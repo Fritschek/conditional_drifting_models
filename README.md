@@ -25,6 +25,7 @@ Training follows a drifting objective based on attraction-repulsion updates in r
 - `conditional_drifting/metrics.py`: sliced Wasserstein distance
 - `conditional_drifting/benchmark.py`: single-channel benchmark entry point
 - `conditional_drifting/baselines/`: optional diffusion and GAN reference baselines
+- `paper/`: current paper draft snapshot, bibliography, notes, and figure assets
 - `scripts/quickstart_awgn.py`: small AWGN demo with figure
 - `scripts/run_publication_benchmark.py`: multi-seed benchmark runner
 - `scripts/compare_optional_baselines.py`: drifting vs optional baselines on one channel

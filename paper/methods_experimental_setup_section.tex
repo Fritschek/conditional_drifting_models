@@ -1,0 +1,219 @@
+\section{Methods and Experimental Setup}
+\label{sec:methods}
+
+\subsection{Problem formulation}
+We study learned conditional channel simulation.
+Let \(x \in \mathbb{R}^n\) denote the transmitted channel input and \(y \in \mathbb{R}^n\) the corresponding channel output.
+Rather than model \(p(y \mid x)\) directly, we work in residual space and define
+\begin{equation}
+e = y - x.
+\end{equation}
+All generative models are therefore trained to approximate the conditional residual law \(p(e \mid x)\), and channel outputs are reconstructed as
+\begin{equation}
+\hat{y} = x + \hat{e}.
+\end{equation}
+This parameterization keeps the evaluation target aligned across additive, multiplicative, and nonlinear channels, and it is the representation used throughout the benchmark code.
+
+\subsection{Conditional diffusion baseline}
+The diffusion baseline follows the channel-learning setting of \cite{paper2309} and uses an epsilon-prediction DDPM objective \cite{ddpm} with DDIM sampling for deterministic inference trajectories \cite{ddim}.
+The backbone is a conditional multilayer perceptron defined by
+\begin{equation}
+\epsilon_\theta(e_t, t, x),
+\end{equation}
+where \(e_t\) is the noised residual at diffusion step \(t\), and \(x\) is the channel condition.
+
+The network architecture is a fully connected model with three hidden conditional layers and one linear output head.
+In the benchmark implementation, the hidden width is \(N=128\), the residual dimension is \(n=2\), and the first layer takes the concatenated vector \([e_t, x] \in \mathbb{R}^{2n}\).
+Each hidden layer is modulated by a learned embedding of the diffusion step \(t\), and a softplus nonlinearity is applied after each conditional affine transform.
+The final layer maps the hidden representation back to \(\mathbb{R}^n\) and predicts the diffusion noise on the residual target.
+
+Training uses a cosine noise schedule with horizon \(T=100\) in the publication-grade configuration.
+Given residual \(e_0\), a random diffusion step \(t\) is sampled, a noised sample \(e_t\) is formed, and the denoiser is trained with mean-squared error on the true noise:
+\begin{equation}
+\mathcal{L}_{\text{DDPM}}
+=
+\mathbb{E}_{e_0, x, t, \epsilon}
+\left[
+\left\|
+\epsilon - \epsilon_\theta(e_t, t, x)
+\right\|_2^2
+\right].
+\end{equation}
+At inference time, we report both the stochastic DDPM reverse chain and the deterministic DDIM trajectory.
+The main comparison in the final figures uses DDPM(100) and DDIM(100); fast DDIM with fewer steps is kept only as an auxiliary ablation because it distorts the plot scale.
+
+\subsection{Conditional drifting baseline}
+The drifting baseline is a conditional one-shot generator inspired by \cite{drifting}.
+Following the notation of the drifting paper, let \(f_\theta\) map \(z \sim p_z\) to a sample \(u = f_\theta(z)\), and let
+\begin{equation}
+q_\theta = (f_\theta)_\# p_z
+\end{equation}
+denote the induced pushforward distribution.
+The central paper-level object is a drifting field \(V_{p,q}(u)\) that indicates how samples from the current model distribution \(q\) should move toward the target distribution \(p\).
+The intended equilibrium property is that the field vanishes when the two distributions match:
+\begin{equation}
+q = p
+\quad \Longrightarrow \quad
+V_{p,q}(u) = 0.
+\end{equation}
+This viewpoint leads to a fixed-point style training update.
+Starting from \(u = f_\theta(z)\), a drifted target is formed as
+\begin{equation}
+\tilde{u}
+=
+\mathrm{stopgrad}\!\left(
+u + \eta V_{p,q_\theta}(u)
+\right),
+\end{equation}
+and the generator is optimized by
+\begin{equation}
+\mathcal{L}_{\text{drift}}
+=
+\mathbb{E}_{z \sim p_z}
+\left[
+\left\|
+f_\theta(z) - \tilde{u}
+\right\|_2^2
+\right].
+\end{equation}
+This makes clear why inference is naturally one-shot: the iterative correction is absorbed into training, and sampling after training requires only one evaluation of \(f_\theta\) \cite{drifting,driftingproj}.
+
+In the channel-learning benchmark, the sample variable above corresponds to the residual \(e = y - x\), and conditioning enters through the transmitted symbol \(x\).
+The implemented generator is therefore
+\begin{equation}
+g_\theta(x, z),
+\qquad
+z \sim \mathcal{N}(0, I),
+\end{equation}
+and predicts the residual \(\hat{e} = g_\theta(x, z)\).
+In the current implementation, \(g_\theta\) is a two-hidden-layer multilayer perceptron with hidden width \(128\), latent dimension \(16\), and SiLU activations:
+\begin{equation}
+[x, z]
+\rightarrow
+\mathrm{Linear}
+\rightarrow
+\mathrm{SiLU}
+\rightarrow
+\mathrm{Linear}
+\rightarrow
+\mathrm{SiLU}
+\rightarrow
+\mathrm{Linear}.
+\end{equation}
+
+The training target is constructed from an attraction--repulsion drift field in residual space.
+This is our concrete channel-specific instantiation of the generic field \(V_{p,q}\) from the drifting formulation.
+Given generated samples \(G = \{g_i\}\) and positive samples \(P = \{p_j\}\), we compute
+\begin{equation}
+V(g_i)
+=
+\left(
+\sum_j w^{(P)}_{ij} p_j - g_i
+\right)
+-
+\lambda
+\left(
+\sum_k w^{(G)}_{ik} g_k - g_i
+\right),
+\end{equation}
+where \(w^{(P)}\) and \(w^{(G)}\) are row-normalized RBF kernel weights.
+The first term attracts generated samples toward nearby positive samples, while the second term repels samples away from local generator collapse.
+The training target is detached:
+\begin{equation}
+\tilde{g}_i
+=
+\mathrm{stopgrad}\!\left(g_i + \eta V(g_i)\right),
+\end{equation}
+and the generator is trained by
+\begin{equation}
+\mathcal{L}_{\text{drift}}
+=
+\frac{1}{N}
+\sum_i
+\left\|
+g_i - \tilde{g}_i
+\right\|_2^2.
+\end{equation}
+Thus, the generic paper-level update \(u \mapsto u + \eta V_{p,q}(u)\) becomes a kernel-based residual update estimated directly from minibatches of generated and true channel residuals.
+
+The corrected benchmark uses the following hyperparameters:
+\(\eta = 1.0\),
+repulsive weight \(\lambda = 1.0\),
+minimum kernel bandwidth \(0.2\),
+and maximum drift norm \(2.0\).
+Unlike diffusion, inference requires only one forward pass through \(g_\theta(x, z)\), so the per-sample inference cost does not scale with \(T\).
+
+\subsection{Conditional GAN baseline}
+The GAN baseline is a conditional residual generator adapted from the \texttt{DM\_OptFib} code path.
+The generator receives the concatenated vector \([x, z]\), where \(z \sim \mathcal{N}(0, I)\), and outputs the full channel output \(\hat{y}\).
+Architecturally, the generator uses an input linear layer, two batch-normalized hidden blocks, a central hidden layer, two additional batch-normalized hidden blocks, and a residual skip from the condition input \(x\) to the output.
+The discriminator takes the concatenated pair \([y, x]\), processes it with a residual-style multilayer perceptron, concatenates the original input back into the hidden state, and produces a scalar realism score.
+
+Two adversarial objectives are implemented in the benchmark code: WGAN-GP and a stronger feature-aligned GAN mode denoted \texttt{GAN\_FA}.
+The final benchmark uses \texttt{GAN\_FA}, since it was substantially more stable than the plain WGAN-GP baseline in this channel-learning setting.
+In \texttt{GAN\_FA}, the discriminator is trained with BCE-with-logits and label smoothing, and the generator is trained with an adversarial term plus an \(L_1\) reconstruction term:
+\begin{equation}
+\mathcal{L}_{G}
+=
+\mathcal{L}_{\text{adv}}
++
+\alpha
+\mathbb{E}\left[\|\hat{y} - y\|_1\right].
+\end{equation}
+In the current implementation, \(\alpha = 1.0\), generator updates are delayed relative to discriminator updates, and the default hidden width is \(128\).
+
+\subsection{Channel models}
+We benchmark four channels.
+
+\textbf{AWGN:}
+\begin{equation}
+y = x + n,
+\qquad
+n \sim \mathcal{N}(0, \sigma^2 I).
+\end{equation}
+
+\textbf{Rayleigh:}
+the transmitted symbol is multiplied elementwise by a Rayleigh fading coefficient and then corrupted by additive Gaussian noise.
+
+\textbf{SSPA:}
+the input amplitude is passed through a smooth solid-state power amplifier nonlinearity before additive noise is applied.
+
+\textbf{OptFib:}
+we include a simplified memoryless optical-fiber proxy channel adapted from \texttt{DM\_OptFib}.
+The I/Q pair is propagated through \(K_{\text{step}}\) repeated nonlinear phase rotations with per-step Gaussian noise injection.
+In the current benchmark, the default parameters are \(L = 5000\), \(\gamma = 1.27\), \(K_{\text{step}} = 50\), and \(P_n = -21.3\) dBm.
+
+\subsection{Training protocol}
+The publication runner is implemented in \texttt{publication\_benchmark\_t100.py} and is designed for multi-seed GPU experiments.
+The publication-scale default configuration is:
+\begin{itemize}
+\item diffusion horizon \(T=100\),
+\item residual dimension \(n=2\),
+\item noise standard deviation \(0.3\),
+\item training set size \(120{,}000\),
+\item diffusion epochs \(60\),
+\item GAN epochs \(120\),
+\item batch size \(512\),
+\item evaluation set size \(20{,}000\),
+\item GAN mode \texttt{GAN\_FA}.
+\end{itemize}
+The drifting model uses the same channel samples and residual-space target as the diffusion and GAN baselines.
+To support publication-ready reporting, the runner performs multi-seed sweeps, stores per-seed outputs, computes mean and standard deviation, estimates a \(95\%\) bootstrap confidence interval for SWD, and records pairwise method wins across seeds.
+
+\subsection{Evaluation metric}
+The primary metric is sliced Wasserstein distance (SWD) on residual vectors:
+\begin{equation}
+\mathrm{SWD}\!\left(\{\hat{e}_i\}, \{e_i\}\right).
+\end{equation}
+In the local benchmark code, SWD is estimated with \(256\) random one-dimensional projections.
+Residual-space SWD was selected over histogram \(L_1\) distance because it is better behaved across channel families and captures geometry in \(\mathbb{R}^2\) rather than only marginal overlap.
+
+\subsection{Inference-time comparison}
+The latency comparison is measured separately from the fidelity benchmark.
+For the stored CPU timing run in this repository, DDPM(100) required \(4.2612\) seconds per repeat over 20,480 samples, while the one-shot drifting generator required \(0.0163\) seconds under the same batch structure.
+This corresponds to an observed speedup of approximately \(260.8\times\) in favor of drifting.
+
+\subsection{Reproducibility}
+The benchmark script exposes an explicit random seed argument and the publication runner defaults to deterministic execution unless disabled.
+Additional sanity checks performed in this repository include: metric identity and symmetry checks for SWD, byte-identical reruns under fixed seed, finite-value validation of stored JSON result files, and small cross-seed ranking checks on AWGN and OptFib.
+These checks are not a substitute for the full publication-scale run, but they provide confidence that the current implementation is internally consistent.
