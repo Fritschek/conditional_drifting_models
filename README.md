@@ -73,3 +73,4 @@ Outputs:
 - Device handling is explicit and robust: scripts accept `--device auto|cpu|cuda|cuda:0|...`, and the model samples on the actual parameter device.
 - The default benchmark configuration matches the recent channel-learning experiments used in this workspace.
 - A small GitHub Actions workflow is included under `.github/workflows/ci.yml`.
+- Repository-level change notes, including the baseline additions, are documented in `REPO_CHANGES.md`.
