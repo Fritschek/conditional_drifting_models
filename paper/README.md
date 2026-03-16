@@ -16,6 +16,9 @@ This folder contains the current paper draft and the minimum assets needed to ke
   - implementation and experiment note from the workspace
 - `figures/`
   - figure assets referenced by the main draft
+- `figures_src/`
+  - simulation and figure-generation scripts
+  - includes a repo-local toy-figure generator and legacy benchmark scripts copied for provenance
 
 ## Build
 

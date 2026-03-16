@@ -8,3 +8,7 @@ results/*.json
 results/*.csv
 results/*.png
 results/*.pdf
+paper/figures/drifting_conditional_toy_figure_mpl.png
+paper/figures/drifting_tiny_mlp_demo_mpl.png
+paper/figures/toy_diffusion_oracle_demo_mpl.png
+paper/figures/drifting_tiny_mlp_demo_stats.txt
