@@ -1,0 +1,221 @@
+{
+  "paper_reference_swd": {
+    "AWGN": {
+      "ddpm": 0.012,
+      "ddim_100": 0.008,
+      "ddim_50": 0.011,
+      "ddim_20": 0.022,
+      "ddim_10": 0.043,
+      "wgan": 0.013
+    },
+    "Rayleigh": {
+      "ddpm": 0.013,
+      "ddim_100": 0.008,
+      "ddim_50": 0.011,
+      "ddim_20": 0.024,
+      "ddim_10": 0.043,
+      "wgan": 0.019
+    },
+    "SSPA": {
+      "ddpm": 0.009,
+      "ddim_100": 0.007,
+      "ddim_50": 0.009,
+      "ddim_20": 0.018,
+      "ddim_10": 0.032,
+      "wgan": 0.104
+    }
+  },
+  "channels": {
+    "AWGN": {
+      "preset": {
+        "n": 7,
+        "ebn0_db": 5.0,
+        "rate": 0.5714285714285714,
+        "diffusion_hidden_dim": 110,
+        "wgan_hidden_dim": 128,
+        "diffusion_epochs": 30,
+        "drifting_epochs": 30,
+        "wgan_epochs": 30,
+        "dataset_size": 10000000,
+        "batch_size": 5000,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100
+      },
+      "noise_std": 0.5260221433216792,
+      "effective_config": {
+        "dataset_size": 4096,
+        "eval_size": 2048,
+        "batch_size": 256,
+        "diffusion_epochs": 8,
+        "drifting_epochs": 8,
+        "wgan_epochs": 12
+      },
+      "paper_reference_swd": {
+        "ddpm": 0.012,
+        "ddim_100": 0.008,
+        "ddim_50": 0.011,
+        "ddim_20": 0.022,
+        "ddim_10": 0.043,
+        "wgan": 0.013
+      },
+      "results": {
+        "drifting_swd": 0.03377516045208924,
+        "ddpm_swd": 0.1264071932595058,
+        "ddim_swd": {
+          "100": 0.12076491658946668,
+          "50": 0.11587069650788917,
+          "20": 0.15884055660615382,
+          "10": 0.214412851185102
+        },
+        "paper_wgan_swd": 0.08355831747151313
+      },
+      "final_history": {
+        "drifting": {
+          "epoch": 8.0,
+          "loss": 0.0026416748441988602,
+          "drift_norm": 0.1315081981010735
+        },
+        "diffusion": {
+          "epoch": 8,
+          "loss": 1.1377103105187416
+        },
+        "paper_wgan": {
+          "epoch": 12,
+          "g_loss": 0.005164702539332211,
+          "d_loss": -0.0018987418530741706
+        }
+      }
+    },
+    "Rayleigh": {
+      "preset": {
+        "n": 7,
+        "ebn0_db": 12.0,
+        "rate": 0.5714285714285714,
+        "diffusion_hidden_dim": 128,
+        "wgan_hidden_dim": 256,
+        "diffusion_epochs": 30,
+        "drifting_epochs": 30,
+        "wgan_epochs": 30,
+        "dataset_size": 10000000,
+        "batch_size": 5000,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100
+      },
+      "noise_std": 0.2349654605298764,
+      "effective_config": {
+        "dataset_size": 4096,
+        "eval_size": 2048,
+        "batch_size": 256,
+        "diffusion_epochs": 8,
+        "drifting_epochs": 8,
+        "wgan_epochs": 12
+      },
+      "paper_reference_swd": {
+        "ddpm": 0.013,
+        "ddim_100": 0.008,
+        "ddim_50": 0.011,
+        "ddim_20": 0.024,
+        "ddim_10": 0.043,
+        "wgan": 0.019
+      },
+      "results": {
+        "drifting_swd": 0.052058965906817016,
+        "ddpm_swd": 0.05794793411367369,
+        "ddim_swd": {
+          "100": 0.0542121242355421,
+          "50": 0.053874609792112164,
+          "20": 0.06647510888996591,
+          "10": 0.11366003224781368
+        },
+        "paper_wgan_swd": 0.1838266904679528
+      },
+      "final_history": {
+        "drifting": {
+          "epoch": 8.0,
+          "loss": 0.0025214081433659885,
+          "drift_norm": 0.12896668817847967
+        },
+        "diffusion": {
+          "epoch": 8,
+          "loss": 1.0493263266980648
+        },
+        "paper_wgan": {
+          "epoch": 12,
+          "g_loss": -0.006429851637221873,
+          "d_loss": -0.0008353090786840766
+        }
+      }
+    },
+    "SSPA": {
+      "preset": {
+        "n": 8,
+        "ebn0_db": 8.0,
+        "rate": 0.75,
+        "diffusion_hidden_dim": 110,
+        "wgan_hidden_dim": 256,
+        "diffusion_epochs": 160,
+        "drifting_epochs": 160,
+        "wgan_epochs": 160,
+        "dataset_size": 10000000,
+        "batch_size": 4096,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100
+      },
+      "noise_std": 0.3250531435997416,
+      "effective_config": {
+        "dataset_size": 4096,
+        "eval_size": 2048,
+        "batch_size": 256,
+        "diffusion_epochs": 8,
+        "drifting_epochs": 8,
+        "wgan_epochs": 12
+      },
+      "paper_reference_swd": {
+        "ddpm": 0.009,
+        "ddim_100": 0.007,
+        "ddim_50": 0.009,
+        "ddim_20": 0.018,
+        "ddim_10": 0.032,
+        "wgan": 0.104
+      },
+      "results": {
+        "drifting_swd": 0.05242231077451599,
+        "ddpm_swd": 0.10462279881064879,
+        "ddim_swd": {
+          "100": 0.09537727476512663,
+          "50": 0.10527640135692028,
+          "20": 0.13315284207779576,
+          "10": 0.19001618514846869
+        },
+        "paper_wgan_swd": 0.1103029601596039
+      },
+      "final_history": {
+        "drifting": {
+          "epoch": 8.0,
+          "loss": 0.002282634548464557,
+          "drift_norm": 0.12884210608899593
+        },
+        "diffusion": {
+          "epoch": 8,
+          "loss": 1.0781276300549507
+        },
+        "paper_wgan": {
+          "epoch": 12,
+          "g_loss": 0.002759784143563593,
+          "d_loss": -0.0026105156306584832
+        }
+      }
+    }
+  },
+  "seed": 7,
+  "device": "cpu",
+  "ddim_steps": [
+    100,
+    50,
+    20,
+    10
+  ]
+}

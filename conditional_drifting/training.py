@@ -30,6 +30,7 @@ class DriftingConfig:
     repulsive_weight: float = 1.0
     eval_size: int = 20_000
     swd_projections: int = 256
+    is_residual: bool = True
 
 
 @dataclass
@@ -80,11 +81,12 @@ def train_conditional_drifting(
         progress = tqdm(range(steps_per_epoch), leave=False, desc=f"epoch {epoch + 1}/{cfg.epochs}")
         for _ in progress:
             x = torch.randn(cfg.batch_size, cfg.n, device=device)
-            residual_true = channel_fn(x, cfg.noise_std, device) - x
-            residual_pred = model(x)
+            y_true = channel_fn(x, cfg.noise_std, device)
+            target_true = y_true - x if cfg.is_residual else y_true
+            target_pred = model(x)
             loss, drift = drifting_loss(
-                residual_pred,
-                residual_true,
+                target_pred,
+                target_true,
                 drift_scale=cfg.drift_scale,
                 bandwidth=cfg.bandwidth,
                 min_bandwidth=cfg.min_bandwidth,
@@ -122,6 +124,19 @@ def sample_channel_outputs(model: ConditionalDriftingGenerator, condition: torch
 
 
 @torch.no_grad()
+def sample_drifting_target(
+    model: ConditionalDriftingGenerator,
+    condition: torch.Tensor,
+    *,
+    is_residual: bool,
+) -> torch.Tensor:
+    generated = model(condition)
+    if is_residual:
+        return condition + generated
+    return generated
+
+
+@torch.no_grad()
 def evaluate_residual_model(
     model: ConditionalDriftingGenerator,
     channel_fn,
@@ -132,22 +147,27 @@ def evaluate_residual_model(
 ) -> dict:
     x = torch.randn(cfg.eval_size, cfg.n, device=device)
     y_true = channel_fn(x, cfg.noise_std, device)
-    y_pred = sample_channel_outputs(model, x)
+    y_pred = sample_drifting_target(model, x, is_residual=cfg.is_residual)
 
-    residual_true = (y_true - x).cpu().numpy()
-    residual_pred = (y_pred - x).cpu().numpy()
+    target_true_torch = y_true - x if cfg.is_residual else y_true
+    target_pred_torch = y_pred - x if cfg.is_residual else y_pred
     swd = sliced_wasserstein_distance(
-        residual_true,
-        residual_pred,
+        target_true_torch,
+        target_pred_torch,
         num_projections=cfg.swd_projections,
         seed=metric_seed,
     )
+    target_true = target_true_torch.cpu().numpy()
+    target_pred = target_pred_torch.cpu().numpy()
 
     return {
         "swd": float(swd),
         "x": x.cpu().numpy(),
         "y_true": y_true.cpu().numpy(),
         "y_pred": y_pred.cpu().numpy(),
-        "residual_true": residual_true,
-        "residual_pred": residual_pred,
+        "residual_true": (y_true - x).cpu().numpy(),
+        "residual_pred": (y_pred - x).cpu().numpy(),
+        "target_true": target_true,
+        "target_pred": target_pred,
+        "target_mode": "residual" if cfg.is_residual else "direct_y",
     }

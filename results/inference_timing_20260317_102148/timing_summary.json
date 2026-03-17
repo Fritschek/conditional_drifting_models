@@ -1,0 +1,189 @@
+{
+  "channel": "AWGN",
+  "device": "cpu",
+  "seed": 7,
+  "prepare_mode": "train",
+  "warmup_repeats": 2,
+  "repeats": 7,
+  "batch_size": 512,
+  "num_batches": 40,
+  "training": {
+    "drifting_residual": {
+      "mode": "trained_60epochs",
+      "train_seconds": 912.5034984270005
+    },
+    "drifting_direct": {
+      "mode": "trained_60epochs",
+      "train_seconds": 933.1042752909998
+    },
+    "diffusion_shared": {
+      "mode": "trained_60epochs",
+      "train_seconds": 341.8883741440004
+    },
+    "gan": {
+      "mode": "trained_120epochs",
+      "train_seconds": 1549.3392012040003
+    }
+  },
+  "methods": {
+    "drifting_residual": {
+      "family": "drifting",
+      "target_mode": "residual",
+      "repeat_seconds": [
+        0.03260872200007725,
+        0.029207730000052834,
+        0.04160127300019667,
+        0.02483519300039916,
+        0.03115260400045372,
+        0.03730976299993927,
+        0.03135379800005467
+      ],
+      "mean_seconds": 0.032581297571596224,
+      "std_seconds": 0.00505187530731929,
+      "samples_per_second": 628581.4723921274,
+      "milliseconds_per_sample": 0.0015908836704880969,
+      "total_samples_per_repeat": 20480,
+      "train_seconds": 912.5034984270005,
+      "train_plus_eval_seconds": 912.5360797245721,
+      "eval_slowdown_vs_drifting_residual": 1.0,
+      "eval_slowdown_vs_drifting_direct": 0.9675095480522601
+    },
+    "drifting_direct": {
+      "family": "drifting",
+      "target_mode": "direct_y",
+      "repeat_seconds": [
+        0.03699254999992263,
+        0.030653509000330814,
+        0.028866347998700803,
+        0.02517437499955122,
+        0.04109117000007245,
+        0.033231583000087994,
+        0.03971845699925325
+      ],
+      "mean_seconds": 0.03367542742827417,
+      "std_seconds": 0.005441098532198731,
+      "samples_per_second": 608158.5762681314,
+      "milliseconds_per_sample": 0.0016443079798961996,
+      "total_samples_per_repeat": 20480,
+      "train_seconds": 933.1042752909998,
+      "train_plus_eval_seconds": 933.1379507184281,
+      "eval_slowdown_vs_drifting_residual": 1.0335815310692777,
+      "eval_slowdown_vs_drifting_direct": 1.0
+    },
+    "ddpm": {
+      "family": "diffusion",
+      "sampler": "ddpm",
+      "target_mode": "residual",
+      "repeat_seconds": [
+        8.494859247999557,
+        25.813299798001026,
+        8.71485399500125,
+        38.68586303700067,
+        29.933430704000784,
+        18.788700826000422,
+        35.22439754300103
+      ],
+      "mean_seconds": 23.665057878714965,
+      "std_seconds": 11.215886329307361,
+      "samples_per_second": 865.410940677238,
+      "milliseconds_per_sample": 1.1555204042341292,
+      "total_samples_per_repeat": 20480,
+      "train_seconds": 341.8883741440004,
+      "train_plus_eval_seconds": 365.55343202271536,
+      "eval_slowdown_vs_drifting_residual": 726.3387170726352,
+      "eval_slowdown_vs_drifting_direct": 702.7396438878037
+    },
+    "ddim100": {
+      "family": "diffusion",
+      "sampler": "ddim100",
+      "target_mode": "residual",
+      "repeat_seconds": [
+        10.63181830800022,
+        10.909280268000657,
+        11.253429860000324,
+        10.42350751399863,
+        19.596549841000524,
+        12.197123030000512,
+        12.439900649000265
+      ],
+      "mean_seconds": 12.49308706714302,
+      "std_seconds": 2.9842989551201997,
+      "samples_per_second": 1639.3065933129262,
+      "milliseconds_per_sample": 0.6100140169503427,
+      "total_samples_per_repeat": 20480,
+      "train_seconds": 341.8883741440004,
+      "train_plus_eval_seconds": 354.3814612111434,
+      "eval_slowdown_vs_drifting_residual": 383.44350895448264,
+      "eval_slowdown_vs_drifting_direct": 370.9852560521242
+    },
+    "ddim50": {
+      "family": "diffusion",
+      "sampler": "ddim50",
+      "target_mode": "residual",
+      "repeat_seconds": [
+        8.887406308000209,
+        8.032425325000077,
+        11.630569356000706,
+        7.122823396999593,
+        6.963465193999582,
+        8.898259912999492,
+        19.194851649001066
+      ],
+      "mean_seconds": 10.104257306000104,
+      "std_seconds": 3.981200483850371,
+      "samples_per_second": 2026.8684159338043,
+      "milliseconds_per_sample": 0.49337193876953633,
+      "total_samples_per_repeat": 20480,
+      "train_seconds": 341.8883741440004,
+      "train_plus_eval_seconds": 351.9926314500005,
+      "eval_slowdown_vs_drifting_residual": 310.1244597087137,
+      "eval_slowdown_vs_drifting_direct": 300.04837585272895
+    },
+    "ddim10": {
+      "family": "diffusion",
+      "sampler": "ddim10",
+      "target_mode": "residual",
+      "repeat_seconds": [
+        0.8048982660002366,
+        1.8097305220017006,
+        1.0796490579996316,
+        1.1365410029993654,
+        6.030939266000132,
+        0.928878466000242,
+        0.8880157940002391
+      ],
+      "mean_seconds": 1.8112360535716496,
+      "std_seconds": 1.750099454875288,
+      "samples_per_second": 11307.19541476367,
+      "milliseconds_per_sample": 0.0884392604283032,
+      "total_samples_per_repeat": 20480,
+      "train_seconds": 341.8883741440004,
+      "train_plus_eval_seconds": 343.69961019757204,
+      "eval_slowdown_vs_drifting_residual": 55.591280537293635,
+      "eval_slowdown_vs_drifting_direct": 53.785094708283374
+    },
+    "gan": {
+      "family": "gan",
+      "sampler": "one_shot",
+      "target_mode": "direct_y",
+      "repeat_seconds": [
+        0.09608159799972782,
+        0.09567972600052599,
+        0.09915008899952227,
+        0.10427455399985774,
+        0.08749606600031257,
+        0.09031214199967508,
+        0.08074088799912715
+      ],
+      "mean_seconds": 0.09339072328553552,
+      "std_seconds": 0.007254076534900197,
+      "samples_per_second": 219293.729393056,
+      "milliseconds_per_sample": 0.004560093910426539,
+      "total_samples_per_repeat": 20480,
+      "train_seconds": 1549.3392012040003,
+      "train_plus_eval_seconds": 1549.4325919272858,
+      "eval_slowdown_vs_drifting_residual": 2.866390544462288,
+      "eval_slowdown_vs_drifting_direct": 2.77326022021398
+    }
+  }
+}

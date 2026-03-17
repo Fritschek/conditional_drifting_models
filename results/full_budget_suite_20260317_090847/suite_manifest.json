@@ -1,0 +1,41 @@
+{
+  "timestamp_utc": "2026-03-17T09:08:47",
+  "cwd": "/home/entropy/GitHub/conditional_drifting_models",
+  "device": "cuda",
+  "seed": 7,
+  "paper_command": [
+    "/home/entropy/miniforge3/envs/dl/bin/python",
+    "scripts/run_paper2309_benchmark.py",
+    "--device",
+    "cuda",
+    "--seed",
+    "7",
+    "--channels",
+    "AWGN,Rayleigh,SSPA",
+    "--eval-size",
+    "1000000",
+    "--include-gan-fa"
+  ],
+  "optfib_command": [
+    "/home/entropy/miniforge3/envs/dl/bin/python",
+    "scripts/compare_optional_baselines.py",
+    "--device",
+    "cuda",
+    "--seed",
+    "7",
+    "--channel",
+    "OptFib",
+    "--dataset-size",
+    "120000",
+    "--epochs",
+    "60",
+    "--batch-size",
+    "512",
+    "--eval-size",
+    "100000",
+    "--num-steps",
+    "100",
+    "--ddim-steps",
+    "100"
+  ]
+}

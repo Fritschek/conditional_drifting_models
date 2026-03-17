@@ -88,15 +88,13 @@ This file includes:
 
 ### Important note
 
-This diffusion module is a **clean reference implementation** written for the standalone repo. It is not a strict bit-for-bit copy of the older diffusion code from the original mixed repository.
+The diffusion baseline is now maintained as a clean standalone port of the legacy benchmark math:
 
-That means:
+- learned timestep embeddings with the legacy conditional MLP structure
+- cosine schedule and DDPM/DDIM sampling rules matching the source benchmark
+- EMA-smoothed evaluation model as used in the older workspace
 
-- it is suitable for clean comparisons inside this new repo
-- it is suitable for publication figures if we report it honestly as the repo baseline
-- it is **not** guaranteed to reproduce exactly the same numbers as the older legacy scripts
-
-If exact historical replication is required, the old diffusion code would need to be ported more literally.
+The implementation is still cleaned up for this repo, but it is intended to preserve the old benchmark behavior rather than just approximate it.
 
 ## 5. GAN Baseline Changes
 
@@ -120,14 +118,13 @@ This file includes:
 
 ### Important note
 
-As with the diffusion module, this GAN implementation is a **clean standalone reference baseline**. It is not the exact original GAN architecture from the previous repository lineage.
+The GAN baseline is also maintained as a clean standalone port of the legacy benchmark path:
 
-So the same caveat applies:
+- DM_OptFib-style conditional generator/discriminator
+- `gan_fa` objective and training cadence matching the source benchmark
+- optional `wgan_gp` mode preserved for direct baseline comparisons
 
-- good for controlled comparisons in the clean repo
-- not a guaranteed exact reproduction of older reported GAN numbers
-
-If we later want a stricter apples-to-apples comparison against a specific historical GAN, we should port that architecture explicitly into a separate baseline file.
+As with diffusion, the code is cleaned up for this repo but is intended to preserve the benchmark behavior of the older workspace.
 
 ## 6. New Comparison Script
 

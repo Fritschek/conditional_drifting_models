@@ -602,3 +602,29 @@ If this work is turned into a new paper, the current codebase supports the follo
 - We report multi-seed aggregate statistics using the publication runner rather than relying on a single seed.
 
 That is the most defensible story supported by the current implementation.
+
+
+## 10. Overnight rerun commands
+
+Full 3-seed benchmark suite:
+
+```bash
+conda run --no-capture-output -n dl python scripts/run_full_budget_suite.py \
+  --device cuda \
+  --num-seeds 3 \
+  --seed-start 7
+```
+
+Run the timing benchmark separately after the suite, not in parallel:
+
+```bash
+conda run --no-capture-output -n dl python scripts/run_inference_timing_benchmark.py \
+  --device cpu \
+  --channel AWGN \
+  --prepare-mode train \
+  --methods drifting_residual,drifting_direct,ddpm,ddim100,ddim50,ddim10,gan \
+  --warmup-repeats 2 \
+  --repeats 7 \
+  --batch-size 512 \
+  --num-batches 40
+```

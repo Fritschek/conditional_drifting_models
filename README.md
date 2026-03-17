@@ -36,7 +36,10 @@ Training follows a drifting objective based on attraction-repulsion updates in r
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e .[dev]
 ```
+
+The editable install is recommended on a new machine so `conditional_drifting` and the test suite resolve against this checkout directly.
 
 ## Quick start
 
@@ -71,6 +74,7 @@ Outputs:
 ## Notes
 
 - The drifting package is the core of the repository; diffusion and GAN are included only as optional reference baselines under `conditional_drifting/baselines/`.
+- The diffusion and GAN baseline modules are written as clean standalone ports of the legacy benchmark math so the standalone repo can preserve comparison behavior without depending on the old workspace layout.
 - Device handling is explicit and robust: scripts accept `--device auto|cpu|cuda|cuda:0|...`, and the model samples on the actual parameter device.
 - The default benchmark configuration matches the recent channel-learning experiments used in this workspace.
 - A small GitHub Actions workflow is included under `.github/workflows/ci.yml`.

@@ -48,6 +48,8 @@ As a result, sample quality, conditioning fidelity, computational cost, and diff
 The question is therefore not merely whether a generative model can match the channel distribution, but whether it can do so at a cost compatible with large-scale training and deployment workflows.
 
 Recent work on diffusion-based channel modeling has shown that conditional diffusion models can generate high-quality channel samples across standard benchmarks such as AWGN, Rayleigh, and nonlinear amplifier channels \cite{paper2309}.
+Follow-up work has further studied robustness and speed-quality tradeoffs for diffusion-based channel generation \cite{kimicc2024}, extended diffusion-based channel synthesis to high-dimensional user-specific channels \cite{lee2024highdimchannels}, and proposed diffusion-driven digital-twin style generation of statistical channel state information from sensing and location information \cite{gong2025dtoc}.
+More broadly, diffusion methods have also begun to influence adjacent wireless tasks such as high-dimensional channel estimation \cite{zhou2025channelestimation}, low-complexity MIMO channel estimation \cite{fesl2024mimoestimation,chen2025mimovi}, joint channel estimation and data detection \cite{zilberstein2024joint}, and fast time-varying MIMO-OFDM estimation \cite{liu2025mimoofdm}, while recent surveys indicate that diffusion models are rapidly becoming a general-purpose tool across wireless networking and communications problems \cite{fan2025wirelesssurvey,luong2025futurenetworksurvey}.
 That line of work is compelling because diffusion models are flexible, robust, and often more stable than earlier adversarial approaches.
 However, this improvement comes with a practical systems cost: inference requires an iterative reverse denoising procedure, and the latency scales with the number of diffusion steps.
 This tradeoff is manageable when the channel generator is called occasionally, but it becomes more problematic when it is embedded in inner loops of iterative training or repeated Monte Carlo evaluation.
@@ -57,6 +59,7 @@ Among recently proposed generative paradigms, drifting models \cite{drifting} ar
 Intuitively, diffusion spends computation at test time by progressively transforming noise into data through a reverse-time chain.
 Drifting instead spends computation during training: generated samples are repeatedly nudged toward the data manifold by a drift field, and the neural generator is updated so that future samples move closer to the desired distribution in a single forward pass.
 Once trained, sampling is therefore naturally one-shot.
+This perspective is also consistent with recent geometric analyses of generative dynamics that relate diffusion-like behavior to autonomous vector-field structure and marginalized noise geometry \cite{geometryofnoise}.
 
 That distinction makes drifting conceptually appealing for channel modeling.
 In a communication setting, the generator must be conditional on the transmitted symbol \(x\), and it must capture not just a marginal sample cloud, but the conditional law \(p(y \mid x)\).
@@ -76,46 +79,7 @@ The main contributions are summarized as follows.
 \item We quantify the fidelity--latency tradeoff and show that one-shot drifting provides large inference-time savings while remaining competitive in distributional fidelity.
 \end{itemize}
 
-\section{Problem Formulation and Model Background}
-\subsection{Residual-space conditional channel modeling}
-Let \(x \in \mathbb{R}^n\) denote the transmitted channel input and \(y \in \mathbb{R}^n\) the channel output.
-Rather than learn \(p(y \mid x)\) directly, we model the residual
-\begin{equation}
-e = y - x.
-\end{equation}
-Each generator is trained to approximate the conditional residual law \(p(e \mid x)\), and generated channel outputs are reconstructed as
-\begin{equation}
-\hat{y} = x + \hat{e}.
-\end{equation}
-This representation has two practical benefits in the present benchmark.
-First, it places additive and non-additive channels on a more comparable footing by centering the learning target around the input symbol.
-Second, it makes evaluation more interpretable, because the residual distribution directly expresses what the channel adds, scales, or distorts relative to the transmitted signal.
-
-\subsection{Conditional diffusion baseline}
-The diffusion baseline follows the channel-learning setting of \cite{paper2309} and uses the epsilon-prediction DDPM objective \cite{ddpm} with DDIM sampling \cite{ddim} as a deterministic alternative at inference time.
-The denoiser is a conditional multilayer perceptron
-\begin{equation}
-\epsilon_\theta(e_t, t, x),
-\end{equation}
-where \(e_t\) is a noisy residual at diffusion step \(t\).
-In the benchmark implementation, the residual dimension is \(n=2\), the hidden width is \(128\), the first layer receives the concatenated vector \([e_t, x]\), and each hidden layer is modulated by a learned time embedding.
-Softplus nonlinearities are used throughout the hidden stack.
-
-Training uses a cosine noise schedule.
-Given a clean residual \(e_0\), a random step \(t\), and Gaussian noise \(\epsilon\), the denoiser is optimized by
-\begin{equation}
-\mathcal{L}_{\text{DDPM}}
-=
-\mathbb{E}_{e_0, x, t, \epsilon}
-\left[
-\left\|
-\epsilon - \epsilon_\theta(e_t, t, x)
-\right\|_2^2
-\right].
-\end{equation}
-At inference time, DDPM uses the full stochastic reverse chain, whereas DDIM follows a deterministic trajectory with the same trained denoiser.
-The important structural point for this paper is that both procedures require a sequence of reverse denoising evaluations, so inference cost scales with the chosen trajectory length.
-
+\section{Problem Formulation and Drifting Background}
 \subsection{What drifting changes conceptually}
 Because drifting is still unfamiliar to many readers, it is useful to state its generative viewpoint explicitly.
 Following \cite{drifting}, let \(f_\theta\) map a latent variable \(z \sim p_z\) to a sample \(u = f_\theta(z)\), and let
@@ -141,7 +105,7 @@ In diffusion, one learns a denoiser and then performs iterative refinement at in
 In drifting, one instead constructs improved targets during training by moving current samples along the field \(V_{p,q}\), and then regresses the generator onto those improved targets.
 As a result, the iterative correction happens during optimization rather than at test time.
 
-The paper-level one-step view can be written as follows.
+The one-step view can be written as follows.
 Starting from a generated sample \(u = f_\theta(z)\), define a drifted target
 \begin{equation}
 \tilde{u}
@@ -172,11 +136,44 @@ The figure therefore illustrates real drift dynamics rather than a hand-drawn sc
 To show that the same idea can train an explicit parameterized generator, Fig.~\ref{fig:toymlp} uses a tiny conditional MLP trained with the drifting objective on the same toy target.
 For contrast, Fig.~\ref{fig:toydiff} shows an oracle conditional diffusion-style reverse trajectory on the same target, making the difference in sampling path length visually explicit.
 
-\subsection{Conditional drifting baseline}
+\subsection{Conditional channel simulation}
+We now specialize the generic drifting view to learned conditional channel simulation.
+Let \(x \in \mathbb{R}^n\) denote the transmitted channel input and \(y \in \mathbb{R}^n\) the channel output.
+The objective is to learn a conditional generator that reproduces the channel law given \(x\).
+In this setting, conditioning enters through the transmitted symbol, while stochasticity is carried by a latent variable \(z \sim \mathcal{N}(0, I)\).
+
+Two target parameterizations are useful in the experiments.
+The first is the direct channel-output formulation, in which the generator approximates \(p(y \mid x)\) and predicts \(\hat{y} = g_\theta(x, z)\).
+The second is the residual formulation, in which
+\begin{equation}
+e = y - x
+\end{equation}
+is modeled instead, so that the generator approximates \(p(e \mid x)\) and the channel output is reconstructed as
+\begin{equation}
+\hat{y} = x + \hat{e}.
+\end{equation}
+The direct formulation corresponds to learning the channel law itself, whereas the residual formulation injects the inductive bias that the channel output can be understood as the transmitted symbol plus a structured perturbation.
+As discussed later in the experiments, the direct formulation is the more natural comparator to direct-output diffusion and WGAN baselines, while the residual formulation is often easier to optimize in the unified benchmark.
+
+\begin{table}[t]
+\caption{Two target parameterizations for conditional drifting}
+\label{tab:drifting_modes}
+\centering
+\scriptsize
+\begin{tabular}{p{1.35cm}p{1.75cm}p{2.2cm}p{2.25cm}}
+\toprule
+Mode & Output of \(g_\theta\) & Target object & Short interpretation \\
+\midrule
+Direct \(y \mid x\) & \(\hat y\) & Learn \(p(y \mid x)\) directly & Learns the channel law directly; cleaner and more principled \\
+Residual & \(\hat e\), then \(\hat y=x+\hat e\) & Learn \(p(e \mid x)\) with \(e=y-x\) & Learns the channel perturbation; more biased but often easier to optimize \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Conditional drifting model}
 Our implementation should be viewed as a practical conditional adaptation inspired by \cite{drifting}, rather than as an exhaustive reproduction of every variant in that paper.
-To avoid confusion with the communication input symbol \(x\), we use \(u\) above for the generic sample variable in the paper-level formulation and reserve \(x\) below for the transmitted symbol.
-In the channel-learning benchmark, the target object is the residual \(e = y - x\), and conditioning enters through the transmitted symbol.
-The generator is therefore
+To avoid confusion with the communication input symbol \(x\), we use \(u\) above for the generic sample variable in the abstract formulation and reserve \(x\) below for the transmitted symbol.
+In the residual benchmark, the target object is the residual \(e = y - x\), and the generator is therefore
 \begin{equation}
 \hat{e} = g_\theta(x, z),
 \qquad
@@ -198,7 +195,7 @@ and is implemented as a two-hidden-layer multilayer perceptron with hidden width
 \end{equation}
 
 The training target is formed from an attraction--repulsion drift field in residual space.
-This should be read as our concrete channel-specific instantiation of the generic paper-level field \(V_{p,q}\).
+This should be read as a concrete channel-specific instantiation of the generic field \(V_{p,q}\).
 Given generated samples \(G = \{g_i\}\) and positive residual samples \(P = \{p_j\}\), we compute
 \begin{equation}
 V(g_i)
@@ -235,40 +232,21 @@ In the corrected benchmark, the drift scale is \(\eta=1.0\), the repulsive weigh
 These settings were chosen because they produced stable residual distributions and materially improved the early AWGN drifting baseline.
 
 The crucial operational consequence is straightforward:
-once training is complete, a channel residual sample is obtained by a single evaluation of \(g_\theta(x,z)\).
+once training is complete, sampling requires only a single evaluation of \(g_\theta(x,z)\).
+In residual mode, this produces a channel residual sample \(\hat e\) followed by reconstruction \(\hat y=x+\hat e\); in direct mode, it produces \(\hat y\) directly.
 There is no reverse chain, no ODE solver, and no per-sample iterative schedule at inference.
-
-\subsection{Conditional GAN baseline}
-To complement the diffusion and drifting baselines, we also include a conditional adversarial generator adapted from the \texttt{DM\_OptFib} code path.
-The generator receives the concatenated input \([x, z]\), where \(z \sim \mathcal{N}(0,I)\), and predicts the full channel output \(\hat{y}\).
-Architecturally, it uses an input linear layer, two batch-normalized hidden blocks, a central hidden layer, two additional batch-normalized hidden blocks, and a residual skip from the condition input \(x\) to the output.
-The discriminator receives \([y, x]\), processes it with a residual-style multilayer perceptron, concatenates the original input back into the hidden state, and outputs a scalar realism score.
-
-Two adversarial objectives are implemented in the benchmark code: WGAN-GP and a stronger feature-aligned mode denoted \texttt{GAN\_FA}.
-The final benchmark uses \texttt{GAN\_FA}, since it was substantially more stable than the plain WGAN-GP baseline in this channel-learning setting.
-In \texttt{GAN\_FA}, the discriminator uses BCE-with-logits with label smoothing, while the generator combines an adversarial term with an \(L_1\) reconstruction penalty:
-\begin{equation}
-\mathcal{L}_{G}
-=
-\mathcal{L}_{\text{adv}}
-+
-\alpha
-\mathbb{E}\left[\|\hat{y} - y\|_1\right],
-\end{equation}
-with \(\alpha = 1.0\).
-Generator updates are delayed relative to discriminator steps, and the default hidden width is \(128\).
 
 \begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
     >=Latex,
     font=\small,
-    boxblue/.style={draw=blue!60!black, thick, rounded corners=2mm, fill=blue!10, minimum width=1.9cm, minimum height=0.95cm, align=center},
-    boxviolet/.style={draw=violet!70!black, thick, rounded corners=2mm, fill=violet!12, minimum width=2.35cm, minimum height=1.15cm, align=center},
-    boxred/.style={draw=red!60!black, thick, rounded corners=2mm, fill=red!10, minimum width=1.95cm, minimum height=0.95cm, align=center},
+    boxblue/.style={draw=blue!60!black, thick, rounded corners=2mm, fill=blue!10, minimum width=2.15cm, minimum height=1.0cm, align=center},
+    boxviolet/.style={draw=violet!70!black, thick, rounded corners=2mm, fill=violet!12, minimum width=2.55cm, minimum height=1.15cm, align=center},
+    boxred/.style={draw=red!60!black, thick, rounded corners=2mm, fill=red!10, minimum width=2.15cm, minimum height=1.0cm, align=center},
     boxgreen/.style={draw=green!50!black, thick, rounded corners=2mm, fill=green!10, minimum width=2.55cm, minimum height=1.05cm, align=center},
     title/.style={font=\bfseries\large},
-    note/.style={align=center, font=\small},
+    note/.style={align=center, font=\small, text depth=0pt},
     flow/.style={->, thick, draw=black!70},
     attr/.style={->, thick, draw=green!50!black},
     repel/.style={<->, semithick, draw=orange!85!black},
@@ -276,50 +254,47 @@ Generator updates are delayed relative to discriminator steps, and the default h
     gendot/.style={circle, draw=orange!80!black, fill=orange!50, inner sep=1.8pt},
     targetdot/.style={circle, draw=green!60!black, fill=green!35, inner sep=1.8pt}
 ]
-\fill[white] (-7.5,-4.4) rectangle (9.7,4.5);
+\fill[white] (-7.4,-4.2) rectangle (3.6,4.3);
 
-% Panel titles
-\node[title] at (-1.0,4.0) {Conditional drifting: training-time correction, one-shot inference};
-\node[title] at (-3.75,3.15) {Training step for fixed channel input $x$};
-\node[title] at (2.95,3.15) {Inference};
+\node[title] at (-1.9,3.75) {Training step for fixed channel input $x$};
 
 % Left panel: inputs and generator
-\node[boxblue] (condx) at (-6.2,1.85) {condition\\$x$};
-\node[boxviolet] (latent) at (-6.2,0.35) {latent draw\\$z \sim \mathcal{N}(0,I)$};
-\node[boxviolet] (gen) at (-3.95,1.1) {generator\\$g_\theta(x,z)$};
+\node[boxblue] (condx) at (-6.1,1.95) {condition\\$x$};
+\node[boxviolet] (latent) at (-6.1,0.45) {latent draw\\$z \sim \mathcal{N}(0,I)$};
+\node[boxviolet] (gen) at (-3.55,1.2) {generator\\$g_\theta(x,z)$};
 \draw[flow, blue!70!black] (condx.east) -- (gen.west);
 \draw[flow, violet!80!black] (latent.east) -- (gen.west);
 
 % True channel
-\node[boxred] (truech) at (-6.2,-1.3) {true channel};
+\node[boxred] (truech) at (-6.1,-1.1) {true channel};
 \draw[flow, red!70!black] (condx.south) -- (truech.north);
-\node[note, red!70!black] at (-6.2,-2.0) {sample $y$, form\\$e=y-x$};
+\node[note, red!70!black, text width=2.3cm] at (-6.1,-1.95) {sample $y$, then form\\$e=y-x$};
 
 % Generated residual cloud
-\node[note, orange!80!black] at (-2.25,2.2) {\textbf{generated residuals $\hat e_i$}};
-\node[gendot] (g1) at (-2.95,1.25) {};
-\node[gendot] (g2) at (-2.55,1.55) {};
-\node[gendot] (g3) at (-2.2,1.05) {};
-\node[gendot] (g4) at (-1.82,1.45) {};
-\node[gendot] (g5) at (-2.35,0.68) {};
-\draw[flow, violet!80!black] (gen.east) -- (-3.1,1.1);
+\node[note, orange!80!black] at (-1.7,2.25) {\textbf{generated residuals $\hat e_i$}};
+\node[gendot] (g1) at (-2.55,1.35) {};
+\node[gendot] (g2) at (-2.1,1.7) {};
+\node[gendot] (g3) at (-1.7,1.15) {};
+\node[gendot] (g4) at (-1.25,1.55) {};
+\node[gendot] (g5) at (-1.9,0.8) {};
+\draw[flow, violet!80!black] (gen.east) -- (-2.75,1.2);
 
 % True residual cloud
-\node[note, blue!70!black] at (-0.2,-0.05) {\textbf{true residuals $e_j$}};
-\node[truedot] (p1) at (-0.95,-0.75) {};
-\node[truedot] (p2) at (-0.5,-0.38) {};
-\node[truedot] (p3) at (-0.02,-0.9) {};
-\node[truedot] (p4) at (0.4,-0.42) {};
-\node[truedot] (p5) at (-0.25,-1.22) {};
-\draw[flow, red!70!black] (truech.east) to[out=5,in=210] (-0.95,-0.75);
+\node[note, blue!70!black] at (0.55,-0.05) {\textbf{true residuals $e_j$}};
+\node[truedot] (p1) at (-0.25,-0.7) {};
+\node[truedot] (p2) at (0.2,-0.33) {};
+\node[truedot] (p3) at (0.7,-0.88) {};
+\node[truedot] (p4) at (1.15,-0.4) {};
+\node[truedot] (p5) at (0.45,-1.18) {};
+\draw[flow, red!70!black] (truech.east) to[out=10,in=210] (-0.25,-0.7);
 
 % Drifted targets
-\node[note, green!50!black] at (-0.55,2.2) {\textbf{drifted targets $\tilde e_i$}};
-\node[targetdot] (t1) at (-1.2,1.6) {};
-\node[targetdot] (t2) at (-0.75,1.8) {};
-\node[targetdot] (t3) at (-0.28,1.3) {};
-\node[targetdot] (t4) at (0.2,1.65) {};
-\node[targetdot] (t5) at (-0.42,1.0) {};
+\node[note, green!50!black] at (0.15,2.25) {\textbf{drifted targets $\tilde e_i$}};
+\node[targetdot] (t1) at (-0.85,1.75) {};
+\node[targetdot] (t2) at (-0.35,1.98) {};
+\node[targetdot] (t3) at (0.15,1.45) {};
+\node[targetdot] (t4) at (0.68,1.78) {};
+\node[targetdot] (t5) at (0.0,1.15) {};
 
 % Attraction arrows
 \draw[attr] (g1) -- (t1);
@@ -333,30 +308,47 @@ Generator updates are delayed relative to discriminator steps, and the default h
 \draw[repel] (g2) -- (g4);
 \draw[repel] (g3) -- (g5);
 
-\node[note, align=left] at (1.35,1.0) {$V(\hat e_i)$:\\\textcolor{green!50!black}{attraction to data}\\+\textcolor{orange!85!black}{repulsion among generated}};
+\node[note, align=left, anchor=west, text width=2.8cm] at (1.8,1.15) {$V(\hat e_i)$:\\\textcolor{green!50!black}{attraction to data}\\+\textcolor{orange!85!black}{repulsion among generated}};
 
 % Loss box
-\node[boxgreen, minimum width=4.8cm, minimum height=1.45cm] (loss) at (-2.25,-2.35) {$\tilde e_i=\mathrm{stopgrad}\!\left(\hat e_i+\eta V(\hat e_i)\right)$\\[2pt]
+\node[boxgreen, minimum width=5.2cm, minimum height=1.55cm] (loss) at (-2.25,-2.35) {$\tilde e_i=\mathrm{stopgrad}\!\left(\hat e_i+\eta V(\hat e_i)\right)$\\[2pt]
 $\mathcal{L}_{\mathrm{drift}}=\frac{1}{N}\sum_i \|\hat e_i-\tilde e_i\|_2^2$};
-\draw[flow] (-1.1,1.35) to[out=-90,in=25] (loss.north east);
-\draw[flow] (-0.25,1.15) to[out=-90,in=-5] (loss.north east);
-\node[note] at (-2.25,-3.15) {Regress $g_\theta$ toward the drifted residual targets.};
+\draw[flow] (-0.7,1.45) to[out=-90,in=25] (loss.north east);
+\draw[flow] (0.15,1.2) to[out=-90,in=-5] (loss.north east);
+\node[note, text width=4.8cm] at (-2.25,-3.2) {Regress $g_\theta$ toward the drifted residual targets.};
+\end{tikzpicture}
+\caption{Training-time drifting update for conditional channel residual modeling. For a fixed transmitted symbol \(x\), the generator produces residual samples \(\hat e_i\), which are moved toward the true residual cloud through a drift field that combines attraction to data and repulsion among generated samples. The network is then regressed toward the drifted targets.}
+\label{fig:drifttrain}
+\end{figure*}
 
-% Right panel inference
-\node[boxblue] (cond2) at (1.15,1.8) {$x$};
-\node[boxviolet] (latent2) at (2.45,1.8) {$z$};
-\node[boxviolet, minimum width=2.9cm, minimum height=1.15cm] (gen2) at (3.95,1.8) {$g_\theta(x,z)$};
-\node[boxgreen, minimum width=2.1cm] (ehat) at (5.95,1.8) {residual\\$\hat e$};
-\node[boxgreen, minimum width=2.35cm] (yhat) at (8.25,1.8) {channel output\\$\hat y=x+\hat e$};
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    boxblue/.style={draw=blue!60!black, thick, rounded corners=2mm, fill=blue!10, minimum width=1.45cm, minimum height=0.95cm, align=center},
+    boxviolet/.style={draw=violet!70!black, thick, rounded corners=2mm, fill=violet!12, minimum width=1.55cm, minimum height=1.05cm, align=center},
+    boxgreen/.style={draw=green!50!black, thick, rounded corners=2mm, fill=green!10, minimum width=2.1cm, minimum height=1.0cm, align=center},
+    title/.style={font=\bfseries\large},
+    note/.style={align=center, font=\small, text depth=0pt},
+    flow/.style={->, thick, draw=black!70}
+]
+\fill[white] (-0.5,-2.3) rectangle (8.7,3.1);
+\node[title] at (4.0,2.5) {Residual-mode one-shot inference};
+\coordinate (inferstart) at (0.2,1.1);
+\node[boxblue, anchor=west] (cond2) at (inferstart) {$x$};
+\node[boxviolet, right=0.28cm of cond2.east, anchor=west] (latent2) {$z$};
+\node[boxviolet, minimum width=2.2cm, right=0.32cm of latent2.east, anchor=west] (gen2) {$g_\theta(x,z)$};
+\node[boxgreen, minimum width=1.7cm, right=0.32cm of gen2.east, anchor=west] (ehat) {$\hat e$};
+\node[boxgreen, minimum width=2.15cm, right=0.32cm of ehat.east, anchor=west] (yhat) {$\hat y=x+\hat e$};
 \draw[flow, blue!70!black] (cond2.east) -- (gen2.west);
 \draw[flow, violet!80!black] (latent2.east) -- (gen2.west);
 \draw[flow, green!50!black] (gen2.east) -- (ehat.west);
 \draw[flow, green!50!black] (ehat.east) -- (yhat.west);
-\node[note, text width=4.6cm] at (4.9,0.2) {After training: draw $z$, evaluate $g_\theta(x,z)$ once, then reconstruct $\hat y=x+\hat e$.};
-\node[note, text width=2.8cm, red!70!black] at (8.15,0.05) {One-shot,\\constant-depth inference.};
-
+\node[note, text width=5.8cm] at (4.1,-0.35) {After training: draw \(z\), evaluate \(g_\theta(x,z)\) once, and reconstruct the channel output as \(\hat y=x+\hat e\).};
+\node[note, text width=3.0cm, red!70!black] at (7.35,-1.45) {Constant-depth,\\one-shot sampling.};
 \end{tikzpicture}
-\caption{Illustration of conditional drifting for channel residual modeling. Left: for a fixed transmitted symbol \(x\), the generator produces residual samples \(\hat e_i\), which are moved toward the true residual cloud through a drift field that combines attraction to data and repulsion among generated samples. The network is then regressed toward the drifted targets. Right: after training, inference is one-shot: draw \(z\), evaluate \(g_\theta(x,z)\), and reconstruct the channel output as \(\hat y=x+\hat e\).}
+\caption{Inference-time schematic for residual-mode conditional drifting. Once the generator has been trained, sampling requires only a single forward pass of \(g_\theta(x,z)\), followed by residual-to-output reconstruction. In the direct-output parameterization, the same one-shot generator would produce \(\hat y\) directly instead of \(\hat e\).}
 \label{fig:schematic}
 \end{figure*}
 
@@ -384,6 +376,14 @@ $\mathcal{L}_{\mathrm{drift}}=\frac{1}{N}\sum_i \|\hat e_i-\tilde e_i\|_2^2$};
 \section{Experimental Setup}
 \subsection{Channel models}
 We benchmark four channel families.
+Unless stated otherwise, each sample is represented as a real-valued I/Q vector
+\begin{equation}
+x = \begin{bmatrix}x_I \\ x_Q\end{bmatrix} \in \mathbb{R}^2,
+\qquad
+y = \begin{bmatrix}y_I \\ y_Q\end{bmatrix} \in \mathbb{R}^2.
+\end{equation}
+Thus the unified benchmark uses channel dimension \(n=2\), which corresponds to one complex channel input-output pair written in real coordinates.
+Noise variables are sampled independently across real components unless a channel-specific transformation introduces coupling.
 
 \textbf{AWGN:}
 \begin{equation}
@@ -391,17 +391,88 @@ y = x + n,
 \qquad
 n \sim \mathcal{N}(0,\sigma^2 I).
 \end{equation}
+This is the standard additive white Gaussian noise reference channel and serves as the simplest near-identity baseline.
 
 \textbf{Rayleigh:}
-the transmitted symbol is multiplied elementwise by a Rayleigh fading coefficient and then corrupted by additive Gaussian noise.
+the transmitted symbol is multiplied elementwise by a random fading amplitude and then corrupted by additive Gaussian noise.
+In the implemented benchmark,
+\begin{equation}
+y = h \odot x + n,
+\end{equation}
+where \(\odot\) denotes elementwise multiplication,
+\begin{equation}
+h_k = \frac{1}{\sqrt{2}}\sqrt{u_k^2 + v_k^2},
+\qquad
+u_k,v_k \overset{\text{i.i.d.}}{\sim} \mathcal{N}(0,1),
+\end{equation}
+and
+\begin{equation}
+n \sim \mathcal{N}(0,\sigma^2 I).
+\end{equation}
+Each real component is therefore scaled by an independent Rayleigh-distributed magnitude before noise is added.
+This channel is multiplicative rather than additive and is correspondingly less aligned with a pure residual perturbation view.
 
 \textbf{SSPA:}
-the input amplitude is passed through a smooth solid-state power amplifier nonlinearity before additive noise is applied.
+the input is passed through a smooth solid-state power amplifier nonlinearity before additive noise is applied.
+Let
+\begin{equation}
+r = \sqrt{x_I^2 + x_Q^2}
+\end{equation}
+denote the input amplitude.
+The nonlinear amplitude law used in the benchmark is
+\begin{equation}
+a(r)
+=
+\frac{G}{\left(1+\left(\frac{Gr}{A_0}\right)^{2p}\right)^{1/(2p)}},
+\end{equation}
+with default parameters \(p=3\), \(A_0=1.5\), and \(G=5.0\).
+The noiseless amplifier output is
+\begin{equation}
+\tilde{x} = a(r)\,x,
+\end{equation}
+and the observed channel output is
+\begin{equation}
+y = \tilde{x} + n,
+\qquad
+n \sim \mathcal{N}\!\left(0,\frac{\sigma^2}{2}I\right).
+\end{equation}
+This channel introduces amplitude-dependent nonlinear distortion while preserving the input direction in the I/Q plane.
 
 \textbf{OptFib:}
 we include a simplified memoryless optical-fiber proxy channel adapted from \texttt{DM\_OptFib}.
-The I/Q pair is propagated through \(K_{\text{step}}\) repeated nonlinear phase rotations with per-step Gaussian noise injection.
+Let the state after propagation step \(k\) be \(x^{(k)} = [x_I^{(k)},x_Q^{(k)}]^\top\).
+At each step, the instantaneous nonlinear phase is
+\begin{equation}
+\phi^{(k)}
+=
+\gamma
+\left(\left(x_I^{(k)}\right)^2 + \left(x_Q^{(k)}\right)^2\right)\frac{L}{K_{\text{step}}}.
+\end{equation}
+The deterministic Kerr-style rotation is
+\begin{equation}
+\begin{aligned}
+\tilde{x}_I^{(k+1)} &= x_I^{(k)}\cos\phi^{(k)} - x_Q^{(k)}\sin\phi^{(k)}, \\
+\tilde{x}_Q^{(k+1)} &= x_I^{(k)}\sin\phi^{(k)} + x_Q^{(k)}\cos\phi^{(k)},
+\end{aligned}
+\end{equation}
+followed by additive Gaussian perturbations at every step:
+\begin{equation}
+\begin{aligned}
+x_I^{(k+1)} &= \tilde{x}_I^{(k+1)} + \sigma_n \xi_I^{(k)}, \\
+x_Q^{(k+1)} &= \tilde{x}_Q^{(k+1)} + \sigma_n \xi_Q^{(k)},
+\end{aligned}
+\qquad
+\xi_I^{(k)},\xi_Q^{(k)} \overset{\text{i.i.d.}}{\sim} \mathcal{N}(0,1).
+\end{equation}
+When the optical-noise parameterization of \texttt{DM\_OptFib} is used,
+\begin{equation}
+\sigma_n
+=
+\sqrt{\frac{10^{(P_n-30)/10}}{2K_{\text{step}}}},
+\end{equation}
+with \(P_n\) measured in dBm.
 In the current benchmark, the default parameters are \(L=5000\), \(\gamma=1.27\), \(K_{\text{step}}=50\), and \(P_n=-21.3\) dBm.
+This is the most nonlinear channel in the suite and serves as a stress test for all generators.
 
 \subsection{Training protocol}
 All models are trained conditionally on \(x\) in residual space.
@@ -430,6 +501,15 @@ The primary metric is sliced Wasserstein distance on residual vectors:
 \begin{equation}
 \mathrm{SWD}\!\left(\{\hat{e}_i\}, \{e_i\}\right).
 \end{equation}
+Given true residual samples \(P=\{e_i\}_{i=1}^N\) and generated samples \(Q=\{\hat e_i\}_{i=1}^N\), SWD is estimated by drawing random unit directions \(\theta_m\), projecting both clouds onto those directions, computing the one-dimensional Wasserstein distance for each projection, and averaging over projections:
+\begin{equation}
+\mathrm{SWD}(P,Q)
+=
+\frac{1}{M}
+\sum_{m=1}^M
+W_1\!\left(\{\langle \theta_m,e_i\rangle\}_{i=1}^N,\{\langle \theta_m,\hat e_i\rangle\}_{i=1}^N\right).
+\end{equation}
+Thus SWD compares the generated and true sample clouds through many one-dimensional views and captures geometric mismatch more faithfully than a purely bin-based marginal comparison.
 In the current code, SWD is estimated using \(256\) random one-dimensional projections.
 Residual-space SWD was selected over histogram \(L_1\) distance because it better captures geometry in \(\mathbb{R}^2\) and behaves more consistently across different channel families.
 
@@ -525,7 +605,7 @@ Several caveats are important.
 First, the tables above are current single-seed benchmark results.
 They are useful for method development and paper drafting, but the final publication version should be based on the multi-seed \(T=100\) runner included in the repository.
 Second, the present study focuses on generator-level distributional fidelity and timing rather than on full end-to-end communication metrics such as SER or \(E_b/N_0\) curves.
-Relative to \cite{paper2309}, the present draft should therefore be interpreted as a complementary benchmark on channel-distribution learning rather than as a replacement for downstream system evaluation.
+Relative to \cite{paper2309}, the present study should therefore be interpreted as a complementary benchmark on channel-distribution learning rather than as a replacement for downstream system evaluation.
 
 Third, the drifting implementation here is deliberately pragmatic.
 It is inspired by \cite{drifting} and captures the core one-shot training idea through an attraction--repulsion drift field, but it is not a claim that every modeling choice from the drifting paper has been reproduced exactly.
@@ -536,7 +616,7 @@ This paper presented a detailed experimental draft for conditional drifting mode
 The results show a clear tradeoff.
 At lower diffusion budgets, drifting is highly competitive and often strongest.
 At \(T=100\), DDPM remains the best fidelity baseline on AWGN and SSPA, while drifting is strongest on Rayleigh and OptFib and preserves a one-shot inference path.
-Most importantly, drifting provides a \(260.8\times\) CPU speedup over DDPM(100) in the current implementation.
+Most importantly, drifting provides a \(260.8\times\) CPU speedup over DDPM(100) in the measured configuration.
 
 These observations suggest that drifting is not only an interesting new generative-model idea, but also a practically relevant direction for communication-system channel learning.
 The next steps are straightforward: run the full multi-seed publication benchmark, report confidence intervals, and extend the comparison to downstream communication metrics and more realistic optical or memory channels.

@@ -1,0 +1,515 @@
+{
+  "paper_reference_swd": {
+    "AWGN": {
+      "ddpm": 0.012,
+      "ddim_100": 0.008,
+      "ddim_50": 0.011,
+      "ddim_20": 0.022,
+      "ddim_10": 0.043,
+      "wgan": 0.013
+    },
+    "Rayleigh": {
+      "ddpm": 0.013,
+      "ddim_100": 0.008,
+      "ddim_50": 0.011,
+      "ddim_20": 0.024,
+      "ddim_10": 0.043,
+      "wgan": 0.019
+    },
+    "SSPA": {
+      "ddpm": 0.009,
+      "ddim_100": 0.007,
+      "ddim_50": 0.009,
+      "ddim_20": 0.018,
+      "ddim_10": 0.032,
+      "wgan": 0.104
+    }
+  },
+  "channels": {
+    "AWGN": {
+      "preset": {
+        "n": 7,
+        "ebn0_db": 5.0,
+        "rate": 0.5714285714285714,
+        "diffusion_hidden_dim": 110,
+        "wgan_hidden_dim": 128,
+        "diffusion_epochs": 30,
+        "drifting_epochs": 30,
+        "wgan_epochs": 30,
+        "dataset_size": 10000000,
+        "batch_size": 5000,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100,
+        "diffusion_learning_rate_schedule": [
+          [
+            10,
+            0.001
+          ],
+          [
+            20,
+            0.0001
+          ]
+        ]
+      },
+      "noise_std": 0.5260221433216792,
+      "effective_config": {
+        "dataset_size": 30000,
+        "eval_size": 5000,
+        "batch_size": 512,
+        "diffusion_epochs": 20,
+        "drifting_epochs": 20,
+        "wgan_epochs": 30
+      },
+      "paper_reference_swd": {
+        "ddpm": 0.012,
+        "ddim_100": 0.008,
+        "ddim_50": 0.011,
+        "ddim_20": 0.022,
+        "ddim_10": 0.043,
+        "wgan": 0.013
+      },
+      "results": {
+        "drifting_swd": 0.015973800793290138,
+        "ddpm_swd": 0.08565268665552139,
+        "ddim_swd": {
+          "100": 0.052412793040275574,
+          "50": 0.047914471477270126,
+          "20": 0.04525115340948105,
+          "10": 0.05518808960914612
+        },
+        "paper_wgan_swd": 0.022005632519721985
+      },
+      "final_history": {
+        "drifting": {
+          "epoch": 20.0,
+          "loss": 0.0010599239894102123,
+          "drift_norm": 0.08259241150344833
+        },
+        "diffusion": {
+          "epoch": 20,
+          "loss": 0.7616059618481135,
+          "lr": 0.0001
+        },
+        "diffusion_eval_timings": {
+          "ddpm": {
+            "prepare_sec": 8.068599981925217e-05,
+            "sample_sec": 0.07554564400015806,
+            "to_numpy_sec": 0.00026263900008416385,
+            "swd_sec": 0.0012305569998716237,
+            "total_sec": 0.0771195259999331
+          },
+          "ddim_100": {
+            "prepare_sec": 8.437700034846785e-05,
+            "sample_sec": 0.0652280439999231,
+            "to_numpy_sec": 0.00026942199974655523,
+            "swd_sec": 0.0012339489999249054,
+            "total_sec": 0.06681579199994303
+          },
+          "ddim_50": {
+            "prepare_sec": 8.208400004150462e-05,
+            "sample_sec": 0.03286606199981179,
+            "to_numpy_sec": 0.00025677500025267364,
+            "swd_sec": 0.001194003999898996,
+            "total_sec": 0.034398925000004965
+          },
+          "ddim_20": {
+            "prepare_sec": 7.845900017855456e-05,
+            "sample_sec": 0.013285904999975173,
+            "to_numpy_sec": 0.0003335609999339795,
+            "swd_sec": 0.0012900710003123095,
+            "total_sec": 0.014987996000400017
+          },
+          "ddim_10": {
+            "prepare_sec": 8.383700014746864e-05,
+            "sample_sec": 0.0067044580000583665,
+            "to_numpy_sec": 0.00014434500008064788,
+            "swd_sec": 0.0011595239998314355,
+            "total_sec": 0.008092164000117918
+          }
+        },
+        "diffusion_eval_chunk_timings": {
+          "ddpm": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 8.068599981925217e-05,
+              "sample_sec": 0.07554564400015806,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.07562632999997732
+            }
+          ],
+          "ddim_100": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 8.437700034846785e-05,
+              "sample_sec": 0.0652280439999231,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.06531242100027157
+            }
+          ],
+          "ddim_50": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 8.208400004150462e-05,
+              "sample_sec": 0.03286606199981179,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.032948145999853296
+            }
+          ],
+          "ddim_20": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 7.845900017855456e-05,
+              "sample_sec": 0.013285904999975173,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.013364364000153728
+            }
+          ],
+          "ddim_10": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 8.383700014746864e-05,
+              "sample_sec": 0.0067044580000583665,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.006788295000205835
+            }
+          ]
+        },
+        "diffusion_eval_total_sec": 0.2022682500000883,
+        "paper_wgan": {
+          "epoch": 30,
+          "g_loss": -0.010882899796558638,
+          "d_loss": -2.5289054265466786e-05
+        }
+      }
+    },
+    "Rayleigh": {
+      "preset": {
+        "n": 7,
+        "ebn0_db": 12.0,
+        "rate": 0.5714285714285714,
+        "diffusion_hidden_dim": 128,
+        "wgan_hidden_dim": 256,
+        "diffusion_epochs": 30,
+        "drifting_epochs": 30,
+        "wgan_epochs": 30,
+        "dataset_size": 10000000,
+        "batch_size": 5000,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100,
+        "diffusion_learning_rate_schedule": [
+          [
+            10,
+            0.001
+          ],
+          [
+            20,
+            0.0001
+          ]
+        ]
+      },
+      "noise_std": 0.2349654605298764,
+      "effective_config": {
+        "dataset_size": 30000,
+        "eval_size": 5000,
+        "batch_size": 512,
+        "diffusion_epochs": 20,
+        "drifting_epochs": 20,
+        "wgan_epochs": 30
+      },
+      "paper_reference_swd": {
+        "ddpm": 0.013,
+        "ddim_100": 0.008,
+        "ddim_50": 0.011,
+        "ddim_20": 0.024,
+        "ddim_10": 0.043,
+        "wgan": 0.019
+      },
+      "results": {
+        "drifting_swd": 0.03151785209774971,
+        "ddpm_swd": 0.1607687771320343,
+        "ddim_swd": {
+          "100": 0.11045098304748535,
+          "50": 0.10781751573085785,
+          "20": 0.08676275610923767,
+          "10": 0.05837814882397652
+        },
+        "paper_wgan_swd": 0.03708852827548981
+      },
+      "final_history": {
+        "drifting": {
+          "epoch": 20.0,
+          "loss": 0.0010951517721523641,
+          "drift_norm": 0.08469779997811479
+        },
+        "diffusion": {
+          "epoch": 20,
+          "loss": 0.652155544798253,
+          "lr": 0.0001
+        },
+        "diffusion_eval_timings": {
+          "ddpm": {
+            "prepare_sec": 0.00019583900029829238,
+            "sample_sec": 0.07579597899984947,
+            "to_numpy_sec": 0.00025897400018948247,
+            "swd_sec": 0.001177946000098018,
+            "total_sec": 0.07742873800043526
+          },
+          "ddim_100": {
+            "prepare_sec": 0.00018988900001204456,
+            "sample_sec": 0.0638576930000454,
+            "to_numpy_sec": 0.00024915799986047205,
+            "swd_sec": 0.0011667750000015076,
+            "total_sec": 0.06546351499991943
+          },
+          "ddim_50": {
+            "prepare_sec": 0.0002009869999710645,
+            "sample_sec": 0.03185353800017765,
+            "to_numpy_sec": 0.0002450120000503375,
+            "swd_sec": 0.0011779350002143474,
+            "total_sec": 0.0334774720004134
+          },
+          "ddim_20": {
+            "prepare_sec": 0.00019895000014003017,
+            "sample_sec": 0.013064715999917098,
+            "to_numpy_sec": 0.00017870100009531598,
+            "swd_sec": 0.001193957999930717,
+            "total_sec": 0.014636325000083161
+          },
+          "ddim_10": {
+            "prepare_sec": 0.0002049620002253505,
+            "sample_sec": 0.006537990999731846,
+            "to_numpy_sec": 0.0001309769995714305,
+            "swd_sec": 0.0011949889999414154,
+            "total_sec": 0.008068918999470043
+          }
+        },
+        "diffusion_eval_chunk_timings": {
+          "ddpm": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.00019583900029829238,
+              "sample_sec": 0.07579597899984947,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.07599181800014776
+            }
+          ],
+          "ddim_100": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.00018988900001204456,
+              "sample_sec": 0.0638576930000454,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.06404758200005745
+            }
+          ],
+          "ddim_50": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.0002009869999710645,
+              "sample_sec": 0.03185353800017765,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.032054525000148715
+            }
+          ],
+          "ddim_20": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.00019895000014003017,
+              "sample_sec": 0.013064715999917098,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.013263666000057128
+            }
+          ],
+          "ddim_10": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.0002049620002253505,
+              "sample_sec": 0.006537990999731846,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.006742952999957197
+            }
+          ]
+        },
+        "diffusion_eval_total_sec": 0.19990014399991196,
+        "paper_wgan": {
+          "epoch": 30,
+          "g_loss": -0.027581804763462583,
+          "d_loss": -0.0007173531451972865
+        }
+      }
+    },
+    "SSPA": {
+      "preset": {
+        "n": 8,
+        "ebn0_db": 8.0,
+        "rate": 0.75,
+        "diffusion_hidden_dim": 110,
+        "wgan_hidden_dim": 256,
+        "diffusion_epochs": 160,
+        "drifting_epochs": 160,
+        "wgan_epochs": 160,
+        "dataset_size": 10000000,
+        "batch_size": 4096,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100,
+        "diffusion_learning_rate_schedule": null
+      },
+      "noise_std": 0.3250531435997416,
+      "effective_config": {
+        "dataset_size": 30000,
+        "eval_size": 5000,
+        "batch_size": 512,
+        "diffusion_epochs": 20,
+        "drifting_epochs": 20,
+        "wgan_epochs": 30
+      },
+      "paper_reference_swd": {
+        "ddpm": 0.009,
+        "ddim_100": 0.007,
+        "ddim_50": 0.009,
+        "ddim_20": 0.018,
+        "ddim_10": 0.032,
+        "wgan": 0.104
+      },
+      "results": {
+        "drifting_swd": 0.024634994566440582,
+        "ddpm_swd": 0.07509691268205643,
+        "ddim_swd": {
+          "100": 0.054246000945568085,
+          "50": 0.05344324931502342,
+          "20": 0.06463242322206497,
+          "10": 0.08701504021883011
+        },
+        "paper_wgan_swd": 0.027485515922307968
+      },
+      "final_history": {
+        "drifting": {
+          "epoch": 20.0,
+          "loss": 0.0010865921612386985,
+          "drift_norm": 0.09009633794174356
+        },
+        "diffusion": {
+          "epoch": 20,
+          "loss": 0.7799414093211546,
+          "lr": 0.0001
+        },
+        "diffusion_eval_timings": {
+          "ddpm": {
+            "prepare_sec": 0.00025800799994613044,
+            "sample_sec": 0.07135064300018712,
+            "to_numpy_sec": 0.0002490199999556353,
+            "swd_sec": 0.001144414999998844,
+            "total_sec": 0.07300208600008773
+          },
+          "ddim_100": {
+            "prepare_sec": 0.0002992409999933443,
+            "sample_sec": 0.06170385199993689,
+            "to_numpy_sec": 0.00023849099989092792,
+            "swd_sec": 0.0011153899999953865,
+            "total_sec": 0.06335697399981655
+          },
+          "ddim_50": {
+            "prepare_sec": 0.0002527309998185956,
+            "sample_sec": 0.031110566999814182,
+            "to_numpy_sec": 0.0002737220002018148,
+            "swd_sec": 0.0011077720000685076,
+            "total_sec": 0.0327447919999031
+          },
+          "ddim_20": {
+            "prepare_sec": 0.00025115299968092586,
+            "sample_sec": 0.012667018000229291,
+            "to_numpy_sec": 0.00023251200036611408,
+            "swd_sec": 0.001090239999939513,
+            "total_sec": 0.014240923000215844
+          },
+          "ddim_10": {
+            "prepare_sec": 0.000251052000294294,
+            "sample_sec": 0.006435622000026342,
+            "to_numpy_sec": 0.00013736499977312633,
+            "swd_sec": 0.0010990929999934451,
+            "total_sec": 0.007923132000087207
+          }
+        },
+        "diffusion_eval_chunk_timings": {
+          "ddpm": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.00025800799994613044,
+              "sample_sec": 0.07135064300018712,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.07160865100013325
+            }
+          ],
+          "ddim_100": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.0002992409999933443,
+              "sample_sec": 0.06170385199993689,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.06200309299993023
+            }
+          ],
+          "ddim_50": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.0002527309998185956,
+              "sample_sec": 0.031110566999814182,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.03136329799963278
+            }
+          ],
+          "ddim_20": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.00025115299968092586,
+              "sample_sec": 0.012667018000229291,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.012918170999910217
+            }
+          ],
+          "ddim_10": [
+            {
+              "batch_index": 1,
+              "batch_size": 5000,
+              "prepare_sec": 0.000251052000294294,
+              "sample_sec": 0.006435622000026342,
+              "to_numpy_sec": 0.0,
+              "total_sec": 0.006686674000320636
+            }
+          ]
+        },
+        "diffusion_eval_total_sec": 0.19178389899980175,
+        "paper_wgan": {
+          "epoch": 30,
+          "g_loss": -0.027500464912440816,
+          "d_loss": -0.0021745476808588383
+        }
+      }
+    }
+  },
+  "seed": 7,
+  "device": "cuda",
+  "ddim_steps": [
+    100,
+    50,
+    20,
+    10
+  ]
+}
