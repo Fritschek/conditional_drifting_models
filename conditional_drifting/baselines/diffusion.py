@@ -10,9 +10,9 @@ from dataclasses import dataclass
 import numpy as np
 import torch
 import torch.nn as nn
-from tqdm import tqdm
 
 from ..metrics import sliced_wasserstein_distance
+from ..progress import tqdm
 
 
 def _disable_tqdm() -> bool:

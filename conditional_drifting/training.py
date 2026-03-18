@@ -8,11 +8,11 @@ from dataclasses import asdict, dataclass
 
 import numpy as np
 import torch
-from tqdm import tqdm
 
 from .losses import drifting_loss
 from .metrics import sliced_wasserstein_distance
 from .model import ConditionalDriftingGenerator
+from .progress import tqdm
 
 
 def _disable_tqdm() -> bool:
