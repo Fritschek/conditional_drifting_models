@@ -33,6 +33,26 @@ def summarize_numeric(values: list[float]) -> dict[str, float]:
     return {"mean": mean, "std": math.sqrt(variance), "num_seeds": len(values)}
 
 
+def resolve_suite_path(path_str: str, suite_dir: Path) -> Path:
+    path = Path(path_str)
+    if path.exists():
+        return path
+
+    parts = path.parts
+    suite_name = suite_dir.name
+    if suite_name in parts:
+        idx = parts.index(suite_name)
+        candidate = suite_dir.joinpath(*parts[idx + 1 :])
+        if candidate.exists():
+            return candidate
+
+    candidate = suite_dir / path.name
+    if candidate.exists():
+        return candidate
+
+    raise FileNotFoundError(f"Could not resolve copied suite path for {path_str} under {suite_dir}")
+
+
 def main() -> None:
     args = parse_args()
     seeds = parse_seeds(args.seeds, args.seed_start, args.num_seeds, args.seed)
@@ -45,7 +65,13 @@ def main() -> None:
         per_seed.append(json.loads(result_path.read_text()))
 
     aggregated: dict[str, dict] = {"paper_channels": {}, "optfib": {}}
-    paper_metrics = ["drifting_swd", "ddpm_swd", "paper_wgan_swd", "gan_fa_swd"]
+    paper_metrics = [
+        "drifting_direct_swd",
+        "drifting_residual_swd",
+        "drifting_swd",
+        "ddpm_swd",
+        "paper_wgan_swd",
+    ]
     ddim_keys = [100, 50, 20, 10]
     channel_names = [name.strip() for name in args.paper_channels.split(",") if name.strip()]
 
@@ -54,7 +80,7 @@ def main() -> None:
         for metric in paper_metrics:
             values = []
             for row in per_seed:
-                summary_path = Path(row["paper_result"]["output_json"])
+                summary_path = resolve_suite_path(row["paper_result"]["output_json"], args.suite_dir)
                 data = json.loads(summary_path.read_text())
                 result_block = data["channels"][channel_name]["results"]
                 if metric in result_block:
@@ -66,16 +92,23 @@ def main() -> None:
         for step in ddim_keys:
             values = []
             for row in per_seed:
-                summary_path = Path(row["paper_result"]["output_json"])
+                summary_path = resolve_suite_path(row["paper_result"]["output_json"], args.suite_dir)
                 data = json.loads(summary_path.read_text())
                 values.append(float(data["channels"][channel_name]["results"]["ddim_swd"][str(step)]))
             ddim_summary[str(step)] = summarize_numeric(values)
         channel_summary["ddim_swd"] = ddim_summary
         aggregated["paper_channels"][channel_name] = channel_summary
 
-    optfib_values = {"drifting_swd": [], "ddpm_swd": [], "ddim_swd": [], "gan_swd": []}
+    optfib_values = {
+        "drifting_residual_swd": [],
+        "drifting_direct_swd": [],
+        "drifting_swd": [],
+        "ddpm_swd": [],
+        "ddim_swd": [],
+        "paper_wgan_swd": [],
+    }
     for row in per_seed:
-        optfib_json = Path(row["optfib_result"]["json"])
+        optfib_json = resolve_suite_path(row["optfib_result"]["json"], args.suite_dir)
         data = json.loads(optfib_json.read_text())
         for metric in optfib_values:
             optfib_values[metric].append(float(data[metric]))

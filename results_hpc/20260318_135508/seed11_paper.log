@@ -1,0 +1,711 @@
+[seed-runner] start 2026-03-18T13:58:50Z
+[seed-runner] label: paper
+[seed-runner] cwd: /home/h3/rifr807e/repos/conditional_drifting_models
+[seed-runner] command: /software/genoa/r24.04/Python/3.11.3-GCCcore-12.3.0/bin/python -u scripts/run_paper2309_benchmark.py --device cuda --seed 11 --channels AWGN,Rayleigh,SSPA --eval-size 1000000 --include-gan-fa --out-dir /home/rifr807e/repos/conditional_drifting_models/results_hpc/20260318_135508/paper2309_benchmark_seed11
+
+epoch 1/30: loss=6.109540e-04, drift=6.245586e-02
+epoch 2/30: loss=3.486478e-04, drift=4.720111e-02
+epoch 3/30: loss=1.850498e-04, drift=3.451169e-02
+epoch 4/30: loss=1.306915e-04, drift=2.921434e-02
+epoch 5/30: loss=1.159308e-04, drift=2.747859e-02
+epoch 6/30: loss=1.121363e-04, drift=2.702103e-02
+epoch 7/30: loss=1.095336e-04, drift=2.674158e-02
+epoch 8/30: loss=1.074068e-04, drift=2.646767e-02
+epoch 9/30: loss=1.096636e-04, drift=2.674859e-02
+epoch 10/30: loss=1.048256e-04, drift=2.611739e-02
+epoch 11/30: loss=1.090094e-04, drift=2.666397e-02
+epoch 12/30: loss=1.024887e-04, drift=2.585660e-02
+epoch 13/30: loss=1.051490e-04, drift=2.616610e-02
+epoch 14/30: loss=1.019613e-04, drift=2.575801e-02
+epoch 15/30: loss=1.022777e-04, drift=2.581201e-02
+epoch 16/30: loss=1.000047e-04, drift=2.552900e-02
+epoch 17/30: loss=9.994279e-05, drift=2.550360e-02
+epoch 18/30: loss=1.014584e-04, drift=2.572320e-02
+epoch 19/30: loss=9.754312e-05, drift=2.524327e-02
+epoch 20/30: loss=1.007509e-04, drift=2.562445e-02
+epoch 21/30: loss=9.770394e-05, drift=2.523928e-02
+epoch 22/30: loss=9.657469e-05, drift=2.506850e-02
+epoch 23/30: loss=9.711553e-05, drift=2.517465e-02
+epoch 24/30: loss=9.571961e-05, drift=2.503179e-02
+epoch 25/30: loss=9.639897e-05, drift=2.506153e-02
+epoch 26/30: loss=9.476025e-05, drift=2.490102e-02
+epoch 27/30: loss=9.436131e-05, drift=2.480488e-02
+epoch 28/30: loss=9.520430e-05, drift=2.488506e-02
+epoch 29/30: loss=9.429192e-05, drift=2.483950e-02
+epoch 30/30: loss=9.545733e-05, drift=2.491676e-02
+diff epoch 1/30: loss=5.624224e-01, lr=1.000e-03
+diff epoch 2/30: loss=5.212506e-01, lr=1.000e-03
+diff epoch 3/30: loss=5.205323e-01, lr=1.000e-03
+diff epoch 4/30: loss=5.203731e-01, lr=1.000e-03
+diff epoch 5/30: loss=5.200876e-01, lr=1.000e-03
+diff epoch 6/30: loss=5.201798e-01, lr=1.000e-03
+diff epoch 7/30: loss=5.199695e-01, lr=1.000e-03
+diff epoch 8/30: loss=5.199562e-01, lr=1.000e-03
+diff epoch 9/30: loss=5.198328e-01, lr=1.000e-03
+diff epoch 10/30: loss=5.197929e-01, lr=1.000e-03
+diff epoch 11/30: loss=5.190637e-01, lr=1.000e-04
+diff epoch 12/30: loss=5.190311e-01, lr=1.000e-04
+diff epoch 13/30: loss=5.191567e-01, lr=1.000e-04
+diff epoch 14/30: loss=5.189009e-01, lr=1.000e-04
+diff epoch 15/30: loss=5.188960e-01, lr=1.000e-04
+diff epoch 16/30: loss=5.188207e-01, lr=1.000e-04
+diff epoch 17/30: loss=5.190799e-01, lr=1.000e-04
+diff epoch 18/30: loss=5.187161e-01, lr=1.000e-04
+diff epoch 19/30: loss=5.188689e-01, lr=1.000e-04
+diff epoch 20/30: loss=5.189132e-01, lr=1.000e-04
+diff epoch 21/30: loss=5.188030e-01, lr=1.000e-04
+diff epoch 22/30: loss=5.187408e-01, lr=1.000e-04
+diff epoch 23/30: loss=5.188597e-01, lr=1.000e-04
+diff epoch 24/30: loss=5.190902e-01, lr=1.000e-04
+diff epoch 25/30: loss=5.191067e-01, lr=1.000e-04
+diff epoch 26/30: loss=5.191559e-01, lr=1.000e-04
+diff epoch 27/30: loss=5.190402e-01, lr=1.000e-04
+diff epoch 28/30: loss=5.190993e-01, lr=1.000e-04
+diff epoch 29/30: loss=5.190568e-01, lr=1.000e-04
+diff epoch 30/30: loss=5.190704e-01, lr=1.000e-04
+[AWGN] diffusion training complete; starting evaluation
+[AWGN] DDPM chunk 1/1: batch=1000000, sample=0.66s, total=0.66s, elapsed=0.66s, eta=0.00s
+[AWGN] DDPM done: swd=0.007414, sample=0.66s, swd_eval=0.24s
+[AWGN] DDIM-100 chunk 1/1: batch=1000000, sample=0.60s, total=0.60s, elapsed=0.60s, eta=0.00s
+[AWGN] DDIM-100 done: swd=0.004157, sample=0.60s, swd_eval=0.28s
+[AWGN] DDIM-50 chunk 1/1: batch=1000000, sample=0.20s, total=0.20s, elapsed=0.20s, eta=0.00s
+[AWGN] DDIM-50 done: swd=0.007126, sample=0.20s, swd_eval=0.28s
+[AWGN] DDIM-20 chunk 1/1: batch=1000000, sample=0.01s, total=0.01s, elapsed=0.01s, eta=0.00s
+[AWGN] DDIM-20 done: swd=0.014533, sample=0.01s, swd_eval=0.24s
+[AWGN] DDIM-10 chunk 1/1: batch=1000000, sample=0.00s, total=0.00s, elapsed=0.01s, eta=0.00s
+[AWGN] DDIM-10 done: swd=0.027175, sample=0.00s, swd_eval=0.16s
+gan epoch 1/30: g_loss=4.448540e+00, d_loss=1.215537e+00
+gan epoch 2/30: g_loss=4.479771e+00, d_loss=1.188552e+00
+gan epoch 3/30: g_loss=4.500060e+00, d_loss=1.183609e+00
+gan epoch 4/30: g_loss=4.498694e+00, d_loss=1.160813e+00
+gan epoch 5/30: g_loss=4.497963e+00, d_loss=1.155270e+00
+gan epoch 6/30: g_loss=4.498397e+00, d_loss=1.153286e+00
+gan epoch 7/30: g_loss=4.499899e+00, d_loss=1.151562e+00
+gan epoch 8/30: g_loss=4.497741e+00, d_loss=1.150484e+00
+gan epoch 9/30: g_loss=4.500551e+00, d_loss=1.149801e+00
+gan epoch 10/30: g_loss=4.498905e+00, d_loss=1.149531e+00
+gan epoch 11/30: g_loss=4.503049e+00, d_loss=1.149205e+00
+gan epoch 12/30: g_loss=4.503026e+00, d_loss=1.149422e+00
+gan epoch 13/30: g_loss=4.503987e+00, d_loss=1.149203e+00
+gan epoch 14/30: g_loss=4.502838e+00, d_loss=1.149746e+00
+gan epoch 15/30: g_loss=4.504855e+00, d_loss=1.149405e+00
+gan epoch 16/30: g_loss=4.501920e+00, d_loss=1.150230e+00
+gan epoch 17/30: g_loss=4.504499e+00, d_loss=1.149875e+00
+gan epoch 18/30: g_loss=4.504814e+00, d_loss=1.149816e+00
+gan epoch 19/30: g_loss=4.504987e+00, d_loss=1.149874e+00
+gan epoch 20/30: g_loss=4.505423e+00, d_loss=1.149421e+00
+gan epoch 21/30: g_loss=4.503773e+00, d_loss=1.149558e+00
+gan epoch 22/30: g_loss=4.506623e+00, d_loss=1.149210e+00
+gan epoch 23/30: g_loss=4.504237e+00, d_loss=1.149283e+00
+gan epoch 24/30: g_loss=4.506221e+00, d_loss=1.149175e+00
+gan epoch 25/30: g_loss=4.505343e+00, d_loss=1.149511e+00
+gan epoch 26/30: g_loss=4.505717e+00, d_loss=1.149247e+00
+gan epoch 27/30: g_loss=4.504066e+00, d_loss=1.149505e+00
+gan epoch 28/30: g_loss=4.504976e+00, d_loss=1.149037e+00
+gan epoch 29/30: g_loss=4.504663e+00, d_loss=1.148772e+00
+gan epoch 30/30: g_loss=4.504586e+00, d_loss=1.149144e+00
+epoch 1/30: loss=5.360011e-04, drift=5.868585e-02
+epoch 2/30: loss=3.433126e-04, drift=4.679469e-02
+epoch 3/30: loss=2.076577e-04, drift=3.623670e-02
+epoch 4/30: loss=1.253176e-04, drift=2.823434e-02
+epoch 5/30: loss=9.609748e-05, drift=2.502247e-02
+epoch 6/30: loss=9.123162e-05, drift=2.435938e-02
+epoch 7/30: loss=8.846420e-05, drift=2.399656e-02
+epoch 8/30: loss=8.860316e-05, drift=2.399892e-02
+epoch 9/30: loss=9.043653e-05, drift=2.425154e-02
+epoch 10/30: loss=8.903376e-05, drift=2.403802e-02
+epoch 11/30: loss=8.878181e-05, drift=2.403774e-02
+epoch 12/30: loss=9.010195e-05, drift=2.419246e-02
+epoch 13/30: loss=8.850740e-05, drift=2.397807e-02
+epoch 14/30: loss=8.388781e-05, drift=2.336508e-02
+epoch 15/30: loss=8.546339e-05, drift=2.355275e-02
+epoch 16/30: loss=8.510242e-05, drift=2.352262e-02
+epoch 17/30: loss=8.185467e-05, drift=2.302110e-02
+epoch 18/30: loss=7.893609e-05, drift=2.265844e-02
+epoch 19/30: loss=7.822735e-05, drift=2.255239e-02
+epoch 20/30: loss=7.902737e-05, drift=2.267380e-02
+epoch 21/30: loss=7.752397e-05, drift=2.245845e-02
+epoch 22/30: loss=7.913443e-05, drift=2.266735e-02
+epoch 23/30: loss=7.667996e-05, drift=2.229877e-02
+epoch 24/30: loss=7.662327e-05, drift=2.231988e-02
+epoch 25/30: loss=7.643480e-05, drift=2.223608e-02
+epoch 26/30: loss=7.607457e-05, drift=2.221246e-02
+epoch 27/30: loss=7.502223e-05, drift=2.205387e-02
+epoch 28/30: loss=7.708475e-05, drift=2.234621e-02
+epoch 29/30: loss=7.630685e-05, drift=2.222700e-02
+epoch 30/30: loss=7.637637e-05, drift=2.229140e-02
+diff epoch 1/30: loss=5.467428e-01, lr=1.000e-03
+diff epoch 2/30: loss=5.126055e-01, lr=1.000e-03
+diff epoch 3/30: loss=5.091736e-01, lr=1.000e-03
+diff epoch 4/30: loss=4.897396e-01, lr=1.000e-03
+diff epoch 5/30: loss=4.644589e-01, lr=1.000e-03
+diff epoch 6/30: loss=4.601119e-01, lr=1.000e-03
+diff epoch 7/30: loss=4.581375e-01, lr=1.000e-03
+diff epoch 8/30: loss=4.572623e-01, lr=1.000e-03
+diff epoch 9/30: loss=4.569585e-01, lr=1.000e-03
+diff epoch 10/30: loss=4.560671e-01, lr=1.000e-03
+diff epoch 11/30: loss=4.551576e-01, lr=1.000e-04
+diff epoch 12/30: loss=4.551655e-01, lr=1.000e-04
+diff epoch 13/30: loss=4.546424e-01, lr=1.000e-04
+diff epoch 14/30: loss=4.547395e-01, lr=1.000e-04
+diff epoch 15/30: loss=4.548557e-01, lr=1.000e-04
+diff epoch 16/30: loss=4.546134e-01, lr=1.000e-04
+diff epoch 17/30: loss=4.547525e-01, lr=1.000e-04
+diff epoch 18/30: loss=4.547510e-01, lr=1.000e-04
+diff epoch 19/30: loss=4.545521e-01, lr=1.000e-04
+diff epoch 20/30: loss=4.546874e-01, lr=1.000e-04
+diff epoch 21/30: loss=4.546969e-01, lr=1.000e-04
+diff epoch 22/30: loss=4.544517e-01, lr=1.000e-04
+diff epoch 23/30: loss=4.544306e-01, lr=1.000e-04
+diff epoch 24/30: loss=4.546768e-01, lr=1.000e-04
+diff epoch 25/30: loss=4.543576e-01, lr=1.000e-04
+diff epoch 26/30: loss=4.545756e-01, lr=1.000e-04
+diff epoch 27/30: loss=4.544201e-01, lr=1.000e-04
+diff epoch 28/30: loss=4.541245e-01, lr=1.000e-04
+diff epoch 29/30: loss=4.543089e-01, lr=1.000e-04
+diff epoch 30/30: loss=4.545391e-01, lr=1.000e-04
+[Rayleigh] diffusion training complete; starting evaluation
+[Rayleigh] DDPM chunk 1/1: batch=1000000, sample=0.75s, total=0.75s, elapsed=0.75s, eta=0.00s
+[Rayleigh] DDPM done: swd=0.007594, sample=0.75s, swd_eval=0.27s
+[Rayleigh] DDIM-100 chunk 1/1: batch=1000000, sample=0.69s, total=0.69s, elapsed=0.69s, eta=0.00s
+[Rayleigh] DDIM-100 done: swd=0.005089, sample=0.69s, swd_eval=0.31s
+[Rayleigh] DDIM-50 chunk 1/1: batch=1000000, sample=0.23s, total=0.23s, elapsed=0.23s, eta=0.00s
+[Rayleigh] DDIM-50 done: swd=0.006344, sample=0.23s, swd_eval=0.31s
+[Rayleigh] DDIM-20 chunk 1/1: batch=1000000, sample=0.01s, total=0.01s, elapsed=0.01s, eta=0.00s
+[Rayleigh] DDIM-20 done: swd=0.013863, sample=0.01s, swd_eval=0.26s
+[Rayleigh] DDIM-10 chunk 1/1: batch=1000000, sample=0.00s, total=0.01s, elapsed=0.01s, eta=0.00s
+[Rayleigh] DDIM-10 done: swd=0.026693, sample=0.00s, swd_eval=0.17s
+gan epoch 1/30: g_loss=4.197055e+00, d_loss=1.200683e+00
+gan epoch 2/30: g_loss=4.053849e+00, d_loss=1.192899e+00
+gan epoch 3/30: g_loss=4.049528e+00, d_loss=1.192365e+00
+gan epoch 4/30: g_loss=4.053602e+00, d_loss=1.188747e+00
+gan epoch 5/30: g_loss=4.052588e+00, d_loss=1.187603e+00
+gan epoch 6/30: g_loss=4.053420e+00, d_loss=1.186203e+00
+gan epoch 7/30: g_loss=4.051750e+00, d_loss=1.185482e+00
+gan epoch 8/30: g_loss=4.053118e+00, d_loss=1.184707e+00
+gan epoch 9/30: g_loss=4.054480e+00, d_loss=1.184111e+00
+gan epoch 10/30: g_loss=4.053416e+00, d_loss=1.184160e+00
+gan epoch 11/30: g_loss=4.054076e+00, d_loss=1.184178e+00
+gan epoch 12/30: g_loss=4.053304e+00, d_loss=1.184496e+00
+gan epoch 13/30: g_loss=4.053319e+00, d_loss=1.184453e+00
+gan epoch 14/30: g_loss=4.053924e+00, d_loss=1.184567e+00
+gan epoch 15/30: g_loss=4.052179e+00, d_loss=1.184685e+00
+gan epoch 16/30: g_loss=4.051379e+00, d_loss=1.184559e+00
+gan epoch 17/30: g_loss=4.052432e+00, d_loss=1.184696e+00
+gan epoch 18/30: g_loss=4.050336e+00, d_loss=1.185018e+00
+gan epoch 19/30: g_loss=4.051200e+00, d_loss=1.184863e+00
+gan epoch 20/30: g_loss=4.048874e+00, d_loss=1.185305e+00
+gan epoch 21/30: g_loss=4.050256e+00, d_loss=1.185086e+00
+gan epoch 22/30: g_loss=4.051715e+00, d_loss=1.184738e+00
+gan epoch 23/30: g_loss=4.051418e+00, d_loss=1.184549e+00
+gan epoch 24/30: g_loss=4.049710e+00, d_loss=1.184745e+00
+gan epoch 25/30: g_loss=4.050593e+00, d_loss=1.184662e+00
+gan epoch 26/30: g_loss=4.050573e+00, d_loss=1.184228e+00
+gan epoch 27/30: g_loss=4.050347e+00, d_loss=1.184179e+00
+gan epoch 28/30: g_loss=4.051842e+00, d_loss=1.183894e+00
+gan epoch 29/30: g_loss=4.051236e+00, d_loss=1.183769e+00
+gan epoch 30/30: g_loss=4.050444e+00, d_loss=1.184004e+00
+epoch 1/160: loss=7.547804e-04, drift=7.464180e-02
+epoch 2/160: loss=3.976318e-04, drift=5.382364e-02
+epoch 3/160: loss=1.979676e-04, drift=3.801413e-02
+epoch 4/160: loss=1.212408e-04, drift=3.014696e-02
+epoch 5/160: loss=1.121115e-04, drift=2.903577e-02
+epoch 6/160: loss=1.074059e-04, drift=2.840710e-02
+epoch 7/160: loss=1.040297e-04, drift=2.795433e-02
+epoch 8/160: loss=1.019338e-04, drift=2.763426e-02
+epoch 9/160: loss=1.029759e-04, drift=2.783130e-02
+epoch 10/160: loss=9.752642e-05, drift=2.706083e-02
+epoch 11/160: loss=9.713344e-05, drift=2.699540e-02
+epoch 12/160: loss=9.582225e-05, drift=2.682748e-02
+epoch 13/160: loss=9.240626e-05, drift=2.637451e-02
+epoch 14/160: loss=9.011720e-05, drift=2.606220e-02
+epoch 15/160: loss=8.964628e-05, drift=2.592321e-02
+epoch 16/160: loss=8.686357e-05, drift=2.556974e-02
+epoch 17/160: loss=8.145672e-05, drift=2.479188e-02
+epoch 18/160: loss=8.482460e-05, drift=2.526104e-02
+epoch 19/160: loss=7.857297e-05, drift=2.429495e-02
+epoch 20/160: loss=7.808478e-05, drift=2.424321e-02
+epoch 21/160: loss=7.581783e-05, drift=2.385190e-02
+epoch 22/160: loss=7.147670e-05, drift=2.316903e-02
+epoch 23/160: loss=7.066325e-05, drift=2.301750e-02
+epoch 24/160: loss=7.189331e-05, drift=2.321933e-02
+epoch 25/160: loss=6.703639e-05, drift=2.243158e-02
+epoch 26/160: loss=6.729786e-05, drift=2.253515e-02
+epoch 27/160: loss=6.348377e-05, drift=2.184723e-02
+epoch 28/160: loss=6.248050e-05, drift=2.166450e-02
+epoch 29/160: loss=6.256375e-05, drift=2.168947e-02
+epoch 30/160: loss=5.975583e-05, drift=2.116163e-02
+epoch 31/160: loss=5.974433e-05, drift=2.118859e-02
+epoch 32/160: loss=5.966055e-05, drift=2.118066e-02
+epoch 33/160: loss=5.863953e-05, drift=2.099771e-02
+epoch 34/160: loss=5.723128e-05, drift=2.075169e-02
+epoch 35/160: loss=5.701436e-05, drift=2.073573e-02
+epoch 36/160: loss=5.730254e-05, drift=2.077228e-02
+epoch 37/160: loss=5.629580e-05, drift=2.057138e-02
+epoch 38/160: loss=5.540998e-05, drift=2.038732e-02
+epoch 39/160: loss=5.525815e-05, drift=2.039041e-02
+epoch 40/160: loss=5.384310e-05, drift=2.010589e-02
+epoch 41/160: loss=5.444665e-05, drift=2.020030e-02
+epoch 42/160: loss=5.285375e-05, drift=1.994335e-02
+epoch 43/160: loss=5.393830e-05, drift=2.011669e-02
+epoch 44/160: loss=5.242564e-05, drift=1.983044e-02
+epoch 45/160: loss=5.208255e-05, drift=1.977751e-02
+epoch 46/160: loss=5.150417e-05, drift=1.967289e-02
+epoch 47/160: loss=5.179434e-05, drift=1.972128e-02
+epoch 48/160: loss=5.157859e-05, drift=1.967811e-02
+epoch 49/160: loss=5.109602e-05, drift=1.958269e-02
+epoch 50/160: loss=4.932548e-05, drift=1.928492e-02
+epoch 51/160: loss=5.071966e-05, drift=1.952290e-02
+epoch 52/160: loss=4.888981e-05, drift=1.915129e-02
+epoch 53/160: loss=4.745934e-05, drift=1.888661e-02
+epoch 54/160: loss=4.875759e-05, drift=1.915597e-02
+epoch 55/160: loss=4.808100e-05, drift=1.901176e-02
+epoch 56/160: loss=4.846833e-05, drift=1.909489e-02
+epoch 57/160: loss=4.870091e-05, drift=1.911958e-02
+epoch 58/160: loss=4.800277e-05, drift=1.899109e-02
+epoch 59/160: loss=4.778935e-05, drift=1.895475e-02
+epoch 60/160: loss=4.742594e-05, drift=1.887637e-02
+epoch 61/160: loss=4.708211e-05, drift=1.880993e-02
+epoch 62/160: loss=4.785412e-05, drift=1.896504e-02
+epoch 63/160: loss=4.670425e-05, drift=1.871665e-02
+epoch 64/160: loss=4.525242e-05, drift=1.844928e-02
+epoch 65/160: loss=4.528165e-05, drift=1.844045e-02
+epoch 66/160: loss=4.698843e-05, drift=1.879210e-02
+epoch 67/160: loss=4.529987e-05, drift=1.844394e-02
+epoch 68/160: loss=4.628172e-05, drift=1.863694e-02
+epoch 69/160: loss=4.557134e-05, drift=1.848167e-02
+epoch 70/160: loss=4.488794e-05, drift=1.835346e-02
+epoch 71/160: loss=4.516538e-05, drift=1.839613e-02
+epoch 72/160: loss=4.399360e-05, drift=1.818014e-02
+epoch 73/160: loss=4.493563e-05, drift=1.838298e-02
+epoch 74/160: loss=4.506101e-05, drift=1.838811e-02
+epoch 75/160: loss=4.355756e-05, drift=1.811186e-02
+epoch 76/160: loss=4.442886e-05, drift=1.826360e-02
+epoch 77/160: loss=4.344707e-05, drift=1.808181e-02
+epoch 78/160: loss=4.475447e-05, drift=1.834027e-02
+epoch 79/160: loss=4.302355e-05, drift=1.797475e-02
+epoch 80/160: loss=4.290823e-05, drift=1.795098e-02
+epoch 81/160: loss=4.315379e-05, drift=1.799453e-02
+epoch 82/160: loss=4.263853e-05, drift=1.788464e-02
+epoch 83/160: loss=4.266822e-05, drift=1.791150e-02
+epoch 84/160: loss=4.311570e-05, drift=1.800990e-02
+epoch 85/160: loss=4.376972e-05, drift=1.812348e-02
+epoch 86/160: loss=4.287121e-05, drift=1.795543e-02
+epoch 87/160: loss=4.246044e-05, drift=1.785437e-02
+epoch 88/160: loss=4.261920e-05, drift=1.789695e-02
+epoch 89/160: loss=4.189877e-05, drift=1.775086e-02
+epoch 90/160: loss=4.205821e-05, drift=1.776286e-02
+epoch 91/160: loss=4.272586e-05, drift=1.793229e-02
+epoch 92/160: loss=4.154673e-05, drift=1.766520e-02
+epoch 93/160: loss=4.173569e-05, drift=1.771961e-02
+epoch 94/160: loss=4.264094e-05, drift=1.790316e-02
+epoch 95/160: loss=4.165096e-05, drift=1.767618e-02
+epoch 96/160: loss=4.191161e-05, drift=1.773306e-02
+epoch 97/160: loss=4.111472e-05, drift=1.758339e-02
+epoch 98/160: loss=4.193418e-05, drift=1.775696e-02
+epoch 99/160: loss=4.069276e-05, drift=1.747971e-02
+epoch 100/160: loss=4.056242e-05, drift=1.747171e-02
+epoch 101/160: loss=4.129232e-05, drift=1.762780e-02
+epoch 102/160: loss=4.011559e-05, drift=1.738082e-02
+epoch 103/160: loss=4.059083e-05, drift=1.747270e-02
+epoch 104/160: loss=4.080653e-05, drift=1.750799e-02
+epoch 105/160: loss=4.117084e-05, drift=1.760868e-02
+epoch 106/160: loss=4.115250e-05, drift=1.759334e-02
+epoch 107/160: loss=4.024656e-05, drift=1.739668e-02
+epoch 108/160: loss=3.977564e-05, drift=1.729555e-02
+epoch 109/160: loss=3.989779e-05, drift=1.734613e-02
+epoch 110/160: loss=4.092706e-05, drift=1.752646e-02
+epoch 111/160: loss=3.953473e-05, drift=1.722364e-02
+epoch 112/160: loss=4.069791e-05, drift=1.747145e-02
+epoch 113/160: loss=3.965139e-05, drift=1.727136e-02
+epoch 114/160: loss=3.897850e-05, drift=1.712971e-02
+epoch 115/160: loss=4.150305e-05, drift=1.766584e-02
+epoch 116/160: loss=4.002878e-05, drift=1.732731e-02
+epoch 117/160: loss=3.867204e-05, drift=1.706933e-02
+epoch 118/160: loss=3.975832e-05, drift=1.729827e-02
+epoch 119/160: loss=4.009305e-05, drift=1.734383e-02
+epoch 120/160: loss=3.888428e-05, drift=1.710007e-02
+epoch 121/160: loss=3.864744e-05, drift=1.702326e-02
+epoch 122/160: loss=3.958019e-05, drift=1.725898e-02
+epoch 123/160: loss=3.879920e-05, drift=1.707256e-02
+epoch 124/160: loss=3.971613e-05, drift=1.727442e-02
+epoch 125/160: loss=3.905447e-05, drift=1.711371e-02
+epoch 126/160: loss=3.885224e-05, drift=1.707507e-02
+epoch 127/160: loss=3.865645e-05, drift=1.706058e-02
+epoch 128/160: loss=3.900493e-05, drift=1.710577e-02
+epoch 129/160: loss=3.945439e-05, drift=1.719095e-02
+epoch 130/160: loss=3.911977e-05, drift=1.717674e-02
+epoch 131/160: loss=3.835764e-05, drift=1.697980e-02
+epoch 132/160: loss=3.907184e-05, drift=1.713364e-02
+epoch 133/160: loss=3.857932e-05, drift=1.702640e-02
+epoch 134/160: loss=3.861457e-05, drift=1.705765e-02
+epoch 135/160: loss=3.877246e-05, drift=1.708008e-02
+epoch 136/160: loss=3.769516e-05, drift=1.683105e-02
+epoch 137/160: loss=3.897239e-05, drift=1.711570e-02
+epoch 138/160: loss=3.867376e-05, drift=1.706203e-02
+epoch 139/160: loss=3.842807e-05, drift=1.701632e-02
+epoch 140/160: loss=3.738763e-05, drift=1.676067e-02
+epoch 141/160: loss=3.837722e-05, drift=1.697685e-02
+epoch 142/160: loss=3.941337e-05, drift=1.722882e-02
+epoch 143/160: loss=3.781100e-05, drift=1.684000e-02
+epoch 144/160: loss=3.855365e-05, drift=1.705153e-02
+epoch 145/160: loss=3.748317e-05, drift=1.678287e-02
+epoch 146/160: loss=3.830094e-05, drift=1.695525e-02
+epoch 147/160: loss=3.696571e-05, drift=1.665725e-02
+epoch 148/160: loss=3.749310e-05, drift=1.679048e-02
+epoch 149/160: loss=3.774415e-05, drift=1.685972e-02
+epoch 150/160: loss=3.786521e-05, drift=1.685072e-02
+epoch 151/160: loss=3.736963e-05, drift=1.678101e-02
+epoch 152/160: loss=3.789227e-05, drift=1.688322e-02
+epoch 153/160: loss=3.732229e-05, drift=1.674829e-02
+epoch 154/160: loss=3.796127e-05, drift=1.688640e-02
+epoch 155/160: loss=3.760972e-05, drift=1.679268e-02
+epoch 156/160: loss=3.778129e-05, drift=1.683758e-02
+epoch 157/160: loss=3.751779e-05, drift=1.680476e-02
+epoch 158/160: loss=3.700049e-05, drift=1.670320e-02
+epoch 159/160: loss=3.771074e-05, drift=1.684677e-02
+epoch 160/160: loss=3.789382e-05, drift=1.689685e-02
+diff epoch 1/160: loss=7.119510e-01, lr=1.000e-04
+diff epoch 2/160: loss=5.372372e-01, lr=1.000e-04
+diff epoch 3/160: loss=5.176372e-01, lr=1.000e-04
+diff epoch 4/160: loss=5.120007e-01, lr=1.000e-04
+diff epoch 5/160: loss=5.091888e-01, lr=1.000e-04
+diff epoch 6/160: loss=5.073164e-01, lr=1.000e-04
+diff epoch 7/160: loss=5.049244e-01, lr=1.000e-04
+diff epoch 8/160: loss=5.003996e-01, lr=1.000e-04
+diff epoch 9/160: loss=4.893919e-01, lr=1.000e-04
+diff epoch 10/160: loss=4.622433e-01, lr=1.000e-04
+diff epoch 11/160: loss=4.095325e-01, lr=1.000e-04
+diff epoch 12/160: loss=3.473147e-01, lr=1.000e-04
+diff epoch 13/160: loss=2.985533e-01, lr=1.000e-04
+diff epoch 14/160: loss=2.698757e-01, lr=1.000e-04
+diff epoch 15/160: loss=2.551426e-01, lr=1.000e-04
+diff epoch 16/160: loss=2.464338e-01, lr=1.000e-04
+diff epoch 17/160: loss=2.405814e-01, lr=1.000e-04
+diff epoch 18/160: loss=2.367310e-01, lr=1.000e-04
+diff epoch 19/160: loss=2.338224e-01, lr=1.000e-04
+diff epoch 20/160: loss=2.319801e-01, lr=1.000e-04
+diff epoch 21/160: loss=2.303036e-01, lr=1.000e-04
+diff epoch 22/160: loss=2.291771e-01, lr=1.000e-04
+diff epoch 23/160: loss=2.279482e-01, lr=1.000e-04
+diff epoch 24/160: loss=2.272576e-01, lr=1.000e-04
+diff epoch 25/160: loss=2.266660e-01, lr=1.000e-04
+diff epoch 26/160: loss=2.261335e-01, lr=1.000e-04
+diff epoch 27/160: loss=2.255794e-01, lr=1.000e-04
+diff epoch 28/160: loss=2.251694e-01, lr=1.000e-04
+diff epoch 29/160: loss=2.249277e-01, lr=1.000e-04
+diff epoch 30/160: loss=2.246993e-01, lr=1.000e-04
+diff epoch 31/160: loss=2.243034e-01, lr=1.000e-04
+diff epoch 32/160: loss=2.240044e-01, lr=1.000e-04
+diff epoch 33/160: loss=2.239580e-01, lr=1.000e-04
+diff epoch 34/160: loss=2.238693e-01, lr=1.000e-04
+diff epoch 35/160: loss=2.235856e-01, lr=1.000e-04
+diff epoch 36/160: loss=2.235119e-01, lr=1.000e-04
+diff epoch 37/160: loss=2.231230e-01, lr=1.000e-04
+diff epoch 38/160: loss=2.229765e-01, lr=1.000e-04
+diff epoch 39/160: loss=2.230075e-01, lr=1.000e-04
+diff epoch 40/160: loss=2.230481e-01, lr=1.000e-04
+diff epoch 41/160: loss=2.228055e-01, lr=1.000e-04
+diff epoch 42/160: loss=2.225773e-01, lr=1.000e-04
+diff epoch 43/160: loss=2.225402e-01, lr=1.000e-04
+diff epoch 44/160: loss=2.226110e-01, lr=1.000e-04
+diff epoch 45/160: loss=2.223948e-01, lr=1.000e-04
+diff epoch 46/160: loss=2.222076e-01, lr=1.000e-04
+diff epoch 47/160: loss=2.222161e-01, lr=1.000e-04
+diff epoch 48/160: loss=2.222510e-01, lr=1.000e-04
+diff epoch 49/160: loss=2.221779e-01, lr=1.000e-04
+diff epoch 50/160: loss=2.221766e-01, lr=1.000e-04
+diff epoch 51/160: loss=2.219111e-01, lr=1.000e-04
+diff epoch 52/160: loss=2.218964e-01, lr=1.000e-04
+diff epoch 53/160: loss=2.218909e-01, lr=1.000e-04
+diff epoch 54/160: loss=2.218372e-01, lr=1.000e-04
+diff epoch 55/160: loss=2.218392e-01, lr=1.000e-04
+diff epoch 56/160: loss=2.219616e-01, lr=1.000e-04
+diff epoch 57/160: loss=2.217606e-01, lr=1.000e-04
+diff epoch 58/160: loss=2.217019e-01, lr=1.000e-04
+diff epoch 59/160: loss=2.217380e-01, lr=1.000e-04
+diff epoch 60/160: loss=2.218580e-01, lr=1.000e-04
+diff epoch 61/160: loss=2.217271e-01, lr=1.000e-04
+diff epoch 62/160: loss=2.215955e-01, lr=1.000e-04
+diff epoch 63/160: loss=2.214899e-01, lr=1.000e-04
+diff epoch 64/160: loss=2.215873e-01, lr=1.000e-04
+diff epoch 65/160: loss=2.216542e-01, lr=1.000e-04
+diff epoch 66/160: loss=2.214800e-01, lr=1.000e-04
+diff epoch 67/160: loss=2.215153e-01, lr=1.000e-04
+diff epoch 68/160: loss=2.216233e-01, lr=1.000e-04
+diff epoch 69/160: loss=2.213657e-01, lr=1.000e-04
+diff epoch 70/160: loss=2.212282e-01, lr=1.000e-04
+diff epoch 71/160: loss=2.213630e-01, lr=1.000e-04
+diff epoch 72/160: loss=2.213670e-01, lr=1.000e-04
+diff epoch 73/160: loss=2.212655e-01, lr=1.000e-04
+diff epoch 74/160: loss=2.213772e-01, lr=1.000e-04
+diff epoch 75/160: loss=2.214183e-01, lr=1.000e-04
+diff epoch 76/160: loss=2.211678e-01, lr=1.000e-04
+diff epoch 77/160: loss=2.214099e-01, lr=1.000e-04
+diff epoch 78/160: loss=2.212808e-01, lr=1.000e-04
+diff epoch 79/160: loss=2.211783e-01, lr=1.000e-04
+diff epoch 80/160: loss=2.211496e-01, lr=1.000e-04
+diff epoch 81/160: loss=2.211590e-01, lr=1.000e-04
+diff epoch 82/160: loss=2.211291e-01, lr=1.000e-04
+diff epoch 83/160: loss=2.210947e-01, lr=1.000e-04
+diff epoch 84/160: loss=2.212741e-01, lr=1.000e-04
+diff epoch 85/160: loss=2.210842e-01, lr=1.000e-04
+diff epoch 86/160: loss=2.212535e-01, lr=1.000e-04
+diff epoch 87/160: loss=2.212260e-01, lr=1.000e-04
+diff epoch 88/160: loss=2.210007e-01, lr=1.000e-04
+diff epoch 89/160: loss=2.211216e-01, lr=1.000e-04
+diff epoch 90/160: loss=2.211541e-01, lr=1.000e-04
+diff epoch 91/160: loss=2.210444e-01, lr=1.000e-04
+diff epoch 92/160: loss=2.209930e-01, lr=1.000e-04
+diff epoch 93/160: loss=2.210688e-01, lr=1.000e-04
+diff epoch 94/160: loss=2.211073e-01, lr=1.000e-04
+diff epoch 95/160: loss=2.208591e-01, lr=1.000e-04
+diff epoch 96/160: loss=2.209897e-01, lr=1.000e-04
+diff epoch 97/160: loss=2.211467e-01, lr=1.000e-04
+diff epoch 98/160: loss=2.209187e-01, lr=1.000e-04
+diff epoch 99/160: loss=2.209360e-01, lr=1.000e-04
+diff epoch 100/160: loss=2.207700e-01, lr=1.000e-04
+diff epoch 101/160: loss=2.209652e-01, lr=1.000e-04
+diff epoch 102/160: loss=2.208178e-01, lr=1.000e-04
+diff epoch 103/160: loss=2.209129e-01, lr=1.000e-04
+diff epoch 104/160: loss=2.209275e-01, lr=1.000e-04
+diff epoch 105/160: loss=2.210314e-01, lr=1.000e-04
+diff epoch 106/160: loss=2.210635e-01, lr=1.000e-04
+diff epoch 107/160: loss=2.208966e-01, lr=1.000e-04
+diff epoch 108/160: loss=2.208992e-01, lr=1.000e-04
+diff epoch 109/160: loss=2.209583e-01, lr=1.000e-04
+diff epoch 110/160: loss=2.208184e-01, lr=1.000e-04
+diff epoch 111/160: loss=2.207379e-01, lr=1.000e-04
+diff epoch 112/160: loss=2.208963e-01, lr=1.000e-04
+diff epoch 113/160: loss=2.209097e-01, lr=1.000e-04
+diff epoch 114/160: loss=2.206876e-01, lr=1.000e-04
+diff epoch 115/160: loss=2.209574e-01, lr=1.000e-04
+diff epoch 116/160: loss=2.209357e-01, lr=1.000e-04
+diff epoch 117/160: loss=2.209403e-01, lr=1.000e-04
+diff epoch 118/160: loss=2.207743e-01, lr=1.000e-04
+diff epoch 119/160: loss=2.207556e-01, lr=1.000e-04
+diff epoch 120/160: loss=2.208447e-01, lr=1.000e-04
+diff epoch 121/160: loss=2.207407e-01, lr=1.000e-04
+diff epoch 122/160: loss=2.207374e-01, lr=1.000e-04
+diff epoch 123/160: loss=2.207764e-01, lr=1.000e-04
+diff epoch 124/160: loss=2.207608e-01, lr=1.000e-04
+diff epoch 125/160: loss=2.208400e-01, lr=1.000e-04
+diff epoch 126/160: loss=2.208944e-01, lr=1.000e-04
+diff epoch 127/160: loss=2.206283e-01, lr=1.000e-04
+diff epoch 128/160: loss=2.206970e-01, lr=1.000e-04
+diff epoch 129/160: loss=2.210581e-01, lr=1.000e-04
+diff epoch 130/160: loss=2.208033e-01, lr=1.000e-04
+diff epoch 131/160: loss=2.207774e-01, lr=1.000e-04
+diff epoch 132/160: loss=2.206353e-01, lr=1.000e-04
+diff epoch 133/160: loss=2.206462e-01, lr=1.000e-04
+diff epoch 134/160: loss=2.205629e-01, lr=1.000e-04
+diff epoch 135/160: loss=2.206503e-01, lr=1.000e-04
+diff epoch 136/160: loss=2.206115e-01, lr=1.000e-04
+diff epoch 137/160: loss=2.206472e-01, lr=1.000e-04
+diff epoch 138/160: loss=2.207674e-01, lr=1.000e-04
+diff epoch 139/160: loss=2.206990e-01, lr=1.000e-04
+diff epoch 140/160: loss=2.206315e-01, lr=1.000e-04
+diff epoch 141/160: loss=2.207815e-01, lr=1.000e-04
+diff epoch 142/160: loss=2.205344e-01, lr=1.000e-04
+diff epoch 143/160: loss=2.205356e-01, lr=1.000e-04
+diff epoch 144/160: loss=2.207035e-01, lr=1.000e-04
+diff epoch 145/160: loss=2.205175e-01, lr=1.000e-04
+diff epoch 146/160: loss=2.206310e-01, lr=1.000e-04
+diff epoch 147/160: loss=2.205742e-01, lr=1.000e-04
+diff epoch 148/160: loss=2.207039e-01, lr=1.000e-04
+diff epoch 149/160: loss=2.205862e-01, lr=1.000e-04
+diff epoch 150/160: loss=2.205277e-01, lr=1.000e-04
+diff epoch 151/160: loss=2.205996e-01, lr=1.000e-04
+diff epoch 152/160: loss=2.207049e-01, lr=1.000e-04
+diff epoch 153/160: loss=2.206668e-01, lr=1.000e-04
+diff epoch 154/160: loss=2.205838e-01, lr=1.000e-04
+diff epoch 155/160: loss=2.205526e-01, lr=1.000e-04
+diff epoch 156/160: loss=2.206337e-01, lr=1.000e-04
+diff epoch 157/160: loss=2.206331e-01, lr=1.000e-04
+diff epoch 158/160: loss=2.204973e-01, lr=1.000e-04
+diff epoch 159/160: loss=2.206998e-01, lr=1.000e-04
+diff epoch 160/160: loss=2.205270e-01, lr=1.000e-04
+[SSPA] diffusion training complete; starting evaluation
+[SSPA] DDPM chunk 1/1: batch=1000000, sample=0.66s, total=0.66s, elapsed=0.66s, eta=0.00s
+[SSPA] DDPM done: swd=0.004487, sample=0.66s, swd_eval=0.24s
+[SSPA] DDIM-100 chunk 1/1: batch=1000000, sample=0.60s, total=0.60s, elapsed=0.60s, eta=0.00s
+[SSPA] DDIM-100 done: swd=0.003430, sample=0.60s, swd_eval=0.28s
+[SSPA] DDIM-50 chunk 1/1: batch=1000000, sample=0.20s, total=0.20s, elapsed=0.20s, eta=0.00s
+[SSPA] DDIM-50 done: swd=0.004386, sample=0.20s, swd_eval=0.28s
+[SSPA] DDIM-20 chunk 1/1: batch=1000000, sample=0.01s, total=0.01s, elapsed=0.01s, eta=0.00s
+[SSPA] DDIM-20 done: swd=0.006791, sample=0.01s, swd_eval=0.23s
+[SSPA] DDIM-10 chunk 1/1: batch=1000000, sample=0.00s, total=0.01s, elapsed=0.01s, eta=0.00s
+[SSPA] DDIM-10 done: swd=0.010839, sample=0.00s, swd_eval=0.16s
+gan epoch 1/160: g_loss=4.179054e+00, d_loss=1.164122e+00
+gan epoch 2/160: g_loss=2.880145e+00, d_loss=1.263384e+00
+gan epoch 3/160: g_loss=2.619219e+00, d_loss=1.279797e+00
+gan epoch 4/160: g_loss=2.634747e+00, d_loss=1.257224e+00
+gan epoch 5/160: g_loss=2.660690e+00, d_loss=1.252424e+00
+gan epoch 6/160: g_loss=2.679092e+00, d_loss=1.257533e+00
+gan epoch 7/160: g_loss=2.681232e+00, d_loss=1.269498e+00
+gan epoch 8/160: g_loss=2.682919e+00, d_loss=1.275628e+00
+gan epoch 9/160: g_loss=2.683964e+00, d_loss=1.279642e+00
+gan epoch 10/160: g_loss=2.684349e+00, d_loss=1.282268e+00
+gan epoch 11/160: g_loss=2.684714e+00, d_loss=1.283731e+00
+gan epoch 12/160: g_loss=2.685812e+00, d_loss=1.279951e+00
+gan epoch 13/160: g_loss=2.695737e+00, d_loss=1.276313e+00
+gan epoch 14/160: g_loss=2.701231e+00, d_loss=1.281480e+00
+gan epoch 15/160: g_loss=2.702421e+00, d_loss=1.283278e+00
+gan epoch 16/160: g_loss=2.707221e+00, d_loss=1.284518e+00
+gan epoch 17/160: g_loss=2.708133e+00, d_loss=1.284949e+00
+gan epoch 18/160: g_loss=2.707767e+00, d_loss=1.285217e+00
+gan epoch 19/160: g_loss=2.708047e+00, d_loss=1.285487e+00
+gan epoch 20/160: g_loss=2.709090e+00, d_loss=1.285488e+00
+gan epoch 21/160: g_loss=2.708387e+00, d_loss=1.285301e+00
+gan epoch 22/160: g_loss=2.709127e+00, d_loss=1.285433e+00
+gan epoch 23/160: g_loss=2.708768e+00, d_loss=1.284987e+00
+gan epoch 24/160: g_loss=2.707786e+00, d_loss=1.284450e+00
+gan epoch 25/160: g_loss=2.709276e+00, d_loss=1.284124e+00
+gan epoch 26/160: g_loss=2.708896e+00, d_loss=1.283620e+00
+gan epoch 27/160: g_loss=2.707330e+00, d_loss=1.283057e+00
+gan epoch 28/160: g_loss=2.707724e+00, d_loss=1.282816e+00
+gan epoch 29/160: g_loss=2.707386e+00, d_loss=1.282160e+00
+gan epoch 30/160: g_loss=2.706898e+00, d_loss=1.281446e+00
+gan epoch 31/160: g_loss=2.706838e+00, d_loss=1.280851e+00
+gan epoch 32/160: g_loss=2.707668e+00, d_loss=1.280576e+00
+gan epoch 33/160: g_loss=2.708100e+00, d_loss=1.279918e+00
+gan epoch 34/160: g_loss=2.708977e+00, d_loss=1.279647e+00
+gan epoch 35/160: g_loss=2.707132e+00, d_loss=1.279156e+00
+gan epoch 36/160: g_loss=2.706594e+00, d_loss=1.279220e+00
+gan epoch 37/160: g_loss=2.707111e+00, d_loss=1.278695e+00
+gan epoch 38/160: g_loss=2.706924e+00, d_loss=1.278684e+00
+gan epoch 39/160: g_loss=2.707599e+00, d_loss=1.278356e+00
+gan epoch 40/160: g_loss=2.707610e+00, d_loss=1.278113e+00
+gan epoch 41/160: g_loss=2.706607e+00, d_loss=1.278252e+00
+gan epoch 42/160: g_loss=2.706911e+00, d_loss=1.278337e+00
+gan epoch 43/160: g_loss=2.706176e+00, d_loss=1.278188e+00
+gan epoch 44/160: g_loss=2.705222e+00, d_loss=1.277918e+00
+gan epoch 45/160: g_loss=2.707194e+00, d_loss=1.277912e+00
+gan epoch 46/160: g_loss=2.707263e+00, d_loss=1.278117e+00
+gan epoch 47/160: g_loss=2.706673e+00, d_loss=1.277997e+00
+gan epoch 48/160: g_loss=2.706458e+00, d_loss=1.278040e+00
+gan epoch 49/160: g_loss=2.706932e+00, d_loss=1.277927e+00
+gan epoch 50/160: g_loss=2.706861e+00, d_loss=1.277814e+00
+gan epoch 51/160: g_loss=2.706894e+00, d_loss=1.277954e+00
+gan epoch 52/160: g_loss=2.706744e+00, d_loss=1.277728e+00
+gan epoch 53/160: g_loss=2.706182e+00, d_loss=1.277668e+00
+gan epoch 54/160: g_loss=2.705941e+00, d_loss=1.277888e+00
+gan epoch 55/160: g_loss=2.705772e+00, d_loss=1.277770e+00
+gan epoch 56/160: g_loss=2.707060e+00, d_loss=1.277878e+00
+gan epoch 57/160: g_loss=2.706959e+00, d_loss=1.277873e+00
+gan epoch 58/160: g_loss=2.705591e+00, d_loss=1.277965e+00
+gan epoch 59/160: g_loss=2.705542e+00, d_loss=1.278003e+00
+gan epoch 60/160: g_loss=2.705838e+00, d_loss=1.278131e+00
+gan epoch 61/160: g_loss=2.705529e+00, d_loss=1.278236e+00
+gan epoch 62/160: g_loss=2.705886e+00, d_loss=1.278109e+00
+gan epoch 63/160: g_loss=2.706195e+00, d_loss=1.278173e+00
+gan epoch 64/160: g_loss=2.705010e+00, d_loss=1.278128e+00
+gan epoch 65/160: g_loss=2.704944e+00, d_loss=1.278403e+00
+gan epoch 66/160: g_loss=2.704794e+00, d_loss=1.278254e+00
+gan epoch 67/160: g_loss=2.705671e+00, d_loss=1.278494e+00
+gan epoch 68/160: g_loss=2.705494e+00, d_loss=1.278211e+00
+gan epoch 69/160: g_loss=2.705071e+00, d_loss=1.278274e+00
+gan epoch 70/160: g_loss=2.705912e+00, d_loss=1.278339e+00
+gan epoch 71/160: g_loss=2.705250e+00, d_loss=1.278330e+00
+gan epoch 72/160: g_loss=2.704596e+00, d_loss=1.278429e+00
+gan epoch 73/160: g_loss=2.705191e+00, d_loss=1.278430e+00
+gan epoch 74/160: g_loss=2.704761e+00, d_loss=1.278449e+00
+gan epoch 75/160: g_loss=2.705810e+00, d_loss=1.278410e+00
+gan epoch 76/160: g_loss=2.704549e+00, d_loss=1.278708e+00
+gan epoch 77/160: g_loss=2.703659e+00, d_loss=1.278643e+00
+gan epoch 78/160: g_loss=2.704730e+00, d_loss=1.278561e+00
+gan epoch 79/160: g_loss=2.704767e+00, d_loss=1.278739e+00
+gan epoch 80/160: g_loss=2.703990e+00, d_loss=1.278924e+00
+gan epoch 81/160: g_loss=2.704647e+00, d_loss=1.278765e+00
+gan epoch 82/160: g_loss=2.705251e+00, d_loss=1.278636e+00
+gan epoch 83/160: g_loss=2.704923e+00, d_loss=1.278935e+00
+gan epoch 84/160: g_loss=2.704486e+00, d_loss=1.278807e+00
+gan epoch 85/160: g_loss=2.703490e+00, d_loss=1.278896e+00
+gan epoch 86/160: g_loss=2.703995e+00, d_loss=1.278798e+00
+gan epoch 87/160: g_loss=2.703545e+00, d_loss=1.278806e+00
+gan epoch 88/160: g_loss=2.703856e+00, d_loss=1.279145e+00
+gan epoch 89/160: g_loss=2.703538e+00, d_loss=1.278948e+00
+gan epoch 90/160: g_loss=2.703782e+00, d_loss=1.278994e+00
+gan epoch 91/160: g_loss=2.704606e+00, d_loss=1.279053e+00
+gan epoch 92/160: g_loss=2.703995e+00, d_loss=1.278882e+00
+gan epoch 93/160: g_loss=2.703556e+00, d_loss=1.279075e+00
+gan epoch 94/160: g_loss=2.704602e+00, d_loss=1.279024e+00
+gan epoch 95/160: g_loss=2.703931e+00, d_loss=1.279079e+00
+gan epoch 96/160: g_loss=2.703558e+00, d_loss=1.279177e+00
+gan epoch 97/160: g_loss=2.703654e+00, d_loss=1.279203e+00
+gan epoch 98/160: g_loss=2.704494e+00, d_loss=1.279191e+00
+gan epoch 99/160: g_loss=2.702882e+00, d_loss=1.279272e+00
+gan epoch 100/160: g_loss=2.702817e+00, d_loss=1.279422e+00
+gan epoch 101/160: g_loss=2.703298e+00, d_loss=1.279281e+00
+gan epoch 102/160: g_loss=2.703419e+00, d_loss=1.279253e+00
+gan epoch 103/160: g_loss=2.702959e+00, d_loss=1.279628e+00
+gan epoch 104/160: g_loss=2.703060e+00, d_loss=1.279490e+00
+gan epoch 105/160: g_loss=2.702737e+00, d_loss=1.279344e+00
+gan epoch 106/160: g_loss=2.702299e+00, d_loss=1.279200e+00
+gan epoch 107/160: g_loss=2.703806e+00, d_loss=1.279623e+00
+gan epoch 108/160: g_loss=2.702706e+00, d_loss=1.279573e+00
+gan epoch 109/160: g_loss=2.702547e+00, d_loss=1.279408e+00
+gan epoch 110/160: g_loss=2.702431e+00, d_loss=1.279430e+00
+gan epoch 111/160: g_loss=2.702497e+00, d_loss=1.279681e+00
+gan epoch 112/160: g_loss=2.703019e+00, d_loss=1.279303e+00
+gan epoch 113/160: g_loss=2.702249e+00, d_loss=1.279540e+00
+gan epoch 114/160: g_loss=2.703739e+00, d_loss=1.279527e+00
+gan epoch 115/160: g_loss=2.703054e+00, d_loss=1.279768e+00
+gan epoch 116/160: g_loss=2.701556e+00, d_loss=1.279642e+00
+gan epoch 117/160: g_loss=2.702225e+00, d_loss=1.279731e+00
+gan epoch 118/160: g_loss=2.702115e+00, d_loss=1.279949e+00
+gan epoch 119/160: g_loss=2.702565e+00, d_loss=1.279601e+00
+gan epoch 120/160: g_loss=2.702377e+00, d_loss=1.279792e+00
+gan epoch 121/160: g_loss=2.702753e+00, d_loss=1.279890e+00
+gan epoch 122/160: g_loss=2.702799e+00, d_loss=1.279965e+00
+gan epoch 123/160: g_loss=2.701710e+00, d_loss=1.280105e+00
+gan epoch 124/160: g_loss=2.701831e+00, d_loss=1.279967e+00
+gan epoch 125/160: g_loss=2.702229e+00, d_loss=1.279794e+00
+gan epoch 126/160: g_loss=2.701657e+00, d_loss=1.279800e+00
+gan epoch 127/160: g_loss=2.702144e+00, d_loss=1.280324e+00
+gan epoch 128/160: g_loss=2.700891e+00, d_loss=1.280147e+00
+gan epoch 129/160: g_loss=2.701962e+00, d_loss=1.279873e+00
+gan epoch 130/160: g_loss=2.702528e+00, d_loss=1.279973e+00
+gan epoch 131/160: g_loss=2.702715e+00, d_loss=1.279968e+00
+gan epoch 132/160: g_loss=2.702471e+00, d_loss=1.280350e+00
+gan epoch 133/160: g_loss=2.702464e+00, d_loss=1.279861e+00
+gan epoch 134/160: g_loss=2.703346e+00, d_loss=1.279971e+00
+gan epoch 135/160: g_loss=2.701709e+00, d_loss=1.280118e+00
+gan epoch 136/160: g_loss=2.702412e+00, d_loss=1.280320e+00
+gan epoch 137/160: g_loss=2.702489e+00, d_loss=1.280023e+00
+gan epoch 138/160: g_loss=2.701710e+00, d_loss=1.279898e+00
+gan epoch 139/160: g_loss=2.700771e+00, d_loss=1.280297e+00
+gan epoch 140/160: g_loss=2.702058e+00, d_loss=1.279901e+00
+gan epoch 141/160: g_loss=2.701793e+00, d_loss=1.280140e+00
+gan epoch 142/160: g_loss=2.702145e+00, d_loss=1.280187e+00
+gan epoch 143/160: g_loss=2.702129e+00, d_loss=1.280384e+00
+gan epoch 144/160: g_loss=2.702060e+00, d_loss=1.280430e+00
+gan epoch 145/160: g_loss=2.701143e+00, d_loss=1.280364e+00
+gan epoch 146/160: g_loss=2.701431e+00, d_loss=1.280191e+00
+gan epoch 147/160: g_loss=2.700432e+00, d_loss=1.280415e+00
+gan epoch 148/160: g_loss=2.702421e+00, d_loss=1.280134e+00
+gan epoch 149/160: g_loss=2.702068e+00, d_loss=1.280338e+00
+gan epoch 150/160: g_loss=2.701479e+00, d_loss=1.280270e+00
+gan epoch 151/160: g_loss=2.700993e+00, d_loss=1.280277e+00
+gan epoch 152/160: g_loss=2.701116e+00, d_loss=1.280339e+00
+gan epoch 153/160: g_loss=2.701336e+00, d_loss=1.280386e+00
+gan epoch 154/160: g_loss=2.701189e+00, d_loss=1.280570e+00
+gan epoch 155/160: g_loss=2.700974e+00, d_loss=1.280309e+00
+gan epoch 156/160: g_loss=2.701510e+00, d_loss=1.280245e+00
+gan epoch 157/160: g_loss=2.702668e+00, d_loss=1.280279e+00
+gan epoch 158/160: g_loss=2.701232e+00, d_loss=1.280296e+00
+gan epoch 159/160: g_loss=2.700969e+00, d_loss=1.280452e+00
+gan epoch 160/160: g_loss=2.701827e+00, d_loss=1.280436e+00
+[benchmark] matplotlib not available; skipping plot generation
+{
+  "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/20260318_135508/paper2309_benchmark_seed11/paper2309_benchmark_summary.json",
+  "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/20260318_135508/paper2309_benchmark_seed11",
+  "channels": [
+    "AWGN",
+    "Rayleigh",
+    "SSPA"
+  ]
+}
+
+[seed-runner] exit_code: 0
+[seed-runner] elapsed_seconds: 15653.416

@@ -163,7 +163,7 @@ def main() -> None:
         wgan_epochs = args.wgan_epochs if args.wgan_epochs > 0 else preset.wgan_epochs
         noise_std = ebno_to_noise(preset.ebn0_db, preset.rate)
 
-        drift_cfg = DriftingConfig(
+        drift_direct_cfg = DriftingConfig(
             n=preset.n,
             noise_std=noise_std,
             dataset_size=dataset_size,
@@ -172,6 +172,16 @@ def main() -> None:
             eval_size=eval_size,
             swd_projections=preset.swd_projections,
             is_residual=False,
+        )
+        drift_residual_cfg = DriftingConfig(
+            n=preset.n,
+            noise_std=noise_std,
+            dataset_size=dataset_size,
+            batch_size=batch_size,
+            epochs=drifting_epochs,
+            eval_size=eval_size,
+            swd_projections=preset.swd_projections,
+            is_residual=True,
         )
         diffusion_cfg = DiffusionConfig(
             n=preset.n,
@@ -207,10 +217,32 @@ def main() -> None:
         final_history: dict[str, object] = {}
 
         if "drifting" in methods:
-            drift_model, drift_artifacts = train_conditional_drifting(channel_fn, drift_cfg, device)
-            drift_eval = evaluate_residual_model(drift_model, channel_fn, drift_cfg, device, metric_seed=args.seed)
-            results["drifting_swd"] = drift_eval["swd"]
-            final_history["drifting"] = drift_artifacts.history[-1]
+            drift_direct_model, drift_direct_artifacts = train_conditional_drifting(channel_fn, drift_direct_cfg, device)
+            drift_direct_eval = evaluate_residual_model(
+                drift_direct_model,
+                channel_fn,
+                drift_direct_cfg,
+                device,
+                metric_seed=args.seed,
+            )
+            drift_residual_model, drift_residual_artifacts = train_conditional_drifting(
+                channel_fn,
+                drift_residual_cfg,
+                device,
+            )
+            drift_residual_eval = evaluate_residual_model(
+                drift_residual_model,
+                channel_fn,
+                drift_residual_cfg,
+                device,
+                metric_seed=args.seed,
+            )
+            results["drifting_direct_swd"] = drift_direct_eval["swd"]
+            results["drifting_residual_swd"] = drift_residual_eval["swd"]
+            # Backward-compatible alias for prior direct-output paper benchmark consumers.
+            results["drifting_swd"] = drift_direct_eval["swd"]
+            final_history["drifting_direct"] = drift_direct_artifacts.history[-1]
+            final_history["drifting_residual"] = drift_residual_artifacts.history[-1]
 
         if "diffusion" in methods:
             diff_model, diff_state = train_conditional_diffusion(channel_fn, diffusion_cfg, device)
@@ -337,7 +369,8 @@ def main() -> None:
         if "wgan" in methods:
             plot_specs.append(("Paper WGAN", [summary["channels"][name]["results"]["paper_wgan_swd"] for name in labels]))
         if "drifting" in methods:
-            plot_specs.append(("Drifting", [summary["channels"][name]["results"]["drifting_swd"] for name in labels]))
+            plot_specs.append(("Drifting Direct", [summary["channels"][name]["results"]["drifting_direct_swd"] for name in labels]))
+            plot_specs.append(("Drifting Residual", [summary["channels"][name]["results"]["drifting_residual_swd"] for name in labels]))
 
         width = 0.8 / max(len(plot_specs), 1)
         offsets = np.linspace(-(len(plot_specs) - 1) / 2.0, (len(plot_specs) - 1) / 2.0, num=len(plot_specs))

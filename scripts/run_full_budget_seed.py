@@ -135,7 +135,6 @@ def main() -> None:
         args.paper_channels,
         "--eval-size",
         str(args.paper_eval_size),
-        "--include-gan-fa",
         "--out-dir",
         str(paper_out_dir),
     ]

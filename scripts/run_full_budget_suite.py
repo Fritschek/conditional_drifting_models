@@ -378,7 +378,6 @@ def main() -> None:
                         args.paper_channels,
                         "--eval-size",
                         str(args.paper_eval_size),
-                        "--include-gan-fa",
                     ],
                     "optfib_command": [
                         sys.executable,
@@ -422,7 +421,6 @@ def main() -> None:
             args.paper_channels,
             "--eval-size",
             str(args.paper_eval_size),
-            "--include-gan-fa",
         ]
         optfib_cmd = [
             sys.executable,
@@ -474,7 +472,13 @@ def main() -> None:
         )
 
     aggregated: dict[str, dict] = {"paper_channels": {}, "optfib": {}}
-    paper_metrics = ["drifting_swd", "ddpm_swd", "paper_wgan_swd", "gan_fa_swd"]
+    paper_metrics = [
+        "drifting_direct_swd",
+        "drifting_residual_swd",
+        "drifting_swd",
+        "ddpm_swd",
+        "paper_wgan_swd",
+    ]
     ddim_keys = [100, 50, 20, 10]
     channel_names = [name.strip() for name in args.paper_channels.split(",") if name.strip()]
     for channel_name in channel_names:
@@ -500,7 +504,14 @@ def main() -> None:
         channel_summary["ddim_swd"] = ddim_summary
         aggregated["paper_channels"][channel_name] = channel_summary
 
-    optfib_values = {"drifting_swd": [], "ddpm_swd": [], "ddim_swd": [], "gan_swd": []}
+    optfib_values = {
+        "drifting_residual_swd": [],
+        "drifting_direct_swd": [],
+        "drifting_swd": [],
+        "ddpm_swd": [],
+        "ddim_swd": [],
+        "paper_wgan_swd": [],
+    }
     for row in per_seed:
         optfib_json = Path(row["optfib_result"]["json"])
         data = json.loads(optfib_json.read_text())

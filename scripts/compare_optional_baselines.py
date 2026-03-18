@@ -20,7 +20,17 @@ except ImportError:
 
 sys.path.insert(0, ROOT)
 
-from conditional_drifting.baselines import DiffusionConfig, GANConfig, evaluate_diffusion_model, evaluate_gan_model, train_conditional_diffusion, train_conditional_gan
+from conditional_drifting.baselines import (
+    DiffusionConfig,
+    GANConfig,
+    PaperWGANConfig,
+    evaluate_diffusion_model,
+    evaluate_gan_model,
+    evaluate_paper_wgan,
+    train_conditional_diffusion,
+    train_conditional_gan,
+    train_paper_wgan,
+)
 from conditional_drifting.benchmark import BenchmarkConfig
 from conditional_drifting.channels import channel_registry
 from conditional_drifting.training import evaluate_residual_model, select_device, set_seed, train_conditional_drifting
@@ -38,6 +48,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--num-steps", type=int, default=100)
     parser.add_argument("--ddim-steps", type=int, default=20)
     parser.add_argument(
+        "--include-gan",
+        action="store_true",
+        help="Also run the later standalone GAN baseline.",
+    )
+    parser.add_argument(
         "--out-dir",
         type=str,
         default="",
@@ -54,38 +69,78 @@ def main() -> None:
     os.makedirs(out_dir, exist_ok=True)
 
     channel_fn = channel_registry()[args.channel]
-    drift_cfg = BenchmarkConfig(dataset_size=args.dataset_size, epochs=args.epochs, batch_size=args.batch_size, eval_size=args.eval_size)
+    drift_residual_cfg = BenchmarkConfig(
+        dataset_size=args.dataset_size,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        eval_size=args.eval_size,
+        is_residual=True,
+    )
+    drift_direct_cfg = BenchmarkConfig(
+        dataset_size=args.dataset_size,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        eval_size=args.eval_size,
+        is_residual=False,
+    )
     diffusion_cfg = DiffusionConfig(dataset_size=args.dataset_size, epochs=args.epochs, batch_size=args.batch_size, eval_size=args.eval_size, num_steps=args.num_steps)
     gan_cfg = GANConfig(dataset_size=args.dataset_size, epochs=args.epochs, batch_size=args.batch_size, eval_size=args.eval_size)
+    paper_wgan_cfg = PaperWGANConfig(
+        n=drift_residual_cfg.n,
+        noise_std=drift_residual_cfg.noise_std,
+        dataset_size=args.dataset_size,
+        batch_size=args.batch_size,
+        epochs=args.epochs,
+        eval_size=args.eval_size,
+    )
 
-    drift_model, _ = train_conditional_drifting(channel_fn, drift_cfg, device)
-    drift_eval = evaluate_residual_model(drift_model, channel_fn, drift_cfg, device)
+    drift_residual_model, _ = train_conditional_drifting(channel_fn, drift_residual_cfg, device)
+    drift_residual_eval = evaluate_residual_model(drift_residual_model, channel_fn, drift_residual_cfg, device)
+    drift_direct_model, _ = train_conditional_drifting(channel_fn, drift_direct_cfg, device)
+    drift_direct_eval = evaluate_residual_model(drift_direct_model, channel_fn, drift_direct_cfg, device)
 
     diff_model, _ = train_conditional_diffusion(channel_fn, diffusion_cfg, device)
     ddpm_eval = evaluate_diffusion_model(diff_model, channel_fn, diffusion_cfg, device, use_ddim=False)
     ddim_eval = evaluate_diffusion_model(diff_model, channel_fn, diffusion_cfg, device, use_ddim=True, ddim_steps=args.ddim_steps)
 
-    gan_model, _ = train_conditional_gan(channel_fn, gan_cfg, device)
-    gan_eval = evaluate_gan_model(gan_model, channel_fn, gan_cfg, device)
+    paper_wgan_model, _ = train_paper_wgan(channel_fn, paper_wgan_cfg, device)
+    paper_wgan_eval = evaluate_paper_wgan(paper_wgan_model, channel_fn, paper_wgan_cfg, device)
 
     summary = {
         "channel": args.channel,
         "device": str(device),
-        "drifting_swd": drift_eval["swd"],
+        "drifting_residual_swd": drift_residual_eval["swd"],
+        "drifting_direct_swd": drift_direct_eval["swd"],
+        "drifting_swd": drift_residual_eval["swd"],
         "ddpm_swd": ddpm_eval["swd"],
         "ddim_swd": ddim_eval["swd"],
-        "gan_swd": gan_eval["swd"],
+        "paper_wgan_swd": paper_wgan_eval["swd"],
     }
+    if args.include_gan:
+        gan_model, _ = train_conditional_gan(channel_fn, gan_cfg, device)
+        gan_eval = evaluate_gan_model(gan_model, channel_fn, gan_cfg, device)
+        summary["gan_swd"] = gan_eval["swd"]
     out_json = os.path.join(out_dir, f"baseline_compare_{args.channel.lower()}.json")
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
     output = {**summary, "json": out_json}
     if plt is not None:
-        labels = ["Drifting", f"DDPM({args.num_steps})", f"DDIM({args.ddim_steps})", "GAN"]
-        values = [summary["drifting_swd"], summary["ddpm_swd"], summary["ddim_swd"], summary["gan_swd"]]
+        labels = ["Drift Res", "Drift Dir", f"DDPM({args.num_steps})", f"DDIM({args.ddim_steps})", "Paper WGAN"]
+        values = [
+            summary["drifting_residual_swd"],
+            summary["drifting_direct_swd"],
+            summary["ddpm_swd"],
+            summary["ddim_swd"],
+            summary["paper_wgan_swd"],
+        ]
+        colors = ["#cf4446", "#f28e2b", "#1f77b4", "#ff7f0e", "#59a14f"]
+        if args.include_gan:
+            labels.append("GAN")
+            values.append(summary["gan_swd"])
+            colors.append("#2ca02c")
         fig, ax = plt.subplots(figsize=(7, 4))
-        ax.bar(labels, values, color=["#cf4446", "#1f77b4", "#ff7f0e", "#2ca02c"])
+        ax.bar(labels, values, color=colors)
         ax.set_ylabel("Residual SWD")
         ax.set_title(f"Optional baseline comparison on {args.channel}")
         ax.grid(axis="y", alpha=0.25)
