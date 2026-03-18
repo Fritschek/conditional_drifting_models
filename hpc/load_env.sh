@@ -5,6 +5,10 @@ set -euo pipefail
 # Shared HPC environment bootstrap.
 # Adjust the module lines below to match the target cluster.
 
+# Required for deterministic CuBLAS operations when PyTorch deterministic
+# algorithms are enabled on CUDA.
+export CUBLAS_WORKSPACE_CONFIG="${CUBLAS_WORKSPACE_CONFIG:-:4096:8}"
+
 if command -v module >/dev/null 2>&1; then
   module --force purge || true
   module load "${HPC_MODULE_RELEASE:-release/24.04}" || true
@@ -22,4 +26,3 @@ if [[ -n "${CONDA_ENV:-}" ]]; then
     exit 1
   fi
 fi
-
