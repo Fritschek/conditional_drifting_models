@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import math
+import os
+import sys
 import time
 from copy import deepcopy
 from dataclasses import dataclass
@@ -11,6 +13,13 @@ import torch.nn as nn
 from tqdm import tqdm
 
 from ..metrics import sliced_wasserstein_distance
+
+
+def _disable_tqdm() -> bool:
+    value = os.environ.get("TQDM_DISABLE", "").strip().lower()
+    if value in {"1", "true", "yes", "on"}:
+        return True
+    return not sys.stderr.isatty()
 
 
 @dataclass
@@ -224,7 +233,12 @@ def train_conditional_diffusion(channel_fn, cfg: DiffusionConfig, device: torch.
             current_lr = lr_schedule[schedule_index][1]
             optimizer.param_groups[0]["lr"] = current_lr
         losses = []
-        progress = tqdm(range(steps_per_epoch), leave=False, desc=f"diff epoch {epoch + 1}/{cfg.epochs}")
+        progress = tqdm(
+            range(steps_per_epoch),
+            leave=False,
+            desc=f"diff epoch {epoch + 1}/{cfg.epochs}",
+            disable=_disable_tqdm(),
+        )
         for _ in progress:
             x = torch.randn(cfg.batch_size, cfg.n, device=device)
             target = channel_fn(x, cfg.noise_std, device)
@@ -244,6 +258,12 @@ def train_conditional_diffusion(channel_fn, cfg: DiffusionConfig, device: torch.
             losses.append(float(loss.item()))
             progress.set_postfix(loss=f"{losses[-1]:.3e}")
         history.append({"epoch": epoch + 1, "loss": float(np.mean(losses)), "lr": current_lr})
+        if _disable_tqdm():
+            print(
+                f"diff epoch {epoch + 1}/{cfg.epochs}: "
+                f"loss={history[-1]['loss']:.6e}, lr={current_lr:.3e}",
+                flush=True,
+            )
 
     model_ema = deepcopy(model).to(device)
     ema.copy_to(model_ema)

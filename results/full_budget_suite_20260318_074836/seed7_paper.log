@@ -1,0 +1,5 @@
+[suite] start 2026-03-18T07:48:36Z
+[suite] label: seed=7 paper
+[suite] cwd: /home/entropy/GitHub/conditional_drifting_models
+[suite] command: /home/entropy/miniforge3/envs/dl/bin/python -u scripts/run_paper2309_benchmark.py --device cuda --seed 7 --channels AWGN,Rayleigh,SSPA --eval-size 1000000 --include-gan-fa
+

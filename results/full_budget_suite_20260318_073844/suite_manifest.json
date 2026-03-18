@@ -1,0 +1,12 @@
+{
+  "timestamp_utc": "2026-03-18T07:38:44",
+  "cwd": "/home/entropy/GitHub/conditional_drifting_models",
+  "device": "cuda",
+  "seeds": [
+    7
+  ],
+  "paper_channels": "AWGN,Rayleigh,SSPA",
+  "paper_eval_size": 1000000,
+  "optfib_eval_size": 100000,
+  "master_log": "/home/entropy/GitHub/conditional_drifting_models/results/full_budget_suite_20260318_073844/suite_master.log"
+}

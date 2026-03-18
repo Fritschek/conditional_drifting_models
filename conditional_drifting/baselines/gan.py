@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import math
+import os
+import sys
 from dataclasses import dataclass
 
 import numpy as np
@@ -10,6 +12,13 @@ from torch import autograd
 from tqdm import tqdm
 
 from ..metrics import sliced_wasserstein_distance
+
+
+def _disable_tqdm() -> bool:
+    value = os.environ.get("TQDM_DISABLE", "").strip().lower()
+    if value in {"1", "true", "yes", "on"}:
+        return True
+    return not sys.stderr.isatty()
 
 
 @dataclass
@@ -140,7 +149,12 @@ def train_conditional_gan(channel_fn, cfg: GANConfig, device: torch.device) -> t
     for epoch in range(cfg.epochs):
         g_losses = []
         d_losses = []
-        progress = tqdm(range(steps_per_epoch), leave=False, desc=f"gan epoch {epoch + 1}/{cfg.epochs}")
+        progress = tqdm(
+            range(steps_per_epoch),
+            leave=False,
+            desc=f"gan epoch {epoch + 1}/{cfg.epochs}",
+            disable=_disable_tqdm(),
+        )
         for step in progress:
             if cfg.mode == "wgan_gp":
                 for _ in range(cfg.critic_steps):
@@ -204,6 +218,12 @@ def train_conditional_gan(channel_fn, cfg: GANConfig, device: torch.device) -> t
                 "d_loss": float(np.mean(d_losses)),
             }
         )
+        if _disable_tqdm():
+            print(
+                f"gan epoch {epoch + 1}/{cfg.epochs}: "
+                f"g_loss={history[-1]['g_loss']:.6e}, d_loss={history[-1]['d_loss']:.6e}",
+                flush=True,
+            )
 
     generator.eval()
     return generator, {"history": history, "mode": cfg.mode}

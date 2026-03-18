@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import math
+import os
 import random
+import sys
 from dataclasses import asdict, dataclass
 
 import numpy as np
@@ -11,6 +13,13 @@ from tqdm import tqdm
 from .losses import drifting_loss
 from .metrics import sliced_wasserstein_distance
 from .model import ConditionalDriftingGenerator
+
+
+def _disable_tqdm() -> bool:
+    value = os.environ.get("TQDM_DISABLE", "").strip().lower()
+    if value in {"1", "true", "yes", "on"}:
+        return True
+    return not sys.stderr.isatty()
 
 
 @dataclass
@@ -78,7 +87,12 @@ def train_conditional_drifting(
     for epoch in range(cfg.epochs):
         loss_values = []
         drift_values = []
-        progress = tqdm(range(steps_per_epoch), leave=False, desc=f"epoch {epoch + 1}/{cfg.epochs}")
+        progress = tqdm(
+            range(steps_per_epoch),
+            leave=False,
+            desc=f"epoch {epoch + 1}/{cfg.epochs}",
+            disable=_disable_tqdm(),
+        )
         for _ in progress:
             x = torch.randn(cfg.batch_size, cfg.n, device=device)
             y_true = channel_fn(x, cfg.noise_std, device)
@@ -109,6 +123,12 @@ def train_conditional_drifting(
                 "drift_norm": float(np.mean(drift_values)),
             }
         )
+        if _disable_tqdm():
+            print(
+                f"epoch {epoch + 1}/{cfg.epochs}: "
+                f"loss={history[-1]['loss']:.6e}, drift={history[-1]['drift_norm']:.6e}",
+                flush=True,
+            )
 
     return model, TrainingArtifacts(history=history, config=asdict(cfg))
 

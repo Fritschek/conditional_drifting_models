@@ -5,9 +5,18 @@ import datetime as dt
 import json
 import math
 import os
+import pty
+import re
+import select
 import subprocess
 import sys
+import time
 from pathlib import Path
+
+try:
+    from tqdm import tqdm
+except ImportError:  # pragma: no cover - fallback when tqdm is unavailable
+    tqdm = None
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -58,19 +67,18 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Print the prepared commands and manifest without executing them.",
     )
+    parser.add_argument(
+        "--terminal-mode",
+        type=str,
+        choices=("compact", "stream"),
+        default="compact",
+        help="How much child output to mirror to the terminal. Full raw logs are always written to files.",
+    )
     return parser.parse_args()
 
 
-def run_command(cmd: list[str], cwd: Path, env: dict[str, str]) -> dict:
-    completed = subprocess.run(
-        cmd,
-        cwd=str(cwd),
-        env=env,
-        check=True,
-        text=True,
-        capture_output=True,
-    )
-    stdout = completed.stdout.strip()
+def parse_json_from_text(text: str, cmd: list[str]) -> dict:
+    stdout = text.strip()
     if stdout:
         lines = stdout.splitlines()
         for idx in range(len(lines) - 1, -1, -1):
@@ -80,6 +88,233 @@ def run_command(cmd: list[str], cwd: Path, env: dict[str, str]) -> dict:
             except json.JSONDecodeError:
                 continue
     raise RuntimeError(f"Could not parse JSON output from command: {' '.join(cmd)}")
+
+
+def timestamped_line(line: str) -> str:
+    ts = dt.datetime.utcnow().isoformat(timespec="seconds") + "Z"
+    if line.endswith("\n"):
+        return f"[{ts}] {line}"
+    return f"[{ts}] {line}\n"
+
+
+def is_progress_line(line: str) -> bool:
+    lowered = line.lower()
+    return any(
+        token in lowered
+        for token in ("epoch", "chunk", "batch", "iter", "step", "progress", "loss")
+    )
+
+
+def is_event_line(line: str) -> bool:
+    lowered = line.lower()
+    return any(
+        token in lowered
+        for token in (
+            "starting",
+            "complete",
+            "completed",
+            "done",
+            "finished",
+            "summary",
+            "saved",
+            "writing",
+            "evaluating",
+            "training",
+            "benchmark",
+            "channel",
+        )
+    )
+
+
+def parse_progress_info(line: str) -> tuple[str, int, int] | None:
+    lowered = line.lower()
+    for kind in ("epoch", "chunk", "batch", "step", "iter"):
+        match = re.search(rf"{kind}\s+(\d+)\s*/\s*(\d+)", lowered)
+        if match:
+            return kind, int(match.group(1)), int(match.group(2))
+    return None
+
+
+def shorten_terminal_line(label: str, line: str, width: int = 140) -> str:
+    clean = re.sub(r"\s+", " ", line.strip())
+    text = f"[{label}] {clean}"
+    if len(text) <= width:
+        return text
+    return text[: width - 3] + "..."
+
+
+def emit_terminal_line(label: str, line: str, terminal_mode: str, status_state: dict[str, bool]) -> None:
+    if terminal_mode == "stream":
+        sys.stdout.write(line)
+        sys.stdout.flush()
+        return
+
+    progress = parse_progress_info(line)
+    if progress is not None and tqdm is not None:
+        kind, current, total = progress
+        bar = status_state.get("bar")
+        bar_key = (label, kind, total)
+        if bar is None or status_state.get("bar_key") != bar_key:
+            if bar is not None:
+                bar.close()
+            bar = tqdm(total=total, desc=f"{label} {kind}", leave=True, dynamic_ncols=True)
+            status_state["bar"] = bar
+            status_state["bar_key"] = bar_key
+            status_state["bar_pos"] = 0
+        target_n = max(0, min(current, total))
+        increment = target_n - int(status_state.get("bar_pos", 0))
+        if increment > 0:
+            bar.update(increment)
+        status_state["bar_pos"] = target_n
+        postfix = shorten_terminal_line("", line, width=100).strip()
+        if postfix:
+            bar.set_postfix_str(postfix[:100], refresh=False)
+        status_state["active"] = True
+        return
+
+    message = shorten_terminal_line(label, line)
+    if is_progress_line(line):
+        sys.stdout.write("\r" + message.ljust(160))
+        sys.stdout.flush()
+        status_state["active"] = True
+        return
+
+    if status_state["active"]:
+        bar = status_state.get("bar")
+        if bar is not None:
+            bar.close()
+            status_state["bar"] = None
+            status_state["bar_key"] = None
+            status_state["bar_pos"] = 0
+        sys.stdout.write("\n")
+        sys.stdout.flush()
+        status_state["active"] = False
+
+    if is_event_line(line):
+        sys.stdout.write(message + "\n")
+        sys.stdout.flush()
+
+
+def run_command(
+    cmd: list[str],
+    cwd: Path,
+    env: dict[str, str],
+    log_path: Path,
+    label: str,
+    terminal_mode: str,
+    master_log_path: Path | None = None,
+) -> dict:
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    start = time.time()
+    actual_cmd = list(cmd)
+    if actual_cmd and Path(actual_cmd[0]).name.startswith("python") and "-u" not in actual_cmd[1:2]:
+        actual_cmd = [actual_cmd[0], "-u", *actual_cmd[1:]]
+    actual_env = dict(env)
+    actual_env.setdefault("PYTHONUNBUFFERED", "1")
+    if terminal_mode == "compact":
+        actual_env["TQDM_DISABLE"] = "1"
+    master_handle = None
+    if master_log_path is not None:
+        master_log_path.parent.mkdir(parents=True, exist_ok=True)
+        master_handle = master_log_path.open("a", encoding="utf-8")
+    with log_path.open("w", encoding="utf-8") as log_handle:
+        header = (
+            f"[suite] start {dt.datetime.utcnow().isoformat(timespec='seconds')}Z\n"
+            f"[suite] label: {label}\n"
+            f"[suite] cwd: {cwd}\n"
+            f"[suite] command: {' '.join(actual_cmd)}\n\n"
+        )
+        log_handle.write(header)
+        log_handle.flush()
+        if master_handle is not None:
+            master_handle.write(header)
+            master_handle.flush()
+
+        captured_lines: list[str] = []
+        status_state = {"active": False}
+        if terminal_mode == "stream":
+            master_fd, slave_fd = pty.openpty()
+            process = subprocess.Popen(
+                actual_cmd,
+                cwd=str(cwd),
+                env=actual_env,
+                stdout=slave_fd,
+                stderr=slave_fd,
+                stdin=subprocess.DEVNULL,
+                close_fds=True,
+            )
+            os.close(slave_fd)
+            captured_text = ""
+            try:
+                while True:
+                    ready, _, _ = select.select([master_fd], [], [], 0.1)
+                    if master_fd in ready:
+                        try:
+                            chunk = os.read(master_fd, 4096)
+                        except OSError:
+                            chunk = b""
+                        if chunk:
+                            text = chunk.decode("utf-8", errors="replace")
+                            captured_text += text
+                            sys.stdout.write(text)
+                            sys.stdout.flush()
+                            log_handle.write(timestamped_line(text.rstrip("\n")))
+                            log_handle.flush()
+                            if master_handle is not None:
+                                master_handle.write(timestamped_line(text.rstrip("\n")))
+                                master_handle.flush()
+                    if process.poll() is not None and not ready:
+                        break
+            finally:
+                os.close(master_fd)
+            captured_lines = captured_text.splitlines(keepends=True)
+            return_code = process.wait()
+        else:
+            process = subprocess.Popen(
+                actual_cmd,
+                cwd=str(cwd),
+                env=actual_env,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                bufsize=1,
+            )
+            assert process.stdout is not None
+            for line in process.stdout:
+                captured_lines.append(line)
+                emit_terminal_line(label, line, terminal_mode, status_state)
+                stamped = timestamped_line(line)
+                log_handle.write(stamped)
+                log_handle.flush()
+                if master_handle is not None:
+                    master_handle.write(stamped)
+                    master_handle.flush()
+            return_code = process.wait()
+        elapsed = time.time() - start
+        if status_state["active"]:
+            bar = status_state.get("bar")
+            if bar is not None:
+                bar.close()
+                status_state["bar"] = None
+            sys.stdout.write("\n")
+            sys.stdout.flush()
+        footer = f"\n[suite] exit_code: {return_code}\n[suite] elapsed_seconds: {elapsed:.3f}\n"
+        log_handle.write(footer)
+        log_handle.flush()
+        if master_handle is not None:
+            master_handle.write(footer)
+            master_handle.flush()
+
+    if master_handle is not None:
+        master_handle.close()
+
+    if return_code != 0:
+        raise subprocess.CalledProcessError(return_code, actual_cmd)
+
+    parsed = parse_json_from_text("".join(captured_lines), actual_cmd)
+    parsed["suite_log"] = str(log_path)
+    parsed["suite_elapsed_seconds"] = elapsed
+    return parsed
 
 
 def parse_seeds(seed_text: str, seed_start: int, num_seeds: int, fallback_seed: int) -> list[int]:
@@ -115,6 +350,8 @@ def main() -> None:
         "paper_eval_size": args.paper_eval_size,
         "optfib_eval_size": args.optfib_eval_size,
     }
+    master_log = args.out_dir / "suite_master.log"
+    manifest["master_log"] = str(master_log)
 
     manifest_path = args.out_dir / "suite_manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2))
@@ -122,9 +359,14 @@ def main() -> None:
     if args.dry_run:
         preview = []
         for seed in seeds:
+            paper_log = args.out_dir / f"seed{seed}_paper.log"
+            optfib_log = args.out_dir / f"seed{seed}_optfib.log"
             preview.append(
                 {
                     "seed": seed,
+                    "master_log": str(master_log),
+                    "paper_log": str(paper_log),
+                    "optfib_log": str(optfib_log),
                     "paper_command": [
                         sys.executable,
                         "scripts/run_paper2309_benchmark.py",
@@ -167,6 +409,8 @@ def main() -> None:
 
     per_seed = []
     for seed in seeds:
+        paper_log = args.out_dir / f"seed{seed}_paper.log"
+        optfib_log = args.out_dir / f"seed{seed}_optfib.log"
         paper_cmd = [
             sys.executable,
             "scripts/run_paper2309_benchmark.py",
@@ -205,8 +449,27 @@ def main() -> None:
         per_seed.append(
             {
                 "seed": seed,
-                "paper_result": run_command(paper_cmd, ROOT, base_env),
-                "optfib_result": run_command(optfib_cmd, ROOT, base_env),
+                "master_log": str(master_log),
+                "paper_log": str(paper_log),
+                "optfib_log": str(optfib_log),
+                "paper_result": run_command(
+                    paper_cmd,
+                    ROOT,
+                    base_env,
+                    paper_log,
+                    f"seed={seed} paper",
+                    args.terminal_mode,
+                    master_log,
+                ),
+                "optfib_result": run_command(
+                    optfib_cmd,
+                    ROOT,
+                    base_env,
+                    optfib_log,
+                    f"seed={seed} optfib",
+                    args.terminal_mode,
+                    master_log,
+                ),
             }
         )
 

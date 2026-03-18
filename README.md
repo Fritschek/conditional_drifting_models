@@ -71,6 +71,14 @@ Outputs:
 - `summary_plot.png`
 - `run_config.json`
 
+## HPC / SLURM
+
+For cluster runs, see [hpc/README.md](hpc/README.md). The repo now includes:
+
+- a SLURM array script for one full-budget seed per job,
+- a separate aggregation script for combining finished seeds into one suite summary,
+- per-seed JSON/log artifacts designed for shared HPC output directories.
+
 ## Notes
 
 - The drifting package is the core of the repository; diffusion and GAN are included only as optional reference baselines under `conditional_drifting/baselines/`.
