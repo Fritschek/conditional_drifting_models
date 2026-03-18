@@ -29,8 +29,12 @@ This writes:
 - `seed<N>_paper.log`
 - `seed<N>_optfib.log`
 - `seed<N>_result.json`
+- `paper2309_benchmark_seed<N>/...`
+- `optfib_seed<N>/...`
 
 into the shared suite directory.
+
+So the HPC path no longer needs to write benchmark artifacts into the repo-level default `results/` tree. You can point `SUITE_DIR` at scratch/workspace storage and keep the entire run self-contained there.
 
 ## Aggregation
 
@@ -46,7 +50,13 @@ This writes:
 
 ## Typical usage
 
-First, sanity-check the environment inside the HPC setup you intend to use:
+First, sanity-check the environment. For a real SLURM smoke test, use:
+
+```bash
+bash hpc/check_env.sh --slurm-smoke
+```
+
+If you only want to inspect the currently loaded shell environment without launching `srun`, use:
 
 ```bash
 bash hpc/check_env.sh

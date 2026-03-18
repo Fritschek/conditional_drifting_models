@@ -121,6 +121,8 @@ def main() -> None:
 
     paper_log = args.suite_dir / f"seed{args.seed}_paper.log"
     optfib_log = args.suite_dir / f"seed{args.seed}_optfib.log"
+    paper_out_dir = args.suite_dir / f"paper2309_benchmark_seed{args.seed}"
+    optfib_out_dir = args.suite_dir / f"optfib_seed{args.seed}"
 
     paper_cmd = [
         sys.executable,
@@ -134,6 +136,8 @@ def main() -> None:
         "--eval-size",
         str(args.paper_eval_size),
         "--include-gan-fa",
+        "--out-dir",
+        str(paper_out_dir),
     ]
     optfib_cmd = [
         sys.executable,
@@ -156,6 +160,8 @@ def main() -> None:
         str(args.optfib_num_steps),
         "--ddim-steps",
         str(args.optfib_num_steps),
+        "--out-dir",
+        str(optfib_out_dir),
     ]
 
     result = {
@@ -163,6 +169,8 @@ def main() -> None:
         "seed": args.seed,
         "paper_log": str(paper_log),
         "optfib_log": str(optfib_log),
+        "paper_out_dir": str(paper_out_dir),
+        "optfib_out_dir": str(optfib_out_dir),
         "paper_result": run_logged_command(paper_cmd, cwd=ROOT, env=env, log_path=paper_log, label="paper"),
         "optfib_result": run_logged_command(optfib_cmd, cwd=ROOT, env=env, log_path=optfib_log, label="optfib"),
     }

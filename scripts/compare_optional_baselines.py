@@ -8,10 +8,15 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault("MPLCONFIGDIR", os.path.join(ROOT, ".mplcache"))
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import numpy as np
+
+try:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+except ImportError:
+    plt = None
 
 sys.path.insert(0, ROOT)
 
@@ -32,6 +37,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--eval-size", type=int, default=20_000)
     parser.add_argument("--num-steps", type=int, default=100)
     parser.add_argument("--ddim-steps", type=int, default=20)
+    parser.add_argument(
+        "--out-dir",
+        type=str,
+        default="",
+        help="Optional output directory. Defaults to repo results/.",
+    )
     return parser.parse_args()
 
 
@@ -39,7 +50,8 @@ def main() -> None:
     args = parse_args()
     device = select_device(args.device)
     set_seed(args.seed)
-    os.makedirs(os.path.join(ROOT, "results"), exist_ok=True)
+    out_dir = args.out_dir or os.path.join(ROOT, "results")
+    os.makedirs(out_dir, exist_ok=True)
 
     channel_fn = channel_registry()[args.channel]
     drift_cfg = BenchmarkConfig(dataset_size=args.dataset_size, epochs=args.epochs, batch_size=args.batch_size, eval_size=args.eval_size)
@@ -64,23 +76,28 @@ def main() -> None:
         "ddim_swd": ddim_eval["swd"],
         "gan_swd": gan_eval["swd"],
     }
-    out_json = os.path.join(ROOT, "results", f"baseline_compare_{args.channel.lower()}.json")
+    out_json = os.path.join(out_dir, f"baseline_compare_{args.channel.lower()}.json")
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
-    labels = ["Drifting", f"DDPM({args.num_steps})", f"DDIM({args.ddim_steps})", "GAN"]
-    values = [summary["drifting_swd"], summary["ddpm_swd"], summary["ddim_swd"], summary["gan_swd"]]
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.bar(labels, values, color=["#cf4446", "#1f77b4", "#ff7f0e", "#2ca02c"])
-    ax.set_ylabel("Residual SWD")
-    ax.set_title(f"Optional baseline comparison on {args.channel}")
-    ax.grid(axis="y", alpha=0.25)
-    fig.tight_layout()
-    out_png = os.path.join(ROOT, "results", f"baseline_compare_{args.channel.lower()}.png")
-    fig.savefig(out_png, dpi=180, bbox_inches="tight")
-    plt.close(fig)
+    output = {**summary, "json": out_json}
+    if plt is not None:
+        labels = ["Drifting", f"DDPM({args.num_steps})", f"DDIM({args.ddim_steps})", "GAN"]
+        values = [summary["drifting_swd"], summary["ddpm_swd"], summary["ddim_swd"], summary["gan_swd"]]
+        fig, ax = plt.subplots(figsize=(7, 4))
+        ax.bar(labels, values, color=["#cf4446", "#1f77b4", "#ff7f0e", "#2ca02c"])
+        ax.set_ylabel("Residual SWD")
+        ax.set_title(f"Optional baseline comparison on {args.channel}")
+        ax.grid(axis="y", alpha=0.25)
+        fig.tight_layout()
+        out_png = os.path.join(out_dir, f"baseline_compare_{args.channel.lower()}.png")
+        fig.savefig(out_png, dpi=180, bbox_inches="tight")
+        plt.close(fig)
+        output["figure"] = out_png
+    else:
+        print("[benchmark] matplotlib not available; skipping plot generation", flush=True)
 
-    print(json.dumps({**summary, "json": out_json, "figure": out_png}, indent=2))
+    print(json.dumps(output, indent=2))
 
 
 if __name__ == "__main__":

@@ -12,10 +12,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault("MPLCONFIGDIR", os.path.join(ROOT, ".mplcache"))
 sys.path.insert(0, ROOT)
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import numpy as np
+
+try:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+except ImportError:
+    plt = None
 
 from conditional_drifting.baselines import (
     DiffusionConfig,
@@ -115,6 +120,12 @@ def parse_args() -> argparse.Namespace:
         help="Comma-separated subset of: drifting,diffusion,wgan,gan_fa",
     )
     parser.add_argument("--include-gan-fa", action="store_true", help="Also run the later GAN_FA baseline next to paper WGAN")
+    parser.add_argument(
+        "--out-dir",
+        type=str,
+        default="",
+        help="Optional output directory. Defaults to results/paper2309_benchmark_seed<seed>.",
+    )
     return parser.parse_args()
 
 
@@ -131,7 +142,7 @@ def main() -> None:
         raise ValueError(f"Unsupported paper2309 channels: {unknown}. Valid: {sorted(PAPER2309_PRESETS)}")
 
     ddim_steps = [int(part.strip()) for part in args.ddim_steps.split(",") if part.strip()]
-    out_dir = os.path.join(ROOT, "results", f"paper2309_benchmark_seed{args.seed}")
+    out_dir = args.out_dir or os.path.join(ROOT, "results", f"paper2309_benchmark_seed{args.seed}")
     os.makedirs(out_dir, exist_ok=True)
 
     summary: dict[str, dict] = {
@@ -315,34 +326,40 @@ def main() -> None:
     with open(out_json, "w", encoding="utf-8") as handle:
         json.dump(summary, handle, indent=2)
 
-    fig, ax = plt.subplots(figsize=(10, 4.8))
-    labels = requested
-    x = np.arange(len(labels))
-    plot_specs = []
-    if "diffusion" in methods:
-        plot_specs.append(("DDPM", [summary["channels"][name]["results"]["ddpm_swd"] for name in labels]))
-    if "wgan" in methods:
-        plot_specs.append(("Paper WGAN", [summary["channels"][name]["results"]["paper_wgan_swd"] for name in labels]))
-    if "drifting" in methods:
-        plot_specs.append(("Drifting", [summary["channels"][name]["results"]["drifting_swd"] for name in labels]))
+    output = {"output_json": out_json, "output_dir": out_dir, "channels": requested}
+    if plt is not None:
+        fig, ax = plt.subplots(figsize=(10, 4.8))
+        labels = requested
+        x = np.arange(len(labels))
+        plot_specs = []
+        if "diffusion" in methods:
+            plot_specs.append(("DDPM", [summary["channels"][name]["results"]["ddpm_swd"] for name in labels]))
+        if "wgan" in methods:
+            plot_specs.append(("Paper WGAN", [summary["channels"][name]["results"]["paper_wgan_swd"] for name in labels]))
+        if "drifting" in methods:
+            plot_specs.append(("Drifting", [summary["channels"][name]["results"]["drifting_swd"] for name in labels]))
 
-    width = 0.8 / max(len(plot_specs), 1)
-    offsets = np.linspace(-(len(plot_specs) - 1) / 2.0, (len(plot_specs) - 1) / 2.0, num=len(plot_specs))
-    for offset, (label, values) in zip(offsets, plot_specs):
-        ax.bar(x + offset * width, values, width=width, label=label)
+        width = 0.8 / max(len(plot_specs), 1)
+        offsets = np.linspace(-(len(plot_specs) - 1) / 2.0, (len(plot_specs) - 1) / 2.0, num=len(plot_specs))
+        for offset, (label, values) in zip(offsets, plot_specs):
+            ax.bar(x + offset * width, values, width=width, label=label)
 
-    ax.set_xticks(x)
-    ax.set_xticklabels(labels)
-    ax.set_ylabel("Residual SWD")
-    ax.set_title("Paper-2309 preset benchmark")
-    if plot_specs:
-        ax.legend()
-    ax.grid(axis="y", alpha=0.25)
-    fig.tight_layout()
-    fig.savefig(os.path.join(out_dir, "paper2309_benchmark_plot.png"), dpi=180, bbox_inches="tight")
-    plt.close(fig)
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
+        ax.set_ylabel("Residual SWD")
+        ax.set_title("Paper-2309 preset benchmark")
+        if plot_specs:
+            ax.legend()
+        ax.grid(axis="y", alpha=0.25)
+        fig.tight_layout()
+        plot_path = os.path.join(out_dir, "paper2309_benchmark_plot.png")
+        fig.savefig(plot_path, dpi=180, bbox_inches="tight")
+        plt.close(fig)
+        output["plot"] = plot_path
+    else:
+        print("[benchmark] matplotlib not available; skipping plot generation", flush=True)
 
-    print(json.dumps({"output_json": out_json, "output_dir": out_dir, "channels": requested}, indent=2))
+    print(json.dumps(output, indent=2))
 
 
 if __name__ == "__main__":

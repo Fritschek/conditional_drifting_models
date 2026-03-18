@@ -4,11 +4,53 @@ set -euo pipefail
 
 PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
+SLURM_SMOKE_CPUS="${SLURM_SMOKE_CPUS:-4}"
+SLURM_SMOKE_MEM="${SLURM_SMOKE_MEM:-16G}"
+SLURM_SMOKE_TIME="${SLURM_SMOKE_TIME:-00:15:00}"
+SLURM_SMOKE_GPU_COUNT="${SLURM_SMOKE_GPU_COUNT:-1}"
+
+RUN_LOCAL_ONLY=0
+RUN_SLURM_SMOKE=0
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --local-only)
+      RUN_LOCAL_ONLY=1
+      shift
+      ;;
+    --slurm-smoke)
+      RUN_SLURM_SMOKE=1
+      shift
+      ;;
+    *)
+      echo "Unknown argument: $1" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [[ "$RUN_SLURM_SMOKE" -eq 1 && "$RUN_LOCAL_ONLY" -eq 0 && -z "${SLURM_JOB_ID:-}" ]]; then
+  echo "[check] launching SLURM smoke allocation via srun"
+  echo "[check] cpus=$SLURM_SMOKE_CPUS mem=$SLURM_SMOKE_MEM time=$SLURM_SMOKE_TIME gpus=$SLURM_SMOKE_GPU_COUNT"
+  cd "$PROJECT_ROOT"
+  exec srun \
+    --gres="gpu:${SLURM_SMOKE_GPU_COUNT}" \
+    --cpus-per-task="$SLURM_SMOKE_CPUS" \
+    --mem="$SLURM_SMOKE_MEM" \
+    --time="$SLURM_SMOKE_TIME" \
+    bash hpc/check_env.sh --local-only
+fi
 
 source "$PROJECT_ROOT/hpc/load_env.sh"
 
 echo "[check] project_root: $PROJECT_ROOT"
 echo "[check] python_bin: $PYTHON_BIN"
+if [[ -n "${SLURM_JOB_ID:-}" ]]; then
+  echo "[check] slurm_job_id: $SLURM_JOB_ID"
+  echo "[check] running inside SLURM allocation"
+else
+  echo "[check] running outside SLURM allocation"
+fi
 echo
 
 if command -v module >/dev/null 2>&1; then
@@ -79,4 +121,10 @@ echo "[check] small benchmark smoke test"
   --suite-dir /tmp/conditional_drifting_hpc_smoke
 echo
 
-echo "[check] environment looks usable"
+if [[ -z "${SLURM_JOB_ID:-}" ]]; then
+  echo "[check] local shell check finished"
+  echo "[check] for a real SLURM smoke test, run:"
+  echo "bash hpc/check_env.sh --slurm-smoke"
+else
+  echo "[check] SLURM smoke test finished"
+fi
