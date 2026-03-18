@@ -8,6 +8,7 @@ SLURM_SMOKE_CPUS="${SLURM_SMOKE_CPUS:-4}"
 SLURM_SMOKE_MEM="${SLURM_SMOKE_MEM:-16G}"
 SLURM_SMOKE_TIME="${SLURM_SMOKE_TIME:-00:15:00}"
 SLURM_SMOKE_GPU_COUNT="${SLURM_SMOKE_GPU_COUNT:-1}"
+SLURM_SMOKE_NODES="${SLURM_SMOKE_NODES:-1}"
 
 RUN_LOCAL_ONLY=0
 RUN_SLURM_SMOKE=0
@@ -31,9 +32,10 @@ done
 
 if [[ "$RUN_SLURM_SMOKE" -eq 1 && "$RUN_LOCAL_ONLY" -eq 0 && -z "${SLURM_JOB_ID:-}" ]]; then
   echo "[check] launching SLURM smoke allocation via srun"
-  echo "[check] cpus=$SLURM_SMOKE_CPUS mem=$SLURM_SMOKE_MEM time=$SLURM_SMOKE_TIME gpus=$SLURM_SMOKE_GPU_COUNT"
+  echo "[check] nodes=$SLURM_SMOKE_NODES cpus=$SLURM_SMOKE_CPUS mem=$SLURM_SMOKE_MEM time=$SLURM_SMOKE_TIME gpus=$SLURM_SMOKE_GPU_COUNT"
   cd "$PROJECT_ROOT"
   exec srun \
+    --nodes="$SLURM_SMOKE_NODES" \
     --gres="gpu:${SLURM_SMOKE_GPU_COUNT}" \
     --cpus-per-task="$SLURM_SMOKE_CPUS" \
     --mem="$SLURM_SMOKE_MEM" \
