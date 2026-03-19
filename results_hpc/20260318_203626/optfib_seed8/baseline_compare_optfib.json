@@ -1,0 +1,10 @@
+{
+  "channel": "OptFib",
+  "device": "cuda",
+  "drifting_residual_swd": 0.03935886174440384,
+  "drifting_direct_swd": 0.016750313341617584,
+  "drifting_swd": 0.03935886174440384,
+  "ddpm_swd": 0.012512807734310627,
+  "ddim_swd": 0.05695846676826477,
+  "paper_wgan_swd": 0.028984742239117622
+}

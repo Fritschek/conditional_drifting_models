@@ -1,0 +1,11 @@
+{
+  "source_summary": "results_hpc/20260318_203626/suite_results.json",
+  "output_dir": "/home/entropy/GitHub/conditional_drifting_models/paper/generated",
+  "generated_files": [
+    "benchmark_summary_flat.csv",
+    "benchmark_summary.md",
+    "benchmark_table_paper_channels.tex",
+    "benchmark_table_optfib.tex",
+    "benchmark_table_all_channels.tex"
+  ]
+}

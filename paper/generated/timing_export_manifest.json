@@ -1,0 +1,12 @@
+{
+  "source_summary": "results/timing_suite_20260319_110813/timing_suite_summary.json",
+  "output_dir": "/home/entropy/GitHub/conditional_drifting_models/paper/generated",
+  "devices": [
+    "cuda"
+  ],
+  "generated_files": [
+    "timing_summary_flat.csv",
+    "timing_summary.md",
+    "timing_table_cuda.tex"
+  ]
+}

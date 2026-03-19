@@ -1,0 +1,21 @@
+\begin{table*}[t]
+\centering
+\caption{Ten-seed SWD benchmark on AWGN, Rayleigh, and SSPA. Lower is better.}
+\label{tab:benchmark-paper-channels}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccc}
+\hline
+Method & AWGN & Rayleigh & SSPA \\
+\hline
+Drifting (dir.) & 0.0100 $\pm$ 0.0007 & 0.0085 $\pm$ 0.0012 & 0.0060 $\pm$ 0.0008 \\
+Drifting (res.) & 0.0097 $\pm$ 0.0009 & 0.0062 $\pm$ 0.0009 & 0.0130 $\pm$ 0.0003 \\
+DDPM & 0.0070 $\pm$ 0.0004 & 0.0079 $\pm$ 0.0008 & 0.0032 $\pm$ 0.0005 \\
+DDIM-100 & 0.0042 $\pm$ 0.0006 & 0.0044 $\pm$ 0.0007 & 0.0024 $\pm$ 0.0004 \\
+DDIM-50 & 0.0064 $\pm$ 0.0004 & 0.0066 $\pm$ 0.0010 & 0.0030 $\pm$ 0.0005 \\
+DDIM-20 & 0.0143 $\pm$ 0.0003 & 0.0146 $\pm$ 0.0014 & 0.0056 $\pm$ 0.0006 \\
+DDIM-10 & 0.0264 $\pm$ 0.0004 & 0.0271 $\pm$ 0.0013 & 0.0092 $\pm$ 0.0008 \\
+Paper WGAN & 0.0189 $\pm$ 0.0044 & 0.0178 $\pm$ 0.0044 & 0.0239 $\pm$ 0.0165 \\
+\hline
+\end{tabular}%
+}
+\end{table*}

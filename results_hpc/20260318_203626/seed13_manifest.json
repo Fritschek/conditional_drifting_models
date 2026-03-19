@@ -1,0 +1,9 @@
+{
+  "timestamp_utc": "2026-03-19T05:28:12",
+  "cwd": "/home/h3/rifr807e/repos/conditional_drifting_models",
+  "device": "cuda",
+  "seed": 13,
+  "paper_channels": "AWGN,Rayleigh,SSPA",
+  "paper_eval_size": 1000000,
+  "optfib_eval_size": 100000
+}

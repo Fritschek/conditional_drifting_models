@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\centering
+\caption{Projected training and inference timing on CUDA. Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample.}}
+\label{tab:timing-cuda}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccccccccc}
+\hline
+Method & \multicolumn{3}{c}{AWGN} & \multicolumn{3}{c}{Rayleigh} & \multicolumn{3}{c}{SSPA} & \multicolumn{3}{c}{OptFib} \\
+\cline{2-4} \cline{5-7} \cline{8-10} \cline{11-13}
+ & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] \\
+\hline
+Drifting (res.) & 0.733 & 0.405 us & 0.734 & 0.730 & 0.407 us & 0.731 & 3.197 & 0.424 us & 3.198 & 0.054 & 0.410 us & 0.054 \\
+Drifting (dir.) & 0.724 & 0.381 us & 0.725 & 0.725 & 0.382 us & 0.726 & 3.183 & 0.396 us & 3.184 & 0.049 & 0.382 us & 0.049 \\
+DDPM & 0.049 & 0.132 ms & 0.416 & 0.050 & 0.134 ms & 0.422 & 0.333 & 0.139 ms & 0.719 & 0.048 & 0.112 ms & 0.051 \\
+DDIM-100 & 0.049 & 0.114 ms & 0.366 & 0.050 & 0.115 ms & 0.371 & 0.333 & 0.120 ms & 0.666 & 0.048 & 0.107 ms & 0.051 \\
+DDIM-50 & 0.049 & 0.057 ms & 0.208 & 0.050 & 0.058 ms & 0.211 & 0.333 & 0.060 ms & 0.500 & 0.048 & 0.054 ms & 0.050 \\
+DDIM-20 & 0.049 & 0.023 ms & 0.113 & 0.050 & 0.023 ms & 0.115 & 0.333 & 0.024 ms & 0.400 & 0.048 & 0.022 ms & 0.049 \\
+DDIM-10 & 0.049 & 0.012 ms & 0.081 & 0.050 & 0.012 ms & 0.083 & 0.333 & 0.012 ms & 0.367 & 0.048 & 0.011 ms & 0.048 \\
+Paper WGAN & 0.206 & 0.393 us & 0.207 & 0.202 & 0.386 us & 0.203 & 1.352 & 0.408 us & 1.354 & 0.236 & 0.382 us & 0.236 \\
+\hline
+\end{tabular}%
+}
+\end{table*}
