@@ -1,0 +1,379 @@
+{
+  "suite_dir": "results_hpc/partial_direct_metric_20260319_120917",
+  "seeds": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "per_seed": [
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed7_manifest.json",
+      "seed": 7,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed7.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed7",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed7/partial_direct_metric_summary_seed7.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed7",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed7.log",
+        "suite_elapsed_seconds": 11553.13427567482
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed8_manifest.json",
+      "seed": 8,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed8.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed8",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed8/partial_direct_metric_summary_seed8.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed8",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed8.log",
+        "suite_elapsed_seconds": 11579.930520057678
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed9_manifest.json",
+      "seed": 9,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed9.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed9",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed9/partial_direct_metric_summary_seed9.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed9",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed9.log",
+        "suite_elapsed_seconds": 15265.919639110565
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed10_manifest.json",
+      "seed": 10,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed10.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed10",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed10/partial_direct_metric_summary_seed10.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed10",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed10.log",
+        "suite_elapsed_seconds": 11468.260003566742
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed11_manifest.json",
+      "seed": 11,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed11.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed11",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed11/partial_direct_metric_summary_seed11.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed11",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed11.log",
+        "suite_elapsed_seconds": 11532.885765075684
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed12_manifest.json",
+      "seed": 12,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed12.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed12",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed12/partial_direct_metric_summary_seed12.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed12",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed12.log",
+        "suite_elapsed_seconds": 11429.49820303917
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed13_manifest.json",
+      "seed": 13,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed13.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed13",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed13/partial_direct_metric_summary_seed13.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed13",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed13.log",
+        "suite_elapsed_seconds": 11540.699345588684
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed14_manifest.json",
+      "seed": 14,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed14.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed14",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed14/partial_direct_metric_summary_seed14.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed14",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed14.log",
+        "suite_elapsed_seconds": 11495.80945611
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed15_manifest.json",
+      "seed": 15,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed15.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed15",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed15/partial_direct_metric_summary_seed15.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed15",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed15.log",
+        "suite_elapsed_seconds": 15409.358613729477
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed16_manifest.json",
+      "seed": 16,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed16.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed16",
+      "result": {
+        "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed16/partial_direct_metric_summary_seed16.json",
+        "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed16",
+        "channels": [
+          "AWGN",
+          "Rayleigh",
+          "SSPA",
+          "OptFib"
+        ],
+        "methods": [
+          "drifting_residual",
+          "optfib_diffusion",
+          "wgan"
+        ],
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed16.log",
+        "suite_elapsed_seconds": 11535.896020889282
+      }
+    }
+  ],
+  "aggregated": {
+    "AWGN": {
+      "drifting_residual": {
+        "y_swd": {
+          "mean": 0.06702078133821487,
+          "std": 0.013806032755459009,
+          "num_seeds": 10
+        },
+        "residual_swd": {
+          "mean": 0.01033284580335021,
+          "std": 0.0010421527451685234,
+          "num_seeds": 10
+        }
+      },
+      "wgan": {
+        "y_swd": {
+          "mean": 0.019756958726793526,
+          "std": 0.005042608288539514,
+          "num_seeds": 10
+        },
+        "residual_swd": {
+          "mean": 0.019490735605359077,
+          "std": 0.005116352226423502,
+          "num_seeds": 10
+        }
+      }
+    },
+    "Rayleigh": {
+      "drifting_residual": {
+        "y_swd": {
+          "mean": 0.3680962294340134,
+          "std": 0.003142710952008161,
+          "num_seeds": 10
+        },
+        "residual_swd": {
+          "mean": 0.006261879368685186,
+          "std": 0.001131322873683418,
+          "num_seeds": 10
+        }
+      },
+      "wgan": {
+        "y_swd": {
+          "mean": 0.017130869161337613,
+          "std": 0.004976498450824586,
+          "num_seeds": 10
+        },
+        "residual_swd": {
+          "mean": 0.017026671674102545,
+          "std": 0.005011581903923274,
+          "num_seeds": 10
+        }
+      }
+    },
+    "SSPA": {
+      "drifting_residual": {
+        "y_swd": {
+          "mean": 0.48119120895862577,
+          "std": 0.0022373256090903594,
+          "num_seeds": 10
+        },
+        "residual_swd": {
+          "mean": 0.012751065474003554,
+          "std": 0.0007198800392164336,
+          "num_seeds": 10
+        }
+      },
+      "wgan": {
+        "y_swd": {
+          "mean": 0.02873243885114789,
+          "std": 0.01557537227114329,
+          "num_seeds": 10
+        },
+        "residual_swd": {
+          "mean": 0.026855299714952707,
+          "std": 0.016150354557552097,
+          "num_seeds": 10
+        }
+      }
+    },
+    "OptFib": {
+      "diffusion": {
+        "ddpm": {
+          "y_swd": {
+            "mean": 0.008813986415043473,
+            "std": 0.0018119894296794762,
+            "num_seeds": 10
+          },
+          "residual_swd": {
+            "mean": 0.011300171539187432,
+            "std": 0.0015974668077717677,
+            "num_seeds": 10
+          }
+        },
+        "ddim_100": {
+          "y_swd": {
+            "mean": 0.05841919332742691,
+            "std": 0.014076145053597144,
+            "num_seeds": 10
+          },
+          "residual_swd": {
+            "mean": 0.061383236572146414,
+            "std": 0.01322687541493226,
+            "num_seeds": 10
+          }
+        }
+      },
+      "drifting_residual": {
+        "y_swd": {
+          "mean": 0.3864350765943527,
+          "std": 0.021136579671893092,
+          "num_seeds": 10
+        },
+        "residual_swd": {
+          "mean": 0.047681988775730134,
+          "std": 0.0059187301698929926,
+          "num_seeds": 10
+        }
+      },
+      "wgan": {
+        "y_swd": {
+          "mean": 0.04136431831866503,
+          "std": 0.017874491071628713,
+          "num_seeds": 10
+        },
+        "residual_swd": {
+          "mean": 0.04236087324097752,
+          "std": 0.0181124916928074,
+          "num_seeds": 10
+        }
+      }
+    }
+  }
+}

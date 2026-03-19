@@ -1,0 +1,362 @@
+[seed-runner] start 2026-03-19T12:20:58Z
+[seed-runner] cwd: /home/h3/rifr807e/repos/conditional_drifting_models
+[seed-runner] command: /software/genoa/r24.04/Python/3.11.3-GCCcore-12.3.0/bin/python -u scripts/run_partial_direct_metric_benchmark.py --device cuda --seed 8 --channels AWGN,Rayleigh,SSPA,OptFib --methods drifting_residual,wgan,optfib_diffusion --paper-eval-size 1000000 --optfib-eval-size 100000 --optfib-dataset-size 120000 --optfib-epochs 60 --optfib-batch-size 512 --optfib-num-steps 100 --out-dir /home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed8
+
+epoch 1/30: loss=1.774261e-04, drift=3.380008e-02
+epoch 2/30: loss=1.535216e-04, drift=3.158580e-02
+epoch 3/30: loss=1.466615e-04, drift=3.089277e-02
+epoch 4/30: loss=1.417371e-04, drift=3.038709e-02
+epoch 5/30: loss=1.381153e-04, drift=3.001251e-02
+epoch 6/30: loss=1.389753e-04, drift=3.007229e-02
+epoch 7/30: loss=1.357597e-04, drift=2.975275e-02
+epoch 8/30: loss=1.339078e-04, drift=2.954507e-02
+epoch 9/30: loss=1.322242e-04, drift=2.937248e-02
+epoch 10/30: loss=1.365910e-04, drift=2.980451e-02
+epoch 11/30: loss=1.342981e-04, drift=2.961837e-02
+epoch 12/30: loss=1.306678e-04, drift=2.921201e-02
+epoch 13/30: loss=1.339054e-04, drift=2.950731e-02
+epoch 14/30: loss=1.303318e-04, drift=2.915095e-02
+epoch 15/30: loss=1.277721e-04, drift=2.885824e-02
+epoch 16/30: loss=1.336993e-04, drift=2.953103e-02
+epoch 17/30: loss=1.273877e-04, drift=2.879982e-02
+epoch 18/30: loss=1.301788e-04, drift=2.915725e-02
+epoch 19/30: loss=1.274298e-04, drift=2.882126e-02
+epoch 20/30: loss=1.280410e-04, drift=2.887728e-02
+epoch 21/30: loss=1.270394e-04, drift=2.878259e-02
+epoch 22/30: loss=1.266127e-04, drift=2.869278e-02
+epoch 23/30: loss=1.279211e-04, drift=2.887601e-02
+epoch 24/30: loss=1.276519e-04, drift=2.882315e-02
+epoch 25/30: loss=1.257705e-04, drift=2.860937e-02
+epoch 26/30: loss=1.265614e-04, drift=2.872857e-02
+epoch 27/30: loss=1.288624e-04, drift=2.895658e-02
+epoch 28/30: loss=1.264426e-04, drift=2.873827e-02
+epoch 29/30: loss=1.271486e-04, drift=2.881186e-02
+epoch 30/30: loss=1.295440e-04, drift=2.905330e-02
+epoch 1/30: loss=1.615978e-04, drift=3.218584e-02
+epoch 2/30: loss=1.392864e-04, drift=3.012544e-02
+epoch 3/30: loss=1.311854e-04, drift=2.920003e-02
+epoch 4/30: loss=1.187574e-04, drift=2.782867e-02
+epoch 5/30: loss=1.144244e-04, drift=2.736110e-02
+epoch 6/30: loss=1.083644e-04, drift=2.657006e-02
+epoch 7/30: loss=1.095199e-04, drift=2.670836e-02
+epoch 8/30: loss=1.038738e-04, drift=2.606252e-02
+epoch 9/30: loss=1.045021e-04, drift=2.609555e-02
+epoch 10/30: loss=1.024573e-04, drift=2.582498e-02
+epoch 11/30: loss=1.008313e-04, drift=2.563454e-02
+epoch 12/30: loss=1.003865e-04, drift=2.558993e-02
+epoch 13/30: loss=1.013167e-04, drift=2.570367e-02
+epoch 14/30: loss=9.569143e-05, drift=2.495014e-02
+epoch 15/30: loss=9.660270e-05, drift=2.511164e-02
+epoch 16/30: loss=9.771220e-05, drift=2.520087e-02
+epoch 17/30: loss=9.603589e-05, drift=2.501690e-02
+epoch 18/30: loss=9.829181e-05, drift=2.531001e-02
+epoch 19/30: loss=9.618181e-05, drift=2.503106e-02
+epoch 20/30: loss=9.550981e-05, drift=2.488679e-02
+epoch 21/30: loss=9.518976e-05, drift=2.491288e-02
+epoch 22/30: loss=9.658303e-05, drift=2.508401e-02
+epoch 23/30: loss=9.341924e-05, drift=2.464025e-02
+epoch 24/30: loss=9.438358e-05, drift=2.477639e-02
+epoch 25/30: loss=9.466652e-05, drift=2.483026e-02
+epoch 26/30: loss=9.298120e-05, drift=2.464743e-02
+epoch 27/30: loss=9.329762e-05, drift=2.462441e-02
+epoch 28/30: loss=9.381608e-05, drift=2.469712e-02
+epoch 29/30: loss=9.309848e-05, drift=2.462464e-02
+epoch 30/30: loss=9.283886e-05, drift=2.464149e-02
+epoch 1/160: loss=1.907572e-04, drift=3.775822e-02
+epoch 2/160: loss=1.656046e-04, drift=3.532905e-02
+epoch 3/160: loss=1.640362e-04, drift=3.510483e-02
+epoch 4/160: loss=1.590989e-04, drift=3.460970e-02
+epoch 5/160: loss=1.510913e-04, drift=3.374833e-02
+epoch 6/160: loss=1.518569e-04, drift=3.378437e-02
+epoch 7/160: loss=1.520059e-04, drift=3.381057e-02
+epoch 8/160: loss=1.512749e-04, drift=3.370694e-02
+epoch 9/160: loss=1.504332e-04, drift=3.359288e-02
+epoch 10/160: loss=1.474244e-04, drift=3.330078e-02
+epoch 11/160: loss=1.491376e-04, drift=3.352289e-02
+epoch 12/160: loss=1.444541e-04, drift=3.289891e-02
+epoch 13/160: loss=1.443638e-04, drift=3.296773e-02
+epoch 14/160: loss=1.465254e-04, drift=3.320467e-02
+epoch 15/160: loss=1.430184e-04, drift=3.278281e-02
+epoch 16/160: loss=1.448526e-04, drift=3.298913e-02
+epoch 17/160: loss=1.410807e-04, drift=3.256711e-02
+epoch 18/160: loss=1.422332e-04, drift=3.271884e-02
+epoch 19/160: loss=1.443525e-04, drift=3.296766e-02
+epoch 20/160: loss=1.437585e-04, drift=3.285266e-02
+epoch 21/160: loss=1.427155e-04, drift=3.280265e-02
+epoch 22/160: loss=1.424293e-04, drift=3.272317e-02
+epoch 23/160: loss=1.413476e-04, drift=3.260284e-02
+epoch 24/160: loss=1.393347e-04, drift=3.235916e-02
+epoch 25/160: loss=1.411775e-04, drift=3.258162e-02
+epoch 26/160: loss=1.411433e-04, drift=3.260219e-02
+epoch 27/160: loss=1.399651e-04, drift=3.244764e-02
+epoch 28/160: loss=1.396411e-04, drift=3.239784e-02
+epoch 29/160: loss=1.387702e-04, drift=3.232049e-02
+epoch 30/160: loss=1.336217e-04, drift=3.172647e-02
+epoch 31/160: loss=1.400230e-04, drift=3.244897e-02
+epoch 32/160: loss=1.353886e-04, drift=3.189839e-02
+epoch 33/160: loss=1.348066e-04, drift=3.182539e-02
+epoch 34/160: loss=1.363271e-04, drift=3.196461e-02
+epoch 35/160: loss=1.396321e-04, drift=3.232501e-02
+epoch 36/160: loss=1.376386e-04, drift=3.213040e-02
+epoch 37/160: loss=1.382505e-04, drift=3.223967e-02
+epoch 38/160: loss=1.330183e-04, drift=3.165499e-02
+epoch 39/160: loss=1.347424e-04, drift=3.178973e-02
+epoch 40/160: loss=1.367647e-04, drift=3.204877e-02
+epoch 41/160: loss=1.347283e-04, drift=3.183360e-02
+epoch 42/160: loss=1.325672e-04, drift=3.156325e-02
+epoch 43/160: loss=1.324222e-04, drift=3.155636e-02
+epoch 44/160: loss=1.354048e-04, drift=3.188709e-02
+epoch 45/160: loss=1.324242e-04, drift=3.154239e-02
+epoch 46/160: loss=1.321730e-04, drift=3.152171e-02
+epoch 47/160: loss=1.314309e-04, drift=3.141022e-02
+epoch 48/160: loss=1.338983e-04, drift=3.172396e-02
+epoch 49/160: loss=1.341286e-04, drift=3.173018e-02
+epoch 50/160: loss=1.337014e-04, drift=3.167821e-02
+epoch 51/160: loss=1.322430e-04, drift=3.157151e-02
+epoch 52/160: loss=1.335929e-04, drift=3.166806e-02
+epoch 53/160: loss=1.307076e-04, drift=3.138826e-02
+epoch 54/160: loss=1.308169e-04, drift=3.136697e-02
+epoch 55/160: loss=1.303407e-04, drift=3.125890e-02
+epoch 56/160: loss=1.316565e-04, drift=3.143168e-02
+epoch 57/160: loss=1.331061e-04, drift=3.168788e-02
+epoch 58/160: loss=1.330182e-04, drift=3.157515e-02
+epoch 59/160: loss=1.316353e-04, drift=3.144476e-02
+epoch 60/160: loss=1.294138e-04, drift=3.117241e-02
+epoch 61/160: loss=1.292805e-04, drift=3.117282e-02
+epoch 62/160: loss=1.321470e-04, drift=3.154572e-02
+epoch 63/160: loss=1.320174e-04, drift=3.148065e-02
+epoch 64/160: loss=1.295943e-04, drift=3.120028e-02
+epoch 65/160: loss=1.321913e-04, drift=3.153665e-02
+epoch 66/160: loss=1.302595e-04, drift=3.130344e-02
+epoch 67/160: loss=1.296989e-04, drift=3.122394e-02
+epoch 68/160: loss=1.288343e-04, drift=3.108715e-02
+epoch 69/160: loss=1.285112e-04, drift=3.111707e-02
+epoch 70/160: loss=1.295476e-04, drift=3.117916e-02
+epoch 71/160: loss=1.292141e-04, drift=3.115716e-02
+epoch 72/160: loss=1.293716e-04, drift=3.117701e-02
+epoch 73/160: loss=1.266004e-04, drift=3.079058e-02
+epoch 74/160: loss=1.297449e-04, drift=3.118122e-02
+epoch 75/160: loss=1.291495e-04, drift=3.119475e-02
+epoch 76/160: loss=1.319407e-04, drift=3.148326e-02
+epoch 77/160: loss=1.293121e-04, drift=3.120477e-02
+epoch 78/160: loss=1.285725e-04, drift=3.106647e-02
+epoch 79/160: loss=1.289210e-04, drift=3.113759e-02
+epoch 80/160: loss=1.280046e-04, drift=3.099793e-02
+epoch 81/160: loss=1.271042e-04, drift=3.091658e-02
+epoch 82/160: loss=1.295936e-04, drift=3.119850e-02
+epoch 83/160: loss=1.286237e-04, drift=3.107156e-02
+epoch 84/160: loss=1.274818e-04, drift=3.095347e-02
+epoch 85/160: loss=1.283381e-04, drift=3.105659e-02
+epoch 86/160: loss=1.273429e-04, drift=3.088024e-02
+epoch 87/160: loss=1.267340e-04, drift=3.083430e-02
+epoch 88/160: loss=1.290746e-04, drift=3.113232e-02
+epoch 89/160: loss=1.272801e-04, drift=3.093916e-02
+epoch 90/160: loss=1.270009e-04, drift=3.087662e-02
+epoch 91/160: loss=1.273949e-04, drift=3.094042e-02
+epoch 92/160: loss=1.278859e-04, drift=3.096104e-02
+epoch 93/160: loss=1.261157e-04, drift=3.076917e-02
+epoch 94/160: loss=1.276658e-04, drift=3.093977e-02
+epoch 95/160: loss=1.274703e-04, drift=3.094373e-02
+epoch 96/160: loss=1.272528e-04, drift=3.090761e-02
+epoch 97/160: loss=1.252739e-04, drift=3.062415e-02
+epoch 98/160: loss=1.289827e-04, drift=3.113645e-02
+epoch 99/160: loss=1.265193e-04, drift=3.081283e-02
+epoch 100/160: loss=1.262547e-04, drift=3.084209e-02
+epoch 101/160: loss=1.255312e-04, drift=3.075306e-02
+epoch 102/160: loss=1.260686e-04, drift=3.079556e-02
+epoch 103/160: loss=1.251647e-04, drift=3.062476e-02
+epoch 104/160: loss=1.243209e-04, drift=3.058046e-02
+epoch 105/160: loss=1.256991e-04, drift=3.072848e-02
+epoch 106/160: loss=1.274302e-04, drift=3.095485e-02
+epoch 107/160: loss=1.255028e-04, drift=3.071129e-02
+epoch 108/160: loss=1.258753e-04, drift=3.072118e-02
+epoch 109/160: loss=1.254316e-04, drift=3.074390e-02
+epoch 110/160: loss=1.267572e-04, drift=3.086182e-02
+epoch 111/160: loss=1.274562e-04, drift=3.095942e-02
+epoch 112/160: loss=1.244078e-04, drift=3.054671e-02
+epoch 113/160: loss=1.248865e-04, drift=3.063643e-02
+epoch 114/160: loss=1.241754e-04, drift=3.053449e-02
+epoch 115/160: loss=1.268746e-04, drift=3.092682e-02
+epoch 116/160: loss=1.253964e-04, drift=3.068560e-02
+epoch 117/160: loss=1.240217e-04, drift=3.055690e-02
+epoch 118/160: loss=1.269904e-04, drift=3.090518e-02
+epoch 119/160: loss=1.262120e-04, drift=3.077308e-02
+epoch 120/160: loss=1.223974e-04, drift=3.035791e-02
+epoch 121/160: loss=1.273738e-04, drift=3.093281e-02
+epoch 122/160: loss=1.263720e-04, drift=3.080156e-02
+epoch 123/160: loss=1.279910e-04, drift=3.101934e-02
+epoch 124/160: loss=1.242447e-04, drift=3.058248e-02
+epoch 125/160: loss=1.260766e-04, drift=3.078578e-02
+epoch 126/160: loss=1.240223e-04, drift=3.047245e-02
+epoch 127/160: loss=1.263411e-04, drift=3.080879e-02
+epoch 128/160: loss=1.241958e-04, drift=3.054113e-02
+epoch 129/160: loss=1.232266e-04, drift=3.044156e-02
+epoch 130/160: loss=1.237982e-04, drift=3.052125e-02
+epoch 131/160: loss=1.248920e-04, drift=3.065105e-02
+epoch 132/160: loss=1.240006e-04, drift=3.050343e-02
+epoch 133/160: loss=1.237688e-04, drift=3.049208e-02
+epoch 134/160: loss=1.233158e-04, drift=3.044719e-02
+epoch 135/160: loss=1.248362e-04, drift=3.062778e-02
+epoch 136/160: loss=1.253007e-04, drift=3.069771e-02
+epoch 137/160: loss=1.219053e-04, drift=3.030391e-02
+epoch 138/160: loss=1.230556e-04, drift=3.041204e-02
+epoch 139/160: loss=1.242675e-04, drift=3.057158e-02
+epoch 140/160: loss=1.239709e-04, drift=3.052997e-02
+epoch 141/160: loss=1.237403e-04, drift=3.054875e-02
+epoch 142/160: loss=1.223521e-04, drift=3.032230e-02
+epoch 143/160: loss=1.210143e-04, drift=3.014737e-02
+epoch 144/160: loss=1.233594e-04, drift=3.044016e-02
+epoch 145/160: loss=1.232946e-04, drift=3.045722e-02
+epoch 146/160: loss=1.262289e-04, drift=3.074495e-02
+epoch 147/160: loss=1.246971e-04, drift=3.061865e-02
+epoch 148/160: loss=1.228867e-04, drift=3.041483e-02
+epoch 149/160: loss=1.257396e-04, drift=3.070270e-02
+epoch 150/160: loss=1.255630e-04, drift=3.066570e-02
+epoch 151/160: loss=1.231129e-04, drift=3.038379e-02
+epoch 152/160: loss=1.236143e-04, drift=3.046724e-02
+epoch 153/160: loss=1.206411e-04, drift=3.007839e-02
+epoch 154/160: loss=1.234617e-04, drift=3.047311e-02
+epoch 155/160: loss=1.214102e-04, drift=3.021518e-02
+epoch 156/160: loss=1.244012e-04, drift=3.057982e-02
+epoch 157/160: loss=1.239210e-04, drift=3.056841e-02
+epoch 158/160: loss=1.239703e-04, drift=3.049734e-02
+epoch 159/160: loss=1.221960e-04, drift=3.028996e-02
+epoch 160/160: loss=1.212636e-04, drift=3.020520e-02
+epoch 1/60: loss=6.901703e-03, drift=1.026639e-01
+epoch 2/60: loss=5.501120e-03, drift=9.060102e-02
+epoch 3/60: loss=6.383832e-03, drift=9.536766e-02
+epoch 4/60: loss=6.258863e-03, drift=9.156079e-02
+epoch 5/60: loss=5.434375e-03, drift=8.246230e-02
+epoch 6/60: loss=5.427126e-03, drift=8.344492e-02
+epoch 7/60: loss=4.879814e-03, drift=7.773211e-02
+epoch 8/60: loss=4.600443e-03, drift=7.472425e-02
+epoch 9/60: loss=4.425771e-03, drift=7.372775e-02
+epoch 10/60: loss=4.386296e-03, drift=7.336796e-02
+epoch 11/60: loss=3.841627e-03, drift=6.791044e-02
+epoch 12/60: loss=3.823891e-03, drift=6.705374e-02
+epoch 13/60: loss=3.815864e-03, drift=6.743358e-02
+epoch 14/60: loss=3.772844e-03, drift=6.595797e-02
+epoch 15/60: loss=3.465989e-03, drift=6.315800e-02
+epoch 16/60: loss=3.482746e-03, drift=6.371995e-02
+epoch 17/60: loss=3.549887e-03, drift=6.431078e-02
+epoch 18/60: loss=3.492995e-03, drift=6.344932e-02
+epoch 19/60: loss=3.373759e-03, drift=6.382001e-02
+epoch 20/60: loss=3.347996e-03, drift=6.310452e-02
+epoch 21/60: loss=3.385735e-03, drift=6.351335e-02
+epoch 22/60: loss=3.396937e-03, drift=6.117214e-02
+epoch 23/60: loss=3.635569e-03, drift=6.651379e-02
+epoch 24/60: loss=3.501262e-03, drift=6.395723e-02
+epoch 25/60: loss=3.363054e-03, drift=6.239361e-02
+epoch 26/60: loss=3.394200e-03, drift=6.333131e-02
+epoch 27/60: loss=3.344468e-03, drift=6.368774e-02
+epoch 28/60: loss=3.263891e-03, drift=6.130372e-02
+epoch 29/60: loss=3.351451e-03, drift=6.336178e-02
+epoch 30/60: loss=3.296788e-03, drift=6.162468e-02
+epoch 31/60: loss=3.245686e-03, drift=6.310263e-02
+epoch 32/60: loss=3.181054e-03, drift=6.253657e-02
+epoch 33/60: loss=3.499395e-03, drift=6.346087e-02
+epoch 34/60: loss=3.293486e-03, drift=6.348725e-02
+epoch 35/60: loss=3.061550e-03, drift=6.022188e-02
+epoch 36/60: loss=3.596862e-03, drift=6.559191e-02
+epoch 37/60: loss=3.081073e-03, drift=6.047516e-02
+epoch 38/60: loss=3.075245e-03, drift=6.178458e-02
+epoch 39/60: loss=3.189917e-03, drift=6.190048e-02
+epoch 40/60: loss=3.342375e-03, drift=6.471609e-02
+epoch 41/60: loss=3.143748e-03, drift=6.232679e-02
+epoch 42/60: loss=3.160451e-03, drift=6.094933e-02
+epoch 43/60: loss=3.478981e-03, drift=6.439854e-02
+epoch 44/60: loss=3.468376e-03, drift=6.654121e-02
+epoch 45/60: loss=2.914574e-03, drift=6.012959e-02
+epoch 46/60: loss=3.274437e-03, drift=6.324821e-02
+epoch 47/60: loss=3.471794e-03, drift=6.494383e-02
+epoch 48/60: loss=3.359624e-03, drift=6.399644e-02
+epoch 49/60: loss=3.219567e-03, drift=6.274745e-02
+epoch 50/60: loss=3.106494e-03, drift=6.011521e-02
+epoch 51/60: loss=3.391070e-03, drift=6.358757e-02
+epoch 52/60: loss=3.320391e-03, drift=6.289226e-02
+epoch 53/60: loss=3.250864e-03, drift=6.241113e-02
+epoch 54/60: loss=3.281285e-03, drift=6.333124e-02
+epoch 55/60: loss=3.346970e-03, drift=6.344605e-02
+epoch 56/60: loss=3.320108e-03, drift=6.343292e-02
+epoch 57/60: loss=3.267330e-03, drift=6.296443e-02
+epoch 58/60: loss=3.233069e-03, drift=6.298507e-02
+epoch 59/60: loss=3.287921e-03, drift=6.283852e-02
+epoch 60/60: loss=3.560927e-03, drift=6.423682e-02
+diff epoch 1/60: loss=6.500909e-01, lr=1.000e-03
+diff epoch 2/60: loss=5.110829e-01, lr=1.000e-03
+diff epoch 3/60: loss=5.013492e-01, lr=1.000e-03
+diff epoch 4/60: loss=4.946079e-01, lr=1.000e-03
+diff epoch 5/60: loss=4.937192e-01, lr=1.000e-03
+diff epoch 6/60: loss=4.926488e-01, lr=1.000e-03
+diff epoch 7/60: loss=4.931671e-01, lr=1.000e-03
+diff epoch 8/60: loss=4.906583e-01, lr=1.000e-03
+diff epoch 9/60: loss=4.887771e-01, lr=1.000e-03
+diff epoch 10/60: loss=4.840919e-01, lr=1.000e-03
+diff epoch 11/60: loss=4.770558e-01, lr=1.000e-03
+diff epoch 12/60: loss=4.683336e-01, lr=1.000e-03
+diff epoch 13/60: loss=4.579257e-01, lr=1.000e-03
+diff epoch 14/60: loss=4.462398e-01, lr=1.000e-03
+diff epoch 15/60: loss=4.401628e-01, lr=1.000e-03
+diff epoch 16/60: loss=4.296048e-01, lr=1.000e-03
+diff epoch 17/60: loss=4.227899e-01, lr=1.000e-03
+diff epoch 18/60: loss=4.141325e-01, lr=1.000e-03
+diff epoch 19/60: loss=4.099790e-01, lr=1.000e-03
+diff epoch 20/60: loss=4.061164e-01, lr=1.000e-03
+diff epoch 21/60: loss=3.954433e-01, lr=1.000e-03
+diff epoch 22/60: loss=3.886082e-01, lr=1.000e-03
+diff epoch 23/60: loss=3.781719e-01, lr=1.000e-03
+diff epoch 24/60: loss=3.781013e-01, lr=1.000e-03
+diff epoch 25/60: loss=3.742192e-01, lr=1.000e-03
+diff epoch 26/60: loss=3.671392e-01, lr=1.000e-03
+diff epoch 27/60: loss=3.648321e-01, lr=1.000e-03
+diff epoch 28/60: loss=3.572894e-01, lr=1.000e-03
+diff epoch 29/60: loss=3.567821e-01, lr=1.000e-03
+diff epoch 30/60: loss=3.523651e-01, lr=1.000e-03
+diff epoch 31/60: loss=3.521175e-01, lr=1.000e-03
+diff epoch 32/60: loss=3.507169e-01, lr=1.000e-03
+diff epoch 33/60: loss=3.478597e-01, lr=1.000e-03
+diff epoch 34/60: loss=3.484509e-01, lr=1.000e-03
+diff epoch 35/60: loss=3.432011e-01, lr=1.000e-03
+diff epoch 36/60: loss=3.468517e-01, lr=1.000e-03
+diff epoch 37/60: loss=3.435329e-01, lr=1.000e-03
+diff epoch 38/60: loss=3.461920e-01, lr=1.000e-03
+diff epoch 39/60: loss=3.388543e-01, lr=1.000e-03
+diff epoch 40/60: loss=3.428590e-01, lr=1.000e-03
+diff epoch 41/60: loss=3.405319e-01, lr=1.000e-03
+diff epoch 42/60: loss=3.375449e-01, lr=1.000e-03
+diff epoch 43/60: loss=3.378330e-01, lr=1.000e-03
+diff epoch 44/60: loss=3.408034e-01, lr=1.000e-03
+diff epoch 45/60: loss=3.376561e-01, lr=1.000e-03
+diff epoch 46/60: loss=3.344266e-01, lr=1.000e-03
+diff epoch 47/60: loss=3.373873e-01, lr=1.000e-03
+diff epoch 48/60: loss=3.367022e-01, lr=1.000e-03
+diff epoch 49/60: loss=3.351645e-01, lr=1.000e-03
+diff epoch 50/60: loss=3.296812e-01, lr=1.000e-03
+diff epoch 51/60: loss=3.323570e-01, lr=1.000e-03
+diff epoch 52/60: loss=3.301763e-01, lr=1.000e-03
+diff epoch 53/60: loss=3.304258e-01, lr=1.000e-03
+diff epoch 54/60: loss=3.343072e-01, lr=1.000e-03
+diff epoch 55/60: loss=3.316215e-01, lr=1.000e-03
+diff epoch 56/60: loss=3.316630e-01, lr=1.000e-03
+diff epoch 57/60: loss=3.283356e-01, lr=1.000e-03
+diff epoch 58/60: loss=3.286096e-01, lr=1.000e-03
+diff epoch 59/60: loss=3.255094e-01, lr=1.000e-03
+diff epoch 60/60: loss=3.271765e-01, lr=1.000e-03
+{
+  "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed8/partial_direct_metric_summary_seed8.json",
+  "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed8",
+  "channels": [
+    "AWGN",
+    "Rayleigh",
+    "SSPA",
+    "OptFib"
+  ],
+  "methods": [
+    "drifting_residual",
+    "optfib_diffusion",
+    "wgan"
+  ]
+}
+
+[seed-runner] exit_code: 0
+[seed-runner] elapsed_seconds: 11579.931

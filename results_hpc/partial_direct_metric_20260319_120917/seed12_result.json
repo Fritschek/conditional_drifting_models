@@ -1,0 +1,23 @@
+{
+  "manifest": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed12_manifest.json",
+  "seed": 12,
+  "log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed12.log",
+  "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed12",
+  "result": {
+    "output_json": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed12/partial_direct_metric_summary_seed12.json",
+    "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_seed12",
+    "channels": [
+      "AWGN",
+      "Rayleigh",
+      "SSPA",
+      "OptFib"
+    ],
+    "methods": [
+      "drifting_residual",
+      "optfib_diffusion",
+      "wgan"
+    ],
+    "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results_hpc/partial_direct_metric_20260319_120917/seed12.log",
+    "suite_elapsed_seconds": 11429.49820303917
+  }
+}

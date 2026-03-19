@@ -1,0 +1,9 @@
+{
+  "source_summary": "results_hpc/partial_direct_metric_20260319_120917/partial_direct_metric_suite_results.json",
+  "output_dir": "/home/entropy/GitHub/conditional_drifting_models/paper/generated",
+  "generated_files": [
+    "partial_direct_metric_summary_flat.csv",
+    "partial_direct_metric_summary.md",
+    "partial_direct_metric_table.tex"
+  ]
+}

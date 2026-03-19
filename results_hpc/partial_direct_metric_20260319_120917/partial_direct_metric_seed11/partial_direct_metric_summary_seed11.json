@@ -1,0 +1,369 @@
+{
+  "seed": 11,
+  "device": "cuda",
+  "channels": {
+    "AWGN": {
+      "block": "main",
+      "preset": {
+        "n": 7,
+        "ebn0_db": 5.0,
+        "rate": 0.5714285714285714,
+        "diffusion_hidden_dim": 110,
+        "wgan_hidden_dim": 128,
+        "diffusion_epochs": 30,
+        "drifting_epochs": 30,
+        "wgan_epochs": 30,
+        "dataset_size": 10000000,
+        "batch_size": 5000,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100,
+        "diffusion_learning_rate_schedule": [
+          [
+            10,
+            0.001
+          ],
+          [
+            20,
+            0.0001
+          ]
+        ]
+      },
+      "effective_config": {
+        "dataset_size": 10000000,
+        "eval_size": 1000000,
+        "batch_size": 5000,
+        "drifting_epochs": 30,
+        "diffusion_epochs": 30,
+        "wgan_epochs": 30
+      },
+      "noise_std": 0.5260221433216792,
+      "drifting_residual": {
+        "config": {
+          "n": 7,
+          "noise_std": 0.5260221433216792,
+          "dataset_size": 10000000,
+          "batch_size": 5000,
+          "epochs": 30,
+          "learning_rate": 0.001,
+          "latent_dim": 16,
+          "hidden_dim": 128,
+          "drift_scale": 1.0,
+          "bandwidth": null,
+          "min_bandwidth": 0.2,
+          "max_drift_norm": 2.0,
+          "repulsive_weight": 1.0,
+          "eval_size": 1000000,
+          "swd_projections": 128,
+          "is_residual": true
+        },
+        "y_swd": 0.05527881160378456,
+        "residual_swd": 0.010202949866652489,
+        "final_history": {
+          "epoch": 30.0,
+          "loss": 0.0001296575936089539,
+          "drift_norm": 0.029077039865311235
+        }
+      },
+      "wgan": {
+        "config": {
+          "n": 7,
+          "noise_std": 0.5260221433216792,
+          "dataset_size": 10000000,
+          "batch_size": 5000,
+          "epochs": 30,
+          "eval_size": 1000000,
+          "hidden_dim": 128,
+          "learning_rate_g": 0.0001,
+          "learning_rate_d": 0.0001,
+          "critic_steps": 5,
+          "clip_value": 0.01,
+          "swd_projections": 128
+        },
+        "y_swd": 0.01897641085088253,
+        "residual_swd": 0.018664179369807243,
+        "final_history": {
+          "epoch": 30,
+          "g_loss": 0.010644216568209231,
+          "d_loss": -9.109321981668472e-08
+        }
+      }
+    },
+    "Rayleigh": {
+      "block": "main",
+      "preset": {
+        "n": 7,
+        "ebn0_db": 12.0,
+        "rate": 0.5714285714285714,
+        "diffusion_hidden_dim": 128,
+        "wgan_hidden_dim": 256,
+        "diffusion_epochs": 30,
+        "drifting_epochs": 30,
+        "wgan_epochs": 30,
+        "dataset_size": 10000000,
+        "batch_size": 5000,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100,
+        "diffusion_learning_rate_schedule": [
+          [
+            10,
+            0.001
+          ],
+          [
+            20,
+            0.0001
+          ]
+        ]
+      },
+      "effective_config": {
+        "dataset_size": 10000000,
+        "eval_size": 1000000,
+        "batch_size": 5000,
+        "drifting_epochs": 30,
+        "diffusion_epochs": 30,
+        "wgan_epochs": 30
+      },
+      "noise_std": 0.2349654605298764,
+      "drifting_residual": {
+        "config": {
+          "n": 7,
+          "noise_std": 0.2349654605298764,
+          "dataset_size": 10000000,
+          "batch_size": 5000,
+          "epochs": 30,
+          "learning_rate": 0.001,
+          "latent_dim": 16,
+          "hidden_dim": 128,
+          "drift_scale": 1.0,
+          "bandwidth": null,
+          "min_bandwidth": 0.2,
+          "max_drift_norm": 2.0,
+          "repulsive_weight": 1.0,
+          "eval_size": 1000000,
+          "swd_projections": 128,
+          "is_residual": true
+        },
+        "y_swd": 0.37211570143699646,
+        "residual_swd": 0.003594801062718034,
+        "final_history": {
+          "epoch": 30.0,
+          "loss": 9.256930273659236e-05,
+          "drift_norm": 0.024567137714708222
+        }
+      },
+      "wgan": {
+        "config": {
+          "n": 7,
+          "noise_std": 0.2349654605298764,
+          "dataset_size": 10000000,
+          "batch_size": 5000,
+          "epochs": 30,
+          "eval_size": 1000000,
+          "hidden_dim": 256,
+          "learning_rate_g": 0.0001,
+          "learning_rate_d": 0.0001,
+          "critic_steps": 5,
+          "clip_value": 0.01,
+          "swd_projections": 128
+        },
+        "y_swd": 0.01587490551173687,
+        "residual_swd": 0.01574123650789261,
+        "final_history": {
+          "epoch": 30,
+          "g_loss": 0.006724714846117422,
+          "d_loss": -2.2345939092338086e-05
+        }
+      }
+    },
+    "SSPA": {
+      "block": "main",
+      "preset": {
+        "n": 8,
+        "ebn0_db": 8.0,
+        "rate": 0.75,
+        "diffusion_hidden_dim": 110,
+        "wgan_hidden_dim": 256,
+        "diffusion_epochs": 160,
+        "drifting_epochs": 160,
+        "wgan_epochs": 160,
+        "dataset_size": 10000000,
+        "batch_size": 4096,
+        "eval_size": 10000000,
+        "swd_projections": 128,
+        "num_steps": 100,
+        "diffusion_learning_rate_schedule": null
+      },
+      "effective_config": {
+        "dataset_size": 10000000,
+        "eval_size": 1000000,
+        "batch_size": 4096,
+        "drifting_epochs": 160,
+        "diffusion_epochs": 160,
+        "wgan_epochs": 160
+      },
+      "noise_std": 0.3250531435997416,
+      "drifting_residual": {
+        "config": {
+          "n": 8,
+          "noise_std": 0.3250531435997416,
+          "dataset_size": 10000000,
+          "batch_size": 4096,
+          "epochs": 160,
+          "learning_rate": 0.001,
+          "latent_dim": 16,
+          "hidden_dim": 128,
+          "drift_scale": 1.0,
+          "bandwidth": null,
+          "min_bandwidth": 0.2,
+          "max_drift_norm": 2.0,
+          "repulsive_weight": 1.0,
+          "eval_size": 1000000,
+          "swd_projections": 128,
+          "is_residual": true
+        },
+        "y_swd": 0.4799324870109558,
+        "residual_swd": 0.011885316111147404,
+        "final_history": {
+          "epoch": 160.0,
+          "loss": 0.00012147098461584621,
+          "drift_norm": 0.03020907547988492
+        }
+      },
+      "wgan": {
+        "config": {
+          "n": 8,
+          "noise_std": 0.3250531435997416,
+          "dataset_size": 10000000,
+          "batch_size": 4096,
+          "epochs": 160,
+          "eval_size": 1000000,
+          "hidden_dim": 256,
+          "learning_rate_g": 0.0001,
+          "learning_rate_d": 0.0001,
+          "critic_steps": 5,
+          "clip_value": 0.01,
+          "swd_projections": 128
+        },
+        "y_swd": 0.01608564704656601,
+        "residual_swd": 0.015753528103232384,
+        "final_history": {
+          "epoch": 160,
+          "g_loss": -0.009999999776482582,
+          "d_loss": 0.0
+        }
+      }
+    },
+    "OptFib": {
+      "block": "optfib",
+      "effective_config": {
+        "dataset_size": 120000,
+        "eval_size": 100000,
+        "batch_size": 512,
+        "epochs": 60,
+        "num_steps": 100,
+        "ddim_steps": 100
+      },
+      "channel_params": {
+        "L": 5000.0,
+        "gamma": 1.27,
+        "Kstep": 50,
+        "Pn_dBm": -21.3,
+        "use_noise_std": false
+      },
+      "drifting_residual": {
+        "config": {
+          "n": 2,
+          "noise_std": 0.3,
+          "dataset_size": 120000,
+          "batch_size": 512,
+          "epochs": 60,
+          "learning_rate": 0.001,
+          "latent_dim": 16,
+          "hidden_dim": 128,
+          "drift_scale": 1.0,
+          "bandwidth": null,
+          "min_bandwidth": 0.2,
+          "max_drift_norm": 2.0,
+          "repulsive_weight": 1.0,
+          "eval_size": 100000,
+          "swd_projections": 256,
+          "is_residual": true
+        },
+        "y_swd": 0.35697922110557556,
+        "residual_swd": 0.05632534623146057,
+        "final_history": {
+          "epoch": 60.0,
+          "loss": 0.003265958886960165,
+          "drift_norm": 0.06346772773627271
+        }
+      },
+      "wgan": {
+        "config": {
+          "n": 2,
+          "noise_std": 0.3,
+          "dataset_size": 120000,
+          "batch_size": 512,
+          "epochs": 60,
+          "eval_size": 100000,
+          "hidden_dim": 128,
+          "learning_rate_g": 0.0001,
+          "learning_rate_d": 0.0001,
+          "critic_steps": 5,
+          "clip_value": 0.01,
+          "swd_projections": 256
+        },
+        "y_swd": 0.011774322018027306,
+        "residual_swd": 0.012685204856097698,
+        "final_history": {
+          "epoch": 60,
+          "g_loss": 0.009733231345865321,
+          "d_loss": -6.725840429042248e-06
+        }
+      },
+      "diffusion": {
+        "config": {
+          "n": 2,
+          "noise_std": 0.3,
+          "dataset_size": 120000,
+          "batch_size": 512,
+          "epochs": 60,
+          "learning_rate": 0.001,
+          "hidden_dim": 128,
+          "num_steps": 100,
+          "eval_size": 100000,
+          "swd_projections": 256,
+          "ema_decay": 0.995,
+          "pred_type": "epsilon",
+          "is_residual": true,
+          "beta_schedule": "cosine",
+          "eval_batch_size": null,
+          "learning_rate_schedule": null
+        },
+        "ddpm": {
+          "y_swd": 0.007490257266908884,
+          "residual_swd": 0.01128037367016077
+        },
+        "ddim_100": {
+          "y_swd": 0.07452110201120377,
+          "residual_swd": 0.07888425886631012
+        },
+        "final_history": {
+          "epoch": 60,
+          "loss": 0.3278084812012125,
+          "lr": 0.001
+        }
+      }
+    }
+  },
+  "methods": [
+    "drifting_residual",
+    "optfib_diffusion",
+    "wgan"
+  ],
+  "notes": {
+    "purpose": "Rerun only the methods/channels that were previously scored in residual space and report direct y-space SWD.",
+    "paper_channel_metric_seed": 11,
+    "optfib_metric_seed": 12345
+  }
+}
