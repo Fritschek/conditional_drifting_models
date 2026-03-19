@@ -1,6 +1,6 @@
 # HPC / SLURM
 
-This directory contains a SLURM-ready path for the full-budget benchmark suite.
+This directory contains SLURM-ready paths for the full-budget benchmark suite and the partial direct-metric rerun.
 
 The intended workflow is:
 
@@ -14,6 +14,10 @@ The intended workflow is:
 - `load_env.sh`: shared module / conda bootstrap used by both checks and SLURM jobs
 - `slurm_full_suite_array.sh`: one seed per SLURM job or array task
 - `slurm_full_suite_aggregate.sh`: aggregate finished seed results into one suite summary
+- `slurm_partial_direct_metric_array.sh`: one seed per SLURM task for the partial direct-metric rerun
+- `slurm_partial_direct_metric_aggregate.sh`: aggregate the partial direct-metric rerun
+- `submit_full_suite.sh`: helper to submit the full benchmark array
+- `submit_partial_direct_metric_suite.sh`: helper to submit the partial direct-metric array
 
 ## Per-seed runner
 
@@ -47,6 +51,31 @@ python -u scripts/aggregate_full_budget_suite.py --suite-dir ...
 This writes:
 
 - `suite_results.json`
+
+## Partial Direct-Metric Rerun
+
+The partial rerun is intended for the question whether the main metric should be direct output-space SWD rather than residual-space SWD. It reruns only the methods/channels that were previously scored in residual space and reports both metrics:
+
+- residual drifting on `AWGN,Rayleigh,SSPA,OptFib`
+- `WGAN` on `AWGN,Rayleigh,SSPA,OptFib`
+- `OptFib` diffusion
+
+The per-seed job calls:
+
+```bash
+python -u scripts/run_partial_direct_metric_seed.py --suite-dir ...
+```
+
+This writes:
+
+- `seed<N>_manifest.json`
+- `seed<N>.log`
+- `seed<N>_result.json`
+- `partial_direct_metric_seed<N>/partial_direct_metric_summary_seed<N>.json`
+
+Aggregation writes:
+
+- `partial_direct_metric_suite_results.json`
 
 ## Typical usage
 
@@ -90,6 +119,39 @@ or run aggregation manually once all seeds are done:
 
 ```bash
 sbatch hpc/slurm_full_suite_aggregate.sh
+```
+
+## Typical Usage For The Partial Direct-Metric Rerun
+
+Choose a shared suite directory first:
+
+```bash
+export PROJECT_ROOT=$PWD
+export SUITE_TAG=$(date -u +%Y%m%d_%H%M%S)
+export SUITE_DIR=$PROJECT_ROOT/results/partial_direct_metric_hpc_${SUITE_TAG}
+export SEED_START=7
+export NUM_SEEDS=10
+```
+
+Submit the array:
+
+```bash
+bash hpc/submit_partial_direct_metric_suite.sh
+```
+
+Then aggregate after the array completes:
+
+```bash
+sbatch --dependency=afterok:<array_job_id> hpc/slurm_partial_direct_metric_aggregate.sh
+```
+
+or aggregate locally after copying the suite directory back:
+
+```bash
+python scripts/aggregate_partial_direct_metric_suite.py \
+  --suite-dir results/partial_direct_metric_hpc_<tag> \
+  --seed-start 7 \
+  --num-seeds 10
 ```
 
 ## Environment setup
