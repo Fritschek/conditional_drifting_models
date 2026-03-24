@@ -1,0 +1,14 @@
+epoch 1/10: loss=2.285020e-01, train_ser=5.354700e-02, eval_ser=0.011790000504115597
+epoch 2/10: loss=3.043590e-02, train_ser=1.026600e-02, eval_ser=0.009300000397488475
+epoch 3/10: loss=2.440369e-02, train_ser=8.108000e-03, eval_ser=0.00686000025831163
+epoch 4/10: loss=1.943891e-02, train_ser=6.490000e-03, eval_ser=0.006380000243661925
+epoch 5/10: loss=1.809704e-02, train_ser=5.987000e-03, eval_ser=0.006270000244257972
+epoch 6/10: loss=1.718472e-02, train_ser=5.884000e-03, eval_ser=0.005370000222465024
+epoch 7/10: loss=1.730152e-02, train_ser=5.735000e-03, eval_ser=0.005790000217966735
+epoch 8/10: loss=1.689094e-02, train_ser=5.710000e-03, eval_ser=0.005590000206138939
+epoch 9/10: loss=1.647501e-02, train_ser=5.591000e-03, eval_ser=0.005120000200113281
+epoch 10/10: loss=1.682904e-02, train_ser=5.725000e-03, eval_ser=0.0055700002191588285
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/analytic_to_analytic",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/analytic_to_analytic/summary.json"
+}

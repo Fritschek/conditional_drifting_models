@@ -1,0 +1,46 @@
+label,checkpoint,ebno_db,ser,ber
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,0.0,0.20002000987529756,0.11002750501036644
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,1.0,0.1317800062894821,0.07256750389933586
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,2.0,0.07750000312924385,0.04256250195205211
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,3.0,0.03896000180393457,0.021332500986754894
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,4.0,0.016390000563114883,0.00902500044554472
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,5.0,0.005600000256672502,0.0030275001283735035
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,6.0,0.001640000072075054,0.0008950000422191806
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,7.0,0.00028000001329928634,0.00015250000637024642
+Analytic train,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt,8.0,4.0000001899898055e-05,2.0000000658910723e-05
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,0.0,0.25712000906467436,0.14133000791072844
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,1.0,0.1828200089931488,0.10086250469088555
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,2.0,0.11903000608086586,0.06606250293552876
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,3.0,0.0691000033915043,0.03863750211894512
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,4.0,0.03612000182271004,0.020452500842511653
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,5.0,0.015990000553429126,0.009140000408515335
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,6.0,0.005990000255405903,0.0034775001415982844
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,7.0,0.0017000000679399819,0.0009850000456208363
+"Drifting (dir., standard)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt,8.0,0.00035000001545995476,0.00022000000783009454
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,0.0,0.213770010471344,0.11784000590443611
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,1.0,0.1442700058221817,0.07986000388860702
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,2.0,0.0868900041282177,0.048362502232193946
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,3.0,0.04624000184237957,0.025790000893175603
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,4.0,0.021070000901818275,0.01168500054627657
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,5.0,0.007550000371411443,0.004207500191405415
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,6.0,0.002310000092256814,0.0012925000599352642
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,7.0,0.0004900000197812915,0.0002925000136019662
+"Drifting (dir., cond. kernel)",weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt,8.0,7.000000332482159e-05,3.750000149011612e-05
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,0.0,0.20042000979185104,0.10880250498652458
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,1.0,0.13113000631332397,0.0712400035560131
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,2.0,0.07760000333189965,0.04195000194013119
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,3.0,0.03916000194847584,0.021187500916421412
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,4.0,0.01689000068232417,0.009165000375360251
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,5.0,0.006040000268258155,0.003300000124145299
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,6.0,0.0015200000628829001,0.0008600000370643102
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,7.0,0.0003300000121816993,0.00019000000873347744
+Diffusion (dir.),/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt,8.0,6.0000002849847076e-05,3.2500001252628864e-05
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,0.0,0.20197000950574875,0.1064200046658516
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,1.0,0.13499000579118728,0.0708900036662817
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,2.0,0.07970000386238098,0.04174000188708305
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,3.0,0.04067000191658735,0.021262500993907453
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,4.0,0.018550000805407762,0.009657500451430679
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,5.0,0.006520000356249511,0.0034050001739524306
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,6.0,0.001760000066133216,0.0008950000375625677
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,7.0,0.0004100000171456486,0.0002075000072363764
+Paper WGAN,/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt,8.0,3.0000001424923538e-05,1.2500000593718141e-05

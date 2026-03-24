@@ -2,11 +2,10 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
 import os
 import sys
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault("MPLCONFIGDIR", os.path.join(ROOT, ".mplcache"))
@@ -34,71 +33,14 @@ from conditional_drifting.baselines import (
     train_paper_wgan,
 )
 from conditional_drifting.channels import channel_registry
+from conditional_drifting.paper2309_presets import PAPER2309_PRESETS, PaperChannelPreset, ebno_to_noise, resolve_paper_diffusion_lr_schedule
 from conditional_drifting.training import DriftingConfig, evaluate_residual_model, select_device, set_seed, train_conditional_drifting
-
-
-@dataclass(frozen=True)
-class PaperChannelPreset:
-    n: int
-    ebn0_db: float
-    rate: float
-    diffusion_hidden_dim: int
-    wgan_hidden_dim: int
-    diffusion_epochs: int = 30
-    drifting_epochs: int = 30
-    wgan_epochs: int = 30
-    dataset_size: int = 10_000_000
-    batch_size: int = 5_000
-    eval_size: int = 10_000_000
-    swd_projections: int = 128
-    num_steps: int = 100
-    diffusion_learning_rate_schedule: tuple[tuple[int, float], ...] | None = None
-
-
-PAPER2309_PRESETS: dict[str, PaperChannelPreset] = {
-    "AWGN": PaperChannelPreset(
-        n=7,
-        ebn0_db=5.0,
-        rate=4.0 / 7.0,
-        diffusion_hidden_dim=110,
-        wgan_hidden_dim=128,
-        diffusion_learning_rate_schedule=((10, 1e-3), (20, 1e-4)),
-    ),
-    "Rayleigh": PaperChannelPreset(
-        n=7,
-        ebn0_db=12.0,
-        rate=4.0 / 7.0,
-        diffusion_hidden_dim=128,
-        wgan_hidden_dim=256,
-        diffusion_learning_rate_schedule=((10, 1e-3), (20, 1e-4)),
-    ),
-    "SSPA": PaperChannelPreset(n=8, ebn0_db=8.0, rate=6.0 / 8.0, diffusion_hidden_dim=110, wgan_hidden_dim=256, diffusion_epochs=160, drifting_epochs=160, wgan_epochs=160, batch_size=4096),
-}
 
 PAPER2309_REFERENCE_SWD = {
     "AWGN": {"ddpm": 0.012, "ddim_100": 0.008, "ddim_50": 0.011, "ddim_20": 0.022, "ddim_10": 0.043, "wgan": 0.013},
     "Rayleigh": {"ddpm": 0.013, "ddim_100": 0.008, "ddim_50": 0.011, "ddim_20": 0.024, "ddim_10": 0.043, "wgan": 0.019},
     "SSPA": {"ddpm": 0.009, "ddim_100": 0.007, "ddim_50": 0.009, "ddim_20": 0.018, "ddim_10": 0.032, "wgan": 0.104},
 }
-
-
-def ebno_to_noise(ebn0_db: float, rate: float) -> float:
-    ebn0 = 10.0 ** (ebn0_db / 10.0)
-    return 1.0 / math.sqrt(2.0 * rate * ebn0)
-
-
-def resolve_paper_diffusion_lr_schedule(
-    preset: PaperChannelPreset,
-    diffusion_epochs: int,
-) -> tuple[tuple[int, float], ...] | None:
-    schedule = preset.diffusion_learning_rate_schedule
-    if schedule is None:
-        return None
-    if sum(stage_epochs for stage_epochs, _ in schedule) == diffusion_epochs:
-        return schedule
-    return None
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Paper-2309 benchmark runner with exact paper-style presets")
     parser.add_argument("--device", type=str, default="auto")

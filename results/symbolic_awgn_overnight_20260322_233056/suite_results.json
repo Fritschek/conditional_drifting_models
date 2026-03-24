@@ -1,0 +1,771 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cuda",
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights",
+    "force_retrain": false,
+    "implant_specs": [
+      {
+        "name": "wgan",
+        "family": "paper_wgan",
+        "register_name": "awgn7_wgan_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128
+        }
+      },
+      {
+        "name": "diffusion_direct",
+        "family": "diffusion_direct",
+        "register_name": "awgn7_diffusion_direct_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 300000,
+          "batch-size": 500,
+          "epochs": 10,
+          "hidden-dim": 128,
+          "num-steps": 50
+        }
+      },
+      {
+        "name": "diffusion_residual",
+        "family": "diffusion_residual",
+        "register_name": "awgn7_diffusion_residual_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 300000,
+          "batch-size": 500,
+          "epochs": 10,
+          "hidden-dim": 128,
+          "num-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_none",
+        "family": "drifting_direct",
+        "register_name": "awgn7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_scale": 0.0
+        }
+      },
+      {
+        "name": "drifting_direct_joint_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "awgn7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_mixture_cond0p5_a0p5",
+        "family": "drifting_direct",
+        "register_name": "awgn7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_scale": 0.5,
+          "mixture_alpha": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_rawplusres",
+        "family": "drifting_direct",
+        "register_name": "awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_scale": 0.5,
+          "target_kernel_mode": "raw_plus_residual",
+          "residual_target_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt",
+        "family": "drifting_direct",
+        "register_name": "awgn7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_scale": 0.5,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8
+        }
+      },
+      {
+        "name": "drifting_residual_none",
+        "family": "drifting_residual",
+        "register_name": "awgn7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_scale": 0.0
+        }
+      },
+      {
+        "name": "drifting_residual_joint_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "awgn7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_scale": 0.25
+        }
+      },
+      {
+        "name": "drifting_residual_product_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "awgn7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_scale": 0.25
+        }
+      },
+      {
+        "name": "drifting_residual_softlocal_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "awgn7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "soft_local",
+          "condition_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      {
+        "name": "drifting_residual_local_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "awgn7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "local",
+          "condition_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      {
+        "name": "drifting_residual_mixture_cond0p25_a0p3",
+        "family": "drifting_residual",
+        "register_name": "awgn7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_scale": 0.25,
+          "mixture_alpha": 0.3
+        }
+      },
+      {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8",
+        "family": "drifting_residual",
+        "register_name": "awgn7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_scale": 0.25,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8,
+          "condition_embedding_dim": 8,
+          "condition_embedding_hidden_dim": 16
+        }
+      }
+    ],
+    "run_specs": [
+      {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_awgn",
+        "train_implant_name": null,
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_analytic_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "wgan_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_wgan_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_wgan_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "diffusion_direct_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_diffusion_direct_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_diffusion_direct_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 20
+        }
+      },
+      {
+        "name": "diffusion_residual_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_diffusion_residual_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_diffusion_residual_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 20
+        }
+      },
+      {
+        "name": "drifting_direct_none_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_direct_none_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_direct_joint_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_direct_joint_cond0p5_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_direct_product_cond0p5_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_direct_mixture_cond0p5_a0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_direct_mixture_cond0p5_a0p5_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_rawplusres_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_direct_product_cond0p5_rawplusres_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_direct_product_whitened_cond0p5_adapt_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_residual_none_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_residual_none_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_residual_joint_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_residual_joint_cond0p25_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_residual_product_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_residual_product_cond0p25_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_residual_softlocal_cond0p25_k16_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_residual_softlocal_cond0p25_k16_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_residual_local_cond0p25_k16_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_residual_local_cond0p25_k16_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_residual_mixture_cond0p25_a0p3_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_residual_mixture_cond0p25_a0p3_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      },
+      {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "eval_implant": "analytic_awgn",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7",
+        "benchmark_args": {
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1
+        }
+      }
+    ],
+    "global_args": {
+      "implant_dataset_size": 120000,
+      "implant_batch_size": 512,
+      "drifting_epochs": 60,
+      "wgan_epochs": 60,
+      "diffusion_dataset_size": 300000,
+      "diffusion_batch_size": 500,
+      "diffusion_epochs": 10,
+      "diffusion_hidden_dim": 128,
+      "diffusion_num_steps": 50,
+      "diffusion_ddim_steps": 20,
+      "ae_dataset_size": 1000000,
+      "ae_batch_size": 500,
+      "eval_size": 100000,
+      "ae_epochs": 10,
+      "ae_learning_rate": 0.001,
+      "eval_every": 1
+    }
+  },
+  "implant_runs": {
+    "wgan": {
+      "spec": {
+        "name": "wgan",
+        "family": "paper_wgan",
+        "register_name": "awgn7_wgan_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128
+        }
+      },
+      "status": "reused",
+      "register_name": "awgn7_wgan_seed7"
+    },
+    "diffusion_direct": {
+      "spec": {
+        "name": "diffusion_direct",
+        "family": "diffusion_direct",
+        "register_name": "awgn7_diffusion_direct_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 300000,
+          "batch-size": 500,
+          "epochs": 10,
+          "hidden-dim": 128,
+          "num-steps": 50
+        }
+      },
+      "status": "trained",
+      "register_name": "awgn7_diffusion_direct_seed7",
+      "runner_result": {
+        "elapsed_seconds": 17.312710395999602,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233056/implant_diffusion_direct.log"
+      }
+    },
+    "diffusion_residual": {
+      "spec": {
+        "name": "diffusion_residual",
+        "family": "diffusion_residual",
+        "register_name": "awgn7_diffusion_residual_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5,
+          "rate": 0.5714285714285714,
+          "dataset-size": 300000,
+          "batch-size": 500,
+          "epochs": 10,
+          "hidden-dim": 128,
+          "num-steps": 50
+        }
+      },
+      "status": "trained",
+      "register_name": "awgn7_diffusion_residual_seed7",
+      "runner_result": {
+        "elapsed_seconds": 16.844985216994246,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233056/implant_diffusion_residual.log"
+      }
+    }
+  },
+  "ae_runs": {}
+}

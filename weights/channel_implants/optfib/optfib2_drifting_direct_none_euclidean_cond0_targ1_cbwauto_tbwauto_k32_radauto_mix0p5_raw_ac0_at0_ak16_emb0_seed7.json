@@ -1,0 +1,1003 @@
+{
+  "family": "drifting_direct",
+  "history": [
+    {
+      "epoch": 1.0,
+      "loss": 0.0036202519553713104,
+      "drift_norm": 0.07503012861458921,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 2.0,
+      "loss": 0.0033607080693977705,
+      "drift_norm": 0.07243928366496447,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 3.0,
+      "loss": 0.0029337820126166497,
+      "drift_norm": 0.06802165231257423,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 4.0,
+      "loss": 0.0032401263137769557,
+      "drift_norm": 0.07101131987411516,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 5.0,
+      "loss": 0.0030115707308600685,
+      "drift_norm": 0.06906352732044489,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 6.0,
+      "loss": 0.003294232685301483,
+      "drift_norm": 0.071474601716477,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 7.0,
+      "loss": 0.0030457273141243383,
+      "drift_norm": 0.06896119057788885,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 8.0,
+      "loss": 0.0031298153119805583,
+      "drift_norm": 0.06985792095865101,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 9.0,
+      "loss": 0.00299526096706846,
+      "drift_norm": 0.06875856029213034,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 10.0,
+      "loss": 0.0032379922804249045,
+      "drift_norm": 0.07134239450605656,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 11.0,
+      "loss": 0.0031719018795877954,
+      "drift_norm": 0.07026330110817232,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 12.0,
+      "loss": 0.00322612686585929,
+      "drift_norm": 0.0707183173148807,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 13.0,
+      "loss": 0.0030148645598767564,
+      "drift_norm": 0.06816041977828172,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 14.0,
+      "loss": 0.002942025144503026,
+      "drift_norm": 0.06809842005473762,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 15.0,
+      "loss": 0.0029492744995027213,
+      "drift_norm": 0.0677991524774187,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 16.0,
+      "loss": 0.003075649230347119,
+      "drift_norm": 0.06927963463850192,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 17.0,
+      "loss": 0.0031189090131543405,
+      "drift_norm": 0.06938639423673267,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 18.0,
+      "loss": 0.0031742282698648894,
+      "drift_norm": 0.07050495954554642,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 19.0,
+      "loss": 0.003220606148762449,
+      "drift_norm": 0.07068393877850458,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 20.0,
+      "loss": 0.0030272813850257675,
+      "drift_norm": 0.06846446953809252,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 21.0,
+      "loss": 0.003056051185953156,
+      "drift_norm": 0.06912888335572626,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 22.0,
+      "loss": 0.0030326613529441074,
+      "drift_norm": 0.06861217454895886,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 23.0,
+      "loss": 0.003258794053187399,
+      "drift_norm": 0.07184440197276885,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 24.0,
+      "loss": 0.00309952744528625,
+      "drift_norm": 0.06963271179169722,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 25.0,
+      "loss": 0.002993998289313493,
+      "drift_norm": 0.0683086272583378,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 26.0,
+      "loss": 0.0030470880645368193,
+      "drift_norm": 0.06864567783124008,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 27.0,
+      "loss": 0.0029824151060148223,
+      "drift_norm": 0.06816058518816383,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 28.0,
+      "loss": 0.0028941615072880403,
+      "drift_norm": 0.06649652789521696,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 29.0,
+      "loss": 0.002973891874009353,
+      "drift_norm": 0.06810350274133144,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 30.0,
+      "loss": 0.0032606003033948837,
+      "drift_norm": 0.07134442044256745,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 31.0,
+      "loss": 0.0030361173359263784,
+      "drift_norm": 0.0689644647615965,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 32.0,
+      "loss": 0.002974481189116095,
+      "drift_norm": 0.06794780990388562,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 33.0,
+      "loss": 0.0032204967071107547,
+      "drift_norm": 0.07039266374636022,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 34.0,
+      "loss": 0.002967226643279376,
+      "drift_norm": 0.06802661203598101,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 35.0,
+      "loss": 0.0028686228854959764,
+      "drift_norm": 0.06664520442651095,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 36.0,
+      "loss": 0.003066736236740096,
+      "drift_norm": 0.06880265762616242,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 37.0,
+      "loss": 0.0028156830198817874,
+      "drift_norm": 0.06640954229205134,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 38.0,
+      "loss": 0.003073718461387635,
+      "drift_norm": 0.0690280544800436,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 39.0,
+      "loss": 0.003108044597806978,
+      "drift_norm": 0.06941076542915134,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 40.0,
+      "loss": 0.003032345781873581,
+      "drift_norm": 0.0686362648554426,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 41.0,
+      "loss": 0.002975451770436147,
+      "drift_norm": 0.06818497748632277,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 42.0,
+      "loss": 0.003078116039541286,
+      "drift_norm": 0.06919799536568313,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 43.0,
+      "loss": 0.0029869920814210396,
+      "drift_norm": 0.06837543212322346,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 44.0,
+      "loss": 0.002987985105817258,
+      "drift_norm": 0.06804464307832993,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 45.0,
+      "loss": 0.0030813804921522654,
+      "drift_norm": 0.0690190224469649,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 46.0,
+      "loss": 0.0029594653380701774,
+      "drift_norm": 0.06825389767402573,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 47.0,
+      "loss": 0.0029936027633158946,
+      "drift_norm": 0.06866767163684039,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 48.0,
+      "loss": 0.0029013003770948574,
+      "drift_norm": 0.06697887215292901,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 49.0,
+      "loss": 0.0031879336350236274,
+      "drift_norm": 0.07071193341172138,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 50.0,
+      "loss": 0.0028986731371202635,
+      "drift_norm": 0.06768883512364923,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 51.0,
+      "loss": 0.0029927117474853543,
+      "drift_norm": 0.06864292398349417,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 52.0,
+      "loss": 0.0028635090378008993,
+      "drift_norm": 0.06667856841408505,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 53.0,
+      "loss": 0.002896643961690773,
+      "drift_norm": 0.06677188684229354,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 54.0,
+      "loss": 0.002890631151217737,
+      "drift_norm": 0.06697582960948857,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 55.0,
+      "loss": 0.0028849892488749516,
+      "drift_norm": 0.0668386780440731,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 56.0,
+      "loss": 0.002840353565335964,
+      "drift_norm": 0.06696098860283303,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 57.0,
+      "loss": 0.00284074928946062,
+      "drift_norm": 0.06703829515324873,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 58.0,
+      "loss": 0.0028780331840514563,
+      "drift_norm": 0.06700603108624244,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 59.0,
+      "loss": 0.0028898752340272152,
+      "drift_norm": 0.06667847053144674,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 60.0,
+      "loss": 0.0028043914478134728,
+      "drift_norm": 0.0655983906801879,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 61.0,
+      "loss": 0.003028313846813289,
+      "drift_norm": 0.0686452373124837,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 62.0,
+      "loss": 0.002922880439090331,
+      "drift_norm": 0.06792114572059173,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 63.0,
+      "loss": 0.002956597751040058,
+      "drift_norm": 0.06826557269249964,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 64.0,
+      "loss": 0.0028975627388755087,
+      "drift_norm": 0.06676492589897771,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 65.0,
+      "loss": 0.002894476824693355,
+      "drift_norm": 0.0674830772707385,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 66.0,
+      "loss": 0.0028196663122724286,
+      "drift_norm": 0.06643653394330179,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 67.0,
+      "loss": 0.003036622703169773,
+      "drift_norm": 0.06936351517723943,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 68.0,
+      "loss": 0.00276671347717067,
+      "drift_norm": 0.065398434828649,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 69.0,
+      "loss": 0.0028270598401239225,
+      "drift_norm": 0.06669427879447111,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 70.0,
+      "loss": 0.003122085770647222,
+      "drift_norm": 0.0697821222576265,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 71.0,
+      "loss": 0.002869678260987476,
+      "drift_norm": 0.06735852748511595,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 72.0,
+      "loss": 0.0030964802430849085,
+      "drift_norm": 0.06958745046178635,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 73.0,
+      "loss": 0.0028381426938113743,
+      "drift_norm": 0.0665668477796959,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 74.0,
+      "loss": 0.00280379156157221,
+      "drift_norm": 0.06605927701785194,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 75.0,
+      "loss": 0.002993535567419939,
+      "drift_norm": 0.06821755738769986,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 76.0,
+      "loss": 0.002981803872855579,
+      "drift_norm": 0.06796449743077769,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 77.0,
+      "loss": 0.0028786674603547085,
+      "drift_norm": 0.06756725910027533,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 78.0,
+      "loss": 0.0031151646368643396,
+      "drift_norm": 0.06953047910298352,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 79.0,
+      "loss": 0.0029665135645930204,
+      "drift_norm": 0.0684191831053829,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 80.0,
+      "loss": 0.003084874146218839,
+      "drift_norm": 0.06965562516232196,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 81.0,
+      "loss": 0.0027881465676470474,
+      "drift_norm": 0.06578253128219383,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 82.0,
+      "loss": 0.002948794483396689,
+      "drift_norm": 0.06788278812281914,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 83.0,
+      "loss": 0.003059978258422355,
+      "drift_norm": 0.06933306737678958,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 84.0,
+      "loss": 0.002749350597339352,
+      "drift_norm": 0.06532158090259384,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 85.0,
+      "loss": 0.002862746365641128,
+      "drift_norm": 0.06660931261650481,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 86.0,
+      "loss": 0.0028985050124740635,
+      "drift_norm": 0.06758966652275962,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 87.0,
+      "loss": 0.002989289951359745,
+      "drift_norm": 0.06827776211889225,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 88.0,
+      "loss": 0.0030566369390316586,
+      "drift_norm": 0.06861661658097859,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 89.0,
+      "loss": 0.0029643114509002176,
+      "drift_norm": 0.0678237560014447,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 90.0,
+      "loss": 0.0029904896725380776,
+      "drift_norm": 0.06803382490999971,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 91.0,
+      "loss": 0.002887738183909175,
+      "drift_norm": 0.06707456775181275,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 92.0,
+      "loss": 0.003137943006962746,
+      "drift_norm": 0.07014797207718212,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 93.0,
+      "loss": 0.003061700714629405,
+      "drift_norm": 0.06899579825776124,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 94.0,
+      "loss": 0.0029308686505505692,
+      "drift_norm": 0.06814336547717045,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 95.0,
+      "loss": 0.0029022119289805236,
+      "drift_norm": 0.0672155216196393,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 96.0,
+      "loss": 0.002890837823005819,
+      "drift_norm": 0.06689650244508638,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 97.0,
+      "loss": 0.0031879912724530916,
+      "drift_norm": 0.07028325511708398,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 98.0,
+      "loss": 0.002935433635228304,
+      "drift_norm": 0.06785282101196081,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 99.0,
+      "loss": 0.0029602939694676447,
+      "drift_norm": 0.06795869116852563,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 100.0,
+      "loss": 0.0029536983984206253,
+      "drift_norm": 0.06830741729549174,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 101.0,
+      "loss": 0.0027944758580769127,
+      "drift_norm": 0.06657098566814494,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 102.0,
+      "loss": 0.002997828665994618,
+      "drift_norm": 0.06873915645169927,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 103.0,
+      "loss": 0.0028209092253727724,
+      "drift_norm": 0.06678191606438506,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 104.0,
+      "loss": 0.0027755432021299557,
+      "drift_norm": 0.06577349627396861,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 105.0,
+      "loss": 0.0030326878728163063,
+      "drift_norm": 0.06907835415065441,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 106.0,
+      "loss": 0.0030246712623746928,
+      "drift_norm": 0.06869853724989367,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 107.0,
+      "loss": 0.0030506899207721166,
+      "drift_norm": 0.06901006593524697,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 108.0,
+      "loss": 0.0030465873858286307,
+      "drift_norm": 0.06920093939712735,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 109.0,
+      "loss": 0.003052087257269658,
+      "drift_norm": 0.06937631470256139,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 110.0,
+      "loss": 0.0028116321278974983,
+      "drift_norm": 0.06684409828901088,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 111.0,
+      "loss": 0.003026661329482342,
+      "drift_norm": 0.06889746749436693,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 112.0,
+      "loss": 0.003084112661977103,
+      "drift_norm": 0.06935614084430776,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 113.0,
+      "loss": 0.0028287057425664284,
+      "drift_norm": 0.06643751398548993,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 114.0,
+      "loss": 0.002902080187363051,
+      "drift_norm": 0.06715335686446355,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 115.0,
+      "loss": 0.002813357808297411,
+      "drift_norm": 0.06650724128498967,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 116.0,
+      "loss": 0.002812523460157697,
+      "drift_norm": 0.06610973167738562,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 117.0,
+      "loss": 0.002840562965496405,
+      "drift_norm": 0.06608725493017317,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 118.0,
+      "loss": 0.003021640493643769,
+      "drift_norm": 0.06803087688626486,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 119.0,
+      "loss": 0.0030562396471616304,
+      "drift_norm": 0.06965368807970614,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 120.0,
+      "loss": 0.0028807647040811307,
+      "drift_norm": 0.06693203940370944,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 121.0,
+      "loss": 0.0027754624811662265,
+      "drift_norm": 0.06541822034128188,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 122.0,
+      "loss": 0.0029423066228449362,
+      "drift_norm": 0.06743472359705806,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 123.0,
+      "loss": 0.0029179559736580147,
+      "drift_norm": 0.06746188099194102,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 124.0,
+      "loss": 0.002987804586192356,
+      "drift_norm": 0.0680638772654808,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 125.0,
+      "loss": 0.00291829812109495,
+      "drift_norm": 0.06742341023211848,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 126.0,
+      "loss": 0.0029394923941555187,
+      "drift_norm": 0.06746681994176867,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 127.0,
+      "loss": 0.0030124432195820124,
+      "drift_norm": 0.06885705671810351,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 128.0,
+      "loss": 0.0029466445008723887,
+      "drift_norm": 0.06756890983775309,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 129.0,
+      "loss": 0.002749345072379428,
+      "drift_norm": 0.0655370616026655,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 130.0,
+      "loss": 0.0028606254562293337,
+      "drift_norm": 0.0664514311137943,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 131.0,
+      "loss": 0.003110565813172866,
+      "drift_norm": 0.0697032094840914,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 132.0,
+      "loss": 0.0029217425059152088,
+      "drift_norm": 0.06784800139061929,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 133.0,
+      "loss": 0.0028215161009535507,
+      "drift_norm": 0.0658189277164638,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 134.0,
+      "loss": 0.0028739664888983068,
+      "drift_norm": 0.06721439221301737,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 135.0,
+      "loss": 0.002889428950104991,
+      "drift_norm": 0.06681306517298362,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 136.0,
+      "loss": 0.0029777374740176652,
+      "drift_norm": 0.06801843402729252,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 137.0,
+      "loss": 0.0030516093906876153,
+      "drift_norm": 0.06937324928927137,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 138.0,
+      "loss": 0.0027694472783930924,
+      "drift_norm": 0.0654735718933236,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 139.0,
+      "loss": 0.002695379740550221,
+      "drift_norm": 0.06463510215396868,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 140.0,
+      "loss": 0.0028811629158134794,
+      "drift_norm": 0.06730416114203658,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 141.0,
+      "loss": 0.003027826033984772,
+      "drift_norm": 0.06921450814562802,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 142.0,
+      "loss": 0.00286578489814165,
+      "drift_norm": 0.06674478178265356,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 143.0,
+      "loss": 0.0028477585357979396,
+      "drift_norm": 0.06707424498496914,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 144.0,
+      "loss": 0.0028276500048663358,
+      "drift_norm": 0.06663955127305443,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 145.0,
+      "loss": 0.0029463544465852154,
+      "drift_norm": 0.06841773094463165,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 146.0,
+      "loss": 0.00305370035501429,
+      "drift_norm": 0.06970912636235459,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 147.0,
+      "loss": 0.0029396821021167134,
+      "drift_norm": 0.06778420725958136,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 148.0,
+      "loss": 0.0027997581313336695,
+      "drift_norm": 0.06634877928860053,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 149.0,
+      "loss": 0.0029379769456411913,
+      "drift_norm": 0.0678526356358577,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 150.0,
+      "loss": 0.0029113289652840844,
+      "drift_norm": 0.06761758035818058,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 151.0,
+      "loss": 0.0031297028709581253,
+      "drift_norm": 0.0695124307103811,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 152.0,
+      "loss": 0.0030336026815993952,
+      "drift_norm": 0.06904475471329058,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 153.0,
+      "loss": 0.0030019428212383964,
+      "drift_norm": 0.0684845290836519,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 154.0,
+      "loss": 0.0028712885251066904,
+      "drift_norm": 0.06731269040237159,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 155.0,
+      "loss": 0.0029160474635042417,
+      "drift_norm": 0.06716664398642123,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 156.0,
+      "loss": 0.0029113278838979882,
+      "drift_norm": 0.0674663776445994,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 157.0,
+      "loss": 0.0027190213429121937,
+      "drift_norm": 0.06537530890033412,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 158.0,
+      "loss": 0.0029120683805779046,
+      "drift_norm": 0.06740667155718132,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 159.0,
+      "loss": 0.002832811693100194,
+      "drift_norm": 0.06671463683050495,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 160.0,
+      "loss": 0.002772274644922826,
+      "drift_norm": 0.06633983472355803,
+      "positive_queue_size": 0.0
+    }
+  ],
+  "config": {
+    "n": 2,
+    "noise_std": 0.5623413251903491,
+    "dataset_size": 300000,
+    "batch_size": 512,
+    "epochs": 160,
+    "learning_rate": 0.001,
+    "latent_dim": 16,
+    "hidden_dim": 128,
+    "drift_scale": 1.0,
+    "bandwidth": null,
+    "min_bandwidth": 0.2,
+    "max_drift_norm": 2.0,
+    "repulsive_weight": 1.0,
+    "eval_size": 20000,
+    "swd_projections": 256,
+    "is_residual": false,
+    "use_conditional_kernel": false,
+    "conditioning_mode": "none",
+    "condition_metric": "euclidean",
+    "condition_kernel_scale": 0.0,
+    "target_kernel_scale": 1.0,
+    "condition_bandwidth": null,
+    "target_bandwidth": null,
+    "local_condition_k": 32,
+    "condition_radius": null,
+    "mixture_alpha": 0.5,
+    "target_kernel_mode": "raw",
+    "residual_target_scale": 1.0,
+    "adaptive_condition_bandwidth": false,
+    "adaptive_target_bandwidth": false,
+    "adaptive_bandwidth_k": 16,
+    "condition_embedding_dim": 0,
+    "condition_embedding_hidden_dim": 64,
+    "positive_queue_size": 0,
+    "positive_reference_size": 0
+  },
+  "train_seconds": 1190.2822792969964
+}

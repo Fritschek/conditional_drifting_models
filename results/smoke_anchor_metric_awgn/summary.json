@@ -1,0 +1,49 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 7,
+    "hidden_dim": 16,
+    "batch_size": 128,
+    "dataset_size": 2000,
+    "epochs": 1,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 512
+  },
+  "train_implant": "paper_wgan",
+  "eval_implant": "analytic_awgn",
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 2.760499283671379,
+      "train_ser": 0.9052734375,
+      "eval_ser": 0.904296875
+    }
+  ],
+  "train_seconds": 0.6447125309932744,
+  "final_eval": {
+    "loss": 2.727371573448181,
+    "ser": 0.876953125
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.05306217074394226,
+    "anchor_y_swd": 0.1317095011472702,
+    "anchor_residual_swd": 0.1317095011472702,
+    "y_swd": 0.0768265575170517,
+    "residual_swd": 0.07534319907426834
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.03622688353061676,
+    "anchor_y_swd": 0.11296311765909195,
+    "anchor_residual_swd": 0.11296311765909195,
+    "y_swd": 0.051748666912317276,
+    "residual_swd": 0.04419361799955368
+  },
+  "seed": 7,
+  "device": "cpu",
+  "channel": "AWGN",
+  "train_implant_source": "awgn7_wgan_seed7",
+  "eval_implant_source": null
+}

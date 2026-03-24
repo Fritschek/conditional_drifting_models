@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\centering
+\caption{Decoder-agnostic conditional moment metrics for the symbolic benchmark on AWGN and SSPA. Reported are final analytic evaluation SER and excess conditional moment metrics over the analytic-vs-analytic floor. Lower is better.}
+\label{tab:symbolic-conditional-moments}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccccc}
+\toprule
+Method & AWGN SER & AWGN MeanEx & AWGN CovEx & AWGN GW2Ex & SSPA SER & SSPA MeanEx & SSPA CovEx & SSPA GW2Ex \\
+\midrule
+Analytic & 0.00565 & 0.01245 & 0.01723 & 0.01973 & 0.00009 & 0.03153 & 0.00000 & 0.00975 \\
+WGAN & 0.00620 & 0.03837 & 0.02099 & 0.04023 & 0.00039 & 0.17277 & 0.12807 & 0.27921 \\
+Residual drifting (best) & 0.00652 & 0.00000 & 0.00000 & 0.00000 & 0.00335 & 0.99712 & 0.44087 & 1.01324 \\
+Direct drifting (best) & 0.02836 & 0.18622 & 0.12978 & 0.28776 & 0.01249 & 0.77339 & 0.16546 & 0.89194 \\
+Diffusion residual & 0.02153 & 0.41608 & 4.76432 & 1.85823 & 0.23518 & 2.44196 & 5.38568 & 3.33928 \\
+Diffusion direct & 0.69884 & 0.00000 & 0.02369 & 0.00357 & 0.61046 & 0.03016 & 0.02378 & 0.04735 \\
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{0.4em}
+\parbox{\textwidth}{\footnotesize
+For AWGN, the best residual drifting row uses \texttt{product+whitened+adaptive+emb8}, and the best direct drifting row uses \texttt{product+raw\_plus\_residual}. For SSPA, the best residual drifting row uses \texttt{joint cond=0.25}, and the best direct drifting row uses \texttt{joint cond=0.5}. MeanEx denotes excess per-anchor conditional mean error, CovEx the excess conditional covariance Frobenius error, and GW2Ex the excess Gaussian conditional Wasserstein-2 distance, each relative to the analytic-vs-analytic reference floor.
+}
+\end{table*}

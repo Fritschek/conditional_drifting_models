@@ -1,0 +1,78 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{paper2309}
+\citation{kimicc2024}
+\citation{lee2024highdimchannels}
+\citation{gong2025dtoc}
+\citation{zhou2025channelestimation}
+\citation{fesl2024mimoestimation,chen2025mimovi}
+\citation{zilberstein2024joint}
+\citation{liu2025mimoofdm}
+\citation{ddim,song2023consistency,yin2024onestep}
+\citation{drifting}
+\citation{geometryofnoise}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\citation{drifting}
+\citation{drifting}
+\citation{drifting}
+\citation{drifting}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Problem Formulation and Drifting Background}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}What drifting changes conceptually}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Conditional channel simulation}{2}{subsection.2.2}\protected@file@percent }
+\citation{li2018e2efiber}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces \textbf  {Two target parameterizations for conditional drifting.}}}{3}{table.1}\protected@file@percent }
+\newlabel{tab:drifting_modes}{{I}{3}{\textbf {Two target parameterizations for conditional drifting.}}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Conditional drifting model}{3}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Experimental Setup}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Channel models}{3}{subsection.3.1}\protected@file@percent }
+\citation{kimicc2024}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Toy conditional particle simulation in residual space. Two different channel inputs induce two different target residual distributions. Starting from mismatched generated particle clouds, the middle panel applies one attraction--repulsion drift update of the form \(\tilde  e=\mathrm  {stopgrad}(\hat  e+\eta V(\hat  e))\), and the last panel shows the particle clouds after repeated updates. This figure is an actual toy simulation of the drift field, not a hand-drawn schematic.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:toy}{{1}{4}{Toy conditional particle simulation in residual space. Two different channel inputs induce two different target residual distributions. Starting from mismatched generated particle clouds, the middle panel applies one attraction--repulsion drift update of the form \(\tilde e=\mathrm {stopgrad}(\hat e+\eta V(\hat e))\), and the last panel shows the particle clouds after repeated updates. This figure is an actual toy simulation of the drift field, not a hand-drawn schematic}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples. The middle panel shows samples from a randomly initialized tiny conditional MLP \(g_\theta (x,z)\). The right panel shows the same MLP after training with the drift objective, where the generated samples move close to the correct condition-dependent residual clouds.}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:toymlp}{{2}{4}{Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples. The middle panel shows samples from a randomly initialized tiny conditional MLP \(g_\theta (x,z)\). The right panel shows the same MLP after training with the drift objective, where the generated samples move close to the correct condition-dependent residual clouds}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Training protocol}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0a}Channel settings.}{4}{paragraph.3.2.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0b}Data and optimization settings.}{4}{paragraph.3.2.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0c}Model settings.}{4}{paragraph.3.2.0.3}\protected@file@percent }
+\citation{paper2309,kimicc2024}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces \textbf  {Model parameter counts in the benchmark setup.} Counts refer to inference-time networks. DDPM and DDIM share the same denoiser weights. WGAN rows report generator-side parameters.}}{5}{table.2}\protected@file@percent }
+\newlabel{tab:model-size}{{II}{5}{\textbf {Model parameter counts in the benchmark setup.} Counts refer to inference-time networks. DDPM and DDIM share the same denoiser weights. WGAN rows report generator-side parameters}{table.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0d}Seeding and reporting.}{5}{paragraph.3.2.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Evaluation metric}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Benchmark Results}{5}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Main SWD benchmark across channels}{5}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Direct-space check for residual drifting and WGAN}{5}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Journal Extension Directions}{5}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}End-to-end learned communication with differentiable channel implants}{5}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Broader channel families and higher-dimensional settings}{5}{subsection.5.2}\protected@file@percent }
+\bibstyle{IEEEtran}
+\bibdata{references}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces \textbf  {Ten-seed SWD benchmark across all channels.} Lower is better. }}{6}{table.3}\protected@file@percent }
+\newlabel{tab:benchmark-all-channels}{{III}{6}{\textbf {Ten-seed SWD benchmark across all channels.} Lower is better}{table.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces \textbf  {Projected training and inference timing.} Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample.}}{6}{table.4}\protected@file@percent }
+\newlabel{tab:timing-cuda}{{IV}{6}{\textbf {Projected training and inference timing.} Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample}{table.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces \textbf  {Direct- and residual-space SWD for residual drifting and WGAN.} Values are ten-seed mean and standard deviation; lower is better.}}{6}{table.5}\protected@file@percent }
+\newlabel{tab:direct-vs-residual-metric}{{V}{6}{\textbf {Direct- and residual-space SWD for residual drifting and WGAN.} Values are ten-seed mean and standard deviation; lower is better}{table.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Parameterization sensitivity and metric-space dependence}{6}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Latency-quality tradeoffs beyond iterative diffusion}{6}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Theory, limitations, and practical design guidelines}{6}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{6}{section.6}\protected@file@percent }
+\bibcite{paper2309}{1}
+\bibcite{kimicc2024}{2}
+\bibcite{lee2024highdimchannels}{3}
+\bibcite{gong2025dtoc}{4}
+\bibcite{zhou2025channelestimation}{5}
+\bibcite{fesl2024mimoestimation}{6}
+\bibcite{chen2025mimovi}{7}
+\bibcite{zilberstein2024joint}{8}
+\bibcite{liu2025mimoofdm}{9}
+\bibcite{ddim}{10}
+\bibcite{song2023consistency}{11}
+\bibcite{yin2024onestep}{12}
+\bibcite{drifting}{13}
+\bibcite{geometryofnoise}{14}
+\bibcite{li2018e2efiber}{15}
+\@writefile{toc}{\contentsline {section}{References}{7}{section*.1}\protected@file@percent }
+\gdef \@abspage@last{7}

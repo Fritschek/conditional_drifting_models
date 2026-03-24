@@ -1,0 +1,12 @@
+epoch 1/8: loss=2.728583e+00, train_ser=9.082400e-01, eval_ser=0.9067000412940979
+epoch 2/8: loss=2.705745e+00, train_ser=9.027800e-01, eval_ser=0.8770600402355194
+epoch 3/8: loss=2.703093e+00, train_ser=9.020100e-01, eval_ser=0.8771200424432755
+epoch 4/8: loss=2.701082e+00, train_ser=9.018200e-01, eval_ser=0.8731600403785705
+epoch 5/8: loss=2.700230e+00, train_ser=9.009000e-01, eval_ser=0.8737200421094894
+epoch 6/8: loss=2.700483e+00, train_ser=9.016567e-01, eval_ser=0.8754400438070298
+epoch 7/8: loss=2.700245e+00, train_ser=9.016400e-01, eval_ser=0.8727000403404236
+epoch 8/8: loss=2.698646e+00, train_ser=9.013434e-01, eval_ser=0.8736200404167175
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/wgan_to_analytic",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/wgan_to_analytic/summary.json"
+}

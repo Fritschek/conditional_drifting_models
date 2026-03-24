@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Projected training and inference timing.} Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample.}
+\label{tab:timing-cuda}
+\tablestyle{3pt}{1.02}
+\tablefontsize
+\begin{tabular}{@{}lcccccccccccc@{}}
+\toprule
+Method & \multicolumn{3}{c}{AWGN} & \multicolumn{3}{c}{Rayleigh} & \multicolumn{3}{c}{SSPA} & \multicolumn{3}{c}{OptFib} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13}
+ & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{13}{l}{\textit{One-shot generators}} \\
+\headspace Drifting (res.) & 0.733 & 0.405 us & 0.734 & 0.730 & 0.407 us & 0.731 & 3.197 & 0.424 us & 3.198 & 0.054 & 0.410 us & 0.054 \\
+\headspace Drifting (dir.) & 0.724 & \textbf{0.381 us} & 0.725 & 0.725 & \textbf{0.382 us} & 0.726 & 3.183 & \textbf{0.396 us} & 3.184 & 0.049 & \textbf{0.382 us} & 0.049 \\
+\headspace Paper WGAN & 0.206 & 0.393 us & 0.207 & 0.202 & 0.386 us & 0.203 & 1.352 & 0.408 us & 1.354 & 0.236 & \textbf{0.382 us} & 0.236 \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{13}{l}{\textit{Diffusion samplers}} \\
+\headspace DDPM & \textbf{0.049} & 0.132 ms & 0.416 & \textbf{0.050} & 0.134 ms & 0.422 & \textbf{0.333} & 0.139 ms & 0.719 & \textbf{0.048} & 0.112 ms & 0.051 \\
+\headspace DDIM-100 & \textbf{0.049} & 0.114 ms & 0.366 & \textbf{0.050} & 0.115 ms & 0.371 & \textbf{0.333} & 0.120 ms & 0.666 & \textbf{0.048} & 0.107 ms & 0.051 \\
+\headspace DDIM-50 & \textbf{0.049} & 0.057 ms & 0.208 & \textbf{0.050} & 0.058 ms & 0.211 & \textbf{0.333} & 0.060 ms & 0.500 & \textbf{0.048} & 0.054 ms & 0.050 \\
+\headspace DDIM-20 & \textbf{0.049} & 0.023 ms & 0.113 & \textbf{0.050} & 0.023 ms & 0.115 & \textbf{0.333} & 0.024 ms & 0.400 & \textbf{0.048} & 0.022 ms & 0.049 \\
+\headspace DDIM-10 & \textbf{0.049} & 0.012 ms & \textbf{0.081} & \textbf{0.050} & 0.012 ms & \textbf{0.083} & \textbf{0.333} & 0.012 ms & \textbf{0.367} & \textbf{0.048} & 0.011 ms & \textbf{0.048} \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,14 @@
+epoch 1/10: loss=2.369318e-01, train_ser=6.162700e-02, eval_ser=0.0107700004207436
+epoch 2/10: loss=3.615796e-02, train_ser=1.261000e-02, eval_ser=0.008450000347802416
+epoch 3/10: loss=2.987502e-02, train_ser=1.059400e-02, eval_ser=0.007720000294502824
+epoch 4/10: loss=2.716681e-02, train_ser=9.597000e-03, eval_ser=0.008970000378321857
+epoch 5/10: loss=2.467502e-02, train_ser=8.786000e-03, eval_ser=0.006770000264514238
+epoch 6/10: loss=2.193516e-02, train_ser=7.744000e-03, eval_ser=0.0035400001332163812
+epoch 7/10: loss=1.953365e-02, train_ser=6.931000e-03, eval_ser=0.003020000122487545
+epoch 8/10: loss=1.842234e-02, train_ser=6.508000e-03, eval_ser=0.0038600001391023396
+epoch 9/10: loss=1.716838e-02, train_ser=6.051000e-03, eval_ser=0.0034900001296773553
+epoch 10/10: loss=1.581085e-02, train_ser=5.657000e-03, eval_ser=0.003150000120513141
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_residual_joint_cond0p25_to_analytic",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_residual_joint_cond0p25_to_analytic/summary.json"
+}

@@ -190,6 +190,9 @@ In the experiments, \(\alpha = 1.0\), generator updates are delayed relative to 
 
 \subsection{Channel models}
 We benchmark four channels.
+All channels are implemented on real-valued vectors.
+For AWGN and Rayleigh, these vectors are treated directly as real-valued channel inputs and outputs.
+For SSPA and OptFib, the real-valued representation is interpreted in paired I/Q coordinates.
 
 \textbf{AWGN:}
 \begin{equation}
@@ -197,12 +200,15 @@ y = x + n,
 \qquad
 n \sim \mathcal{N}(0, \sigma^2 I).
 \end{equation}
+In the final full-budget benchmark, AWGN uses a real-valued channel dimension rather than a paired-I/Q complex representation.
 
 \textbf{Rayleigh:}
 the transmitted symbol is multiplied elementwise by a Rayleigh fading coefficient and then corrupted by additive Gaussian noise.
+In the benchmark implementation, this is likewise a real-valued vector channel.
 
 \textbf{SSPA:}
 the input amplitude is passed through a smooth solid-state power amplifier nonlinearity before additive noise is applied.
+Here the real-valued signal is interpreted as paired I/Q components.
 
 \textbf{OptFib:}
 we include a simplified memoryless optical-fiber proxy channel adapted from \texttt{DM\_OptFib}.

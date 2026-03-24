@@ -1,0 +1,12 @@
+epoch 1/8: loss=2.432410e-01, train_ser=5.534000e-02, eval_ser=0.608020026087761
+epoch 2/8: loss=3.804452e-04, train_ser=0.000000e+00, eval_ser=0.5962800282239914
+epoch 3/8: loss=1.228910e-04, train_ser=0.000000e+00, eval_ser=0.5925000298023224
+epoch 4/8: loss=5.834884e-05, train_ser=0.000000e+00, eval_ser=0.5854200303554535
+epoch 5/8: loss=3.236849e-05, train_ser=0.000000e+00, eval_ser=0.5860400313138961
+epoch 6/8: loss=1.959428e-05, train_ser=0.000000e+00, eval_ser=0.5814200282096863
+epoch 7/8: loss=1.245051e-05, train_ser=0.000000e+00, eval_ser=0.5793200296163559
+epoch 8/8: loss=8.261264e-06, train_ser=0.000000e+00, eval_ser=0.5791600263118744
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_local_cond0p25_k16_to_analytic",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_local_cond0p25_k16_to_analytic/summary.json"
+}

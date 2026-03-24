@@ -1,0 +1,51 @@
+{
+  "family": "drifting_residual",
+  "history": [
+    {
+      "epoch": 1.0,
+      "loss": 0.0029204815509729087,
+      "drift_norm": 0.13885421864688396
+    },
+    {
+      "epoch": 2.0,
+      "loss": 0.0026234914548695087,
+      "drift_norm": 0.13154594413936138
+    }
+  ],
+  "config": {
+    "n": 7,
+    "noise_std": 0.5260221433216792,
+    "dataset_size": 1024,
+    "batch_size": 128,
+    "epochs": 2,
+    "learning_rate": 0.001,
+    "latent_dim": 16,
+    "hidden_dim": 128,
+    "drift_scale": 1.0,
+    "bandwidth": null,
+    "min_bandwidth": 0.2,
+    "max_drift_norm": 2.0,
+    "repulsive_weight": 1.0,
+    "eval_size": 20000,
+    "swd_projections": 256,
+    "is_residual": true,
+    "use_conditional_kernel": false,
+    "conditioning_mode": "mixture",
+    "condition_metric": "whitened",
+    "condition_kernel_scale": 0.25,
+    "target_kernel_scale": 1.0,
+    "condition_bandwidth": null,
+    "target_bandwidth": null,
+    "local_condition_k": 32,
+    "condition_radius": null,
+    "mixture_alpha": 0.3,
+    "target_kernel_mode": "raw",
+    "residual_target_scale": 1.0,
+    "adaptive_condition_bandwidth": true,
+    "adaptive_target_bandwidth": true,
+    "adaptive_bandwidth_k": 8,
+    "condition_embedding_dim": 8,
+    "condition_embedding_hidden_dim": 16
+  },
+  "train_seconds": 0.0804782979976153
+}

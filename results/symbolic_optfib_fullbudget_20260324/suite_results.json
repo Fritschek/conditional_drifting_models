@@ -1,0 +1,1313 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cuda",
+    "channel": "OptFib",
+    "code_dim": 2,
+    "rate": 0.5,
+    "ebno_db": 5.0,
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights",
+    "force_retrain": true,
+    "implant_specs": [
+      {
+        "name": "wgan",
+        "family": "paper_wgan",
+        "register_name": "optfib2_wgan_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128
+        }
+      },
+      {
+        "name": "diffusion_direct",
+        "family": "diffusion_direct",
+        "register_name": "optfib2_diffusion_direct_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 30,
+          "hidden-dim": 128,
+          "diffusion-profile": "muah_symbolic",
+          "num-steps": 50
+        }
+      },
+      {
+        "name": "diffusion_residual",
+        "family": "diffusion_residual",
+        "register_name": "optfib2_diffusion_residual_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 30,
+          "hidden-dim": 128,
+          "diffusion-profile": "muah_symbolic",
+          "num-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_none",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_kernel_scale": 0.0
+        }
+      },
+      {
+        "name": "drifting_direct_joint_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_mixture_cond0p5_a0p5",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.5,
+          "mixture_alpha": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_rawplusres",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5,
+          "target_kernel_mode": "raw_plus_residual",
+          "residual_target_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8
+        }
+      },
+      {
+        "name": "drifting_residual_none",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_kernel_scale": 0.0
+        }
+      },
+      {
+        "name": "drifting_residual_joint_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      {
+        "name": "drifting_residual_product_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      {
+        "name": "drifting_residual_softlocal_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "soft_local",
+          "condition_kernel_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      {
+        "name": "drifting_residual_local_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "local",
+          "condition_kernel_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      {
+        "name": "drifting_residual_mixture_cond0p25_a0p3",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.25,
+          "mixture_alpha": 0.3
+        }
+      },
+      {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8,
+          "condition_embedding_dim": 8,
+          "condition_embedding_hidden_dim": 16
+        }
+      }
+    ],
+    "run_specs": [
+      {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_channel",
+        "train_implant_name": null,
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_analytic_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "wgan_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_wgan_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_wgan_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "diffusion_direct_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_diffusion_direct_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_diffusion_direct_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "diffusion_residual_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_diffusion_residual_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_diffusion_residual_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_none_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_direct_none_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_joint_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_direct_joint_cond0p5_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_direct_product_cond0p5_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_mixture_cond0p5_a0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_direct_mixture_cond0p5_a0p5_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_rawplusres_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_direct_product_cond0p5_rawplusres_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_direct_product_whitened_cond0p5_adapt_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_none_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_residual_none_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_joint_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_residual_joint_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_product_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_residual_product_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_softlocal_cond0p25_k16_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_residual_softlocal_cond0p25_k16_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_local_cond0p25_k16_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_residual_local_cond0p25_k16_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_mixture_cond0p25_a0p3_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_residual_mixture_cond0p25_a0p3_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      }
+    ],
+    "global_args": {
+      "implant_dataset_size": 300000,
+      "implant_batch_size": 512,
+      "drifting_epochs": 160,
+      "wgan_epochs": 60,
+      "diffusion_dataset_size": 1000000,
+      "diffusion_batch_size": 500,
+      "diffusion_epochs": 30,
+      "diffusion_hidden_dim": 128,
+      "diffusion_num_steps": 50,
+      "diffusion_ddim_steps": 50,
+      "diffusion_profile": "muah_symbolic",
+      "ae_dataset_size": 1000000,
+      "ae_batch_size": 500,
+      "eval_size": 100000,
+      "ae_epochs": 30,
+      "ae_learning_rate": 0.001,
+      "eval_every": 2
+    }
+  },
+  "implant_runs": {
+    "wgan": {
+      "spec": {
+        "name": "wgan",
+        "family": "paper_wgan",
+        "register_name": "optfib2_wgan_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_wgan_seed7",
+      "runner_result": {
+        "elapsed_seconds": 2169.067848972998,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_wgan.log"
+      }
+    },
+    "diffusion_direct": {
+      "spec": {
+        "name": "diffusion_direct",
+        "family": "diffusion_direct",
+        "register_name": "optfib2_diffusion_direct_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 30,
+          "hidden-dim": 128,
+          "diffusion-profile": "muah_symbolic",
+          "num-steps": 50
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_diffusion_direct_seed7",
+      "runner_result": {
+        "elapsed_seconds": 748.5596584929954,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_diffusion_direct.log"
+      }
+    },
+    "diffusion_residual": {
+      "spec": {
+        "name": "diffusion_residual",
+        "family": "diffusion_residual",
+        "register_name": "optfib2_diffusion_residual_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 30,
+          "hidden-dim": 128,
+          "diffusion-profile": "muah_symbolic",
+          "num-steps": 50
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_diffusion_residual_seed7",
+      "runner_result": {
+        "elapsed_seconds": 744.0222780539989,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_diffusion_residual.log"
+      }
+    },
+    "drifting_direct_none": {
+      "spec": {
+        "name": "drifting_direct_none",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_kernel_scale": 0.0
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1192.4468066059999,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_direct_none.log"
+      }
+    },
+    "drifting_direct_joint_cond0p5": {
+      "spec": {
+        "name": "drifting_direct_joint_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1246.6156250830027,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_direct_joint_cond0p5.log"
+      }
+    },
+    "drifting_direct_product_cond0p5": {
+      "spec": {
+        "name": "drifting_direct_product_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1317.0020619450006,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_direct_product_cond0p5.log"
+      }
+    },
+    "drifting_direct_mixture_cond0p5_a0p5": {
+      "spec": {
+        "name": "drifting_direct_mixture_cond0p5_a0p5",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.5,
+          "mixture_alpha": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1327.266166887006,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_direct_mixture_cond0p5_a0p5.log"
+      }
+    },
+    "drifting_direct_product_cond0p5_rawplusres": {
+      "spec": {
+        "name": "drifting_direct_product_cond0p5_rawplusres",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5,
+          "target_kernel_mode": "raw_plus_residual",
+          "residual_target_scale": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1369.4557349949973,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_direct_product_cond0p5_rawplusres.log"
+      }
+    },
+    "drifting_direct_product_whitened_cond0p5_adapt": {
+      "spec": {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt",
+        "family": "drifting_direct",
+        "register_name": "optfib2_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1381.7291792739998,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_direct_product_whitened_cond0p5_adapt.log"
+      }
+    },
+    "drifting_residual_none": {
+      "spec": {
+        "name": "drifting_residual_none",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_kernel_scale": 0.0
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1248.235943779997,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_residual_none.log"
+      }
+    },
+    "drifting_residual_joint_cond0p25": {
+      "spec": {
+        "name": "drifting_residual_joint_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1263.0658864009965,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_residual_joint_cond0p25.log"
+      }
+    },
+    "drifting_residual_product_cond0p25": {
+      "spec": {
+        "name": "drifting_residual_product_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1311.7604014190001,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_residual_product_cond0p25.log"
+      }
+    },
+    "drifting_residual_softlocal_cond0p25_k16": {
+      "spec": {
+        "name": "drifting_residual_softlocal_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "soft_local",
+          "condition_kernel_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1392.6832931630051,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_residual_softlocal_cond0p25_k16.log"
+      }
+    },
+    "drifting_residual_local_cond0p25_k16": {
+      "spec": {
+        "name": "drifting_residual_local_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "local",
+          "condition_kernel_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1466.6964707379957,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_residual_local_cond0p25_k16.log"
+      }
+    },
+    "drifting_residual_mixture_cond0p25_a0p3": {
+      "spec": {
+        "name": "drifting_residual_mixture_cond0p25_a0p3",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.25,
+          "mixture_alpha": 0.3
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1338.9506465380036,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_residual_mixture_cond0p25_a0p3.log"
+      }
+    },
+    "drifting_residual_product_whitened_cond0p25_adapt_emb8": {
+      "spec": {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8",
+        "family": "drifting_residual",
+        "register_name": "optfib2_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "train_args": {
+          "channel": "OptFib",
+          "n": 2,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 300000,
+          "batch-size": 512,
+          "epochs": 160,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8,
+          "condition_embedding_dim": 8,
+          "condition_embedding_hidden_dim": 16
+        }
+      },
+      "status": "trained",
+      "register_name": "optfib2_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+      "runner_result": {
+        "elapsed_seconds": 1490.4329567279929,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/implant_drifting_residual_product_whitened_cond0p25_adapt_emb8.log"
+      }
+    }
+  },
+  "ae_runs": {
+    "analytic_to_analytic": {
+      "spec": {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_channel",
+        "train_implant_name": null,
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_analytic_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 2504.906930665995,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/analytic_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/analytic_to_analytic/summary.json",
+      "final_eval_ser": 0.3242600155621767,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.002808601362630725,
+        "anchor_y_swd": 0.18348050117492676,
+        "anchor_y_floor_swd": 0.1677989959716797,
+        "anchor_y_excess_swd": 0.01568150520324707,
+        "anchor_y_ratio": 1.0934541062801932,
+        "anchor_residual_swd": 0.18348050117492676,
+        "anchor_residual_floor_swd": 0.1677989959716797,
+        "anchor_residual_excess_swd": 0.01568150520324707,
+        "anchor_residual_ratio": 1.0934541062801932,
+        "anchor_mean_l2": 0.23583896458148956,
+        "anchor_mean_l2_floor": 0.21490788459777832,
+        "anchor_mean_l2_excess": 0.020931079983711243,
+        "anchor_mean_l2_ratio": 1.0973955889188796,
+        "anchor_cov_fro": 0.2713889479637146,
+        "anchor_cov_fro_floor": 0.23646719753742218,
+        "anchor_cov_fro_excess": 0.03492175042629242,
+        "anchor_cov_fro_ratio": 1.1476811616578062,
+        "anchor_gaussian_w2": 0.28016161918640137,
+        "anchor_gaussian_w2_floor": 0.24896447360515594,
+        "anchor_gaussian_w2_excess": 0.031197145581245422,
+        "anchor_gaussian_w2_ratio": 1.1253076197157446,
+        "y_swd": 0.0038526335265487432,
+        "residual_swd": 0.0039540850557386875
+      }
+    },
+    "wgan_to_analytic": {
+      "spec": {
+        "name": "wgan_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "optfib2_wgan_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_optfib_wgan_seed7",
+        "benchmark_args": {
+          "channel": "OptFib",
+          "message-dim": 16,
+          "code-dim": 2,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 377.8026492529898,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/wgan_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/wgan_to_analytic/summary.json",
+      "final_eval_ser": 0.16159000754356384,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.0191140566021204,
+        "anchor_y_swd": 0.18383988738059998,
+        "anchor_y_floor_swd": 0.1840912103652954,
+        "anchor_y_excess_swd": 0.0,
+        "anchor_y_ratio": 0.9986347909593472,
+        "anchor_residual_swd": 0.18383988738059998,
+        "anchor_residual_floor_swd": 0.1840912103652954,
+        "anchor_residual_excess_swd": 0.0,
+        "anchor_residual_ratio": 0.9986347909593472,
+        "anchor_mean_l2": 0.21624721586704254,
+        "anchor_mean_l2_floor": 0.25258591771125793,
+        "anchor_mean_l2_excess": 0.0,
+        "anchor_mean_l2_ratio": 0.8561333023887905,
+        "anchor_cov_fro": 0.27355000376701355,
+        "anchor_cov_fro_floor": 0.19290409982204437,
+        "anchor_cov_fro_excess": 0.08064590394496918,
+        "anchor_cov_fro_ratio": 1.4180621563738962,
+        "anchor_gaussian_w2": 0.27320390939712524,
+        "anchor_gaussian_w2_floor": 0.2723958492279053,
+        "anchor_gaussian_w2_excess": 0.0008080601692199707,
+        "anchor_gaussian_w2_ratio": 1.002966492226333,
+        "y_swd": 0.027633417397737503,
+        "residual_swd": 0.029716547578573227
+      }
+    }
+  }
+}

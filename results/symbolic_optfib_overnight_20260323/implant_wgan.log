@@ -1,0 +1,4 @@
+{
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_wgan_seed7.pt",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_wgan_seed7.json"
+}

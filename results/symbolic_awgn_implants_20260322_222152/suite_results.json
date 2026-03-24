@@ -1,0 +1,62 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cuda",
+    "n": 7,
+    "rate": 0.5714285714285714,
+    "ebno_db": 5.0,
+    "dataset_size": 120000,
+    "batch_size": 512,
+    "drifting_epochs": 60,
+    "wgan_epochs": 60,
+    "hidden_dim": 128,
+    "latent_dim": 16,
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights",
+    "specs": [
+      {
+        "family": "drifting_direct",
+        "register_name": "awgn7_drift_direct_seed7"
+      },
+      {
+        "family": "drifting_residual",
+        "register_name": "awgn7_drift_residual_seed7"
+      },
+      {
+        "family": "paper_wgan",
+        "register_name": "awgn7_wgan_seed7"
+      }
+    ]
+  },
+  "runs": {
+    "drifting_direct": {
+      "spec": {
+        "family": "drifting_direct",
+        "register_name": "awgn7_drift_direct_seed7"
+      },
+      "runner_result": {
+        "elapsed_seconds": 42.477791606997926,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_implants_20260322_222152/drifting_direct.log"
+      }
+    },
+    "drifting_residual": {
+      "spec": {
+        "family": "drifting_residual",
+        "register_name": "awgn7_drift_residual_seed7"
+      },
+      "runner_result": {
+        "elapsed_seconds": 40.5598022760023,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_implants_20260322_222152/drifting_residual.log"
+      }
+    },
+    "paper_wgan": {
+      "spec": {
+        "family": "paper_wgan",
+        "register_name": "awgn7_wgan_seed7"
+      },
+      "runner_result": {
+        "elapsed_seconds": 164.8236529349997,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_implants_20260322_222152/paper_wgan.log"
+      }
+    }
+  }
+}

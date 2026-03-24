@@ -1,0 +1,94 @@
+\subsection{Channel models}
+We benchmark four channel families.
+All channels are implemented on real-valued vectors, but not all channels use the same interpretation of the coordinates.
+For AWGN and Rayleigh, the benchmark uses real-valued channel inputs and outputs directly.
+In the main benchmark, both channels use dimension \(n=7\).
+For SSPA and OptFib, the signal is again stored as a real vector, but adjacent entries are interpreted as paired in-phase and quadrature components.
+Thus SSPA uses \(n=8\), corresponding to four I/Q pairs, and OptFib uses \(n=2\), corresponding to one I/Q pair.
+Noise variables are sampled independently across real components unless the channel transformation itself introduces coupling.
+
+\textbf{AWGN:}
+\begin{equation}
+y = x + n,
+\qquad
+n \sim \mathcal{N}(0,\sigma^2 I).
+\end{equation}
+This is the standard additive white Gaussian noise reference channel and serves as the simplest near-identity baseline.
+In our benchmark, AWGN is treated as a real-valued vector channel rather than as a complex I/Q channel.
+
+\textbf{Rayleigh:}
+the transmitted symbol is multiplied elementwise by a random fading amplitude and then corrupted by additive Gaussian noise.
+In the implemented benchmark,
+\begin{equation}
+y = h \odot x + n,
+\end{equation}
+where \(\odot\) denotes elementwise multiplication,
+\begin{equation}
+h_k = \frac{1}{\sqrt{2}}\sqrt{u_k^2 + v_k^2},
+\qquad
+u_k,v_k \overset{\text{i.i.d.}}{\sim} \mathcal{N}(0,1),
+\end{equation}
+and $n \sim \mathcal{N}(0,\sigma^2 I).$
+
+Each real component is therefore scaled by an independent Rayleigh-distributed magnitude before noise is added.
+This channel is multiplicative rather than additive and is correspondingly less aligned with a pure residual perturbation view.
+As implemented here, Rayleigh is also a real-valued vector channel rather than a paired-I/Q complex channel.
+
+\textbf{SSPA:}
+the input is passed through a smooth solid-state power amplifier nonlinearity before additive noise is applied.
+In this case, the real-valued representation is interpreted as paired I/Q components.
+Let
+\begin{equation}
+r = \sqrt{x_I^2 + x_Q^2}
+\end{equation}
+denote the input amplitude.
+The nonlinear amplitude law used in the benchmark is
+\begin{equation}
+a(r)
+=
+\frac{G}{\left(1+\left(\frac{Gr}{A_0}\right)^{2p}\right)^{1/(2p)}},
+\end{equation}
+with default parameters \(p=3\), \(A_0=1.5\), and \(G=5.0\).
+The noiseless amplifier output is $\tilde{x} = a(r)\,x,$
+and the observed channel output is
+\begin{equation}
+y = \tilde{x} + n,
+\qquad
+n \sim \mathcal{N}\!\left(0,\frac{\sigma^2}{2}I\right).
+\end{equation}
+This channel introduces amplitude-dependent nonlinear distortion while preserving the input direction in the I/Q plane.
+
+\textbf{OptFib:}
+We include a simplified memoryless optical-fiber proxy channel following \cite{li2018e2efiber} for the choice of parameters.
+As in SSPA, the real-valued state is interpreted as an I/Q pair.
+Let the state after propagation step \(k\) be \(x^{(k)} = [x_I^{(k)},x_Q^{(k)}]^\top\).
+At each step, the instantaneous nonlinear phase is
+\begin{equation}
+\phi^{(k)}
+=
+\gamma
+\left(\left(x_I^{(k)}\right)^2 + \left(x_Q^{(k)}\right)^2\right)\frac{L}{K_{\text{step}}}.
+\end{equation}
+The deterministic Kerr-style rotation is
+\begin{equation}
+\begin{aligned}
+\tilde{x}_I^{(k+1)} &= x_I^{(k)}\cos\phi^{(k)} - x_Q^{(k)}\sin\phi^{(k)}, \\
+\tilde{x}_Q^{(k+1)} &= x_I^{(k)}\sin\phi^{(k)} + x_Q^{(k)}\cos\phi^{(k)},
+\end{aligned}
+\end{equation}
+followed by additive Gaussian perturbations at every step:
+\begin{equation}
+\begin{aligned}
+x_I^{(k+1)} &= \tilde{x}_I^{(k+1)} + \sigma_n \xi_I^{(k)}, \\
+x_Q^{(k+1)} &= \tilde{x}_Q^{(k+1)} + \sigma_n \xi_Q^{(k)},
+\end{aligned}
+\qquad
+\xi_I^{(k)},\xi_Q^{(k)} \overset{\text{i.i.d.}}{\sim} \mathcal{N}(0,1).
+\end{equation}
+When that optical-channel parameterization is used,
+\begin{equation}
+\sigma_n
+=
+\sqrt{\frac{10^{(P_n-30)/10}}{2K_{\text{step}}}},
+\end{equation}
+with \(P_n\) measured in dBm.

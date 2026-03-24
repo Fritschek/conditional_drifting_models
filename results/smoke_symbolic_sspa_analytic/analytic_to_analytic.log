@@ -1,0 +1,5 @@
+epoch 1/1: loss=2.753898e+00, train_ser=9.248047e-01, eval_ser=0.845703125
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_symbolic_sspa_analytic/analytic_to_analytic",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_symbolic_sspa_analytic/analytic_to_analytic/summary.json"
+}

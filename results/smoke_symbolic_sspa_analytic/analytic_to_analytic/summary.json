@@ -1,0 +1,46 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 8,
+    "hidden_dim": 16,
+    "batch_size": 128,
+    "dataset_size": 2000,
+    "epochs": 1,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 512
+  },
+  "train_implant": "analytic_sspa",
+  "eval_implant": "analytic_sspa",
+  "rate": 0.5,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 2.7538982033729553,
+      "train_ser": 0.9248046875,
+      "eval_ser": 0.845703125
+    }
+  ],
+  "train_seconds": 0.03615534799610032,
+  "final_eval": {
+    "loss": 2.6781890392303467,
+    "ser": 0.849609375
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.027398735284805298,
+    "y_swd": 0.03748674690723419,
+    "residual_swd": 0.03423170745372772
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.0288722924888134,
+    "y_swd": 0.039510637521743774,
+    "residual_swd": 0.035509318113327026
+  },
+  "seed": 7,
+  "device": "cpu",
+  "channel": "SSPA",
+  "train_implant_source": null,
+  "eval_implant_source": null,
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_analytic_seed7.pt"
+}

@@ -1,0 +1,12 @@
+epoch 1/8: loss=1.571472e-01, train_ser=2.724000e-02, eval_ser=0.025210001128725706
+epoch 2/8: loss=4.273550e-04, train_ser=0.000000e+00, eval_ser=0.02493000109679997
+epoch 3/8: loss=1.084415e-04, train_ser=0.000000e+00, eval_ser=0.024180001085624098
+epoch 4/8: loss=3.869481e-05, train_ser=0.000000e+00, eval_ser=0.03193000166676938
+epoch 5/8: loss=1.540664e-05, train_ser=0.000000e+00, eval_ser=0.030090001402422784
+epoch 6/8: loss=5.941641e-06, train_ser=0.000000e+00, eval_ser=0.027930001243948937
+epoch 7/8: loss=1.999442e-05, train_ser=4.000000e-06, eval_ser=0.04781000227667391
+epoch 8/8: loss=1.604960e-06, train_ser=0.000000e+00, eval_ser=0.038590002059936526
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond1_targ1",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond1_targ1/summary.json"
+}

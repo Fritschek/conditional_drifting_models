@@ -1,0 +1,99 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 7,
+    "hidden_dim": 16,
+    "batch_size": 500,
+    "dataset_size": 1000000,
+    "epochs": 10,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 100000
+  },
+  "train_implant": "drifting_residual",
+  "eval_implant": "analytic_awgn",
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 0.15294364887781559,
+      "train_ser": 0.028413001291104592,
+      "eval_ser": 0.05087000207975507
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 0.0003356007924376172,
+      "train_ser": 1.0000000474974512e-06,
+      "eval_ser": 0.050800001993775365
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 7.744650144377374e-05,
+      "train_ser": 0.0,
+      "eval_ser": 0.051580002158880235
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 2.791413338059101e-05,
+      "train_ser": 0.0,
+      "eval_ser": 0.04873000199906528
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 1.460853102173587e-05,
+      "train_ser": 0.0,
+      "eval_ser": 0.058330001905560494
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 3.4077753155798975e-06,
+      "train_ser": 0.0,
+      "eval_ser": 0.05267000211402774
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 2.5199420014132558e-05,
+      "train_ser": 9.00000031106174e-06,
+      "eval_ser": 0.08650000408291816
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 4.852997034994644e-06,
+      "train_ser": 0.0,
+      "eval_ser": 0.06342000242322683
+    },
+    {
+      "epoch": 9.0,
+      "train_loss": 2.925455850437686e-06,
+      "train_ser": 0.0,
+      "eval_ser": 0.07632000314071774
+    },
+    {
+      "epoch": 10.0,
+      "train_loss": 4.144780121668745e-07,
+      "train_ser": 0.0,
+      "eval_ser": 0.058680002111941576
+    }
+  ],
+  "train_seconds": 58.62237973399897,
+  "final_eval": {
+    "loss": 0.25823599234223366,
+    "ser": 0.0599600020237267
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.12450110167264938,
+    "y_swd": 0.1742790937423706,
+    "residual_swd": 0.046307895332574844
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.003515909891575575,
+    "y_swd": 0.004477995913475752,
+    "residual_swd": 0.0034510528203099966
+  },
+  "seed": 7,
+  "device": "cuda",
+  "train_implant_source": "awgn7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+  "eval_implant_source": null,
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_local_cond0p25_k16_seed7.pt"
+}

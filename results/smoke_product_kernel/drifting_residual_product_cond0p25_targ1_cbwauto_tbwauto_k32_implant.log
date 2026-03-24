@@ -1,0 +1,6 @@
+epoch 1/2: loss=1.777333e-03, drift=1.067072e-01
+epoch 2/2: loss=2.585103e-03, drift=1.282852e-01
+{
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7.pt",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7.json"
+}

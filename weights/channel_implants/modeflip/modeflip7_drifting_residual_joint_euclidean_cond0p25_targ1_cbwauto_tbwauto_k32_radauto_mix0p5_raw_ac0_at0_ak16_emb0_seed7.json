@@ -1,0 +1,283 @@
+{
+  "family": "drifting_residual",
+  "history": [
+    {
+      "epoch": 1.0,
+      "loss": 0.004083713094897053,
+      "drift_norm": 0.15860419690291933,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 2.0,
+      "loss": 0.00478665317963571,
+      "drift_norm": 0.17555855360436948,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 3.0,
+      "loss": 0.004530416632645784,
+      "drift_norm": 0.17072182044069817,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 4.0,
+      "loss": 0.003795741132628965,
+      "drift_norm": 0.15712855263276304,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 5.0,
+      "loss": 0.0036171688254863182,
+      "drift_norm": 0.1532518076928372,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 6.0,
+      "loss": 0.003680663930371087,
+      "drift_norm": 0.154792705558716,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 7.0,
+      "loss": 0.0034941294728381995,
+      "drift_norm": 0.1505887304214721,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 8.0,
+      "loss": 0.0032407088321633635,
+      "drift_norm": 0.14552354711167356,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 9.0,
+      "loss": 0.0032293387673834853,
+      "drift_norm": 0.14505636371830677,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 10.0,
+      "loss": 0.0030517282150190404,
+      "drift_norm": 0.141096194246982,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 11.0,
+      "loss": 0.00287560130533901,
+      "drift_norm": 0.13661642941705723,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 12.0,
+      "loss": 0.0029614644246473117,
+      "drift_norm": 0.1389226053623443,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 13.0,
+      "loss": 0.0026862376260551367,
+      "drift_norm": 0.13240161829806388,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 14.0,
+      "loss": 0.002596950299909061,
+      "drift_norm": 0.13039351373593858,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 15.0,
+      "loss": 0.0026953455987089175,
+      "drift_norm": 0.13244895351693986,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 16.0,
+      "loss": 0.0027116698902744326,
+      "drift_norm": 0.13266658163134087,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 17.0,
+      "loss": 0.002571609319172839,
+      "drift_norm": 0.12959110489551057,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 18.0,
+      "loss": 0.002507203717052223,
+      "drift_norm": 0.12808496317964918,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 19.0,
+      "loss": 0.002600105541158824,
+      "drift_norm": 0.12981086184686802,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 20.0,
+      "loss": 0.0025539172895034734,
+      "drift_norm": 0.12866319909374765,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 21.0,
+      "loss": 0.0025994416905884095,
+      "drift_norm": 0.12967584654688835,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 22.0,
+      "loss": 0.002528936087966282,
+      "drift_norm": 0.1278069941604391,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 23.0,
+      "loss": 0.002507829874942198,
+      "drift_norm": 0.127287063937872,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 24.0,
+      "loss": 0.002574009511822914,
+      "drift_norm": 0.12879393522409682,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 25.0,
+      "loss": 0.0027514075966888762,
+      "drift_norm": 0.1329594112140067,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 26.0,
+      "loss": 0.002622795556523302,
+      "drift_norm": 0.12967601091937817,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 27.0,
+      "loss": 0.002789532158652598,
+      "drift_norm": 0.134188549062039,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 28.0,
+      "loss": 0.0028506295361675005,
+      "drift_norm": 0.134810386534701,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 29.0,
+      "loss": 0.002490666011556428,
+      "drift_norm": 0.12633023097160015,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 30.0,
+      "loss": 0.00278171401996007,
+      "drift_norm": 0.1340189316488327,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 31.0,
+      "loss": 0.002628627770203859,
+      "drift_norm": 0.13007695727208826,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 32.0,
+      "loss": 0.0027625787039683696,
+      "drift_norm": 0.1337791897197987,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 33.0,
+      "loss": 0.0027324758009350998,
+      "drift_norm": 0.13247251016028383,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 34.0,
+      "loss": 0.002740430855439936,
+      "drift_norm": 0.132782897654366,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 35.0,
+      "loss": 0.0028308644110554867,
+      "drift_norm": 0.13507554781563738,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 36.0,
+      "loss": 0.002897616024030016,
+      "drift_norm": 0.13670886498182377,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 37.0,
+      "loss": 0.0027834062192073844,
+      "drift_norm": 0.13328176741587355,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 38.0,
+      "loss": 0.002883084880515061,
+      "drift_norm": 0.13690174726095605,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 39.0,
+      "loss": 0.0029037004306991685,
+      "drift_norm": 0.1367627760197254,
+      "positive_queue_size": 0.0
+    },
+    {
+      "epoch": 40.0,
+      "loss": 0.0028562131486436788,
+      "drift_norm": 0.13586356425856022,
+      "positive_queue_size": 0.0
+    }
+  ],
+  "config": {
+    "n": 7,
+    "noise_std": 0.5260221433216792,
+    "dataset_size": 120000,
+    "batch_size": 512,
+    "epochs": 40,
+    "learning_rate": 0.001,
+    "latent_dim": 16,
+    "hidden_dim": 128,
+    "drift_scale": 1.0,
+    "bandwidth": null,
+    "min_bandwidth": 0.2,
+    "max_drift_norm": 2.0,
+    "repulsive_weight": 1.0,
+    "eval_size": 20000,
+    "swd_projections": 256,
+    "is_residual": true,
+    "use_conditional_kernel": false,
+    "conditioning_mode": "joint",
+    "condition_metric": "euclidean",
+    "condition_kernel_scale": 0.25,
+    "target_kernel_scale": 1.0,
+    "condition_bandwidth": null,
+    "target_bandwidth": null,
+    "local_condition_k": 32,
+    "condition_radius": null,
+    "mixture_alpha": 0.5,
+    "target_kernel_mode": "raw",
+    "residual_target_scale": 1.0,
+    "adaptive_condition_bandwidth": false,
+    "adaptive_target_bandwidth": false,
+    "adaptive_bandwidth_k": 16,
+    "condition_embedding_dim": 0,
+    "condition_embedding_hidden_dim": 64,
+    "positive_queue_size": 0,
+    "positive_reference_size": 0
+  },
+  "train_seconds": 54.67947168300452
+}

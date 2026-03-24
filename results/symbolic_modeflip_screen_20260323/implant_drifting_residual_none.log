@@ -1,0 +1,44 @@
+epoch 1/40: loss=3.598212e-03, drift=1.433771e-01
+epoch 2/40: loss=5.424852e-03, drift=1.872900e-01
+epoch 3/40: loss=5.065029e-03, drift=1.803035e-01
+epoch 4/40: loss=4.416086e-03, drift=1.691327e-01
+epoch 5/40: loss=4.190952e-03, drift=1.647976e-01
+epoch 6/40: loss=4.186547e-03, drift=1.644266e-01
+epoch 7/40: loss=3.815173e-03, drift=1.577477e-01
+epoch 8/40: loss=3.417519e-03, drift=1.493934e-01
+epoch 9/40: loss=3.442444e-03, drift=1.491502e-01
+epoch 10/40: loss=3.042898e-03, drift=1.412713e-01
+epoch 11/40: loss=2.937887e-03, drift=1.382702e-01
+epoch 12/40: loss=2.961262e-03, drift=1.390978e-01
+epoch 13/40: loss=2.601475e-03, drift=1.298067e-01
+epoch 14/40: loss=2.510959e-03, drift=1.282568e-01
+epoch 15/40: loss=2.521519e-03, drift=1.282186e-01
+epoch 16/40: loss=2.590174e-03, drift=1.293952e-01
+epoch 17/40: loss=2.523968e-03, drift=1.285151e-01
+epoch 18/40: loss=2.404014e-03, drift=1.256844e-01
+epoch 19/40: loss=2.521245e-03, drift=1.277932e-01
+epoch 20/40: loss=2.508425e-03, drift=1.275469e-01
+epoch 21/40: loss=2.449283e-03, drift=1.263099e-01
+epoch 22/40: loss=2.397429e-03, drift=1.245139e-01
+epoch 23/40: loss=2.336204e-03, drift=1.229633e-01
+epoch 24/40: loss=2.384703e-03, drift=1.241868e-01
+epoch 25/40: loss=2.577059e-03, drift=1.291776e-01
+epoch 26/40: loss=2.446481e-03, drift=1.253038e-01
+epoch 27/40: loss=2.560538e-03, drift=1.287239e-01
+epoch 28/40: loss=2.625752e-03, drift=1.295156e-01
+epoch 29/40: loss=2.328267e-03, drift=1.219747e-01
+epoch 30/40: loss=2.572355e-03, drift=1.288819e-01
+epoch 31/40: loss=2.422347e-03, drift=1.247052e-01
+epoch 32/40: loss=2.533553e-03, drift=1.278154e-01
+epoch 33/40: loss=2.532858e-03, drift=1.276256e-01
+epoch 34/40: loss=2.558121e-03, drift=1.279158e-01
+epoch 35/40: loss=2.648107e-03, drift=1.305779e-01
+epoch 36/40: loss=2.654482e-03, drift=1.305196e-01
+epoch 37/40: loss=2.640952e-03, drift=1.298222e-01
+epoch 38/40: loss=2.678951e-03, drift=1.315739e-01
+epoch 39/40: loss=2.643479e-03, drift=1.301931e-01
+epoch 40/40: loss=2.603633e-03, drift=1.294565e-01
+{
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json"
+}

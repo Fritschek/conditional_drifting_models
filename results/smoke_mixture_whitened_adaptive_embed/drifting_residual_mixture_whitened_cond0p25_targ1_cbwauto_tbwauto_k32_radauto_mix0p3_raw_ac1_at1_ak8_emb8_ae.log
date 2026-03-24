@@ -1,0 +1,5 @@
+epoch 1/1: loss=2.766001e+00, train_ser=9.189453e-01, eval_ser=0.888671875
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_mixture_whitened_adaptive_embed/drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_mixture_whitened_adaptive_embed/drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8/summary.json"
+}

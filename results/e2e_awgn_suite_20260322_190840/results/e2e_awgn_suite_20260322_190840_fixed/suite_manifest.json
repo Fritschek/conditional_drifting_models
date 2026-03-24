@@ -1,0 +1,43 @@
+{
+  "device": "cuda",
+  "seed": 7,
+  "epochs": 300,
+  "batch_size": 500,
+  "dec_bs_fac": 1,
+  "sample_size": 50000,
+  "sequence_length": 64,
+  "channel_length": 128,
+  "num_iteration": 5,
+  "num_iter_ft_cnn": 5,
+  "learning_rate": 0.0002,
+  "ebno_db": 4.0,
+  "eval_batches": 100,
+  "eval_every": 10,
+  "weights_root": "/home/entropy/GitHub/conditional_drifting_models/results/e2e_awgn_suite_20260322_190840/weights",
+  "specs": [
+    {
+      "name": "drifting_direct_to_analytic",
+      "train_implant": "checkpoint",
+      "train_implant_name": "awgn_drift_direct_seed7",
+      "eval_implant": "analytic_awgn",
+      "eval_implant_name": null,
+      "save_e2e_name": "cnn_turbo_awgn_drift_direct_seed7"
+    },
+    {
+      "name": "drifting_residual_to_analytic",
+      "train_implant": "checkpoint",
+      "train_implant_name": "awgn_drift_residual_seed7",
+      "eval_implant": "analytic_awgn",
+      "eval_implant_name": null,
+      "save_e2e_name": "cnn_turbo_awgn_drift_residual_seed7"
+    },
+    {
+      "name": "wgan_to_analytic",
+      "train_implant": "checkpoint",
+      "train_implant_name": "awgn_wgan_seed7",
+      "eval_implant": "analytic_awgn",
+      "eval_implant_name": null,
+      "save_e2e_name": "cnn_turbo_awgn_wgan_seed7"
+    }
+  ]
+}

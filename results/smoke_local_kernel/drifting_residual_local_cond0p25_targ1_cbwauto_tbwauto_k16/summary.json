@@ -1,0 +1,45 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 7,
+    "hidden_dim": 16,
+    "batch_size": 128,
+    "dataset_size": 2000,
+    "epochs": 1,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 512
+  },
+  "train_implant": "drifting_residual",
+  "eval_implant": "analytic_awgn",
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 2.764919638633728,
+      "train_ser": 0.90380859375,
+      "eval_ser": 0.8828125
+    }
+  ],
+  "train_seconds": 0.7982929159988998,
+  "final_eval": {
+    "loss": 2.734791398048401,
+    "ser": 0.880859375
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.1479359269142151,
+    "y_swd": 0.23597997426986694,
+    "residual_swd": 0.36722710728645325
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.038934823125600815,
+    "y_swd": 0.056147340685129166,
+    "residual_swd": 0.053714681416749954
+  },
+  "seed": 7,
+  "device": "cpu",
+  "train_implant_source": "awgn7_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7",
+  "eval_implant_source": null,
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7.pt"
+}

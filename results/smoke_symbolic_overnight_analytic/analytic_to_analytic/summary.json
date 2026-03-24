@@ -1,0 +1,45 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 7,
+    "hidden_dim": 16,
+    "batch_size": 128,
+    "dataset_size": 2000,
+    "epochs": 1,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 512
+  },
+  "train_implant": "analytic_awgn",
+  "eval_implant": "analytic_awgn",
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 2.765295162796974,
+      "train_ser": 0.92529296875,
+      "eval_ser": 0.89453125
+    }
+  ],
+  "train_seconds": 0.03551261400571093,
+  "final_eval": {
+    "loss": 2.730616867542267,
+    "ser": 0.890625
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.031122300773859024,
+    "y_swd": 0.04367617517709732,
+    "residual_swd": 0.039702899754047394
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.03890234977006912,
+    "y_swd": 0.0551147386431694,
+    "residual_swd": 0.051314108073711395
+  },
+  "seed": 7,
+  "device": "cpu",
+  "train_implant_source": null,
+  "eval_implant_source": null,
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt"
+}

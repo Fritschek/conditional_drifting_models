@@ -1,0 +1,260 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cuda",
+    "condition_scales": [
+      0.0,
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "target_scales": [
+      1.0
+    ],
+    "families": [
+      "drifting_direct",
+      "drifting_residual"
+    ],
+    "implant_epochs": 40,
+    "ae_epochs": 8,
+    "dataset_size": 120000,
+    "batch_size": 512,
+    "ae_dataset_size": 1000000,
+    "ae_batch_size": 500,
+    "eval_size": 100000,
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights"
+  },
+  "runs": [
+    {
+      "family": "drifting_direct",
+      "condition_scale": 0.0,
+      "target_scale": 1.0,
+      "run_name": "drifting_direct_cond0_targ1",
+      "implant_register_name": "awgn7_drifting_direct_cond0_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_direct_cond0_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 27.644292893997772,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 51.67026945500038,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0_targ1/summary.json",
+      "final_eval_ser": 0.03252000161446631,
+      "channel_metrics": {
+        "joint_xy_swd": 0.10450202971696854,
+        "y_swd": 0.13361746072769165,
+        "residual_swd": 0.2797103524208069
+      }
+    },
+    {
+      "family": "drifting_direct",
+      "condition_scale": 0.1,
+      "target_scale": 1.0,
+      "run_name": "drifting_direct_cond0p1_targ1",
+      "implant_register_name": "awgn7_drifting_direct_cond0p1_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_direct_cond0p1_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 28.341685190000135,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p1_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 53.369618667002214,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p1_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p1_targ1/summary.json",
+      "final_eval_ser": 0.03345000176224858,
+      "channel_metrics": {
+        "joint_xy_swd": 0.10416951030492783,
+        "y_swd": 0.13392014801502228,
+        "residual_swd": 0.27916136384010315
+      }
+    },
+    {
+      "family": "drifting_direct",
+      "condition_scale": 0.25,
+      "target_scale": 1.0,
+      "run_name": "drifting_direct_cond0p25_targ1",
+      "implant_register_name": "awgn7_drifting_direct_cond0p25_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_direct_cond0p25_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 28.403593256000022,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p25_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 52.62265256799947,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p25_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p25_targ1/summary.json",
+      "final_eval_ser": 0.03348000172525644,
+      "channel_metrics": {
+        "joint_xy_swd": 0.10339434444904327,
+        "y_swd": 0.1299089640378952,
+        "residual_swd": 0.2768961489200592
+      }
+    },
+    {
+      "family": "drifting_direct",
+      "condition_scale": 0.5,
+      "target_scale": 1.0,
+      "run_name": "drifting_direct_cond0p5_targ1",
+      "implant_register_name": "awgn7_drifting_direct_cond0p5_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_direct_cond0p5_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 28.883732401998714,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p5_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 55.92087116100083,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p5_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p5_targ1/summary.json",
+      "final_eval_ser": 0.030500001572072506,
+      "channel_metrics": {
+        "joint_xy_swd": 0.0930640771985054,
+        "y_swd": 0.11584027111530304,
+        "residual_swd": 0.2625199854373932
+      }
+    },
+    {
+      "family": "drifting_direct",
+      "condition_scale": 1.0,
+      "target_scale": 1.0,
+      "run_name": "drifting_direct_cond1_targ1",
+      "implant_register_name": "awgn7_drifting_direct_cond1_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_direct_cond1_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 31.081033532998845,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond1_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 55.1040716589996,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond1_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond1_targ1/summary.json",
+      "final_eval_ser": 0.037650002129375935,
+      "channel_metrics": {
+        "joint_xy_swd": 0.05523979291319847,
+        "y_swd": 0.06829369813203812,
+        "residual_swd": 0.16682542860507965
+      }
+    },
+    {
+      "family": "drifting_residual",
+      "condition_scale": 0.0,
+      "target_scale": 1.0,
+      "run_name": "drifting_residual_cond0_targ1",
+      "implant_register_name": "awgn7_drifting_residual_cond0_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_residual_cond0_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 30.834726209999644,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 55.6496010310002,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0_targ1/summary.json",
+      "final_eval_ser": 0.06905000252649188,
+      "channel_metrics": {
+        "joint_xy_swd": 0.08505107462406158,
+        "y_swd": 0.1045646071434021,
+        "residual_swd": 0.039761606603860855
+      }
+    },
+    {
+      "family": "drifting_residual",
+      "condition_scale": 0.1,
+      "target_scale": 1.0,
+      "run_name": "drifting_residual_cond0p1_targ1",
+      "implant_register_name": "awgn7_drifting_residual_cond0p1_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_residual_cond0p1_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 30.42182447199957,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p1_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 56.53920547099915,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p1_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p1_targ1/summary.json",
+      "final_eval_ser": 0.009890000434825196,
+      "channel_metrics": {
+        "joint_xy_swd": 0.01516235526651144,
+        "y_swd": 0.023013828322291374,
+        "residual_swd": 0.017908522859215736
+      }
+    },
+    {
+      "family": "drifting_residual",
+      "condition_scale": 0.25,
+      "target_scale": 1.0,
+      "run_name": "drifting_residual_cond0p25_targ1",
+      "implant_register_name": "awgn7_drifting_residual_cond0p25_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_residual_cond0p25_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 30.576255796000623,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p25_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 55.57329812699754,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p25_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p25_targ1/summary.json",
+      "final_eval_ser": 0.00956000036909245,
+      "channel_metrics": {
+        "joint_xy_swd": 0.012756251730024815,
+        "y_swd": 0.018153605982661247,
+        "residual_swd": 0.018331576138734818
+      }
+    },
+    {
+      "family": "drifting_residual",
+      "condition_scale": 0.5,
+      "target_scale": 1.0,
+      "run_name": "drifting_residual_cond0p5_targ1",
+      "implant_register_name": "awgn7_drifting_residual_cond0p5_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_residual_cond0p5_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 31.62957943600486,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p5_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 56.830337206003605,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p5_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p5_targ1/summary.json",
+      "final_eval_ser": 0.011920000510290265,
+      "channel_metrics": {
+        "joint_xy_swd": 0.011697819456458092,
+        "y_swd": 0.017143113538622856,
+        "residual_swd": 0.020334122702479362
+      }
+    },
+    {
+      "family": "drifting_residual",
+      "condition_scale": 1.0,
+      "target_scale": 1.0,
+      "run_name": "drifting_residual_cond1_targ1",
+      "implant_register_name": "awgn7_drifting_residual_cond1_targ1_seed7",
+      "ae_name": "symbolic_awgn_drifting_residual_cond1_targ1_seed7",
+      "implant_result": {
+        "elapsed_seconds": 31.78773188100604,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond1_targ1_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 54.938465824998275,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond1_targ1_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond1_targ1/summary.json",
+      "final_eval_ser": 0.015060000692028553,
+      "channel_metrics": {
+        "joint_xy_swd": 0.01152151357382536,
+        "y_swd": 0.016089795157313347,
+        "residual_swd": 0.026480657979846
+      }
+    }
+  ]
+}

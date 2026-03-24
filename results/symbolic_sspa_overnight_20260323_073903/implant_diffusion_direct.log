@@ -1,0 +1,14 @@
+diff epoch 1/10: loss=7.448238e-01, lr=1.000e-03
+diff epoch 2/10: loss=6.184903e-01, lr=1.000e-03
+diff epoch 3/10: loss=6.031056e-01, lr=1.000e-03
+diff epoch 4/10: loss=5.938245e-01, lr=1.000e-03
+diff epoch 5/10: loss=5.702023e-01, lr=1.000e-03
+diff epoch 6/10: loss=5.244147e-01, lr=1.000e-03
+diff epoch 7/10: loss=4.764826e-01, lr=1.000e-03
+diff epoch 8/10: loss=4.423182e-01, lr=1.000e-03
+diff epoch 9/10: loss=4.234155e-01, lr=1.000e-03
+diff epoch 10/10: loss=4.133014e-01, lr=1.000e-03
+{
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_diffusion_direct_seed7.pt",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_diffusion_direct_seed7.json"
+}

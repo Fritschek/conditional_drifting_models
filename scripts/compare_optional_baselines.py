@@ -40,7 +40,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Optional baseline comparison for a single channel")
     parser.add_argument("--device", type=str, default="auto")
     parser.add_argument("--seed", type=int, default=7)
-    parser.add_argument("--channel", type=str, default="AWGN", choices=["AWGN", "Rayleigh", "SSPA", "OptFib"])
+    parser.add_argument("--channel", type=str, default="AWGN", choices=["AWGN", "Rayleigh", "ModeFlip", "SSPA", "OptFib"])
     parser.add_argument("--dataset-size", type=int, default=120_000)
     parser.add_argument("--epochs", type=int, default=60)
     parser.add_argument("--batch-size", type=int, default=512)

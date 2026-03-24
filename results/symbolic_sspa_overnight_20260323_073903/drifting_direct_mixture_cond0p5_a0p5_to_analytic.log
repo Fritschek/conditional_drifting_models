@@ -1,0 +1,14 @@
+epoch 1/10: loss=1.479912e-01, train_ser=2.991600e-02, eval_ser=0.008980000374140217
+epoch 2/10: loss=1.162389e-03, train_ser=9.700000e-05, eval_ser=0.01969000092241913
+epoch 3/10: loss=4.835353e-04, train_ser=5.200000e-05, eval_ser=0.01351000059978105
+epoch 4/10: loss=2.513809e-04, train_ser=4.000000e-05, eval_ser=0.017850000853650273
+epoch 5/10: loss=1.870118e-04, train_ser=3.000000e-05, eval_ser=0.017760000792331993
+epoch 6/10: loss=1.629831e-04, train_ser=3.200000e-05, eval_ser=0.03799000198952854
+epoch 7/10: loss=4.248181e-05, train_ser=9.000000e-06, eval_ser=0.025620001195929946
+epoch 8/10: loss=1.391754e-04, train_ser=2.300000e-05, eval_ser=0.03864000206813216
+epoch 9/10: loss=5.039983e-05, train_ser=1.000000e-05, eval_ser=0.056330002043396235
+epoch 10/10: loss=8.236280e-05, train_ser=1.500000e-05, eval_ser=0.04524000206962228
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_direct_mixture_cond0p5_a0p5_to_analytic",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_direct_mixture_cond0p5_a0p5_to_analytic/summary.json"
+}

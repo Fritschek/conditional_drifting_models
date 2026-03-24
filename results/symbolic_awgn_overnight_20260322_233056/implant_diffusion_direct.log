@@ -1,0 +1,14 @@
+diff epoch 1/10: loss=6.778514e-01, lr=1.000e-03
+diff epoch 2/10: loss=5.333505e-01, lr=1.000e-03
+diff epoch 3/10: loss=5.241856e-01, lr=1.000e-03
+diff epoch 4/10: loss=5.225068e-01, lr=1.000e-03
+diff epoch 5/10: loss=5.220030e-01, lr=1.000e-03
+diff epoch 6/10: loss=5.202736e-01, lr=1.000e-03
+diff epoch 7/10: loss=5.205828e-01, lr=1.000e-03
+diff epoch 8/10: loss=5.194181e-01, lr=1.000e-03
+diff epoch 9/10: loss=5.208018e-01, lr=1.000e-03
+diff epoch 10/10: loss=5.205208e-01, lr=1.000e-03
+{
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_direct_seed7.pt",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_direct_seed7.json"
+}

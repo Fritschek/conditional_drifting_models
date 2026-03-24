@@ -285,7 +285,6 @@ def train_conditional_diffusion(channel_fn, cfg: DiffusionConfig, device: torch.
     return model_ema, state
 
 
-@torch.no_grad()
 def sample_ddpm(model: nn.Module, condition: torch.Tensor, state: dict) -> torch.Tensor:
     device = condition.device
     betas = state["betas"].to(device)
@@ -328,7 +327,6 @@ def sample_ddpm(model: nn.Module, condition: torch.Tensor, state: dict) -> torch
     return residual
 
 
-@torch.no_grad()
 def sample_ddim(model: nn.Module, condition: torch.Tensor, state: dict, num_steps: int | None = None) -> torch.Tensor:
     device = condition.device
     alphas_prod = state["alphas_prod"].to(device)

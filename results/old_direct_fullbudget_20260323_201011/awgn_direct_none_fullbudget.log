@@ -1,0 +1,14 @@
+epoch 1/10: loss=1.496124e-01, train_ser=2.911100e-02, eval_ser=0.04003000217489898
+epoch 2/10: loss=2.155685e-04, train_ser=0.000000e+00, eval_ser=0.038480001911520956
+epoch 3/10: loss=4.406684e-05, train_ser=0.000000e+00, eval_ser=0.03796000198461116
+epoch 4/10: loss=1.226604e-05, train_ser=0.000000e+00, eval_ser=0.036710001984611156
+epoch 5/10: loss=3.754392e-06, train_ser=0.000000e+00, eval_ser=0.0372000019159168
+epoch 6/10: loss=1.178450e-06, train_ser=0.000000e+00, eval_ser=0.036760002048686145
+epoch 7/10: loss=3.687757e-07, train_ser=0.000000e+00, eval_ser=0.03698000190779567
+epoch 8/10: loss=1.140222e-07, train_ser=0.000000e+00, eval_ser=0.037420002007856966
+epoch 9/10: loss=3.714430e-08, train_ser=0.000000e+00, eval_ser=0.03972000207751989
+epoch 10/10: loss=1.765024e-08, train_ser=0.000000e+00, eval_ser=0.0497000022046268
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/old_direct_fullbudget_20260323_201011/awgn_direct_none_fullbudget_e2e",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/old_direct_fullbudget_20260323_201011/awgn_direct_none_fullbudget_e2e/summary.json"
+}

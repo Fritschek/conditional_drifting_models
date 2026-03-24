@@ -1,0 +1,53 @@
+{
+  "seed": 7,
+  "device": "cpu",
+  "channel": "SSPA",
+  "code_dim": 8,
+  "rate": 0.5,
+  "ebno_db": 5.0,
+  "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights",
+  "force_retrain": false,
+  "implant_specs": [],
+  "run_specs": [
+    {
+      "name": "analytic_to_analytic",
+      "train_implant": "analytic_channel",
+      "train_implant_name": null,
+      "eval_implant": "analytic_channel",
+      "eval_implant_name": null,
+      "save_ae_name": "symbolic_sspa_analytic_seed7",
+      "benchmark_args": {
+        "channel": "SSPA",
+        "message-dim": 16,
+        "code-dim": 8,
+        "hidden-dim": 16,
+        "rate": 0.5,
+        "ebno-db": 5.0,
+        "batch-size": 128,
+        "dataset-size": 2000,
+        "eval-size": 512,
+        "epochs": 1,
+        "learning-rate": 0.001,
+        "eval-every": 1
+      }
+    }
+  ],
+  "global_args": {
+    "implant_dataset_size": 120000,
+    "implant_batch_size": 512,
+    "drifting_epochs": 60,
+    "wgan_epochs": 60,
+    "diffusion_dataset_size": 300000,
+    "diffusion_batch_size": 500,
+    "diffusion_epochs": 10,
+    "diffusion_hidden_dim": 128,
+    "diffusion_num_steps": 50,
+    "diffusion_ddim_steps": 20,
+    "ae_dataset_size": 2000,
+    "ae_batch_size": 128,
+    "eval_size": 512,
+    "ae_epochs": 1,
+    "ae_learning_rate": 0.001,
+    "eval_every": 1
+  }
+}

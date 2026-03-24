@@ -1,0 +1,33 @@
+{
+  "seed": 7,
+  "device": "cpu",
+  "conditioning_modes": [
+    "local"
+  ],
+  "condition_scales": [
+    0.25
+  ],
+  "target_scales": [
+    1.0
+  ],
+  "condition_bandwidths": [
+    null
+  ],
+  "target_bandwidths": [
+    null
+  ],
+  "local_condition_ks": [
+    16
+  ],
+  "families": [
+    "drifting_residual"
+  ],
+  "implant_epochs": 2,
+  "ae_epochs": 1,
+  "dataset_size": 1024,
+  "batch_size": 128,
+  "ae_dataset_size": 2000,
+  "ae_batch_size": 128,
+  "eval_size": 512,
+  "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights"
+}

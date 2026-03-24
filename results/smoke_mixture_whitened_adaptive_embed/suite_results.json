@@ -1,0 +1,88 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cpu",
+    "conditioning_modes": [
+      "mixture"
+    ],
+    "condition_metric": "whitened",
+    "condition_scales": [
+      0.25
+    ],
+    "target_scales": [
+      1.0
+    ],
+    "condition_bandwidths": [
+      null
+    ],
+    "target_bandwidths": [
+      null
+    ],
+    "local_condition_ks": [
+      32
+    ],
+    "condition_radii": [
+      null
+    ],
+    "mixture_alphas": [
+      0.3
+    ],
+    "target_kernel_mode": "raw",
+    "residual_target_scale": 1.0,
+    "adaptive_condition_bandwidth": true,
+    "adaptive_target_bandwidth": true,
+    "adaptive_bandwidth_k": 8,
+    "condition_embedding_dim": 8,
+    "condition_embedding_hidden_dim": 16,
+    "families": [
+      "drifting_residual"
+    ],
+    "implant_epochs": 2,
+    "ae_epochs": 1,
+    "dataset_size": 1024,
+    "batch_size": 128,
+    "ae_dataset_size": 2000,
+    "ae_batch_size": 128,
+    "eval_size": 512,
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights"
+  },
+  "runs": [
+    {
+      "family": "drifting_residual",
+      "conditioning_mode": "mixture",
+      "condition_scale": 0.25,
+      "target_scale": 1.0,
+      "condition_metric": "whitened",
+      "condition_bandwidth": null,
+      "target_bandwidth": null,
+      "local_condition_k": 32,
+      "condition_radius": null,
+      "mixture_alpha": 0.3,
+      "target_kernel_mode": "raw",
+      "residual_target_scale": 1.0,
+      "adaptive_condition_bandwidth": true,
+      "adaptive_target_bandwidth": true,
+      "adaptive_bandwidth_k": 8,
+      "condition_embedding_dim": 8,
+      "condition_embedding_hidden_dim": 16,
+      "run_name": "drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8",
+      "implant_register_name": "awgn7_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7",
+      "ae_name": "symbolic_awgn_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7",
+      "implant_result": {
+        "elapsed_seconds": 2.1898294289931073,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_mixture_whitened_adaptive_embed/drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 2.185767365001084,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_mixture_whitened_adaptive_embed/drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_mixture_whitened_adaptive_embed/drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8/summary.json",
+      "final_eval_ser": 0.880859375,
+      "channel_metrics": {
+        "joint_xy_swd": 0.1413201242685318,
+        "y_swd": 0.22712667286396027,
+        "residual_swd": 0.29843777418136597
+      }
+    }
+  ]
+}

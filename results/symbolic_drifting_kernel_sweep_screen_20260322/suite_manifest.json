@@ -1,0 +1,26 @@
+{
+  "seed": 7,
+  "device": "cuda",
+  "condition_scales": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "target_scales": [
+    1.0
+  ],
+  "families": [
+    "drifting_direct",
+    "drifting_residual"
+  ],
+  "implant_epochs": 40,
+  "ae_epochs": 8,
+  "dataset_size": 120000,
+  "batch_size": 512,
+  "ae_dataset_size": 1000000,
+  "ae_batch_size": 500,
+  "eval_size": 100000,
+  "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights"
+}

@@ -1,0 +1,74 @@
+{
+  "family": "diffusion_direct",
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.6778514264027278,
+      "lr": 0.001
+    },
+    {
+      "epoch": 2,
+      "loss": 0.533350526591142,
+      "lr": 0.001
+    },
+    {
+      "epoch": 3,
+      "loss": 0.5241856228311856,
+      "lr": 0.001
+    },
+    {
+      "epoch": 4,
+      "loss": 0.5225068429112434,
+      "lr": 0.001
+    },
+    {
+      "epoch": 5,
+      "loss": 0.522003040711085,
+      "lr": 0.001
+    },
+    {
+      "epoch": 6,
+      "loss": 0.5202736217776934,
+      "lr": 0.001
+    },
+    {
+      "epoch": 7,
+      "loss": 0.5205828134715557,
+      "lr": 0.001
+    },
+    {
+      "epoch": 8,
+      "loss": 0.519418139408032,
+      "lr": 0.001
+    },
+    {
+      "epoch": 9,
+      "loss": 0.520801791002353,
+      "lr": 0.001
+    },
+    {
+      "epoch": 10,
+      "loss": 0.5205208211640517,
+      "lr": 0.001
+    }
+  ],
+  "config": {
+    "n": 7,
+    "noise_std": 0.5260221433216792,
+    "dataset_size": 300000,
+    "batch_size": 500,
+    "epochs": 10,
+    "learning_rate": 0.001,
+    "hidden_dim": 128,
+    "num_steps": 50,
+    "eval_size": 2000,
+    "swd_projections": 64,
+    "ema_decay": 0.9,
+    "pred_type": "v",
+    "is_residual": false,
+    "beta_schedule": "cosine-zf",
+    "eval_batch_size": null,
+    "learning_rate_schedule": null
+  },
+  "train_seconds": 15.175686344002315
+}

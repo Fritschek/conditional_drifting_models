@@ -1,0 +1,5 @@
+epoch 1/1: loss=2.765555e+00, train_ser=9.008789e-01, eval_ser=0.8828125
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_product_kernel/drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_product_kernel/drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32/summary.json"
+}

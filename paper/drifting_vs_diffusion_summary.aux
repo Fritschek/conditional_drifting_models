@@ -15,63 +15,25 @@
 \citation{drifting}
 \citation{geometryofnoise}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
-\citation{paper2309}
 \citation{drifting}
 \citation{drifting,driftingproj}
+\citation{drifting}
 \citation{drifting}
 \@writefile{toc}{\contentsline {section}{\numberline {II}Problem Formulation and Drifting Background}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}What drifting changes conceptually}{2}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Conditional channel simulation}{2}{subsection.2.2}\protected@file@percent }
-\citation{drifting}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Two target parameterizations for conditional drifting}}{3}{table.1}\protected@file@percent }
-\newlabel{tab:drifting_modes}{{I}{3}{Two target parameterizations for conditional drifting}{table.1}{}}
+\citation{li2018e2efiber}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces \textbf  {Two target parameterizations for conditional drifting.}}}{3}{table.1}\protected@file@percent }
+\newlabel{tab:drifting_modes}{{I}{3}{\textbf {Two target parameterizations for conditional drifting.}}{table.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Conditional drifting model}{3}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {III}Experimental Setup}{3}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Channel models}{3}{subsection.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Training-time drifting update for conditional channel residual modeling. For a fixed transmitted symbol \(x\), the generator produces residual samples \(\hat  e_i\), which are moved toward the true residual cloud through a drift field that combines attraction to data and repulsion among generated samples. The network is then regressed toward the drifted targets.}}{4}{figure.1}\protected@file@percent }
-\newlabel{fig:drifttrain}{{1}{4}{Training-time drifting update for conditional channel residual modeling. For a fixed transmitted symbol \(x\), the generator produces residual samples \(\hat e_i\), which are moved toward the true residual cloud through a drift field that combines attraction to data and repulsion among generated samples. The network is then regressed toward the drifted targets}{figure.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Inference-time schematic for residual-mode conditional drifting. Once the generator has been trained, sampling requires only a single forward pass of \(g_\theta (x,z)\), followed by residual-to-output reconstruction. In the direct-output parameterization, the same one-shot generator would produce \(\hat  y\) directly instead of \(\hat  e\).}}{4}{figure.2}\protected@file@percent }
-\newlabel{fig:schematic}{{2}{4}{Inference-time schematic for residual-mode conditional drifting. Once the generator has been trained, sampling requires only a single forward pass of \(g_\theta (x,z)\), followed by residual-to-output reconstruction. In the direct-output parameterization, the same one-shot generator would produce \(\hat y\) directly instead of \(\hat e\)}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Toy conditional particle simulation in residual space. Two different channel inputs induce two different target residual distributions. Starting from mismatched generated particle clouds, the middle panel applies one attraction--repulsion drift update of the form \(\tilde  e=\mathrm  {stopgrad}(\hat  e+\eta V(\hat  e))\), and the last panel shows the particle clouds after repeated updates. This figure is an actual toy simulation of the drift field, not a hand-drawn schematic.}}{5}{figure.3}\protected@file@percent }
-\newlabel{fig:toy}{{3}{5}{Toy conditional particle simulation in residual space. Two different channel inputs induce two different target residual distributions. Starting from mismatched generated particle clouds, the middle panel applies one attraction--repulsion drift update of the form \(\tilde e=\mathrm {stopgrad}(\hat e+\eta V(\hat e))\), and the last panel shows the particle clouds after repeated updates. This figure is an actual toy simulation of the drift field, not a hand-drawn schematic}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples. The middle panel shows samples from a randomly initialized tiny conditional MLP \(g_\theta (x,z)\). The right panel shows the same MLP after training with the drift objective, where the generated samples move close to the correct condition-dependent residual clouds.}}{5}{figure.4}\protected@file@percent }
-\newlabel{fig:toymlp}{{4}{5}{Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples. The middle panel shows samples from a randomly initialized tiny conditional MLP \(g_\theta (x,z)\). The right panel shows the same MLP after training with the drift objective, where the generated samples move close to the correct condition-dependent residual clouds}{figure.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Training protocol}{5}{subsection.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Oracle toy conditional diffusion trajectory on the same Gaussian conditional target. The panels show reverse-time snapshots from a 100-step diffusion process at \(t=100\), \(t=50\), \(t=20\), and \(t=0\). Starting from condition-independent noise, the reverse denoising trajectory progressively separates the conditions and contracts toward their target residual distributions. This figure is included to contrast the explicit multi-step reverse path of diffusion with the one-shot sampling path of drifting.}}{6}{figure.5}\protected@file@percent }
-\newlabel{fig:toydiff}{{5}{6}{Oracle toy conditional diffusion trajectory on the same Gaussian conditional target. The panels show reverse-time snapshots from a 100-step diffusion process at \(t=100\), \(t=50\), \(t=20\), and \(t=0\). Starting from condition-independent noise, the reverse denoising trajectory progressively separates the conditions and contracts toward their target residual distributions. This figure is included to contrast the explicit multi-step reverse path of diffusion with the one-shot sampling path of drifting}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Evaluation metric and sanity checks}{6}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{6}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Lower-budget comparison at \(T=20\)}{6}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Main comparison at \(T=100\)}{6}{subsection.4.2}\protected@file@percent }
-\citation{paper2309}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Residual SWD comparison at \(T=20\) (lower is better)}}{7}{table.2}\protected@file@percent }
-\newlabel{tab:t20}{{II}{7}{Residual SWD comparison at \(T=20\) (lower is better)}{table.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Residual SWD comparison at \(T=100\) (lower is better)}}{7}{table.3}\protected@file@percent }
-\newlabel{tab:t100}{{III}{7}{Residual SWD comparison at \(T=100\) (lower is better)}{table.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Residual SWD comparison across channels for the \(T=100\) benchmark. The fast reduced-step DDIM ablation is omitted for readability.}}{7}{figure.6}\protected@file@percent }
-\newlabel{fig:bar}{{6}{7}{Residual SWD comparison across channels for the \(T=100\) benchmark. The fast reduced-step DDIM ablation is omitted for readability}{figure.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Example residual distributions}{7}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Inference-time comparison}{7}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Interpretation and limitations}{7}{subsection.4.5}\protected@file@percent }
-\citation{drifting}
-\bibstyle{IEEEtran}
-\bibdata{references}
-\bibcite{drifting}{1}
-\bibcite{paper2309}{2}
-\bibcite{kimicc2024}{3}
-\bibcite{lee2024highdimchannels}{4}
-\bibcite{gong2025dtoc}{5}
-\bibcite{zhou2025channelestimation}{6}
-\bibcite{fesl2024mimoestimation}{7}
-\bibcite{chen2025mimovi}{8}
-\bibcite{zilberstein2024joint}{9}
-\bibcite{liu2025mimoofdm}{10}
-\bibcite{fan2025wirelesssurvey}{11}
-\bibcite{luong2025futurenetworksurvey}{12}
-\bibcite{geometryofnoise}{13}
-\bibcite{driftingproj}{14}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces AWGN example with training curves, residual distributions, sample clouds, and residual SWD comparison.}}{8}{figure.7}\protected@file@percent }
-\newlabel{fig:awgn}{{7}{8}{AWGN example with training curves, residual distributions, sample clouds, and residual SWD comparison}{figure.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Conclusion}{8}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{8}{section*.1}\protected@file@percent }
-\gdef \@abspage@last{8}
+\citation{kimicc2024}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Toy conditional particle simulation in residual space. Two different channel inputs induce two different target residual distributions. Starting from mismatched generated particle clouds, the middle panel applies one attraction--repulsion drift update of the form \(\tilde  e=\mathrm  {stopgrad}(\hat  e+\eta V(\hat  e))\), and the last panel shows the particle clouds after repeated updates. This figure is an actual toy simulation of the drift field, not a hand-drawn schematic.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:toy}{{1}{4}{Toy conditional particle simulation in residual space. Two different channel inputs induce two different target residual distributions. Starting from mismatched generated particle clouds, the middle panel applies one attraction--repulsion drift update of the form \(\tilde e=\mathrm {stopgrad}(\hat e+\eta V(\hat e))\), and the last panel shows the particle clouds after repeated updates. This figure is an actual toy simulation of the drift field, not a hand-drawn schematic}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples. The middle panel shows samples from a randomly initialized tiny conditional MLP \(g_\theta (x,z)\). The right panel shows the same MLP after training with the drift objective, where the generated samples move close to the correct condition-dependent residual clouds.}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:toymlp}{{2}{4}{Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples. The middle panel shows samples from a randomly initialized tiny conditional MLP \(g_\theta (x,z)\). The right panel shows the same MLP after training with the drift objective, where the generated samples move close to the correct condition-dependent residual clouds}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Training protocol}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0a}Channel settings.}{4}{paragraph.3.2.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0b}Data and optimization settings.}{4}{paragraph.3.2.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0c}Model settings.}{4}{paragraph.3.2.0.3}\protected@file@percent }

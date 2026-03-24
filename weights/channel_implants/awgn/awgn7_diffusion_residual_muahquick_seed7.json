@@ -1,0 +1,74 @@
+{
+  "family": "diffusion_residual",
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.7134151828289031,
+      "lr": 0.001
+    },
+    {
+      "epoch": 2,
+      "loss": 0.3467034535109997,
+      "lr": 0.001
+    },
+    {
+      "epoch": 3,
+      "loss": 0.33632304251194,
+      "lr": 0.001
+    },
+    {
+      "epoch": 4,
+      "loss": 0.3369269627332687,
+      "lr": 0.001
+    },
+    {
+      "epoch": 5,
+      "loss": 0.3362264843285084,
+      "lr": 0.001
+    },
+    {
+      "epoch": 6,
+      "loss": 0.33254228755831716,
+      "lr": 0.001
+    },
+    {
+      "epoch": 7,
+      "loss": 0.33309447661042213,
+      "lr": 0.001
+    },
+    {
+      "epoch": 8,
+      "loss": 0.3335229058563709,
+      "lr": 0.001
+    },
+    {
+      "epoch": 9,
+      "loss": 0.33516806304454805,
+      "lr": 0.001
+    },
+    {
+      "epoch": 10,
+      "loss": 0.3347392645478249,
+      "lr": 0.001
+    }
+  ],
+  "config": {
+    "n": 7,
+    "noise_std": 0.5260221433216792,
+    "dataset_size": 100000,
+    "batch_size": 500,
+    "epochs": 10,
+    "learning_rate": 0.001,
+    "hidden_dim": 128,
+    "num_steps": 50,
+    "eval_size": 2000,
+    "swd_projections": 64,
+    "ema_decay": 0.995,
+    "pred_type": "epsilon",
+    "is_residual": true,
+    "beta_schedule": "cosine",
+    "eval_batch_size": null,
+    "learning_rate_schedule": null
+  },
+  "train_seconds": 6.174693856999511
+}

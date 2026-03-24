@@ -1,0 +1,128 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 7,
+    "hidden_dim": 16,
+    "batch_size": 500,
+    "dataset_size": 300000,
+    "epochs": 8,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 50000
+  },
+  "train_implant": "analytic_modeflip",
+  "eval_implant": "analytic_modeflip",
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 1.6897498564918836,
+      "train_ser": 0.5915366941193739,
+      "eval_ser": 0.405660018324852
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 0.8429556126395862,
+      "train_ser": 0.34982001652320227,
+      "eval_ser": 0.3334000164270401
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 0.7394153361519178,
+      "train_ser": 0.32881334831317266,
+      "eval_ser": 0.325340014398098
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 0.7251076060533523,
+      "train_ser": 0.3257100146015485,
+      "eval_ser": 0.3254800155758858
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 0.7175861073533694,
+      "train_ser": 0.3247900147239367,
+      "eval_ser": 0.3221600157022476
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 0.7094473839799563,
+      "train_ser": 0.3213966815173626,
+      "eval_ser": 0.32032001435756685
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 0.7057891640067101,
+      "train_ser": 0.3210800147553285,
+      "eval_ser": 0.31900001525878907
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 0.7025438284873963,
+      "train_ser": 0.32073001364866893,
+      "eval_ser": 0.3186000147461891
+    }
+  ],
+  "train_seconds": 19.02285671500431,
+  "final_eval": {
+    "loss": 0.6992726659774781,
+    "ser": 0.32040001571178434
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.006417504511773586,
+    "anchor_y_swd": 0.1463429480791092,
+    "anchor_y_floor_swd": 0.18740391731262207,
+    "anchor_y_excess_swd": 0.0,
+    "anchor_y_ratio": 0.7808958861568721,
+    "anchor_residual_swd": 0.1463429480791092,
+    "anchor_residual_floor_swd": 0.18740391731262207,
+    "anchor_residual_excess_swd": 0.0,
+    "anchor_residual_ratio": 0.7808958861568721,
+    "anchor_mean_l2": 0.3059801757335663,
+    "anchor_mean_l2_floor": 0.46219104528427124,
+    "anchor_mean_l2_excess": 0.0,
+    "anchor_mean_l2_ratio": 0.6620209951176634,
+    "anchor_cov_fro": 1.0064198970794678,
+    "anchor_cov_fro_floor": 1.0376391410827637,
+    "anchor_cov_fro_excess": 0.0,
+    "anchor_cov_fro_ratio": 0.9699131974043317,
+    "anchor_gaussian_w2": 0.45756423473358154,
+    "anchor_gaussian_w2_floor": 0.5696731805801392,
+    "anchor_gaussian_w2_excess": 0.0,
+    "anchor_gaussian_w2_ratio": 0.8032048029145605,
+    "y_swd": 0.008088004775345325,
+    "residual_swd": 0.010484670288860798
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.008044427260756493,
+    "anchor_y_swd": 0.13554894924163818,
+    "anchor_y_floor_swd": 0.15329258143901825,
+    "anchor_y_excess_swd": 0.0,
+    "anchor_y_ratio": 0.8842498963040901,
+    "anchor_residual_swd": 0.13554896414279938,
+    "anchor_residual_floor_swd": 0.15329258143901825,
+    "anchor_residual_excess_swd": 0.0,
+    "anchor_residual_ratio": 0.8842499935114113,
+    "anchor_mean_l2": 0.25397661328315735,
+    "anchor_mean_l2_floor": 0.324640154838562,
+    "anchor_mean_l2_excess": 0.0,
+    "anchor_mean_l2_ratio": 0.782332713614727,
+    "anchor_cov_fro": 1.0963683128356934,
+    "anchor_cov_fro_floor": 1.1080961227416992,
+    "anchor_cov_fro_excess": 0.0,
+    "anchor_cov_fro_ratio": 0.9894162521957135,
+    "anchor_gaussian_w2": 0.40670454502105713,
+    "anchor_gaussian_w2_floor": 0.45782434940338135,
+    "anchor_gaussian_w2_excess": 0.0,
+    "anchor_gaussian_w2_ratio": 0.8883418838492502,
+    "y_swd": 0.009743412025272846,
+    "residual_swd": 0.010627523995935917
+  },
+  "seed": 7,
+  "device": "cuda",
+  "channel": "ModeFlip",
+  "train_implant_source": null,
+  "eval_implant_source": null,
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_analytic_seed7.pt"
+}

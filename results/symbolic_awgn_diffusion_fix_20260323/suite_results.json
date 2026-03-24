@@ -1,0 +1,358 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cuda",
+    "channel": "AWGN",
+    "code_dim": 7,
+    "rate": 0.5714285714285714,
+    "ebno_db": 5.0,
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights",
+    "force_retrain": false,
+    "implant_specs": [
+      {
+        "name": "diffusion_direct",
+        "family": "diffusion_direct",
+        "register_name": "awgn7_diffusion_direct_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 10,
+          "hidden-dim": 128,
+          "diffusion-profile": "muah_symbolic",
+          "num-steps": 50
+        }
+      },
+      {
+        "name": "diffusion_residual",
+        "family": "diffusion_residual",
+        "register_name": "awgn7_diffusion_residual_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 10,
+          "hidden-dim": 128,
+          "diffusion-profile": "muah_symbolic",
+          "num-steps": 50
+        }
+      }
+    ],
+    "run_specs": [
+      {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_channel",
+        "train_implant_name": null,
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_analytic_seed7",
+        "benchmark_args": {
+          "channel": "AWGN",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "diffusion_direct_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_diffusion_direct_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_diffusion_direct_seed7",
+        "benchmark_args": {
+          "channel": "AWGN",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "diffusion_residual_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_diffusion_residual_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_diffusion_residual_seed7",
+        "benchmark_args": {
+          "channel": "AWGN",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      }
+    ],
+    "global_args": {
+      "implant_dataset_size": 120000,
+      "implant_batch_size": 512,
+      "drifting_epochs": 60,
+      "wgan_epochs": 60,
+      "diffusion_dataset_size": 1000000,
+      "diffusion_batch_size": 500,
+      "diffusion_epochs": 10,
+      "diffusion_hidden_dim": 128,
+      "diffusion_num_steps": 50,
+      "diffusion_ddim_steps": 50,
+      "diffusion_profile": "muah_symbolic",
+      "ae_dataset_size": 1000000,
+      "ae_batch_size": 500,
+      "eval_size": 100000,
+      "ae_epochs": 10,
+      "ae_learning_rate": 0.001,
+      "eval_every": 1
+    }
+  },
+  "implant_runs": {
+    "diffusion_direct": {
+      "spec": {
+        "name": "diffusion_direct",
+        "family": "diffusion_direct",
+        "register_name": "awgn7_diffusion_direct_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 10,
+          "hidden-dim": 128,
+          "diffusion-profile": "muah_symbolic",
+          "num-steps": 50
+        }
+      },
+      "status": "reused",
+      "register_name": "awgn7_diffusion_direct_seed7"
+    },
+    "diffusion_residual": {
+      "spec": {
+        "name": "diffusion_residual",
+        "family": "diffusion_residual",
+        "register_name": "awgn7_diffusion_residual_seed7",
+        "train_args": {
+          "channel": "AWGN",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 10,
+          "hidden-dim": 128,
+          "diffusion-profile": "muah_symbolic",
+          "num-steps": 50
+        }
+      },
+      "status": "reused",
+      "register_name": "awgn7_diffusion_residual_seed7"
+    }
+  },
+  "ae_runs": {
+    "analytic_to_analytic": {
+      "spec": {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_channel",
+        "train_implant_name": null,
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_analytic_seed7",
+        "benchmark_args": {
+          "channel": "AWGN",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 65.67032278999977,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/analytic_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/analytic_to_analytic/summary.json",
+      "final_eval_ser": 0.005660000228090212,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.003265050007030368,
+        "anchor_y_swd": 0.11080969870090485,
+        "anchor_y_floor_swd": 0.1095992848277092,
+        "anchor_y_excess_swd": 0.0012104138731956482,
+        "anchor_y_ratio": 1.0110439942660066,
+        "anchor_residual_swd": 0.11080969870090485,
+        "anchor_residual_floor_swd": 0.1095992848277092,
+        "anchor_residual_excess_swd": 0.0012104138731956482,
+        "anchor_residual_ratio": 1.0110439942660066,
+        "anchor_mean_l2": 0.2099313735961914,
+        "anchor_mean_l2_floor": 0.22020290791988373,
+        "anchor_mean_l2_excess": 0.0,
+        "anchor_mean_l2_ratio": 0.9533542294208512,
+        "anchor_cov_fro": 0.37800508737564087,
+        "anchor_cov_fro_floor": 0.3592492938041687,
+        "anchor_cov_fro_excess": 0.018755793571472168,
+        "anchor_cov_fro_ratio": 1.052208296286022,
+        "anchor_gaussian_w2": 0.42384544014930725,
+        "anchor_gaussian_w2_floor": 0.40995532274246216,
+        "anchor_gaussian_w2_excess": 0.013890117406845093,
+        "anchor_gaussian_w2_ratio": 1.0338820272265887,
+        "y_swd": 0.004179178271442652,
+        "residual_swd": 0.002754255197942257
+      }
+    },
+    "diffusion_direct_to_analytic": {
+      "spec": {
+        "name": "diffusion_direct_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_diffusion_direct_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_diffusion_direct_seed7",
+        "benchmark_args": {
+          "channel": "AWGN",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 1179.9711348589917,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/diffusion_direct_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/diffusion_direct_to_analytic/summary.json",
+      "final_eval_ser": 0.0059900002228096124,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.007655147463083267,
+        "anchor_y_swd": 0.11163493990898132,
+        "anchor_y_floor_swd": 0.10972733050584793,
+        "anchor_y_excess_swd": 0.0019076094031333923,
+        "anchor_y_ratio": 1.017384997833623,
+        "anchor_residual_swd": 0.11163493245840073,
+        "anchor_residual_floor_swd": 0.10972733050584793,
+        "anchor_residual_excess_swd": 0.0019076019525527954,
+        "anchor_residual_ratio": 1.0173849299327584,
+        "anchor_mean_l2": 0.21242059767246246,
+        "anchor_mean_l2_floor": 0.22089368104934692,
+        "anchor_mean_l2_excess": 0.0,
+        "anchor_mean_l2_ratio": 0.9616418028047095,
+        "anchor_cov_fro": 0.37918704748153687,
+        "anchor_cov_fro_floor": 0.3579710125923157,
+        "anchor_cov_fro_excess": 0.02121603488922119,
+        "anchor_cov_fro_ratio": 1.059267466199515,
+        "anchor_gaussian_w2": 0.4269212484359741,
+        "anchor_gaussian_w2_floor": 0.4099378287792206,
+        "anchor_gaussian_w2_excess": 0.01698341965675354,
+        "anchor_gaussian_w2_ratio": 1.0414292569859422,
+        "y_swd": 0.011046767234802246,
+        "residual_swd": 0.011209643445909023
+      }
+    },
+    "diffusion_residual_to_analytic": {
+      "spec": {
+        "name": "diffusion_residual_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "awgn7_diffusion_residual_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_awgn_diffusion_residual_seed7",
+        "benchmark_args": {
+          "channel": "AWGN",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 10,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 1067.427348275989,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/diffusion_residual_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/diffusion_residual_to_analytic/summary.json",
+      "final_eval_ser": 0.008780000339029356,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.043926406651735306,
+        "anchor_y_swd": 0.18309971690177917,
+        "anchor_y_floor_swd": 0.10955655574798584,
+        "anchor_y_excess_swd": 0.07354316115379333,
+        "anchor_y_ratio": 1.6712803323514978,
+        "anchor_residual_swd": 0.18309971690177917,
+        "anchor_residual_floor_swd": 0.10955655574798584,
+        "anchor_residual_excess_swd": 0.07354316115379333,
+        "anchor_residual_ratio": 1.6712803323514978,
+        "anchor_mean_l2": 0.3251972198486328,
+        "anchor_mean_l2_floor": 0.2207052856683731,
+        "anchor_mean_l2_excess": 0.1044919341802597,
+        "anchor_mean_l2_ratio": 1.473445544649379,
+        "anchor_cov_fro": 0.9713312983512878,
+        "anchor_cov_fro_floor": 0.3582070469856262,
+        "anchor_cov_fro_excess": 0.6131242513656616,
+        "anchor_cov_fro_ratio": 2.71164765329216,
+        "anchor_gaussian_w2": 0.7908183932304382,
+        "anchor_gaussian_w2_floor": 0.4095187187194824,
+        "anchor_gaussian_w2_excess": 0.3812996745109558,
+        "anchor_gaussian_w2_ratio": 1.931092174988327,
+        "y_swd": 0.06869257986545563,
+        "residual_swd": 0.09595711529254913
+      }
+    }
+  }
+}

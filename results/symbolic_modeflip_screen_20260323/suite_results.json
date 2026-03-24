@@ -1,0 +1,1918 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cuda",
+    "channel": "ModeFlip",
+    "code_dim": 7,
+    "rate": 0.5714285714285714,
+    "ebno_db": 5.0,
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights",
+    "force_retrain": false,
+    "implant_specs": [
+      {
+        "name": "wgan",
+        "family": "paper_wgan",
+        "register_name": "modeflip7_wgan_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128
+        }
+      },
+      {
+        "name": "drifting_direct_none",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_kernel_scale": 0.0
+        }
+      },
+      {
+        "name": "drifting_direct_joint_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_mixture_cond0p5_a0p5",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.5,
+          "mixture_alpha": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_rawplusres",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5,
+          "target_kernel_mode": "raw_plus_residual",
+          "residual_target_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8
+        }
+      },
+      {
+        "name": "drifting_residual_none",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_kernel_scale": 0.0
+        }
+      },
+      {
+        "name": "drifting_residual_joint_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      {
+        "name": "drifting_residual_product_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      {
+        "name": "drifting_residual_softlocal_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "soft_local",
+          "condition_kernel_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      {
+        "name": "drifting_residual_local_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "local",
+          "condition_kernel_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      {
+        "name": "drifting_residual_mixture_cond0p25_a0p3",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.25,
+          "mixture_alpha": 0.3
+        }
+      },
+      {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8,
+          "condition_embedding_dim": 8,
+          "condition_embedding_hidden_dim": 16
+        }
+      }
+    ],
+    "run_specs": [
+      {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_channel",
+        "train_implant_name": null,
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_analytic_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "wgan_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_wgan_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_wgan_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_none_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_none_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_joint_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_joint_cond0p5_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_product_cond0p5_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_mixture_cond0p5_a0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_mixture_cond0p5_a0p5_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_product_cond0p5_rawplusres_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_product_cond0p5_rawplusres_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_product_whitened_cond0p5_adapt_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_none_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_none_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_joint_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_joint_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_product_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_product_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_softlocal_cond0p25_k16_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_softlocal_cond0p25_k16_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_local_cond0p25_k16_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_local_cond0p25_k16_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_mixture_cond0p25_a0p3_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_mixture_cond0p25_a0p3_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      }
+    ],
+    "global_args": {
+      "implant_dataset_size": 120000,
+      "implant_batch_size": 512,
+      "drifting_epochs": 40,
+      "wgan_epochs": 40,
+      "diffusion_dataset_size": 300000,
+      "diffusion_batch_size": 500,
+      "diffusion_epochs": 10,
+      "diffusion_hidden_dim": 128,
+      "diffusion_num_steps": 50,
+      "diffusion_ddim_steps": 0,
+      "diffusion_profile": "muah_symbolic",
+      "ae_dataset_size": 300000,
+      "ae_batch_size": 500,
+      "eval_size": 50000,
+      "ae_epochs": 8,
+      "ae_learning_rate": 0.001,
+      "eval_every": 1
+    }
+  },
+  "implant_runs": {
+    "wgan": {
+      "spec": {
+        "name": "wgan",
+        "family": "paper_wgan",
+        "register_name": "modeflip7_wgan_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128
+        }
+      },
+      "status": "reused",
+      "register_name": "modeflip7_wgan_seed7"
+    },
+    "drifting_direct_none": {
+      "spec": {
+        "name": "drifting_direct_none",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_kernel_scale": 0.0
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 48.43734643800417,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_direct_none.log"
+      }
+    },
+    "drifting_direct_joint_cond0p5": {
+      "spec": {
+        "name": "drifting_direct_joint_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 57.18315381099819,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_direct_joint_cond0p5.log"
+      }
+    },
+    "drifting_direct_product_cond0p5": {
+      "spec": {
+        "name": "drifting_direct_product_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 69.76562270300929,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_direct_product_cond0p5.log"
+      }
+    },
+    "drifting_direct_mixture_cond0p5_a0p5": {
+      "spec": {
+        "name": "drifting_direct_mixture_cond0p5_a0p5",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.5,
+          "mixture_alpha": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 70.06212527300522,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_direct_mixture_cond0p5_a0p5.log"
+      }
+    },
+    "drifting_direct_product_cond0p5_rawplusres": {
+      "spec": {
+        "name": "drifting_direct_product_cond0p5_rawplusres",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5,
+          "target_kernel_mode": "raw_plus_residual",
+          "residual_target_scale": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 71.90065541600052,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_direct_product_cond0p5_rawplusres.log"
+      }
+    },
+    "drifting_direct_product_whitened_cond0p5_adapt": {
+      "spec": {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt",
+        "family": "drifting_direct",
+        "register_name": "modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.5,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 62.2346682260104,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_direct_product_whitened_cond0p5_adapt.log"
+      }
+    },
+    "drifting_residual_none": {
+      "spec": {
+        "name": "drifting_residual_none",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "none",
+          "condition_kernel_scale": 0.0
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 47.07933708799828,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_residual_none.log"
+      }
+    },
+    "drifting_residual_joint_cond0p25": {
+      "spec": {
+        "name": "drifting_residual_joint_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 56.937850956994225,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_residual_joint_cond0p25.log"
+      }
+    },
+    "drifting_residual_product_cond0p25": {
+      "spec": {
+        "name": "drifting_residual_product_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 68.84152885999356,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_residual_product_cond0p25.log"
+      }
+    },
+    "drifting_residual_softlocal_cond0p25_k16": {
+      "spec": {
+        "name": "drifting_residual_softlocal_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "soft_local",
+          "condition_kernel_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 70.9067356279993,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_residual_softlocal_cond0p25_k16.log"
+      }
+    },
+    "drifting_residual_local_cond0p25_k16": {
+      "spec": {
+        "name": "drifting_residual_local_cond0p25_k16",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "local",
+          "condition_kernel_scale": 0.25,
+          "local_condition_k": 16
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 70.21151440500398,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_residual_local_cond0p25_k16.log"
+      }
+    },
+    "drifting_residual_mixture_cond0p25_a0p3": {
+      "spec": {
+        "name": "drifting_residual_mixture_cond0p25_a0p3",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.25,
+          "mixture_alpha": 0.3
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 67.7910670269921,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_residual_mixture_cond0p25_a0p3.log"
+      }
+    },
+    "drifting_residual_product_whitened_cond0p25_adapt_emb8": {
+      "spec": {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8",
+        "family": "drifting_residual",
+        "register_name": "modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "train_args": {
+          "channel": "ModeFlip",
+          "n": 7,
+          "ebno-db": 5.0,
+          "rate": 0.5714285714285714,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 40,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25,
+          "condition_metric": "whitened",
+          "adaptive_condition_bandwidth": true,
+          "adaptive_target_bandwidth": true,
+          "adaptive_bandwidth_k": 8,
+          "condition_embedding_dim": 8,
+          "condition_embedding_hidden_dim": 16
+        }
+      },
+      "status": "trained",
+      "register_name": "modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+      "runner_result": {
+        "elapsed_seconds": 62.60834869100654,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/implant_drifting_residual_product_whitened_cond0p25_adapt_emb8.log"
+      }
+    }
+  },
+  "ae_runs": {
+    "analytic_to_analytic": {
+      "spec": {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_channel",
+        "train_implant_name": null,
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_analytic_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 22.232064260009793,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/analytic_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/analytic_to_analytic/summary.json",
+      "final_eval_ser": 0.32040001571178434,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.006417504511773586,
+        "anchor_y_swd": 0.1463429480791092,
+        "anchor_y_floor_swd": 0.18740391731262207,
+        "anchor_y_excess_swd": 0.0,
+        "anchor_y_ratio": 0.7808958861568721,
+        "anchor_residual_swd": 0.1463429480791092,
+        "anchor_residual_floor_swd": 0.18740391731262207,
+        "anchor_residual_excess_swd": 0.0,
+        "anchor_residual_ratio": 0.7808958861568721,
+        "anchor_mean_l2": 0.3059801757335663,
+        "anchor_mean_l2_floor": 0.46219104528427124,
+        "anchor_mean_l2_excess": 0.0,
+        "anchor_mean_l2_ratio": 0.6620209951176634,
+        "anchor_cov_fro": 1.0064198970794678,
+        "anchor_cov_fro_floor": 1.0376391410827637,
+        "anchor_cov_fro_excess": 0.0,
+        "anchor_cov_fro_ratio": 0.9699131974043317,
+        "anchor_gaussian_w2": 0.45756423473358154,
+        "anchor_gaussian_w2_floor": 0.5696731805801392,
+        "anchor_gaussian_w2_excess": 0.0,
+        "anchor_gaussian_w2_ratio": 0.8032048029145605,
+        "y_swd": 0.008088004775345325,
+        "residual_swd": 0.010484670288860798
+      }
+    },
+    "wgan_to_analytic": {
+      "spec": {
+        "name": "wgan_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_wgan_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_wgan_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.206637094001053,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/wgan_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/wgan_to_analytic/summary.json",
+      "final_eval_ser": 0.8758600425720214,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.37364083528518677,
+        "anchor_y_swd": 0.8974689245223999,
+        "anchor_y_floor_swd": 0.07745485007762909,
+        "anchor_y_excess_swd": 0.8200140744447708,
+        "anchor_y_ratio": 11.586994534530918,
+        "anchor_residual_swd": 0.8974689245223999,
+        "anchor_residual_floor_swd": 0.0774548351764679,
+        "anchor_residual_excess_swd": 0.820014089345932,
+        "anchor_residual_ratio": 11.586996763696765,
+        "anchor_mean_l2": 0.45872753858566284,
+        "anchor_mean_l2_floor": 0.20296944677829742,
+        "anchor_mean_l2_excess": 0.2557580918073654,
+        "anchor_mean_l2_ratio": 2.260081730856412,
+        "anchor_cov_fro": 10.110286712646484,
+        "anchor_cov_fro_floor": 1.2674171924591064,
+        "anchor_cov_fro_excess": 8.842869520187378,
+        "anchor_cov_fro_ratio": 7.977078717884518,
+        "anchor_gaussian_w2": 3.1660561561584473,
+        "anchor_gaussian_w2_floor": 0.24226807057857513,
+        "anchor_gaussian_w2_excess": 2.923788085579872,
+        "anchor_gaussian_w2_ratio": 13.068400423536604,
+        "y_swd": 0.483752965927124,
+        "residual_swd": 0.6021751165390015
+      }
+    },
+    "drifting_direct_none_to_analytic": {
+      "spec": {
+        "name": "drifting_direct_none_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_none_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.315712454990717,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_none_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_none_to_analytic/summary.json",
+      "final_eval_ser": 0.6732600325345993,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.21289128065109253,
+        "anchor_y_swd": 0.8988029956817627,
+        "anchor_y_floor_swd": 0.20982614159584045,
+        "anchor_y_excess_swd": 0.6889768540859222,
+        "anchor_y_ratio": 4.283560612828714,
+        "anchor_residual_swd": 0.8988029956817627,
+        "anchor_residual_floor_swd": 0.20982614159584045,
+        "anchor_residual_excess_swd": 0.6889768540859222,
+        "anchor_residual_ratio": 4.283560612828714,
+        "anchor_mean_l2": 2.681765556335449,
+        "anchor_mean_l2_floor": 0.48013487458229065,
+        "anchor_mean_l2_excess": 2.2016306817531586,
+        "anchor_mean_l2_ratio": 5.585442129502758,
+        "anchor_cov_fro": 6.805567264556885,
+        "anchor_cov_fro_floor": 1.0930454730987549,
+        "anchor_cov_fro_excess": 5.71252179145813,
+        "anchor_cov_fro_ratio": 6.226243493112214,
+        "anchor_gaussian_w2": 3.5084404945373535,
+        "anchor_gaussian_w2_floor": 0.6436128616333008,
+        "anchor_gaussian_w2_excess": 2.8648276329040527,
+        "anchor_gaussian_w2_ratio": 5.451165916159537,
+        "y_swd": 0.2114987075328827,
+        "residual_swd": 0.4125734567642212
+      }
+    },
+    "drifting_direct_joint_cond0p5_to_analytic": {
+      "spec": {
+        "name": "drifting_direct_joint_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_joint_cond0p5_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.315340056011337,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_joint_cond0p5_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_joint_cond0p5_to_analytic/summary.json",
+      "final_eval_ser": 0.9438400441408157,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.37972429394721985,
+        "anchor_y_swd": 0.9319072961807251,
+        "anchor_y_floor_swd": 0.11988822370767593,
+        "anchor_y_excess_swd": 0.8120190724730492,
+        "anchor_y_ratio": 7.7731345695220195,
+        "anchor_residual_swd": 0.9319072961807251,
+        "anchor_residual_floor_swd": 0.11988822370767593,
+        "anchor_residual_excess_swd": 0.8120190724730492,
+        "anchor_residual_ratio": 7.7731345695220195,
+        "anchor_mean_l2": 0.561083197593689,
+        "anchor_mean_l2_floor": 0.3362886607646942,
+        "anchor_mean_l2_excess": 0.22479453682899475,
+        "anchor_mean_l2_ratio": 1.6684570818350803,
+        "anchor_cov_fro": 9.570820808410645,
+        "anchor_cov_fro_floor": 0.9221490621566772,
+        "anchor_cov_fro_excess": 8.648671746253967,
+        "anchor_cov_fro_ratio": 10.378821820874464,
+        "anchor_gaussian_w2": 3.2427754402160645,
+        "anchor_gaussian_w2_floor": 0.3708747923374176,
+        "anchor_gaussian_w2_excess": 2.871900647878647,
+        "anchor_gaussian_w2_ratio": 8.743585455831749,
+        "y_swd": 0.4611995220184326,
+        "residual_swd": 0.5851587057113647
+      }
+    },
+    "drifting_direct_product_cond0p5_to_analytic": {
+      "spec": {
+        "name": "drifting_direct_product_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_product_cond0p5_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.12503450800432,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_cond0p5_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_cond0p5_to_analytic/summary.json",
+      "final_eval_ser": 0.9885000437498093,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.3438345193862915,
+        "anchor_y_swd": 0.9375117421150208,
+        "anchor_y_floor_swd": 0.05958022177219391,
+        "anchor_y_excess_swd": 0.8779315203428268,
+        "anchor_y_ratio": 15.73528453283733,
+        "anchor_residual_swd": 0.9375117421150208,
+        "anchor_residual_floor_swd": 0.05958021432161331,
+        "anchor_residual_excess_swd": 0.8779315277934074,
+        "anchor_residual_ratio": 15.735286500554414,
+        "anchor_mean_l2": 0.4229583740234375,
+        "anchor_mean_l2_floor": 0.1245962530374527,
+        "anchor_mean_l2_excess": 0.2983621209859848,
+        "anchor_mean_l2_ratio": 3.394631569669269,
+        "anchor_cov_fro": 10.66301155090332,
+        "anchor_cov_fro_floor": 1.2465232610702515,
+        "anchor_cov_fro_excess": 9.416488289833069,
+        "anchor_cov_fro_ratio": 8.554201821912391,
+        "anchor_gaussian_w2": 3.209902286529541,
+        "anchor_gaussian_w2_floor": 0.18963612616062164,
+        "anchor_gaussian_w2_excess": 3.0202661603689194,
+        "anchor_gaussian_w2_ratio": 16.926639198539398,
+        "y_swd": 0.4116930067539215,
+        "residual_swd": 0.53205806016922
+      }
+    },
+    "drifting_direct_mixture_cond0p5_a0p5_to_analytic": {
+      "spec": {
+        "name": "drifting_direct_mixture_cond0p5_a0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_mixture_cond0p5_a0p5_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.142284807996475,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_mixture_cond0p5_a0p5_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_mixture_cond0p5_a0p5_to_analytic/summary.json",
+      "final_eval_ser": 0.9933800393342972,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.37212419509887695,
+        "anchor_y_swd": 0.9543222188949585,
+        "anchor_y_floor_swd": 0.07552337646484375,
+        "anchor_y_excess_swd": 0.8787988424301147,
+        "anchor_y_ratio": 12.636116968885746,
+        "anchor_residual_swd": 0.9543222188949585,
+        "anchor_residual_floor_swd": 0.07552338391542435,
+        "anchor_residual_excess_swd": 0.8787988349795341,
+        "anchor_residual_ratio": 12.63611572229955,
+        "anchor_mean_l2": 0.5168064832687378,
+        "anchor_mean_l2_floor": 0.17721717059612274,
+        "anchor_mean_l2_excess": 0.33958931267261505,
+        "anchor_mean_l2_ratio": 2.916232561045328,
+        "anchor_cov_fro": 10.271688461303711,
+        "anchor_cov_fro_floor": 1.0014528036117554,
+        "anchor_cov_fro_excess": 9.270235657691956,
+        "anchor_cov_fro_ratio": 10.2567873635769,
+        "anchor_gaussian_w2": 3.2984371185302734,
+        "anchor_gaussian_w2_floor": 0.22569184005260468,
+        "anchor_gaussian_w2_excess": 3.0727452784776688,
+        "anchor_gaussian_w2_ratio": 14.614782341096017,
+        "y_swd": 0.43601441383361816,
+        "residual_swd": 0.5664504766464233
+      }
+    },
+    "drifting_direct_product_cond0p5_rawplusres_to_analytic": {
+      "spec": {
+        "name": "drifting_direct_product_cond0p5_rawplusres_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_product_cond0p5_rawplusres_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.61452415000531,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_cond0p5_rawplusres_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_cond0p5_rawplusres_to_analytic/summary.json",
+      "final_eval_ser": 0.9727400434017182,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.3452746868133545,
+        "anchor_y_swd": 0.9315987825393677,
+        "anchor_y_floor_swd": 0.05666864663362503,
+        "anchor_y_excess_swd": 0.8749301359057426,
+        "anchor_y_ratio": 16.43940411286604,
+        "anchor_residual_swd": 0.9315987825393677,
+        "anchor_residual_floor_swd": 0.05666864663362503,
+        "anchor_residual_excess_swd": 0.8749301359057426,
+        "anchor_residual_ratio": 16.43940411286604,
+        "anchor_mean_l2": 0.49566954374313354,
+        "anchor_mean_l2_floor": 0.10554303228855133,
+        "anchor_mean_l2_excess": 0.3901265114545822,
+        "anchor_mean_l2_ratio": 4.696373914935366,
+        "anchor_cov_fro": 9.923375129699707,
+        "anchor_cov_fro_floor": 1.0865824222564697,
+        "anchor_cov_fro_excess": 8.836792707443237,
+        "anchor_cov_fro_ratio": 9.13264831681352,
+        "anchor_gaussian_w2": 3.1537997722625732,
+        "anchor_gaussian_w2_floor": 0.17350424826145172,
+        "anchor_gaussian_w2_excess": 2.9802955240011215,
+        "anchor_gaussian_w2_ratio": 18.177075223599974,
+        "y_swd": 0.4176117777824402,
+        "residual_swd": 0.5308529734611511
+      }
+    },
+    "drifting_direct_product_whitened_cond0p5_adapt_to_analytic": {
+      "spec": {
+        "name": "drifting_direct_product_whitened_cond0p5_adapt_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_direct_product_whitened_cond0p5_adapt_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.46735338700819,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_whitened_cond0p5_adapt_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_whitened_cond0p5_adapt_to_analytic/summary.json",
+      "final_eval_ser": 0.14276000678539277,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.05806694179773331,
+        "anchor_y_swd": 0.27599024772644043,
+        "anchor_y_floor_swd": 0.20241062343120575,
+        "anchor_y_excess_swd": 0.07357962429523468,
+        "anchor_y_ratio": 1.3635166131497172,
+        "anchor_residual_swd": 0.27599024772644043,
+        "anchor_residual_floor_swd": 0.20241062343120575,
+        "anchor_residual_excess_swd": 0.07357962429523468,
+        "anchor_residual_ratio": 1.3635166131497172,
+        "anchor_mean_l2": 0.5451984405517578,
+        "anchor_mean_l2_floor": 0.45602449774742126,
+        "anchor_mean_l2_excess": 0.08917394280433655,
+        "anchor_mean_l2_ratio": 1.195546386750756,
+        "anchor_cov_fro": 2.432366371154785,
+        "anchor_cov_fro_floor": 1.04188871383667,
+        "anchor_cov_fro_excess": 1.3904776573181152,
+        "anchor_cov_fro_ratio": 2.3345740661666206,
+        "anchor_gaussian_w2": 0.9486178755760193,
+        "anchor_gaussian_w2_floor": 0.6264963746070862,
+        "anchor_gaussian_w2_excess": 0.3221215009689331,
+        "anchor_gaussian_w2_ratio": 1.5141633918806872,
+        "y_swd": 0.09213101118803024,
+        "residual_swd": 0.08285794407129288
+      }
+    },
+    "drifting_residual_none_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_none_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_none_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.486842025988153,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_none_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_none_to_analytic/summary.json",
+      "final_eval_ser": 0.4189400207996368,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.20089733600616455,
+        "anchor_y_swd": 0.4982941746711731,
+        "anchor_y_floor_swd": 0.20803213119506836,
+        "anchor_y_excess_swd": 0.29026204347610474,
+        "anchor_y_ratio": 2.395275055870724,
+        "anchor_residual_swd": 0.4982941746711731,
+        "anchor_residual_floor_swd": 0.20803213119506836,
+        "anchor_residual_excess_swd": 0.29026204347610474,
+        "anchor_residual_ratio": 2.395275055870724,
+        "anchor_mean_l2": 0.6777935028076172,
+        "anchor_mean_l2_floor": 0.4825299084186554,
+        "anchor_mean_l2_excess": 0.1952635943889618,
+        "anchor_mean_l2_ratio": 1.4046663035435019,
+        "anchor_cov_fro": 4.185297012329102,
+        "anchor_cov_fro_floor": 1.0902820825576782,
+        "anchor_cov_fro_excess": 3.0950149297714233,
+        "anchor_cov_fro_ratio": 3.838728599951738,
+        "anchor_gaussian_w2": 1.538171410560608,
+        "anchor_gaussian_w2_floor": 0.6408534049987793,
+        "anchor_gaussian_w2_excess": 0.8973180055618286,
+        "anchor_gaussian_w2_ratio": 2.400192303828889,
+        "y_swd": 0.46060240268707275,
+        "residual_swd": 0.17735661566257477
+      }
+    },
+    "drifting_residual_joint_cond0p25_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_joint_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_joint_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.31256235699402,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_joint_cond0p25_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_joint_cond0p25_to_analytic/summary.json",
+      "final_eval_ser": 0.32210001438856123,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.17347902059555054,
+        "anchor_y_swd": 0.41876697540283203,
+        "anchor_y_floor_swd": 0.2199036031961441,
+        "anchor_y_excess_swd": 0.19886337220668793,
+        "anchor_y_ratio": 1.904320662855673,
+        "anchor_residual_swd": 0.41876697540283203,
+        "anchor_residual_floor_swd": 0.2199036180973053,
+        "anchor_residual_excess_swd": 0.19886335730552673,
+        "anchor_residual_ratio": 1.904320533814644,
+        "anchor_mean_l2": 0.7846522927284241,
+        "anchor_mean_l2_floor": 0.5045630931854248,
+        "anchor_mean_l2_excess": 0.28008919954299927,
+        "anchor_mean_l2_ratio": 1.5551123404106524,
+        "anchor_cov_fro": 2.7908241748809814,
+        "anchor_cov_fro_floor": 1.102797031402588,
+        "anchor_cov_fro_excess": 1.6880271434783936,
+        "anchor_cov_fro_ratio": 2.530677990066298,
+        "anchor_gaussian_w2": 1.365004539489746,
+        "anchor_gaussian_w2_floor": 0.6631742119789124,
+        "anchor_gaussian_w2_excess": 0.7018303275108337,
+        "anchor_gaussian_w2_ratio": 2.0582895336303437,
+        "y_swd": 0.3612560033798218,
+        "residual_swd": 0.1911212056875229
+      }
+    },
+    "drifting_residual_product_cond0p25_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_product_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_product_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.35435898900323,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_product_cond0p25_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_product_cond0p25_to_analytic/summary.json",
+      "final_eval_ser": 0.275020013153553,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.10671372711658478,
+        "anchor_y_swd": 0.3844084143638611,
+        "anchor_y_floor_swd": 0.20929893851280212,
+        "anchor_y_excess_swd": 0.17510947585105896,
+        "anchor_y_ratio": 1.8366477015856824,
+        "anchor_residual_swd": 0.3844084143638611,
+        "anchor_residual_floor_swd": 0.20929893851280212,
+        "anchor_residual_excess_swd": 0.17510947585105896,
+        "anchor_residual_ratio": 1.8366477015856824,
+        "anchor_mean_l2": 0.7412698268890381,
+        "anchor_mean_l2_floor": 0.4930917024612427,
+        "anchor_mean_l2_excess": 0.2481781244277954,
+        "anchor_mean_l2_ratio": 1.5033102832374317,
+        "anchor_cov_fro": 5.063713073730469,
+        "anchor_cov_fro_floor": 1.1127114295959473,
+        "anchor_cov_fro_excess": 3.9510016441345215,
+        "anchor_cov_fro_ratio": 4.550787328183756,
+        "anchor_gaussian_w2": 1.3874874114990234,
+        "anchor_gaussian_w2_floor": 0.6502479314804077,
+        "anchor_gaussian_w2_excess": 0.7372394800186157,
+        "anchor_gaussian_w2_ratio": 2.1337821226745866,
+        "y_swd": 0.16949231922626495,
+        "residual_swd": 0.21706116199493408
+      }
+    },
+    "drifting_residual_softlocal_cond0p25_k16_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_softlocal_cond0p25_k16_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_softlocal_cond0p25_k16_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.36391544700018,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_softlocal_cond0p25_k16_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_softlocal_cond0p25_k16_to_analytic/summary.json",
+      "final_eval_ser": 0.5269400253891945,
+      "train_implant_metrics": {
+        "joint_xy_swd": 2.0032613277435303,
+        "anchor_y_swd": 3.7233424186706543,
+        "anchor_y_floor_swd": 0.21659162640571594,
+        "anchor_y_excess_swd": 3.5067507922649384,
+        "anchor_y_ratio": 17.190611107449506,
+        "anchor_residual_swd": 3.7233424186706543,
+        "anchor_residual_floor_swd": 0.21659162640571594,
+        "anchor_residual_excess_swd": 3.5067507922649384,
+        "anchor_residual_ratio": 17.190611107449506,
+        "anchor_mean_l2": 12.082196235656738,
+        "anchor_mean_l2_floor": 0.5094491243362427,
+        "anchor_mean_l2_excess": 11.572747111320496,
+        "anchor_mean_l2_ratio": 23.716197866467116,
+        "anchor_cov_fro": 7.1926469802856445,
+        "anchor_cov_fro_floor": 1.1380281448364258,
+        "anchor_cov_fro_excess": 6.054618835449219,
+        "anchor_cov_fro_ratio": 6.320271614477055,
+        "anchor_gaussian_w2": 12.342378616333008,
+        "anchor_gaussian_w2_floor": 0.6660056114196777,
+        "anchor_gaussian_w2_excess": 11.67637300491333,
+        "anchor_gaussian_w2_ratio": 18.531943882610268,
+        "y_swd": 3.038276195526123,
+        "residual_swd": 3.646615743637085
+      }
+    },
+    "drifting_residual_local_cond0p25_k16_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_local_cond0p25_k16_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_local_cond0p25_k16_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 21.859081492992118,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_local_cond0p25_k16_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_local_cond0p25_k16_to_analytic/summary.json",
+      "final_eval_ser": 0.574100027680397,
+      "train_implant_metrics": {
+        "joint_xy_swd": 4.295621395111084,
+        "anchor_y_swd": 6.962657451629639,
+        "anchor_y_floor_swd": 0.21574963629245758,
+        "anchor_y_excess_swd": 6.746907815337181,
+        "anchor_y_ratio": 32.27193135190952,
+        "anchor_residual_swd": 6.962657451629639,
+        "anchor_residual_floor_swd": 0.21574963629245758,
+        "anchor_residual_excess_swd": 6.746907815337181,
+        "anchor_residual_ratio": 32.27193135190952,
+        "anchor_mean_l2": 22.74883270263672,
+        "anchor_mean_l2_floor": 0.5080180168151855,
+        "anchor_mean_l2_excess": 22.240814685821533,
+        "anchor_mean_l2_ratio": 44.77957857725474,
+        "anchor_cov_fro": 7.1474151611328125,
+        "anchor_cov_fro_floor": 1.1169990301132202,
+        "anchor_cov_fro_excess": 6.030416131019592,
+        "anchor_cov_fro_ratio": 6.398765771898963,
+        "anchor_gaussian_w2": 22.87066650390625,
+        "anchor_gaussian_w2_floor": 0.6634721755981445,
+        "anchor_gaussian_w2_excess": 22.207194328308105,
+        "anchor_gaussian_w2_ratio": 34.471176554295596,
+        "y_swd": 6.332174777984619,
+        "residual_swd": 6.98281192779541
+      }
+    },
+    "drifting_residual_mixture_cond0p25_a0p3_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_mixture_cond0p25_a0p3_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_mixture_cond0p25_a0p3_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 20.57920783299778,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_mixture_cond0p25_a0p3_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_mixture_cond0p25_a0p3_to_analytic/summary.json",
+      "final_eval_ser": 0.21088001042604446,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.08943843841552734,
+        "anchor_y_swd": 0.35443270206451416,
+        "anchor_y_floor_swd": 0.21267221868038177,
+        "anchor_y_excess_swd": 0.14176048338413239,
+        "anchor_y_ratio": 1.6665679432120828,
+        "anchor_residual_swd": 0.35443270206451416,
+        "anchor_residual_floor_swd": 0.21267220377922058,
+        "anchor_residual_excess_swd": 0.14176049828529358,
+        "anchor_residual_ratio": 1.6665680599823853,
+        "anchor_mean_l2": 0.7046264410018921,
+        "anchor_mean_l2_floor": 0.49510443210601807,
+        "anchor_mean_l2_excess": 0.20952200889587402,
+        "anchor_mean_l2_ratio": 1.4231875041082414,
+        "anchor_cov_fro": 3.6589901447296143,
+        "anchor_cov_fro_floor": 1.0831385850906372,
+        "anchor_cov_fro_excess": 2.575851559638977,
+        "anchor_cov_fro_ratio": 3.3781366439119416,
+        "anchor_gaussian_w2": 1.247793436050415,
+        "anchor_gaussian_w2_floor": 0.6579909920692444,
+        "anchor_gaussian_w2_excess": 0.5898024439811707,
+        "anchor_gaussian_w2_ratio": 1.8963685690078598,
+        "y_swd": 0.15515872836112976,
+        "residual_swd": 0.18812282383441925
+      }
+    },
+    "drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_modeflip_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7",
+        "benchmark_args": {
+          "channel": "ModeFlip",
+          "message-dim": 16,
+          "code-dim": 7,
+          "hidden-dim": 16,
+          "rate": 0.5714285714285714,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 300000,
+          "eval-size": 50000,
+          "epochs": 8,
+          "learning-rate": 0.001,
+          "eval-every": 1,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 50
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 19.86699384599342,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic/summary.json",
+      "final_eval_ser": 0.7462400335073471,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.432284951210022,
+        "anchor_y_swd": 0.6609489917755127,
+        "anchor_y_floor_swd": 0.1589425504207611,
+        "anchor_y_excess_swd": 0.5020064413547516,
+        "anchor_y_ratio": 4.158414408387268,
+        "anchor_residual_swd": 0.6609489917755127,
+        "anchor_residual_floor_swd": 0.1589425504207611,
+        "anchor_residual_excess_swd": 0.5020064413547516,
+        "anchor_residual_ratio": 4.158414408387268,
+        "anchor_mean_l2": 2.033834457397461,
+        "anchor_mean_l2_floor": 0.3484950363636017,
+        "anchor_mean_l2_excess": 1.6853394210338593,
+        "anchor_mean_l2_ratio": 5.836050001227172,
+        "anchor_cov_fro": 3.089603900909424,
+        "anchor_cov_fro_floor": 1.0175790786743164,
+        "anchor_cov_fro_excess": 2.0720248222351074,
+        "anchor_cov_fro_ratio": 3.0362297787553807,
+        "anchor_gaussian_w2": 2.24843430519104,
+        "anchor_gaussian_w2_floor": 0.4793303608894348,
+        "anchor_gaussian_w2_excess": 1.7691039443016052,
+        "anchor_gaussian_w2_ratio": 4.690782159133202,
+        "y_swd": 0.6228174567222595,
+        "residual_swd": 0.6686015725135803
+      }
+    }
+  }
+}

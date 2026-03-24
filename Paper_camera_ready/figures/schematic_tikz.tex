@@ -1,0 +1,23 @@
+\input{figures/tikz_shared_styles.tex}
+\begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    boxblue/.style={boxbluebase},
+    boxviolet/.style={boxvioletbase},
+    boxgreen/.style={boxgreenbase}
+]
+\fill[white] (-0.5,-2.3) rectangle (8.7,3.1);
+\node[title] at (4.0,2.5) {Residual-mode one-shot inference};
+\coordinate (inferstart) at (0.2,1.1);
+\node[boxblue, minimum width=1.45cm, minimum height=0.95cm, anchor=west] (cond2) at (inferstart) {$x$};
+\node[boxviolet, minimum width=1.55cm, minimum height=1.05cm, right=0.28cm of cond2.east, anchor=west] (latent2) {$z$};
+\node[boxviolet, minimum width=2.2cm, minimum height=1.05cm, right=0.32cm of latent2.east, anchor=west] (gen2) {$g_\theta(x,z)$};
+\node[boxgreen, minimum width=1.7cm, minimum height=1.0cm, right=0.32cm of gen2.east, anchor=west] (ehat) {$\hat e$};
+\node[boxgreen, minimum width=2.15cm, minimum height=1.0cm, right=0.32cm of ehat.east, anchor=west] (yhat) {$\hat y=x+\hat e$};
+\draw[flow, blue!70!black] (cond2.east) -- (gen2.west);
+\draw[flow, violet!80!black] (latent2.east) -- (gen2.west);
+\draw[flow, green!50!black] (gen2.east) -- (ehat.west);
+\draw[flow, green!50!black] (ehat.east) -- (yhat.west);
+\node[note, text width=5.8cm] at (4.1,-0.35) {After training: draw \(z\), evaluate \(g_\theta(x,z)\) once, and reconstruct the channel output as \(\hat y=x+\hat e\).};
+\node[note, text width=3.0cm, red!70!black] at (7.35,-1.45) {Constant-depth,\\one-shot sampling.};
+\end{tikzpicture}

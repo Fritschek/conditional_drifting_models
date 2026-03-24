@@ -1,0 +1,61 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 7,
+    "hidden_dim": 16,
+    "batch_size": 128,
+    "dataset_size": 2000,
+    "epochs": 1,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 512
+  },
+  "train_implant": "paper_wgan",
+  "eval_implant": "analytic_awgn",
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 2.760499283671379,
+      "train_ser": 0.9052734375,
+      "eval_ser": 0.904296875
+    }
+  ],
+  "train_seconds": 0.13159821600129362,
+  "final_eval": {
+    "loss": 2.727371573448181,
+    "ser": 0.876953125
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.05306217074394226,
+    "anchor_y_swd": 0.13564647734165192,
+    "anchor_y_floor_swd": 0.11511123180389404,
+    "anchor_y_excess_swd": 0.020535245537757874,
+    "anchor_y_ratio": 1.1783948031478124,
+    "anchor_residual_swd": 0.13564647734165192,
+    "anchor_residual_floor_swd": 0.11511124670505524,
+    "anchor_residual_excess_swd": 0.02053523063659668,
+    "anchor_residual_ratio": 1.1783946506044995,
+    "y_swd": 0.0768265575170517,
+    "residual_swd": 0.07534319907426834
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.03328055143356323,
+    "anchor_y_swd": 0.11543458700180054,
+    "anchor_y_floor_swd": 0.11514285206794739,
+    "anchor_y_excess_swd": 0.0002917349338531494,
+    "anchor_y_ratio": 1.002533678197245,
+    "anchor_residual_swd": 0.11543458700180054,
+    "anchor_residual_floor_swd": 0.11514285206794739,
+    "anchor_residual_excess_swd": 0.0002917349338531494,
+    "anchor_residual_ratio": 1.002533678197245,
+    "y_swd": 0.04518956318497658,
+    "residual_swd": 0.03974590450525284
+  },
+  "seed": 7,
+  "device": "cpu",
+  "channel": "AWGN",
+  "train_implant_source": "awgn7_wgan_seed7",
+  "eval_implant_source": null
+}

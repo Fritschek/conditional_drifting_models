@@ -1,0 +1,1795 @@
+{
+  "awgn7_diffusion_direct_muahquick_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_direct_muahquick_seed7.pt",
+    "family": "diffusion_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_direct_muahquick_seed7.json",
+    "name": "awgn7_diffusion_direct_muahquick_seed7",
+    "seed": 7
+  },
+  "awgn7_diffusion_direct_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_direct_seed7.pt",
+    "family": "diffusion_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_direct_seed7.json",
+    "name": "awgn7_diffusion_direct_seed7",
+    "seed": 7
+  },
+  "awgn7_diffusion_residual_muahquick_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_residual_muahquick_seed7.pt",
+    "family": "diffusion_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_residual_muahquick_seed7.json",
+    "name": "awgn7_diffusion_residual_muahquick_seed7",
+    "seed": 7
+  },
+  "awgn7_diffusion_residual_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_residual_seed7.pt",
+    "family": "diffusion_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_diffusion_residual_seed7.json",
+    "name": "awgn7_diffusion_residual_seed7",
+    "seed": 7
+  },
+  "awgn7_direct_highbudget_queue_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_direct_highbudget_queue_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_direct_highbudget_queue_seed7.json",
+    "name": "awgn7_direct_highbudget_queue_seed7",
+    "seed": 7
+  },
+  "awgn7_direct_none_fullbudget_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_direct_none_fullbudget_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_direct_none_fullbudget_seed7.json",
+    "name": "awgn7_direct_none_fullbudget_seed7",
+    "seed": 7
+  },
+  "awgn7_direct_none_queue_big_decay_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_direct_none_queue_big_decay_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_direct_none_queue_big_decay_seed7.json",
+    "name": "awgn7_direct_none_queue_big_decay_seed7",
+    "seed": 7
+  },
+  "awgn7_direct_none_queue_big_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_direct_none_queue_big_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_direct_none_queue_big_seed7.json",
+    "name": "awgn7_direct_none_queue_big_seed7",
+    "seed": 7
+  },
+  "awgn7_drift_direct_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drift_direct_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drift_direct_seed7.json",
+    "name": "awgn7_drift_direct_seed7",
+    "seed": 7
+  },
+  "awgn7_drift_residual_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drift_residual_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drift_residual_seed7.json",
+    "name": "awgn7_drift_residual_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_cond0_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond0_targ1_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond0_targ1_seed7.json",
+    "name": "awgn7_drifting_direct_cond0_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_cond0p1_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond0p1_targ1_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond0p1_targ1_seed7.json",
+    "name": "awgn7_drifting_direct_cond0p1_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_cond0p25_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond0p25_targ1_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond0p25_targ1_seed7.json",
+    "name": "awgn7_drifting_direct_cond0p25_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_cond0p5_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond0p5_targ1_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond0p5_targ1_seed7.json",
+    "name": "awgn7_drifting_direct_cond0p5_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_cond1_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond1_targ1_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_cond1_targ1_seed7.json",
+    "name": "awgn7_drifting_direct_cond1_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_product_cond0p5_queue_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_product_cond0p5_queue_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_product_cond0p5_queue_seed7.json",
+    "name": "awgn7_drifting_direct_product_cond0p5_queue_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7.json",
+    "name": "awgn7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_cond0_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond0_targ1_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond0_targ1_seed7.json",
+    "name": "awgn7_drifting_residual_cond0_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_cond0p1_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond0p1_targ1_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond0p1_targ1_seed7.json",
+    "name": "awgn7_drifting_residual_cond0p1_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_cond0p25_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond0p25_targ1_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond0p25_targ1_seed7.json",
+    "name": "awgn7_drifting_residual_cond0p25_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_cond0p5_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond0p5_targ1_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond0p5_targ1_seed7.json",
+    "name": "awgn7_drifting_residual_cond0p5_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_cond1_targ1_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond1_targ1_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_cond1_targ1_seed7.json",
+    "name": "awgn7_drifting_residual_cond1_targ1_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7.json",
+    "name": "awgn7_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7.json",
+    "name": "awgn7_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7.json",
+    "name": "awgn7_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_product_whitened_cond0p25_queue_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_whitened_cond0p25_queue_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_whitened_cond0p25_queue_seed7.json",
+    "name": "awgn7_drifting_residual_product_whitened_cond0p25_queue_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7.json",
+    "name": "awgn7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+    "seed": 7
+  },
+  "awgn7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "awgn7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "awgn7_residual_highbudget_queue_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_residual_highbudget_queue_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_residual_highbudget_queue_seed7.json",
+    "name": "awgn7_residual_highbudget_queue_seed7",
+    "seed": 7
+  },
+  "awgn7_wgan_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_wgan_seed7.pt",
+    "family": "paper_wgan",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn7_wgan_seed7.json",
+    "name": "awgn7_wgan_seed7",
+    "seed": 7
+  },
+  "awgn_drift_direct_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn_drift_direct_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn_drift_direct_seed7.json",
+    "name": "awgn_drift_direct_seed7",
+    "seed": 7
+  },
+  "awgn_drift_residual_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn_drift_residual_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn_drift_residual_seed7.json",
+    "name": "awgn_drift_residual_seed7",
+    "seed": 7
+  },
+  "awgn_wgan_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn_wgan_seed7.pt",
+    "family": "paper_wgan",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/awgn/awgn_wgan_seed7.json",
+    "name": "awgn_wgan_seed7",
+    "seed": 7
+  },
+  "cnn_turbo_awgn_analytic_seed7": {
+    "category": "e2e_autoencoder",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/e2e_autoencoders/cnn_turbo/cnn_turbo_awgn_analytic_seed7.pt",
+    "eval_implant": "analytic_awgn",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/e2e_autoencoders/cnn_turbo/cnn_turbo_awgn_analytic_seed7.json",
+    "model_type": "cnn_turbo",
+    "name": "cnn_turbo_awgn_analytic_seed7",
+    "seed": 7,
+    "train_implant": "analytic_awgn"
+  },
+  "drifting_direct_awgn_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/tmp/awgn7_drift_direct_rawplusresidual_smoke.pt",
+    "family": "drifting_direct",
+    "metadata": "/tmp/awgn7_drift_direct_rawplusresidual_smoke.json",
+    "name": "drifting_direct_awgn_seed7",
+    "seed": 7
+  },
+  "drifting_residual_awgn_seed7": {
+    "category": "channel_implant",
+    "channel": "AWGN",
+    "checkpoint": "/tmp/awgn7_drift_residual_radius_smoke.pt",
+    "family": "drifting_residual",
+    "metadata": "/tmp/awgn7_drift_residual_radius_smoke.json",
+    "name": "drifting_residual_awgn_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7.json",
+    "name": "modeflip7_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7.json",
+    "name": "modeflip7_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+    "seed": 7
+  },
+  "modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "modeflip7_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "modeflip7_wgan_seed7": {
+    "category": "channel_implant",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_wgan_seed7.pt",
+    "family": "paper_wgan",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/modeflip/modeflip7_wgan_seed7.json",
+    "name": "modeflip7_wgan_seed7",
+    "seed": 7
+  },
+  "optfib2_diffusion_direct_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_diffusion_direct_seed7.pt",
+    "family": "diffusion_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_diffusion_direct_seed7.json",
+    "name": "optfib2_diffusion_direct_seed7",
+    "seed": 7
+  },
+  "optfib2_diffusion_residual_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_diffusion_residual_seed7.pt",
+    "family": "diffusion_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_diffusion_residual_seed7.json",
+    "name": "optfib2_diffusion_residual_seed7",
+    "seed": 7
+  },
+  "optfib2_direct_none_fullbudget_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_direct_none_fullbudget_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_direct_none_fullbudget_seed7.json",
+    "name": "optfib2_direct_none_fullbudget_seed7",
+    "seed": 7
+  },
+  "optfib2_direct_product_whitened_cond0p5_adapt_fullbudget_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_direct_product_whitened_cond0p5_adapt_fullbudget_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_direct_product_whitened_cond0p5_adapt_fullbudget_seed7.json",
+    "name": "optfib2_direct_product_whitened_cond0p5_adapt_fullbudget_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7.json",
+    "name": "optfib2_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7.json",
+    "name": "optfib2_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+    "seed": 7
+  },
+  "optfib2_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "optfib2_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "optfib2_wgan_seed7": {
+    "category": "channel_implant",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_wgan_seed7.pt",
+    "family": "paper_wgan",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/optfib/optfib2_wgan_seed7.json",
+    "name": "optfib2_wgan_seed7",
+    "seed": 7
+  },
+  "sspa8_diffusion_direct_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_diffusion_direct_seed7.pt",
+    "family": "diffusion_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_diffusion_direct_seed7.json",
+    "name": "sspa8_diffusion_direct_seed7",
+    "seed": 7
+  },
+  "sspa8_diffusion_residual_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_diffusion_residual_seed7.pt",
+    "family": "diffusion_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_diffusion_residual_seed7.json",
+    "name": "sspa8_diffusion_residual_seed7",
+    "seed": 7
+  },
+  "sspa8_direct_highbudget_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_direct_highbudget_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_direct_highbudget_seed7.json",
+    "name": "sspa8_direct_highbudget_seed7",
+    "seed": 7
+  },
+  "sspa8_direct_none_fullbudget_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_direct_none_fullbudget_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_direct_none_fullbudget_seed7.json",
+    "name": "sspa8_direct_none_fullbudget_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_direct_joint_cond0p5_queue_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_joint_cond0p5_queue_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_joint_cond0p5_queue_seed7.json",
+    "name": "sspa8_drifting_direct_joint_cond0p5_queue_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_direct_mixture_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_direct_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_direct_product_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_rawplusresidual_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7.pt",
+    "family": "drifting_direct",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7.json",
+    "name": "sspa8_drifting_direct_product_whitened_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_residual_joint_cond0p25_queue_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_joint_cond0p25_queue_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_joint_cond0p25_queue_seed7.json",
+    "name": "sspa8_drifting_residual_joint_cond0p25_queue_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_residual_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_residual_none_euclidean_cond0_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7.json",
+    "name": "sspa8_drifting_residual_product_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac1_at1_ak8_emb8_seed7",
+    "seed": 7
+  },
+  "sspa8_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.pt",
+    "family": "drifting_residual",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7.json",
+    "name": "sspa8_drifting_residual_soft_local_euclidean_cond0p25_targ1_cbwauto_tbwauto_k16_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+    "seed": 7
+  },
+  "sspa8_wgan_seed7": {
+    "category": "channel_implant",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_wgan_seed7.pt",
+    "family": "paper_wgan",
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_wgan_seed7.json",
+    "name": "sspa8_wgan_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_analytic_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_analytic_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/analytic_to_analytic/summary.json",
+    "name": "symbolic_awgn_analytic_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_diffusion_direct_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_direct_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/diffusion_direct_to_analytic/summary.json",
+    "name": "symbolic_awgn_diffusion_direct_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_diffusion_residual_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_diffusion_residual_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_diffusion_fix_20260323/diffusion_residual_to_analytic/summary.json",
+    "name": "symbolic_awgn_diffusion_residual_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drift_direct_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drift_direct_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_suite_20260322_225156_condkernel/drifting_direct_to_analytic/summary.json",
+    "name": "symbolic_awgn_drift_direct_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drift_residual_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drift_residual_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_suite_20260322_225156_condkernel/drifting_residual_to_analytic/summary.json",
+    "name": "symbolic_awgn_drift_residual_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_cond0_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_cond0_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_direct_cond0_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_cond0p1_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_cond0p1_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p1_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_direct_cond0p1_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_cond0p25_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_cond0p25_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p25_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_direct_cond0p25_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_cond0p5_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_cond0p5_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond0p5_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_direct_cond0p5_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_cond1_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_cond1_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_direct_cond1_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_direct_cond1_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_highbudget_queue_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_highbudget_queue_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/awgn_serber_setup/direct_highbudget_queue/summary.json",
+    "name": "symbolic_awgn_drifting_direct_highbudget_queue_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_joint_cond0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_joint_cond0p5_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_direct_joint_cond0p5_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_direct_joint_cond0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_mixture_cond0p5_a0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_mixture_cond0p5_a0p5_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_direct_mixture_cond0p5_a0p5_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_direct_mixture_cond0p5_a0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_none_fullbudget_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_fullbudget_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/old_direct_fullbudget_20260323_201011/awgn_direct_none_fullbudget_e2e/summary.json",
+    "name": "symbolic_awgn_drifting_direct_none_fullbudget_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_none_queue_big_20ep_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_20ep_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/awgn_direct_none_queue_big_20ep_e2e/summary.json",
+    "name": "symbolic_awgn_drifting_direct_none_queue_big_20ep_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/awgn_direct_none_queue_big_decay_best_e2e/summary.json",
+    "name": "symbolic_awgn_drifting_direct_none_queue_big_decay_best_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_none_queue_big_decay_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/awgn_direct_none_queue_big_decay_e2e/summary.json",
+    "name": "symbolic_awgn_drifting_direct_none_queue_big_decay_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_none_queue_big_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/awgn_direct_none_queue_big_e2e/summary.json",
+    "name": "symbolic_awgn_drifting_direct_none_queue_big_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_none_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_direct_none_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_direct_none_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_product_cond0p5_rawplusres_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_product_cond0p5_rawplusres_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_direct_product_cond0p5_rawplusres_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_direct_product_cond0p5_rawplusres_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_product_cond0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_product_cond0p5_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_direct_product_cond0p5_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_direct_product_cond0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_direct_product_whitened_cond0p5_adapt_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_product_whitened_cond0p5_adapt_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_direct_product_whitened_cond0p5_adapt_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_direct_product_whitened_cond0p5_adapt_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_cond0_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_cond0_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_residual_cond0_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_cond0p1_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_cond0p1_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p1_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_residual_cond0p1_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_cond0p25_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_cond0p25_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p25_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_residual_cond0p25_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_cond0p5_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_cond0p5_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond0p5_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_residual_cond0p5_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_cond1_targ1_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_cond1_targ1_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_drifting_kernel_sweep_screen_20260322/drifting_residual_cond1_targ1/summary.json",
+    "name": "symbolic_awgn_drifting_residual_cond1_targ1_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_joint_cond0p25_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_joint_cond0p25_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_residual_joint_cond0p25_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_residual_joint_cond0p25_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_local_cond0p25_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_local_cond0p25_k16_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_residual_local_cond0p25_k16_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_residual_local_cond0p25_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_local_kernel/drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16/summary.json",
+    "name": "symbolic_awgn_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_mixture_cond0p25_a0p3_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_mixture_cond0p25_a0p3_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_residual_mixture_cond0p25_a0p3_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_residual_mixture_cond0p25_a0p3_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_mixture_whitened_adaptive_embed/drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8/summary.json",
+    "name": "symbolic_awgn_drifting_residual_mixture_whitened_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac1_at1_ak8_emb8_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_none_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_none_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_residual_none_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_residual_none_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_product_cond0p25_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_product_cond0p25_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_residual_product_cond0p25_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_residual_product_cond0p25_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_product_kernel/drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32/summary.json",
+    "name": "symbolic_awgn_drifting_residual_product_cond0p25_targ1_cbwauto_tbwauto_k32_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_queue_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_queue_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/awgn_serber_setup/residual_queue/summary.json",
+    "name": "symbolic_awgn_drifting_residual_queue_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_drifting_residual_softlocal_cond0p25_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_residual_softlocal_cond0p25_k16_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/drifting_residual_softlocal_cond0p25_k16_to_analytic/summary.json",
+    "name": "symbolic_awgn_drifting_residual_softlocal_cond0p25_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_awgn_wgan_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "AWGN",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_wgan_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_awgn_overnight_20260322_233425/wgan_to_analytic/summary.json",
+    "name": "symbolic_awgn_wgan_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_analytic_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_analytic_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/analytic_to_analytic/summary.json",
+    "name": "symbolic_modeflip_analytic_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_direct_joint_cond0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_direct_joint_cond0p5_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_joint_cond0p5_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_direct_joint_cond0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_direct_mixture_cond0p5_a0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_direct_mixture_cond0p5_a0p5_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_mixture_cond0p5_a0p5_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_direct_mixture_cond0p5_a0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_direct_none_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_direct_none_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_none_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_direct_none_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_direct_product_cond0p5_rawplusres_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_direct_product_cond0p5_rawplusres_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_cond0p5_rawplusres_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_direct_product_cond0p5_rawplusres_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_direct_product_cond0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_direct_product_cond0p5_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_cond0p5_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_direct_product_cond0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_direct_product_whitened_cond0p5_adapt_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_direct_product_whitened_cond0p5_adapt_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_product_whitened_cond0p5_adapt_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_direct_product_whitened_cond0p5_adapt_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_residual_joint_cond0p25_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_residual_joint_cond0p25_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_joint_cond0p25_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_residual_joint_cond0p25_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_residual_local_cond0p25_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_residual_local_cond0p25_k16_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_local_cond0p25_k16_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_residual_local_cond0p25_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_residual_mixture_cond0p25_a0p3_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_residual_mixture_cond0p25_a0p3_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_mixture_cond0p25_a0p3_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_residual_mixture_cond0p25_a0p3_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_residual_none_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_residual_none_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_none_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_residual_none_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_residual_product_cond0p25_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_residual_product_cond0p25_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_product_cond0p25_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_residual_product_cond0p25_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_drifting_residual_softlocal_cond0p25_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_drifting_residual_softlocal_cond0p25_k16_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_residual_softlocal_cond0p25_k16_to_analytic/summary.json",
+    "name": "symbolic_modeflip_drifting_residual_softlocal_cond0p25_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_modeflip_wgan_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "ModeFlip",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/modeflip/symbolic_modeflip_wgan_seed7.pt",
+    "code_dim": 7,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/wgan_to_analytic/summary.json",
+    "name": "symbolic_modeflip_wgan_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_analytic_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_analytic_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/analytic_to_analytic/summary.json",
+    "name": "symbolic_optfib_analytic_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_diffusion_direct_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_diffusion_direct_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/diffusion_direct_to_analytic/summary.json",
+    "name": "symbolic_optfib_diffusion_direct_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_diffusion_residual_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_diffusion_residual_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/diffusion_residual_to_analytic/summary.json",
+    "name": "symbolic_optfib_diffusion_residual_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_direct_product_whitened_cond0p5_adapt_fullbudget_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_direct_product_whitened_cond0p5_adapt_fullbudget_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/optfib_direct_specialized_fullbudget_20260324/e2e/summary.json",
+    "name": "symbolic_optfib_direct_product_whitened_cond0p5_adapt_fullbudget_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_direct_joint_cond0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_direct_joint_cond0p5_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_direct_joint_cond0p5_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_direct_joint_cond0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_direct_mixture_cond0p5_a0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_direct_mixture_cond0p5_a0p5_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_direct_mixture_cond0p5_a0p5_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_direct_mixture_cond0p5_a0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_direct_none_fullbudget_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_direct_none_fullbudget_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/old_direct_fullbudget_20260323_201011/optfib_direct_none_fullbudget_e2e/summary.json",
+    "name": "symbolic_optfib_drifting_direct_none_fullbudget_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_direct_none_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_direct_none_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_direct_none_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_direct_none_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_direct_product_cond0p5_rawplusres_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_direct_product_cond0p5_rawplusres_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_direct_product_cond0p5_rawplusres_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_direct_product_cond0p5_rawplusres_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_direct_product_cond0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_direct_product_cond0p5_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_direct_product_cond0p5_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_direct_product_cond0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_direct_product_whitened_cond0p5_adapt_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_direct_product_whitened_cond0p5_adapt_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_direct_product_whitened_cond0p5_adapt_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_direct_product_whitened_cond0p5_adapt_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_residual_joint_cond0p25_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_residual_joint_cond0p25_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_residual_joint_cond0p25_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_residual_joint_cond0p25_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_residual_local_cond0p25_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_residual_local_cond0p25_k16_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_residual_local_cond0p25_k16_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_residual_local_cond0p25_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_residual_mixture_cond0p25_a0p3_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_residual_mixture_cond0p25_a0p3_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_residual_mixture_cond0p25_a0p3_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_residual_mixture_cond0p25_a0p3_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_residual_none_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_residual_none_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_residual_none_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_residual_none_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_residual_product_cond0p25_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_residual_product_cond0p25_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_residual_product_cond0p25_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_residual_product_cond0p25_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_drifting_residual_softlocal_cond0p25_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_drifting_residual_softlocal_cond0p25_k16_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/drifting_residual_softlocal_cond0p25_k16_to_analytic/summary.json",
+    "name": "symbolic_optfib_drifting_residual_softlocal_cond0p25_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_optfib_wgan_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "OptFib",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/optfib/symbolic_optfib_wgan_seed7.pt",
+    "code_dim": 2,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_fullbudget_20260324/wgan_to_analytic/summary.json",
+    "name": "symbolic_optfib_wgan_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_analytic_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_analytic_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/analytic_to_analytic/summary.json",
+    "name": "symbolic_sspa_analytic_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_diffusion_direct_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_diffusion_direct_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/diffusion_direct_to_analytic/summary.json",
+    "name": "symbolic_sspa_diffusion_direct_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_diffusion_residual_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_diffusion_residual_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/diffusion_residual_to_analytic/summary.json",
+    "name": "symbolic_sspa_diffusion_residual_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_direct_joint_cond0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_direct_joint_cond0p5_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_direct_joint_cond0p5_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_direct_joint_cond0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_direct_mixture_cond0p5_a0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_direct_mixture_cond0p5_a0p5_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_direct_mixture_cond0p5_a0p5_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_direct_mixture_cond0p5_a0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_direct_none_fullbudget_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_direct_none_fullbudget_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/old_direct_fullbudget_20260323_201011/sspa_direct_none_fullbudget_e2e/summary.json",
+    "name": "symbolic_sspa_drifting_direct_none_fullbudget_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_direct_none_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_direct_none_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_direct_none_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_direct_none_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_direct_product_cond0p5_rawplusres_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_direct_product_cond0p5_rawplusres_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_direct_product_cond0p5_rawplusres_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_direct_product_cond0p5_rawplusres_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_direct_product_cond0p5_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_direct_product_cond0p5_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_direct_product_cond0p5_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_direct_product_cond0p5_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_direct_product_whitened_cond0p5_adapt_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_direct_product_whitened_cond0p5_adapt_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_direct_product_whitened_cond0p5_adapt_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_direct_product_whitened_cond0p5_adapt_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_residual_joint_cond0p25_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_residual_joint_cond0p25_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_joint_cond0p25_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_residual_joint_cond0p25_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_residual_local_cond0p25_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_residual_local_cond0p25_k16_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_residual_local_cond0p25_k16_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_residual_local_cond0p25_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_residual_mixture_cond0p25_a0p3_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_residual_mixture_cond0p25_a0p3_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_mixture_cond0p25_a0p3_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_residual_mixture_cond0p25_a0p3_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_residual_none_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_residual_none_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_residual_none_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_residual_none_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_residual_product_cond0p25_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_residual_product_cond0p25_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_product_cond0p25_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_residual_product_cond0p25_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_residual_product_whitened_cond0p25_adapt_emb8_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_residual_product_whitened_cond0p25_adapt_emb8_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_drifting_residual_softlocal_cond0p25_k16_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_residual_softlocal_cond0p25_k16_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_073903/drifting_residual_softlocal_cond0p25_k16_to_analytic/summary.json",
+    "name": "symbolic_sspa_drifting_residual_softlocal_cond0p25_k16_seed7",
+    "seed": 7
+  },
+  "symbolic_sspa_wgan_seed7": {
+    "category": "symbolic_autoencoder",
+    "channel": "SSPA",
+    "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_wgan_seed7.pt",
+    "code_dim": 8,
+    "message_dim": 16,
+    "metadata": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/wgan_to_analytic/summary.json",
+    "name": "symbolic_sspa_wgan_seed7",
+    "seed": 7
+  }
+}

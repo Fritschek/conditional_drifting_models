@@ -1,6 +1,6 @@
 # HPC / SLURM
 
-This directory contains SLURM-ready paths for the full-budget benchmark suite and the partial direct-metric rerun.
+This directory contains SLURM-ready paths for the full-budget benchmark suite, the partial direct-metric rerun, and the enhanced direct-kernel rerun.
 
 The intended workflow is:
 
@@ -16,8 +16,11 @@ The intended workflow is:
 - `slurm_full_suite_aggregate.sh`: aggregate finished seed results into one suite summary
 - `slurm_partial_direct_metric_array.sh`: one seed per SLURM task for the partial direct-metric rerun
 - `slurm_partial_direct_metric_aggregate.sh`: aggregate the partial direct-metric rerun
+- `slurm_enhanced_direct_array.sh`: one seed per SLURM task for the enhanced direct-kernel rerun
+- `slurm_enhanced_direct_aggregate.sh`: aggregate the enhanced direct-kernel rerun
 - `submit_full_suite.sh`: helper to submit the full benchmark array
 - `submit_partial_direct_metric_suite.sh`: helper to submit the partial direct-metric array
+- `submit_enhanced_direct_suite.sh`: helper to submit the enhanced direct-kernel array
 
 ## Per-seed runner
 
@@ -152,6 +155,44 @@ python scripts/aggregate_partial_direct_metric_suite.py \
   --suite-dir results/partial_direct_metric_hpc_<tag> \
   --seed-start 7 \
   --num-seeds 10
+```
+
+## Enhanced Direct-Kernel Rerun
+
+The enhanced rerun is intended for the added conditioning-aware direct drifting row. It runs only:
+
+- enhanced direct drifting on `AWGN,Rayleigh,SSPA`
+
+The per-seed job calls:
+
+```bash
+python -u scripts/run_enhanced_direct_seed.py --suite-dir ...
+```
+
+This writes:
+
+- `seed<N>_manifest.json`
+- `seed<N>.log`
+- `seed<N>_result.json`
+- `enhanced_direct_seed<N>/enhanced_direct_summary_seed<N>.json`
+- `enhanced_direct_seed<N>/checkpoints/enhanced_direct_<channel>_seed<N>.pt`
+
+Aggregation writes:
+
+- `enhanced_direct_suite_results.json`
+
+Typical usage:
+
+```bash
+export PROJECT_ROOT=$PWD
+export SUITE_TAG=$(date -u +%Y%m%d_%H%M%S)
+export SUITE_DIR=$PROJECT_ROOT/results/enhanced_direct_hpc_${SUITE_TAG}
+export SEED_START=7
+export NUM_SEEDS=10
+# Defaults now match the practical benchmark rerun:
+# EVAL_SIZE=1000000 and per-channel drifting epochs from the paper presets.
+
+bash hpc/submit_enhanced_direct_suite.sh
 ```
 
 ## Environment setup

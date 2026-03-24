@@ -1,0 +1,34 @@
+diff epoch 1/30: loss=4.090180e-01, lr=1.000e-03
+diff epoch 2/30: loss=3.680606e-01, lr=1.000e-03
+diff epoch 3/30: loss=3.673322e-01, lr=1.000e-03
+diff epoch 4/30: loss=3.667665e-01, lr=1.000e-03
+diff epoch 5/30: loss=3.669179e-01, lr=1.000e-03
+diff epoch 6/30: loss=3.663060e-01, lr=1.000e-03
+diff epoch 7/30: loss=3.662125e-01, lr=1.000e-03
+diff epoch 8/30: loss=3.663279e-01, lr=1.000e-03
+diff epoch 9/30: loss=3.658766e-01, lr=1.000e-03
+diff epoch 10/30: loss=3.662031e-01, lr=1.000e-03
+diff epoch 11/30: loss=3.655174e-01, lr=1.000e-03
+diff epoch 12/30: loss=3.665417e-01, lr=1.000e-03
+diff epoch 13/30: loss=3.658850e-01, lr=1.000e-03
+diff epoch 14/30: loss=3.655692e-01, lr=1.000e-03
+diff epoch 15/30: loss=3.658432e-01, lr=1.000e-03
+diff epoch 16/30: loss=3.650518e-01, lr=1.000e-03
+diff epoch 17/30: loss=3.656450e-01, lr=1.000e-03
+diff epoch 18/30: loss=3.656912e-01, lr=1.000e-03
+diff epoch 19/30: loss=3.656438e-01, lr=1.000e-03
+diff epoch 20/30: loss=3.655278e-01, lr=1.000e-03
+diff epoch 21/30: loss=3.644695e-01, lr=1.000e-03
+diff epoch 22/30: loss=3.638212e-01, lr=1.000e-03
+diff epoch 23/30: loss=3.594287e-01, lr=1.000e-03
+diff epoch 24/30: loss=3.506379e-01, lr=1.000e-03
+diff epoch 25/30: loss=3.431906e-01, lr=1.000e-03
+diff epoch 26/30: loss=3.374319e-01, lr=1.000e-03
+diff epoch 27/30: loss=3.311589e-01, lr=1.000e-03
+diff epoch 28/30: loss=3.190574e-01, lr=1.000e-03
+diff epoch 29/30: loss=3.158030e-01, lr=1.000e-03
+diff epoch 30/30: loss=3.133405e-01, lr=1.000e-03
+{
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_diffusion_residual_seed7.pt",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/weights/channel_implants/sspa/sspa8_diffusion_residual_seed7.json"
+}

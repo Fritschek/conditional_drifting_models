@@ -1,0 +1,27 @@
+\section{Journal Extension Directions}
+
+\subsection{End-to-End Learned Communication with Differentiable Channel Implants}
+An important journal-scale extension is to place the learned channel models inside end-to-end communication pipelines rather than restricting the study to generator-level benchmark metrics.
+In particular, direct and residual drifting models should be compared against diffusion and WGAN channel implants under downstream communication objectives such as achievable information rate, symbol error rate, or block error rate.
+This section should emphasize that both drifting variants are differentiable but induce different gradient structure with respect to the transmitted symbol, which may affect transmitter and receiver optimization differently across channel regimes.
+
+\subsection{Parameterization and Metric-Space Analysis}
+The conference version already shows that direct and residual drifting behave differently across channels and evaluation spaces.
+The journal version can elevate this into a systematic methodological study by treating target parameterization and evaluation space as first-class variables.
+This includes direct-output versus residual training targets, direct-output versus residual SWD evaluation, and their interaction with channel nonlinearity.
+Such a section would clarify when residual parameterization is a useful inductive bias and when direct-output modeling is preferable.
+
+\subsection{Extended Channel Studies}
+The present benchmark covers AWGN, Rayleigh, SSPA, and a simplified optical-fiber proxy channel.
+The journal version should broaden this set to at least one richer setting, such as higher-dimensional fading channels, MIMO channels, memory channels, or more realistic optical models.
+The central question is whether the relative behavior of residual drifting, direct drifting, and diffusion remains stable once the channel law departs more strongly from a near-identity structure.
+
+\subsection{Latency-Quality Tradeoffs Beyond Standard Diffusion}
+The current conference paper compares drifting primarily against DDPM, DDIM, and WGAN baselines.
+For a journal extension, this comparison can be widened to include accelerated diffusion strategies such as reduced-step DDIM, consistency models, and distillation-based one-step diffusion.
+This would allow the journal version to position drifting more precisely within the broader space of latency-conscious generative modeling, using not only inference speed but also projected training cost and total deployment cost.
+
+\subsection{Limitations and Practical Design Guidelines}
+The journal version should also provide a more explicit discussion of limitations and model-selection guidance.
+Relevant issues include the dependence of reported quality on metric space, the suitability of residual parameterization for near-identity versus strongly nonlinear channels, the role of minibatch field estimation, and the limitations of the current optical proxy benchmark.
+This section can be turned into a practical guide that recommends direct or residual drifting, diffusion, or accelerated diffusion variants depending on channel structure and latency constraints.

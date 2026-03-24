@@ -1,0 +1,908 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cuda",
+    "channel": "SSPA",
+    "code_dim": 8,
+    "rate": 0.5,
+    "ebno_db": 5.0,
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights",
+    "force_retrain": true,
+    "implant_specs": [
+      {
+        "name": "wgan",
+        "family": "paper_wgan",
+        "register_name": "sspa8_wgan_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128
+        }
+      },
+      {
+        "name": "diffusion_direct",
+        "family": "diffusion_direct",
+        "register_name": "sspa8_diffusion_direct_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 30,
+          "hidden-dim": 128,
+          "num-steps": 50
+        }
+      },
+      {
+        "name": "diffusion_residual",
+        "family": "diffusion_residual",
+        "register_name": "sspa8_diffusion_residual_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 30,
+          "hidden-dim": 128,
+          "num-steps": 50
+        }
+      },
+      {
+        "name": "drifting_direct_joint_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      {
+        "name": "drifting_residual_joint_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      {
+        "name": "drifting_residual_product_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      {
+        "name": "drifting_residual_mixture_cond0p25_a0p3",
+        "family": "drifting_residual",
+        "register_name": "sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.25,
+          "mixture_alpha": 0.3
+        }
+      }
+    ],
+    "run_specs": [
+      {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_channel",
+        "train_implant_name": null,
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_analytic_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      {
+        "name": "wgan_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_wgan_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_wgan_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      {
+        "name": "diffusion_direct_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_diffusion_direct_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_diffusion_direct_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 100
+        }
+      },
+      {
+        "name": "diffusion_residual_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_diffusion_residual_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_diffusion_residual_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 100
+        }
+      },
+      {
+        "name": "drifting_direct_joint_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_drifting_direct_joint_cond0p5_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      {
+        "name": "drifting_residual_joint_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_drifting_residual_joint_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      {
+        "name": "drifting_residual_product_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_drifting_residual_product_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      {
+        "name": "drifting_residual_mixture_cond0p25_a0p3_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_drifting_residual_mixture_cond0p25_a0p3_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      }
+    ],
+    "global_args": {
+      "implant_dataset_size": 120000,
+      "implant_batch_size": 512,
+      "drifting_epochs": 60,
+      "wgan_epochs": 60,
+      "diffusion_dataset_size": 1000000,
+      "diffusion_batch_size": 500,
+      "diffusion_epochs": 30,
+      "diffusion_hidden_dim": 128,
+      "diffusion_num_steps": 50,
+      "diffusion_ddim_steps": 100,
+      "ae_dataset_size": 1000000,
+      "ae_batch_size": 500,
+      "eval_size": 100000,
+      "ae_epochs": 30,
+      "ae_learning_rate": 0.001,
+      "eval_every": 2
+    }
+  },
+  "implant_runs": {
+    "wgan": {
+      "spec": {
+        "name": "wgan",
+        "family": "paper_wgan",
+        "register_name": "sspa8_wgan_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128
+        }
+      },
+      "status": "trained",
+      "register_name": "sspa8_wgan_seed7",
+      "runner_result": {
+        "elapsed_seconds": 192.52694735801197,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/implant_wgan.log"
+      }
+    },
+    "diffusion_direct": {
+      "spec": {
+        "name": "diffusion_direct",
+        "family": "diffusion_direct",
+        "register_name": "sspa8_diffusion_direct_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 30,
+          "hidden-dim": 128,
+          "num-steps": 50
+        }
+      },
+      "status": "trained",
+      "register_name": "sspa8_diffusion_direct_seed7",
+      "runner_result": {
+        "elapsed_seconds": 171.3069198029989,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/implant_diffusion_direct.log"
+      }
+    },
+    "diffusion_residual": {
+      "spec": {
+        "name": "diffusion_residual",
+        "family": "diffusion_residual",
+        "register_name": "sspa8_diffusion_residual_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 1000000,
+          "batch-size": 500,
+          "epochs": 30,
+          "hidden-dim": 128,
+          "num-steps": 50
+        }
+      },
+      "status": "trained",
+      "register_name": "sspa8_diffusion_residual_seed7",
+      "runner_result": {
+        "elapsed_seconds": 170.58330409199698,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/implant_diffusion_residual.log"
+      }
+    },
+    "drifting_direct_joint_cond0p5": {
+      "spec": {
+        "name": "drifting_direct_joint_cond0p5",
+        "family": "drifting_direct",
+        "register_name": "sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.5
+        }
+      },
+      "status": "trained",
+      "register_name": "sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 57.66003787300724,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/implant_drifting_direct_joint_cond0p5.log"
+      }
+    },
+    "drifting_residual_joint_cond0p25": {
+      "spec": {
+        "name": "drifting_residual_joint_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "joint",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      "status": "trained",
+      "register_name": "sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 59.76680974398914,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/implant_drifting_residual_joint_cond0p25.log"
+      }
+    },
+    "drifting_residual_product_cond0p25": {
+      "spec": {
+        "name": "drifting_residual_product_cond0p25",
+        "family": "drifting_residual",
+        "register_name": "sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "product",
+          "condition_kernel_scale": 0.25
+        }
+      },
+      "status": "trained",
+      "register_name": "sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 69.3827540249913,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/implant_drifting_residual_product_cond0p25.log"
+      }
+    },
+    "drifting_residual_mixture_cond0p25_a0p3": {
+      "spec": {
+        "name": "drifting_residual_mixture_cond0p25_a0p3",
+        "family": "drifting_residual",
+        "register_name": "sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "train_args": {
+          "channel": "SSPA",
+          "n": 8,
+          "ebno-db": 5.0,
+          "rate": 0.5,
+          "dataset-size": 120000,
+          "batch-size": 512,
+          "epochs": 60,
+          "hidden-dim": 128,
+          "latent-dim": 16,
+          "target-kernel-scale": 1.0,
+          "conditioning_mode": "mixture",
+          "condition_kernel_scale": 0.25,
+          "mixture_alpha": 0.3
+        }
+      },
+      "status": "trained",
+      "register_name": "sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+      "runner_result": {
+        "elapsed_seconds": 68.18436344301153,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/implant_drifting_residual_mixture_cond0p25_a0p3.log"
+      }
+    }
+  },
+  "ae_runs": {
+    "analytic_to_analytic": {
+      "spec": {
+        "name": "analytic_to_analytic",
+        "train_implant": "analytic_channel",
+        "train_implant_name": null,
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_analytic_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 198.4700288999884,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/analytic_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/analytic_to_analytic/summary.json",
+      "final_eval_ser": 5.0000002374872565e-05,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.0025484657380729914,
+        "y_swd": 0.003433879930526018,
+        "residual_swd": 0.0021566329523921013
+      }
+    },
+    "wgan_to_analytic": {
+      "spec": {
+        "name": "wgan_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_wgan_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_wgan_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 193.73701839298883,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/wgan_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/wgan_to_analytic/summary.json",
+      "final_eval_ser": 0.0013200000557117165,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.04248671233654022,
+        "y_swd": 0.06235243380069733,
+        "residual_swd": 0.03107890486717224
+      }
+    },
+    "diffusion_direct_to_analytic": {
+      "spec": {
+        "name": "diffusion_direct_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_diffusion_direct_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_diffusion_direct_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 100
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 2039.7851055770006,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/diffusion_direct_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/diffusion_direct_to_analytic/summary.json",
+      "final_eval_ser": 0.5905700308084488,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.016006523743271828,
+        "anchor_y_swd": 0.09714902192354202,
+        "anchor_residual_swd": 0.09714902937412262,
+        "y_swd": 0.02394186705350876,
+        "residual_swd": 0.02386549301445484
+      }
+    },
+    "diffusion_residual_to_analytic": {
+      "spec": {
+        "name": "diffusion_residual_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_diffusion_residual_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_diffusion_residual_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2,
+          "diffusion-sampler": "ddim",
+          "ddim-steps": 100
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 3080.804740298001,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/diffusion_residual_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/diffusion_residual_to_analytic/summary.json",
+      "final_eval_ser": 0.001440000063739717,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.14912770688533783,
+        "anchor_y_swd": 0.36273106932640076,
+        "anchor_y_floor_swd": 0.08682730793952942,
+        "anchor_y_excess_swd": 0.27590376138687134,
+        "anchor_y_ratio": 4.177615060679107,
+        "anchor_residual_swd": 0.36273106932640076,
+        "anchor_residual_floor_swd": 0.08682730793952942,
+        "anchor_residual_excess_swd": 0.27590376138687134,
+        "anchor_residual_ratio": 4.177615060679107,
+        "anchor_mean_l2": 1.019464373588562,
+        "anchor_mean_l2_floor": 0.197067528963089,
+        "anchor_mean_l2_excess": 0.822396844625473,
+        "anchor_mean_l2_ratio": 5.1731727644461865,
+        "anchor_cov_fro": 1.0024535655975342,
+        "anchor_cov_fro_floor": 0.21777284145355225,
+        "anchor_cov_fro_excess": 0.7846807241439819,
+        "anchor_cov_fro_ratio": 4.603207447294767,
+        "anchor_gaussian_w2": 1.3488043546676636,
+        "anchor_gaussian_w2_floor": 0.34221214056015015,
+        "anchor_gaussian_w2_excess": 1.0065922141075134,
+        "anchor_gaussian_w2_ratio": 3.9414275380758625,
+        "y_swd": 0.23620803654193878,
+        "residual_swd": 0.17638741433620453
+      }
+    },
+    "drifting_direct_joint_cond0p5_to_analytic": {
+      "spec": {
+        "name": "drifting_direct_joint_cond0p5_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_drifting_direct_joint_euclidean_cond0p5_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_drifting_direct_joint_cond0p5_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 189.08281173399882,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_direct_joint_cond0p5_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_direct_joint_cond0p5_to_analytic/summary.json",
+      "final_eval_ser": 0.01035000040079467,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.1286303550004959,
+        "anchor_y_swd": 0.35865646600723267,
+        "anchor_y_floor_swd": 0.08777632564306259,
+        "anchor_y_excess_swd": 0.2708801403641701,
+        "anchor_y_ratio": 4.086027335727047,
+        "anchor_residual_swd": 0.35865646600723267,
+        "anchor_residual_floor_swd": 0.08777632564306259,
+        "anchor_residual_excess_swd": 0.2708801403641701,
+        "anchor_residual_ratio": 4.086027335727047,
+        "anchor_mean_l2": 1.0222617387771606,
+        "anchor_mean_l2_floor": 0.2001137137413025,
+        "anchor_mean_l2_excess": 0.8221480250358582,
+        "anchor_mean_l2_ratio": 5.108404215108876,
+        "anchor_cov_fro": 0.4027785062789917,
+        "anchor_cov_fro_floor": 0.21854209899902344,
+        "anchor_cov_fro_excess": 0.18423640727996826,
+        "anchor_cov_fro_ratio": 1.8430247907557231,
+        "anchor_gaussian_w2": 1.2956252098083496,
+        "anchor_gaussian_w2_floor": 0.3457711935043335,
+        "anchor_gaussian_w2_excess": 0.9498540163040161,
+        "anchor_gaussian_w2_ratio": 3.74705942585154,
+        "y_swd": 0.1733001172542572,
+        "residual_swd": 0.21025636792182922
+      }
+    },
+    "drifting_residual_joint_cond0p25_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_joint_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_drifting_residual_joint_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_drifting_residual_joint_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 197.79640338900208,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_joint_cond0p25_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_joint_cond0p25_to_analytic/summary.json",
+      "final_eval_ser": 0.0009500000416301191,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.10151224583387375,
+        "anchor_y_swd": 0.3502150774002075,
+        "anchor_y_floor_swd": 0.0881681963801384,
+        "anchor_y_excess_swd": 0.2620468810200691,
+        "anchor_y_ratio": 3.9721247771730566,
+        "anchor_residual_swd": 0.3502150774002075,
+        "anchor_residual_floor_swd": 0.0881681963801384,
+        "anchor_residual_excess_swd": 0.2620468810200691,
+        "anchor_residual_ratio": 3.9721247771730566,
+        "anchor_mean_l2": 1.0616542100906372,
+        "anchor_mean_l2_floor": 0.20087853074073792,
+        "anchor_mean_l2_excess": 0.8607756793498993,
+        "anchor_mean_l2_ratio": 5.285055631260325,
+        "anchor_cov_fro": 0.687372624874115,
+        "anchor_cov_fro_floor": 0.22019800543785095,
+        "anchor_cov_fro_excess": 0.46717461943626404,
+        "anchor_cov_fro_ratio": 3.1216114946514364,
+        "anchor_gaussian_w2": 1.2649474143981934,
+        "anchor_gaussian_w2_floor": 0.3482329249382019,
+        "anchor_gaussian_w2_excess": 0.9167144894599915,
+        "anchor_gaussian_w2_ratio": 3.632475058533519,
+        "y_swd": 0.12582650780677795,
+        "residual_swd": 0.09398094564676285
+      }
+    },
+    "drifting_residual_product_cond0p25_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_product_cond0p25_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_drifting_residual_product_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p5_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_drifting_residual_product_cond0p25_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 192.18934005098708,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_product_cond0p25_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_product_cond0p25_to_analytic/summary.json",
+      "final_eval_ser": 0.01220000055152923,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.09651192277669907,
+        "anchor_y_swd": 0.3296922445297241,
+        "anchor_y_floor_swd": 0.08803664892911911,
+        "anchor_y_excess_swd": 0.241655595600605,
+        "anchor_y_ratio": 3.744943140613735,
+        "anchor_residual_swd": 0.3296922445297241,
+        "anchor_residual_floor_swd": 0.08803664892911911,
+        "anchor_residual_excess_swd": 0.241655595600605,
+        "anchor_residual_ratio": 3.744943140613735,
+        "anchor_mean_l2": 0.991600751876831,
+        "anchor_mean_l2_floor": 0.20051603019237518,
+        "anchor_mean_l2_excess": 0.7910847216844559,
+        "anchor_mean_l2_ratio": 4.945244282591715,
+        "anchor_cov_fro": 0.6748937964439392,
+        "anchor_cov_fro_floor": 0.21948111057281494,
+        "anchor_cov_fro_excess": 0.45541268587112427,
+        "anchor_cov_fro_ratio": 3.074951619674973,
+        "anchor_gaussian_w2": 1.20242440700531,
+        "anchor_gaussian_w2_floor": 0.3476365804672241,
+        "anchor_gaussian_w2_excess": 0.8547878265380859,
+        "anchor_gaussian_w2_ratio": 3.4588546619266873,
+        "y_swd": 0.13087166845798492,
+        "residual_swd": 0.10212213546037674
+      }
+    },
+    "drifting_residual_mixture_cond0p25_a0p3_to_analytic": {
+      "spec": {
+        "name": "drifting_residual_mixture_cond0p25_a0p3_to_analytic",
+        "train_implant": "checkpoint",
+        "train_implant_name": "sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+        "eval_implant": "analytic_channel",
+        "eval_implant_name": null,
+        "save_ae_name": "symbolic_sspa_drifting_residual_mixture_cond0p25_a0p3_seed7",
+        "benchmark_args": {
+          "channel": "SSPA",
+          "message-dim": 16,
+          "code-dim": 8,
+          "hidden-dim": 16,
+          "rate": 0.5,
+          "ebno-db": 5.0,
+          "batch-size": 500,
+          "dataset-size": 1000000,
+          "eval-size": 100000,
+          "epochs": 30,
+          "learning-rate": 0.001,
+          "eval-every": 2
+        }
+      },
+      "runner_result": {
+        "elapsed_seconds": 186.0549164369877,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_mixture_cond0p25_a0p3_to_analytic.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_sspa_overnight_20260323_090436/drifting_residual_mixture_cond0p25_a0p3_to_analytic/summary.json",
+      "final_eval_ser": 0.01636000075377524,
+      "train_implant_metrics": {
+        "joint_xy_swd": 0.1081431433558464,
+        "anchor_y_swd": 0.4063277542591095,
+        "anchor_y_floor_swd": 0.08821116387844086,
+        "anchor_y_excess_swd": 0.31811659038066864,
+        "anchor_y_ratio": 4.606307596383699,
+        "anchor_residual_swd": 0.4063277542591095,
+        "anchor_residual_floor_swd": 0.08821116387844086,
+        "anchor_residual_excess_swd": 0.31811659038066864,
+        "anchor_residual_ratio": 4.606307596383699,
+        "anchor_mean_l2": 1.2496428489685059,
+        "anchor_mean_l2_floor": 0.2009326070547104,
+        "anchor_mean_l2_excess": 1.0487102419137955,
+        "anchor_mean_l2_ratio": 6.219213831373074,
+        "anchor_cov_fro": 0.6832183599472046,
+        "anchor_cov_fro_floor": 0.22030597925186157,
+        "anchor_cov_fro_excess": 0.462912380695343,
+        "anchor_cov_fro_ratio": 3.101224770509407,
+        "anchor_gaussian_w2": 1.4327971935272217,
+        "anchor_gaussian_w2_floor": 0.34828197956085205,
+        "anchor_gaussian_w2_excess": 1.0845152139663696,
+        "anchor_gaussian_w2_ratio": 4.113899878867785,
+        "y_swd": 0.11243000626564026,
+        "residual_swd": 0.07388913631439209
+      }
+    }
+  }
+}

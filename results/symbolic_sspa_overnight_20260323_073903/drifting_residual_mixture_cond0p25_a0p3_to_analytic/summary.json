@@ -1,0 +1,100 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 8,
+    "hidden_dim": 16,
+    "batch_size": 500,
+    "dataset_size": 1000000,
+    "epochs": 10,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 100000
+  },
+  "train_implant": "drifting_residual",
+  "eval_implant": "analytic_sspa",
+  "rate": 0.5,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 0.22160186492837966,
+      "train_ser": 0.05577300263126381,
+      "eval_ser": 0.016240000780671834
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 0.02622360533592291,
+      "train_ser": 0.009180000374559313,
+      "eval_ser": 0.011540000486420468
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 0.02159182328940369,
+      "train_ser": 0.007667000297340565,
+      "eval_ser": 0.008130000293022022
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 0.019670159735251217,
+      "train_ser": 0.00698500027297996,
+      "eval_ser": 0.0072800002829171715
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 0.0184980409690761,
+      "train_ser": 0.006631000256864354,
+      "eval_ser": 0.008230000328039751
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 0.017692478963173927,
+      "train_ser": 0.006249000232201069,
+      "eval_ser": 0.008950000361073763
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 0.016807434955611825,
+      "train_ser": 0.006080000231042504,
+      "eval_ser": 0.009220000392524526
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 0.01650876340636751,
+      "train_ser": 0.005927000227151438,
+      "eval_ser": 0.010840000445023179
+    },
+    {
+      "epoch": 9.0,
+      "train_loss": 0.01659369265969144,
+      "train_ser": 0.005922000226099044,
+      "eval_ser": 0.009080000366084277
+    },
+    {
+      "epoch": 10.0,
+      "train_loss": 0.016074582024593838,
+      "train_ser": 0.005843000225024298,
+      "eval_ser": 0.007910000314004718
+    }
+  ],
+  "train_seconds": 61.53189128699887,
+  "final_eval": {
+    "loss": 0.023639165330678225,
+    "ser": 0.0077600002917461094
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.09485792368650436,
+    "y_swd": 0.12095899879932404,
+    "residual_swd": 0.0720565915107727
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.0027821226976811886,
+    "y_swd": 0.003601508680731058,
+    "residual_swd": 0.0027166567742824554
+  },
+  "seed": 7,
+  "device": "cuda",
+  "channel": "SSPA",
+  "train_implant_source": "sspa8_drifting_residual_mixture_euclidean_cond0p25_targ1_cbwauto_tbwauto_k32_radauto_mix0p3_raw_ac0_at0_ak16_emb0_seed7",
+  "eval_implant_source": null,
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/sspa/symbolic_sspa_drifting_residual_mixture_cond0p25_a0p3_seed7.pt"
+}

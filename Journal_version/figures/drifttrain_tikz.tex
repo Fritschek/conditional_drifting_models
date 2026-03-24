@@ -1,0 +1,82 @@
+\input{figures/tikz_shared_styles.tex}
+\begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    boxblue/.style={boxbluebase},
+    boxviolet/.style={boxvioletbase},
+    boxred/.style={boxredbase},
+    boxgreen/.style={boxgreenbase},
+    attr/.style={->, thick, draw=green!50!black},
+    repel/.style={<->, semithick, draw=orange!85!black},
+    truedot/.style={circle, draw=blue!70!black, fill=blue!35, inner sep=1.8pt},
+    gendot/.style={circle, draw=orange!80!black, fill=orange!50, inner sep=1.8pt},
+    targetdot/.style={circle, draw=green!60!black, fill=green!35, inner sep=1.8pt}
+]
+\fill[white] (-7.4,-4.2) rectangle (3.6,4.3);
+
+\def\cloudxshift{0cm}
+\def\cloudyshift{0cm}
+\begin{scope}[shift={(\cloudxshift,\cloudyshift)}]
+\node[title] at (-1.9,3.75) {Training step for fixed channel input $x$};
+
+% Left panel: inputs and generator
+\node[boxblue, minimum width=1.45cm, minimum height=0.72cm] (condx) at (-6.5,1.2) {condition\\$x$};
+\node[boxviolet, minimum width=2.10cm, minimum height=0.92cm] (latent) at (-6.5,2.2) {latent draw\\$z \sim \mathcal{N}(0,I)$};
+\node[boxviolet, minimum width=2.30cm, minimum height=0.82cm] (gen) at (-3.8,2.2) {generator\\$g_\theta(x,z)$};
+\draw[flow, blue!70!black] (condx.east) -- (gen.west);
+\draw[flow, violet!80!black] (latent.east) -- (gen.west);
+
+% True channel
+\node[boxred, minimum width=1.55cm, minimum height=0.72cm] (truech) at (-6.5,-0.5) {true channel};
+\draw[flow, red!70!black] (condx.south) -- (truech.north);
+\node[note, red!70!black, text width=2.3cm] at (-6.1,-1.95) {sample $y$, then form\\$e=y-x$};
+
+% Generated residual cloud
+\node[note, orange!80!black] at (-0.5,2.25) {\textbf{generated residuals $\hat e_i$}};
+\node[gendot] (g1) at (-2.55,1.35) {};
+\node[gendot] (g2) at (-2.1,1.7) {};
+\node[gendot] (g3) at (-1.7,1.15) {};
+\node[gendot] (g4) at (-1.25,1.55) {};
+\node[gendot] (g5) at (-1.9,0.8) {};
+\draw[flow, violet!80!black] (gen.east) -- (-3.35,1.2);
+
+% True residual cloud
+\node[note, blue!70!black] at (1,-0.05) {\textbf{true residuals $e_j$}};
+\node[truedot] (p1) at (-0.25,-0.7) {};
+\node[truedot] (p2) at (0.2,-0.33) {};
+\node[truedot] (p3) at (0.7,-0.88) {};
+\node[truedot] (p4) at (1.15,-0.4) {};
+\node[truedot] (p5) at (0.45,-1.18) {};
+\draw[flow, red!70!black] (truech.east) to[out=10,in=210] (-0.25,-0.7);
+
+% Drifted targets
+\node[note, green!50!black] at (2.3,2.25) {\textbf{drifted targets $\tilde e_i$}};
+\node[targetdot] (t1) at (-0.85,1.75) {};
+\node[targetdot] (t2) at (-0.35,1.98) {};
+\node[targetdot] (t3) at (0.15,1.45) {};
+\node[targetdot] (t4) at (0.68,1.78) {};
+\node[targetdot] (t5) at (0.0,1.15) {};
+
+% Attraction arrows
+\draw[attr] (g1) -- (t1);
+\draw[attr] (g2) -- (t2);
+\draw[attr] (g3) -- (t3);
+\draw[attr] (g4) -- (t4);
+\draw[attr] (g5) -- (t5);
+
+% Repulsion arrows
+\draw[repel] (g1) -- (g2);
+\draw[repel] (g2) -- (g4);
+\draw[repel] (g3) -- (g5);
+
+\node[note, align=left, anchor=west, text width=2.8cm] at (1.8,1.15) {$V(\hat e_i)$:\\textcolor{green!50!black}{attraction to data}\\+\textcolor{orange!85!black}{repulsion among generated}};
+
+\end{scope}
+
+% Loss box
+\node[boxgreen, minimum width=5.2cm, minimum height=1.55cm] (loss) at (-2.25,-2.35) {$\tilde e_i=\mathrm{stopgrad}\!\left(\hat e_i+\eta V(\hat e_i)\right)$\\[2pt]
+$\mathcal{L}_{\mathrm{drift}}=\frac{1}{N}\sum_i \|\hat e_i-\tilde e_i\|_2^2$};
+\draw[flow] (-0.7,1.45) to[out=-90,in=25] (loss.north east);
+\draw[flow] (0.15,1.2) to[out=-90,in=-5] (loss.north east);
+\node[note, text width=4.8cm] at (-2.25,-3.2) {Regress $g_\theta$ toward the drifted residual targets.};
+\end{tikzpicture}

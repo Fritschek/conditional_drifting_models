@@ -1,0 +1,140 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 7,
+    "hidden_dim": 16,
+    "batch_size": 500,
+    "dataset_size": 1000000,
+    "epochs": 10,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 100000
+  },
+  "train_implant": "drifting_direct",
+  "eval_implant": "analytic_awgn",
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "history": [
+    {
+      "epoch": 1.0,
+      "train_loss": 0.15466627797839463,
+      "train_ser": 0.0272330012639286,
+      "eval_ser": 0.01802000081981532
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 0.00030917661972125644,
+      "train_ser": 0.0,
+      "eval_ser": 0.01678000075975433
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 7.160502623810316e-05,
+      "train_ser": 0.0,
+      "eval_ser": 0.016690000790404155
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 2.2933593709240085e-05,
+      "train_ser": 0.0,
+      "eval_ser": 0.015970000753877684
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 8.175892008409847e-06,
+      "train_ser": 0.0,
+      "eval_ser": 0.018660000870004297
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 6.204128757133276e-06,
+      "train_ser": 0.0,
+      "eval_ser": 0.017620000801980496
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 8.29763664273031e-06,
+      "train_ser": 0.0,
+      "eval_ser": 0.026150001124478878
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 1.1044842795957522e-06,
+      "train_ser": 0.0,
+      "eval_ser": 0.01978000093251467
+    },
+    {
+      "epoch": 9.0,
+      "train_loss": 1.7375942099651097e-07,
+      "train_ser": 0.0,
+      "eval_ser": 0.017660000822506846
+    },
+    {
+      "epoch": 10.0,
+      "train_loss": 1.966785080408151e-06,
+      "train_ser": 0.0,
+      "eval_ser": 0.027000001249834895
+    }
+  ],
+  "train_seconds": 68.85064954900008,
+  "final_eval": {
+    "loss": 0.11061406251043081,
+    "ser": 0.02753000132739544
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.062354784458875656,
+    "anchor_y_swd": 0.2372550368309021,
+    "anchor_y_floor_swd": 0.10921928286552429,
+    "anchor_y_excess_swd": 0.1280357539653778,
+    "anchor_y_ratio": 2.1722815844068597,
+    "anchor_residual_swd": 0.2372550368309021,
+    "anchor_residual_floor_swd": 0.10921929031610489,
+    "anchor_residual_excess_swd": 0.1280357465147972,
+    "anchor_residual_ratio": 2.172281436220958,
+    "anchor_mean_l2": 0.4020403325557709,
+    "anchor_mean_l2_floor": 0.2200983762741089,
+    "anchor_mean_l2_excess": 0.181941956281662,
+    "anchor_mean_l2_ratio": 1.8266392481472595,
+    "anchor_cov_fro": 0.5979952812194824,
+    "anchor_cov_fro_floor": 0.3589630722999573,
+    "anchor_cov_fro_excess": 0.23903220891952515,
+    "anchor_cov_fro_ratio": 1.6658963758806495,
+    "anchor_gaussian_w2": 0.8390941619873047,
+    "anchor_gaussian_w2_floor": 0.4083065092563629,
+    "anchor_gaussian_w2_excess": 0.4307876527309418,
+    "anchor_gaussian_w2_ratio": 2.055059478516576,
+    "y_swd": 0.08513694256544113,
+    "residual_swd": 0.17233902215957642
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.003505653701722622,
+    "anchor_y_swd": 0.11223173886537552,
+    "anchor_y_floor_swd": 0.11423029005527496,
+    "anchor_y_excess_swd": 0.0,
+    "anchor_y_ratio": 0.9825041922861935,
+    "anchor_residual_swd": 0.11223173886537552,
+    "anchor_residual_floor_swd": 0.11423029005527496,
+    "anchor_residual_excess_swd": 0.0,
+    "anchor_residual_ratio": 0.9825041922861935,
+    "anchor_mean_l2": 0.23330140113830566,
+    "anchor_mean_l2_floor": 0.23791417479515076,
+    "anchor_mean_l2_excess": 0.0,
+    "anchor_mean_l2_ratio": 0.9806116064298531,
+    "anchor_cov_fro": 0.35702085494995117,
+    "anchor_cov_fro_floor": 0.366069495677948,
+    "anchor_cov_fro_excess": 0.0,
+    "anchor_cov_fro_ratio": 0.9752816313983249,
+    "anchor_gaussian_w2": 0.414202481508255,
+    "anchor_gaussian_w2_floor": 0.42643070220947266,
+    "anchor_gaussian_w2_excess": 0.0,
+    "anchor_gaussian_w2_ratio": 0.9713242488454528,
+    "y_swd": 0.004485184792429209,
+    "residual_swd": 0.0035802251659333706
+  },
+  "seed": 7,
+  "device": "cuda",
+  "channel": "AWGN",
+  "train_implant_source": "awgn7_direct_none_queue_big_decay_seed7",
+  "eval_implant_source": null,
+  "checkpoint": "/home/entropy/GitHub/conditional_drifting_models/weights/symbolic_autoencoders/awgn/symbolic_awgn_drifting_direct_none_queue_big_decay_seed7.pt"
+}

@@ -1,0 +1,64 @@
+{
+  "manifest": {
+    "seed": 7,
+    "device": "cpu",
+    "conditioning_modes": [
+      "local"
+    ],
+    "condition_scales": [
+      0.25
+    ],
+    "target_scales": [
+      1.0
+    ],
+    "condition_bandwidths": [
+      null
+    ],
+    "target_bandwidths": [
+      null
+    ],
+    "local_condition_ks": [
+      16
+    ],
+    "families": [
+      "drifting_residual"
+    ],
+    "implant_epochs": 2,
+    "ae_epochs": 1,
+    "dataset_size": 1024,
+    "batch_size": 128,
+    "ae_dataset_size": 2000,
+    "ae_batch_size": 128,
+    "eval_size": 512,
+    "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights"
+  },
+  "runs": [
+    {
+      "family": "drifting_residual",
+      "conditioning_mode": "local",
+      "condition_scale": 0.25,
+      "target_scale": 1.0,
+      "condition_bandwidth": null,
+      "target_bandwidth": null,
+      "local_condition_k": 16,
+      "run_name": "drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16",
+      "implant_register_name": "awgn7_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7",
+      "ae_name": "symbolic_awgn_drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_seed7",
+      "implant_result": {
+        "elapsed_seconds": 5.723975649998465,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_local_kernel/drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_implant.log"
+      },
+      "ae_result": {
+        "elapsed_seconds": 4.8476344180016895,
+        "log_path": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_local_kernel/drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16_ae.log"
+      },
+      "summary_path": "/home/entropy/GitHub/conditional_drifting_models/results/smoke_local_kernel/drifting_residual_local_cond0p25_targ1_cbwauto_tbwauto_k16/summary.json",
+      "final_eval_ser": 0.880859375,
+      "channel_metrics": {
+        "joint_xy_swd": 0.1479359269142151,
+        "y_swd": 0.23597997426986694,
+        "residual_swd": 0.36722710728645325
+      }
+    }
+  ]
+}

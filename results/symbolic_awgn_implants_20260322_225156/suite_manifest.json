@@ -1,0 +1,27 @@
+{
+  "seed": 7,
+  "device": "cuda",
+  "n": 7,
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "dataset_size": 120000,
+  "batch_size": 512,
+  "drifting_epochs": 60,
+  "wgan_epochs": 60,
+  "hidden_dim": 128,
+  "latent_dim": 16,
+  "conditional_kernel": true,
+  "condition_kernel_scale": 1.0,
+  "target_kernel_scale": 1.0,
+  "weights_root": "/home/entropy/GitHub/conditional_drifting_models/weights",
+  "specs": [
+    {
+      "family": "drifting_direct",
+      "register_name": "awgn7_drift_direct_seed7"
+    },
+    {
+      "family": "drifting_residual",
+      "register_name": "awgn7_drift_residual_seed7"
+    }
+  ]
+}

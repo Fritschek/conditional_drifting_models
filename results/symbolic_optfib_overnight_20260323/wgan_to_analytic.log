@@ -1,0 +1,34 @@
+epoch 1/30: loss=1.811370e+00, train_ser=6.554740e-01, eval_ser=skipped
+epoch 2/30: loss=1.404189e+00, train_ser=5.085050e-01, eval_ser=0.45701002165675164
+epoch 3/30: loss=1.354315e+00, train_ser=4.866240e-01, eval_ser=skipped
+epoch 4/30: loss=1.271446e+00, train_ser=4.584210e-01, eval_ser=0.4020100185275078
+epoch 5/30: loss=1.249662e+00, train_ser=4.478370e-01, eval_ser=skipped
+epoch 6/30: loss=1.225415e+00, train_ser=4.409460e-01, eval_ser=0.39300001703202725
+epoch 7/30: loss=1.210196e+00, train_ser=4.410980e-01, eval_ser=skipped
+epoch 8/30: loss=1.190162e+00, train_ser=4.374860e-01, eval_ser=0.3722000166773796
+epoch 9/30: loss=1.168251e+00, train_ser=4.344480e-01, eval_ser=skipped
+epoch 10/30: loss=1.147526e+00, train_ser=4.298490e-01, eval_ser=0.37018001720309257
+epoch 11/30: loss=1.140058e+00, train_ser=4.303070e-01, eval_ser=skipped
+epoch 12/30: loss=1.134345e+00, train_ser=4.290520e-01, eval_ser=0.36409001529216767
+epoch 13/30: loss=1.121656e+00, train_ser=4.245840e-01, eval_ser=skipped
+epoch 14/30: loss=1.124673e+00, train_ser=4.285880e-01, eval_ser=0.3658800169825554
+epoch 15/30: loss=1.124827e+00, train_ser=4.285110e-01, eval_ser=skipped
+epoch 16/30: loss=1.118556e+00, train_ser=4.271010e-01, eval_ser=0.3839600184559822
+epoch 17/30: loss=1.120888e+00, train_ser=4.285780e-01, eval_ser=skipped
+epoch 18/30: loss=1.075491e+00, train_ser=4.031050e-01, eval_ser=0.3388400150835514
+epoch 19/30: loss=1.042685e+00, train_ser=3.949230e-01, eval_ser=skipped
+epoch 20/30: loss=1.041605e+00, train_ser=3.940150e-01, eval_ser=0.33808001548051836
+epoch 21/30: loss=1.041589e+00, train_ser=3.945490e-01, eval_ser=skipped
+epoch 22/30: loss=1.037360e+00, train_ser=3.941010e-01, eval_ser=0.33168001517653467
+epoch 23/30: loss=1.038136e+00, train_ser=3.954460e-01, eval_ser=skipped
+epoch 24/30: loss=1.036376e+00, train_ser=3.947870e-01, eval_ser=0.3222800146043301
+epoch 25/30: loss=1.027551e+00, train_ser=3.900690e-01, eval_ser=skipped
+epoch 26/30: loss=1.034314e+00, train_ser=3.945140e-01, eval_ser=0.33883001662790774
+epoch 27/30: loss=1.028552e+00, train_ser=3.930270e-01, eval_ser=skipped
+epoch 28/30: loss=1.027306e+00, train_ser=3.916660e-01, eval_ser=0.3160000157356262
+epoch 29/30: loss=1.021626e+00, train_ser=3.903070e-01, eval_ser=skipped
+epoch 30/30: loss=1.025687e+00, train_ser=3.913410e-01, eval_ser=0.3414100156724453
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/wgan_to_analytic",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_optfib_overnight_20260323/wgan_to_analytic/summary.json"
+}

@@ -1,0 +1,3019 @@
+{
+  "model_type": "cnn_turbo",
+  "train_implant": "analytic_awgn",
+  "train_implant_source": null,
+  "eval_implant": "analytic_awgn",
+  "eval_implant_source": null,
+  "seed": 7,
+  "device": "cuda",
+  "training_regime": "epoch_alternate",
+  "rate": 0.5,
+  "ebno_db": 4.0,
+  "epochs": 300,
+  "num_iterations": 3000,
+  "batch_size": 500,
+  "sample_size": 50000,
+  "train_seconds": 9594.366281553,
+  "history": [
+    {
+      "epoch": 1,
+      "phase": "alternate",
+      "encoder_loss": 0.6876086235046387,
+      "encoder_ber": 0.49982439786195754,
+      "decoder_loss": 0.1853481482565403,
+      "decoder_ber": 0.07428719084709882,
+      "epoch_seconds": 67.25233221300005,
+      "eval_ber": null
+    },
+    {
+      "epoch": 2,
+      "phase": "alternate",
+      "encoder_loss": 0.07040308684110641,
+      "encoder_ber": 0.02176406351849437,
+      "decoder_loss": 0.12486526238918304,
+      "decoder_ber": 0.04872300236672163,
+      "epoch_seconds": 65.48971647399958,
+      "eval_ber": null
+    },
+    {
+      "epoch": 3,
+      "phase": "alternate",
+      "encoder_loss": 0.052598168179392814,
+      "encoder_ber": 0.0168618758674711,
+      "decoder_loss": 0.11108465176820755,
+      "decoder_ber": 0.04291793945431709,
+      "epoch_seconds": 65.93049116700058,
+      "eval_ber": null
+    },
+    {
+      "epoch": 4,
+      "phase": "alternate",
+      "encoder_loss": 0.046677321381866935,
+      "encoder_ber": 0.014871875727549196,
+      "decoder_loss": 0.10541668930649757,
+      "decoder_ber": 0.040545939490199086,
+      "epoch_seconds": 65.68510449400128,
+      "eval_ber": null
+    },
+    {
+      "epoch": 5,
+      "phase": "alternate",
+      "encoder_loss": 0.0461177646368742,
+      "encoder_ber": 0.014290313199162484,
+      "decoder_loss": 0.10177431394159794,
+      "decoder_ber": 0.03905637691915035,
+      "epoch_seconds": 65.78390172799845,
+      "eval_ber": null
+    },
+    {
+      "epoch": 6,
+      "phase": "alternate",
+      "encoder_loss": 0.04440073598176241,
+      "encoder_ber": 0.013672813139855862,
+      "decoder_loss": 0.09953437247872353,
+      "decoder_ber": 0.038103314340114595,
+      "epoch_seconds": 46.94887269700121,
+      "eval_ber": null
+    },
+    {
+      "epoch": 7,
+      "phase": "alternate",
+      "encoder_loss": 0.04260491639375687,
+      "encoder_ber": 0.01336187562905252,
+      "decoder_loss": 0.09861902084946632,
+      "decoder_ber": 0.03763437678664923,
+      "epoch_seconds": 31.387057615997037,
+      "eval_ber": null
+    },
+    {
+      "epoch": 8,
+      "phase": "alternate",
+      "encoder_loss": 0.04202018070966005,
+      "encoder_ber": 0.01336625061929226,
+      "decoder_loss": 0.09746315985918046,
+      "decoder_ber": 0.037172439314424995,
+      "epoch_seconds": 31.219374001000688,
+      "eval_ber": null
+    },
+    {
+      "epoch": 9,
+      "phase": "alternate",
+      "encoder_loss": 0.0415753386169672,
+      "encoder_ber": 0.013118438115343451,
+      "decoder_loss": 0.09675497685372829,
+      "decoder_ber": 0.03681031423062086,
+      "epoch_seconds": 31.202609543001017,
+      "eval_ber": null
+    },
+    {
+      "epoch": 10,
+      "phase": "alternate",
+      "encoder_loss": 0.04135922782123089,
+      "encoder_ber": 0.01295375063084066,
+      "decoder_loss": 0.0961151931732893,
+      "decoder_ber": 0.03656125173717737,
+      "epoch_seconds": 32.74127378000048,
+      "eval_ber": 0.012960625626146794
+    },
+    {
+      "epoch": 11,
+      "phase": "alternate",
+      "encoder_loss": 0.04040086850523949,
+      "encoder_ber": 0.012821875596418977,
+      "decoder_loss": 0.095209671407938,
+      "decoder_ber": 0.0362362517118454,
+      "epoch_seconds": 31.196843336998427,
+      "eval_ber": null
+    },
+    {
+      "epoch": 12,
+      "phase": "alternate",
+      "encoder_loss": 0.041162120774388314,
+      "encoder_ber": 0.012675313111394644,
+      "decoder_loss": 0.0945837373584509,
+      "decoder_ber": 0.03594431418180466,
+      "epoch_seconds": 31.2061989419999,
+      "eval_ber": null
+    },
+    {
+      "epoch": 13,
+      "phase": "alternate",
+      "encoder_loss": 0.04070556826889515,
+      "encoder_ber": 0.012352500539273024,
+      "decoder_loss": 0.0935365368872881,
+      "decoder_ber": 0.03557087654620409,
+      "epoch_seconds": 31.199998752999818,
+      "eval_ber": null
+    },
+    {
+      "epoch": 14,
+      "phase": "alternate",
+      "encoder_loss": 0.0396705262362957,
+      "encoder_ber": 0.012081563128158451,
+      "decoder_loss": 0.09196266004443168,
+      "decoder_ber": 0.03489918909966946,
+      "epoch_seconds": 31.491278948997206,
+      "eval_ber": null
+    },
+    {
+      "epoch": 15,
+      "phase": "alternate",
+      "encoder_loss": 0.037801452949643134,
+      "encoder_ber": 0.011689688032492995,
+      "decoder_loss": 0.08980093866586686,
+      "decoder_ber": 0.034015376646071675,
+      "epoch_seconds": 31.31575050000174,
+      "eval_ber": null
+    },
+    {
+      "epoch": 16,
+      "phase": "alternate",
+      "encoder_loss": 0.035989120341837405,
+      "encoder_ber": 0.01126156303100288,
+      "decoder_loss": 0.08738083216547966,
+      "decoder_ber": 0.03307075160741806,
+      "epoch_seconds": 31.18234305399892,
+      "eval_ber": null
+    },
+    {
+      "epoch": 17,
+      "phase": "alternate",
+      "encoder_loss": 0.03399910617619753,
+      "encoder_ber": 0.010493750488385557,
+      "decoder_loss": 0.08535527488589287,
+      "decoder_ber": 0.03220668899640441,
+      "epoch_seconds": 31.18120154999997,
+      "eval_ber": null
+    },
+    {
+      "epoch": 18,
+      "phase": "alternate",
+      "encoder_loss": 0.0336183787882328,
+      "encoder_ber": 0.010096562979742884,
+      "decoder_loss": 0.08310700249671936,
+      "decoder_ber": 0.03137906393781304,
+      "epoch_seconds": 31.193464142997982,
+      "eval_ber": null
+    },
+    {
+      "epoch": 19,
+      "phase": "alternate",
+      "encoder_loss": 0.030698301997035743,
+      "encoder_ber": 0.009648125441744924,
+      "decoder_loss": 0.08098411369323731,
+      "decoder_ber": 0.03051362645253539,
+      "epoch_seconds": 31.184223639000265,
+      "eval_ber": null
+    },
+    {
+      "epoch": 20,
+      "phase": "alternate",
+      "encoder_loss": 0.030243814755231142,
+      "encoder_ber": 0.009004687955603004,
+      "decoder_loss": 0.07953475406765938,
+      "decoder_ber": 0.029927438888698817,
+      "epoch_seconds": 32.74902954799836,
+      "eval_ber": 0.008592187892645597
+    },
+    {
+      "epoch": 21,
+      "phase": "alternate",
+      "encoder_loss": 0.027838946543633936,
+      "encoder_ber": 0.0087475003907457,
+      "decoder_loss": 0.07790161706507207,
+      "decoder_ber": 0.0292407513782382,
+      "epoch_seconds": 31.195164732002013,
+      "eval_ber": null
+    },
+    {
+      "epoch": 22,
+      "phase": "alternate",
+      "encoder_loss": 0.027487537693232297,
+      "encoder_ber": 0.00820718792732805,
+      "decoder_loss": 0.07583729831874371,
+      "decoder_ber": 0.028465563867241143,
+      "epoch_seconds": 31.205503523000516,
+      "eval_ber": null
+    },
+    {
+      "epoch": 23,
+      "phase": "alternate",
+      "encoder_loss": 0.025206459052860737,
+      "encoder_ber": 0.007803750336170197,
+      "decoder_loss": 0.07489079493284226,
+      "decoder_ber": 0.02803662633150816,
+      "epoch_seconds": 31.197041616000206,
+      "eval_ber": null
+    },
+    {
+      "epoch": 24,
+      "phase": "alternate",
+      "encoder_loss": 0.023226196262985468,
+      "encoder_ber": 0.007424375344999135,
+      "decoder_loss": 0.07358653357625007,
+      "decoder_ber": 0.027567938819527626,
+      "epoch_seconds": 31.207635579001362,
+      "eval_ber": null
+    },
+    {
+      "epoch": 25,
+      "phase": "alternate",
+      "encoder_loss": 0.023254405725747346,
+      "encoder_ber": 0.007161562857218087,
+      "decoder_loss": 0.07244269064068794,
+      "decoder_ber": 0.0270836262665689,
+      "epoch_seconds": 31.2119286140005,
+      "eval_ber": null
+    },
+    {
+      "epoch": 26,
+      "phase": "alternate",
+      "encoder_loss": 0.022930299378931523,
+      "encoder_ber": 0.006950312834233046,
+      "decoder_loss": 0.0717754759043455,
+      "decoder_ber": 0.02689618881046772,
+      "epoch_seconds": 31.20595958699778,
+      "eval_ber": null
+    },
+    {
+      "epoch": 27,
+      "phase": "alternate",
+      "encoder_loss": 0.022364247199147938,
+      "encoder_ber": 0.006599687812849879,
+      "decoder_loss": 0.07128825739026069,
+      "decoder_ber": 0.02667075128853321,
+      "epoch_seconds": 31.203024791000644,
+      "eval_ber": null
+    },
+    {
+      "epoch": 28,
+      "phase": "alternate",
+      "encoder_loss": 0.021337897554039954,
+      "encoder_ber": 0.006370312799699605,
+      "decoder_loss": 0.07031514589488506,
+      "decoder_ber": 0.026291063766926526,
+      "epoch_seconds": 31.198335144999874,
+      "eval_ber": null
+    },
+    {
+      "epoch": 29,
+      "phase": "alternate",
+      "encoder_loss": 0.02021002857014537,
+      "encoder_ber": 0.006316250278614461,
+      "decoder_loss": 0.06979447801411152,
+      "decoder_ber": 0.026128876253962516,
+      "epoch_seconds": 31.208919919001346,
+      "eval_ber": null
+    },
+    {
+      "epoch": 30,
+      "phase": "alternate",
+      "encoder_loss": 0.01981631349772215,
+      "encoder_ber": 0.006085312785580754,
+      "decoder_loss": 0.06923080755770207,
+      "decoder_ber": 0.025864938668906687,
+      "epoch_seconds": 32.748263131001295,
+      "eval_ber": 0.005965625252574682
+    },
+    {
+      "epoch": 31,
+      "phase": "alternate",
+      "encoder_loss": 0.019288225937634705,
+      "encoder_ber": 0.006004062779247761,
+      "decoder_loss": 0.06847064233571291,
+      "decoder_ber": 0.02554037620127201,
+      "epoch_seconds": 31.200836299998628,
+      "eval_ber": null
+    },
+    {
+      "epoch": 32,
+      "phase": "alternate",
+      "encoder_loss": 0.0188181122392416,
+      "encoder_ber": 0.005863125300966204,
+      "decoder_loss": 0.06826657570898532,
+      "decoder_ber": 0.02548387622833252,
+      "epoch_seconds": 31.20051548700212,
+      "eval_ber": null
+    },
+    {
+      "epoch": 33,
+      "phase": "alternate",
+      "encoder_loss": 0.019617001041769982,
+      "encoder_ber": 0.005682500270195305,
+      "decoder_loss": 0.0673116489648819,
+      "decoder_ber": 0.02515493868663907,
+      "epoch_seconds": 31.199453257999266,
+      "eval_ber": null
+    },
+    {
+      "epoch": 34,
+      "phase": "alternate",
+      "encoder_loss": 0.0186086580529809,
+      "encoder_ber": 0.005502500259317458,
+      "decoder_loss": 0.06746616353839636,
+      "decoder_ber": 0.025199876189231873,
+      "epoch_seconds": 31.18777549799779,
+      "eval_ber": null
+    },
+    {
+      "epoch": 35,
+      "phase": "alternate",
+      "encoder_loss": 0.018406370989978313,
+      "encoder_ber": 0.005475625260733068,
+      "decoder_loss": 0.06789278373867273,
+      "decoder_ber": 0.0253398761972785,
+      "epoch_seconds": 31.183615270998416,
+      "eval_ber": null
+    },
+    {
+      "epoch": 36,
+      "phase": "alternate",
+      "encoder_loss": 0.018016655128449202,
+      "encoder_ber": 0.005500000244937837,
+      "decoder_loss": 0.06680689673125743,
+      "decoder_ber": 0.024958251159638168,
+      "epoch_seconds": 31.198787964000076,
+      "eval_ber": null
+    },
+    {
+      "epoch": 37,
+      "phase": "alternate",
+      "encoder_loss": 0.01758962756022811,
+      "encoder_ber": 0.005215000254102051,
+      "decoder_loss": 0.06540698248893023,
+      "decoder_ber": 0.02444468866661191,
+      "epoch_seconds": 31.198763484000665,
+      "eval_ber": null
+    },
+    {
+      "epoch": 38,
+      "phase": "alternate",
+      "encoder_loss": 0.016826260099187494,
+      "encoder_ber": 0.004999375226907432,
+      "decoder_loss": 0.06488390431553126,
+      "decoder_ber": 0.024211251102387907,
+      "epoch_seconds": 31.19407196300017,
+      "eval_ber": null
+    },
+    {
+      "epoch": 39,
+      "phase": "alternate",
+      "encoder_loss": 0.01652652448043227,
+      "encoder_ber": 0.005078437738120556,
+      "decoder_loss": 0.06443687070906162,
+      "decoder_ber": 0.02400050113722682,
+      "epoch_seconds": 31.19565003599928,
+      "eval_ber": null
+    },
+    {
+      "epoch": 40,
+      "phase": "alternate",
+      "encoder_loss": 0.016176327038556336,
+      "encoder_ber": 0.004914375224616379,
+      "decoder_loss": 0.06473823675513267,
+      "decoder_ber": 0.024158188622444867,
+      "epoch_seconds": 32.73105231199952,
+      "eval_ber": 0.004761875218246132
+    },
+    {
+      "epoch": 41,
+      "phase": "alternate",
+      "encoder_loss": 0.01599706075154245,
+      "encoder_ber": 0.004810312690678984,
+      "decoder_loss": 0.06302892113476992,
+      "decoder_ber": 0.023517813611775636,
+      "epoch_seconds": 31.18257806300244,
+      "eval_ber": null
+    },
+    {
+      "epoch": 42,
+      "phase": "alternate",
+      "encoder_loss": 0.01573423048481345,
+      "encoder_ber": 0.004635000205598772,
+      "decoder_loss": 0.06366111080348491,
+      "decoder_ber": 0.023708501134067774,
+      "epoch_seconds": 31.177570171999832,
+      "eval_ber": null
+    },
+    {
+      "epoch": 43,
+      "phase": "alternate",
+      "encoder_loss": 0.014990364350378513,
+      "encoder_ber": 0.004655000204220414,
+      "decoder_loss": 0.06286203482747078,
+      "decoder_ber": 0.023413251098245384,
+      "epoch_seconds": 31.174004740998498,
+      "eval_ber": null
+    },
+    {
+      "epoch": 44,
+      "phase": "alternate",
+      "encoder_loss": 0.015059345187619328,
+      "encoder_ber": 0.0045271877106279135,
+      "decoder_loss": 0.06239042863994837,
+      "decoder_ber": 0.023220501076430082,
+      "epoch_seconds": 31.18019526599892,
+      "eval_ber": null
+    },
+    {
+      "epoch": 45,
+      "phase": "alternate",
+      "encoder_loss": 0.015616970872506498,
+      "encoder_ber": 0.0045656252186745405,
+      "decoder_loss": 0.0623887954428792,
+      "decoder_ber": 0.023209313601255416,
+      "epoch_seconds": 31.169993729999987,
+      "eval_ber": null
+    },
+    {
+      "epoch": 46,
+      "phase": "alternate",
+      "encoder_loss": 0.01498622978106141,
+      "encoder_ber": 0.0043768752040341495,
+      "decoder_loss": 0.062286903142929076,
+      "decoder_ber": 0.023150251127779485,
+      "epoch_seconds": 31.18011602399929,
+      "eval_ber": null
+    },
+    {
+      "epoch": 47,
+      "phase": "alternate",
+      "encoder_loss": 0.014222360830754042,
+      "encoder_ber": 0.0043025001953355966,
+      "decoder_loss": 0.0615226693674922,
+      "decoder_ber": 0.02287800106778741,
+      "epoch_seconds": 31.166794337001193,
+      "eval_ber": null
+    },
+    {
+      "epoch": 48,
+      "phase": "alternate",
+      "encoder_loss": 0.014192417757585644,
+      "encoder_ber": 0.004347187695093453,
+      "decoder_loss": 0.061470692187547686,
+      "decoder_ber": 0.022839563608169557,
+      "epoch_seconds": 31.194293180000386,
+      "eval_ber": null
+    },
+    {
+      "epoch": 49,
+      "phase": "alternate",
+      "encoder_loss": 0.013693100931122899,
+      "encoder_ber": 0.004186562702525407,
+      "decoder_loss": 0.060584649041295055,
+      "decoder_ber": 0.02251718856394291,
+      "epoch_seconds": 31.192137196001568,
+      "eval_ber": null
+    },
+    {
+      "epoch": 50,
+      "phase": "alternate",
+      "encoder_loss": 0.013603105545043945,
+      "encoder_ber": 0.00408718767343089,
+      "decoder_loss": 0.06120991142839193,
+      "decoder_ber": 0.02276200107112527,
+      "epoch_seconds": 32.713848113002314,
+      "eval_ber": 0.004018437678460032
+    },
+    {
+      "epoch": 51,
+      "phase": "alternate",
+      "encoder_loss": 0.014155398057773709,
+      "encoder_ber": 0.004107812680304051,
+      "decoder_loss": 0.06021279212832451,
+      "decoder_ber": 0.02237493856623769,
+      "epoch_seconds": 31.149884845999622,
+      "eval_ber": null
+    },
+    {
+      "epoch": 52,
+      "phase": "alternate",
+      "encoder_loss": 0.013851960264146328,
+      "encoder_ber": 0.004120937688276172,
+      "decoder_loss": 0.05920054194331169,
+      "decoder_ber": 0.021995251052081586,
+      "epoch_seconds": 31.14150667099966,
+      "eval_ber": null
+    },
+    {
+      "epoch": 53,
+      "phase": "alternate",
+      "encoder_loss": 0.013283031480386853,
+      "encoder_ber": 0.003953125185798854,
+      "decoder_loss": 0.05984677939116955,
+      "decoder_ber": 0.022262251023203134,
+      "epoch_seconds": 31.142955328003154,
+      "eval_ber": null
+    },
+    {
+      "epoch": 54,
+      "phase": "alternate",
+      "encoder_loss": 0.012945178300142288,
+      "encoder_ber": 0.0038325001788325607,
+      "decoder_loss": 0.05900476575642824,
+      "decoder_ber": 0.02191581354662776,
+      "epoch_seconds": 31.146283450998453,
+      "eval_ber": null
+    },
+    {
+      "epoch": 55,
+      "phase": "alternate",
+      "encoder_loss": 0.013409491498023271,
+      "encoder_ber": 0.003880625159945339,
+      "decoder_loss": 0.05913698947429657,
+      "decoder_ber": 0.021949313536286354,
+      "epoch_seconds": 31.137920864999614,
+      "eval_ber": null
+    },
+    {
+      "epoch": 56,
+      "phase": "alternate",
+      "encoder_loss": 0.012864072918891906,
+      "encoder_ber": 0.0038068751827813685,
+      "decoder_loss": 0.05921581610292196,
+      "decoder_ber": 0.021953001026064158,
+      "epoch_seconds": 31.137063481997757,
+      "eval_ber": null
+    },
+    {
+      "epoch": 57,
+      "phase": "alternate",
+      "encoder_loss": 0.012690239446237683,
+      "encoder_ber": 0.003706562682054937,
+      "decoder_loss": 0.0590590438246727,
+      "decoder_ber": 0.021923251044005155,
+      "epoch_seconds": 31.137432085997716,
+      "eval_ber": null
+    },
+    {
+      "epoch": 58,
+      "phase": "alternate",
+      "encoder_loss": 0.012624283889308571,
+      "encoder_ber": 0.003838437681552023,
+      "decoder_loss": 0.05807390066236257,
+      "decoder_ber": 0.021575626019388436,
+      "epoch_seconds": 31.144137931998557,
+      "eval_ber": null
+    },
+    {
+      "epoch": 59,
+      "phase": "alternate",
+      "encoder_loss": 0.012790718814358115,
+      "encoder_ber": 0.003708125171251595,
+      "decoder_loss": 0.05784861838817596,
+      "decoder_ber": 0.021476938474923372,
+      "epoch_seconds": 31.138147906000086,
+      "eval_ber": null
+    },
+    {
+      "epoch": 60,
+      "phase": "alternate",
+      "encoder_loss": 0.012307342328131198,
+      "encoder_ber": 0.0036393751739524304,
+      "decoder_loss": 0.05688440219312906,
+      "decoder_ber": 0.021129750996828078,
+      "epoch_seconds": 32.68483404800281,
+      "eval_ber": 0.0034203126560896635
+    },
+    {
+      "epoch": 61,
+      "phase": "alternate",
+      "encoder_loss": 0.012642994727939368,
+      "encoder_ber": 0.0035412501473911107,
+      "decoder_loss": 0.05796582594513893,
+      "decoder_ber": 0.021484501015394925,
+      "epoch_seconds": 31.136057427000196,
+      "eval_ber": null
+    },
+    {
+      "epoch": 62,
+      "phase": "alternate",
+      "encoder_loss": 0.012029955983161927,
+      "encoder_ber": 0.003540625174064189,
+      "decoder_loss": 0.057807313092052934,
+      "decoder_ber": 0.021413001008331777,
+      "epoch_seconds": 31.14443151500018,
+      "eval_ber": null
+    },
+    {
+      "epoch": 63,
+      "phase": "alternate",
+      "encoder_loss": 0.01206282421015203,
+      "encoder_ber": 0.0036884376662783326,
+      "decoder_loss": 0.05753664260357618,
+      "decoder_ber": 0.02134956345334649,
+      "epoch_seconds": 31.139769306002563,
+      "eval_ber": null
+    },
+    {
+      "epoch": 64,
+      "phase": "alternate",
+      "encoder_loss": 0.01199030913412571,
+      "encoder_ber": 0.0034415626479312776,
+      "decoder_loss": 0.057309172987937924,
+      "decoder_ber": 0.021290126036852597,
+      "epoch_seconds": 31.142702252000163,
+      "eval_ber": null
+    },
+    {
+      "epoch": 65,
+      "phase": "alternate",
+      "encoder_loss": 0.011612008176743984,
+      "encoder_ber": 0.0034506251523271202,
+      "decoder_loss": 0.056846340134739874,
+      "decoder_ber": 0.02107712598517537,
+      "epoch_seconds": 31.13726685599977,
+      "eval_ber": null
+    },
+    {
+      "epoch": 66,
+      "phase": "alternate",
+      "encoder_loss": 0.011160702668130398,
+      "encoder_ber": 0.0033353126654401422,
+      "decoder_loss": 0.056291966252028945,
+      "decoder_ber": 0.020857938505709172,
+      "epoch_seconds": 31.14200041300137,
+      "eval_ber": null
+    },
+    {
+      "epoch": 67,
+      "phase": "alternate",
+      "encoder_loss": 0.011537583181634545,
+      "encoder_ber": 0.0033534376602619887,
+      "decoder_loss": 0.056204832032322884,
+      "decoder_ber": 0.020847251005470753,
+      "epoch_seconds": 31.13771478200215,
+      "eval_ber": null
+    },
+    {
+      "epoch": 68,
+      "phase": "alternate",
+      "encoder_loss": 0.011479425914585591,
+      "encoder_ber": 0.0033540626615285872,
+      "decoder_loss": 0.05521445840597153,
+      "decoder_ber": 0.020410125989466905,
+      "epoch_seconds": 31.140360175999376,
+      "eval_ber": null
+    },
+    {
+      "epoch": 69,
+      "phase": "alternate",
+      "encoder_loss": 0.011683547738939523,
+      "encoder_ber": 0.00315437515033409,
+      "decoder_loss": 0.0538793819770217,
+      "decoder_ber": 0.01992087595909834,
+      "epoch_seconds": 31.138656716997502,
+      "eval_ber": null
+    },
+    {
+      "epoch": 70,
+      "phase": "alternate",
+      "encoder_loss": 0.010473774466663598,
+      "encoder_ber": 0.0029809376306366175,
+      "decoder_loss": 0.05233837307989597,
+      "decoder_ber": 0.019327875901013612,
+      "epoch_seconds": 32.6847813059976,
+      "eval_ber": 0.002785312635824084
+    },
+    {
+      "epoch": 71,
+      "phase": "alternate",
+      "encoder_loss": 0.00986727565061301,
+      "encoder_ber": 0.0028293751215096564,
+      "decoder_loss": 0.05231971497088671,
+      "decoder_ber": 0.01927000093087554,
+      "epoch_seconds": 31.137270301998797,
+      "eval_ber": null
+    },
+    {
+      "epoch": 72,
+      "phase": "alternate",
+      "encoder_loss": 0.009321454181335866,
+      "encoder_ber": 0.0028090626327320935,
+      "decoder_loss": 0.05169495474547148,
+      "decoder_ber": 0.019032125882804393,
+      "epoch_seconds": 31.13691403700068,
+      "eval_ber": null
+    },
+    {
+      "epoch": 73,
+      "phase": "alternate",
+      "encoder_loss": 0.008765531145036221,
+      "encoder_ber": 0.0026668751204852017,
+      "decoder_loss": 0.05027432105690241,
+      "decoder_ber": 0.018472688380628825,
+      "epoch_seconds": 31.14213415699851,
+      "eval_ber": null
+    },
+    {
+      "epoch": 74,
+      "phase": "alternate",
+      "encoder_loss": 0.008176914141513407,
+      "encoder_ber": 0.0025084376195445655,
+      "decoder_loss": 0.04962071694433689,
+      "decoder_ber": 0.018157375885173677,
+      "epoch_seconds": 31.1628343270022,
+      "eval_ber": null
+    },
+    {
+      "epoch": 75,
+      "phase": "alternate",
+      "encoder_loss": 0.007839883072301745,
+      "encoder_ber": 0.002339375107549131,
+      "decoder_loss": 0.04757421677559614,
+      "decoder_ber": 0.017442438358440997,
+      "epoch_seconds": 31.132990114001586,
+      "eval_ber": null
+    },
+    {
+      "epoch": 76,
+      "phase": "alternate",
+      "encoder_loss": 0.007120098774321377,
+      "encoder_ber": 0.002122812595916912,
+      "decoder_loss": 0.04699962195754051,
+      "decoder_ber": 0.017152563367038964,
+      "epoch_seconds": 31.38872815600189,
+      "eval_ber": null
+    },
+    {
+      "epoch": 77,
+      "phase": "alternate",
+      "encoder_loss": 0.006708508902229369,
+      "encoder_ber": 0.0018978125834837557,
+      "decoder_loss": 0.04463349052518606,
+      "decoder_ber": 0.016249688325449825,
+      "epoch_seconds": 31.13445049800066,
+      "eval_ber": null
+    },
+    {
+      "epoch": 78,
+      "phase": "alternate",
+      "encoder_loss": 0.0061172488937154415,
+      "encoder_ber": 0.001860312585486099,
+      "decoder_loss": 0.04481567443907261,
+      "decoder_ber": 0.01629750075004995,
+      "epoch_seconds": 31.134517520000372,
+      "eval_ber": null
+    },
+    {
+      "epoch": 79,
+      "phase": "alternate",
+      "encoder_loss": 0.005699948035180568,
+      "encoder_ber": 0.0017506250727456062,
+      "decoder_loss": 0.043460956931114195,
+      "decoder_ber": 0.01580575074069202,
+      "epoch_seconds": 31.125994158999674,
+      "eval_ber": null
+    },
+    {
+      "epoch": 80,
+      "phase": "alternate",
+      "encoder_loss": 0.005274965311400592,
+      "encoder_ber": 0.00151656256231945,
+      "decoder_loss": 0.04172549572587013,
+      "decoder_ber": 0.015158813212066889,
+      "epoch_seconds": 32.67997396999999,
+      "eval_ber": 0.0013590625557117165
+    },
+    {
+      "epoch": 81,
+      "phase": "alternate",
+      "encoder_loss": 0.0050824281666427855,
+      "encoder_ber": 0.0015003125695511699,
+      "decoder_loss": 0.04096447008103132,
+      "decoder_ber": 0.014841125708073378,
+      "epoch_seconds": 31.133645942998555,
+      "eval_ber": null
+    },
+    {
+      "epoch": 82,
+      "phase": "alternate",
+      "encoder_loss": 0.005408989386633038,
+      "encoder_ber": 0.0015756250696722417,
+      "decoder_loss": 0.04374932219088078,
+      "decoder_ber": 0.015893313255161048,
+      "epoch_seconds": 31.134389661001478,
+      "eval_ber": null
+    },
+    {
+      "epoch": 83,
+      "phase": "alternate",
+      "encoder_loss": 0.005350197697989643,
+      "encoder_ber": 0.0014787500660168008,
+      "decoder_loss": 0.04199651178717613,
+      "decoder_ber": 0.015230563243851065,
+      "epoch_seconds": 31.13753086700308,
+      "eval_ber": null
+    },
+    {
+      "epoch": 84,
+      "phase": "alternate",
+      "encoder_loss": 0.004741693153046071,
+      "encoder_ber": 0.0013946875592228025,
+      "decoder_loss": 0.04126607371121645,
+      "decoder_ber": 0.014977125694975257,
+      "epoch_seconds": 31.137683016000665,
+      "eval_ber": null
+    },
+    {
+      "epoch": 85,
+      "phase": "alternate",
+      "encoder_loss": 0.00431953466963023,
+      "encoder_ber": 0.0012193750514416025,
+      "decoder_loss": 0.04078912819549441,
+      "decoder_ber": 0.014809000726789236,
+      "epoch_seconds": 31.148689969999396,
+      "eval_ber": null
+    },
+    {
+      "epoch": 86,
+      "phase": "alternate",
+      "encoder_loss": 0.0043173231813125315,
+      "encoder_ber": 0.0013034375588176772,
+      "decoder_loss": 0.04122300140559673,
+      "decoder_ber": 0.015063125722110271,
+      "epoch_seconds": 31.15470438200282,
+      "eval_ber": null
+    },
+    {
+      "epoch": 87,
+      "phase": "alternate",
+      "encoder_loss": 0.0041251488588750366,
+      "encoder_ber": 0.0012946875562192873,
+      "decoder_loss": 0.0394508369974792,
+      "decoder_ber": 0.014394125699996948,
+      "epoch_seconds": 31.15352670700304,
+      "eval_ber": null
+    },
+    {
+      "epoch": 88,
+      "phase": "alternate",
+      "encoder_loss": 0.004093469739891589,
+      "encoder_ber": 0.0012021875503705815,
+      "decoder_loss": 0.040437212098389866,
+      "decoder_ber": 0.014810188187286258,
+      "epoch_seconds": 31.151900221000687,
+      "eval_ber": null
+    },
+    {
+      "epoch": 89,
+      "phase": "alternate",
+      "encoder_loss": 0.004490337846800685,
+      "encoder_ber": 0.001344062557327561,
+      "decoder_loss": 0.039684382870793344,
+      "decoder_ber": 0.014564813215285539,
+      "epoch_seconds": 31.152649114999804,
+      "eval_ber": null
+    },
+    {
+      "epoch": 90,
+      "phase": "alternate",
+      "encoder_loss": 0.0038809632835909726,
+      "encoder_ber": 0.0011250000499421731,
+      "decoder_loss": 0.03874307765439153,
+      "decoder_ber": 0.014157750688493252,
+      "epoch_seconds": 32.69513092499983,
+      "eval_ber": 0.000925937540596351
+    },
+    {
+      "epoch": 91,
+      "phase": "alternate",
+      "encoder_loss": 0.004463658209424466,
+      "encoder_ber": 0.0013771875615930184,
+      "decoder_loss": 0.03873059654980898,
+      "decoder_ber": 0.014155625699087977,
+      "epoch_seconds": 31.14224875000218,
+      "eval_ber": null
+    },
+    {
+      "epoch": 92,
+      "phase": "alternate",
+      "encoder_loss": 0.003445145692676306,
+      "encoder_ber": 0.0010546875407453627,
+      "decoder_loss": 0.03963457091897726,
+      "decoder_ber": 0.014474625689908862,
+      "epoch_seconds": 31.15401689400096,
+      "eval_ber": null
+    },
+    {
+      "epoch": 93,
+      "phase": "alternate",
+      "encoder_loss": 0.003376368060708046,
+      "encoder_ber": 0.0009668750397395342,
+      "decoder_loss": 0.03832863534986973,
+      "decoder_ber": 0.014035250669345259,
+      "epoch_seconds": 31.143011915999523,
+      "eval_ber": null
+    },
+    {
+      "epoch": 94,
+      "phase": "alternate",
+      "encoder_loss": 0.003493856913410127,
+      "encoder_ber": 0.0010825000383192674,
+      "decoder_loss": 0.10157725501060486,
+      "decoder_ber": 0.03897400189191103,
+      "epoch_seconds": 31.18936370099982,
+      "eval_ber": null
+    },
+    {
+      "epoch": 95,
+      "phase": "alternate",
+      "encoder_loss": 0.010959308799356223,
+      "encoder_ber": 0.0033850001613609493,
+      "decoder_loss": 0.049288844242692,
+      "decoder_ber": 0.018081125903874635,
+      "epoch_seconds": 31.160484553998685,
+      "eval_ber": null
+    },
+    {
+      "epoch": 96,
+      "phase": "alternate",
+      "encoder_loss": 0.004114980783779174,
+      "encoder_ber": 0.0012628125527407975,
+      "decoder_loss": 0.041726836293935775,
+      "decoder_ber": 0.015244250690564513,
+      "epoch_seconds": 31.15945505599666,
+      "eval_ber": null
+    },
+    {
+      "epoch": 97,
+      "phase": "alternate",
+      "encoder_loss": 0.003833372830413282,
+      "encoder_ber": 0.0011706250527640804,
+      "decoder_loss": 0.03767099158838391,
+      "decoder_ber": 0.013756375627592205,
+      "epoch_seconds": 31.171578648998548,
+      "eval_ber": null
+    },
+    {
+      "epoch": 98,
+      "phase": "alternate",
+      "encoder_loss": 0.0038089807145297526,
+      "encoder_ber": 0.0011306250403868034,
+      "decoder_loss": 0.036116685897111894,
+      "decoder_ber": 0.01324337563291192,
+      "epoch_seconds": 31.153642189001403,
+      "eval_ber": null
+    },
+    {
+      "epoch": 99,
+      "phase": "alternate",
+      "encoder_loss": 0.0037379463319666684,
+      "encoder_ber": 0.0011234375496860594,
+      "decoder_loss": 0.03556599433720112,
+      "decoder_ber": 0.01293500061891973,
+      "epoch_seconds": 31.156914746999973,
+      "eval_ber": null
+    },
+    {
+      "epoch": 100,
+      "phase": "alternate",
+      "encoder_loss": 0.0034870264865458013,
+      "encoder_ber": 0.0010315625427756458,
+      "decoder_loss": 0.03546505946293473,
+      "decoder_ber": 0.01298118812404573,
+      "epoch_seconds": 32.70083239199812,
+      "eval_ber": 0.0008181250339839608
+    },
+    {
+      "epoch": 101,
+      "phase": "alternate",
+      "encoder_loss": 0.0031351970997639,
+      "encoder_ber": 0.0009671875380445272,
+      "decoder_loss": 0.03694834716245532,
+      "decoder_ber": 0.013656063128262758,
+      "epoch_seconds": 31.156868524001766,
+      "eval_ber": null
+    },
+    {
+      "epoch": 102,
+      "phase": "alternate",
+      "encoder_loss": 0.002694816818693653,
+      "encoder_ber": 0.0008431250366265886,
+      "decoder_loss": 0.035549969874322414,
+      "decoder_ber": 0.013091063123196363,
+      "epoch_seconds": 31.17267086100037,
+      "eval_ber": null
+    },
+    {
+      "epoch": 103,
+      "phase": "alternate",
+      "encoder_loss": 0.003217580490745604,
+      "encoder_ber": 0.0009828125426429323,
+      "decoder_loss": 0.03727355755120516,
+      "decoder_ber": 0.013918063152581454,
+      "epoch_seconds": 31.158775533000153,
+      "eval_ber": null
+    },
+    {
+      "epoch": 104,
+      "phase": "alternate",
+      "encoder_loss": 0.002675021047471091,
+      "encoder_ber": 0.0007850000358303078,
+      "decoder_loss": 0.037036253318190576,
+      "decoder_ber": 0.01379218815639615,
+      "epoch_seconds": 31.165236382999865,
+      "eval_ber": null
+    },
+    {
+      "epoch": 105,
+      "phase": "alternate",
+      "encoder_loss": 0.003124527803156525,
+      "encoder_ber": 0.0009621875375160016,
+      "decoder_loss": 0.035723456170409916,
+      "decoder_ber": 0.013110938107594847,
+      "epoch_seconds": 31.17916879099721,
+      "eval_ber": null
+    },
+    {
+      "epoch": 106,
+      "phase": "alternate",
+      "encoder_loss": 0.0030709356907755135,
+      "encoder_ber": 0.000835312539129518,
+      "decoder_loss": 0.03639481278136372,
+      "decoder_ber": 0.01345831312984228,
+      "epoch_seconds": 31.181858654999814,
+      "eval_ber": null
+    },
+    {
+      "epoch": 107,
+      "phase": "alternate",
+      "encoder_loss": 0.0029004931857343763,
+      "encoder_ber": 0.0008665625378489494,
+      "decoder_loss": 0.03547964109480381,
+      "decoder_ber": 0.0128871881198138,
+      "epoch_seconds": 31.155967943999713,
+      "eval_ber": null
+    },
+    {
+      "epoch": 108,
+      "phase": "alternate",
+      "encoder_loss": 0.0031060975906439126,
+      "encoder_ber": 0.0008800000348128379,
+      "decoder_loss": 0.03517090709507465,
+      "decoder_ber": 0.01292006309889257,
+      "epoch_seconds": 31.153169017001346,
+      "eval_ber": null
+    },
+    {
+      "epoch": 109,
+      "phase": "alternate",
+      "encoder_loss": 0.003213714223820716,
+      "encoder_ber": 0.0009393750334857031,
+      "decoder_loss": 0.03490788481384516,
+      "decoder_ber": 0.012937938082963228,
+      "epoch_seconds": 31.142324075000943,
+      "eval_ber": null
+    },
+    {
+      "epoch": 110,
+      "phase": "alternate",
+      "encoder_loss": 0.0032353794970549645,
+      "encoder_ber": 0.0009687500429572537,
+      "decoder_loss": 0.037867311719805,
+      "decoder_ber": 0.013651438165456057,
+      "epoch_seconds": 32.69645316899914,
+      "eval_ber": 0.0010134375392226503
+    },
+    {
+      "epoch": 111,
+      "phase": "alternate",
+      "encoder_loss": 0.0034483813983388245,
+      "encoder_ber": 0.0009834375360514968,
+      "decoder_loss": 0.034268000546842814,
+      "decoder_ber": 0.01244587559439242,
+      "epoch_seconds": 31.15391518300021,
+      "eval_ber": null
+    },
+    {
+      "epoch": 112,
+      "phase": "alternate",
+      "encoder_loss": 0.0029252872860524803,
+      "encoder_ber": 0.0008156250329921022,
+      "decoder_loss": 0.034997134260833264,
+      "decoder_ber": 0.012927625618875027,
+      "epoch_seconds": 31.15011831099764,
+      "eval_ber": null
+    },
+    {
+      "epoch": 113,
+      "phase": "alternate",
+      "encoder_loss": 0.003027145890519023,
+      "encoder_ber": 0.0008368750344379805,
+      "decoder_loss": 0.0373232394978404,
+      "decoder_ber": 0.01397768817283213,
+      "epoch_seconds": 31.149852884998836,
+      "eval_ber": null
+    },
+    {
+      "epoch": 114,
+      "phase": "alternate",
+      "encoder_loss": 0.002959318547509611,
+      "encoder_ber": 0.0008471875381655991,
+      "decoder_loss": 0.04078984149545431,
+      "decoder_ber": 0.01583681324310601,
+      "epoch_seconds": 31.144098073997156,
+      "eval_ber": null
+    },
+    {
+      "epoch": 115,
+      "phase": "alternate",
+      "encoder_loss": 0.0027993456565309316,
+      "encoder_ber": 0.0008553125389153137,
+      "decoder_loss": 0.0376803097166121,
+      "decoder_ber": 0.013874688168987633,
+      "epoch_seconds": 31.145565860002534,
+      "eval_ber": null
+    },
+    {
+      "epoch": 116,
+      "phase": "alternate",
+      "encoder_loss": 0.0034006508835591376,
+      "encoder_ber": 0.0010400000400841236,
+      "decoder_loss": 0.035071610137820244,
+      "decoder_ber": 0.012788250613957643,
+      "epoch_seconds": 31.157636138999806,
+      "eval_ber": null
+    },
+    {
+      "epoch": 117,
+      "phase": "alternate",
+      "encoder_loss": 0.0030288155924063174,
+      "encoder_ber": 0.0009434375388082117,
+      "decoder_loss": 0.0348545087389648,
+      "decoder_ber": 0.012820188097655774,
+      "epoch_seconds": 32.66038927900081,
+      "eval_ber": null
+    },
+    {
+      "epoch": 118,
+      "phase": "alternate",
+      "encoder_loss": 0.002893247287720442,
+      "encoder_ber": 0.0007753125345334411,
+      "decoder_loss": 0.034888340167701246,
+      "decoder_ber": 0.012852563112974167,
+      "epoch_seconds": 32.07264899499933,
+      "eval_ber": null
+    },
+    {
+      "epoch": 119,
+      "phase": "alternate",
+      "encoder_loss": 0.002727406332269311,
+      "encoder_ber": 0.0007906250341329724,
+      "decoder_loss": 0.03575249807909131,
+      "decoder_ber": 0.013408500647172332,
+      "epoch_seconds": 32.061297783002374,
+      "eval_ber": null
+    },
+    {
+      "epoch": 120,
+      "phase": "alternate",
+      "encoder_loss": 0.003068496158812195,
+      "encoder_ber": 0.000919062539760489,
+      "decoder_loss": 0.03519139287248254,
+      "decoder_ber": 0.01304200060851872,
+      "epoch_seconds": 33.81104974200207,
+      "eval_ber": 0.000712812532146927
+    },
+    {
+      "epoch": 121,
+      "phase": "alternate",
+      "encoder_loss": 0.003314835597993806,
+      "encoder_ber": 0.0010368750419002025,
+      "decoder_loss": 0.03657683107256889,
+      "decoder_ber": 0.013618188152089716,
+      "epoch_seconds": 31.24009207799827,
+      "eval_ber": null
+    },
+    {
+      "epoch": 122,
+      "phase": "alternate",
+      "encoder_loss": 0.002857936235377565,
+      "encoder_ber": 0.0008737500340794213,
+      "decoder_loss": 0.03365195631235838,
+      "decoder_ber": 0.012506250588223338,
+      "epoch_seconds": 31.555116138999438,
+      "eval_ber": null
+    },
+    {
+      "epoch": 123,
+      "phase": "alternate",
+      "encoder_loss": 0.0029431020829360933,
+      "encoder_ber": 0.0008725000341655686,
+      "decoder_loss": 0.03705774139985442,
+      "decoder_ber": 0.01399012567847967,
+      "epoch_seconds": 31.703311640998436,
+      "eval_ber": null
+    },
+    {
+      "epoch": 124,
+      "phase": "alternate",
+      "encoder_loss": 0.006658613733015954,
+      "encoder_ber": 0.0023346876219147816,
+      "decoder_loss": 0.03749458698928356,
+      "decoder_ber": 0.013633250607177615,
+      "epoch_seconds": 31.706913428999542,
+      "eval_ber": null
+    },
+    {
+      "epoch": 125,
+      "phase": "alternate",
+      "encoder_loss": 0.004845540560781955,
+      "encoder_ber": 0.0014900000591296703,
+      "decoder_loss": 0.03402099901437759,
+      "decoder_ber": 0.012439063081517815,
+      "epoch_seconds": 32.22241640500215,
+      "eval_ber": null
+    },
+    {
+      "epoch": 126,
+      "phase": "alternate",
+      "encoder_loss": 0.0028755320922937244,
+      "encoder_ber": 0.0008268750307615846,
+      "decoder_loss": 0.03481302479654551,
+      "decoder_ber": 0.012931125599890948,
+      "epoch_seconds": 31.462193440998817,
+      "eval_ber": null
+    },
+    {
+      "epoch": 127,
+      "phase": "alternate",
+      "encoder_loss": 0.002491213601315394,
+      "encoder_ber": 0.0007412500359350816,
+      "decoder_loss": 0.03545175900310278,
+      "decoder_ber": 0.013328938145190478,
+      "epoch_seconds": 31.785277644001326,
+      "eval_ber": null
+    },
+    {
+      "epoch": 128,
+      "phase": "alternate",
+      "encoder_loss": 0.002345207603648305,
+      "encoder_ber": 0.0007056250327150338,
+      "decoder_loss": 0.034551855228841306,
+      "decoder_ber": 0.012984313104301691,
+      "epoch_seconds": 31.189650787000573,
+      "eval_ber": null
+    },
+    {
+      "epoch": 129,
+      "phase": "alternate",
+      "encoder_loss": 0.002311105253174901,
+      "encoder_ber": 0.0006918750298791565,
+      "decoder_loss": 0.03413172920420766,
+      "decoder_ber": 0.01280762560851872,
+      "epoch_seconds": 31.185804200002167,
+      "eval_ber": null
+    },
+    {
+      "epoch": 130,
+      "phase": "alternate",
+      "encoder_loss": 0.002320227294694632,
+      "encoder_ber": 0.0007003125388291664,
+      "decoder_loss": 0.033465013355016705,
+      "decoder_ber": 0.012490188121795654,
+      "epoch_seconds": 32.73244773800252,
+      "eval_ber": 0.0006371875313925557
+    },
+    {
+      "epoch": 131,
+      "phase": "alternate",
+      "encoder_loss": 0.0022435594012495132,
+      "encoder_ber": 0.0007090625332784839,
+      "decoder_loss": 0.03536407345533371,
+      "decoder_ber": 0.013458813138306141,
+      "epoch_seconds": 31.175879798000096,
+      "eval_ber": null
+    },
+    {
+      "epoch": 132,
+      "phase": "alternate",
+      "encoder_loss": 0.0023760215693619103,
+      "encoder_ber": 0.0006790625356370583,
+      "decoder_loss": 0.03479988844320178,
+      "decoder_ber": 0.013082563122734427,
+      "epoch_seconds": 31.172644433998357,
+      "eval_ber": null
+    },
+    {
+      "epoch": 133,
+      "phase": "alternate",
+      "encoder_loss": 0.0024526828492525965,
+      "encoder_ber": 0.0007221875333925709,
+      "decoder_loss": 0.03765829625353217,
+      "decoder_ber": 0.01451662566512823,
+      "epoch_seconds": 31.16901543900167,
+      "eval_ber": null
+    },
+    {
+      "epoch": 134,
+      "phase": "alternate",
+      "encoder_loss": 0.002230666766408831,
+      "encoder_ber": 0.0006437500304309652,
+      "decoder_loss": 0.03422330351546407,
+      "decoder_ber": 0.012707500590011477,
+      "epoch_seconds": 31.224007642002107,
+      "eval_ber": null
+    },
+    {
+      "epoch": 135,
+      "phase": "alternate",
+      "encoder_loss": 0.0022203789721243084,
+      "encoder_ber": 0.0006959375337464734,
+      "decoder_loss": 0.03601310067996383,
+      "decoder_ber": 0.013629938131198288,
+      "epoch_seconds": 31.153296987999056,
+      "eval_ber": null
+    },
+    {
+      "epoch": 136,
+      "phase": "alternate",
+      "encoder_loss": 0.0024953988275956364,
+      "encoder_ber": 0.0007143750324030407,
+      "decoder_loss": 0.037332530844956635,
+      "decoder_ber": 0.01435325065627694,
+      "epoch_seconds": 31.178744510001707,
+      "eval_ber": null
+    },
+    {
+      "epoch": 137,
+      "phase": "alternate",
+      "encoder_loss": 0.0023245975153986364,
+      "encoder_ber": 0.0006818750314414501,
+      "decoder_loss": 0.03557533462718129,
+      "decoder_ber": 0.013404313119128347,
+      "epoch_seconds": 31.170711282997217,
+      "eval_ber": null
+    },
+    {
+      "epoch": 138,
+      "phase": "alternate",
+      "encoder_loss": 0.0024905232223682103,
+      "encoder_ber": 0.0007025000339490362,
+      "decoder_loss": 0.03453764597326517,
+      "decoder_ber": 0.012974188102409244,
+      "epoch_seconds": 31.191815209000197,
+      "eval_ber": null
+    },
+    {
+      "epoch": 139,
+      "phase": "alternate",
+      "encoder_loss": 0.0020560246193781495,
+      "encoder_ber": 0.0005787500279257074,
+      "decoder_loss": 0.03390928851813078,
+      "decoder_ber": 0.012711313104256987,
+      "epoch_seconds": 31.154445222000504,
+      "eval_ber": null
+    },
+    {
+      "epoch": 140,
+      "phase": "alternate",
+      "encoder_loss": 0.0025478153792209924,
+      "encoder_ber": 0.0007353125346708111,
+      "decoder_loss": 0.03420452240481973,
+      "decoder_ber": 0.012809188080951571,
+      "epoch_seconds": 32.702147677999164,
+      "eval_ber": 0.0006037500296952203
+    },
+    {
+      "epoch": 141,
+      "phase": "alternate",
+      "encoder_loss": 0.002446667696349323,
+      "encoder_ber": 0.000702812533127144,
+      "decoder_loss": 0.034962361752986906,
+      "decoder_ber": 0.013184063117951155,
+      "epoch_seconds": 31.13804125399838,
+      "eval_ber": null
+    },
+    {
+      "epoch": 142,
+      "phase": "alternate",
+      "encoder_loss": 0.0022574678796809166,
+      "encoder_ber": 0.0006837500323308631,
+      "decoder_loss": 0.0343446958810091,
+      "decoder_ber": 0.012595188087783754,
+      "epoch_seconds": 31.185369495000486,
+      "eval_ber": null
+    },
+    {
+      "epoch": 143,
+      "phase": "alternate",
+      "encoder_loss": 0.002595551279373467,
+      "encoder_ber": 0.0007712500367779285,
+      "decoder_loss": 0.03551273850724101,
+      "decoder_ber": 0.013053625606000423,
+      "epoch_seconds": 31.31026250099967,
+      "eval_ber": null
+    },
+    {
+      "epoch": 144,
+      "phase": "alternate",
+      "encoder_loss": 0.0025720295018982144,
+      "encoder_ber": 0.0007431250333320349,
+      "decoder_loss": 0.03372791182994843,
+      "decoder_ber": 0.012590500565245747,
+      "epoch_seconds": 31.15668235299745,
+      "eval_ber": null
+    },
+    {
+      "epoch": 145,
+      "phase": "alternate",
+      "encoder_loss": 0.0021972547320183366,
+      "encoder_ber": 0.0005909375287592411,
+      "decoder_loss": 0.03420648914948106,
+      "decoder_ber": 0.012819375613704324,
+      "epoch_seconds": 31.194484021998505,
+      "eval_ber": null
+    },
+    {
+      "epoch": 146,
+      "phase": "alternate",
+      "encoder_loss": 0.0020571023575030266,
+      "encoder_ber": 0.0005890625315078068,
+      "decoder_loss": 0.03343506597355008,
+      "decoder_ber": 0.01247868809569627,
+      "epoch_seconds": 31.17185625700222,
+      "eval_ber": null
+    },
+    {
+      "epoch": 147,
+      "phase": "alternate",
+      "encoder_loss": 0.00254564598784782,
+      "encoder_ber": 0.0007521875365637243,
+      "decoder_loss": 0.034681341744959356,
+      "decoder_ber": 0.012937000611796975,
+      "epoch_seconds": 31.167806757999642,
+      "eval_ber": null
+    },
+    {
+      "epoch": 148,
+      "phase": "alternate",
+      "encoder_loss": 0.0025297544861678034,
+      "encoder_ber": 0.0007771875389153138,
+      "decoder_loss": 0.03320637722685933,
+      "decoder_ber": 0.012291688086465,
+      "epoch_seconds": 31.216038254002342,
+      "eval_ber": null
+    },
+    {
+      "epoch": 149,
+      "phase": "alternate",
+      "encoder_loss": 0.0025018496671691537,
+      "encoder_ber": 0.0007437500369269401,
+      "decoder_loss": 0.03522787557914853,
+      "decoder_ber": 0.013345563113689422,
+      "epoch_seconds": 31.1809744639977,
+      "eval_ber": null
+    },
+    {
+      "epoch": 150,
+      "phase": "alternate",
+      "encoder_loss": 0.00238431966281496,
+      "encoder_ber": 0.0006878125306684524,
+      "decoder_loss": 0.034825410690158605,
+      "decoder_ber": 0.013065750632435083,
+      "epoch_seconds": 32.70908575299836,
+      "eval_ber": 0.0006137500274053309
+    },
+    {
+      "epoch": 151,
+      "phase": "alternate",
+      "encoder_loss": 0.0028420054190792144,
+      "encoder_ber": 0.0008881250364356674,
+      "decoder_loss": 0.03498024781048298,
+      "decoder_ber": 0.013026000631973147,
+      "epoch_seconds": 31.16008967200105,
+      "eval_ber": null
+    },
+    {
+      "epoch": 152,
+      "phase": "alternate",
+      "encoder_loss": 0.0027072008594404904,
+      "encoder_ber": 0.0008090625394834205,
+      "decoder_loss": 0.03323467765375972,
+      "decoder_ber": 0.012355813076719641,
+      "epoch_seconds": 31.14885811199929,
+      "eval_ber": null
+    },
+    {
+      "epoch": 153,
+      "phase": "alternate",
+      "encoder_loss": 0.002431398924672976,
+      "encoder_ber": 0.0006984375382307916,
+      "decoder_loss": 0.032687957838177684,
+      "decoder_ber": 0.012119000557810069,
+      "epoch_seconds": 31.139944552000088,
+      "eval_ber": null
+    },
+    {
+      "epoch": 154,
+      "phase": "alternate",
+      "encoder_loss": 0.004980116987135261,
+      "encoder_ber": 0.001642187586548971,
+      "decoder_loss": 0.034491105012595655,
+      "decoder_ber": 0.012982125606387854,
+      "epoch_seconds": 31.149173196001357,
+      "eval_ber": null
+    },
+    {
+      "epoch": 155,
+      "phase": "alternate",
+      "encoder_loss": 0.0022682418464683,
+      "encoder_ber": 0.0006359375288593583,
+      "decoder_loss": 0.0352813125513494,
+      "decoder_ber": 0.013496063137426972,
+      "epoch_seconds": 31.162457491998794,
+      "eval_ber": null
+    },
+    {
+      "epoch": 156,
+      "phase": "alternate",
+      "encoder_loss": 0.002244351647095755,
+      "encoder_ber": 0.0006246875299257226,
+      "decoder_loss": 0.036924573812633754,
+      "decoder_ber": 0.01435443815495819,
+      "epoch_seconds": 31.17921987400041,
+      "eval_ber": null
+    },
+    {
+      "epoch": 157,
+      "phase": "alternate",
+      "encoder_loss": 0.002482688723830506,
+      "encoder_ber": 0.0007437500316882506,
+      "decoder_loss": 0.03498295740038156,
+      "decoder_ber": 0.013210375636816025,
+      "epoch_seconds": 31.1432420630008,
+      "eval_ber": null
+    },
+    {
+      "epoch": 158,
+      "phase": "alternate",
+      "encoder_loss": 0.0022628794773481785,
+      "encoder_ber": 0.0007137500315729994,
+      "decoder_loss": 0.03445522951707244,
+      "decoder_ber": 0.01305306314304471,
+      "epoch_seconds": 31.163627679001365,
+      "eval_ber": null
+    },
+    {
+      "epoch": 159,
+      "phase": "alternate",
+      "encoder_loss": 0.002060868762782775,
+      "encoder_ber": 0.000618437531447853,
+      "decoder_loss": 0.033581556536257266,
+      "decoder_ber": 0.012648125593550504,
+      "epoch_seconds": 31.14277859900176,
+      "eval_ber": null
+    },
+    {
+      "epoch": 160,
+      "phase": "alternate",
+      "encoder_loss": 0.0022302851150743665,
+      "encoder_ber": 0.0006343750329688191,
+      "decoder_loss": 0.035285799100995066,
+      "decoder_ber": 0.013488375637680293,
+      "epoch_seconds": 32.696806384999945,
+      "eval_ber": 0.0005112500254472252
+    },
+    {
+      "epoch": 161,
+      "phase": "alternate",
+      "encoder_loss": 0.00187862238031812,
+      "encoder_ber": 0.000537187526060734,
+      "decoder_loss": 0.034010099712759256,
+      "decoder_ber": 0.012694750601425766,
+      "epoch_seconds": 31.147699596000166,
+      "eval_ber": null
+    },
+    {
+      "epoch": 162,
+      "phase": "alternate",
+      "encoder_loss": 0.001924109129467979,
+      "encoder_ber": 0.0005684375285636634,
+      "decoder_loss": 0.03578185198456049,
+      "decoder_ber": 0.013679188145324588,
+      "epoch_seconds": 31.15764937300264,
+      "eval_ber": null
+    },
+    {
+      "epoch": 163,
+      "phase": "alternate",
+      "encoder_loss": 0.001979127515805885,
+      "encoder_ber": 0.0005840625267592259,
+      "decoder_loss": 0.03428459908440709,
+      "decoder_ber": 0.013009688131511212,
+      "epoch_seconds": 31.15510954199999,
+      "eval_ber": null
+    },
+    {
+      "epoch": 164,
+      "phase": "alternate",
+      "encoder_loss": 0.0022866229654755444,
+      "encoder_ber": 0.0006512500286044087,
+      "decoder_loss": 0.0355575201921165,
+      "decoder_ber": 0.013629625644534826,
+      "epoch_seconds": 31.16251893899971,
+      "eval_ber": null
+    },
+    {
+      "epoch": 165,
+      "phase": "alternate",
+      "encoder_loss": 0.002374669233104214,
+      "encoder_ber": 0.0006993750324181747,
+      "decoder_loss": 0.03404529054090381,
+      "decoder_ber": 0.012590125581249594,
+      "epoch_seconds": 31.192231042998174,
+      "eval_ber": null
+    },
+    {
+      "epoch": 166,
+      "phase": "alternate",
+      "encoder_loss": 0.002261745745781809,
+      "encoder_ber": 0.0006715625312062912,
+      "decoder_loss": 0.033536571849137546,
+      "decoder_ber": 0.01249331309646368,
+      "epoch_seconds": 31.164572093999595,
+      "eval_ber": null
+    },
+    {
+      "epoch": 167,
+      "phase": "alternate",
+      "encoder_loss": 0.001986246848246083,
+      "encoder_ber": 0.0005875000287778676,
+      "decoder_loss": 0.03370231435075402,
+      "decoder_ber": 0.012603375610895456,
+      "epoch_seconds": 31.191568922000442,
+      "eval_ber": null
+    },
+    {
+      "epoch": 168,
+      "phase": "alternate",
+      "encoder_loss": 0.0022291186708025632,
+      "encoder_ber": 0.0006959375318547245,
+      "decoder_loss": 0.03379820420965552,
+      "decoder_ber": 0.012709500597789884,
+      "epoch_seconds": 31.17908283900033,
+      "eval_ber": null
+    },
+    {
+      "epoch": 169,
+      "phase": "alternate",
+      "encoder_loss": 0.002525037303566933,
+      "encoder_ber": 0.0007368750331806951,
+      "decoder_loss": 0.03349118136614561,
+      "decoder_ber": 0.012528625573962927,
+      "epoch_seconds": 31.151557830002275,
+      "eval_ber": null
+    },
+    {
+      "epoch": 170,
+      "phase": "alternate",
+      "encoder_loss": 0.00200847617466934,
+      "encoder_ber": 0.0005956250269082375,
+      "decoder_loss": 0.03694862399250269,
+      "decoder_ber": 0.013575625613331794,
+      "epoch_seconds": 32.69787112699851,
+      "eval_ber": 0.0006593750329921022
+    },
+    {
+      "epoch": 171,
+      "phase": "alternate",
+      "encoder_loss": 0.002605209267931059,
+      "encoder_ber": 0.0006984375329921022,
+      "decoder_loss": 0.03339701649174094,
+      "decoder_ber": 0.012292938083410263,
+      "epoch_seconds": 31.148135162999097,
+      "eval_ber": null
+    },
+    {
+      "epoch": 172,
+      "phase": "alternate",
+      "encoder_loss": 0.00203867451637052,
+      "encoder_ber": 0.0005900000299152452,
+      "decoder_loss": 0.03358301810547709,
+      "decoder_ber": 0.012572500603273511,
+      "epoch_seconds": 31.160970050001197,
+      "eval_ber": null
+    },
+    {
+      "epoch": 173,
+      "phase": "alternate",
+      "encoder_loss": 0.002469775025965646,
+      "encoder_ber": 0.0007006250356789679,
+      "decoder_loss": 0.03578544028475881,
+      "decoder_ber": 0.013788750676438212,
+      "epoch_seconds": 31.15755805899971,
+      "eval_ber": null
+    },
+    {
+      "epoch": 174,
+      "phase": "alternate",
+      "encoder_loss": 0.002025972205447033,
+      "encoder_ber": 0.0006146875281410757,
+      "decoder_loss": 0.03398867381364107,
+      "decoder_ber": 0.012485063090920448,
+      "epoch_seconds": 31.152134612002556,
+      "eval_ber": null
+    },
+    {
+      "epoch": 175,
+      "phase": "alternate",
+      "encoder_loss": 0.002464977806666866,
+      "encoder_ber": 0.0007043750322191045,
+      "decoder_loss": 0.031652938544750216,
+      "decoder_ber": 0.01150600053369999,
+      "epoch_seconds": 31.185687924997183,
+      "eval_ber": null
+    },
+    {
+      "epoch": 176,
+      "phase": "alternate",
+      "encoder_loss": 0.0024234985024668278,
+      "encoder_ber": 0.0006878125327057206,
+      "decoder_loss": 0.031917024482041596,
+      "decoder_ber": 0.01172262554615736,
+      "epoch_seconds": 31.152748315998906,
+      "eval_ber": null
+    },
+    {
+      "epoch": 177,
+      "phase": "alternate",
+      "encoder_loss": 0.0020538700826000424,
+      "encoder_ber": 0.0005668750278709922,
+      "decoder_loss": 0.032849892873317,
+      "decoder_ber": 0.012231250573880971,
+      "epoch_seconds": 31.183417764001206,
+      "eval_ber": null
+    },
+    {
+      "epoch": 178,
+      "phase": "alternate",
+      "encoder_loss": 0.0022025615209713576,
+      "encoder_ber": 0.0006228125281631946,
+      "decoder_loss": 0.032495663613080976,
+      "decoder_ber": 0.012063563061878085,
+      "epoch_seconds": 31.15597347700168,
+      "eval_ber": null
+    },
+    {
+      "epoch": 179,
+      "phase": "alternate",
+      "encoder_loss": 0.0020025689818430692,
+      "encoder_ber": 0.0005721875275776256,
+      "decoder_loss": 0.03401161884516478,
+      "decoder_ber": 0.012828750610351563,
+      "epoch_seconds": 31.138718365000386,
+      "eval_ber": null
+    },
+    {
+      "epoch": 180,
+      "phase": "alternate",
+      "encoder_loss": 0.002260026589501649,
+      "encoder_ber": 0.0006446875317487866,
+      "decoder_loss": 0.034114930100739,
+      "decoder_ber": 0.01294293812289834,
+      "epoch_seconds": 32.6809250059996,
+      "eval_ber": 0.0005112500247196294
+    },
+    {
+      "epoch": 181,
+      "phase": "alternate",
+      "encoder_loss": 0.001978714052820578,
+      "encoder_ber": 0.0005746875290060416,
+      "decoder_loss": 0.0335454168394208,
+      "decoder_ber": 0.012622188100591302,
+      "epoch_seconds": 31.160102551999444,
+      "eval_ber": null
+    },
+    {
+      "epoch": 182,
+      "phase": "alternate",
+      "encoder_loss": 0.001802934737643227,
+      "encoder_ber": 0.0005246875243028625,
+      "decoder_loss": 0.03360648178309202,
+      "decoder_ber": 0.012708500598557293,
+      "epoch_seconds": 31.151571203001367,
+      "eval_ber": null
+    },
+    {
+      "epoch": 183,
+      "phase": "alternate",
+      "encoder_loss": 0.0020601502095814795,
+      "encoder_ber": 0.0005871875265438575,
+      "decoder_loss": 0.034254172459244725,
+      "decoder_ber": 0.013041438091546297,
+      "epoch_seconds": 31.15253995400053,
+      "eval_ber": null
+    },
+    {
+      "epoch": 184,
+      "phase": "alternate",
+      "encoder_loss": 0.001959871370345354,
+      "encoder_ber": 0.0005778125280630775,
+      "decoder_loss": 0.03634400096163154,
+      "decoder_ber": 0.014156625671312213,
+      "epoch_seconds": 31.15120722500069,
+      "eval_ber": null
+    },
+    {
+      "epoch": 185,
+      "phase": "alternate",
+      "encoder_loss": 0.0021136207215022296,
+      "encoder_ber": 0.0005706250313960481,
+      "decoder_loss": 0.03479268355667591,
+      "decoder_ber": 0.013277875654399396,
+      "epoch_seconds": 31.18531290499959,
+      "eval_ber": null
+    },
+    {
+      "epoch": 186,
+      "phase": "alternate",
+      "encoder_loss": 0.0030584534513764085,
+      "encoder_ber": 0.0009715625384706072,
+      "decoder_loss": 0.041230414550751444,
+      "decoder_ber": 0.016260438267141582,
+      "epoch_seconds": 31.184582567002508,
+      "eval_ber": null
+    },
+    {
+      "epoch": 187,
+      "phase": "alternate",
+      "encoder_loss": 0.0022532105806749316,
+      "encoder_ber": 0.0006581250338058453,
+      "decoder_loss": 0.034415033672004935,
+      "decoder_ber": 0.013136750605888665,
+      "epoch_seconds": 31.145953642000677,
+      "eval_ber": null
+    },
+    {
+      "epoch": 188,
+      "phase": "alternate",
+      "encoder_loss": 0.0025929519394412635,
+      "encoder_ber": 0.0007868750365742017,
+      "decoder_loss": 0.03536027730628848,
+      "decoder_ber": 0.013382063146680594,
+      "epoch_seconds": 31.136873630999617,
+      "eval_ber": null
+    },
+    {
+      "epoch": 189,
+      "phase": "alternate",
+      "encoder_loss": 0.0030826486623845993,
+      "encoder_ber": 0.0009762500433134846,
+      "decoder_loss": 0.03538336061313748,
+      "decoder_ber": 0.013244625605642796,
+      "epoch_seconds": 31.140005949000624,
+      "eval_ber": null
+    },
+    {
+      "epoch": 190,
+      "phase": "alternate",
+      "encoder_loss": 0.002588771675946191,
+      "encoder_ber": 0.0007475000343401916,
+      "decoder_loss": 0.035918708026409146,
+      "decoder_ber": 0.01372768815793097,
+      "epoch_seconds": 32.73536652999974,
+      "eval_ber": 0.0005456250262795947
+    },
+    {
+      "epoch": 191,
+      "phase": "alternate",
+      "encoder_loss": 0.0019682407134678213,
+      "encoder_ber": 0.0005609375247149728,
+      "decoder_loss": 0.0361808342859149,
+      "decoder_ber": 0.013980813151225447,
+      "epoch_seconds": 31.18948534300216,
+      "eval_ber": null
+    },
+    {
+      "epoch": 192,
+      "phase": "alternate",
+      "encoder_loss": 0.0019422666693571955,
+      "encoder_ber": 0.0005859375279396772,
+      "decoder_loss": 0.03269752663746476,
+      "decoder_ber": 0.01224981309659779,
+      "epoch_seconds": 31.160526767998817,
+      "eval_ber": null
+    },
+    {
+      "epoch": 193,
+      "phase": "alternate",
+      "encoder_loss": 0.002013851797673851,
+      "encoder_ber": 0.0005596875261107925,
+      "decoder_loss": 0.03399957011267543,
+      "decoder_ber": 0.012754813115112484,
+      "epoch_seconds": 31.15604000100211,
+      "eval_ber": null
+    },
+    {
+      "epoch": 194,
+      "phase": "alternate",
+      "encoder_loss": 0.0020804307446815073,
+      "encoder_ber": 0.000621250029944349,
+      "decoder_loss": 0.03268457024171949,
+      "decoder_ber": 0.012245875595137477,
+      "epoch_seconds": 31.176648979002493,
+      "eval_ber": null
+    },
+    {
+      "epoch": 195,
+      "phase": "alternate",
+      "encoder_loss": 0.0024708592274691908,
+      "encoder_ber": 0.000749062534305267,
+      "decoder_loss": 0.03301041950657964,
+      "decoder_ber": 0.012514250617474318,
+      "epoch_seconds": 31.14562576699973,
+      "eval_ber": null
+    },
+    {
+      "epoch": 196,
+      "phase": "alternate",
+      "encoder_loss": 0.0017550163995474577,
+      "encoder_ber": 0.0005131250253180042,
+      "decoder_loss": 0.03246182640269399,
+      "decoder_ber": 0.01221681305859238,
+      "epoch_seconds": 31.17062827799964,
+      "eval_ber": null
+    },
+    {
+      "epoch": 197,
+      "phase": "alternate",
+      "encoder_loss": 0.002059237944195047,
+      "encoder_ber": 0.0006050000297545921,
+      "decoder_loss": 0.03164919790253043,
+      "decoder_ber": 0.011800188040360808,
+      "epoch_seconds": 31.145551761997922,
+      "eval_ber": null
+    },
+    {
+      "epoch": 198,
+      "phase": "alternate",
+      "encoder_loss": 0.0020344630966428667,
+      "encoder_ber": 0.0005878125291201286,
+      "decoder_loss": 0.031229304000735283,
+      "decoder_ber": 0.011525625543668866,
+      "epoch_seconds": 31.137120999999752,
+      "eval_ber": null
+    },
+    {
+      "epoch": 199,
+      "phase": "alternate",
+      "encoder_loss": 0.002106848722323775,
+      "encoder_ber": 0.0006056250285473653,
+      "decoder_loss": 0.03254868596419692,
+      "decoder_ber": 0.012028875562362373,
+      "epoch_seconds": 31.131746748000296,
+      "eval_ber": null
+    },
+    {
+      "epoch": 200,
+      "phase": "alternate",
+      "encoder_loss": 0.002021374278701842,
+      "encoder_ber": 0.0005584375259059016,
+      "decoder_loss": 0.03187225205078721,
+      "decoder_ber": 0.011914813068695367,
+      "epoch_seconds": 32.68116237399954,
+      "eval_ber": 0.0004443750214704778
+    },
+    {
+      "epoch": 201,
+      "phase": "alternate",
+      "encoder_loss": 0.00228189603658393,
+      "encoder_ber": 0.0006643750294460915,
+      "decoder_loss": 0.03478776516020298,
+      "decoder_ber": 0.013318500632420183,
+      "epoch_seconds": 31.133835168999212,
+      "eval_ber": null
+    },
+    {
+      "epoch": 202,
+      "phase": "alternate",
+      "encoder_loss": 0.0019188484648475423,
+      "encoder_ber": 0.0005609375255153282,
+      "decoder_loss": 0.0362809962593019,
+      "decoder_ber": 0.01384912563674152,
+      "epoch_seconds": 31.13474482699894,
+      "eval_ber": null
+    },
+    {
+      "epoch": 203,
+      "phase": "alternate",
+      "encoder_loss": 0.0023905362526420505,
+      "encoder_ber": 0.0007365625316742807,
+      "decoder_loss": 0.03363595436885953,
+      "decoder_ber": 0.012715875590220093,
+      "epoch_seconds": 31.15802787299981,
+      "eval_ber": null
+    },
+    {
+      "epoch": 204,
+      "phase": "alternate",
+      "encoder_loss": 0.0018683567247353495,
+      "encoder_ber": 0.0005143750230490696,
+      "decoder_loss": 0.032163698725402354,
+      "decoder_ber": 0.012127188061363994,
+      "epoch_seconds": 31.17024405600023,
+      "eval_ber": null
+    },
+    {
+      "epoch": 205,
+      "phase": "alternate",
+      "encoder_loss": 0.0019122216396499426,
+      "encoder_ber": 0.0005956250269082375,
+      "decoder_loss": 0.033095021091401576,
+      "decoder_ber": 0.012563875592313707,
+      "epoch_seconds": 31.16089128800013,
+      "eval_ber": null
+    },
+    {
+      "epoch": 206,
+      "phase": "alternate",
+      "encoder_loss": 0.001954831532202661,
+      "encoder_ber": 0.000560625025536865,
+      "decoder_loss": 0.03273994248360396,
+      "decoder_ber": 0.012163000567816197,
+      "epoch_seconds": 31.148354166998615,
+      "eval_ber": null
+    },
+    {
+      "epoch": 207,
+      "phase": "alternate",
+      "encoder_loss": 0.0023470300959888848,
+      "encoder_ber": 0.0006928125303238631,
+      "decoder_loss": 0.032207578949630264,
+      "decoder_ber": 0.011994875560514628,
+      "epoch_seconds": 31.13994038400051,
+      "eval_ber": null
+    },
+    {
+      "epoch": 208,
+      "phase": "alternate",
+      "encoder_loss": 0.0018528451712336391,
+      "encoder_ber": 0.0005212500241759698,
+      "decoder_loss": 0.032866580575704574,
+      "decoder_ber": 0.012404813061468303,
+      "epoch_seconds": 31.13909827200041,
+      "eval_ber": null
+    },
+    {
+      "epoch": 209,
+      "phase": "alternate",
+      "encoder_loss": 0.0019628586166072636,
+      "encoder_ber": 0.000577187527960632,
+      "decoder_loss": 0.03152440682426095,
+      "decoder_ber": 0.011713563032448292,
+      "epoch_seconds": 31.13575402800052,
+      "eval_ber": null
+    },
+    {
+      "epoch": 210,
+      "phase": "alternate",
+      "encoder_loss": 0.0019419009948614984,
+      "encoder_ber": 0.0005606250269920565,
+      "decoder_loss": 0.033039132270962,
+      "decoder_ber": 0.012556875582784415,
+      "epoch_seconds": 32.68509151700346,
+      "eval_ber": 0.000471562524617184
+    },
+    {
+      "epoch": 211,
+      "phase": "alternate",
+      "encoder_loss": 0.0018294043926289304,
+      "encoder_ber": 0.0005065625239512883,
+      "decoder_loss": 0.03451651694253087,
+      "decoder_ber": 0.013238313119858503,
+      "epoch_seconds": 31.161458216000028,
+      "eval_ber": null
+    },
+    {
+      "epoch": 212,
+      "phase": "alternate",
+      "encoder_loss": 0.0018792518309783191,
+      "encoder_ber": 0.0005562500250380254,
+      "decoder_loss": 0.03208976264670491,
+      "decoder_ber": 0.01197275055386126,
+      "epoch_seconds": 31.159223836999445,
+      "eval_ber": null
+    },
+    {
+      "epoch": 213,
+      "phase": "alternate",
+      "encoder_loss": 0.001964274615747854,
+      "encoder_ber": 0.000515000022132881,
+      "decoder_loss": 0.03254768029600382,
+      "decoder_ber": 0.012256313084624708,
+      "epoch_seconds": 31.192618534001667,
+      "eval_ber": null
+    },
+    {
+      "epoch": 214,
+      "phase": "alternate",
+      "encoder_loss": 0.0018579064239747822,
+      "encoder_ber": 0.000557187525118934,
+      "decoder_loss": 0.031657060548663137,
+      "decoder_ber": 0.01164868806488812,
+      "epoch_seconds": 31.152862189999723,
+      "eval_ber": null
+    },
+    {
+      "epoch": 215,
+      "phase": "alternate",
+      "encoder_loss": 0.001848794084507972,
+      "encoder_ber": 0.0005409375255112537,
+      "decoder_loss": 0.03188890192657709,
+      "decoder_ber": 0.011809875552542507,
+      "epoch_seconds": 31.15396781600066,
+      "eval_ber": null
+    },
+    {
+      "epoch": 216,
+      "phase": "alternate",
+      "encoder_loss": 0.0019042949611321092,
+      "encoder_ber": 0.0005265625278843799,
+      "decoder_loss": 0.03300571120530367,
+      "decoder_ber": 0.012448563102632761,
+      "epoch_seconds": 31.152956878999248,
+      "eval_ber": null
+    },
+    {
+      "epoch": 217,
+      "phase": "alternate",
+      "encoder_loss": 0.0019252871139906348,
+      "encoder_ber": 0.0006028125263401308,
+      "decoder_loss": 0.03212462220713496,
+      "decoder_ber": 0.011968250582925975,
+      "epoch_seconds": 31.155724693002412,
+      "eval_ber": null
+    },
+    {
+      "epoch": 218,
+      "phase": "alternate",
+      "encoder_loss": 0.0018942229414824396,
+      "encoder_ber": 0.0005556250270456075,
+      "decoder_loss": 0.03290796016156673,
+      "decoder_ber": 0.01227775058336556,
+      "epoch_seconds": 31.148924076002004,
+      "eval_ber": null
+    },
+    {
+      "epoch": 219,
+      "phase": "alternate",
+      "encoder_loss": 0.00200154448277317,
+      "encoder_ber": 0.0005621875250653829,
+      "decoder_loss": 0.034511316083371636,
+      "decoder_ber": 0.013080313118174673,
+      "epoch_seconds": 31.147670866001135,
+      "eval_ber": null
+    },
+    {
+      "epoch": 220,
+      "phase": "alternate",
+      "encoder_loss": 0.002115556594217196,
+      "encoder_ber": 0.0005912500275007914,
+      "decoder_loss": 0.031978171292692426,
+      "decoder_ber": 0.011688313065096736,
+      "epoch_seconds": 32.69624453100187,
+      "eval_ber": 0.0005412500268357689
+    },
+    {
+      "epoch": 221,
+      "phase": "alternate",
+      "encoder_loss": 0.001959412409923971,
+      "encoder_ber": 0.0005328125222877133,
+      "decoder_loss": 0.032031911965459584,
+      "decoder_ber": 0.011948875550180673,
+      "epoch_seconds": 31.15013795900086,
+      "eval_ber": null
+    },
+    {
+      "epoch": 222,
+      "phase": "alternate",
+      "encoder_loss": 0.001776016153744422,
+      "encoder_ber": 0.0004865625238744542,
+      "decoder_loss": 0.03260340539366007,
+      "decoder_ber": 0.012310563074424862,
+      "epoch_seconds": 31.15353323599993,
+      "eval_ber": null
+    },
+    {
+      "epoch": 223,
+      "phase": "alternate",
+      "encoder_loss": 0.00183438666514121,
+      "encoder_ber": 0.0005090625246521086,
+      "decoder_loss": 0.034599712442606685,
+      "decoder_ber": 0.01333868814073503,
+      "epoch_seconds": 31.180118804000813,
+      "eval_ber": null
+    },
+    {
+      "epoch": 224,
+      "phase": "alternate",
+      "encoder_loss": 0.001839973809546791,
+      "encoder_ber": 0.0005306250252760946,
+      "decoder_loss": 0.03180203517898917,
+      "decoder_ber": 0.01182343807630241,
+      "epoch_seconds": 31.157109869000124,
+      "eval_ber": null
+    },
+    {
+      "epoch": 225,
+      "phase": "alternate",
+      "encoder_loss": 0.0018332009646110238,
+      "encoder_ber": 0.0005459375242935494,
+      "decoder_loss": 0.033724377620965244,
+      "decoder_ber": 0.012686438104137778,
+      "epoch_seconds": 31.17836947699834,
+      "eval_ber": null
+    },
+    {
+      "epoch": 226,
+      "phase": "alternate",
+      "encoder_loss": 0.0019140442955540493,
+      "encoder_ber": 0.000575312526198104,
+      "decoder_loss": 0.03527533932775259,
+      "decoder_ber": 0.01347837564535439,
+      "epoch_seconds": 31.14016908400299,
+      "eval_ber": null
+    },
+    {
+      "epoch": 227,
+      "phase": "alternate",
+      "encoder_loss": 0.0019035608577542007,
+      "encoder_ber": 0.0005812500287720468,
+      "decoder_loss": 0.036314649261534215,
+      "decoder_ber": 0.013981250675395131,
+      "epoch_seconds": 31.1378056020003,
+      "eval_ber": null
+    },
+    {
+      "epoch": 228,
+      "phase": "alternate",
+      "encoder_loss": 0.002049286215333268,
+      "encoder_ber": 0.0006078125325439032,
+      "decoder_loss": 0.035820893701165916,
+      "decoder_ber": 0.013795313144102693,
+      "epoch_seconds": 31.144748308001,
+      "eval_ber": null
+    },
+    {
+      "epoch": 229,
+      "phase": "alternate",
+      "encoder_loss": 0.0017729010875336827,
+      "encoder_ber": 0.0005296875252679456,
+      "decoder_loss": 0.03499406784772873,
+      "decoder_ber": 0.01357137565035373,
+      "epoch_seconds": 31.14865105300123,
+      "eval_ber": null
+    },
+    {
+      "epoch": 230,
+      "phase": "alternate",
+      "encoder_loss": 0.002288036780664697,
+      "encoder_ber": 0.0007096875317802187,
+      "decoder_loss": 0.03430912098288536,
+      "decoder_ber": 0.013207875627093017,
+      "epoch_seconds": 32.68140982299883,
+      "eval_ber": 0.0004421875190746505
+    },
+    {
+      "epoch": 231,
+      "phase": "alternate",
+      "encoder_loss": 0.00165077077166643,
+      "encoder_ber": 0.0004771875197184272,
+      "decoder_loss": 0.03344483913481235,
+      "decoder_ber": 0.012725063111633062,
+      "epoch_seconds": 31.13935649600171,
+      "eval_ber": null
+    },
+    {
+      "epoch": 232,
+      "phase": "alternate",
+      "encoder_loss": 0.002028922925237566,
+      "encoder_ber": 0.0006187500270607416,
+      "decoder_loss": 0.03396100433543325,
+      "decoder_ber": 0.01305131311994046,
+      "epoch_seconds": 31.174222711997572,
+      "eval_ber": null
+    },
+    {
+      "epoch": 233,
+      "phase": "alternate",
+      "encoder_loss": 0.0018690417194738983,
+      "encoder_ber": 0.0005484375263040419,
+      "decoder_loss": 0.03439392368867993,
+      "decoder_ber": 0.013222813099622727,
+      "epoch_seconds": 31.14692196100077,
+      "eval_ber": null
+    },
+    {
+      "epoch": 234,
+      "phase": "alternate",
+      "encoder_loss": 0.001711590774357319,
+      "encoder_ber": 0.0004950000242388341,
+      "decoder_loss": 0.03205439798161387,
+      "decoder_ber": 0.011814438050612807,
+      "epoch_seconds": 31.169538902999193,
+      "eval_ber": null
+    },
+    {
+      "epoch": 235,
+      "phase": "alternate",
+      "encoder_loss": 0.0019054986455012113,
+      "encoder_ber": 0.0005284375266637653,
+      "decoder_loss": 0.031236608132719994,
+      "decoder_ber": 0.011612438057549298,
+      "epoch_seconds": 31.158492224003567,
+      "eval_ber": null
+    },
+    {
+      "epoch": 236,
+      "phase": "alternate",
+      "encoder_loss": 0.0023176154354587197,
+      "encoder_ber": 0.0006937500316416844,
+      "decoder_loss": 0.03379269522428512,
+      "decoder_ber": 0.013004438133910298,
+      "epoch_seconds": 31.158864761000586,
+      "eval_ber": null
+    },
+    {
+      "epoch": 237,
+      "phase": "alternate",
+      "encoder_loss": 0.0019150230078957976,
+      "encoder_ber": 0.0005518750271585305,
+      "decoder_loss": 0.033206013944,
+      "decoder_ber": 0.012666250612586737,
+      "epoch_seconds": 31.187264221000078,
+      "eval_ber": null
+    },
+    {
+      "epoch": 238,
+      "phase": "alternate",
+      "encoder_loss": 0.0022214717441238463,
+      "encoder_ber": 0.0007118750317022204,
+      "decoder_loss": 0.035651409067213535,
+      "decoder_ber": 0.013533375626429915,
+      "epoch_seconds": 31.16498493399922,
+      "eval_ber": null
+    },
+    {
+      "epoch": 239,
+      "phase": "alternate",
+      "encoder_loss": 0.0019275123323313891,
+      "encoder_ber": 0.0005628125253133476,
+      "decoder_loss": 0.031727997489273546,
+      "decoder_ber": 0.011791438072919845,
+      "epoch_seconds": 31.160744461998547,
+      "eval_ber": null
+    },
+    {
+      "epoch": 240,
+      "phase": "alternate",
+      "encoder_loss": 0.0020395327114965766,
+      "encoder_ber": 0.0005943750261212699,
+      "decoder_loss": 0.032852327831089496,
+      "decoder_ber": 0.012231188101693987,
+      "epoch_seconds": 32.72777692400268,
+      "eval_ber": 0.0005209375254344195
+    },
+    {
+      "epoch": 241,
+      "phase": "alternate",
+      "encoder_loss": 0.0017924204119481146,
+      "encoder_ber": 0.00048343752496293746,
+      "decoder_loss": 0.03256758658587933,
+      "decoder_ber": 0.012184938070364297,
+      "epoch_seconds": 31.16945537799984,
+      "eval_ber": null
+    },
+    {
+      "epoch": 242,
+      "phase": "alternate",
+      "encoder_loss": 0.0019221103913150727,
+      "encoder_ber": 0.0005543750275683124,
+      "decoder_loss": 0.033562039107084274,
+      "decoder_ber": 0.012773250587284565,
+      "epoch_seconds": 31.194246024002496,
+      "eval_ber": null
+    },
+    {
+      "epoch": 243,
+      "phase": "alternate",
+      "encoder_loss": 0.002477637667907402,
+      "encoder_ber": 0.0007284375303424895,
+      "decoder_loss": 0.031996047753840684,
+      "decoder_ber": 0.012071000549010932,
+      "epoch_seconds": 31.1651474149985,
+      "eval_ber": null
+    },
+    {
+      "epoch": 244,
+      "phase": "alternate",
+      "encoder_loss": 0.002153348745778203,
+      "encoder_ber": 0.0006228125291818287,
+      "decoder_loss": 0.03259394862502813,
+      "decoder_ber": 0.012406688087619841,
+      "epoch_seconds": 31.17751443200177,
+      "eval_ber": null
+    },
+    {
+      "epoch": 245,
+      "phase": "alternate",
+      "encoder_loss": 0.0019051822205074132,
+      "encoder_ber": 0.0005381250249047298,
+      "decoder_loss": 0.03354241805896163,
+      "decoder_ber": 0.012849063104018569,
+      "epoch_seconds": 31.144952834001742,
+      "eval_ber": null
+    },
+    {
+      "epoch": 246,
+      "phase": "alternate",
+      "encoder_loss": 0.0019643450190778822,
+      "encoder_ber": 0.0005865625268779695,
+      "decoder_loss": 0.03201161851733923,
+      "decoder_ber": 0.0119410630594939,
+      "epoch_seconds": 31.13925726299931,
+      "eval_ber": null
+    },
+    {
+      "epoch": 247,
+      "phase": "alternate",
+      "encoder_loss": 0.0018703659827588126,
+      "encoder_ber": 0.0005578125263855327,
+      "decoder_loss": 0.03185451987013221,
+      "decoder_ber": 0.011938000550493598,
+      "epoch_seconds": 31.142098186999647,
+      "eval_ber": null
+    },
+    {
+      "epoch": 248,
+      "phase": "alternate",
+      "encoder_loss": 0.00207355861668475,
+      "encoder_ber": 0.0005768750230708974,
+      "decoder_loss": 0.03169236822798848,
+      "decoder_ber": 0.011977688068524003,
+      "epoch_seconds": 31.152151728001627,
+      "eval_ber": null
+    },
+    {
+      "epoch": 249,
+      "phase": "alternate",
+      "encoder_loss": 0.0027635544911026955,
+      "encoder_ber": 0.0008571875424240716,
+      "decoder_loss": 0.032223015394061805,
+      "decoder_ber": 0.0121371255684644,
+      "epoch_seconds": 31.136300782000035,
+      "eval_ber": null
+    },
+    {
+      "epoch": 250,
+      "phase": "alternate",
+      "encoder_loss": 0.001806333060376346,
+      "encoder_ber": 0.0005187500265310519,
+      "decoder_loss": 0.03318837460875511,
+      "decoder_ber": 0.012717375594191253,
+      "epoch_seconds": 32.68127310899945,
+      "eval_ber": 0.0004953125238534995
+    },
+    {
+      "epoch": 251,
+      "phase": "alternate",
+      "encoder_loss": 0.0018322123179677875,
+      "encoder_ber": 0.0005296875249769073,
+      "decoder_loss": 0.03339601792395115,
+      "decoder_ber": 0.012776250558905303,
+      "epoch_seconds": 31.158959644999413,
+      "eval_ber": null
+    },
+    {
+      "epoch": 252,
+      "phase": "alternate",
+      "encoder_loss": 0.0018437620758777484,
+      "encoder_ber": 0.0005771875237041968,
+      "decoder_loss": 0.032216860350221393,
+      "decoder_ber": 0.012295625570230185,
+      "epoch_seconds": 31.187741323003138,
+      "eval_ber": null
+    },
+    {
+      "epoch": 253,
+      "phase": "alternate",
+      "encoder_loss": 0.0016923748288536445,
+      "encoder_ber": 0.0004921875253785402,
+      "decoder_loss": 0.03217900593578815,
+      "decoder_ber": 0.011977375561371446,
+      "epoch_seconds": 31.194037273002323,
+      "eval_ber": null
+    },
+    {
+      "epoch": 254,
+      "phase": "alternate",
+      "encoder_loss": 0.001742628214415163,
+      "encoder_ber": 0.0004931250221852679,
+      "decoder_loss": 0.03245238438621163,
+      "decoder_ber": 0.012287688083946705,
+      "epoch_seconds": 31.15925265199985,
+      "eval_ber": null
+    },
+    {
+      "epoch": 255,
+      "phase": "alternate",
+      "encoder_loss": 0.0016530501755187288,
+      "encoder_ber": 0.0004615625225414988,
+      "decoder_loss": 0.03420352586358786,
+      "decoder_ber": 0.013133688103407622,
+      "epoch_seconds": 31.163473520999105,
+      "eval_ber": null
+    },
+    {
+      "epoch": 256,
+      "phase": "alternate",
+      "encoder_loss": 0.002264265186386183,
+      "encoder_ber": 0.0006384375320340041,
+      "decoder_loss": 0.03449259696900844,
+      "decoder_ber": 0.013319000639952719,
+      "epoch_seconds": 31.155786506998993,
+      "eval_ber": null
+    },
+    {
+      "epoch": 257,
+      "phase": "alternate",
+      "encoder_loss": 0.0016163610038347543,
+      "encoder_ber": 0.0004981250241689849,
+      "decoder_loss": 0.032075570188462736,
+      "decoder_ber": 0.012186938099563121,
+      "epoch_seconds": 31.15063322900096,
+      "eval_ber": null
+    },
+    {
+      "epoch": 258,
+      "phase": "alternate",
+      "encoder_loss": 0.0016200397105421871,
+      "encoder_ber": 0.0004815625215996988,
+      "decoder_loss": 0.032614557351917026,
+      "decoder_ber": 0.012426813089288771,
+      "epoch_seconds": 31.150691217000713,
+      "eval_ber": null
+    },
+    {
+      "epoch": 259,
+      "phase": "alternate",
+      "encoder_loss": 0.0017247400427004322,
+      "encoder_ber": 0.0005115625228791032,
+      "decoder_loss": 0.032200067557394504,
+      "decoder_ber": 0.012235375579446555,
+      "epoch_seconds": 31.158735159999196,
+      "eval_ber": null
+    },
+    {
+      "epoch": 260,
+      "phase": "alternate",
+      "encoder_loss": 0.0018582079256884753,
+      "encoder_ber": 0.0005425000237300992,
+      "decoder_loss": 0.03486988845095038,
+      "decoder_ber": 0.013588188156485558,
+      "epoch_seconds": 32.74562818599952,
+      "eval_ber": 0.00044156252086395396
+    },
+    {
+      "epoch": 261,
+      "phase": "alternate",
+      "encoder_loss": 0.0018791383277857675,
+      "encoder_ber": 0.0005800000291492324,
+      "decoder_loss": 0.03258110950142145,
+      "decoder_ber": 0.012432938088662922,
+      "epoch_seconds": 31.153257922000194,
+      "eval_ber": null
+    },
+    {
+      "epoch": 262,
+      "phase": "alternate",
+      "encoder_loss": 0.001628978262306191,
+      "encoder_ber": 0.0004778125228767749,
+      "decoder_loss": 0.0319271717518568,
+      "decoder_ber": 0.0121306255729869,
+      "epoch_seconds": 31.148329021998507,
+      "eval_ber": null
+    },
+    {
+      "epoch": 263,
+      "phase": "alternate",
+      "encoder_loss": 0.0017209966696100309,
+      "encoder_ber": 0.00047000002188724466,
+      "decoder_loss": 0.03241390259936452,
+      "decoder_ber": 0.012389313083142043,
+      "epoch_seconds": 31.17266555199967,
+      "eval_ber": null
+    },
+    {
+      "epoch": 264,
+      "phase": "alternate",
+      "encoder_loss": 0.001668630116037093,
+      "encoder_ber": 0.0004918750220531365,
+      "decoder_loss": 0.03208572870865464,
+      "decoder_ber": 0.012119625563733279,
+      "epoch_seconds": 31.17921519200172,
+      "eval_ber": null
+    },
+    {
+      "epoch": 265,
+      "phase": "alternate",
+      "encoder_loss": 0.0016388573352014645,
+      "encoder_ber": 0.00047625002218410373,
+      "decoder_loss": 0.03068180476129055,
+      "decoder_ber": 0.011432188044302165,
+      "epoch_seconds": 31.162923726998997,
+      "eval_ber": null
+    },
+    {
+      "epoch": 266,
+      "phase": "alternate",
+      "encoder_loss": 0.001681821164675057,
+      "encoder_ber": 0.00046031252306420354,
+      "decoder_loss": 0.03152383806928992,
+      "decoder_ber": 0.011860250538215041,
+      "epoch_seconds": 31.162850466000236,
+      "eval_ber": null
+    },
+    {
+      "epoch": 267,
+      "phase": "alternate",
+      "encoder_loss": 0.0017421127570560202,
+      "encoder_ber": 0.0004909375243005343,
+      "decoder_loss": 0.03020416183769703,
+      "decoder_ber": 0.011231438036076725,
+      "epoch_seconds": 31.169862544000353,
+      "eval_ber": null
+    },
+    {
+      "epoch": 268,
+      "phase": "alternate",
+      "encoder_loss": 0.0014880923606688157,
+      "encoder_ber": 0.0004043750175333116,
+      "decoder_loss": 0.031480631474405524,
+      "decoder_ber": 0.011891688076779247,
+      "epoch_seconds": 31.167777403999935,
+      "eval_ber": null
+    },
+    {
+      "epoch": 269,
+      "phase": "alternate",
+      "encoder_loss": 0.0026050004514399914,
+      "encoder_ber": 0.0007531250346801243,
+      "decoder_loss": 0.03252907897904515,
+      "decoder_ber": 0.0123238755883649,
+      "epoch_seconds": 31.155502279998473,
+      "eval_ber": null
+    },
+    {
+      "epoch": 270,
+      "phase": "alternate",
+      "encoder_loss": 0.001676460356102325,
+      "encoder_ber": 0.0004662500233098399,
+      "decoder_loss": 0.03319921154156327,
+      "decoder_ber": 0.012758000587113202,
+      "epoch_seconds": 32.72171874000196,
+      "eval_ber": 0.000442812519686413
+    },
+    {
+      "epoch": 271,
+      "phase": "alternate",
+      "encoder_loss": 0.002422003139508888,
+      "encoder_ber": 0.0007543750322656705,
+      "decoder_loss": 0.03210301582887769,
+      "decoder_ber": 0.012140000568702817,
+      "epoch_seconds": 31.180241035002837,
+      "eval_ber": null
+    },
+    {
+      "epoch": 272,
+      "phase": "alternate",
+      "encoder_loss": 0.0017998859111685306,
+      "encoder_ber": 0.00045343752048211173,
+      "decoder_loss": 0.031600661378353836,
+      "decoder_ber": 0.011947063060477376,
+      "epoch_seconds": 31.175152255000285,
+      "eval_ber": null
+    },
+    {
+      "epoch": 273,
+      "phase": "alternate",
+      "encoder_loss": 0.0017598998837638647,
+      "encoder_ber": 0.000515937525924528,
+      "decoder_loss": 0.03106261381879449,
+      "decoder_ber": 0.011529625547118484,
+      "epoch_seconds": 31.173831113999768,
+      "eval_ber": null
+    },
+    {
+      "epoch": 274,
+      "phase": "alternate",
+      "encoder_loss": 0.0016478840034687891,
+      "encoder_ber": 0.0004856250221200753,
+      "decoder_loss": 0.030326972614973784,
+      "decoder_ber": 0.011311875542625785,
+      "epoch_seconds": 31.15714535100051,
+      "eval_ber": null
+    },
+    {
+      "epoch": 275,
+      "phase": "alternate",
+      "encoder_loss": 0.0016885190812172368,
+      "encoder_ber": 0.0004953125254542101,
+      "decoder_loss": 0.030471958000212906,
+      "decoder_ber": 0.011247250541113318,
+      "epoch_seconds": 31.161847007002507,
+      "eval_ber": null
+    },
+    {
+      "epoch": 276,
+      "phase": "alternate",
+      "encoder_loss": 0.0016005007782950997,
+      "encoder_ber": 0.00046562502146116455,
+      "decoder_loss": 0.03149049385264516,
+      "decoder_ber": 0.01189162554871291,
+      "epoch_seconds": 31.16097207200073,
+      "eval_ber": null
+    },
+    {
+      "epoch": 277,
+      "phase": "alternate",
+      "encoder_loss": 0.001617883903090842,
+      "encoder_ber": 0.0004625000210580765,
+      "decoder_loss": 0.031438510697335005,
+      "decoder_ber": 0.01193812558054924,
+      "epoch_seconds": 31.169990414000495,
+      "eval_ber": null
+    },
+    {
+      "epoch": 278,
+      "phase": "alternate",
+      "encoder_loss": 0.0016112467442872002,
+      "encoder_ber": 0.00048250002058921384,
+      "decoder_loss": 0.031487091947346925,
+      "decoder_ber": 0.011900000538676977,
+      "epoch_seconds": 31.1663124480001,
+      "eval_ber": null
+    },
+    {
+      "epoch": 279,
+      "phase": "alternate",
+      "encoder_loss": 0.001522373262559995,
+      "encoder_ber": 0.0004565625215764157,
+      "decoder_loss": 0.03356601613759994,
+      "decoder_ber": 0.012853500630706548,
+      "epoch_seconds": 31.16069380100089,
+      "eval_ber": null
+    },
+    {
+      "epoch": 280,
+      "phase": "alternate",
+      "encoder_loss": 0.0017932769132312388,
+      "encoder_ber": 0.0005175000229792204,
+      "decoder_loss": 0.03230706376582384,
+      "decoder_ber": 0.012168688059784471,
+      "epoch_seconds": 32.73839977199896,
+      "eval_ber": 0.0004471875203307718
+    },
+    {
+      "epoch": 281,
+      "phase": "alternate",
+      "encoder_loss": 0.0016333921859040855,
+      "encoder_ber": 0.0004384375223889947,
+      "decoder_loss": 0.03241023628413677,
+      "decoder_ber": 0.012345000568777322,
+      "epoch_seconds": 31.17948810699818,
+      "eval_ber": null
+    },
+    {
+      "epoch": 282,
+      "phase": "alternate",
+      "encoder_loss": 0.0017159380193334072,
+      "encoder_ber": 0.0004940625237577479,
+      "decoder_loss": 0.032665550652891395,
+      "decoder_ber": 0.012486250597052276,
+      "epoch_seconds": 31.191952292003407,
+      "eval_ber": null
+    },
+    {
+      "epoch": 283,
+      "phase": "alternate",
+      "encoder_loss": 0.0017929271212778985,
+      "encoder_ber": 0.00046750002009503076,
+      "decoder_loss": 0.03088709831237793,
+      "decoder_ber": 0.011397813054732978,
+      "epoch_seconds": 31.154057245999866,
+      "eval_ber": null
+    },
+    {
+      "epoch": 284,
+      "phase": "alternate",
+      "encoder_loss": 0.0019774818437872455,
+      "encoder_ber": 0.0005628125249859295,
+      "decoder_loss": 0.03174245589971542,
+      "decoder_ber": 0.011938375562429429,
+      "epoch_seconds": 31.14421585299715,
+      "eval_ber": null
+    },
+    {
+      "epoch": 285,
+      "phase": "alternate",
+      "encoder_loss": 0.001557163965771906,
+      "encoder_ber": 0.0004418750200420618,
+      "decoder_loss": 0.03232093842327595,
+      "decoder_ber": 0.01233437557797879,
+      "epoch_seconds": 31.138258711998787,
+      "eval_ber": null
+    },
+    {
+      "epoch": 286,
+      "phase": "alternate",
+      "encoder_loss": 0.0018002337386133149,
+      "encoder_ber": 0.0005318750246078708,
+      "decoder_loss": 0.031093971110880376,
+      "decoder_ber": 0.01170543805602938,
+      "epoch_seconds": 31.139071433000936,
+      "eval_ber": null
+    },
+    {
+      "epoch": 287,
+      "phase": "alternate",
+      "encoder_loss": 0.001792066328926012,
+      "encoder_ber": 0.0005246875243756222,
+      "decoder_loss": 0.03347054487839341,
+      "decoder_ber": 0.01218156305514276,
+      "epoch_seconds": 31.143200386999524,
+      "eval_ber": null
+    },
+    {
+      "epoch": 288,
+      "phase": "alternate",
+      "encoder_loss": 0.0022163125849328936,
+      "encoder_ber": 0.000571875026653288,
+      "decoder_loss": 0.029605115305632354,
+      "decoder_ber": 0.010824000488035381,
+      "epoch_seconds": 31.151547486999334,
+      "eval_ber": null
+    },
+    {
+      "epoch": 289,
+      "phase": "alternate",
+      "encoder_loss": 0.0015845881047425792,
+      "encoder_ber": 0.00044031252044078427,
+      "decoder_loss": 0.03114967253804207,
+      "decoder_ber": 0.011744125572964548,
+      "epoch_seconds": 31.167049088002386,
+      "eval_ber": null
+    },
+    {
+      "epoch": 290,
+      "phase": "alternate",
+      "encoder_loss": 0.001455632058205083,
+      "encoder_ber": 0.00041468752184300686,
+      "decoder_loss": 0.030901959124952555,
+      "decoder_ber": 0.011638375560753048,
+      "epoch_seconds": 32.72719230000075,
+      "eval_ber": 0.00037843751793843695
+    },
+    {
+      "epoch": 291,
+      "phase": "alternate",
+      "encoder_loss": 0.0015922411676729097,
+      "encoder_ber": 0.0004706250230083242,
+      "decoder_loss": 0.031089575313031675,
+      "decoder_ber": 0.011757125549018383,
+      "epoch_seconds": 31.158008106001944,
+      "eval_ber": null
+    },
+    {
+      "epoch": 292,
+      "phase": "alternate",
+      "encoder_loss": 0.0016099880199180916,
+      "encoder_ber": 0.00042437501979293303,
+      "decoder_loss": 0.03043673911318183,
+      "decoder_ber": 0.011336313041858375,
+      "epoch_seconds": 31.15867325599902,
+      "eval_ber": null
+    },
+    {
+      "epoch": 293,
+      "phase": "alternate",
+      "encoder_loss": 0.0015583855233853683,
+      "encoder_ber": 0.0004278125203200034,
+      "decoder_loss": 0.03250441390275955,
+      "decoder_ber": 0.01247943806834519,
+      "epoch_seconds": 31.162328503000026,
+      "eval_ber": null
+    },
+    {
+      "epoch": 294,
+      "phase": "alternate",
+      "encoder_loss": 0.0016765054868301376,
+      "encoder_ber": 0.0005134375250781887,
+      "decoder_loss": 0.03184022366628051,
+      "decoder_ber": 0.01209018805809319,
+      "epoch_seconds": 31.17843632400036,
+      "eval_ber": null
+    },
+    {
+      "epoch": 295,
+      "phase": "alternate",
+      "encoder_loss": 0.0017303465318400412,
+      "encoder_ber": 0.00047750002282555216,
+      "decoder_loss": 0.033041083622723816,
+      "decoder_ber": 0.012555688100866973,
+      "epoch_seconds": 31.14949376199729,
+      "eval_ber": null
+    },
+    {
+      "epoch": 296,
+      "phase": "alternate",
+      "encoder_loss": 0.001666511802468449,
+      "encoder_ber": 0.00048437502460728864,
+      "decoder_loss": 0.030518171060830355,
+      "decoder_ber": 0.011489438038319349,
+      "epoch_seconds": 31.13612572599959,
+      "eval_ber": null
+    },
+    {
+      "epoch": 297,
+      "phase": "alternate",
+      "encoder_loss": 0.0014620297349756583,
+      "encoder_ber": 0.00043500002007931473,
+      "decoder_loss": 0.030775492556393145,
+      "decoder_ber": 0.011581375547684729,
+      "epoch_seconds": 31.14566019099948,
+      "eval_ber": null
+    },
+    {
+      "epoch": 298,
+      "phase": "alternate",
+      "encoder_loss": 0.0015440220962045714,
+      "encoder_ber": 0.00047375002221087924,
+      "decoder_loss": 0.031682528767734766,
+      "decoder_ber": 0.012067125581204891,
+      "epoch_seconds": 31.13868746299704,
+      "eval_ber": null
+    },
+    {
+      "epoch": 299,
+      "phase": "alternate",
+      "encoder_loss": 0.0014843709458364175,
+      "encoder_ber": 0.00041968751858803446,
+      "decoder_loss": 0.030508321329951286,
+      "decoder_ber": 0.011468500524759293,
+      "epoch_seconds": 31.15901816100086,
+      "eval_ber": null
+    },
+    {
+      "epoch": 300,
+      "phase": "alternate",
+      "encoder_loss": 0.0017008930165320635,
+      "encoder_ber": 0.00048500002405489796,
+      "decoder_loss": 0.029431854873895644,
+      "decoder_ber": 0.0108937505222857,
+      "epoch_seconds": 32.71143262899932,
+      "eval_ber": 0.00040687501939828507
+    }
+  ]
+}

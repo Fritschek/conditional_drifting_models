@@ -1,0 +1,12 @@
+epoch 1/8: loss=2.723582e+00, train_ser=9.054234e-01, eval_ser=0.9108800441026688
+epoch 2/8: loss=2.690083e+00, train_ser=8.973534e-01, eval_ser=0.9314400434494019
+epoch 3/8: loss=2.684146e+00, train_ser=8.963567e-01, eval_ser=0.945460038781166
+epoch 4/8: loss=2.684311e+00, train_ser=8.964400e-01, eval_ser=0.9441000461578369
+epoch 5/8: loss=2.682919e+00, train_ser=8.963800e-01, eval_ser=0.9437400460243225
+epoch 6/8: loss=2.683343e+00, train_ser=8.963100e-01, eval_ser=0.9458400428295135
+epoch 7/8: loss=2.682915e+00, train_ser=8.961300e-01, eval_ser=0.9445200449228287
+epoch 8/8: loss=2.681377e+00, train_ser=8.968234e-01, eval_ser=0.9430200457572937
+{
+  "out_dir": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_joint_cond0p5_to_analytic",
+  "summary": "/home/entropy/GitHub/conditional_drifting_models/results/symbolic_modeflip_screen_20260323/drifting_direct_joint_cond0p5_to_analytic/summary.json"
+}

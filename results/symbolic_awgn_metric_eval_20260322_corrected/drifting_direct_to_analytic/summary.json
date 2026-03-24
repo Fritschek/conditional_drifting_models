@@ -1,0 +1,37 @@
+{
+  "config": {
+    "message_dim": 16,
+    "code_dim": 7,
+    "hidden_dim": 16,
+    "batch_size": 500,
+    "dataset_size": 1000000,
+    "epochs": 0,
+    "learning_rate": 0.001,
+    "grad_clip_norm": 1.0,
+    "eval_size": 100000
+  },
+  "train_implant": "drifting_direct",
+  "eval_implant": "analytic_awgn",
+  "rate": 0.5714285714285714,
+  "ebno_db": 5.0,
+  "history": [],
+  "train_seconds": 3.7609970604535192e-06,
+  "final_eval": {
+    "loss": 0.15764817833900452,
+    "ser": 0.0451000021584332
+  },
+  "train_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.10633256286382675,
+    "y_swd": 0.1340932846069336,
+    "residual_swd": 0.2703321874141693
+  },
+  "eval_implant_channel_metrics_vs_analytic": {
+    "joint_xy_swd": 0.0032953794579952955,
+    "y_swd": 0.004163695499300957,
+    "residual_swd": 0.0027975859120488167
+  },
+  "seed": 7,
+  "device": "cuda",
+  "train_implant_source": "awgn7_drift_direct_seed7",
+  "eval_implant_source": null
+}
