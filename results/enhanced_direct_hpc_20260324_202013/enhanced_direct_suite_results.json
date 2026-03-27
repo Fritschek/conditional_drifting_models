@@ -1,0 +1,203 @@
+{
+  "suite_dir": "results/enhanced_direct_hpc_20260324_202013",
+  "seeds": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "per_seed": [
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed7_manifest.json",
+      "seed": 7,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed7.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed7",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed7/enhanced_direct_summary_seed7.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed7.log",
+        "suite_elapsed_seconds": 11975.244926214218
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed8_manifest.json",
+      "seed": 8,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed8.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed8",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed8/enhanced_direct_summary_seed8.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed8.log",
+        "suite_elapsed_seconds": 11924.92660665512
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed9_manifest.json",
+      "seed": 9,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed9.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed9",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed9/enhanced_direct_summary_seed9.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed9.log",
+        "suite_elapsed_seconds": 11868.09031701088
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed10_manifest.json",
+      "seed": 10,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed10.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed10",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed10/enhanced_direct_summary_seed10.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed10.log",
+        "suite_elapsed_seconds": 11883.332107782364
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed11_manifest.json",
+      "seed": 11,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed11.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed11",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed11/enhanced_direct_summary_seed11.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed11.log",
+        "suite_elapsed_seconds": 11857.692848920822
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed12_manifest.json",
+      "seed": 12,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed12.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed12",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed12/enhanced_direct_summary_seed12.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed12.log",
+        "suite_elapsed_seconds": 11896.597668886185
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed13_manifest.json",
+      "seed": 13,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed13.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed13",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed13/enhanced_direct_summary_seed13.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed13.log",
+        "suite_elapsed_seconds": 11908.636197805405
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed14_manifest.json",
+      "seed": 14,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed14.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed14",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed14/enhanced_direct_summary_seed14.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed14.log",
+        "suite_elapsed_seconds": 11869.985308885574
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed15_manifest.json",
+      "seed": 15,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed15.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed15",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed15/enhanced_direct_summary_seed15.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed15.log",
+        "suite_elapsed_seconds": 11864.471414804459
+      }
+    },
+    {
+      "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed16_manifest.json",
+      "seed": 16,
+      "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed16.log",
+      "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed16",
+      "enhanced_direct_result": {
+        "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed16/enhanced_direct_summary_seed16.json",
+        "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed16.log",
+        "suite_elapsed_seconds": 11863.204892158508
+      }
+    }
+  ],
+  "aggregated": {
+    "channels": {
+      "AWGN": {
+        "swd": {
+          "mean": 0.02776361759752035,
+          "std": 0.002974430983048767,
+          "num_seeds": 10
+        },
+        "suite_elapsed_seconds": {
+          "mean": 11891.218228912354,
+          "std": 34.93004855013178,
+          "num_seeds": 10
+        },
+        "checkpoints": [
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed7/checkpoints/enhanced_direct_awgn_seed7.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed8/checkpoints/enhanced_direct_awgn_seed8.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed9/checkpoints/enhanced_direct_awgn_seed9.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed10/checkpoints/enhanced_direct_awgn_seed10.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed11/checkpoints/enhanced_direct_awgn_seed11.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed12/checkpoints/enhanced_direct_awgn_seed12.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed13/checkpoints/enhanced_direct_awgn_seed13.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed14/checkpoints/enhanced_direct_awgn_seed14.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed15/checkpoints/enhanced_direct_awgn_seed15.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed16/checkpoints/enhanced_direct_awgn_seed16.pt"
+        ]
+      },
+      "Rayleigh": {
+        "swd": {
+          "mean": 0.04901220090687275,
+          "std": 0.0013427621847330107,
+          "num_seeds": 10
+        },
+        "suite_elapsed_seconds": {
+          "mean": 11891.218228912354,
+          "std": 34.93004855013178,
+          "num_seeds": 10
+        },
+        "checkpoints": [
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed7/checkpoints/enhanced_direct_rayleigh_seed7.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed8/checkpoints/enhanced_direct_rayleigh_seed8.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed9/checkpoints/enhanced_direct_rayleigh_seed9.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed10/checkpoints/enhanced_direct_rayleigh_seed10.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed11/checkpoints/enhanced_direct_rayleigh_seed11.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed12/checkpoints/enhanced_direct_rayleigh_seed12.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed13/checkpoints/enhanced_direct_rayleigh_seed13.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed14/checkpoints/enhanced_direct_rayleigh_seed14.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed15/checkpoints/enhanced_direct_rayleigh_seed15.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed16/checkpoints/enhanced_direct_rayleigh_seed16.pt"
+        ]
+      },
+      "SSPA": {
+        "swd": {
+          "mean": 0.007249877182766795,
+          "std": 0.0007460507211012279,
+          "num_seeds": 10
+        },
+        "suite_elapsed_seconds": {
+          "mean": 11891.218228912354,
+          "std": 34.93004855013178,
+          "num_seeds": 10
+        },
+        "checkpoints": [
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed7/checkpoints/enhanced_direct_sspa_seed7.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed8/checkpoints/enhanced_direct_sspa_seed8.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed9/checkpoints/enhanced_direct_sspa_seed9.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed10/checkpoints/enhanced_direct_sspa_seed10.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed11/checkpoints/enhanced_direct_sspa_seed11.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed12/checkpoints/enhanced_direct_sspa_seed12.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed13/checkpoints/enhanced_direct_sspa_seed13.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed14/checkpoints/enhanced_direct_sspa_seed14.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed15/checkpoints/enhanced_direct_sspa_seed15.pt",
+          "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed16/checkpoints/enhanced_direct_sspa_seed16.pt"
+        ]
+      }
+    }
+  }
+}

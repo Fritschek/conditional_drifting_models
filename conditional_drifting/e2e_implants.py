@@ -199,6 +199,19 @@ def load_implant_from_checkpoint(
     ddim_steps: int | None = 100,
 ):
     payload = torch.load(Path(path), map_location=device)
+    if "family" not in payload:
+        if "model_state_dict" in payload and "config" in payload:
+            cfg = payload["config"]
+            model = ConditionalDriftingGenerator(
+                condition_dim=int(cfg["n"]),
+                output_dim=int(cfg["n"]),
+                latent_dim=int(cfg["latent_dim"]),
+                hidden_dim=int(cfg["hidden_dim"]),
+            ).to(device)
+            model.load_state_dict(payload["model_state_dict"])
+            model.eval()
+            return DriftingChannelImplant(model, is_residual=bool(cfg.get("is_residual", False)))
+        raise KeyError("Checkpoint payload does not contain a supported implant format.")
     family = payload["family"]
 
     if family == "drifting":

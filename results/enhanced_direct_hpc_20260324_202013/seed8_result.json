@@ -1,0 +1,11 @@
+{
+  "manifest": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed8_manifest.json",
+  "seed": 8,
+  "log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed8.log",
+  "output_dir": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed8",
+  "enhanced_direct_result": {
+    "summary": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/enhanced_direct_seed8/enhanced_direct_summary_seed8.json",
+    "suite_log": "/home/rifr807e/repos/conditional_drifting_models/results/enhanced_direct_hpc_20260324_202013/seed8.log",
+    "suite_elapsed_seconds": 11924.92660665512
+  }
+}

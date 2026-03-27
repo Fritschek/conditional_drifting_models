@@ -1,0 +1,16 @@
+{
+  "timestamp_utc": "2026-03-24T20:20:40",
+  "cwd": "/home/h3/rifr807e/repos/conditional_drifting_models",
+  "device": "cuda",
+  "seed": 15,
+  "channels": "AWGN,Rayleigh,SSPA",
+  "dataset_size": -1,
+  "eval_size": 1000000,
+  "batch_size": -1,
+  "drifting_epochs": -1,
+  "swd_projections": -1,
+  "conditioning_mode": "joint",
+  "condition_kernel_scale": 0.5,
+  "target_kernel_scale": 1.0,
+  "target_kernel_mode": "raw"
+}
