@@ -86,7 +86,7 @@ f_\theta(z) - \tilde{u}
 \right\|_2^2
 \right].
 \end{equation}
-This makes clear why inference is naturally one-shot: the iterative correction is absorbed into training, and sampling after training requires only one evaluation of \(f_\theta\) \cite{drifting,driftingproj}.
+This makes clear why inference is naturally one-shot: the iterative correction is absorbed into training, and sampling after training requires only one evaluation of \(f_\theta\) \cite{drifting}.
 
 For channel simulation, two target parameterizations are meaningful.
 The first is the direct conditional channel-output law \(p(y \mid x)\), which treats the learned generator as a surrogate for the full channel law.
@@ -154,6 +154,31 @@ g_i - \tilde{g}_i
 \right\|_2^2.
 \end{equation}
 Thus, the generic update \(u \mapsto u + \eta V_{p,q}(u)\) becomes a kernel-based update estimated directly from minibatches of generated and true channel samples in the selected target space.
+
+The March 27 conference draft also includes an enhanced direct-output variant with a conditioning-aware kernel.
+For this variant, sample interactions are computed on joint condition-target pairs \(k((x_i,y_i),(x_j,y_j))\) rather than on \(k(y_i,y_j)\) alone.
+This makes attraction and repulsion depend on both transmitted-symbol similarity and channel-output similarity, and the direct-output target kernel can additionally include residual similarity.
+The generator architecture and one-shot inference path are unchanged.
+
+The journal version additionally considers a Sinkhorn replacement for this heuristic kernel field, motivated by W-Flow \cite{han2026wflow}.
+For channel simulation, the Sinkhorn field is applied conditionally rather than on the unrestricted joint space.
+Writing \(p(dx,dy)=\mu(dx)p_x(dy)\) and \(q_\theta(dx,dy)=\mu(dx)q_{\theta,x}(dy)\), the conditional objective is
+\begin{equation}
+\mathcal S_\varepsilon^{\mathrm{cond}}(q_\theta,p)
+=
+\int S_\varepsilon(q_{\theta,x},p_x)\,\mu(dx).
+\end{equation}
+The resulting fiberwise velocity is
+\begin{equation}
+v_x(y)
+=
+T^\varepsilon_{q_{\theta,x},p_x}(y)
+-
+T^\varepsilon_{q_{\theta,x},q_{\theta,x}}(y),
+\end{equation}
+where the barycentric projections are computed from entropic optimal-transport couplings.
+For simulator channels, this is estimated by drawing multiple true and generated samples at the same condition anchor.
+For measured data with only one output per condition, the corresponding approximation is local conditional Sinkhorn over nearby condition blocks.
 
 Empirically, the two parameterizations behave differently.
 At matched mid-budget settings, residual drifting is materially stronger than direct \(y \mid x\) drifting on AWGN, Rayleigh, and SSPA, which is consistent with the view that residual modeling supplies a useful near-identity inductive bias.

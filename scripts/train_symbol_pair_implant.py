@@ -41,6 +41,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--lr-decay-epoch", type=int, default=0)
     parser.add_argument("--lr-decay-factor", type=float, default=0.1)
+    parser.add_argument("--drift-field", type=str, default="kernel", choices=["kernel", "sinkhorn", "fiber_sinkhorn"])
+    parser.add_argument("--drift-scale", type=float, default=1.0)
+    parser.add_argument("--max-drift-norm", type=float, default=2.0)
+    parser.add_argument("--repulsive-weight", type=float, default=1.0)
     parser.add_argument("--conditional-kernel", action="store_true", help="Use a joint kernel on concatenated [condition, target] during drifting training.")
     parser.add_argument("--conditioning-mode", type=str, default="none", choices=["none", "joint", "product", "local", "soft_local", "radius", "mixture"])
     parser.add_argument("--condition-metric", type=str, default="euclidean", choices=["euclidean", "whitened"])
@@ -60,6 +64,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--condition-embedding-hidden-dim", type=int, default=64)
     parser.add_argument("--positive-queue-size", type=int, default=0)
     parser.add_argument("--positive-reference-size", type=int, default=0)
+    parser.add_argument("--sinkhorn-epsilon", type=float, default=None)
+    parser.add_argument("--sinkhorn-min-epsilon", type=float, default=1e-3)
+    parser.add_argument("--sinkhorn-iterations", type=int, default=10)
+    parser.add_argument("--fiber-generated-samples", type=int, default=4)
+    parser.add_argument("--fiber-positive-samples", type=int, default=4)
+    parser.add_argument("--fiber-reference-samples", type=int, default=4)
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--out", type=str, default=None)
@@ -100,6 +110,10 @@ def main() -> None:
         "dataset_size": args.dataset_size,
         "batch_size": args.batch_size,
         "epochs": args.epochs,
+        "drift_field": args.drift_field,
+        "drift_scale": args.drift_scale,
+        "max_drift_norm": args.max_drift_norm,
+        "repulsive_weight": args.repulsive_weight,
         "conditioning_mode": args.conditioning_mode,
         "condition_metric": args.condition_metric,
         "condition_bandwidth": args.condition_bandwidth,
@@ -115,6 +129,12 @@ def main() -> None:
         "condition_embedding_dim": args.condition_embedding_dim,
         "positive_queue_size": args.positive_queue_size,
         "positive_reference_size": args.positive_reference_size,
+        "sinkhorn_epsilon": args.sinkhorn_epsilon,
+        "sinkhorn_min_epsilon": args.sinkhorn_min_epsilon,
+        "sinkhorn_iterations": args.sinkhorn_iterations,
+        "fiber_generated_samples": args.fiber_generated_samples,
+        "fiber_positive_samples": args.fiber_positive_samples,
+        "fiber_reference_samples": args.fiber_reference_samples,
     }
     train_start = time.perf_counter()
 
@@ -132,6 +152,10 @@ def main() -> None:
             learning_rate=args.learning_rate,
             lr_decay_epoch=args.lr_decay_epoch,
             lr_decay_factor=args.lr_decay_factor,
+            drift_field=args.drift_field,
+            drift_scale=args.drift_scale,
+            max_drift_norm=args.max_drift_norm,
+            repulsive_weight=args.repulsive_weight,
             latent_dim=args.latent_dim,
             hidden_dim=args.hidden_dim,
             is_residual=is_residual,
@@ -154,6 +178,12 @@ def main() -> None:
             condition_embedding_hidden_dim=args.condition_embedding_hidden_dim,
             positive_queue_size=args.positive_queue_size,
             positive_reference_size=args.positive_reference_size,
+            sinkhorn_epsilon=args.sinkhorn_epsilon,
+            sinkhorn_min_epsilon=args.sinkhorn_min_epsilon,
+            sinkhorn_iterations=args.sinkhorn_iterations,
+            fiber_generated_samples=args.fiber_generated_samples,
+            fiber_positive_samples=args.fiber_positive_samples,
+            fiber_reference_samples=args.fiber_reference_samples,
         )
         model, artifacts = train_conditional_drifting(channel_fn, cfg, device)
         save_implant_checkpoint(out_path, model, family="drifting", metadata=metadata, is_residual=is_residual)

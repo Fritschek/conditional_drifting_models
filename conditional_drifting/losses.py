@@ -134,6 +134,141 @@ def _resolve_cross_bandwidths(
     )
 
 
+def _resolve_sinkhorn_epsilon(
+    source_features: torch.Tensor,
+    target_features: torch.Tensor,
+    epsilon: float | None,
+    min_epsilon: float,
+) -> float:
+    if epsilon is not None:
+        return max(float(epsilon), float(min_epsilon))
+    if source_features.numel() == 0 or target_features.numel() == 0:
+        return float(min_epsilon)
+    with torch.no_grad():
+        costs = 0.5 * torch.cdist(source_features.detach(), target_features.detach(), p=2).square()
+        values = costs[costs > 0]
+        if values.numel() == 0:
+            return float(min_epsilon)
+        return float(torch.clamp(values.median(), min=float(min_epsilon)).item())
+
+
+def _sinkhorn_barycentric_projection(
+    source_features: torch.Tensor,
+    target_features: torch.Tensor,
+    target_values: torch.Tensor,
+    *,
+    epsilon: float | None,
+    min_epsilon: float,
+    iterations: int,
+    eps: float = 1e-8,
+) -> torch.Tensor:
+    source_features = source_features.detach().float()
+    target_features = target_features.detach().to(device=source_features.device, dtype=torch.float32)
+    target_values = target_values.detach().to(device=source_features.device, dtype=torch.float32)
+    n_source = source_features.shape[0]
+    n_target = target_features.shape[0]
+    if n_source == 0 or n_target == 0:
+        raise ValueError("Sinkhorn projection requires non-empty source and target batches.")
+
+    regularization = _resolve_sinkhorn_epsilon(source_features, target_features, epsilon, min_epsilon)
+    cost = 0.5 * torch.cdist(source_features, target_features, p=2).square()
+    scaled_cost = cost / regularization
+    # Row shifts are absorbed by Sinkhorn's source scaling and improve numerical stability.
+    scaled_cost = scaled_cost - scaled_cost.amin(dim=1, keepdim=True)
+    kernel = torch.exp(-scaled_cost).clamp_min(eps)
+
+    source_mass = torch.full((n_source,), 1.0 / n_source, device=source_features.device, dtype=kernel.dtype)
+    target_mass = torch.full((n_target,), 1.0 / n_target, device=source_features.device, dtype=kernel.dtype)
+    u = torch.ones_like(source_mass)
+    v = torch.ones_like(target_mass)
+    for _ in range(max(1, int(iterations))):
+        u = source_mass / (kernel @ v + eps)
+        v = target_mass / (kernel.T @ u + eps)
+
+    coupling = u[:, None] * kernel * v[None, :]
+    row_weights = coupling / (coupling.sum(dim=1, keepdim=True) + eps)
+    return row_weights @ target_values
+
+
+def _batched_sinkhorn_barycentric_projection(
+    source_features: torch.Tensor,
+    target_features: torch.Tensor,
+    target_values: torch.Tensor,
+    *,
+    epsilon: float | None,
+    min_epsilon: float,
+    iterations: int,
+    eps: float = 1e-8,
+) -> torch.Tensor:
+    source_features = source_features.detach().float()
+    target_features = target_features.detach().to(device=source_features.device, dtype=torch.float32)
+    target_values = target_values.detach().to(device=source_features.device, dtype=torch.float32)
+    batch_size, n_source, _ = source_features.shape
+    n_target = target_features.shape[1]
+    if batch_size == 0 or n_source == 0 or n_target == 0:
+        raise ValueError("Batched Sinkhorn projection requires non-empty source and target batches.")
+
+    regularization = _resolve_sinkhorn_epsilon(
+        source_features.reshape(-1, source_features.shape[-1]),
+        target_features.reshape(-1, target_features.shape[-1]),
+        epsilon,
+        min_epsilon,
+    )
+    cost = 0.5 * torch.cdist(source_features, target_features, p=2).square()
+    scaled_cost = cost / regularization
+    scaled_cost = scaled_cost - scaled_cost.amin(dim=2, keepdim=True)
+    kernel = torch.exp(-scaled_cost).clamp_min(eps)
+
+    source_mass = torch.full((batch_size, n_source), 1.0 / n_source, device=source_features.device, dtype=kernel.dtype)
+    target_mass = torch.full((batch_size, n_target), 1.0 / n_target, device=source_features.device, dtype=kernel.dtype)
+    u = torch.ones_like(source_mass)
+    v = torch.ones_like(target_mass)
+    for _ in range(max(1, int(iterations))):
+        u = source_mass / (torch.bmm(kernel, v.unsqueeze(-1)).squeeze(-1) + eps)
+        v = target_mass / (torch.bmm(kernel.transpose(1, 2), u.unsqueeze(-1)).squeeze(-1) + eps)
+
+    coupling = u[:, :, None] * kernel * v[:, None, :]
+    row_weights = coupling / (coupling.sum(dim=2, keepdim=True) + eps)
+    return torch.bmm(row_weights, target_values)
+
+
+def _build_sinkhorn_features(
+    target_left: torch.Tensor,
+    target_right: torch.Tensor,
+    condition_left: torch.Tensor | None,
+    condition_right: torch.Tensor | None,
+    conditioning_mode: str,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    if conditioning_mode == "none":
+        return target_left, target_right
+    if condition_left is None or condition_right is None:
+        raise ValueError(f"conditioning_mode={conditioning_mode!r} requires condition tensors.")
+    return torch.cat((condition_left, target_left), dim=1), torch.cat((condition_right, target_right), dim=1)
+
+
+def _prepare_fiber_target_features(
+    values: torch.Tensor,
+    conditions: torch.Tensor | None,
+    *,
+    target_scale: float,
+    target_representation: str,
+    target_is_residual: bool,
+    residual_target_scale: float,
+) -> torch.Tensor:
+    scaled = float(target_scale) * values
+    representation = str(target_representation or "raw").lower()
+    if representation == "raw":
+        return scaled
+    if representation == "raw_plus_residual":
+        if target_is_residual:
+            return scaled
+        if conditions is None:
+            raise ValueError("target_representation='raw_plus_residual' requires target condition tensors.")
+        residual = float(residual_target_scale) * (values - conditions)
+        return torch.cat((scaled, residual), dim=2)
+    raise ValueError(f"Unsupported target_representation={target_representation!r}")
+
+
 def compute_kernel_drift(
     generated: torch.Tensor,
     positive: torch.Tensor,
@@ -398,13 +533,273 @@ def compute_kernel_drift(
     return drift
 
 
+def compute_sinkhorn_drift(
+    generated: torch.Tensor,
+    positive: torch.Tensor,
+    condition_generated: torch.Tensor | None = None,
+    condition_positive: torch.Tensor | None = None,
+    condition_reference: torch.Tensor | None = None,
+    target_condition_generated: torch.Tensor | None = None,
+    target_condition_positive: torch.Tensor | None = None,
+    target_condition_reference: torch.Tensor | None = None,
+    generated_reference: torch.Tensor | None = None,
+    conditioning_mode: str = "none",
+    condition_metric: str = "euclidean",
+    condition_scale: float = 1.0,
+    target_scale: float = 1.0,
+    target_representation: str = "raw",
+    target_is_residual: bool = False,
+    residual_target_scale: float = 1.0,
+    sinkhorn_epsilon: float | None = None,
+    sinkhorn_min_epsilon: float = 1e-3,
+    sinkhorn_iterations: int = 10,
+    max_drift_norm: float | None = None,
+    repulsive_weight: float = 1.0,
+    eps: float = 1e-8,
+) -> torch.Tensor:
+    generated = generated.float()
+    positive = positive.to(device=generated.device, dtype=torch.float32)
+    if generated_reference is None:
+        generated_reference = generated.detach()
+    generated_reference = generated_reference.to(device=generated.device, dtype=torch.float32)
+    if condition_generated is not None:
+        condition_generated = condition_generated.to(device=generated.device, dtype=torch.float32)
+    if condition_positive is not None:
+        condition_positive = condition_positive.to(device=generated.device, dtype=torch.float32)
+    if condition_reference is not None:
+        condition_reference = condition_reference.to(device=generated.device, dtype=torch.float32)
+    if target_condition_generated is not None:
+        target_condition_generated = target_condition_generated.to(device=generated.device, dtype=torch.float32)
+    if target_condition_positive is not None:
+        target_condition_positive = target_condition_positive.to(device=generated.device, dtype=torch.float32)
+    if target_condition_reference is not None:
+        target_condition_reference = target_condition_reference.to(device=generated.device, dtype=torch.float32)
+
+    conditioning_mode = str(conditioning_mode or "none").lower()
+    if conditioning_mode not in {"none", "joint", "product", "local", "soft_local", "radius", "mixture"}:
+        raise ValueError(f"Unsupported conditioning_mode={conditioning_mode!r}")
+    if conditioning_mode != "none" and condition_generated is None:
+        raise ValueError(f"conditioning_mode={conditioning_mode!r} requires condition tensors.")
+    if conditioning_mode != "none" and condition_positive is None:
+        raise ValueError(f"conditioning_mode={conditioning_mode!r} requires positive condition tensors.")
+    if conditioning_mode != "none" and condition_reference is None:
+        condition_reference = condition_generated.detach()
+    if target_condition_reference is None and target_condition_generated is not None:
+        target_condition_reference = target_condition_generated.detach()
+
+    target_generated, target_positive = _prepare_target_features(
+        generated,
+        positive,
+        target_scale=target_scale,
+        target_representation=target_representation,
+        target_is_residual=target_is_residual,
+        target_condition_generated=target_condition_generated,
+        target_condition_positive=target_condition_positive,
+        residual_target_scale=residual_target_scale,
+    )
+    target_self_generated, target_reference = _prepare_target_features(
+        generated,
+        generated_reference,
+        target_scale=target_scale,
+        target_representation=target_representation,
+        target_is_residual=target_is_residual,
+        target_condition_generated=target_condition_generated,
+        target_condition_positive=target_condition_reference,
+        residual_target_scale=residual_target_scale,
+    )
+    cond_generated, cond_positive = _prepare_condition_features(
+        condition_generated,
+        condition_positive,
+        condition_scale=condition_scale,
+        condition_metric=condition_metric,
+        min_bandwidth=sinkhorn_min_epsilon,
+    )
+    cond_self_generated, cond_reference = _prepare_condition_features(
+        condition_generated,
+        condition_reference,
+        condition_scale=condition_scale,
+        condition_metric=condition_metric,
+        min_bandwidth=sinkhorn_min_epsilon,
+    )
+
+    source_features, positive_features = _build_sinkhorn_features(
+        target_generated,
+        target_positive,
+        cond_generated,
+        cond_positive,
+        conditioning_mode,
+    )
+    positive_center = _sinkhorn_barycentric_projection(
+        source_features,
+        positive_features,
+        positive,
+        epsilon=sinkhorn_epsilon,
+        min_epsilon=sinkhorn_min_epsilon,
+        iterations=sinkhorn_iterations,
+        eps=eps,
+    )
+    drift = positive_center - generated
+
+    if repulsive_weight > 0.0:
+        self_source_features, self_reference_features = _build_sinkhorn_features(
+            target_self_generated,
+            target_reference,
+            cond_self_generated,
+            cond_reference,
+            conditioning_mode,
+        )
+        self_center = _sinkhorn_barycentric_projection(
+            self_source_features,
+            self_reference_features,
+            generated_reference,
+            epsilon=sinkhorn_epsilon,
+            min_epsilon=sinkhorn_min_epsilon,
+            iterations=sinkhorn_iterations,
+            eps=eps,
+        )
+        drift = drift - float(repulsive_weight) * (self_center - generated)
+
+    if max_drift_norm is not None:
+        drift_norm = drift.norm(dim=1, keepdim=True) + eps
+        scale = torch.clamp(float(max_drift_norm) / drift_norm, max=1.0)
+        drift = drift * scale
+
+    return drift.detach()
+
+
+def compute_fiber_sinkhorn_drift(
+    generated: torch.Tensor,
+    positive: torch.Tensor,
+    target_condition_generated: torch.Tensor | None = None,
+    target_condition_positive: torch.Tensor | None = None,
+    target_condition_reference: torch.Tensor | None = None,
+    generated_reference: torch.Tensor | None = None,
+    fiber_num_conditions: int | None = None,
+    fiber_generated_samples: int = 1,
+    fiber_positive_samples: int = 1,
+    fiber_reference_samples: int | None = None,
+    target_scale: float = 1.0,
+    target_representation: str = "raw",
+    target_is_residual: bool = False,
+    residual_target_scale: float = 1.0,
+    sinkhorn_epsilon: float | None = None,
+    sinkhorn_min_epsilon: float = 1e-3,
+    sinkhorn_iterations: int = 10,
+    max_drift_norm: float | None = None,
+    repulsive_weight: float = 1.0,
+    eps: float = 1e-8,
+) -> torch.Tensor:
+    generated = generated.float()
+    positive = positive.to(device=generated.device, dtype=torch.float32)
+    generated_count = max(1, int(fiber_generated_samples))
+    positive_count = max(1, int(fiber_positive_samples))
+    if fiber_num_conditions is None:
+        if generated.shape[0] % generated_count != 0:
+            raise ValueError("Cannot infer fiber_num_conditions from generated samples.")
+        fiber_num_conditions = generated.shape[0] // generated_count
+    num_conditions = int(fiber_num_conditions)
+    if generated.shape[0] != num_conditions * generated_count:
+        raise ValueError("Generated sample count does not match fiber_num_conditions * fiber_generated_samples.")
+    if positive.shape[0] != num_conditions * positive_count:
+        raise ValueError("Positive sample count does not match fiber_num_conditions * fiber_positive_samples.")
+
+    generated_3d = generated.reshape(num_conditions, generated_count, generated.shape[1])
+    positive_3d = positive.reshape(num_conditions, positive_count, positive.shape[1])
+    cond_generated_3d = (
+        target_condition_generated.to(device=generated.device, dtype=torch.float32).reshape(num_conditions, generated_count, generated.shape[1])
+        if target_condition_generated is not None
+        else None
+    )
+    cond_positive_3d = (
+        target_condition_positive.to(device=generated.device, dtype=torch.float32).reshape(num_conditions, positive_count, positive.shape[1])
+        if target_condition_positive is not None
+        else None
+    )
+
+    generated_features = _prepare_fiber_target_features(
+        generated_3d,
+        cond_generated_3d,
+        target_scale=target_scale,
+        target_representation=target_representation,
+        target_is_residual=target_is_residual,
+        residual_target_scale=residual_target_scale,
+    )
+    positive_features = _prepare_fiber_target_features(
+        positive_3d,
+        cond_positive_3d,
+        target_scale=target_scale,
+        target_representation=target_representation,
+        target_is_residual=target_is_residual,
+        residual_target_scale=residual_target_scale,
+    )
+    positive_center = _batched_sinkhorn_barycentric_projection(
+        generated_features,
+        positive_features,
+        positive_3d,
+        epsilon=sinkhorn_epsilon,
+        min_epsilon=sinkhorn_min_epsilon,
+        iterations=sinkhorn_iterations,
+        eps=eps,
+    )
+    drift = positive_center - generated_3d
+
+    if repulsive_weight > 0.0:
+        if generated_reference is None:
+            generated_reference = generated.detach()
+            reference_count = generated_count
+        else:
+            generated_reference = generated_reference.to(device=generated.device, dtype=torch.float32)
+            reference_count = max(1, int(fiber_reference_samples or generated_count))
+        if generated_reference.shape[0] != num_conditions * reference_count:
+            raise ValueError("Reference sample count does not match fiber_num_conditions * fiber_reference_samples.")
+        reference_3d = generated_reference.reshape(num_conditions, reference_count, generated.shape[1])
+        cond_reference_3d = (
+            target_condition_reference.to(device=generated.device, dtype=torch.float32).reshape(num_conditions, reference_count, generated.shape[1])
+            if target_condition_reference is not None
+            else cond_generated_3d
+        )
+        reference_features = _prepare_fiber_target_features(
+            reference_3d,
+            cond_reference_3d,
+            target_scale=target_scale,
+            target_representation=target_representation,
+            target_is_residual=target_is_residual,
+            residual_target_scale=residual_target_scale,
+        )
+        self_center = _batched_sinkhorn_barycentric_projection(
+            generated_features,
+            reference_features,
+            reference_3d,
+            epsilon=sinkhorn_epsilon,
+            min_epsilon=sinkhorn_min_epsilon,
+            iterations=sinkhorn_iterations,
+            eps=eps,
+        )
+        drift = drift - float(repulsive_weight) * (self_center - generated_3d)
+
+    drift = drift.reshape(num_conditions * generated_count, generated.shape[1])
+    if max_drift_norm is not None:
+        drift_norm = drift.norm(dim=1, keepdim=True) + eps
+        scale = torch.clamp(float(max_drift_norm) / drift_norm, max=1.0)
+        drift = drift * scale
+    return drift.detach()
+
+
 def drifting_loss(
     generated: torch.Tensor,
     positive: torch.Tensor,
     condition_generated: torch.Tensor | None = None,
     condition_positive: torch.Tensor | None = None,
+    condition_reference: torch.Tensor | None = None,
     target_condition_generated: torch.Tensor | None = None,
     target_condition_positive: torch.Tensor | None = None,
+    target_condition_reference: torch.Tensor | None = None,
+    generated_reference: torch.Tensor | None = None,
+    drift_field: str = "kernel",
+    fiber_num_conditions: int | None = None,
+    fiber_generated_samples: int = 1,
+    fiber_positive_samples: int = 1,
+    fiber_reference_samples: int | None = None,
     conditioning_mode: str = "none",
     condition_metric: str = "euclidean",
     condition_scale: float = 1.0,
@@ -425,34 +820,87 @@ def drifting_loss(
     min_bandwidth: float = 1e-3,
     max_drift_norm: float | None = None,
     repulsive_weight: float = 0.0,
+    sinkhorn_epsilon: float | None = None,
+    sinkhorn_min_epsilon: float = 1e-3,
+    sinkhorn_iterations: int = 10,
 ) -> tuple[torch.Tensor, torch.Tensor]:
-    drift = compute_kernel_drift(
-        generated,
-        positive,
-        condition_generated=condition_generated,
-        condition_positive=condition_positive,
-        target_condition_generated=target_condition_generated,
-        target_condition_positive=target_condition_positive,
-        conditioning_mode=conditioning_mode,
-        condition_metric=condition_metric,
-        condition_scale=condition_scale,
-        target_scale=target_scale,
-        bandwidth=bandwidth,
-        condition_bandwidth=condition_bandwidth,
-        target_bandwidth=target_bandwidth,
-        local_condition_k=local_condition_k,
-        condition_radius=condition_radius,
-        mixture_alpha=mixture_alpha,
-        target_representation=target_representation,
-        target_is_residual=target_is_residual,
-        residual_target_scale=residual_target_scale,
-        adaptive_condition_bandwidth=adaptive_condition_bandwidth,
-        adaptive_target_bandwidth=adaptive_target_bandwidth,
-        adaptive_bandwidth_k=adaptive_bandwidth_k,
-        min_bandwidth=min_bandwidth,
-        max_drift_norm=max_drift_norm,
-        repulsive_weight=repulsive_weight,
-    )
+    drift_field = str(drift_field or "kernel").lower()
+    if drift_field == "kernel":
+        drift = compute_kernel_drift(
+            generated,
+            positive,
+            condition_generated=condition_generated,
+            condition_positive=condition_positive,
+            target_condition_generated=target_condition_generated,
+            target_condition_positive=target_condition_positive,
+            conditioning_mode=conditioning_mode,
+            condition_metric=condition_metric,
+            condition_scale=condition_scale,
+            target_scale=target_scale,
+            bandwidth=bandwidth,
+            condition_bandwidth=condition_bandwidth,
+            target_bandwidth=target_bandwidth,
+            local_condition_k=local_condition_k,
+            condition_radius=condition_radius,
+            mixture_alpha=mixture_alpha,
+            target_representation=target_representation,
+            target_is_residual=target_is_residual,
+            residual_target_scale=residual_target_scale,
+            adaptive_condition_bandwidth=adaptive_condition_bandwidth,
+            adaptive_target_bandwidth=adaptive_target_bandwidth,
+            adaptive_bandwidth_k=adaptive_bandwidth_k,
+            min_bandwidth=min_bandwidth,
+            max_drift_norm=max_drift_norm,
+            repulsive_weight=repulsive_weight,
+        )
+    elif drift_field == "sinkhorn":
+        drift = compute_sinkhorn_drift(
+            generated,
+            positive,
+            condition_generated=condition_generated,
+            condition_positive=condition_positive,
+            condition_reference=condition_reference,
+            target_condition_generated=target_condition_generated,
+            target_condition_positive=target_condition_positive,
+            target_condition_reference=target_condition_reference,
+            generated_reference=generated_reference,
+            conditioning_mode=conditioning_mode,
+            condition_metric=condition_metric,
+            condition_scale=condition_scale,
+            target_scale=target_scale,
+            target_representation=target_representation,
+            target_is_residual=target_is_residual,
+            residual_target_scale=residual_target_scale,
+            sinkhorn_epsilon=sinkhorn_epsilon,
+            sinkhorn_min_epsilon=sinkhorn_min_epsilon,
+            sinkhorn_iterations=sinkhorn_iterations,
+            max_drift_norm=max_drift_norm,
+            repulsive_weight=repulsive_weight,
+        )
+    elif drift_field == "fiber_sinkhorn":
+        drift = compute_fiber_sinkhorn_drift(
+            generated,
+            positive,
+            target_condition_generated=target_condition_generated,
+            target_condition_positive=target_condition_positive,
+            target_condition_reference=target_condition_reference,
+            generated_reference=generated_reference,
+            fiber_num_conditions=fiber_num_conditions,
+            fiber_generated_samples=fiber_generated_samples,
+            fiber_positive_samples=fiber_positive_samples,
+            fiber_reference_samples=fiber_reference_samples,
+            target_scale=target_scale,
+            target_representation=target_representation,
+            target_is_residual=target_is_residual,
+            residual_target_scale=residual_target_scale,
+            sinkhorn_epsilon=sinkhorn_epsilon,
+            sinkhorn_min_epsilon=sinkhorn_min_epsilon,
+            sinkhorn_iterations=sinkhorn_iterations,
+            max_drift_norm=max_drift_norm,
+            repulsive_weight=repulsive_weight,
+        )
+    else:
+        raise ValueError(f"Unsupported drift_field={drift_field!r}")
     target = (generated + float(drift_scale) * drift).detach()
     loss = F.mse_loss(generated, target)
     return loss, drift

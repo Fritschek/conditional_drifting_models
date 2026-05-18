@@ -11,7 +11,14 @@ import torch
 import torch.nn as nn
 
 from .losses import drifting_loss
-from .metrics import sliced_wasserstein_distance
+from .metrics import (
+    conditional_anchor_cov_fro,
+    conditional_anchor_gaussian_w2,
+    conditional_anchor_mean_l2,
+    conditional_anchor_residual_swd,
+    conditional_anchor_swd,
+    sliced_wasserstein_distance,
+)
 from .model import ConditionalDriftingGenerator
 from .progress import tqdm
 
@@ -35,6 +42,7 @@ class DriftingConfig:
     lr_decay_factor: float = 0.1
     latent_dim: int = 16
     hidden_dim: int = 128
+    drift_field: str = "kernel"
     drift_scale: float = 1.0
     bandwidth: float | None = None
     min_bandwidth: float = 0.2
@@ -62,6 +70,12 @@ class DriftingConfig:
     condition_embedding_hidden_dim: int = 64
     positive_queue_size: int = 0
     positive_reference_size: int = 0
+    sinkhorn_epsilon: float | None = None
+    sinkhorn_min_epsilon: float = 1e-3
+    sinkhorn_iterations: int = 10
+    fiber_generated_samples: int = 4
+    fiber_positive_samples: int = 4
+    fiber_reference_samples: int = 4
 
 
 @dataclass
@@ -183,26 +197,62 @@ def train_conditional_drifting(
             disable=_disable_tqdm(),
         )
         for _ in progress:
-            x = torch.randn(cfg.batch_size, cfg.n, device=device)
-            y_true = channel_fn(x, cfg.noise_std, device)
-            target_true = y_true - x if cfg.is_residual else y_true
-            target_pred = model(x)
-            positive_queue.add(x, target_true)
-            if positive_queue.size > 0 and cfg.positive_queue_size > 0:
-                positive_x, positive_target = positive_queue.sample(reference_size)
+            drift_field = str(cfg.drift_field or "kernel").lower()
+            if drift_field == "fiber_sinkhorn":
+                x_anchor = torch.randn(cfg.batch_size, cfg.n, device=device)
+                generated_count = max(1, int(cfg.fiber_generated_samples))
+                positive_count = max(1, int(cfg.fiber_positive_samples))
+                reference_count = max(1, int(cfg.fiber_reference_samples))
+                x = x_anchor.repeat_interleave(generated_count, dim=0)
+                positive_x = x_anchor.repeat_interleave(positive_count, dim=0)
+                y_true = channel_fn(positive_x, cfg.noise_std, device)
+                target_true = y_true - positive_x if cfg.is_residual else y_true
+                target_pred = model(x)
+                reference_x = x_anchor.repeat_interleave(reference_count, dim=0)
+                with torch.no_grad():
+                    target_reference = model(reference_x)
             else:
-                positive_x, positive_target = x, target_true
+                x = torch.randn(cfg.batch_size, cfg.n, device=device)
+                y_true = channel_fn(x, cfg.noise_std, device)
+                target_true = y_true - x if cfg.is_residual else y_true
+                target_pred = model(x)
+                target_reference = None
+                reference_x = None
+                positive_queue.add(x, target_true)
+                if positive_queue.size > 0 and cfg.positive_queue_size > 0:
+                    positive_x, target_true = positive_queue.sample(reference_size)
+                else:
+                    positive_x = x
+            if drift_field == "sinkhorn" and float(cfg.repulsive_weight) > 0.0:
+                reference_x = torch.randn(cfg.batch_size, cfg.n, device=device)
+                with torch.no_grad():
+                    target_reference = model(reference_x)
+            positive_target = target_true
             kernel_condition = condition_embedder(x) if condition_embedder is not None else x
             kernel_condition_positive = (
                 condition_embedder(positive_x) if condition_embedder is not None else positive_x
             )
+            kernel_condition_reference = None
+            if reference_x is not None:
+                with torch.no_grad():
+                    kernel_condition_reference = (
+                        condition_embedder(reference_x) if condition_embedder is not None else reference_x
+                    )
             loss, drift = drifting_loss(
                 target_pred,
                 positive_target,
                 condition_generated=kernel_condition if use_conditioning else None,
                 condition_positive=kernel_condition_positive if use_conditioning else None,
+                condition_reference=kernel_condition_reference if use_conditioning else None,
                 target_condition_generated=x if use_conditioning else None,
                 target_condition_positive=positive_x if use_conditioning else None,
+                target_condition_reference=reference_x if use_conditioning else None,
+                generated_reference=target_reference,
+                drift_field=cfg.drift_field,
+                fiber_num_conditions=cfg.batch_size if drift_field == "fiber_sinkhorn" else None,
+                fiber_generated_samples=cfg.fiber_generated_samples,
+                fiber_positive_samples=cfg.fiber_positive_samples,
+                fiber_reference_samples=cfg.fiber_reference_samples,
                 conditioning_mode=conditioning_mode,
                 condition_metric=cfg.condition_metric,
                 condition_scale=cfg.condition_kernel_scale,
@@ -223,6 +273,9 @@ def train_conditional_drifting(
                 min_bandwidth=cfg.min_bandwidth,
                 max_drift_norm=cfg.max_drift_norm,
                 repulsive_weight=cfg.repulsive_weight,
+                sinkhorn_epsilon=cfg.sinkhorn_epsilon,
+                sinkhorn_min_epsilon=cfg.sinkhorn_min_epsilon,
+                sinkhorn_iterations=cfg.sinkhorn_iterations,
             )
             optimizer.zero_grad()
             loss.backward()
@@ -325,15 +378,24 @@ def evaluate_residual_model(
     residual_pred_cpu = torch.cat(residual_pred_batches, dim=0)
     target_true_cpu = torch.cat(target_true_batches, dim=0)
     target_pred_cpu = torch.cat(target_pred_batches, dim=0)
-    swd = sliced_wasserstein_distance(
-        target_true_cpu,
-        target_pred_cpu,
+    direct_swd = sliced_wasserstein_distance(
+        y_true_cpu,
+        y_pred_cpu,
         num_projections=cfg.swd_projections,
         seed=metric_seed,
     )
+    residual_swd = sliced_wasserstein_distance(
+        residual_true_cpu,
+        residual_pred_cpu,
+        num_projections=cfg.swd_projections,
+        seed=metric_seed,
+    )
+    swd = residual_swd if cfg.is_residual else direct_swd
 
     return {
         "swd": float(swd),
+        "direct_swd": float(direct_swd),
+        "residual_swd": float(residual_swd),
         "x": x_cpu.numpy(),
         "y_true": y_true_cpu.numpy(),
         "y_pred": y_pred_cpu.numpy(),
@@ -342,4 +404,104 @@ def evaluate_residual_model(
         "target_true": target_true_cpu.numpy(),
         "target_pred": target_pred_cpu.numpy(),
         "target_mode": "residual" if cfg.is_residual else "direct_y",
+    }
+
+
+@torch.no_grad()
+def evaluate_conditional_anchor_metrics(
+    model: ConditionalDriftingGenerator,
+    channel_fn,
+    cfg: DriftingConfig,
+    device: torch.device,
+    *,
+    num_anchors: int = 128,
+    samples_per_anchor: int = 64,
+    swd_projections: int = 64,
+    metric_seed: int = 12345,
+) -> dict[str, float]:
+    if num_anchors <= 0:
+        raise ValueError("num_anchors must be positive.")
+    if samples_per_anchor <= 1:
+        raise ValueError("samples_per_anchor must be greater than one.")
+
+    fork_devices = []
+    if device.type == "cuda":
+        fork_devices = [device.index if device.index is not None else torch.cuda.current_device()]
+    with torch.random.fork_rng(devices=fork_devices):
+        torch.manual_seed(metric_seed)
+        if device.type == "cuda":
+            torch.cuda.manual_seed_all(metric_seed)
+
+        x_anchor = torch.randn(num_anchors, cfg.n, device=device)
+        y_true_a = []
+        y_true_b = []
+        y_pred = []
+        for anchor in x_anchor:
+            x_rep = anchor.unsqueeze(0).repeat(samples_per_anchor, 1)
+            y_true_a.append(channel_fn(x_rep, cfg.noise_std, device))
+            y_true_b.append(channel_fn(x_rep, cfg.noise_std, device))
+            y_pred.append(sample_drifting_target(model, x_rep, is_residual=cfg.is_residual))
+
+        y_true_anchor = torch.stack(y_true_a, dim=0)
+        y_floor_anchor = torch.stack(y_true_b, dim=0)
+        y_pred_anchor = torch.stack(y_pred, dim=0)
+
+    anchor_y_swd = conditional_anchor_swd(
+        y_true_anchor,
+        y_pred_anchor,
+        num_projections=swd_projections,
+        seed=metric_seed,
+    )
+    anchor_y_floor_swd = conditional_anchor_swd(
+        y_true_anchor,
+        y_floor_anchor,
+        num_projections=swd_projections,
+        seed=metric_seed + 10_000,
+    )
+    anchor_residual_swd = conditional_anchor_residual_swd(
+        x_anchor,
+        y_true_anchor,
+        y_pred_anchor,
+        num_projections=swd_projections,
+        seed=metric_seed + 20_000,
+    )
+    anchor_residual_floor_swd = conditional_anchor_residual_swd(
+        x_anchor,
+        y_true_anchor,
+        y_floor_anchor,
+        num_projections=swd_projections,
+        seed=metric_seed + 30_000,
+    )
+    anchor_mean_l2 = conditional_anchor_mean_l2(y_true_anchor, y_pred_anchor)
+    anchor_mean_l2_floor = conditional_anchor_mean_l2(y_true_anchor, y_floor_anchor)
+    anchor_cov_fro = conditional_anchor_cov_fro(y_true_anchor, y_pred_anchor)
+    anchor_cov_fro_floor = conditional_anchor_cov_fro(y_true_anchor, y_floor_anchor)
+    anchor_gaussian_w2 = conditional_anchor_gaussian_w2(y_true_anchor, y_pred_anchor)
+    anchor_gaussian_w2_floor = conditional_anchor_gaussian_w2(y_true_anchor, y_floor_anchor)
+
+    eps = 1e-12
+    return {
+        "anchor_num_conditions": float(num_anchors),
+        "anchor_samples_per_condition": float(samples_per_anchor),
+        "anchor_swd_projections": float(swd_projections),
+        "anchor_y_swd": float(anchor_y_swd),
+        "anchor_y_floor_swd": float(anchor_y_floor_swd),
+        "anchor_y_excess_swd": float(max(anchor_y_swd - anchor_y_floor_swd, 0.0)),
+        "anchor_y_ratio": float(anchor_y_swd / max(anchor_y_floor_swd, eps)),
+        "anchor_residual_swd": float(anchor_residual_swd),
+        "anchor_residual_floor_swd": float(anchor_residual_floor_swd),
+        "anchor_residual_excess_swd": float(max(anchor_residual_swd - anchor_residual_floor_swd, 0.0)),
+        "anchor_residual_ratio": float(anchor_residual_swd / max(anchor_residual_floor_swd, eps)),
+        "anchor_mean_l2": float(anchor_mean_l2),
+        "anchor_mean_l2_floor": float(anchor_mean_l2_floor),
+        "anchor_mean_l2_excess": float(max(anchor_mean_l2 - anchor_mean_l2_floor, 0.0)),
+        "anchor_mean_l2_ratio": float(anchor_mean_l2 / max(anchor_mean_l2_floor, eps)),
+        "anchor_cov_fro": float(anchor_cov_fro),
+        "anchor_cov_fro_floor": float(anchor_cov_fro_floor),
+        "anchor_cov_fro_excess": float(max(anchor_cov_fro - anchor_cov_fro_floor, 0.0)),
+        "anchor_cov_fro_ratio": float(anchor_cov_fro / max(anchor_cov_fro_floor, eps)),
+        "anchor_gaussian_w2": float(anchor_gaussian_w2),
+        "anchor_gaussian_w2_floor": float(anchor_gaussian_w2_floor),
+        "anchor_gaussian_w2_excess": float(max(anchor_gaussian_w2 - anchor_gaussian_w2_floor, 0.0)),
+        "anchor_gaussian_w2_ratio": float(anchor_gaussian_w2 / max(anchor_gaussian_w2_floor, eps)),
     }

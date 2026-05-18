@@ -1,6 +1,6 @@
 # HPC / SLURM
 
-This directory contains SLURM-ready paths for the full-budget benchmark suite, the partial direct-metric rerun, and the enhanced direct-kernel rerun.
+This directory contains SLURM-ready paths for the full-budget benchmark suite, the partial direct-metric rerun, the enhanced direct-kernel rerun, and the journal W-Flow/Sinkhorn rerun.
 
 The intended workflow is:
 
@@ -18,9 +18,12 @@ The intended workflow is:
 - `slurm_partial_direct_metric_aggregate.sh`: aggregate the partial direct-metric rerun
 - `slurm_enhanced_direct_array.sh`: one seed per SLURM task for the enhanced direct-kernel rerun
 - `slurm_enhanced_direct_aggregate.sh`: aggregate the enhanced direct-kernel rerun
+- `slurm_journal_wflow_array.sh`: one `(seed, variant)` task for the journal W-Flow/Sinkhorn rerun
+- `slurm_journal_wflow_aggregate.sh`: aggregate the journal W-Flow/Sinkhorn rerun
 - `submit_full_suite.sh`: helper to submit the full benchmark array
 - `submit_partial_direct_metric_suite.sh`: helper to submit the partial direct-metric array
 - `submit_enhanced_direct_suite.sh`: helper to submit the enhanced direct-kernel array
+- `submit_journal_wflow_suite.sh`: helper to submit the journal W-Flow/Sinkhorn array
 
 ## Per-seed runner
 
@@ -194,6 +197,75 @@ export NUM_SEEDS=10
 
 bash hpc/submit_enhanced_direct_suite.sh
 ```
+
+## Journal W-Flow / Fiberwise Sinkhorn Rerun
+
+The journal rerun is intended for the drift-field comparison introduced after the W-Flow paper. It flattens the grid into one SLURM array where each task runs one `(seed, variant)` pair.
+
+Default variants:
+
+- `kernel_target`: standard direct-output drifting with target-space kernel only
+- `kernel_joint`: GLOBECOM conditioning-aware direct-output kernel drifting
+- `joint_sinkhorn`: naive joint Sinkhorn drift on condition-target features
+- `fiber_sinkhorn`: fiberwise conditional Sinkhorn drift with repeated samples per condition
+
+The per-task job calls:
+
+```bash
+python -u scripts/run_journal_wflow_task.py --suite-dir ... --seed ... --variant ...
+```
+
+Each task writes:
+
+- `<variant>_seed<N>_manifest.json`
+- `<variant>_seed<N>_result.json`
+- `logs/<variant>_seed<N>.log`
+- `<variant>/seed<N>/<variant>_summary_seed<N>.json`
+- `<variant>/seed<N>/checkpoints/enhanced_direct_<channel>_seed<N>.pt`
+
+Aggregation writes:
+
+- `journal_wflow_suite_results.json`
+- `journal_wflow_per_seed.csv`
+
+Typical 100-seed usage:
+
+```bash
+export PROJECT_ROOT=$PWD
+export SUITE_TAG=$(date -u +%Y%m%d_%H%M%S)
+export SUITE_DIR=$PROJECT_ROOT/results/journal_wflow_hpc_${SUITE_TAG}
+export SEED_START=7
+export NUM_SEEDS=100
+export VARIANTS=kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn
+export CHANNELS=AWGN,Rayleigh,SSPA,OptFib
+
+# Conservative shared budget used for the first journal-scale W-Flow run.
+export DATASET_SIZE=120000
+export EVAL_SIZE=100000
+export BATCH_SIZE=512
+export DRIFTING_EPOCHS=60
+export SWD_PROJECTIONS=128
+
+# Avoid flooding the scheduler if needed.
+export MAX_PARALLEL=32
+
+bash hpc/submit_journal_wflow_suite.sh
+```
+
+For a paper-budget rerun on AWGN/Rayleigh/SSPA, set `DATASET_SIZE=-1`, `BATCH_SIZE=-1`, `DRIFTING_EPOCHS=-1`, `EVAL_SIZE=1000000`, and `CHANNELS=AWGN,Rayleigh,SSPA`. The `-1` values let `scripts/run_enhanced_direct_benchmark.py` use the per-channel paper presets.
+
+To aggregate manually after the array finishes:
+
+```bash
+python scripts/aggregate_journal_wflow_suite.py \
+  --suite-dir results/journal_wflow_hpc_<tag> \
+  --seed-start 7 \
+  --num-seeds 100 \
+  --variants kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn \
+  --channels AWGN,Rayleigh,SSPA,OptFib
+```
+
+The aggregator reports direct SWD, residual SWD, anchor-conditioned SWD, anchor mean/covariance/Gaussian-W2 excess metrics, training loss/drift norm, elapsed time, and paired deltas versus `kernel_joint`.
 
 ## Environment setup
 

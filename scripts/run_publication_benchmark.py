@@ -37,10 +37,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--noise-std", type=float, default=0.3)
     parser.add_argument("--latent-dim", type=int, default=16)
     parser.add_argument("--hidden-dim", type=int, default=128)
+    parser.add_argument("--drift-field", type=str, default="kernel", choices=["kernel", "sinkhorn", "fiber_sinkhorn"])
     parser.add_argument("--drift-scale", type=float, default=1.0)
     parser.add_argument("--min-bandwidth", type=float, default=0.2)
     parser.add_argument("--max-drift-norm", type=float, default=2.0)
     parser.add_argument("--repulsive-weight", type=float, default=1.0)
+    parser.add_argument("--sinkhorn-epsilon", type=float, default=None)
+    parser.add_argument("--sinkhorn-min-epsilon", type=float, default=1e-3)
+    parser.add_argument("--sinkhorn-iterations", type=int, default=10)
+    parser.add_argument("--fiber-generated-samples", type=int, default=4)
+    parser.add_argument("--fiber-positive-samples", type=int, default=4)
+    parser.add_argument("--fiber-reference-samples", type=int, default=4)
     parser.add_argument("--swd-projections", type=int, default=256)
     parser.add_argument("--optfib-L", type=float, default=5000.0)
     parser.add_argument("--optfib-gamma", type=float, default=1.27)
@@ -107,10 +114,17 @@ def main() -> None:
         eval_size=args.eval_size,
         latent_dim=args.latent_dim,
         hidden_dim=args.hidden_dim,
+        drift_field=args.drift_field,
         drift_scale=args.drift_scale,
         min_bandwidth=args.min_bandwidth,
         max_drift_norm=args.max_drift_norm,
         repulsive_weight=args.repulsive_weight,
+        sinkhorn_epsilon=args.sinkhorn_epsilon,
+        sinkhorn_min_epsilon=args.sinkhorn_min_epsilon,
+        sinkhorn_iterations=args.sinkhorn_iterations,
+        fiber_generated_samples=args.fiber_generated_samples,
+        fiber_positive_samples=args.fiber_positive_samples,
+        fiber_reference_samples=args.fiber_reference_samples,
         swd_projections=args.swd_projections,
     )
 

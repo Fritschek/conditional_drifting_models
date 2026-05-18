@@ -5,7 +5,7 @@ This folder contains the current paper draft and the minimum assets needed to ke
 ## Contents
 
 - `drifting_vs_diffusion_summary.tex`
-  - current conference-style draft
+  - current journal working draft, updated against the March 27 GLOBECOM PDF/source and extended with the fiberwise Sinkhorn theory/results
 - `drifting_vs_diffusion_summary.pdf`
   - compiled PDF snapshot copied from the workspace draft
 - `references.bib`
@@ -32,4 +32,5 @@ If you use another LaTeX toolchain, make sure `references.bib` and the files in 
 
 ## Note
 
-This folder is a snapshot copied from the active workspace draft. As the standalone repository evolves, it may make sense to tighten the draft so that the paper text refers only to the clean repository structure in `conditional_drifting/` and `conditional_drifting/baselines/`.
+The latest GLOBECOM-style source in this repository is `Paper_camera_ready/drifting_vs_diffusion_summary (3).tex`, which matches the uploaded March 27 PDF more closely than `Paper_camera_ready/drifting_vs_diffusion_summary.tex`.
+The journal draft in this folder uses that `(3)` source/PDF as the baseline and then adds journal-only diagnostics and the fiberwise Sinkhorn extension.

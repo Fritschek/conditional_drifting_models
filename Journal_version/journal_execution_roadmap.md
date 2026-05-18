@@ -37,6 +37,30 @@ The guiding principle is to reuse the current benchmark code whenever possible a
 
 ## Work Packages
 
+## WP0: Sinkhorn / Wasserstein Drifting Upgrade
+
+### Goal
+
+Test whether the kernel-design problem in conditional drifting can be reduced by replacing the row-normalized attraction-repulsion field with a Sinkhorn/Wasserstein-gradient-flow field inspired by W-Flow.
+
+### Implementation status
+
+- experimental `drift_field="sinkhorn"` option added to `DriftingConfig`
+- two-batch generated self-transport added during drifting training
+- CLI hooks added to the enhanced direct benchmark, publication benchmark, and symbol-pair implant trainer
+- follow-up plan documented in `Journal_version/wflow_sinkhorn_followup.md`
+
+### Deliverables
+
+- table: kernel drifting vs Sinkhorn drifting across AWGN, SSPA, and OptFib
+- table: direct-space and residual-space SWD for Sinkhorn variants
+- timing row: training-time overhead and unchanged one-shot inference latency
+- manuscript text: principled replacement for the heuristic channel-specific kernel field
+
+### Priority
+
+- highest
+
 ## WP1: End-to-End Communication with Learned Channel Implants
 
 ### Goal
