@@ -205,7 +205,7 @@ bash hpc/submit_enhanced_direct_suite.sh
 
 ## Journal W-Flow / Fiberwise Sinkhorn Rerun
 
-The journal rerun is intended for the drift-field comparison introduced after the W-Flow paper. It flattens the grid into one SLURM array where each task runs one `(seed, variant)` pair.
+The journal rerun is intended for the drift-field comparison introduced after the W-Flow paper. The submit helpers cap the submitted SLURM array at `MAX_ARRAY_TASKS=32` by default and pack the remaining logical work inside each array task. This matches clusters with a hard 32-element array limit.
 
 Default variants:
 
@@ -214,7 +214,7 @@ Default variants:
 - `joint_sinkhorn`: naive joint Sinkhorn drift on condition-target features
 - `fiber_sinkhorn`: fiberwise conditional Sinkhorn drift with repeated samples per condition
 
-The per-task job calls:
+The generic per-variant job calls:
 
 ```bash
 python -u scripts/run_journal_wflow_task.py --suite-dir ... --seed ... --variant ...
@@ -236,45 +236,24 @@ Aggregation writes:
 Typical 100-seed usage:
 
 ```bash
-export PROJECT_ROOT=$PWD
-export SUITE_TAG=$(date -u +%Y%m%d_%H%M%S)
-export SUITE_DIR=$PROJECT_ROOT/results/journal_wflow_hpc_${SUITE_TAG}
-export SEED_START=7
-export NUM_SEEDS=100
-export VARIANTS=kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn
-export CHANNELS=AWGN,Rayleigh,SSPA,OptFib
-
-# Conservative shared budget used for the first journal-scale W-Flow run.
-export DATASET_SIZE=120000
-export EVAL_SIZE=100000
-export BATCH_SIZE=512
-export DRIFTING_EPOCHS=60
-export SWD_PROJECTIONS=128
-
-# Avoid flooding the scheduler if needed.
-export MAX_PARALLEL=32
+unset CONDA_ENV
+unset PYTHON_BIN
 
 bash hpc/submit_journal_wflow_suite.sh
 ```
 
-For a paper-budget rerun on AWGN/Rayleigh/SSPA, prefer the seed-packed helper. It runs one seed per SLURM task and loops over all variants inside that task, reducing scheduler overhead on fast GPUs.
+The generic helper defaults to `NUM_SEEDS=100`, `MAX_ARRAY_TASKS=32`, `CHANNELS=AWGN,Rayleigh,SSPA,OptFib`, `DATASET_SIZE=120000`, `EVAL_SIZE=100000`, `BATCH_SIZE=512`, `DRIFTING_EPOCHS=60`, and `SWD_PROJECTIONS=128`. Override only the settings that need changing.
+
+For a paper-budget rerun on AWGN/Rayleigh/SSPA, prefer the seed-packed helper. It runs all variants/channels for each seed and packs seeds into at most 32 SLURM array tasks.
 
 ```bash
 unset CONDA_ENV
 unset PYTHON_BIN
 
-export PROJECT_ROOT=$PWD
-export SEED_START=7
-export NUM_SEEDS=100
-export MAX_PARALLEL=32
-
-export VARIANTS=kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn
-export CHANNELS=AWGN,Rayleigh,SSPA
-
 bash hpc/submit_journal_wflow_paper_budget_suite.sh
 ```
 
-The helper defaults to `DATASET_SIZE=-1`, `BATCH_SIZE=-1`, `DRIFTING_EPOCHS=-1`, `SWD_PROJECTIONS=-1`, and `EVAL_SIZE=1000000`. The `-1` values let `scripts/run_enhanced_direct_benchmark.py` use the per-channel paper presets.
+The paper-budget helper defaults to `NUM_SEEDS=100`, `MAX_ARRAY_TASKS=32`, `CHANNELS=AWGN,Rayleigh,SSPA`, `DATASET_SIZE=-1`, `BATCH_SIZE=-1`, `DRIFTING_EPOCHS=-1`, `SWD_PROJECTIONS=-1`, and `EVAL_SIZE=1000000`. The `-1` values let `scripts/run_enhanced_direct_benchmark.py` use the per-channel paper presets.
 
 To aggregate manually after the array finishes:
 
@@ -293,17 +272,10 @@ The aggregator reports direct SWD, residual SWD, anchor-conditioned SWD, anchor 
 
 The symbolic coding follow-up consumes checkpoints from a completed W-Flow suite and trains a symbolic block autoencoder through each learned implant. It reports both SER and BER. With the default `message_dim=16`, BER is computed from the 4-bit binary representation of each message index.
 
-One SLURM task runs one `(seed, channel)` pair and loops over the requested variants:
+The BER/SER submit helper also caps the submitted array at `MAX_ARRAY_TASKS=32` by default. Each array task processes a strided subset of the full `(seed, channel)` grid and loops over the requested variants. If `WFLOW_SUITE_DIR` is unset, the helper auto-detects the newest `results/journal_wflow_paper_hpc_*` or `results/journal_wflow_hpc_*` directory.
 
 ```bash
-export WFLOW_SUITE_DIR=$PWD/results/journal_wflow_hpc_<tag>
-export SER_SUITE_DIR=$PWD/results/journal_wflow_ser_<tag>
-
-export SEED_START=7
-export NUM_SEEDS=100
 export CHANNELS=AWGN,Rayleigh,SSPA,OptFib
-export VARIANTS=analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn
-export MAX_PARALLEL=32
 
 bash hpc/submit_journal_wflow_ser_suite.sh
 ```
@@ -315,7 +287,6 @@ export WFLOW_SUITE_DIR=$PWD/results/journal_wflow_hpc_<tag>
 export NUM_SEEDS=10
 export CHANNELS=AWGN,SSPA,OptFib
 export VARIANTS=analytic,kernel_joint,joint_sinkhorn,fiber_sinkhorn
-export MAX_PARALLEL=16
 
 bash hpc/submit_journal_wflow_ser_suite.sh
 ```

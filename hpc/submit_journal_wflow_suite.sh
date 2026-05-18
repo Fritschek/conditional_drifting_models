@@ -14,6 +14,7 @@ DRIFTING_EPOCHS="${DRIFTING_EPOCHS:-60}"
 SWD_PROJECTIONS="${SWD_PROJECTIONS:-128}"
 SUITE_TAG="${SUITE_TAG:-$(date -u +%Y%m%d_%H%M%S)}"
 SUITE_DIR="${SUITE_DIR:-$PROJECT_ROOT/results/journal_wflow_hpc_${SUITE_TAG}}"
+MAX_ARRAY_TASKS="${MAX_ARRAY_TASKS:-32}"
 MAX_PARALLEL="${MAX_PARALLEL:-}"
 
 mkdir -p "$PROJECT_ROOT/logs"
@@ -27,7 +28,21 @@ if [[ "$VARIANT_COUNT" -lt 1 ]]; then
 fi
 
 TASK_COUNT=$((NUM_SEEDS * VARIANT_COUNT))
-ARRAY_END=$((TASK_COUNT - 1))
+if (( TASK_COUNT < 1 )); then
+  echo "No journal W-Flow tasks to submit" >&2
+  exit 1
+fi
+if (( MAX_ARRAY_TASKS < 1 )); then
+  echo "MAX_ARRAY_TASKS must be at least 1" >&2
+  exit 1
+fi
+
+ARRAY_TASK_COUNT="$TASK_COUNT"
+if (( ARRAY_TASK_COUNT > MAX_ARRAY_TASKS )); then
+  ARRAY_TASK_COUNT="$MAX_ARRAY_TASKS"
+fi
+
+ARRAY_END=$((ARRAY_TASK_COUNT - 1))
 ARRAY_SPEC="0-${ARRAY_END}"
 if [[ -n "$MAX_PARALLEL" ]]; then
   ARRAY_SPEC="${ARRAY_SPEC}%${MAX_PARALLEL}"
@@ -44,6 +59,7 @@ export BATCH_SIZE
 export DRIFTING_EPOCHS
 export SWD_PROJECTIONS
 export SUITE_DIR
+export ARRAY_TASK_COUNT
 
 echo "[submit] project_root: $PROJECT_ROOT"
 echo "[submit] suite_dir: $SUITE_DIR"
@@ -55,7 +71,9 @@ echo "[submit] eval_size: $EVAL_SIZE"
 echo "[submit] batch_size: $BATCH_SIZE"
 echo "[submit] drifting_epochs: $DRIFTING_EPOCHS"
 echo "[submit] swd_projections: $SWD_PROJECTIONS"
-echo "[submit] tasks: $TASK_COUNT"
+echo "[submit] logical_seed_variant_tasks: $TASK_COUNT"
+echo "[submit] max_array_tasks: $MAX_ARRAY_TASKS"
+echo "[submit] submitted_array_tasks: $ARRAY_TASK_COUNT"
 echo "[submit] array: $ARRAY_SPEC"
 
 ARRAY_JOB_ID=$(sbatch --parsable --array="$ARRAY_SPEC" hpc/slurm_journal_wflow_array.sh)

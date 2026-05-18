@@ -13,7 +13,7 @@
 
 set -euo pipefail
 
-PROJECT_ROOT="${PROJECT_ROOT:-$SLURM_SUBMIT_DIR}"
+PROJECT_ROOT="${PROJECT_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 SEED_START="${SEED_START:-7}"
 NUM_SEEDS="${NUM_SEEDS:-100}"
@@ -36,17 +36,19 @@ ANCHOR_METRICS="${ANCHOR_METRICS:-1}"
 ANCHOR_COUNT="${ANCHOR_COUNT:-128}"
 ANCHOR_SAMPLES="${ANCHOR_SAMPLES:-64}"
 ANCHOR_SWD_PROJECTIONS="${ANCHOR_SWD_PROJECTIONS:-64}"
+ARRAY_TASK_COUNT="${ARRAY_TASK_COUNT:-${SLURM_ARRAY_TASK_COUNT:-$NUM_SEEDS}}"
 
 mkdir -p "$PROJECT_ROOT/logs"
 mkdir -p "$SUITE_DIR"
 
 TASK_ID="${SLURM_ARRAY_TASK_ID:-0}"
-CURRENT_SEED=$((SEED_START + TASK_ID))
 
 echo "[slurm] host: $(hostname)"
 echo "[slurm] project_root: $PROJECT_ROOT"
 echo "[slurm] suite_dir: $SUITE_DIR"
-echo "[slurm] seed: $CURRENT_SEED"
+echo "[slurm] seed_start: $SEED_START"
+echo "[slurm] num_seeds: $NUM_SEEDS"
+echo "[slurm] array_task_count: $ARRAY_TASK_COUNT"
 echo "[slurm] variants: $VARIANTS"
 echo "[slurm] channels: $CHANNELS"
 echo "[slurm] job_id: ${SLURM_JOB_ID:-n/a}"
@@ -59,33 +61,38 @@ cd "$PROJECT_ROOT"
 echo "[slurm] GPU information"
 nvidia-smi || true
 
-CMD=(
-  "$PYTHON_BIN" -u scripts/run_journal_wflow_seed.py
-  --device cuda
-  --seed "$CURRENT_SEED"
-  --variants "$VARIANTS"
-  --channels "$CHANNELS"
-  --dataset-size "$DATASET_SIZE"
-  --eval-size "$EVAL_SIZE"
-  --batch-size "$BATCH_SIZE"
-  --drifting-epochs "$DRIFTING_EPOCHS"
-  --swd-projections "$SWD_PROJECTIONS"
-  --sinkhorn-min-epsilon "$SINKHORN_MIN_EPSILON"
-  --sinkhorn-iterations "$SINKHORN_ITERATIONS"
-  --fiber-generated-samples "$FIBER_GENERATED_SAMPLES"
-  --fiber-positive-samples "$FIBER_POSITIVE_SAMPLES"
-  --fiber-reference-samples "$FIBER_REFERENCE_SAMPLES"
-  --anchor-count "$ANCHOR_COUNT"
-  --anchor-samples "$ANCHOR_SAMPLES"
-  --anchor-swd-projections "$ANCHOR_SWD_PROJECTIONS"
-  --suite-dir "$SUITE_DIR"
-)
+for ((SEED_OFFSET = TASK_ID; SEED_OFFSET < NUM_SEEDS; SEED_OFFSET += ARRAY_TASK_COUNT)); do
+  CURRENT_SEED=$((SEED_START + SEED_OFFSET))
+  echo "[slurm] running seed: $CURRENT_SEED"
 
-if [[ -n "$SINKHORN_EPSILON" ]]; then
-  CMD+=(--sinkhorn-epsilon "$SINKHORN_EPSILON")
-fi
-if [[ "$ANCHOR_METRICS" == "1" || "$ANCHOR_METRICS" == "true" || "$ANCHOR_METRICS" == "yes" ]]; then
-  CMD+=(--anchor-metrics)
-fi
+  CMD=(
+    "$PYTHON_BIN" -u scripts/run_journal_wflow_seed.py
+    --device cuda
+    --seed "$CURRENT_SEED"
+    --variants "$VARIANTS"
+    --channels "$CHANNELS"
+    --dataset-size "$DATASET_SIZE"
+    --eval-size "$EVAL_SIZE"
+    --batch-size "$BATCH_SIZE"
+    --drifting-epochs "$DRIFTING_EPOCHS"
+    --swd-projections "$SWD_PROJECTIONS"
+    --sinkhorn-min-epsilon "$SINKHORN_MIN_EPSILON"
+    --sinkhorn-iterations "$SINKHORN_ITERATIONS"
+    --fiber-generated-samples "$FIBER_GENERATED_SAMPLES"
+    --fiber-positive-samples "$FIBER_POSITIVE_SAMPLES"
+    --fiber-reference-samples "$FIBER_REFERENCE_SAMPLES"
+    --anchor-count "$ANCHOR_COUNT"
+    --anchor-samples "$ANCHOR_SAMPLES"
+    --anchor-swd-projections "$ANCHOR_SWD_PROJECTIONS"
+    --suite-dir "$SUITE_DIR"
+  )
 
-"${CMD[@]}"
+  if [[ -n "$SINKHORN_EPSILON" ]]; then
+    CMD+=(--sinkhorn-epsilon "$SINKHORN_EPSILON")
+  fi
+  if [[ "$ANCHOR_METRICS" == "1" || "$ANCHOR_METRICS" == "true" || "$ANCHOR_METRICS" == "yes" ]]; then
+    CMD+=(--anchor-metrics)
+  fi
+
+  "${CMD[@]}"
+done

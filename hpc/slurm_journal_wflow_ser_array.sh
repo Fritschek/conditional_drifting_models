@@ -13,7 +13,7 @@
 
 set -euo pipefail
 
-PROJECT_ROOT="${PROJECT_ROOT:-$SLURM_SUBMIT_DIR}"
+PROJECT_ROOT="${PROJECT_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 SEED_START="${SEED_START:-7}"
 NUM_SEEDS="${NUM_SEEDS:-100}"
@@ -27,6 +27,7 @@ AE_EPOCHS="${AE_EPOCHS:-10}"
 AE_LEARNING_RATE="${AE_LEARNING_RATE:-0.001}"
 EVAL_SIZE="${EVAL_SIZE:-100000}"
 EVAL_EVERY="${EVAL_EVERY:-1}"
+ARRAY_TASK_COUNT="${ARRAY_TASK_COUNT:-${SLURM_ARRAY_TASK_COUNT:-1}}"
 
 if [[ -z "${WFLOW_SUITE_DIR:-}" ]]; then
   echo "WFLOW_SUITE_DIR must point to the completed journal W-Flow checkpoint suite." >&2
@@ -44,17 +45,17 @@ if [[ "$CHANNEL_COUNT" -lt 1 ]]; then
 fi
 
 TASK_ID="${SLURM_ARRAY_TASK_ID:-0}"
-SEED_OFFSET=$((TASK_ID / CHANNEL_COUNT))
-CHANNEL_OFFSET=$((TASK_ID % CHANNEL_COUNT))
-CURRENT_SEED=$((SEED_START + SEED_OFFSET))
-CURRENT_CHANNEL="${CHANNEL_ARRAY[$CHANNEL_OFFSET]}"
+TASK_COUNT=$((NUM_SEEDS * CHANNEL_COUNT))
 
 echo "[slurm] host: $(hostname)"
 echo "[slurm] project_root: $PROJECT_ROOT"
 echo "[slurm] wflow_suite_dir: $WFLOW_SUITE_DIR"
 echo "[slurm] ser_suite_dir: $SER_SUITE_DIR"
-echo "[slurm] seed: $CURRENT_SEED"
-echo "[slurm] channel: $CURRENT_CHANNEL"
+echo "[slurm] seed_start: $SEED_START"
+echo "[slurm] num_seeds: $NUM_SEEDS"
+echo "[slurm] channels: $CHANNELS"
+echo "[slurm] logical_task_count: $TASK_COUNT"
+echo "[slurm] array_task_count: $ARRAY_TASK_COUNT"
 echo "[slurm] variants: $VARIANTS"
 echo "[slurm] job_id: ${SLURM_JOB_ID:-n/a}"
 echo "[slurm] array_task_id: ${SLURM_ARRAY_TASK_ID:-n/a}"
@@ -66,16 +67,25 @@ cd "$PROJECT_ROOT"
 echo "[slurm] GPU information"
 nvidia-smi || true
 
-"$PYTHON_BIN" -u scripts/run_journal_wflow_ser_seed_channel.py \
-  --device cuda \
-  --seed "$CURRENT_SEED" \
-  --channel "$CURRENT_CHANNEL" \
-  --variants "$VARIANTS" \
-  --wflow-suite-dir "$WFLOW_SUITE_DIR" \
-  --suite-dir "$SER_SUITE_DIR" \
-  --ae-dataset-size "$AE_DATASET_SIZE" \
-  --ae-batch-size "$AE_BATCH_SIZE" \
-  --ae-epochs "$AE_EPOCHS" \
-  --ae-learning-rate "$AE_LEARNING_RATE" \
-  --eval-size "$EVAL_SIZE" \
-  --eval-every "$EVAL_EVERY"
+for ((LOGICAL_TASK_ID = TASK_ID; LOGICAL_TASK_ID < TASK_COUNT; LOGICAL_TASK_ID += ARRAY_TASK_COUNT)); do
+  SEED_OFFSET=$((LOGICAL_TASK_ID / CHANNEL_COUNT))
+  CHANNEL_OFFSET=$((LOGICAL_TASK_ID % CHANNEL_COUNT))
+  CURRENT_SEED=$((SEED_START + SEED_OFFSET))
+  CURRENT_CHANNEL="${CHANNEL_ARRAY[$CHANNEL_OFFSET]}"
+
+  echo "[slurm] running seed=$CURRENT_SEED channel=$CURRENT_CHANNEL logical_task_id=$LOGICAL_TASK_ID"
+
+  "$PYTHON_BIN" -u scripts/run_journal_wflow_ser_seed_channel.py \
+    --device cuda \
+    --seed "$CURRENT_SEED" \
+    --channel "$CURRENT_CHANNEL" \
+    --variants "$VARIANTS" \
+    --wflow-suite-dir "$WFLOW_SUITE_DIR" \
+    --suite-dir "$SER_SUITE_DIR" \
+    --ae-dataset-size "$AE_DATASET_SIZE" \
+    --ae-batch-size "$AE_BATCH_SIZE" \
+    --ae-epochs "$AE_EPOCHS" \
+    --ae-learning-rate "$AE_LEARNING_RATE" \
+    --eval-size "$EVAL_SIZE" \
+    --eval-every "$EVAL_EVERY"
+done
