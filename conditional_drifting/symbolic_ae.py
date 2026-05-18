@@ -93,6 +93,17 @@ def compute_symbol_error_rate(logits: torch.Tensor, labels: torch.Tensor) -> flo
     return float((predictions != labels).float().mean().detach().cpu().item())
 
 
+def compute_symbol_bit_error_rate(logits: torch.Tensor, labels: torch.Tensor) -> float:
+    num_classes = int(logits.shape[1])
+    num_bits = max(1, int(math.ceil(math.log2(num_classes))))
+    predictions = torch.argmax(logits, dim=1).to(dtype=torch.long)
+    labels = labels.to(dtype=torch.long, device=predictions.device)
+    bit_positions = torch.arange(num_bits, device=predictions.device, dtype=torch.long)
+    prediction_bits = (predictions[:, None] >> bit_positions[None, :]) & 1
+    label_bits = (labels[:, None] >> bit_positions[None, :]) & 1
+    return float((prediction_bits != label_bits).float().mean().detach().cpu().item())
+
+
 def train_symbolic_autoencoder(
     encoder: SymbolicEncoder,
     decoder: SymbolicDecoder,
@@ -114,6 +125,7 @@ def train_symbolic_autoencoder(
     steps_per_epoch = max(1, math.ceil(cfg.dataset_size / cfg.batch_size))
     history: list[dict[str, float]] = []
     best_eval_ser: float | None = None
+    best_eval_ber: float | None = None
     best_epoch: int | None = None
     best_encoder_state = None
     best_decoder_state = None
@@ -121,6 +133,7 @@ def train_symbolic_autoencoder(
     for epoch in range(cfg.epochs):
         losses = []
         sers = []
+        bers = []
         for _ in range(steps_per_epoch):
             labels = sample_message_labels(cfg.batch_size, cfg.message_dim, device)
             messages = labels_to_one_hot(labels, cfg.message_dim)
@@ -131,14 +144,17 @@ def train_symbolic_autoencoder(
             logits = decoder(received)
             loss = F.cross_entropy(logits, labels)
             ser = compute_symbol_error_rate(logits, labels)
+            ber = compute_symbol_bit_error_rate(logits, labels)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(list(encoder.parameters()) + list(decoder.parameters()), cfg.grad_clip_norm)
             optimizer.step()
 
             losses.append(float(loss.item()))
             sers.append(float(ser))
+            bers.append(float(ber))
 
         eval_ser = None
+        eval_ber = None
         if eval_implant is not None and eval_every > 0 and ((epoch + 1) % eval_every == 0 or epoch + 1 == cfg.epochs):
             eval_stats = evaluate_symbolic_autoencoder(
                 encoder,
@@ -150,8 +166,10 @@ def train_symbolic_autoencoder(
                 ebno_db=ebno_db,
             )
             eval_ser = eval_stats["ser"]
+            eval_ber = eval_stats["ber"]
             if best_eval_ser is None or float(eval_ser) < float(best_eval_ser):
                 best_eval_ser = float(eval_ser)
+                best_eval_ber = float(eval_ber)
                 best_epoch = int(epoch + 1)
                 best_encoder_state = copy.deepcopy(encoder.state_dict())
                 best_decoder_state = copy.deepcopy(decoder.state_dict())
@@ -160,14 +178,18 @@ def train_symbolic_autoencoder(
                 "epoch": float(epoch + 1),
                 "train_loss": float(np.mean(losses)),
                 "train_ser": float(np.mean(sers)),
+                "train_ber": float(np.mean(bers)),
                 "eval_ser": None if eval_ser is None else float(eval_ser),
+                "eval_ber": None if eval_ber is None else float(eval_ber),
             }
         )
         print(
             f"epoch {epoch + 1}/{cfg.epochs}: "
             f"loss={history[-1]['train_loss']:.6e}, "
             f"train_ser={history[-1]['train_ser']:.6e}, "
-            f"eval_ser={history[-1]['eval_ser'] if history[-1]['eval_ser'] is not None else 'skipped'}",
+            f"train_ber={history[-1]['train_ber']:.6e}, "
+            f"eval_ser={history[-1]['eval_ser'] if history[-1]['eval_ser'] is not None else 'skipped'}, "
+            f"eval_ber={history[-1]['eval_ber'] if history[-1]['eval_ber'] is not None else 'skipped'}",
             flush=True,
         )
 
@@ -179,6 +201,7 @@ def train_symbolic_autoencoder(
         "ebno_db": float(ebno_db),
         "history": history,
         "best_eval_ser": best_eval_ser,
+        "best_eval_ber": best_eval_ber,
         "best_epoch": best_epoch,
     }
     if best_encoder_state is not None and best_decoder_state is not None:
@@ -203,6 +226,7 @@ def evaluate_symbolic_autoencoder(
     num_batches = max(1, math.ceil(cfg.eval_size / cfg.batch_size))
     losses = []
     sers = []
+    bers = []
     for _ in range(num_batches):
         labels = sample_message_labels(cfg.batch_size, cfg.message_dim, device)
         messages = labels_to_one_hot(labels, cfg.message_dim)
@@ -211,9 +235,10 @@ def evaluate_symbolic_autoencoder(
         logits = decoder(received)
         losses.append(float(F.cross_entropy(logits, labels).item()))
         sers.append(compute_symbol_error_rate(logits, labels))
+        bers.append(compute_symbol_bit_error_rate(logits, labels))
     encoder.train()
     decoder.train()
-    return {"loss": float(np.mean(losses)), "ser": float(np.mean(sers))}
+    return {"loss": float(np.mean(losses)), "ser": float(np.mean(sers)), "ber": float(np.mean(bers))}
 
 
 @torch.no_grad()

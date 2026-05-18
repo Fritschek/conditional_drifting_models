@@ -540,6 +540,7 @@ def main() -> None:
             "runner_result": result,
             "summary_path": str(summary_path.resolve()),
             "final_eval_ser": summary["final_eval"]["ser"],
+            "final_eval_ber": summary["final_eval"].get("ber"),
             "train_implant_metrics": summary.get("train_implant_channel_metrics_vs_analytic"),
         }
         (suite_dir / "suite_results.json").write_text(json.dumps(results, indent=2), encoding="utf-8")

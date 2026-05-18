@@ -1,6 +1,6 @@
 # HPC / SLURM
 
-This directory contains SLURM-ready paths for the full-budget benchmark suite, the partial direct-metric rerun, the enhanced direct-kernel rerun, and the journal W-Flow/Sinkhorn rerun.
+This directory contains SLURM-ready paths for the full-budget benchmark suite, the partial direct-metric rerun, the enhanced direct-kernel rerun, the journal W-Flow/Sinkhorn rerun, and the downstream BER/SER follow-up.
 
 The intended workflow is:
 
@@ -19,11 +19,16 @@ The intended workflow is:
 - `slurm_enhanced_direct_array.sh`: one seed per SLURM task for the enhanced direct-kernel rerun
 - `slurm_enhanced_direct_aggregate.sh`: aggregate the enhanced direct-kernel rerun
 - `slurm_journal_wflow_array.sh`: one `(seed, variant)` task for the journal W-Flow/Sinkhorn rerun
+- `slurm_journal_wflow_seed_array.sh`: one seed task that loops over journal W-Flow/Sinkhorn variants
 - `slurm_journal_wflow_aggregate.sh`: aggregate the journal W-Flow/Sinkhorn rerun
+- `slurm_journal_wflow_ser_array.sh`: one `(seed, channel)` task that loops over coding variants
+- `slurm_journal_wflow_ser_aggregate.sh`: aggregate symbolic BER/SER follow-up results
 - `submit_full_suite.sh`: helper to submit the full benchmark array
 - `submit_partial_direct_metric_suite.sh`: helper to submit the partial direct-metric array
 - `submit_enhanced_direct_suite.sh`: helper to submit the enhanced direct-kernel array
 - `submit_journal_wflow_suite.sh`: helper to submit the journal W-Flow/Sinkhorn array
+- `submit_journal_wflow_paper_budget_suite.sh`: helper for the seed-packed paper-budget W-Flow/Sinkhorn array
+- `submit_journal_wflow_ser_suite.sh`: helper to submit the symbolic BER/SER follow-up array
 
 ## Per-seed runner
 
@@ -252,7 +257,24 @@ export MAX_PARALLEL=32
 bash hpc/submit_journal_wflow_suite.sh
 ```
 
-For a paper-budget rerun on AWGN/Rayleigh/SSPA, set `DATASET_SIZE=-1`, `BATCH_SIZE=-1`, `DRIFTING_EPOCHS=-1`, `EVAL_SIZE=1000000`, and `CHANNELS=AWGN,Rayleigh,SSPA`. The `-1` values let `scripts/run_enhanced_direct_benchmark.py` use the per-channel paper presets.
+For a paper-budget rerun on AWGN/Rayleigh/SSPA, prefer the seed-packed helper. It runs one seed per SLURM task and loops over all variants inside that task, reducing scheduler overhead on fast GPUs.
+
+```bash
+unset CONDA_ENV
+unset PYTHON_BIN
+
+export PROJECT_ROOT=$PWD
+export SEED_START=7
+export NUM_SEEDS=100
+export MAX_PARALLEL=32
+
+export VARIANTS=kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn
+export CHANNELS=AWGN,Rayleigh,SSPA
+
+bash hpc/submit_journal_wflow_paper_budget_suite.sh
+```
+
+The helper defaults to `DATASET_SIZE=-1`, `BATCH_SIZE=-1`, `DRIFTING_EPOCHS=-1`, `SWD_PROJECTIONS=-1`, and `EVAL_SIZE=1000000`. The `-1` values let `scripts/run_enhanced_direct_benchmark.py` use the per-channel paper presets.
 
 To aggregate manually after the array finishes:
 
@@ -266,6 +288,53 @@ python scripts/aggregate_journal_wflow_suite.py \
 ```
 
 The aggregator reports direct SWD, residual SWD, anchor-conditioned SWD, anchor mean/covariance/Gaussian-W2 excess metrics, training loss/drift norm, elapsed time, and paired deltas versus `kernel_joint`.
+
+## Journal BER / SER Follow-Up
+
+The symbolic coding follow-up consumes checkpoints from a completed W-Flow suite and trains a symbolic block autoencoder through each learned implant. It reports both SER and BER. With the default `message_dim=16`, BER is computed from the 4-bit binary representation of each message index.
+
+One SLURM task runs one `(seed, channel)` pair and loops over the requested variants:
+
+```bash
+export WFLOW_SUITE_DIR=$PWD/results/journal_wflow_hpc_<tag>
+export SER_SUITE_DIR=$PWD/results/journal_wflow_ser_<tag>
+
+export SEED_START=7
+export NUM_SEEDS=100
+export CHANNELS=AWGN,Rayleigh,SSPA,OptFib
+export VARIANTS=analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn
+export MAX_PARALLEL=32
+
+bash hpc/submit_journal_wflow_ser_suite.sh
+```
+
+For a first coding check, run fewer seeds/channels:
+
+```bash
+export WFLOW_SUITE_DIR=$PWD/results/journal_wflow_hpc_<tag>
+export NUM_SEEDS=10
+export CHANNELS=AWGN,SSPA,OptFib
+export VARIANTS=analytic,kernel_joint,joint_sinkhorn,fiber_sinkhorn
+export MAX_PARALLEL=16
+
+bash hpc/submit_journal_wflow_ser_suite.sh
+```
+
+Aggregation writes:
+
+- `journal_wflow_ser_results.json`
+- `journal_wflow_ser_per_seed.csv`
+
+Manual aggregation:
+
+```bash
+python scripts/aggregate_journal_wflow_ser_suite.py \
+  --suite-dir results/journal_wflow_ser_<tag> \
+  --seed-start 7 \
+  --num-seeds 100 \
+  --channels AWGN,Rayleigh,SSPA,OptFib \
+  --variants analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn
+```
 
 ## Environment setup
 
