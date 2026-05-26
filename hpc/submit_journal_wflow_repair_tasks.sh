@@ -6,6 +6,8 @@ PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 CHANNELS="${CHANNELS:-AWGN,Rayleigh,SSPA,OptFib}"
 WALLTIME="${WALLTIME:-3-00:00:00}"
 REPAIR_TASKS="${REPAIR_TASKS:-joint_sinkhorn:103 fiber_sinkhorn:103 fiber_sinkhorn:104 fiber_sinkhorn:105 fiber_sinkhorn:106}"
+SLURM_SCRIPT="$PROJECT_ROOT/hpc/slurm_journal_wflow_repair_task.sh"
+HPC_USE_CONDA="${HPC_USE_CONDA:-0}"
 
 if [[ -z "${SUITE_DIR:-}" ]]; then
   SUITE_DIR="$(
@@ -26,6 +28,7 @@ mkdir -p "$SUITE_DIR"
 export PROJECT_ROOT
 export SUITE_DIR
 export CHANNELS
+export HPC_USE_CONDA
 
 echo "[submit] project_root: $PROJECT_ROOT"
 echo "[submit] suite_dir: $SUITE_DIR"
@@ -43,10 +46,11 @@ for task in $REPAIR_TASKS; do
 
   job_id="$(
     sbatch --parsable \
+      --chdir="$PROJECT_ROOT" \
       --time="$WALLTIME" \
       --job-name="wflow_fix_${variant}_${seed}" \
-      --export=ALL,PROJECT_ROOT="$PROJECT_ROOT",SUITE_DIR="$SUITE_DIR",CHANNELS="$CHANNELS",REPAIR_VARIANT="$variant",REPAIR_SEED="$seed" \
-      hpc/slurm_journal_wflow_repair_task.sh
+      --export=ALL,PROJECT_ROOT="$PROJECT_ROOT",SUITE_DIR="$SUITE_DIR",CHANNELS="$CHANNELS",REPAIR_VARIANT="$variant",REPAIR_SEED="$seed",HPC_USE_CONDA="$HPC_USE_CONDA" \
+      "$SLURM_SCRIPT"
   )"
   echo "[submit] $variant seed $seed -> $job_id"
 done

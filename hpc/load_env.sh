@@ -17,7 +17,12 @@ if command -v module >/dev/null 2>&1; then
   module load "${HPC_MODULE_PYTORCH:-PyTorch/2.1.2-CUDA-12.1.1}" || true
 fi
 
-if [[ -n "${CONDA_ENV:-}" ]]; then
+HPC_USE_CONDA="${HPC_USE_CONDA:-0}"
+if [[ "$HPC_USE_CONDA" == "1" || "$HPC_USE_CONDA" == "true" || "$HPC_USE_CONDA" == "yes" ]]; then
+  if [[ -z "${CONDA_ENV:-}" ]]; then
+    echo "[load_env] HPC_USE_CONDA is enabled but CONDA_ENV is not set" >&2
+    exit 1
+  fi
   if command -v conda >/dev/null 2>&1; then
     eval "$(conda shell.bash hook)"
     conda activate "$CONDA_ENV"
@@ -25,4 +30,6 @@ if [[ -n "${CONDA_ENV:-}" ]]; then
     echo "[load_env] CONDA_ENV is set but conda is not available" >&2
     exit 1
   fi
+elif [[ -n "${CONDA_ENV:-}" ]]; then
+  echo "[load_env] ignoring inherited CONDA_ENV=$CONDA_ENV because HPC_USE_CONDA is not enabled" >&2
 fi
