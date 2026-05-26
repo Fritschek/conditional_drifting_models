@@ -17,6 +17,9 @@ EVAL_SIZE="${EVAL_SIZE:-100000}"
 EVAL_EVERY="${EVAL_EVERY:-1}"
 MAX_ARRAY_TASKS="${MAX_ARRAY_TASKS:-32}"
 MAX_PARALLEL="${MAX_PARALLEL:-}"
+SLURM_SCRIPT="$PROJECT_ROOT/hpc/slurm_journal_wflow_ser_array.sh"
+AGGREGATE_SCRIPT="$PROJECT_ROOT/hpc/slurm_journal_wflow_ser_aggregate.sh"
+HPC_USE_CONDA="${HPC_USE_CONDA:-0}"
 
 if [[ -z "${WFLOW_SUITE_DIR:-}" ]]; then
   WFLOW_SUITE_DIR="$(
@@ -76,6 +79,7 @@ export AE_LEARNING_RATE
 export EVAL_SIZE
 export EVAL_EVERY
 export ARRAY_TASK_COUNT
+export HPC_USE_CONDA
 
 echo "[submit] project_root: $PROJECT_ROOT"
 echo "[submit] wflow_suite_dir: $WFLOW_SUITE_DIR"
@@ -92,7 +96,7 @@ echo "[submit] max_array_tasks: $MAX_ARRAY_TASKS"
 echo "[submit] submitted_array_tasks: $ARRAY_TASK_COUNT"
 echo "[submit] array: $ARRAY_SPEC"
 
-ARRAY_JOB_ID=$(sbatch --parsable --array="$ARRAY_SPEC" hpc/slurm_journal_wflow_ser_array.sh)
+ARRAY_JOB_ID=$(sbatch --parsable --chdir="$PROJECT_ROOT" --array="$ARRAY_SPEC" "$SLURM_SCRIPT")
 echo "[submit] array_job_id: $ARRAY_JOB_ID"
 echo "[submit] aggregate after completion with:"
 echo "export PROJECT_ROOT=\"$PROJECT_ROOT\""
@@ -101,4 +105,4 @@ echo "export SEED_START=$SEED_START"
 echo "export NUM_SEEDS=$NUM_SEEDS"
 echo "export CHANNELS=\"$CHANNELS\""
 echo "export VARIANTS=\"$VARIANTS\""
-echo "sbatch --dependency=afterok:${ARRAY_JOB_ID} hpc/slurm_journal_wflow_ser_aggregate.sh"
+echo "sbatch --chdir=\"$PROJECT_ROOT\" --dependency=afterok:${ARRAY_JOB_ID} \"$AGGREGATE_SCRIPT\""

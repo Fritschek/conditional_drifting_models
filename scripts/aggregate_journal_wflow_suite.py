@@ -136,6 +136,7 @@ def main() -> None:
     seeds = parse_seeds(args.seeds, args.seed_start, args.num_seeds)
 
     missing: list[str] = []
+    missing_rows: list[str] = []
     task_results: list[dict[str, object]] = []
     rows: list[dict[str, object]] = []
     for variant in variants:
@@ -151,10 +152,15 @@ def main() -> None:
             for channel in channels:
                 if channel in summary.get("channels", {}):
                     rows.append(flatten_channel_row(seed, variant, channel, task, summary))
+                else:
+                    missing_rows.append(f"{variant} seed {seed} channel {channel} in {summary_path}")
 
     if missing and not args.allow_missing:
         preview = "\n".join(missing[:20])
         raise FileNotFoundError(f"Missing {len(missing)} task result files. First missing paths:\n{preview}")
+    if missing_rows and not args.allow_missing:
+        preview = "\n".join(missing_rows[:20])
+        raise ValueError(f"Missing {len(missing_rows)} channel result rows. First missing rows:\n{preview}")
 
     grouped: dict[str, dict[str, dict[str, list[float]]]] = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     for row in rows:
@@ -203,6 +209,7 @@ def main() -> None:
         "channels": channels,
         "seeds": seeds,
         "missing": missing,
+        "missing_rows": missing_rows,
         "num_rows": len(rows),
         "paired_baseline": baseline,
         "aggregated": aggregated,

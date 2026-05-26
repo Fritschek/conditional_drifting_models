@@ -3,9 +3,11 @@
 set -euo pipefail
 
 PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
-VARIANTS="${VARIANTS:-analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn}"
+VARIANTS="${SER_REPAIR_VARIANTS:-analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn}"
 WALLTIME="${WALLTIME:-1-12:00:00}"
 REPAIR_TASKS="${REPAIR_TASKS:-Rayleigh:103 Rayleigh:104 Rayleigh:105 Rayleigh:106 SSPA:103 SSPA:104 SSPA:105 SSPA:106 OptFib:103 OptFib:104 OptFib:105 OptFib:106}"
+SLURM_SCRIPT="$PROJECT_ROOT/hpc/slurm_journal_wflow_ser_repair_task.sh"
+HPC_USE_CONDA="${HPC_USE_CONDA:-0}"
 
 if [[ -z "${WFLOW_SUITE_DIR:-}" ]]; then
   WFLOW_SUITE_DIR="$(
@@ -40,6 +42,7 @@ export PROJECT_ROOT
 export WFLOW_SUITE_DIR
 export SER_SUITE_DIR
 export VARIANTS
+export HPC_USE_CONDA
 
 echo "[submit] project_root: $PROJECT_ROOT"
 echo "[submit] wflow_suite_dir: $WFLOW_SUITE_DIR"
@@ -58,10 +61,11 @@ for task in $REPAIR_TASKS; do
 
   job_id="$(
     sbatch --parsable \
+      --chdir="$PROJECT_ROOT" \
       --time="$WALLTIME" \
       --job-name="ser_fix_${channel}_${seed}" \
-      --export=ALL,PROJECT_ROOT="$PROJECT_ROOT",WFLOW_SUITE_DIR="$WFLOW_SUITE_DIR",SER_SUITE_DIR="$SER_SUITE_DIR",VARIANTS="$VARIANTS",REPAIR_CHANNEL="$channel",REPAIR_SEED="$seed" \
-      hpc/slurm_journal_wflow_ser_repair_task.sh
+      --export=ALL,PROJECT_ROOT="$PROJECT_ROOT",WFLOW_SUITE_DIR="$WFLOW_SUITE_DIR",SER_SUITE_DIR="$SER_SUITE_DIR",VARIANTS="$VARIANTS",REPAIR_CHANNEL="$channel",REPAIR_SEED="$seed",HPC_USE_CONDA="$HPC_USE_CONDA" \
+      "$SLURM_SCRIPT"
   )"
   echo "[submit] $channel seed $seed -> $job_id"
 done

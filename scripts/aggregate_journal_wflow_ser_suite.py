@@ -78,9 +78,15 @@ def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
             writer.writerow(row)
 
 
-def load_rows(suite_dir: Path, channels: list[str], variants: list[str], seeds: list[int]) -> tuple[list[dict[str, object]], list[str]]:
+def load_rows(
+    suite_dir: Path,
+    channels: list[str],
+    variants: list[str],
+    seeds: list[int],
+) -> tuple[list[dict[str, object]], list[str], list[str]]:
     rows: list[dict[str, object]] = []
     missing: list[str] = []
+    missing_rows: list[str] = []
     variant_set = set(variants)
     for channel in channels:
         for seed in seeds:
@@ -105,7 +111,17 @@ def load_rows(suite_dir: Path, channels: list[str], variants: list[str], seeds: 
                     "train_seconds": run.get("train_seconds"),
                 }
                 rows.append(row)
-    return rows, missing
+
+    seen = {(int(row["seed"]), str(row["channel"]), str(row["variant"])) for row in rows}
+    for channel in channels:
+        for seed in seeds:
+            result_path = suite_dir / f"ser_{channel.lower()}_seed{seed}_result.json"
+            if not result_path.exists():
+                continue
+            for variant in variants:
+                if (seed, channel, variant) not in seen:
+                    missing_rows.append(f"{channel} seed {seed} variant {variant} in {result_path}")
+    return rows, missing, missing_rows
 
 
 def main() -> None:
@@ -113,10 +129,13 @@ def main() -> None:
     variants = parse_csv_list(args.variants)
     channels = parse_csv_list(args.channels)
     seeds = parse_seeds(args.seeds, args.seed_start, args.num_seeds)
-    rows, missing = load_rows(args.suite_dir, channels, variants, seeds)
+    rows, missing, missing_rows = load_rows(args.suite_dir, channels, variants, seeds)
     if missing and not args.allow_missing:
         preview = "\n".join(missing[:20])
         raise FileNotFoundError(f"Missing {len(missing)} SER task result files. First missing paths:\n{preview}")
+    if missing_rows and not args.allow_missing:
+        preview = "\n".join(missing_rows[:20])
+        raise ValueError(f"Missing {len(missing_rows)} SER result rows. First missing rows:\n{preview}")
 
     grouped: dict[str, dict[str, dict[str, list[float]]]] = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     for row in rows:
@@ -166,6 +185,7 @@ def main() -> None:
         "channels": channels,
         "seeds": seeds,
         "missing": missing,
+        "missing_rows": missing_rows,
         "num_rows": len(rows),
         "paired_baseline": baseline,
         "aggregated": aggregated,

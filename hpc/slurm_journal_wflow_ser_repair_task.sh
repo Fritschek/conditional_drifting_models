@@ -15,7 +15,7 @@ set -euo pipefail
 
 PROJECT_ROOT="${PROJECT_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
-VARIANTS="${VARIANTS:-analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn}"
+VARIANTS="${SER_REPAIR_VARIANTS:-${VARIANTS:-analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn}}"
 AE_DATASET_SIZE="${AE_DATASET_SIZE:-1000000}"
 AE_BATCH_SIZE="${AE_BATCH_SIZE:-500}"
 AE_EPOCHS="${AE_EPOCHS:-10}"
