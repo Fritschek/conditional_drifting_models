@@ -1,6 +1,6 @@
 # HPC / SLURM
 
-This directory contains SLURM-ready paths for the full-budget benchmark suite, the partial direct-metric rerun, the enhanced direct-kernel rerun, the journal W-Flow/Sinkhorn rerun, and the downstream BER/SER follow-up.
+This directory contains SLURM-ready paths for the full-budget benchmark suite, the partial direct-metric rerun, the enhanced direct-kernel rerun, the journal W-Flow/Sinkhorn rerun, the downstream BER/SER follow-up, and the TurboAE long-block check.
 
 The intended workflow is:
 
@@ -23,12 +23,15 @@ The intended workflow is:
 - `slurm_journal_wflow_aggregate.sh`: aggregate the journal W-Flow/Sinkhorn rerun
 - `slurm_journal_wflow_ser_array.sh`: one `(seed, channel)` task that loops over coding variants
 - `slurm_journal_wflow_ser_aggregate.sh`: aggregate symbolic BER/SER follow-up results
+- `slurm_turboae_long_block_array.sh`: one seed task for paired analytic/surrogate TurboAE long-block runs
+- `slurm_turboae_long_block_aggregate.sh`: aggregate TurboAE long-block runs
 - `submit_full_suite.sh`: helper to submit the full benchmark array
 - `submit_partial_direct_metric_suite.sh`: helper to submit the partial direct-metric array
 - `submit_enhanced_direct_suite.sh`: helper to submit the enhanced direct-kernel array
 - `submit_journal_wflow_suite.sh`: helper to submit the journal W-Flow/Sinkhorn array
 - `submit_journal_wflow_paper_budget_suite.sh`: helper for the seed-packed paper-budget W-Flow/Sinkhorn array
 - `submit_journal_wflow_ser_suite.sh`: helper to submit the symbolic BER/SER follow-up array
+- `submit_turboae_long_block_suite.sh`: helper to submit the TurboAE long-block array
 
 ## Per-seed runner
 
@@ -244,7 +247,7 @@ bash hpc/submit_journal_wflow_suite.sh
 
 The generic helper defaults to `NUM_SEEDS=100`, `MAX_ARRAY_TASKS=32`, `CHANNELS=AWGN,Rayleigh,SSPA,OptFib`, `DATASET_SIZE=120000`, `EVAL_SIZE=100000`, `BATCH_SIZE=512`, `DRIFTING_EPOCHS=60`, and `SWD_PROJECTIONS=128`. Override only the settings that need changing.
 
-For a paper-budget rerun on AWGN/Rayleigh/SSPA, prefer the seed-packed helper. It runs all variants/channels for each seed and packs seeds into at most 32 SLURM array tasks.
+For a paper-budget rerun on AWGN/Rayleigh/SSPA/TDL, prefer the seed-packed helper. It runs all variants/channels for each seed and packs seeds into at most 32 SLURM array tasks.
 
 ```bash
 unset CONDA_ENV
@@ -253,7 +256,7 @@ unset PYTHON_BIN
 bash hpc/submit_journal_wflow_paper_budget_suite.sh
 ```
 
-The paper-budget helper defaults to `NUM_SEEDS=100`, `MAX_ARRAY_TASKS=32`, `CHANNELS=AWGN,Rayleigh,SSPA`, `DATASET_SIZE=-1`, `BATCH_SIZE=-1`, `DRIFTING_EPOCHS=-1`, `SWD_PROJECTIONS=-1`, and `EVAL_SIZE=1000000`. The `-1` values let `scripts/run_enhanced_direct_benchmark.py` use the per-channel paper presets.
+The paper-budget helper defaults to `NUM_SEEDS=100`, `MAX_ARRAY_TASKS=32`, `CHANNELS=AWGN,Rayleigh,SSPA,TDL`, `DATASET_SIZE=-1`, `BATCH_SIZE=-1`, `DRIFTING_EPOCHS=-1`, `SWD_PROJECTIONS=-1`, and `EVAL_SIZE=1000000`. The `-1` values let `scripts/run_enhanced_direct_benchmark.py` use the per-channel paper presets.
 
 To aggregate manually after the array finishes:
 
@@ -263,7 +266,7 @@ python scripts/aggregate_journal_wflow_suite.py \
   --seed-start 7 \
   --num-seeds 100 \
   --variants kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn \
-  --channels AWGN,Rayleigh,SSPA,OptFib
+  --channels AWGN,Rayleigh,SSPA,TDL
 ```
 
 The aggregator reports direct SWD, residual SWD, anchor-conditioned SWD, anchor mean/covariance/Gaussian-W2 excess metrics, training loss/drift norm, elapsed time, and paired deltas versus `kernel_joint`.
@@ -275,7 +278,7 @@ The symbolic coding follow-up consumes checkpoints from a completed W-Flow suite
 The BER/SER submit helper also caps the submitted array at `MAX_ARRAY_TASKS=32` by default. Each array task processes a strided subset of the full `(seed, channel)` grid and loops over the requested variants. If `WFLOW_SUITE_DIR` is unset, the helper auto-detects the newest `results/journal_wflow_paper_hpc_*` or `results/journal_wflow_hpc_*` directory.
 
 ```bash
-export CHANNELS=AWGN,Rayleigh,SSPA,OptFib
+export CHANNELS=AWGN,Rayleigh,SSPA,TDL
 
 bash hpc/submit_journal_wflow_ser_suite.sh
 ```
@@ -285,7 +288,7 @@ For a first coding check, run fewer seeds/channels:
 ```bash
 export WFLOW_SUITE_DIR=$PWD/results/journal_wflow_hpc_<tag>
 export NUM_SEEDS=10
-export CHANNELS=AWGN,SSPA,OptFib
+export CHANNELS=AWGN,SSPA,TDL
 export VARIANTS=analytic,kernel_joint,joint_sinkhorn,fiber_sinkhorn
 
 bash hpc/submit_journal_wflow_ser_suite.sh
@@ -303,8 +306,48 @@ python scripts/aggregate_journal_wflow_ser_suite.py \
   --suite-dir results/journal_wflow_ser_<tag> \
   --seed-start 7 \
   --num-seeds 100 \
-  --channels AWGN,Rayleigh,SSPA,OptFib \
+  --channels AWGN,Rayleigh,SSPA,TDL \
   --variants analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn
+```
+
+## TurboAE Long-Block Follow-Up
+
+The TurboAE follow-up trains paired long-block baselines with the matched overnight-style settings from the vendored CNN TurboAE baseline in `external/turbo_mingru_decoder`:
+
+- analytic AWGN training, evaluated on analytic AWGN
+- fiber-Sinkhorn AWGN surrogate training, evaluated on analytic AWGN
+
+Each seed task first trains its own `n=2` AWGN fiber-Sinkhorn implant unless `CHANNEL_IMPLANT_CHECKPOINT` is set. The default long-block run uses `L=64`, `300` epochs, `batch_size=500`, `sample_size=50000`, and `eval_num_blocks=50000`.
+
+Typical 30-seed usage:
+
+```bash
+unset CONDA_ENV
+unset PYTHON_BIN
+
+export SEED_START=7
+export NUM_SEEDS=30
+export TURBOAE_LENGTHS=64
+
+bash hpc/submit_turboae_long_block_suite.sh
+```
+
+Set `TURBO_ROOT=/path/to/turbo_mingru_decoder` only if you explicitly want to use the full external TurboAE repo instead of the vendored minimal CNN baseline.
+
+Aggregation writes:
+
+- `turboae_long_block_results.json`
+- `turboae_long_block_per_seed.csv`
+
+Manual aggregation:
+
+```bash
+python scripts/aggregate_turboae_long_block_suite.py \
+  --suite-dir results/turboae_long_block_hpc_<tag> \
+  --seed-start 7 \
+  --num-seeds 30 \
+  --lengths 64 \
+  --modes analytic,checkpoint
 ```
 
 ## Environment setup
