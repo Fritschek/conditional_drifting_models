@@ -118,17 +118,16 @@ for ((SEED_OFFSET = TASK_ID; SEED_OFFSET < NUM_SEEDS; SEED_OFFSET += ARRAY_TASK_
       IMPLANT_CHECKPOINT="$IMPLANT_DIR/checkpoints/enhanced_direct_awgn_seed${CURRENT_SEED}.pt"
       if is_enabled "$TRAIN_CHANNEL_IMPLANT" || [[ ! -f "$IMPLANT_CHECKPOINT" ]]; then
         echo "[slurm] training n=2 AWGN fiber-Sinkhorn implant for seed=$CURRENT_SEED"
-        "$PYTHON_BIN" -u scripts/run_enhanced_direct_benchmark.py \
+        "$PYTHON_BIN" -u scripts/train_turboae_awgn_implant.py \
           --device cuda \
           --seed "$CURRENT_SEED" \
-          --channels AWGN \
-          --override-n 2 \
-          --override-ebno-db "$TURBOAE_EBNO_DB" \
-          --override-rate "$TURBOAE_RATE" \
+          --n 2 \
+          --ebno-db "$TURBOAE_EBNO_DB" \
+          --rate "$TURBOAE_RATE" \
           --dataset-size "$CHANNEL_IMPLANT_DATASET_SIZE" \
           --eval-size "$CHANNEL_IMPLANT_EVAL_SIZE" \
           --batch-size "$CHANNEL_IMPLANT_BATCH_SIZE" \
-          --drifting-epochs "$CHANNEL_IMPLANT_EPOCHS" \
+          --epochs "$CHANNEL_IMPLANT_EPOCHS" \
           --swd-projections "$CHANNEL_IMPLANT_SWD_PROJECTIONS" \
           --drift-field fiber_sinkhorn \
           --conditioning-mode none \
