@@ -13,6 +13,7 @@ CHANNEL_SETTINGS = {
     "AWGN": {"code_dim": 7, "rate": 4.0 / 7.0, "ebno_db": 5.0},
     "Rayleigh": {"code_dim": 7, "rate": 4.0 / 7.0, "ebno_db": 12.0},
     "SSPA": {"code_dim": 8, "rate": 6.0 / 8.0, "ebno_db": 8.0},
+    "TDL": {"code_dim": 8, "rate": 4.0 / 8.0, "ebno_db": 10.0},
     "OptFib": {"code_dim": 2, "rate": 1.0, "ebno_db": 5.0},
 }
 
@@ -27,10 +28,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--suite-dir", type=Path, required=True)
     parser.add_argument("--message-dim", type=int, default=16)
     parser.add_argument("--hidden-dim", type=int, default=16)
+    parser.add_argument("--hidden-layers", type=int, default=2)
+    parser.add_argument("--encoder-normalization", type=str, default="standardize", choices=["standardize", "none"])
+    parser.add_argument("--encoder-output-activation", action="store_true")
+    parser.add_argument("--decoder-output-activation", action="store_true")
     parser.add_argument("--ae-dataset-size", type=int, default=1_000_000)
     parser.add_argument("--ae-batch-size", type=int, default=500)
     parser.add_argument("--ae-epochs", type=int, default=10)
     parser.add_argument("--ae-learning-rate", type=float, default=1e-3)
+    parser.add_argument("--code-power", type=float, default=0.0)
+    parser.add_argument("--optfib-input-power-dbm", type=float, default=None)
     parser.add_argument("--eval-size", type=int, default=100_000)
     parser.add_argument("--eval-every", type=int, default=1)
     parser.add_argument("--diffusion-ddim-steps", type=int, default=100)
@@ -81,6 +88,10 @@ def build_ser_command(args: argparse.Namespace, variant: str, out_dir: Path) -> 
         str(settings["code_dim"]),
         "--hidden-dim",
         str(args.hidden_dim),
+        "--hidden-layers",
+        str(args.hidden_layers),
+        "--encoder-normalization",
+        args.encoder_normalization,
         "--rate",
         str(settings["rate"]),
         "--ebno-db",
@@ -95,6 +106,8 @@ def build_ser_command(args: argparse.Namespace, variant: str, out_dir: Path) -> 
         str(args.ae_epochs),
         "--learning-rate",
         str(args.ae_learning_rate),
+        "--code-power",
+        str(args.code_power),
         "--eval-every",
         str(args.eval_every),
         "--weights-root",
@@ -106,6 +119,12 @@ def build_ser_command(args: argparse.Namespace, variant: str, out_dir: Path) -> 
         "--out-dir",
         str(out_dir),
     ]
+    if args.optfib_input_power_dbm is not None:
+        cmd.extend(["--optfib-input-power-dbm", str(args.optfib_input_power_dbm)])
+    if args.encoder_output_activation:
+        cmd.append("--encoder-output-activation")
+    if args.decoder_output_activation:
+        cmd.append("--decoder-output-activation")
     if variant == "analytic":
         cmd.extend(["--train-implant", "analytic_channel", "--eval-implant", "analytic_channel"])
         return cmd
@@ -168,6 +187,7 @@ def main() -> None:
         summary_path = Path(runner_result["summary"])
         summary = json.loads(summary_path.read_text())
         final_eval = summary.get("final_eval", {})
+        decoder_metrics = summary.get("eval_implant_decoder_metrics_vs_analytic", {})
         run_results.append(
             {
                 "seed": args.seed,
@@ -178,6 +198,26 @@ def main() -> None:
                 "final_eval_ser": final_eval.get("ser"),
                 "final_eval_ber": final_eval.get("ber"),
                 "final_eval_loss": final_eval.get("loss"),
+                "final_eval_cross_entropy_bits": final_eval.get("cross_entropy_bits"),
+                "final_eval_air_bits_per_message": final_eval.get("air_bits_per_message"),
+                "final_eval_normalized_air": final_eval.get("normalized_air"),
+                "decoder_true_ser": decoder_metrics.get("decoder_true_ser"),
+                "decoder_pred_ser": decoder_metrics.get("decoder_pred_ser"),
+                "decoder_abs_ser_gap": decoder_metrics.get("decoder_abs_ser_gap"),
+                "decoder_true_ber": decoder_metrics.get("decoder_true_ber"),
+                "decoder_pred_ber": decoder_metrics.get("decoder_pred_ber"),
+                "decoder_abs_ber_gap": decoder_metrics.get("decoder_abs_ber_gap"),
+                "decoder_abs_ce_gap": decoder_metrics.get("decoder_abs_ce_gap"),
+                "decoder_air_bits_gap": decoder_metrics.get("decoder_air_bits_gap"),
+                "decoder_confusion_tv": decoder_metrics.get("decoder_confusion_tv"),
+                "decoder_confusion_floor_tv": decoder_metrics.get("decoder_confusion_floor_tv"),
+                "decoder_confusion_tv_ratio": decoder_metrics.get("decoder_confusion_tv_ratio"),
+                "decoder_prob_swd_ratio": decoder_metrics.get("decoder_prob_swd_ratio"),
+                "decoder_logprob_swd_ratio": decoder_metrics.get("decoder_logprob_swd_ratio"),
+                "decoder_prob_margin_swd_ratio": decoder_metrics.get("decoder_prob_margin_swd_ratio"),
+                "decoder_boundary_mass_abs_gap": decoder_metrics.get("decoder_boundary_mass_abs_gap"),
+                "decoder_confusion_worst_message": decoder_metrics.get("decoder_confusion_worst_message"),
+                "decoder_ser_worst_message": decoder_metrics.get("decoder_ser_worst_message"),
                 "train_seconds": summary.get("train_seconds"),
                 "checkpoint_path": None
                 if variant == "analytic"

@@ -12,6 +12,7 @@ __all__ = [
     "run_single_channel_benchmark",
     "select_device",
     "set_seed",
+    "tdl_effective_profile",
     "train_conditional_drifting",
 ]
 
@@ -24,6 +25,7 @@ _MODULE_EXPORTS = {
     "run_single_channel_benchmark": ("conditional_drifting.benchmark", "run_single_channel_benchmark"),
     "select_device": ("conditional_drifting.training", "select_device"),
     "set_seed": ("conditional_drifting.training", "set_seed"),
+    "tdl_effective_profile": ("conditional_drifting.channels", "tdl_effective_profile"),
     "train_conditional_drifting": ("conditional_drifting.training", "train_conditional_drifting"),
 }
 

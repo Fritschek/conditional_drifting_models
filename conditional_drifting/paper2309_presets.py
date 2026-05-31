@@ -50,6 +50,20 @@ PAPER2309_PRESETS: dict[str, PaperChannelPreset] = {
         wgan_epochs=160,
         batch_size=4096,
     ),
+    "TDL": PaperChannelPreset(
+        n=8,
+        ebn0_db=10.0,
+        rate=4.0 / 8.0,
+        diffusion_hidden_dim=128,
+        wgan_hidden_dim=256,
+        diffusion_epochs=60,
+        drifting_epochs=60,
+        wgan_epochs=60,
+        dataset_size=120_000,
+        batch_size=512,
+        eval_size=100_000,
+        swd_projections=128,
+    ),
 }
 
 
