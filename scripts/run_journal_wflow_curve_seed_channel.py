@@ -2,24 +2,37 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import subprocess
 import sys
 import time
 from pathlib import Path
 
+import torch
+
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from conditional_drifting.e2e_implants import AnalyticChannelImplant
+from conditional_drifting.symbolic_ae import SymbolicAEConfig, evaluate_symbolic_autoencoder
+from conditional_drifting.training import set_seed
+from scripts.run_symbolic_awgn_benchmark import load_symbolic_checkpoint
+
 
 CHANNEL_SETTINGS = {
-    "AWGN": {"message_dim": 16, "code_dim": 7, "rate": 4.0 / 7.0, "ebno_db": 5.0},
-    "Rayleigh": {"message_dim": 16, "code_dim": 7, "rate": 4.0 / 7.0, "ebno_db": 12.0},
-    "SSPA": {"message_dim": 64, "code_dim": 8, "rate": 6.0 / 8.0, "ebno_db": 8.0},
-    "TDL": {"message_dim": 16, "code_dim": 8, "rate": 4.0 / 8.0, "ebno_db": 10.0},
-    "OptFib": {"message_dim": 16, "code_dim": 2, "rate": 1.0, "ebno_db": 5.0},
+    "AWGN": {"message_dim": 16, "code_dim": 7, "rate": 4.0 / 7.0, "train_ebno_db": 5.0, "ebno_values": "0,1,2,3,4,5,6,7,8"},
+    "Rayleigh": {"message_dim": 16, "code_dim": 7, "rate": 4.0 / 7.0, "train_ebno_db": 12.0, "ebno_values": "6,8,10,12,14,16,18"},
+    "SSPA": {"message_dim": 64, "code_dim": 8, "rate": 6.0 / 8.0, "train_ebno_db": 8.0, "ebno_values": "1,2,3,4,5,6,7,8,9,10,11"},
+    "TDL": {"message_dim": 16, "code_dim": 8, "rate": 4.0 / 8.0, "train_ebno_db": 10.0, "ebno_values": "2,4,6,8,10,12,14"},
+    # The current OptFib analytic channel uses its own P_n parameter and does not
+    # vary with Eb/N0 unless the channel implementation is changed to use noise_std.
+    "OptFib": {"message_dim": 16, "code_dim": 2, "rate": 1.0, "train_ebno_db": 5.0, "ebno_values": "5"},
 }
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run symbolic BER/SER follow-up for one journal W-Flow seed/channel.")
+    parser = argparse.ArgumentParser(description="Train symbolic AEs for one seed/channel and evaluate BER/SER curves.")
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--channel", type=str, required=True, choices=sorted(CHANNEL_SETTINGS))
@@ -39,9 +52,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--code-power", type=float, default=0.0)
     parser.add_argument("--optfib-input-power-dbm", type=float, default=None)
     parser.add_argument("--eval-size", type=int, default=100_000)
+    parser.add_argument("--eval-batch-size", type=int, default=1000)
     parser.add_argument("--eval-every", type=int, default=1)
+    parser.add_argument("--train-ebno-db", type=float, default=None)
+    parser.add_argument("--ebno-values", type=str, default="")
     parser.add_argument("--diffusion-ddim-steps", type=int, default=100)
-    parser.add_argument("--weights-root", type=str, default=str(ROOT / "weights"))
+    parser.add_argument("--force-retrain", action="store_true")
     return parser.parse_args()
 
 
@@ -49,15 +65,8 @@ def parse_csv_list(text: str) -> list[str]:
     return [part.strip() for part in text.split(",") if part.strip()]
 
 
-def parse_json_from_text(text: str, cmd: list[str]) -> dict:
-    lines = text.strip().splitlines()
-    for idx in range(len(lines) - 1, -1, -1):
-        candidate = "\n".join(lines[idx:])
-        try:
-            return json.loads(candidate)
-        except json.JSONDecodeError:
-            continue
-    raise RuntimeError(f"Could not parse JSON output from command: {' '.join(cmd)}")
+def parse_float_list(text: str) -> list[float]:
+    return [float(part.strip()) for part in text.split(",") if part.strip()]
 
 
 def checkpoint_path(wflow_suite_dir: Path, variant: str, channel: str, seed: int) -> Path:
@@ -70,7 +79,7 @@ def checkpoint_path(wflow_suite_dir: Path, variant: str, channel: str, seed: int
     )
 
 
-def build_ser_command(args: argparse.Namespace, variant: str, out_dir: Path) -> list[str]:
+def build_train_command(args: argparse.Namespace, variant: str, out_dir: Path, ae_checkpoint: Path, train_ebno_db: float) -> list[str]:
     settings = CHANNEL_SETTINGS[args.channel]
     message_dim = int(args.message_dim if args.message_dim > 0 else settings["message_dim"])
     cmd = [
@@ -96,7 +105,7 @@ def build_ser_command(args: argparse.Namespace, variant: str, out_dir: Path) -> 
         "--rate",
         str(settings["rate"]),
         "--ebno-db",
-        str(settings["ebno_db"]),
+        str(train_ebno_db),
         "--batch-size",
         str(args.ae_batch_size),
         "--dataset-size",
@@ -111,12 +120,12 @@ def build_ser_command(args: argparse.Namespace, variant: str, out_dir: Path) -> 
         str(args.code_power),
         "--eval-every",
         str(args.eval_every),
-        "--weights-root",
-        args.weights_root,
         "--diffusion-sampler",
         "ddim",
         "--ddim-steps",
         str(args.diffusion_ddim_steps),
+        "--save-ae-checkpoint",
+        str(ae_checkpoint),
         "--out-dir",
         str(out_dir),
     ]
@@ -146,8 +155,7 @@ def build_ser_command(args: argparse.Namespace, variant: str, out_dir: Path) -> 
     return cmd
 
 
-def run_logged_command(cmd: list[str], log_path: Path) -> dict:
-    captured_lines: list[str] = []
+def run_logged_command(cmd: list[str], log_path: Path) -> None:
     log_path.parent.mkdir(parents=True, exist_ok=True)
     with log_path.open("w", encoding="utf-8") as handle:
         process = subprocess.Popen(
@@ -160,7 +168,6 @@ def run_logged_command(cmd: list[str], log_path: Path) -> dict:
         )
         assert process.stdout is not None
         for line in process.stdout:
-            captured_lines.append(line)
             sys.stdout.write(line)
             sys.stdout.flush()
             handle.write(line)
@@ -168,73 +175,124 @@ def run_logged_command(cmd: list[str], log_path: Path) -> dict:
         return_code = process.wait()
     if return_code != 0:
         raise subprocess.CalledProcessError(return_code, cmd)
-    return parse_json_from_text("".join(captured_lines), cmd)
+
+
+def evaluate_curve(
+    ae_checkpoint: Path,
+    *,
+    channel: str,
+    rate: float,
+    ebno_values: list[float],
+    eval_size: int,
+    batch_size: int,
+    seed: int,
+    device: torch.device,
+) -> list[dict[str, float]]:
+    encoder, decoder, payload = load_symbolic_checkpoint(ae_checkpoint, device)
+    cfg_dict = payload["config"]
+    cfg = SymbolicAEConfig(
+        message_dim=int(cfg_dict["message_dim"]),
+        code_dim=int(cfg_dict["code_dim"]),
+        hidden_dim=int(cfg_dict["hidden_dim"]),
+        hidden_layers=int(cfg_dict.get("hidden_layers", 2)),
+        encoder_normalization=str(cfg_dict.get("encoder_normalization", "standardize")),
+        encoder_output_activation=bool(cfg_dict.get("encoder_output_activation", False)),
+        decoder_output_activation=bool(cfg_dict.get("decoder_output_activation", False)),
+        code_power=cfg_dict.get("code_power"),
+        batch_size=int(batch_size),
+        dataset_size=int(eval_size),
+        epochs=0,
+        eval_size=int(eval_size),
+    )
+    eval_implant = AnalyticChannelImplant(channel)
+    curve = []
+    for ebno_db in ebno_values:
+        set_seed(seed + int(round(100.0 * ebno_db)))
+        stats = evaluate_symbolic_autoencoder(
+            encoder,
+            decoder,
+            eval_implant,
+            cfg=cfg,
+            device=device,
+            rate=rate,
+            ebno_db=float(ebno_db),
+        )
+        curve.append(
+            {
+                "ebno_db": float(ebno_db),
+                "ser": float(stats["ser"]),
+                "ber": float(stats["ber"]),
+                "loss": float(stats["loss"]),
+                "cross_entropy_bits": float(stats["cross_entropy_bits"]),
+                "air_bits_per_message": float(stats["air_bits_per_message"]),
+                "normalized_air": float(stats["normalized_air"]),
+            }
+        )
+    return curve
 
 
 def main() -> None:
     args = parse_args()
+    settings = CHANNEL_SETTINGS[args.channel]
+    message_dim = int(args.message_dim if args.message_dim > 0 else settings["message_dim"])
     variants = parse_csv_list(args.variants)
+    train_ebno_db = float(settings["train_ebno_db"] if args.train_ebno_db is None else args.train_ebno_db)
+    ebno_values = parse_float_list(args.ebno_values or str(settings["ebno_values"]))
+    args.message_dim = message_dim
+    device = torch.device(args.device if args.device != "auto" else ("cuda" if torch.cuda.is_available() else "cpu"))
     args.suite_dir.mkdir(parents=True, exist_ok=True)
     log_dir = args.suite_dir / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
 
     start = time.perf_counter()
-    run_results = []
+    runs = []
     for variant in variants:
         out_dir = args.suite_dir / args.channel / f"seed{args.seed}" / variant
-        log_path = log_dir / f"ser_{args.channel.lower()}_{variant}_seed{args.seed}.log"
-        print(f"[journal-wflow-ser] seed={args.seed} channel={args.channel} variant={variant}", flush=True)
-        runner_result = run_logged_command(build_ser_command(args, variant, out_dir), log_path)
-        summary_path = Path(runner_result["summary"])
-        summary = json.loads(summary_path.read_text())
-        final_eval = summary.get("final_eval", {})
-        decoder_metrics = summary.get("eval_implant_decoder_metrics_vs_analytic", {})
-        run_results.append(
+        ae_checkpoint = out_dir / "symbolic_autoencoder.pt"
+        summary_path = out_dir / "summary.json"
+        train_log = log_dir / f"curve_train_{args.channel.lower()}_{variant}_seed{args.seed}.log"
+        if args.force_retrain or not ae_checkpoint.exists() or not summary_path.exists():
+            cmd = build_train_command(args, variant, out_dir, ae_checkpoint, train_ebno_db)
+            print(f"[curve] training seed={args.seed} channel={args.channel} variant={variant}", flush=True)
+            run_logged_command(cmd, train_log)
+        else:
+            print(f"[curve] reusing {ae_checkpoint}", flush=True)
+
+        print(f"[curve] evaluating seed={args.seed} channel={args.channel} variant={variant}", flush=True)
+        curve = evaluate_curve(
+            ae_checkpoint,
+            channel=args.channel,
+            rate=float(settings["rate"]),
+            ebno_values=ebno_values,
+            eval_size=args.eval_size,
+            batch_size=args.eval_batch_size,
+            seed=args.seed,
+            device=device,
+        )
+        runs.append(
             {
-                "seed": args.seed,
+                "seed": int(args.seed),
                 "channel": args.channel,
                 "variant": variant,
+                "train_ebno_db": train_ebno_db,
+                "checkpoint": str(ae_checkpoint),
                 "summary": str(summary_path),
-                "log": str(log_path),
-                "final_eval_ser": final_eval.get("ser"),
-                "final_eval_ber": final_eval.get("ber"),
-                "final_eval_loss": final_eval.get("loss"),
-                "final_eval_cross_entropy_bits": final_eval.get("cross_entropy_bits"),
-                "final_eval_air_bits_per_message": final_eval.get("air_bits_per_message"),
-                "final_eval_normalized_air": final_eval.get("normalized_air"),
-                "decoder_true_ser": decoder_metrics.get("decoder_true_ser"),
-                "decoder_pred_ser": decoder_metrics.get("decoder_pred_ser"),
-                "decoder_abs_ser_gap": decoder_metrics.get("decoder_abs_ser_gap"),
-                "decoder_true_ber": decoder_metrics.get("decoder_true_ber"),
-                "decoder_pred_ber": decoder_metrics.get("decoder_pred_ber"),
-                "decoder_abs_ber_gap": decoder_metrics.get("decoder_abs_ber_gap"),
-                "decoder_abs_ce_gap": decoder_metrics.get("decoder_abs_ce_gap"),
-                "decoder_air_bits_gap": decoder_metrics.get("decoder_air_bits_gap"),
-                "decoder_confusion_tv": decoder_metrics.get("decoder_confusion_tv"),
-                "decoder_confusion_floor_tv": decoder_metrics.get("decoder_confusion_floor_tv"),
-                "decoder_confusion_tv_ratio": decoder_metrics.get("decoder_confusion_tv_ratio"),
-                "decoder_prob_swd_ratio": decoder_metrics.get("decoder_prob_swd_ratio"),
-                "decoder_logprob_swd_ratio": decoder_metrics.get("decoder_logprob_swd_ratio"),
-                "decoder_prob_margin_swd_ratio": decoder_metrics.get("decoder_prob_margin_swd_ratio"),
-                "decoder_boundary_mass_abs_gap": decoder_metrics.get("decoder_boundary_mass_abs_gap"),
-                "decoder_confusion_worst_message": decoder_metrics.get("decoder_confusion_worst_message"),
-                "decoder_ser_worst_message": decoder_metrics.get("decoder_ser_worst_message"),
-                "train_seconds": summary.get("train_seconds"),
-                "checkpoint_path": None
-                if variant == "analytic"
-                else str(checkpoint_path(args.wflow_suite_dir, variant, args.channel, args.seed)),
+                "train_log": str(train_log),
+                "curve": curve,
             }
         )
 
     payload = {
-        "seed": args.seed,
+        "seed": int(args.seed),
         "channel": args.channel,
         "variants": variants,
         "wflow_suite_dir": str(args.wflow_suite_dir),
+        "train_ebno_db": train_ebno_db,
+        "ebno_values": ebno_values,
         "elapsed_seconds": time.perf_counter() - start,
-        "runs": run_results,
+        "runs": runs,
     }
-    result_path = args.suite_dir / f"ser_{args.channel.lower()}_seed{args.seed}_result.json"
+    result_path = args.suite_dir / f"curve_{args.channel.lower()}_seed{args.seed}_result.json"
     result_path.write_text(json.dumps(payload, indent=2))
     print(json.dumps({"seed": args.seed, "channel": args.channel, "result_json": str(result_path)}, indent=2))
 
