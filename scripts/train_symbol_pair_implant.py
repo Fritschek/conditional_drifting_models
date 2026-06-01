@@ -23,7 +23,7 @@ from conditional_drifting.baselines import DiffusionConfig, PaperWGANConfig, tra
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Train a vector-valued channel implant and save it as an end-to-end checkpoint.")
     parser.add_argument("--family", required=True, choices=["drifting_direct", "drifting_residual", "paper_wgan", "diffusion_direct", "diffusion_residual"])
-    parser.add_argument("--channel", default="AWGN", choices=["AWGN", "Rayleigh", "ModeFlip", "SSPA", "OptFib"])
+    parser.add_argument("--channel", default="AWGN", choices=["AWGN", "Rayleigh", "ModeFlip", "SSPA", "TDL", "OptFib"])
     parser.add_argument("--n", type=int, default=2)
     parser.add_argument("--noise-std", type=float, default=0.25)
     parser.add_argument("--ebno-db", type=float, default=None, help="If set for AWGN-style implants, derive noise_std from Eb/N0 instead of using --noise-std.")

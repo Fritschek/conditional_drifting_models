@@ -17,7 +17,7 @@ PYTHON_BIN="${PYTHON_BIN:-python}"
 SEED_START="${SEED_START:-7}"
 NUM_SEEDS="${NUM_SEEDS:-100}"
 VARIANTS="${VARIANTS:-kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn}"
-CHANNELS="${CHANNELS:-AWGN,Rayleigh,SSPA,OptFib}"
+CHANNELS="${CHANNELS:-AWGN,Rayleigh,SSPA,TDL}"
 PAIRED_BASELINE="${PAIRED_BASELINE:-kernel_joint}"
 ALLOW_MISSING="${ALLOW_MISSING:-0}"
 

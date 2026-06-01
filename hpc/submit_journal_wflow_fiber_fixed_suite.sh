@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -euo pipefail
+
+PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SEED_START="${SEED_START:-7}"
+NUM_SEEDS="${NUM_SEEDS:-100}"
+VARIANTS="${VARIANTS:-fiber_sinkhorn}"
+CHANNELS="${CHANNELS:-AWGN,Rayleigh,SSPA,TDL}"
+DATASET_SIZE="${DATASET_SIZE:--1}"
+EVAL_SIZE="${EVAL_SIZE:-1000000}"
+BATCH_SIZE="${BATCH_SIZE:--1}"
+DRIFTING_EPOCHS="${DRIFTING_EPOCHS:--1}"
+SWD_PROJECTIONS="${SWD_PROJECTIONS:--1}"
+SUITE_TAG="${SUITE_TAG:-$(date -u +%Y%m%d_%H%M%S)}"
+SUITE_DIR="${SUITE_DIR:-$PROJECT_ROOT/results/journal_wflow_fiber_fixed_paper_hpc_${SUITE_TAG}}"
+MAX_ARRAY_TASKS="${MAX_ARRAY_TASKS:-32}"
+MAX_PARALLEL="${MAX_PARALLEL:-}"
+HPC_USE_CONDA="${HPC_USE_CONDA:-0}"
+
+export PROJECT_ROOT
+export SEED_START
+export NUM_SEEDS
+export VARIANTS
+export CHANNELS
+export DATASET_SIZE
+export EVAL_SIZE
+export BATCH_SIZE
+export DRIFTING_EPOCHS
+export SWD_PROJECTIONS
+export SUITE_DIR
+export MAX_ARRAY_TASKS
+export MAX_PARALLEL
+export HPC_USE_CONDA
+
+"$PROJECT_ROOT/hpc/submit_journal_wflow_paper_budget_suite.sh"

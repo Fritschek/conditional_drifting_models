@@ -103,6 +103,33 @@ OPTFIB_SUITE_PRESET = {
 }
 
 
+WFLOW_TIMING_VARIANTS: dict[str, dict[str, object]] = {
+    "kernel_target": {
+        "drift_field": "kernel",
+        "conditioning_mode": "none",
+        "target_kernel_scale": 1.0,
+    },
+    "kernel_joint": {
+        "drift_field": "kernel",
+        "conditioning_mode": "joint",
+        "condition_kernel_scale": 0.5,
+        "target_kernel_scale": 1.0,
+        "target_kernel_mode": "raw",
+    },
+    "joint_sinkhorn": {
+        "drift_field": "sinkhorn",
+        "conditioning_mode": "joint",
+        "condition_kernel_scale": 0.5,
+        "target_kernel_scale": 1.0,
+    },
+    "fiber_sinkhorn": {
+        "drift_field": "fiber_sinkhorn",
+        "conditioning_mode": "none",
+        "target_kernel_scale": 1.0,
+    },
+}
+
+
 def ebno_to_noise(ebn0_db: float, rate: float) -> float:
     ebn0 = 10.0 ** (ebn0_db / 10.0)
     return 1.0 / math.sqrt(2.0 * rate * ebn0)
@@ -142,6 +169,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--paper-wgan-epochs", type=int, default=-1)
     parser.add_argument("--gan-epochs", type=int, default=120)
     parser.add_argument("--diffusion-steps", type=int, default=100)
+    parser.add_argument("--sinkhorn-min-epsilon", type=float, default=1e-3)
+    parser.add_argument("--sinkhorn-iterations", type=int, default=10)
+    parser.add_argument("--fiber-generated-samples", type=int, default=4)
+    parser.add_argument("--fiber-positive-samples", type=int, default=4)
+    parser.add_argument("--fiber-reference-samples", type=int, default=4)
     parser.add_argument(
         "--train-fraction",
         type=float,
@@ -337,6 +369,11 @@ def main() -> None:
         latent_dim=args.latent_dim,
         hidden_dim=args.hidden_dim,
         is_residual=True,
+        sinkhorn_min_epsilon=args.sinkhorn_min_epsilon,
+        sinkhorn_iterations=args.sinkhorn_iterations,
+        fiber_generated_samples=args.fiber_generated_samples,
+        fiber_positive_samples=args.fiber_positive_samples,
+        fiber_reference_samples=args.fiber_reference_samples,
     )
     diffusion_cfg = DiffusionConfig(
         n=int(resolved["n"]),
@@ -417,6 +454,53 @@ def main() -> None:
                     model,
                     x,
                     is_residual=is_residual,
+                )
+            )
+
+    if any(method in methods for method in WFLOW_TIMING_VARIANTS):
+        for method_name, variant_args in WFLOW_TIMING_VARIANTS.items():
+            if method_name not in methods:
+                continue
+            cfg = DriftingConfig(
+                **{
+                    **drifting_cfg.__dict__,
+                    **variant_args,
+                    "is_residual": False,
+                }
+            )
+            prep_start = time.perf_counter()
+            if args.prepare_mode == "train":
+                model, artifacts = train_conditional_drifting(channel_fn, cfg, device)
+                note = f"trained_{len(artifacts.history)}epochs"
+            else:
+                model = ConditionalDriftingGenerator(
+                    condition_dim=int(resolved["n"]),
+                    output_dim=int(resolved["n"]),
+                    latent_dim=args.latent_dim,
+                    hidden_dim=args.hidden_dim,
+                ).to(device)
+                model.eval()
+                note = "initialized_only"
+            train_seconds = time.perf_counter() - prep_start
+            training[method_name] = build_training_stats(
+                mode=note,
+                train_seconds=train_seconds,
+                timed_dataset_size=cfg.dataset_size,
+                full_dataset_size=int(resolved["dataset_size"]),
+                batch_size=int(resolved["batch_size"]),
+                epochs=cfg.epochs,
+            )
+            method_meta[method_name] = {
+                "family": "wflow_drifting",
+                "sampler": "one_shot",
+                "target_mode": "direct_y",
+                **{key: str(value) for key, value in variant_args.items()},
+            }
+            models[method_name] = (
+                lambda x, model=model: sample_drifting_target(
+                    model,
+                    x,
+                    is_residual=False,
                 )
             )
 
@@ -572,6 +656,8 @@ def main() -> None:
         if method.startswith("dd"):
             train_seconds = float(training["diffusion_shared"]["projected_full_train_seconds"])
         elif method.startswith("drifting_"):
+            train_seconds = float(training[method]["projected_full_train_seconds"])
+        elif method in WFLOW_TIMING_VARIANTS:
             train_seconds = float(training[method]["projected_full_train_seconds"])
         elif method == "paper_wgan":
             train_seconds = float(training["paper_wgan"]["projected_full_train_seconds"])

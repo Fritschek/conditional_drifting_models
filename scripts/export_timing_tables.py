@@ -10,12 +10,15 @@ ROOT = Path(__file__).resolve().parents[1]
 METHOD_ORDER = [
     ("drifting_residual", "Drifting (res.)"),
     ("drifting_direct", "Drifting (dir.)"),
+    ("kernel_joint", "Joint-kernel drift"),
+    ("joint_sinkhorn", "Joint Sinkhorn"),
+    ("fiber_sinkhorn", "Condition-wise Sinkhorn"),
     ("ddpm", "DDPM"),
     ("ddim100", "DDIM-100"),
     ("ddim50", "DDIM-50"),
     ("ddim20", "DDIM-20"),
     ("ddim10", "DDIM-10"),
-    ("paper_wgan", "Paper WGAN"),
+    ("paper_wgan", "WGAN"),
 ]
 CHANNEL_ORDER = ["AWGN", "Rayleigh", "SSPA", "OptFib"]
 

@@ -140,7 +140,7 @@ def main() -> None:
             cwd=str(ROOT),
             text=True,
             capture_output=True,
-            check=True,
+            check=False,
         )
         if completed.stdout:
             sys.stdout.write(completed.stdout)
@@ -148,6 +148,8 @@ def main() -> None:
         if completed.stderr:
             sys.stderr.write(completed.stderr)
             sys.stderr.flush()
+        if completed.returncode != 0:
+            raise subprocess.CalledProcessError(completed.returncode, cmd)
         result = parse_json_from_text(completed.stdout, cmd)
         timing_summary_path = Path(result["output_path"])
         device_key = device.lower().replace(":", "_")

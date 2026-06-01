@@ -32,6 +32,11 @@ MARKERS = {
     "fiber_sinkhorn": "P",
 }
 
+MC_REPORT_FLOORS = {
+    ("SSPA", "ber"): 1.67e-6,
+    ("SSPA", "ser"): 1.0e-5,
+}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Plot journal W-Flow BER/SER curves.")
@@ -52,6 +57,27 @@ def read_rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def display_curve_values(channel: str, metric: str, means: list[float], sems: list[float]) -> tuple[list[float], list[list[float]], list[bool]]:
+    floor = MC_REPORT_FLOORS.get((channel, metric))
+    display_means: list[float] = []
+    lower_errors: list[float] = []
+    upper_errors: list[float] = []
+    clipped: list[bool] = []
+    for mean, sem in zip(means, sems):
+        if floor is not None and mean < floor:
+            display_means.append(floor)
+            lower_errors.append(0.0)
+            upper_errors.append(0.0)
+            clipped.append(True)
+            continue
+        display_means.append(mean)
+        min_positive = floor if floor is not None else max(mean * 1e-3, 1e-12)
+        lower_errors.append(max(0.0, min(sem, mean - min_positive)))
+        upper_errors.append(max(0.0, sem))
+        clipped.append(False)
+    return display_means, [lower_errors, upper_errors], clipped
+
+
 def plot_channel(channel: str, variants: list[str], rows: list[dict[str, str]], out_dir: Path) -> None:
     channel_rows = [row for row in rows if row["channel"] == channel]
     fig, axes = plt.subplots(1, 2, figsize=(8.8, 3.6), sharex=True)
@@ -64,8 +90,9 @@ def plot_channel(channel: str, variants: list[str], rows: list[dict[str, str]], 
             if not pts:
                 continue
             xs = [float(row["ebno_db"]) for row in pts]
-            ys = [float(row[f"{metric}_mean"]) for row in pts]
-            yerr = [float(row[f"{metric}_sem"]) for row in pts]
+            raw_ys = [float(row[f"{metric}_mean"]) for row in pts]
+            raw_yerr = [float(row[f"{metric}_sem"]) for row in pts]
+            ys, yerr, clipped = display_curve_values(channel, metric, raw_ys, raw_yerr)
             ax.errorbar(
                 xs,
                 ys,
@@ -77,10 +104,18 @@ def plot_channel(channel: str, variants: list[str], rows: list[dict[str, str]], 
                 markersize=4.0,
                 capsize=2.0,
             )
+            floor = MC_REPORT_FLOORS.get((channel, metric))
+            if floor is not None:
+                for x, is_clipped in zip(xs, clipped):
+                    if is_clipped:
+                        ax.text(x, floor * 1.25, "$<$", color=COLORS.get(variant), ha="center", va="bottom", fontsize=7)
         ax.set_yscale("log")
         ax.set_xlabel(r"$E_b/N_0$ (dB)")
         ax.set_ylabel(ylabel)
         ax.grid(True, which="major", linewidth=0.4, alpha=0.35)
+        floor = MC_REPORT_FLOORS.get((channel, metric))
+        if floor is not None:
+            ax.axhline(floor, color="#777777", linewidth=0.6, linestyle=":", alpha=0.65)
     axes[0].set_title(f"{channel} BER")
     axes[1].set_title(f"{channel} SER")
     axes[1].legend(fontsize=7, loc="best", frameon=True)
@@ -105,7 +140,7 @@ def write_latex_snippet(path: Path, channels: list[str]) -> None:
                 r"\begin{figure*}[t]",
                 r"\centering",
                 rf"\includegraphics[width=0.92\textwidth]{{figures/{stem}.pdf}}",
-                rf"\caption{{\textbf{{{channel} BER/SER curves for W-Flow channel surrogates.}} Symbolic autoencoders are trained through each surrogate and evaluated on the analytic channel over an $E_b/N_0$ grid. Curves report seed means with standard-error bars.}}",
+                rf"\caption{{\textbf{{{channel} BER/SER curves for W-Flow channel surrogates.}} Symbolic autoencoders are trained through each surrogate and evaluated on the analytic channel over an $E_b/N_0$ grid. Curves report seed means with standard-error bars; points below the single-run Monte Carlo resolution are clipped to the dotted reporting floor and marked as upper bounds.}}",
                 rf"\label{{{label}}}",
                 r"\end{figure*}",
                 "",

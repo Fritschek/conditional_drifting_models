@@ -48,6 +48,89 @@ VARIANT_SPECS: dict[str, dict[str, object]] = {
             "target_kernel_scale": 1.0,
         },
     },
+    "fiber_sinkhorn_rawpolar": {
+        "description": "Fiberwise Sinkhorn drift using raw I/Q plus radial/phase residual transport features.",
+        "args": {
+            "drift_field": "fiber_sinkhorn",
+            "conditioning_mode": "none",
+            "target_kernel_scale": 1.0,
+            "target_kernel_mode": "raw_plus_polar_residual",
+            "residual_target_scale": 1.0,
+        },
+    },
+    "fiber_mmd_rawpolar": {
+        "description": "Fiberwise same-condition MMD matching with raw I/Q plus radial/phase residual features.",
+        "args": {
+            "drift_field": "fiber_mmd",
+            "conditioning_mode": "none",
+            "target_kernel_scale": 1.0,
+            "target_kernel_mode": "raw_plus_polar_residual",
+            "residual_target_scale": 1.0,
+        },
+    },
+    "fiber_energy_rawpolar": {
+        "description": "Fiberwise same-condition energy-distance matching with raw I/Q plus radial/phase residual features.",
+        "args": {
+            "drift_field": "fiber_energy",
+            "conditioning_mode": "none",
+            "target_kernel_scale": 1.0,
+            "target_kernel_mode": "raw_plus_polar_residual",
+            "residual_target_scale": 1.0,
+        },
+    },
+    "fiber_moment": {
+        "description": "Fiberwise same-condition moment matching for conditional mean and covariance.",
+        "args": {
+            "drift_field": "fiber_moment",
+            "conditioning_mode": "none",
+            "target_kernel_scale": 1.0,
+            "target_kernel_mode": "raw",
+        },
+    },
+    "fiber_energy_moment": {
+        "description": "Fiberwise energy-distance matching with explicit conditional moment matching.",
+        "args": {
+            "drift_field": "fiber_energy_moment",
+            "conditioning_mode": "none",
+            "target_kernel_scale": 1.0,
+            "target_kernel_mode": "raw",
+        },
+    },
+    "fiber_phase_energy": {
+        "description": "OptFib phase-feature fiberwise energy matching with a weak supervised anchor term.",
+        "args": {
+            "drift_field": "fiber_energy",
+            "conditioning_mode": "none",
+            "condition_feature_mode": "optfib_phase",
+            "latent_input_scale": 4.0,
+            "target_kernel_scale": 250.0,
+            "target_kernel_mode": "raw",
+            "fiber_supervised_weight": 0.003125,
+            "fiber_generated_samples": 16,
+            "fiber_positive_samples": 16,
+            "fiber_reference_samples": 16,
+        },
+    },
+    "fiber_physics_k20_mean": {
+        "description": "OptFib K=20 physics-base surrogate with deterministic fiberwise mean correction.",
+        "args": {
+            "drift_field": "fiber_moment",
+            "conditioning_mode": "none",
+            "condition_context_mode": "input_base",
+            "condition_feature_mode": "optfib_phase",
+            "physics_base_mode": "optfib",
+            "physics_base_optfib_kstep": 20,
+            "physics_base_optfib_pn_dbm": -21.3,
+            "latent_input_scale": 0.0,
+            "target_kernel_scale": 250.0,
+            "target_kernel_mode": "raw",
+            "fiber_generated_samples": 16,
+            "fiber_positive_samples": 16,
+            "fiber_reference_samples": 16,
+            "fiber_moment_mean_weight": 1.0,
+            "fiber_moment_cov_weight": 0.0,
+        },
+    },
 }
 
 
@@ -56,11 +139,27 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--variant", type=str, required=True, choices=sorted(VARIANT_SPECS))
-    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,OptFib")
+    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,TDL")
     parser.add_argument("--dataset-size", type=int, default=120_000)
     parser.add_argument("--eval-size", type=int, default=100_000)
     parser.add_argument("--batch-size", type=int, default=512)
+    parser.add_argument("--condition-power", type=float, default=0.0)
+    parser.add_argument("--condition-input-scale", type=float, default=0.0)
+    parser.add_argument("--optfib-input-power-dbm", type=float, default=None)
+    parser.add_argument("--condition-codebook-checkpoint", type=str, default="")
+    parser.add_argument("--condition-jitter-std", type=float, default=0.0)
+    parser.add_argument("--condition-context-mode", type=str, default="input", choices=["input", "input_base", "input_base_delta"])
+    parser.add_argument("--condition-feature-mode", type=str, default="raw", choices=["raw", "optfib_phase"])
+    parser.add_argument("--optfib-gamma", type=float, default=1.27)
+    parser.add_argument("--optfib-length", type=float, default=5000.0)
+    parser.add_argument("--physics-base-mode", type=str, default="identity", choices=["identity", "optfib", "optfib_noiseless"])
+    parser.add_argument("--physics-base-optfib-kstep", type=int, default=20)
+    parser.add_argument("--physics-base-optfib-pn-dbm", type=float, default=-21.3)
+    parser.add_argument("--latent-input-scale", type=float, default=1.0)
+    parser.add_argument("--residual-model", action="store_true")
+    parser.add_argument("--output-init-scale", type=float, default=1.0)
     parser.add_argument("--drifting-epochs", type=int, default=60)
+    parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--swd-projections", type=int, default=128)
     parser.add_argument("--sinkhorn-epsilon", type=float, default=None)
     parser.add_argument("--sinkhorn-min-epsilon", type=float, default=1e-3)
@@ -68,6 +167,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--fiber-generated-samples", type=int, default=4)
     parser.add_argument("--fiber-positive-samples", type=int, default=4)
     parser.add_argument("--fiber-reference-samples", type=int, default=4)
+    parser.add_argument("--fiber-moment-mean-weight", type=float, default=1.0)
+    parser.add_argument("--fiber-moment-cov-weight", type=float, default=1.0)
+    parser.add_argument("--fiber-supervised-weight", type=float, default=0.0)
     parser.add_argument("--anchor-metrics", action="store_true")
     parser.add_argument("--anchor-count", type=int, default=128)
     parser.add_argument("--anchor-samples", type=int, default=64)
@@ -164,8 +266,34 @@ def build_benchmark_command(args: argparse.Namespace, out_json: Path, ckpt_dir: 
         str(args.eval_size),
         "--batch-size",
         str(args.batch_size),
+        "--condition-power",
+        str(args.condition_power),
+        "--condition-input-scale",
+        str(args.condition_input_scale),
+        "--condition-jitter-std",
+        str(args.condition_jitter_std),
+        "--condition-context-mode",
+        args.condition_context_mode,
+        "--condition-feature-mode",
+        args.condition_feature_mode,
+        "--optfib-gamma",
+        str(args.optfib_gamma),
+        "--optfib-length",
+        str(args.optfib_length),
+        "--physics-base-mode",
+        args.physics_base_mode,
+        "--physics-base-optfib-kstep",
+        str(args.physics_base_optfib_kstep),
+        "--physics-base-optfib-pn-dbm",
+        str(args.physics_base_optfib_pn_dbm),
+        "--latent-input-scale",
+        str(args.latent_input_scale),
+        "--output-init-scale",
+        str(args.output_init_scale),
         "--drifting-epochs",
         str(args.drifting_epochs),
+        "--learning-rate",
+        str(args.learning_rate),
         "--swd-projections",
         str(args.swd_projections),
         "--sinkhorn-min-epsilon",
@@ -178,6 +306,12 @@ def build_benchmark_command(args: argparse.Namespace, out_json: Path, ckpt_dir: 
         str(args.fiber_positive_samples),
         "--fiber-reference-samples",
         str(args.fiber_reference_samples),
+        "--fiber-moment-mean-weight",
+        str(args.fiber_moment_mean_weight),
+        "--fiber-moment-cov-weight",
+        str(args.fiber_moment_cov_weight),
+        "--fiber-supervised-weight",
+        str(args.fiber_supervised_weight),
         "--save-dir",
         str(ckpt_dir),
         "--out",
@@ -185,6 +319,12 @@ def build_benchmark_command(args: argparse.Namespace, out_json: Path, ckpt_dir: 
     ]
     if args.sinkhorn_epsilon is not None:
         cmd.extend(["--sinkhorn-epsilon", str(args.sinkhorn_epsilon)])
+    if args.optfib_input_power_dbm is not None:
+        cmd.extend(["--optfib-input-power-dbm", str(args.optfib_input_power_dbm)])
+    if args.condition_codebook_checkpoint:
+        cmd.extend(["--condition-codebook-checkpoint", args.condition_codebook_checkpoint])
+    if args.residual_model:
+        cmd.append("--residual-model")
     if args.anchor_metrics:
         cmd.extend(
             [
@@ -227,7 +367,19 @@ def main() -> None:
         "dataset_size": args.dataset_size,
         "eval_size": args.eval_size,
         "batch_size": args.batch_size,
+        "condition_power": args.condition_power,
+        "condition_input_scale": args.condition_input_scale,
+        "optfib_input_power_dbm": args.optfib_input_power_dbm,
+        "condition_codebook_checkpoint": args.condition_codebook_checkpoint,
+        "condition_jitter_std": args.condition_jitter_std,
+        "condition_feature_mode": args.condition_feature_mode,
+        "optfib_gamma": args.optfib_gamma,
+        "optfib_length": args.optfib_length,
+        "latent_input_scale": args.latent_input_scale,
+        "residual_model": args.residual_model,
+        "output_init_scale": args.output_init_scale,
         "drifting_epochs": args.drifting_epochs,
+        "learning_rate": args.learning_rate,
         "swd_projections": args.swd_projections,
         "anchor_metrics": args.anchor_metrics,
         "anchor_count": args.anchor_count,
@@ -239,6 +391,9 @@ def main() -> None:
         "fiber_generated_samples": args.fiber_generated_samples,
         "fiber_positive_samples": args.fiber_positive_samples,
         "fiber_reference_samples": args.fiber_reference_samples,
+        "fiber_moment_mean_weight": args.fiber_moment_mean_weight,
+        "fiber_moment_cov_weight": args.fiber_moment_cov_weight,
+        "fiber_supervised_weight": args.fiber_supervised_weight,
     }
     manifest_path.write_text(json.dumps(manifest, indent=2))
 

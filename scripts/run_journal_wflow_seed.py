@@ -15,11 +15,27 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--variants", type=str, default="kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn")
-    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA")
+    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,TDL")
     parser.add_argument("--dataset-size", type=int, default=-1)
     parser.add_argument("--eval-size", type=int, default=1_000_000)
     parser.add_argument("--batch-size", type=int, default=-1)
+    parser.add_argument("--condition-power", type=float, default=0.0)
+    parser.add_argument("--condition-input-scale", type=float, default=0.0)
+    parser.add_argument("--optfib-input-power-dbm", type=float, default=None)
+    parser.add_argument("--condition-codebook-checkpoint", type=str, default="")
+    parser.add_argument("--condition-jitter-std", type=float, default=0.0)
+    parser.add_argument("--condition-context-mode", type=str, default="input", choices=["input", "input_base", "input_base_delta"])
+    parser.add_argument("--condition-feature-mode", type=str, default="raw", choices=["raw", "optfib_phase"])
+    parser.add_argument("--optfib-gamma", type=float, default=1.27)
+    parser.add_argument("--optfib-length", type=float, default=5000.0)
+    parser.add_argument("--physics-base-mode", type=str, default="identity", choices=["identity", "optfib", "optfib_noiseless"])
+    parser.add_argument("--physics-base-optfib-kstep", type=int, default=20)
+    parser.add_argument("--physics-base-optfib-pn-dbm", type=float, default=-21.3)
+    parser.add_argument("--latent-input-scale", type=float, default=1.0)
+    parser.add_argument("--residual-model", action="store_true")
+    parser.add_argument("--output-init-scale", type=float, default=1.0)
     parser.add_argument("--drifting-epochs", type=int, default=-1)
+    parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--swd-projections", type=int, default=-1)
     parser.add_argument("--sinkhorn-epsilon", type=float, default=None)
     parser.add_argument("--sinkhorn-min-epsilon", type=float, default=1e-3)
@@ -27,6 +43,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--fiber-generated-samples", type=int, default=4)
     parser.add_argument("--fiber-positive-samples", type=int, default=4)
     parser.add_argument("--fiber-reference-samples", type=int, default=4)
+    parser.add_argument("--fiber-moment-mean-weight", type=float, default=1.0)
+    parser.add_argument("--fiber-moment-cov-weight", type=float, default=1.0)
+    parser.add_argument("--fiber-supervised-weight", type=float, default=0.0)
     parser.add_argument("--anchor-metrics", action="store_true")
     parser.add_argument("--anchor-count", type=int, default=128)
     parser.add_argument("--anchor-samples", type=int, default=64)
@@ -69,8 +88,34 @@ def build_variant_command(args: argparse.Namespace, variant: str) -> list[str]:
         str(args.eval_size),
         "--batch-size",
         str(args.batch_size),
+        "--condition-power",
+        str(args.condition_power),
+        "--condition-input-scale",
+        str(args.condition_input_scale),
+        "--condition-jitter-std",
+        str(args.condition_jitter_std),
+        "--condition-context-mode",
+        args.condition_context_mode,
+        "--condition-feature-mode",
+        args.condition_feature_mode,
+        "--optfib-gamma",
+        str(args.optfib_gamma),
+        "--optfib-length",
+        str(args.optfib_length),
+        "--physics-base-mode",
+        args.physics_base_mode,
+        "--physics-base-optfib-kstep",
+        str(args.physics_base_optfib_kstep),
+        "--physics-base-optfib-pn-dbm",
+        str(args.physics_base_optfib_pn_dbm),
+        "--latent-input-scale",
+        str(args.latent_input_scale),
+        "--output-init-scale",
+        str(args.output_init_scale),
         "--drifting-epochs",
         str(args.drifting_epochs),
+        "--learning-rate",
+        str(args.learning_rate),
         "--swd-projections",
         str(args.swd_projections),
         "--sinkhorn-min-epsilon",
@@ -83,6 +128,12 @@ def build_variant_command(args: argparse.Namespace, variant: str) -> list[str]:
         str(args.fiber_positive_samples),
         "--fiber-reference-samples",
         str(args.fiber_reference_samples),
+        "--fiber-moment-mean-weight",
+        str(args.fiber_moment_mean_weight),
+        "--fiber-moment-cov-weight",
+        str(args.fiber_moment_cov_weight),
+        "--fiber-supervised-weight",
+        str(args.fiber_supervised_weight),
         "--anchor-count",
         str(args.anchor_count),
         "--anchor-samples",
@@ -94,6 +145,12 @@ def build_variant_command(args: argparse.Namespace, variant: str) -> list[str]:
     ]
     if args.sinkhorn_epsilon is not None:
         cmd.extend(["--sinkhorn-epsilon", str(args.sinkhorn_epsilon)])
+    if args.optfib_input_power_dbm is not None:
+        cmd.extend(["--optfib-input-power-dbm", str(args.optfib_input_power_dbm)])
+    if args.condition_codebook_checkpoint:
+        cmd.extend(["--condition-codebook-checkpoint", args.condition_codebook_checkpoint])
+    if args.residual_model:
+        cmd.append("--residual-model")
     if args.anchor_metrics:
         cmd.append("--anchor-metrics")
     return cmd

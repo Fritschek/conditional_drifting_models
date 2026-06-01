@@ -29,7 +29,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Aggregate journal W-Flow seed/variant tasks.")
     parser.add_argument("--suite-dir", type=Path, required=True)
     parser.add_argument("--variants", type=str, default="kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn")
-    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,OptFib")
+    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,TDL")
     parser.add_argument("--seeds", type=str, default="")
     parser.add_argument("--seed-start", type=int, default=7)
     parser.add_argument("--num-seeds", type=int, default=100)

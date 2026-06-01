@@ -11,6 +11,26 @@ METRICS = [
     "final_eval_ser",
     "final_eval_ber",
     "final_eval_loss",
+    "final_eval_cross_entropy_bits",
+    "final_eval_air_bits_per_message",
+    "final_eval_normalized_air",
+    "decoder_true_ser",
+    "decoder_pred_ser",
+    "decoder_abs_ser_gap",
+    "decoder_true_ber",
+    "decoder_pred_ber",
+    "decoder_abs_ber_gap",
+    "decoder_abs_ce_gap",
+    "decoder_air_bits_gap",
+    "decoder_confusion_tv",
+    "decoder_confusion_floor_tv",
+    "decoder_confusion_tv_ratio",
+    "decoder_prob_swd_ratio",
+    "decoder_logprob_swd_ratio",
+    "decoder_prob_margin_swd_ratio",
+    "decoder_boundary_mass_abs_gap",
+    "decoder_confusion_worst_message",
+    "decoder_ser_worst_message",
     "train_seconds",
 ]
 
@@ -19,7 +39,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Aggregate journal W-Flow symbolic BER/SER follow-up results.")
     parser.add_argument("--suite-dir", type=Path, required=True)
     parser.add_argument("--variants", type=str, default="analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn")
-    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,OptFib")
+    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,TDL")
     parser.add_argument("--seeds", type=str, default="")
     parser.add_argument("--seed-start", type=int, default=7)
     parser.add_argument("--num-seeds", type=int, default=100)
@@ -105,11 +125,9 @@ def load_rows(
                     "summary": run.get("summary"),
                     "log": run.get("log"),
                     "checkpoint_path": run.get("checkpoint_path"),
-                    "final_eval_ser": run.get("final_eval_ser"),
-                    "final_eval_ber": run.get("final_eval_ber"),
-                    "final_eval_loss": run.get("final_eval_loss"),
-                    "train_seconds": run.get("train_seconds"),
                 }
+                for metric in METRICS:
+                    row[metric] = run.get(metric)
                 rows.append(row)
 
     seen = {(int(row["seed"]), str(row["channel"]), str(row["variant"])) for row in rows}

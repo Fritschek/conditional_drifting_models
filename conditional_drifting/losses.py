@@ -109,7 +109,60 @@ def _prepare_target_features(
             torch.cat((scaled_generated, residual_generated), dim=1),
             torch.cat((scaled_positive, residual_positive), dim=1),
         )
+    if representation in {"polar_residual", "raw_plus_polar_residual"}:
+        if target_is_residual:
+            raise ValueError(f"target_representation={target_representation!r} requires direct target values.")
+        if target_condition_generated is None or target_condition_positive is None:
+            raise ValueError(f"target_representation={target_representation!r} requires target condition tensors.")
+        polar_generated = _complex_polar_residual_features(
+            generated,
+            target_condition_generated,
+            scale=residual_target_scale,
+        )
+        polar_positive = _complex_polar_residual_features(
+            positive,
+            target_condition_positive,
+            scale=residual_target_scale,
+        )
+        if representation == "polar_residual":
+            return polar_generated, polar_positive
+        return (
+            torch.cat((scaled_generated, polar_generated), dim=1),
+            torch.cat((scaled_positive, polar_positive), dim=1),
+        )
     raise ValueError(f"Unsupported target_representation={target_representation!r}")
+
+
+def _complex_polar_residual_features(
+    values: torch.Tensor,
+    conditions: torch.Tensor,
+    *,
+    scale: float,
+    eps: float = 1e-8,
+) -> torch.Tensor:
+    """Represent complex I/Q outputs by radial and phase residuals to conditions."""
+    if values.shape[-1] % 2 != 0:
+        raise ValueError("Polar residual features require an even I/Q feature dimension.")
+    if values.shape != conditions.shape:
+        raise ValueError("Polar residual features require values and conditions with matching shapes.")
+
+    pair_count = values.shape[-1] // 2
+    values_2d = values.reshape(*values.shape[:-1], pair_count, 2)
+    conditions_2d = conditions.reshape(*conditions.shape[:-1], pair_count, 2)
+
+    vr = values_2d[..., 0]
+    vi = values_2d[..., 1]
+    cr = conditions_2d[..., 0]
+    ci = conditions_2d[..., 1]
+
+    value_radius = torch.sqrt(vr.square() + vi.square() + eps)
+    condition_radius = torch.sqrt(cr.square() + ci.square() + eps)
+    radial_residual = value_radius - condition_radius
+    denom = value_radius * condition_radius + eps
+    cos_delta = torch.clamp((vr * cr + vi * ci) / denom, min=-1.0, max=1.0)
+    sin_delta = torch.clamp((vi * cr - vr * ci) / denom, min=-1.0, max=1.0)
+    features = torch.stack((radial_residual, sin_delta, cos_delta), dim=-1)
+    return float(scale) * features.reshape(*values.shape[:-1], pair_count * 3)
 
 
 def _resolve_cross_bandwidths(
@@ -208,13 +261,19 @@ def _batched_sinkhorn_barycentric_projection(
     if batch_size == 0 or n_source == 0 or n_target == 0:
         raise ValueError("Batched Sinkhorn projection requires non-empty source and target batches.")
 
-    regularization = _resolve_sinkhorn_epsilon(
-        source_features.reshape(-1, source_features.shape[-1]),
-        target_features.reshape(-1, target_features.shape[-1]),
-        epsilon,
-        min_epsilon,
-    )
     cost = 0.5 * torch.cdist(source_features, target_features, p=2).square()
+    if epsilon is not None:
+        regularization = max(float(epsilon), float(min_epsilon))
+    else:
+        # Estimate the Sinkhorn scale only from within-condition costs. Flattening
+        # the batch before cdist would compare unrelated fibers and create a
+        # quadratic global matrix.
+        with torch.no_grad():
+            values = cost.detach()[cost.detach() > 0]
+            if values.numel() == 0:
+                regularization = float(min_epsilon)
+            else:
+                regularization = float(torch.clamp(values.median(), min=float(min_epsilon)).item())
     scaled_cost = cost / regularization
     scaled_cost = scaled_cost - scaled_cost.amin(dim=2, keepdim=True)
     kernel = torch.exp(-scaled_cost).clamp_min(eps)
@@ -266,6 +325,19 @@ def _prepare_fiber_target_features(
             raise ValueError("target_representation='raw_plus_residual' requires target condition tensors.")
         residual = float(residual_target_scale) * (values - conditions)
         return torch.cat((scaled, residual), dim=2)
+    if representation in {"polar_residual", "raw_plus_polar_residual"}:
+        if target_is_residual:
+            raise ValueError(f"target_representation={target_representation!r} requires direct target values.")
+        if conditions is None:
+            raise ValueError(f"target_representation={target_representation!r} requires target condition tensors.")
+        polar = _complex_polar_residual_features(
+            values,
+            conditions,
+            scale=residual_target_scale,
+        )
+        if representation == "polar_residual":
+            return polar
+        return torch.cat((scaled, polar), dim=2)
     raise ValueError(f"Unsupported target_representation={target_representation!r}")
 
 
@@ -496,7 +568,11 @@ def compute_kernel_drift(
                 weights_gg = ky_gg * (torch.cdist(cond_generated, cond_generated, p=2) <= float(radius)).to(dtype=generated.dtype)
             else:
                 k = max(1, min(int(local_condition_k), generated.shape[0]))
-                neighbor_idx = torch.topk(sq_dist_x_gg + torch.eye(generated.shape[0], device=generated.device) * float("inf"), k=k, dim=1, largest=False).indices
+                self_dist_x = sq_dist_x_gg.masked_fill(
+                    torch.eye(generated.shape[0], device=generated.device, dtype=torch.bool),
+                    float("inf"),
+                )
+                neighbor_idx = torch.topk(self_dist_x, k=k, dim=1, largest=False).indices
                 mask = torch.zeros_like(sq_dist_y_gg, dtype=torch.bool)
                 mask.scatter_(1, neighbor_idx, True)
                 weights_gg = ky_gg * mask.to(dtype=generated.dtype)
@@ -785,6 +861,126 @@ def compute_fiber_sinkhorn_drift(
     return drift.detach()
 
 
+def compute_fiber_cloud_loss(
+    generated: torch.Tensor,
+    positive: torch.Tensor,
+    target_condition_generated: torch.Tensor | None = None,
+    target_condition_positive: torch.Tensor | None = None,
+    fiber_num_conditions: int | None = None,
+    fiber_generated_samples: int = 1,
+    fiber_positive_samples: int = 1,
+    target_scale: float = 1.0,
+    target_representation: str = "raw",
+    target_is_residual: bool = False,
+    residual_target_scale: float = 1.0,
+    bandwidth: float | None = None,
+    min_bandwidth: float = 1e-3,
+    objective: str = "mmd",
+    moment_mean_weight: float = 1.0,
+    moment_cov_weight: float = 1.0,
+    supervised_weight: float = 0.0,
+    eps: float = 1e-8,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    generated = generated.float()
+    positive = positive.to(device=generated.device, dtype=torch.float32)
+    generated_count = max(1, int(fiber_generated_samples))
+    positive_count = max(1, int(fiber_positive_samples))
+    if fiber_num_conditions is None:
+        if generated.shape[0] % generated_count != 0:
+            raise ValueError("Cannot infer fiber_num_conditions from generated samples.")
+        fiber_num_conditions = generated.shape[0] // generated_count
+    num_conditions = int(fiber_num_conditions)
+    if generated.shape[0] != num_conditions * generated_count:
+        raise ValueError("Generated sample count does not match fiber_num_conditions * fiber_generated_samples.")
+    if positive.shape[0] != num_conditions * positive_count:
+        raise ValueError("Positive sample count does not match fiber_num_conditions * fiber_positive_samples.")
+
+    generated_3d = generated.reshape(num_conditions, generated_count, generated.shape[1])
+    positive_3d = positive.reshape(num_conditions, positive_count, positive.shape[1])
+    cond_generated_3d = (
+        target_condition_generated.to(device=generated.device, dtype=torch.float32).reshape(num_conditions, generated_count, generated.shape[1])
+        if target_condition_generated is not None
+        else None
+    )
+    cond_positive_3d = (
+        target_condition_positive.to(device=generated.device, dtype=torch.float32).reshape(num_conditions, positive_count, positive.shape[1])
+        if target_condition_positive is not None
+        else None
+    )
+
+    generated_features = _prepare_fiber_target_features(
+        generated_3d,
+        cond_generated_3d,
+        target_scale=target_scale,
+        target_representation=target_representation,
+        target_is_residual=target_is_residual,
+        residual_target_scale=residual_target_scale,
+    )
+    positive_features = _prepare_fiber_target_features(
+        positive_3d,
+        cond_positive_3d,
+        target_scale=target_scale,
+        target_representation=target_representation,
+        target_is_residual=target_is_residual,
+        residual_target_scale=residual_target_scale,
+    )
+
+    objective_name = str(objective or "mmd").lower()
+    def moment_loss() -> torch.Tensor:
+        generated_mean = generated_features.mean(dim=1)
+        positive_mean = positive_features.mean(dim=1)
+        mean_loss = (generated_mean - positive_mean).square().sum(dim=1).mean()
+
+        generated_centered = generated_features - generated_mean[:, None, :]
+        positive_centered = positive_features - positive_mean[:, None, :]
+        generated_denom = max(1, generated_count - 1)
+        positive_denom = max(1, positive_count - 1)
+        generated_cov = torch.bmm(generated_centered.transpose(1, 2), generated_centered) / generated_denom
+        positive_cov = torch.bmm(positive_centered.transpose(1, 2), positive_centered) / positive_denom
+        cov_loss = (generated_cov - positive_cov).square().mean(dim=(1, 2)).mean()
+        return float(moment_mean_weight) * mean_loss + float(moment_cov_weight) * cov_loss
+
+    if objective_name in {"mmd", "mmd_moment"}:
+        flat_features = torch.cat(
+            (
+                generated_features.reshape(-1, generated_features.shape[-1]).detach(),
+                positive_features.reshape(-1, positive_features.shape[-1]).detach(),
+            ),
+            dim=0,
+        )
+        resolved_bw = _resolve_bandwidth(flat_features, bandwidth, min_bandwidth=min_bandwidth)
+        sq_gg = torch.cdist(generated_features, generated_features, p=2).square()
+        sq_gp = torch.cdist(generated_features, positive_features, p=2).square()
+        sq_pp = torch.cdist(positive_features, positive_features, p=2).square()
+        denom = 2.0 * resolved_bw * resolved_bw + eps
+        k_gg = torch.exp(-sq_gg / denom)
+        k_gp = torch.exp(-sq_gp / denom)
+        k_pp = torch.exp(-sq_pp / denom)
+        loss = (k_gg.mean(dim=(1, 2)) + k_pp.mean(dim=(1, 2)) - 2.0 * k_gp.mean(dim=(1, 2))).mean()
+        if objective_name == "mmd_moment":
+            loss = loss + moment_loss()
+    elif objective_name in {"energy", "energy_moment"}:
+        d_gg = torch.cdist(generated_features, generated_features, p=2)
+        d_gp = torch.cdist(generated_features, positive_features, p=2)
+        d_pp = torch.cdist(positive_features, positive_features, p=2)
+        loss = (2.0 * d_gp.mean(dim=(1, 2)) - d_gg.mean(dim=(1, 2)) - d_pp.mean(dim=(1, 2))).mean()
+        if objective_name == "energy_moment":
+            loss = loss + moment_loss()
+    elif objective_name == "moment":
+        loss = moment_loss()
+    else:
+        raise ValueError(f"Unsupported fiber cloud objective={objective!r}")
+
+    if float(supervised_weight) > 0.0:
+        paired_count = min(generated_count, positive_count)
+        paired_generated = generated_features[:, :paired_count, :]
+        paired_positive = positive_features[:, :paired_count, :]
+        loss = loss + float(supervised_weight) * F.mse_loss(paired_generated, paired_positive)
+
+    drift = positive_3d.mean(dim=1, keepdim=True) - generated_3d
+    return loss, drift.reshape(num_conditions * generated_count, generated.shape[1]).detach()
+
+
 def drifting_loss(
     generated: torch.Tensor,
     positive: torch.Tensor,
@@ -823,6 +1019,9 @@ def drifting_loss(
     sinkhorn_epsilon: float | None = None,
     sinkhorn_min_epsilon: float = 1e-3,
     sinkhorn_iterations: int = 10,
+    fiber_moment_mean_weight: float = 1.0,
+    fiber_moment_cov_weight: float = 1.0,
+    fiber_supervised_weight: float = 0.0,
 ) -> tuple[torch.Tensor, torch.Tensor]:
     drift_field = str(drift_field or "kernel").lower()
     if drift_field == "kernel":
@@ -899,6 +1098,33 @@ def drifting_loss(
             max_drift_norm=max_drift_norm,
             repulsive_weight=repulsive_weight,
         )
+    elif drift_field in {"fiber_mmd", "fiber_energy", "fiber_moment", "fiber_energy_moment", "fiber_mmd_moment"}:
+        loss, drift = compute_fiber_cloud_loss(
+            generated,
+            positive,
+            target_condition_generated=target_condition_generated,
+            target_condition_positive=target_condition_positive,
+            fiber_num_conditions=fiber_num_conditions,
+            fiber_generated_samples=fiber_generated_samples,
+            fiber_positive_samples=fiber_positive_samples,
+            target_scale=target_scale,
+            target_representation=target_representation,
+            target_is_residual=target_is_residual,
+            residual_target_scale=residual_target_scale,
+            bandwidth=target_bandwidth if target_bandwidth is not None else bandwidth,
+            min_bandwidth=min_bandwidth,
+            objective={
+                "fiber_mmd": "mmd",
+                "fiber_energy": "energy",
+                "fiber_moment": "moment",
+                "fiber_energy_moment": "energy_moment",
+                "fiber_mmd_moment": "mmd_moment",
+            }[drift_field],
+            moment_mean_weight=fiber_moment_mean_weight,
+            moment_cov_weight=fiber_moment_cov_weight,
+            supervised_weight=fiber_supervised_weight,
+        )
+        return loss, drift
     else:
         raise ValueError(f"Unsupported drift_field={drift_field!r}")
     target = (generated + float(drift_scale) * drift).detach()

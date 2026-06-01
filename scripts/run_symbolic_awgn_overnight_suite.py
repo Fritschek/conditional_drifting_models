@@ -341,7 +341,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run a broad overnight symbolic channel surrogate-training suite.")
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--seed", type=int, default=7)
-    parser.add_argument("--channel", type=str, default="AWGN", choices=["AWGN", "Rayleigh", "ModeFlip", "SSPA", "OptFib"])
+    parser.add_argument("--channel", type=str, default="AWGN", choices=["AWGN", "Rayleigh", "ModeFlip", "SSPA", "TDL", "OptFib"])
     parser.add_argument("--code-dim", type=int, default=7)
     parser.add_argument("--rate", type=float, default=4.0 / 7.0)
     parser.add_argument("--ebno-db", type=float, default=5.0)
@@ -415,7 +415,7 @@ def filter_specs(items: list[object], allowed_prefixes: set[str]) -> list[object
 
 def main() -> None:
     args = build_parser().parse_args()
-    if args.channel in {"SSPA", "OptFib"} and (args.code_dim % 2 != 0):
+    if args.channel in {"SSPA", "TDL", "OptFib"} and (args.code_dim % 2 != 0):
         raise ValueError(f"{args.channel} requires an even code dimension, got {args.code_dim}.")
     stamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
     suite_dir = Path(args.suite_dir) if args.suite_dir else ROOT / "results" / f"symbolic_{args.channel.lower()}_overnight_{stamp}"

@@ -3,7 +3,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
-CHANNELS="${REPAIR_CHANNELS:-AWGN,Rayleigh,SSPA,OptFib}"
+CHANNELS="${REPAIR_CHANNELS:-AWGN,Rayleigh,SSPA,TDL}"
 WALLTIME="${WALLTIME:-3-00:00:00}"
 REPAIR_TASKS="${REPAIR_TASKS:-joint_sinkhorn:103 fiber_sinkhorn:103 fiber_sinkhorn:104 fiber_sinkhorn:105 fiber_sinkhorn:106}"
 SLURM_SCRIPT="$PROJECT_ROOT/hpc/slurm_journal_wflow_repair_task.sh"
