@@ -5,8 +5,8 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1
-#SBATCH --time=1-12:00:00
-#SBATCH --job-name=cond_drift_curve
+#SBATCH --time=3-12:00:00
+#SBATCH --job-name=cond_drift_base
 #SBATCH --mail-type=END,FAIL
 #SBATCH --output=logs/%x-%A_%a.out
 #SBATCH --error=logs/%x-%A_%a.err
@@ -16,31 +16,25 @@ set -euo pipefail
 PROJECT_ROOT="${PROJECT_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 SEED_START="${SEED_START:-7}"
-NUM_SEEDS="${NUM_SEEDS:-10}"
+NUM_SEEDS="${NUM_SEEDS:-30}"
 CHANNELS="${CHANNELS:-AWGN,Rayleigh,SSPA,TDL}"
-VARIANTS="${VARIANTS:-analytic,fiber_sinkhorn,wgan,diffusion_ddim100}"
-WFLOW_SUITE_DIR_MAP="${WFLOW_SUITE_DIR_MAP:-}"
-BASELINE_SUITE_DIR="${BASELINE_SUITE_DIR:-}"
-CURVE_SUITE_DIR="${CURVE_SUITE_DIR:-$PROJECT_ROOT/results/journal_wflow_curves_${SUITE_TAG:-$(date -u +%Y%m%d_%H%M%S)}}"
-AE_DATASET_SIZE="${AE_DATASET_SIZE:-1000000}"
-AE_BATCH_SIZE="${AE_BATCH_SIZE:-500}"
-AE_EPOCHS="${AE_EPOCHS:-10}"
-AE_LEARNING_RATE="${AE_LEARNING_RATE:-0.001}"
-EVAL_SIZE="${EVAL_SIZE:-100000}"
-EVAL_BATCH_SIZE="${EVAL_BATCH_SIZE:-1000}"
-EVAL_EVERY="${EVAL_EVERY:-1}"
-EBNO_VALUES="${EBNO_VALUES:-}"
+VARIANTS="${VARIANTS:-wgan,diffusion}"
+BASELINE_SUITE_DIR="${BASELINE_SUITE_DIR:-$PROJECT_ROOT/results/journal_baseline_implants_${SUITE_TAG:-$(date -u +%Y%m%d_%H%M%S)}}"
+DATASET_SIZE="${DATASET_SIZE:--1}"
+BATCH_SIZE="${BATCH_SIZE:--1}"
+METRIC_EVAL_SIZE="${METRIC_EVAL_SIZE:-100000}"
+SWD_PROJECTIONS="${SWD_PROJECTIONS:--1}"
+DIFFUSION_EPOCHS="${DIFFUSION_EPOCHS:--1}"
+WGAN_EPOCHS="${WGAN_EPOCHS:--1}"
+DIFFUSION_LEARNING_RATE="${DIFFUSION_LEARNING_RATE:-0.0001}"
 DIFFUSION_DDIM_STEPS="${DIFFUSION_DDIM_STEPS:-100}"
+DIFFUSION_EVAL_BATCH_SIZE="${DIFFUSION_EVAL_BATCH_SIZE:--1}"
+SKIP_METRIC_EVAL="${SKIP_METRIC_EVAL:-0}"
 FORCE_RETRAIN="${FORCE_RETRAIN:-0}"
 ARRAY_TASK_COUNT="${ARRAY_TASK_COUNT:-${SLURM_ARRAY_TASK_COUNT:-1}}"
 
-if [[ -z "${WFLOW_SUITE_DIR:-}" ]]; then
-  echo "WFLOW_SUITE_DIR must point to the completed journal W-Flow checkpoint suite." >&2
-  exit 1
-fi
-
 mkdir -p "$PROJECT_ROOT/logs"
-mkdir -p "$CURVE_SUITE_DIR"
+mkdir -p "$BASELINE_SUITE_DIR"
 
 IFS=',' read -r -a CHANNEL_ARRAY <<< "$CHANNELS"
 CHANNEL_COUNT="${#CHANNEL_ARRAY[@]}"
@@ -54,15 +48,16 @@ TASK_COUNT=$((NUM_SEEDS * CHANNEL_COUNT))
 
 echo "[slurm] host: $(hostname)"
 echo "[slurm] project_root: $PROJECT_ROOT"
-echo "[slurm] wflow_suite_dir: $WFLOW_SUITE_DIR"
-echo "[slurm] wflow_suite_dir_map: ${WFLOW_SUITE_DIR_MAP:-none}"
-echo "[slurm] baseline_suite_dir: ${BASELINE_SUITE_DIR:-none}"
-echo "[slurm] curve_suite_dir: $CURVE_SUITE_DIR"
+echo "[slurm] baseline_suite_dir: $BASELINE_SUITE_DIR"
 echo "[slurm] seed_start: $SEED_START"
 echo "[slurm] num_seeds: $NUM_SEEDS"
 echo "[slurm] channels: $CHANNELS"
 echo "[slurm] variants: $VARIANTS"
-echo "[slurm] ebno_values: ${EBNO_VALUES:-channel-default}"
+echo "[slurm] dataset_size: $DATASET_SIZE"
+echo "[slurm] batch_size: $BATCH_SIZE"
+echo "[slurm] metric_eval_size: $METRIC_EVAL_SIZE"
+echo "[slurm] diffusion_epochs: $DIFFUSION_EPOCHS"
+echo "[slurm] wgan_epochs: $WGAN_EPOCHS"
 echo "[slurm] logical_task_count: $TASK_COUNT"
 echo "[slurm] array_task_count: $ARRAY_TASK_COUNT"
 echo "[slurm] job_id: ${SLURM_JOB_ID:-n/a}"
@@ -84,30 +79,24 @@ for ((LOGICAL_TASK_ID = TASK_ID; LOGICAL_TASK_ID < TASK_COUNT; LOGICAL_TASK_ID +
   echo "[slurm] running seed=$CURRENT_SEED channel=$CURRENT_CHANNEL logical_task_id=$LOGICAL_TASK_ID"
 
   CMD=(
-    "$PYTHON_BIN" -u scripts/run_journal_wflow_curve_seed_channel.py
+    "$PYTHON_BIN" -u scripts/run_journal_baseline_implant_seed_channel.py
     --device cuda
     --seed "$CURRENT_SEED"
     --channel "$CURRENT_CHANNEL"
     --variants "$VARIANTS"
-    --wflow-suite-dir "$WFLOW_SUITE_DIR"
-    --suite-dir "$CURVE_SUITE_DIR"
+    --suite-dir "$BASELINE_SUITE_DIR"
+    --dataset-size "$DATASET_SIZE"
+    --batch-size "$BATCH_SIZE"
+    --metric-eval-size "$METRIC_EVAL_SIZE"
+    --swd-projections "$SWD_PROJECTIONS"
+    --diffusion-epochs "$DIFFUSION_EPOCHS"
+    --wgan-epochs "$WGAN_EPOCHS"
+    --diffusion-learning-rate "$DIFFUSION_LEARNING_RATE"
     --diffusion-ddim-steps "$DIFFUSION_DDIM_STEPS"
-    --ae-dataset-size "$AE_DATASET_SIZE"
-    --ae-batch-size "$AE_BATCH_SIZE"
-    --ae-epochs "$AE_EPOCHS"
-    --ae-learning-rate "$AE_LEARNING_RATE"
-    --eval-size "$EVAL_SIZE"
-    --eval-batch-size "$EVAL_BATCH_SIZE"
-    --eval-every "$EVAL_EVERY"
+    --diffusion-eval-batch-size "$DIFFUSION_EVAL_BATCH_SIZE"
   )
-  if [[ -n "$WFLOW_SUITE_DIR_MAP" ]]; then
-    CMD+=(--wflow-suite-dir-map "$WFLOW_SUITE_DIR_MAP")
-  fi
-  if [[ -n "$BASELINE_SUITE_DIR" ]]; then
-    CMD+=(--baseline-suite-dir "$BASELINE_SUITE_DIR")
-  fi
-  if [[ -n "$EBNO_VALUES" ]]; then
-    CMD+=(--ebno-values "$EBNO_VALUES")
+  if [[ "$SKIP_METRIC_EVAL" == "1" || "$SKIP_METRIC_EVAL" == "true" || "$SKIP_METRIC_EVAL" == "yes" ]]; then
+    CMD+=(--skip-metric-eval)
   fi
   if [[ "$FORCE_RETRAIN" == "1" || "$FORCE_RETRAIN" == "true" || "$FORCE_RETRAIN" == "yes" ]]; then
     CMD+=(--force-retrain)

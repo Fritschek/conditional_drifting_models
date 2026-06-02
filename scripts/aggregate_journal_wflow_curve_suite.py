@@ -12,9 +12,9 @@ METRICS = ["ser", "ber", "loss", "cross_entropy_bits", "air_bits_per_message", "
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Aggregate journal W-Flow BER/SER curve results.")
+    parser = argparse.ArgumentParser(description="Aggregate journal BER/SER curve results for learned channel surrogates.")
     parser.add_argument("--suite-dir", type=Path, required=True)
-    parser.add_argument("--variants", type=str, default="analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn")
+    parser.add_argument("--variants", type=str, default="analytic,fiber_sinkhorn,wgan,diffusion_ddim100")
     parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,TDL")
     parser.add_argument("--seeds", type=str, default="")
     parser.add_argument("--seed-start", type=int, default=7)

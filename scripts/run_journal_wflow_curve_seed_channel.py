@@ -30,14 +30,31 @@ CHANNEL_SETTINGS = {
     "OptFib": {"message_dim": 16, "code_dim": 2, "rate": 1.0, "train_ebno_db": 5.0, "ebno_values": "5"},
 }
 
+WFLOW_VARIANTS = {
+    "kernel_target",
+    "kernel_joint",
+    "joint_sinkhorn",
+    "fiber_sinkhorn",
+    "fiber_sinkhorn_marginal",
+}
+
+WGAN_VARIANTS = {"wgan", "paper_wgan"}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train symbolic AEs for one seed/channel and evaluate BER/SER curves.")
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--channel", type=str, required=True, choices=sorted(CHANNEL_SETTINGS))
-    parser.add_argument("--variants", type=str, default="analytic,kernel_target,kernel_joint,joint_sinkhorn,fiber_sinkhorn")
-    parser.add_argument("--wflow-suite-dir", type=Path, required=True)
+    parser.add_argument("--variants", type=str, default="analytic,fiber_sinkhorn,wgan,diffusion_ddim100")
+    parser.add_argument("--wflow-suite-dir", type=Path, default=None)
+    parser.add_argument(
+        "--wflow-suite-dir-map",
+        type=str,
+        default="",
+        help="Optional channel-specific W-Flow suite map, e.g. SSPA=/path/a,TDL=/path/b.",
+    )
+    parser.add_argument("--baseline-suite-dir", type=Path, default=None)
     parser.add_argument("--suite-dir", type=Path, required=True)
     parser.add_argument("--message-dim", type=int, default=0, help="Use <=0 for the channel default.")
     parser.add_argument("--hidden-dim", type=int, default=16)
@@ -69,13 +86,82 @@ def parse_float_list(text: str) -> list[float]:
     return [float(part.strip()) for part in text.split(",") if part.strip()]
 
 
-def checkpoint_path(wflow_suite_dir: Path, variant: str, channel: str, seed: int) -> Path:
+def parse_suite_dir_map(text: str) -> dict[str, Path]:
+    mapping: dict[str, Path] = {}
+    for item in parse_csv_list(text):
+        if "=" not in item:
+            raise ValueError(f"Invalid suite map entry {item!r}; expected CHANNEL=/path.")
+        channel, path = item.split("=", 1)
+        channel = channel.strip()
+        if not channel:
+            raise ValueError(f"Invalid suite map entry {item!r}; channel is empty.")
+        mapping[channel] = Path(path.strip())
+    return mapping
+
+
+def resolve_wflow_suite_dir(args: argparse.Namespace, channel: str) -> Path:
+    mapping = getattr(args, "_wflow_suite_map", {})
+    suite_dir = mapping.get(channel) or args.wflow_suite_dir
+    if suite_dir is None:
+        raise ValueError(
+            f"Variant requires a W-Flow checkpoint for channel {channel}, "
+            "but neither --wflow-suite-dir nor --wflow-suite-dir-map provided one."
+        )
+    return Path(suite_dir)
+
+
+def wflow_checkpoint_path(args: argparse.Namespace, variant: str, channel: str, seed: int) -> Path:
+    wflow_suite_dir = resolve_wflow_suite_dir(args, channel)
     return (
         wflow_suite_dir
         / variant
         / f"seed{seed}"
         / "checkpoints"
         / f"enhanced_direct_{channel.lower()}_seed{seed}.pt"
+    )
+
+
+def diffusion_variant_options(variant: str, default_ddim_steps: int) -> tuple[str, int | None]:
+    normalized = variant.lower()
+    if normalized in {"diffusion", "diffusion_ddim"}:
+        return "ddim", default_ddim_steps
+    if normalized in {"diffusion_ddim100", "ddim100"}:
+        return "ddim", 100
+    if normalized == "ddpm" or normalized == "diffusion_ddpm":
+        return "ddpm", None
+    for prefix in ("diffusion_ddim", "ddim"):
+        if normalized.startswith(prefix):
+            suffix = normalized[len(prefix) :]
+            if suffix.isdigit():
+                return "ddim", int(suffix)
+    raise ValueError(f"Unsupported diffusion curve variant: {variant}")
+
+
+def is_diffusion_variant(variant: str) -> bool:
+    normalized = variant.lower()
+    return normalized in {"diffusion", "diffusion_ddim", "diffusion_ddim100", "diffusion_ddpm", "ddim100", "ddpm"} or normalized.startswith(
+        ("diffusion_ddim", "ddim")
+    )
+
+
+def baseline_checkpoint_path(args: argparse.Namespace, variant: str, channel: str, seed: int) -> Path:
+    if args.baseline_suite_dir is None:
+        raise ValueError(f"Variant {variant} requires --baseline-suite-dir.")
+    normalized = variant.lower()
+    if normalized in WGAN_VARIANTS:
+        variant_dir = "wgan"
+        checkpoint_stem = "wgan"
+    elif is_diffusion_variant(normalized):
+        variant_dir = "diffusion"
+        checkpoint_stem = "diffusion"
+    else:
+        raise ValueError(f"Unsupported baseline variant: {variant}")
+    return (
+        Path(args.baseline_suite_dir)
+        / variant_dir
+        / f"seed{seed}"
+        / "checkpoints"
+        / f"{checkpoint_stem}_{channel.lower()}_seed{seed}.pt"
     )
 
 
@@ -139,9 +225,29 @@ def build_train_command(args: argparse.Namespace, variant: str, out_dir: Path, a
         cmd.extend(["--train-implant", "analytic_channel", "--eval-implant", "analytic_channel"])
         return cmd
 
-    ckpt = checkpoint_path(args.wflow_suite_dir, variant, args.channel, args.seed)
-    if not ckpt.exists():
-        raise FileNotFoundError(f"Missing W-Flow checkpoint: {ckpt}")
+    if variant in WFLOW_VARIANTS:
+        ckpt = wflow_checkpoint_path(args, variant, args.channel, args.seed)
+        if not ckpt.exists():
+            raise FileNotFoundError(f"Missing W-Flow checkpoint: {ckpt}")
+        sampler = "ddim"
+        ddim_steps = args.diffusion_ddim_steps
+    elif variant.lower() in WGAN_VARIANTS or is_diffusion_variant(variant):
+        ckpt = baseline_checkpoint_path(args, variant, args.channel, args.seed)
+        if not ckpt.exists():
+            raise FileNotFoundError(f"Missing baseline implant checkpoint: {ckpt}")
+        if is_diffusion_variant(variant):
+            sampler, parsed_ddim_steps = diffusion_variant_options(variant, args.diffusion_ddim_steps)
+            ddim_steps = args.diffusion_ddim_steps if parsed_ddim_steps is None else int(parsed_ddim_steps)
+        else:
+            sampler = "ddim"
+            ddim_steps = args.diffusion_ddim_steps
+    else:
+        raise ValueError(
+            f"Unsupported curve variant {variant!r}. Use analytic, one of {sorted(WFLOW_VARIANTS)}, "
+            "wgan/paper_wgan, or diffusion_ddim<N>/diffusion_ddpm."
+        )
+    cmd[cmd.index("--diffusion-sampler") + 1] = sampler
+    cmd[cmd.index("--ddim-steps") + 1] = str(ddim_steps)
     cmd.extend(
         [
             "--train-implant",
@@ -233,6 +339,7 @@ def evaluate_curve(
 
 def main() -> None:
     args = parse_args()
+    args._wflow_suite_map = parse_suite_dir_map(args.wflow_suite_dir_map)
     settings = CHANNEL_SETTINGS[args.channel]
     message_dim = int(args.message_dim if args.message_dim > 0 else settings["message_dim"])
     variants = parse_csv_list(args.variants)
@@ -286,7 +393,9 @@ def main() -> None:
         "seed": int(args.seed),
         "channel": args.channel,
         "variants": variants,
-        "wflow_suite_dir": str(args.wflow_suite_dir),
+        "wflow_suite_dir": str(args.wflow_suite_dir) if args.wflow_suite_dir is not None else None,
+        "wflow_suite_dir_map": {key: str(value) for key, value in args._wflow_suite_map.items()},
+        "baseline_suite_dir": str(args.baseline_suite_dir) if args.baseline_suite_dir is not None else None,
         "train_ebno_db": train_ebno_db,
         "ebno_values": ebno_values,
         "elapsed_seconds": time.perf_counter() - start,
