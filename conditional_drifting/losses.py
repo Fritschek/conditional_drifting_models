@@ -205,6 +205,53 @@ def _resolve_sinkhorn_epsilon(
         return float(torch.clamp(values.median(), min=float(min_epsilon)).item())
 
 
+def _subsample_feature_rows(features: torch.Tensor, max_samples: int) -> torch.Tensor:
+    flat = features.reshape(-1, features.shape[-1])
+    sample_count = int(max_samples)
+    if sample_count <= 0 or flat.shape[0] <= sample_count:
+        return flat
+    idx = torch.linspace(0, flat.shape[0] - 1, steps=sample_count, device=flat.device).round().long()
+    return flat.index_select(0, idx)
+
+
+def _resolve_batched_sinkhorn_epsilon(
+    cost: torch.Tensor,
+    source_features: torch.Tensor,
+    target_features: torch.Tensor,
+    *,
+    epsilon: float | None,
+    min_epsilon: float,
+    mode: str,
+    sample_count: int,
+    scale: float,
+) -> float:
+    if epsilon is not None:
+        regularization = max(float(epsilon), float(min_epsilon))
+    else:
+        mode_name = str(mode or "within").lower()
+        if mode_name in {"within", "fiber", "condition", "batched"}:
+            # Estimate the Sinkhorn scale only from within-condition costs.
+            with torch.no_grad():
+                values = cost.detach()[cost.detach() > 0]
+                if values.numel() == 0:
+                    regularization = float(min_epsilon)
+                else:
+                    regularization = float(torch.clamp(values.median(), min=float(min_epsilon)).item())
+        elif mode_name in {"global", "legacy", "marginal"}:
+            # Legacy behavior used cross-condition distances to set the entropy
+            # temperature, but still solved the Sinkhorn systems per condition.
+            # Subsampling keeps this usable for large paper-budget batches.
+            regularization = _resolve_sinkhorn_epsilon(
+                _subsample_feature_rows(source_features, sample_count),
+                _subsample_feature_rows(target_features, sample_count),
+                None,
+                min_epsilon,
+            )
+        else:
+            raise ValueError(f"Unsupported sinkhorn_epsilon_mode={mode!r}")
+    return max(float(regularization) * float(scale), float(min_epsilon))
+
+
 def _sinkhorn_barycentric_projection(
     source_features: torch.Tensor,
     target_features: torch.Tensor,
@@ -213,6 +260,9 @@ def _sinkhorn_barycentric_projection(
     epsilon: float | None,
     min_epsilon: float,
     iterations: int,
+    epsilon_mode: str = "within",
+    epsilon_sample_count: int = 2048,
+    epsilon_scale: float = 1.0,
     eps: float = 1e-8,
 ) -> torch.Tensor:
     source_features = source_features.detach().float()
@@ -224,6 +274,7 @@ def _sinkhorn_barycentric_projection(
         raise ValueError("Sinkhorn projection requires non-empty source and target batches.")
 
     regularization = _resolve_sinkhorn_epsilon(source_features, target_features, epsilon, min_epsilon)
+    regularization = max(float(regularization) * float(epsilon_scale), float(min_epsilon))
     cost = 0.5 * torch.cdist(source_features, target_features, p=2).square()
     scaled_cost = cost / regularization
     # Row shifts are absorbed by Sinkhorn's source scaling and improve numerical stability.
@@ -251,6 +302,9 @@ def _batched_sinkhorn_barycentric_projection(
     epsilon: float | None,
     min_epsilon: float,
     iterations: int,
+    epsilon_mode: str = "within",
+    epsilon_sample_count: int = 2048,
+    epsilon_scale: float = 1.0,
     eps: float = 1e-8,
 ) -> torch.Tensor:
     source_features = source_features.detach().float()
@@ -262,18 +316,16 @@ def _batched_sinkhorn_barycentric_projection(
         raise ValueError("Batched Sinkhorn projection requires non-empty source and target batches.")
 
     cost = 0.5 * torch.cdist(source_features, target_features, p=2).square()
-    if epsilon is not None:
-        regularization = max(float(epsilon), float(min_epsilon))
-    else:
-        # Estimate the Sinkhorn scale only from within-condition costs. Flattening
-        # the batch before cdist would compare unrelated fibers and create a
-        # quadratic global matrix.
-        with torch.no_grad():
-            values = cost.detach()[cost.detach() > 0]
-            if values.numel() == 0:
-                regularization = float(min_epsilon)
-            else:
-                regularization = float(torch.clamp(values.median(), min=float(min_epsilon)).item())
+    regularization = _resolve_batched_sinkhorn_epsilon(
+        cost,
+        source_features,
+        target_features,
+        epsilon=epsilon,
+        min_epsilon=min_epsilon,
+        mode=epsilon_mode,
+        sample_count=epsilon_sample_count,
+        scale=epsilon_scale,
+    )
     scaled_cost = cost / regularization
     scaled_cost = scaled_cost - scaled_cost.amin(dim=2, keepdim=True)
     kernel = torch.exp(-scaled_cost).clamp_min(eps)
@@ -629,6 +681,9 @@ def compute_sinkhorn_drift(
     sinkhorn_epsilon: float | None = None,
     sinkhorn_min_epsilon: float = 1e-3,
     sinkhorn_iterations: int = 10,
+    sinkhorn_epsilon_mode: str = "within",
+    sinkhorn_epsilon_samples: int = 2048,
+    sinkhorn_epsilon_scale: float = 1.0,
     max_drift_norm: float | None = None,
     repulsive_weight: float = 1.0,
     eps: float = 1e-8,
@@ -712,6 +767,9 @@ def compute_sinkhorn_drift(
         epsilon=sinkhorn_epsilon,
         min_epsilon=sinkhorn_min_epsilon,
         iterations=sinkhorn_iterations,
+        epsilon_mode=sinkhorn_epsilon_mode,
+        epsilon_sample_count=sinkhorn_epsilon_samples,
+        epsilon_scale=sinkhorn_epsilon_scale,
         eps=eps,
     )
     drift = positive_center - generated
@@ -731,6 +789,9 @@ def compute_sinkhorn_drift(
             epsilon=sinkhorn_epsilon,
             min_epsilon=sinkhorn_min_epsilon,
             iterations=sinkhorn_iterations,
+            epsilon_mode=sinkhorn_epsilon_mode,
+            epsilon_sample_count=sinkhorn_epsilon_samples,
+            epsilon_scale=sinkhorn_epsilon_scale,
             eps=eps,
         )
         drift = drift - float(repulsive_weight) * (self_center - generated)
@@ -761,6 +822,9 @@ def compute_fiber_sinkhorn_drift(
     sinkhorn_epsilon: float | None = None,
     sinkhorn_min_epsilon: float = 1e-3,
     sinkhorn_iterations: int = 10,
+    sinkhorn_epsilon_mode: str = "within",
+    sinkhorn_epsilon_samples: int = 2048,
+    sinkhorn_epsilon_scale: float = 1.0,
     max_drift_norm: float | None = None,
     repulsive_weight: float = 1.0,
     eps: float = 1e-8,
@@ -815,6 +879,9 @@ def compute_fiber_sinkhorn_drift(
         epsilon=sinkhorn_epsilon,
         min_epsilon=sinkhorn_min_epsilon,
         iterations=sinkhorn_iterations,
+        epsilon_mode=sinkhorn_epsilon_mode,
+        epsilon_sample_count=sinkhorn_epsilon_samples,
+        epsilon_scale=sinkhorn_epsilon_scale,
         eps=eps,
     )
     drift = positive_center - generated_3d
@@ -849,6 +916,9 @@ def compute_fiber_sinkhorn_drift(
             epsilon=sinkhorn_epsilon,
             min_epsilon=sinkhorn_min_epsilon,
             iterations=sinkhorn_iterations,
+            epsilon_mode=sinkhorn_epsilon_mode,
+            epsilon_sample_count=sinkhorn_epsilon_samples,
+            epsilon_scale=sinkhorn_epsilon_scale,
             eps=eps,
         )
         drift = drift - float(repulsive_weight) * (self_center - generated_3d)
@@ -1019,6 +1089,9 @@ def drifting_loss(
     sinkhorn_epsilon: float | None = None,
     sinkhorn_min_epsilon: float = 1e-3,
     sinkhorn_iterations: int = 10,
+    sinkhorn_epsilon_mode: str = "within",
+    sinkhorn_epsilon_samples: int = 2048,
+    sinkhorn_epsilon_scale: float = 1.0,
     fiber_moment_mean_weight: float = 1.0,
     fiber_moment_cov_weight: float = 1.0,
     fiber_supervised_weight: float = 0.0,
@@ -1073,6 +1146,9 @@ def drifting_loss(
             sinkhorn_epsilon=sinkhorn_epsilon,
             sinkhorn_min_epsilon=sinkhorn_min_epsilon,
             sinkhorn_iterations=sinkhorn_iterations,
+            sinkhorn_epsilon_mode=sinkhorn_epsilon_mode,
+            sinkhorn_epsilon_samples=sinkhorn_epsilon_samples,
+            sinkhorn_epsilon_scale=sinkhorn_epsilon_scale,
             max_drift_norm=max_drift_norm,
             repulsive_weight=repulsive_weight,
         )
@@ -1095,6 +1171,9 @@ def drifting_loss(
             sinkhorn_epsilon=sinkhorn_epsilon,
             sinkhorn_min_epsilon=sinkhorn_min_epsilon,
             sinkhorn_iterations=sinkhorn_iterations,
+            sinkhorn_epsilon_mode=sinkhorn_epsilon_mode,
+            sinkhorn_epsilon_samples=sinkhorn_epsilon_samples,
+            sinkhorn_epsilon_scale=sinkhorn_epsilon_scale,
             max_drift_norm=max_drift_norm,
             repulsive_weight=repulsive_weight,
         )

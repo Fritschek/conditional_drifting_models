@@ -40,6 +40,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sinkhorn-epsilon", type=float, default=None)
     parser.add_argument("--sinkhorn-min-epsilon", type=float, default=1e-3)
     parser.add_argument("--sinkhorn-iterations", type=int, default=10)
+    parser.add_argument("--sinkhorn-epsilon-mode", type=str, default="within", choices=["within", "global", "legacy", "marginal"])
+    parser.add_argument("--sinkhorn-epsilon-samples", type=int, default=2048)
+    parser.add_argument("--sinkhorn-epsilon-scale", type=float, default=1.0)
     parser.add_argument("--fiber-generated-samples", type=int, default=4)
     parser.add_argument("--fiber-positive-samples", type=int, default=4)
     parser.add_argument("--fiber-reference-samples", type=int, default=4)
@@ -122,6 +125,12 @@ def build_variant_command(args: argparse.Namespace, variant: str) -> list[str]:
         str(args.sinkhorn_min_epsilon),
         "--sinkhorn-iterations",
         str(args.sinkhorn_iterations),
+        "--sinkhorn-epsilon-mode",
+        args.sinkhorn_epsilon_mode,
+        "--sinkhorn-epsilon-samples",
+        str(args.sinkhorn_epsilon_samples),
+        "--sinkhorn-epsilon-scale",
+        str(args.sinkhorn_epsilon_scale),
         "--fiber-generated-samples",
         str(args.fiber_generated_samples),
         "--fiber-positive-samples",

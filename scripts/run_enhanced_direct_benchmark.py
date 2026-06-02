@@ -130,6 +130,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sinkhorn-epsilon", type=float, default=None)
     parser.add_argument("--sinkhorn-min-epsilon", type=float, default=1e-3)
     parser.add_argument("--sinkhorn-iterations", type=int, default=10)
+    parser.add_argument("--sinkhorn-epsilon-mode", type=str, default="within", choices=["within", "global", "legacy", "marginal"])
+    parser.add_argument("--sinkhorn-epsilon-samples", type=int, default=2048)
+    parser.add_argument("--sinkhorn-epsilon-scale", type=float, default=1.0)
     parser.add_argument("--fiber-generated-samples", type=int, default=4)
     parser.add_argument("--fiber-positive-samples", type=int, default=4)
     parser.add_argument("--fiber-reference-samples", type=int, default=4)
@@ -197,6 +200,9 @@ def main() -> None:
             "sinkhorn_epsilon": args.sinkhorn_epsilon,
             "sinkhorn_min_epsilon": args.sinkhorn_min_epsilon,
             "sinkhorn_iterations": args.sinkhorn_iterations,
+            "sinkhorn_epsilon_mode": args.sinkhorn_epsilon_mode,
+            "sinkhorn_epsilon_samples": args.sinkhorn_epsilon_samples,
+            "sinkhorn_epsilon_scale": args.sinkhorn_epsilon_scale,
             "fiber_generated_samples": args.fiber_generated_samples,
             "fiber_positive_samples": args.fiber_positive_samples,
             "fiber_reference_samples": args.fiber_reference_samples,
@@ -277,6 +283,9 @@ def main() -> None:
             sinkhorn_epsilon=args.sinkhorn_epsilon,
             sinkhorn_min_epsilon=args.sinkhorn_min_epsilon,
             sinkhorn_iterations=args.sinkhorn_iterations,
+            sinkhorn_epsilon_mode=args.sinkhorn_epsilon_mode,
+            sinkhorn_epsilon_samples=args.sinkhorn_epsilon_samples,
+            sinkhorn_epsilon_scale=args.sinkhorn_epsilon_scale,
             fiber_generated_samples=args.fiber_generated_samples,
             fiber_positive_samples=args.fiber_positive_samples,
             fiber_reference_samples=args.fiber_reference_samples,

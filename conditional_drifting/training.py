@@ -87,6 +87,9 @@ class DriftingConfig:
     sinkhorn_epsilon: float | None = None
     sinkhorn_min_epsilon: float = 1e-3
     sinkhorn_iterations: int = 10
+    sinkhorn_epsilon_mode: str = "within"
+    sinkhorn_epsilon_samples: int = 2048
+    sinkhorn_epsilon_scale: float = 1.0
     fiber_generated_samples: int = 4
     fiber_positive_samples: int = 4
     fiber_reference_samples: int = 4
@@ -520,6 +523,9 @@ def train_conditional_drifting(
                 sinkhorn_epsilon=cfg.sinkhorn_epsilon,
                 sinkhorn_min_epsilon=cfg.sinkhorn_min_epsilon,
                 sinkhorn_iterations=cfg.sinkhorn_iterations,
+                sinkhorn_epsilon_mode=cfg.sinkhorn_epsilon_mode,
+                sinkhorn_epsilon_samples=cfg.sinkhorn_epsilon_samples,
+                sinkhorn_epsilon_scale=cfg.sinkhorn_epsilon_scale,
                 fiber_moment_mean_weight=cfg.fiber_moment_mean_weight,
                 fiber_moment_cov_weight=cfg.fiber_moment_cov_weight,
                 fiber_supervised_weight=cfg.fiber_supervised_weight,
