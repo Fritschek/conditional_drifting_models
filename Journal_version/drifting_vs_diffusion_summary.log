@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  3 JUN 2026 11:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  3 JUN 2026 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -481,14 +481,14 @@ onts/enc/dvips/base/8r.enc}
 [2]
 LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 195.
  [3]
-<figures/drifting_conditional_toy_figure_mpl.pdf, id=178, 685.13167pt x 236.739
+<figures/drifting_conditional_toy_figure_mpl.pdf, id=174, 685.13167pt x 236.739
 46pt>
 File: figures/drifting_conditional_toy_figure_mpl.pdf Graphic file (type pdf)
 <use figures/drifting_conditional_toy_figure_mpl.pdf>
 Package pdftex.def Info: figures/drifting_conditional_toy_figure_mpl.pdf  used 
 on input line 384.
 (pdftex.def)             Requested size: 361.19843pt x 124.80663pt.
-<figures/drifting_tiny_mlp_demo_mpl.pdf, id=179, 685.13167pt x 236.73946pt>
+<figures/drifting_tiny_mlp_demo_mpl.pdf, id=175, 685.13167pt x 236.73946pt>
 File: figures/drifting_tiny_mlp_demo_mpl.pdf Graphic file (type pdf)
 <use figures/drifting_tiny_mlp_demo_mpl.pdf>
 Package pdftex.def Info: figures/drifting_tiny_mlp_demo_mpl.pdf  used on input 
@@ -497,26 +497,26 @@ line 391.
  [4] [5 <./figures/drifting_conditional_toy_figure_mpl.pdf> <./figures/drifting
 _tiny_mlp_demo_mpl.pdf>]
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
-06.
+07.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) (./model_size_table.tex)
-[6] (./wflow_swd_baseline_table.tex) (./timing_table_cuda.tex)
-(./partial_direct_metric_table.tex) [7]
-Underfull \vbox (badness 2189) has occurred while \output is active []
+) [6] (./model_size_table.tex) (./wflow_swd_baseline_table.tex) (./timing_table
+_cuda.tex) [7]
+(./wflow_conditional_metric_table.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-(./wflow_conditional_metric_table.tex) (./wflow_coding_table.tex)
-(./wflow_all_ser_curve_figures.tex
-<figures/wflow_all_ser_curves.pdf, id=391, 516.70102pt x 358.16179pt>
+(./wflow_coding_table.tex) (./wflow_all_ser_curve_figures.tex
+<figures/wflow_all_ser_curves.pdf, id=384, 516.70102pt x 358.16179pt>
 File: figures/wflow_all_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_all_ser_curves.pdf>
 Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
 .
 (pdftex.def)             Requested size: 505.6778pt x 350.52615pt.
-) (./wflow_curve_figures.tex
-<figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf, id=393, 584.84152pt x 232.
+)
+(./wflow_curve_figures.tex
+<figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf, id=386, 584.84152pt x 232.
 36398pt>
 File: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf Graphic file (type pdf
 )
@@ -524,28 +524,25 @@ File: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf Graphic file (type pdf
 Package pdftex.def Info: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf  us
 ed on input line 13.
 (pdftex.def)             Requested size: 474.71906pt x 188.61798pt.
-)
-(./drifting_vs_diffusion_summary.bbl [9] [10]) [11
-
- <./figures/wflow_all_ser_curves.pdf>] [12 <./figures/turboae_awgn_l64_ber_bler
-_curve_eval2k.pdf>]
-(./drifting_vs_diffusion_summary.aux)
+) (./drifting_vs_diffusion_summary.bbl [9]) [10]
+[11 <./figures/wflow_all_ser_curves.pdf> <./figures/turboae_awgn_l64_ber_bler_c
+urve_eval2k.pdf>] (./drifting_vs_diffusion_summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `drifting_vs_diffusion_summary.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: 67B231D2BF33C12B5E2100927B1971CF;3798.
+(rerunfilecheck)             Checksum: 73955BE19B9C7CDE91DBAC7BC467EE43;3523.
  ) 
 Here is how much of TeX's memory you used:
- 11575 strings out of 469515
- 179041 string characters out of 5470807
- 637992 words of memory out of 5000000
- 39952 multiletter control sequences out of 15000+600000
+ 11564 strings out of 469515
+ 178757 string characters out of 5470807
+ 640721 words of memory out of 5000000
+ 39947 multiletter control sequences out of 15000+600000
  680281 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,14n,83p,674b,596s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,14n,83p,724b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -566,10 +563,10 @@ rier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/s
 hare/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a
 .pfb>
-Output written on drifting_vs_diffusion_summary.pdf (12 pages, 427375 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (11 pages, 425864 bytes).
 PDF statistics:
- 710 PDF objects out of 1000 (max. 8388607)
- 385 compressed objects within 4 object streams
- 99 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 697 PDF objects out of 1000 (max. 8388607)
+ 373 compressed objects within 4 object streams
+ 96 named destinations out of 1000 (max. 500000)
+ 181 words of extra memory for PDF output out of 10000 (max. 10000000)
 

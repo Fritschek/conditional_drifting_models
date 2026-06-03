@@ -20,6 +20,7 @@ except ImportError:  # pragma: no cover - keeps the script usable on minimal TeX
 
 
 CHANNELS = ["AWGN", "Rayleigh", "SSPA"]
+SWD_TABLE_CHANNELS = ["AWGN", "Rayleigh", "SSPA", "TDL"]
 DIRECT_DRIFTING_VARIANT = "direct_drifting"
 WFLOW_VARIANTS = ["kernel_target", "kernel_joint", "joint_sinkhorn", "fiber_sinkhorn"]
 CODING_VARIANTS = ["analytic", *WFLOW_VARIANTS]
@@ -67,6 +68,17 @@ REFERENCE_SWDS = {
         "Rayleigh": (0.0044, 0.0007),
         "SSPA": (0.0024, 0.0004),
     },
+}
+
+REFERENCE_VARIANT_LABELS = {
+    "wgan": "WGAN",
+    "paper_wgan": "WGAN",
+    "paperwgan": "WGAN",
+    "ddpm": "DDPM",
+    "ddim": "DDIM-100",
+    "ddim100": "DDIM-100",
+    "ddim_100": "DDIM-100",
+    "ddim-100": "DDIM-100",
 }
 
 COLORS = {
@@ -190,6 +202,19 @@ def parse_args() -> argparse.Namespace:
         help="SSPA M_msg=64 BER/SER CSV used to replace all SSPA coding rows.",
     )
     parser.add_argument(
+        "--baseline-direct-swd-csv",
+        type=Path,
+        action="append",
+        default=[],
+        help="Optional checkpoint-only direct-SWD CSVs for diffusion/WGAN reference rows, e.g. TDL.",
+    )
+    parser.add_argument(
+        "--baseline-direct-swd-error",
+        choices=("std", "sem"),
+        default="std",
+        help="Error statistic used when importing --baseline-direct-swd-csv reference rows.",
+    )
+    parser.add_argument(
         "--coding-channels",
         type=str,
         default=",".join(CHANNELS),
@@ -298,6 +323,44 @@ def summarize(rows: list[dict[str, str]], metrics: list[str]) -> dict[tuple[str,
     }
 
 
+def summarize_reference_swd_rows(
+    rows: list[dict[str, str]],
+    *,
+    error_stat: str,
+) -> dict[str, dict[str, tuple[float, float]]]:
+    grouped: dict[tuple[str, str], list[float]] = defaultdict(list)
+    for row in rows:
+        value = row.get("direct_swd")
+        if value in (None, ""):
+            continue
+        variant = str(row.get("variant", "")).lower()
+        method = REFERENCE_VARIANT_LABELS.get(variant)
+        if method is None:
+            continue
+        channel = str(row.get("channel", ""))
+        if not channel:
+            continue
+        grouped[(method, channel)].append(float(value))
+
+    summary: dict[str, dict[str, tuple[float, float]]] = defaultdict(dict)
+    for (method, channel), values in grouped.items():
+        if not values:
+            continue
+        error = std(values) if error_stat == "std" else sem(values)
+        summary[method][channel] = (mean(values), error)
+    return dict(summary)
+
+
+def merge_reference_swds(
+    base: dict[str, dict[str, tuple[float, float]]],
+    updates: dict[str, dict[str, tuple[float, float]]],
+) -> dict[str, dict[str, tuple[float, float]]]:
+    merged = {method: dict(values) for method, values in base.items()}
+    for method, values in updates.items():
+        merged.setdefault(method, {}).update(values)
+    return merged
+
+
 def latex_escape(text: str) -> str:
     return text.replace("_", r"\_")
 
@@ -366,36 +429,56 @@ def available_variants(
     return [variant for variant in variants if summary_metric(summary, channel, variant, metric) is not None]
 
 
-def write_wflow_swd_table(path: Path, wflow_summary: dict[tuple[str, str], dict[str, tuple[float, float]]]) -> None:
+def write_wflow_swd_table(
+    path: Path,
+    wflow_summary: dict[tuple[str, str], dict[str, tuple[float, float]]],
+    reference_swds: dict[str, dict[str, tuple[float, float]]] | None = None,
+) -> None:
+    reference_swds = reference_swds or REFERENCE_SWDS
     drifting_rows = [DIRECT_DRIFTING_VARIANT, *WFLOW_VARIANTS]
+    channels = [
+        channel
+        for channel in SWD_TABLE_CHANNELS
+        if channel in DIRECT_DRIFTING_SWD
+        or any((channel, variant) in wflow_summary for variant in WFLOW_VARIANTS)
+        or any(channel in values for values in reference_swds.values())
+    ]
     best_drifting = {
-        channel: min(
-            drifting_rows,
-            key=lambda variant: (
-                DIRECT_DRIFTING_SWD[channel][0]
-                if variant == DIRECT_DRIFTING_VARIANT
-                else wflow_summary[(channel, variant)]["direct_swd"][0]
-            ),
-        )
-        for channel in CHANNELS
+        channel: min(available, key=lambda item: item[1])[0]
+        for channel in channels
+        for available in [
+            [
+                *(
+                    [(DIRECT_DRIFTING_VARIANT, DIRECT_DRIFTING_SWD[channel][0])]
+                    if channel in DIRECT_DRIFTING_SWD
+                    else []
+                ),
+                *[
+                    (variant, wflow_summary[(channel, variant)]["direct_swd"][0])
+                    for variant in WFLOW_VARIANTS
+                    if (channel, variant) in wflow_summary and "direct_swd" in wflow_summary[(channel, variant)]
+                ],
+            ]
+        ]
+        if available
     }
-    ncols = len(CHANNELS) + 1
-    colspec = "l" + "c" * len(CHANNELS)
+    ncols = len(channels) + 1
+    colspec = "l" + "c" * len(channels)
     lines = [
         r"\begin{table*}[t]",
         r"\centering",
-        r"\caption{\textbf{Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report the ten-seed mean $\pm$ standard deviation from the diffusion/WGAN benchmark. The drifting-family rows contain direct drifting from the same ten-seed benchmark and the W-Flow drift-field ablation; W-Flow rows report the available-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean.}",
+        r"\caption{\textbf{Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report mean $\pm$ standard deviation from the diffusion/WGAN benchmark or from checkpoint-only direct-SWD evaluation. The drifting-family rows contain direct drifting from the same benchmark and the W-Flow drift-field ablation; W-Flow rows report the available-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean; dashes mark unavailable matched generator-level SWD values.}",
         r"\label{tab:wflow-swd-baselines}",
         r"\tablestyle{4.5pt}{1.03}",
         r"\tablefontsize",
         rf"\begin{{tabular}}{{@{{}}{colspec}@{{}}}}",
         r"\toprule",
-        "Method & " + " & ".join(CHANNELS) + r" \\",
+        "Method & " + " & ".join(channels) + r" \\",
         r"\midrule",
         rf"\rowcolor[gray]{{0.9}} \multicolumn{{{ncols}}}{{l}}{{\textit{{Diffusion/WGAN reference baselines}}}} \\",
     ]
-    for method, values in REFERENCE_SWDS.items():
-        cells = [pm_fixed(*values[channel]) for channel in CHANNELS]
+    for method, values in reference_swds.items():
+        cells = [pm_fixed(*values[channel]) if channel in values else "--" for channel in channels]
         lines.append(r"\headspace " + method + " & " + " & ".join(cells) + r" \\")
     lines.extend(
         [
@@ -404,16 +487,23 @@ def write_wflow_swd_table(path: Path, wflow_summary: dict[tuple[str, str], dict[
         ]
     )
     direct_cells = []
-    for channel in CHANNELS:
+    for channel in channels:
+        if channel not in DIRECT_DRIFTING_SWD:
+            direct_cells.append("--")
+            continue
         value, error = DIRECT_DRIFTING_SWD[channel]
-        direct_cells.append(maybe_bold(pm_fixed(value, error), best_drifting[channel] == DIRECT_DRIFTING_VARIANT))
+        direct_cells.append(maybe_bold(pm_fixed(value, error), best_drifting.get(channel) == DIRECT_DRIFTING_VARIANT))
     lines.append(r"\headspace " + VARIANT_LABELS[DIRECT_DRIFTING_VARIANT] + " & " + " & ".join(direct_cells) + r" \\")
     for variant in WFLOW_VARIANTS:
         cells = []
-        for channel in CHANNELS:
-            value, error = wflow_summary[(channel, variant)]["direct_swd"]
+        for channel in channels:
+            metric = wflow_summary.get((channel, variant), {}).get("direct_swd")
+            if metric is None:
+                cells.append("--")
+                continue
+            value, error = metric
             cell = pm_fixed(value, error)
-            cells.append(maybe_bold(cell, best_drifting[channel] == variant))
+            cells.append(maybe_bold(cell, best_drifting.get(channel) == variant))
         lines.append(r"\headspace " + VARIANT_LABELS[variant] + " & " + " & ".join(cells) + r" \\")
     lines.extend(
         [
@@ -595,6 +685,7 @@ def write_markdown_summary(
     channels: list[str],
     wflow_csvs: list[Path],
     ser_csvs: list[Path],
+    reference_csvs: list[Path],
 ) -> None:
     lines = [
         "# Journal W-Flow Artifact Summary",
@@ -604,6 +695,8 @@ def write_markdown_summary(
     for csv_path in wflow_csvs:
         lines.append(f"- `{csv_path}`")
     for csv_path in ser_csvs:
+        lines.append(f"- `{csv_path}`")
+    for csv_path in reference_csvs:
         lines.append(f"- `{csv_path}`")
     lines.extend(
         [
@@ -638,6 +731,7 @@ def write_markdown_summary(
             "",
             "Interpretation:",
             "- Condition-wise Sinkhorn is the best learned coding surrogate on AWGN, Rayleigh, SSPA, and TDL under the reported channel-specific coding setups.",
+            "- TDL diffusion/WGAN direct-SWD reference rows are checkpoint-only evaluations of the trained baseline implants.",
             "- The SSPA condition-wise row uses the corrected compact-budget M_msg=64 screen; the older full-budget corrected run was an over-optimization failure of the sharp field, not the reported SSPA model.",
             "- Direct SWD and downstream coding do not always agree, so the paper reports both global and condition-wise diagnostics.",
         ]
@@ -668,6 +762,16 @@ def main() -> None:
             variants=None,
         )
         ser_csvs.append(args.sspa_ser_csv)
+    reference_swds = REFERENCE_SWDS
+    if args.baseline_direct_swd_csv:
+        baseline_reference_rows = merge_rows_by_seed_channel_variant(args.baseline_direct_swd_csv)
+        reference_swds = merge_reference_swds(
+            reference_swds,
+            summarize_reference_swd_rows(
+                baseline_reference_rows,
+                error_stat=args.baseline_direct_swd_error,
+            ),
+        )
     coding_channels = parse_csv_list(args.coding_channels)
     metric_channels = parse_csv_list(args.metric_channels)
     wflow_summary = summarize(
@@ -680,7 +784,7 @@ def main() -> None:
     fig_dir = args.journal_dir / "figures"
     fig_dir.mkdir(parents=True, exist_ok=True)
 
-    write_wflow_swd_table(args.journal_dir / "wflow_swd_baseline_table.tex", wflow_summary)
+    write_wflow_swd_table(args.journal_dir / "wflow_swd_baseline_table.tex", wflow_summary, reference_swds)
     write_coding_table(args.journal_dir / "wflow_coding_table.tex", ser_summary, coding_channels)
     write_metric_table(args.journal_dir / "wflow_conditional_metric_table.tex", wflow_summary, ser_summary, metric_channels)
     write_markdown_summary(
@@ -690,6 +794,7 @@ def main() -> None:
         metric_channels,
         wflow_csvs,
         ser_csvs,
+        args.baseline_direct_swd_csv,
     )
 
     print(

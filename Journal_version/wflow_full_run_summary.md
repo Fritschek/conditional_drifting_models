@@ -9,6 +9,7 @@ Generated from:
 - `results/journal_wflow_ser_tdl_20260531_151126/journal_wflow_ser_per_seed.csv`
 - `results/journal_wflow_ser_fiber_fixed_20260601_201405/journal_wflow_ser_per_seed.csv`
 - `results/journal_wflow_ser_sspa_budget_screen_20260602_073353/journal_wflow_ser_per_seed.csv`
+- `results/journal_baseline_direct_swd_tdl_20260603_094050/journal_baseline_direct_swd_per_seed.csv`
 
 If repeated `(seed, channel, variant)` rows are present, later CSVs replace earlier rows.
 
@@ -23,5 +24,6 @@ If repeated `(seed, channel, variant)` rows are present, later CSVs replace earl
 
 Interpretation:
 - Condition-wise Sinkhorn is the best learned coding surrogate on AWGN, Rayleigh, SSPA, and TDL under the reported channel-specific coding setups.
+- TDL diffusion/WGAN direct-SWD reference rows are checkpoint-only evaluations of the trained baseline implants.
 - The SSPA condition-wise row uses the corrected compact-budget M_msg=64 screen; the older full-budget corrected run was an over-optimization failure of the sharp field, not the reported SSPA model.
 - Direct SWD and downstream coding do not always agree, so the paper reports both global and condition-wise diagnostics.
