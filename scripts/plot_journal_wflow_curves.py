@@ -291,7 +291,7 @@ def write_latex_snippet(path: Path, channels: list[str], metrics: list[str], *, 
         channel_text = ", ".join(channels)
         lines.extend(
             [
-                r"\begin{figure*}[t]",
+                r"\begin{figure*}[!t]",
                 r"\centering",
                 rf"\includegraphics[width=0.98\textwidth]{{figures/{stem}.pdf}}",
                 rf"\caption{{\textbf{{SER curves for learned channel surrogates.}} Symbolic autoencoders are trained through each surrogate at the nominal training point and evaluated on the analytic channel over an $E_b/N_0$ grid for {channel_text}. Curves report seed means with standard-error bars; points below the single-run Monte Carlo resolution are clipped to the dotted reporting floor and marked as upper bounds.}}",
@@ -308,7 +308,7 @@ def write_latex_snippet(path: Path, channels: list[str], metrics: list[str], *, 
         label = f"fig:wflow-{channel.lower()}-{metric_tag.replace('_', '-')}-curves"
         lines.extend(
             [
-                r"\begin{figure*}[t]",
+                r"\begin{figure*}[!t]",
                 r"\centering",
                 rf"\includegraphics[width=0.72\textwidth]{{figures/{stem}.pdf}}",
                 rf"\caption{{\textbf{{{channel} {metric_title} curves for learned channel surrogates.}} Symbolic autoencoders are trained through each surrogate at the nominal training point and evaluated on the analytic channel over an $E_b/N_0$ grid. Curves report seed means with standard-error bars for {metric_text}; points below the single-run Monte Carlo resolution are clipped to the dotted reporting floor and marked as upper bounds.}}",

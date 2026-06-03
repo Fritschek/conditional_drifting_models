@@ -1,8 +1,8 @@
-\begin{table*}[t]
+\begin{table}[!t]
 \centering
 \caption{\textbf{Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian-W2 are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are seed means; lower is better.}
 \label{tab:wflow-conditional-metrics}
-\tablestyle{6.0pt}{1.03}
+\tablestyle{3.4pt}{1.02}
 \tablefontsize
 \begin{tabular}{@{}llcc@{}}
 \toprule
@@ -30,8 +30,8 @@ TDL & Condition-wise Sinkhorn & 0.1054 & 0.4444 \\
 \bottomrule
 \end{tabular}
 \par\vspace{0.25em}
-\begin{minipage}{0.92\textwidth}
+\begin{minipage}{0.92\columnwidth}
 \footnotesize\raggedright
 The SSPA condition-wise Sinkhorn row uses the same \(30\)-seed update-budget-controlled run as Table~\ref{tab:wflow-swd-baselines}.
 \end{minipage}
-\end{table*}
+\end{table}

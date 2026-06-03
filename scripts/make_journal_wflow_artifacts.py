@@ -581,11 +581,11 @@ def write_metric_table(
     channels: list[str],
 ) -> None:
     lines = [
-        r"\begin{table*}[t]",
+        r"\begin{table}[!t]",
         r"\centering",
         r"\caption{\textbf{Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian-W2 are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are seed means; lower is better.}",
         r"\label{tab:wflow-conditional-metrics}",
-        r"\tablestyle{6.0pt}{1.03}",
+        r"\tablestyle{3.4pt}{1.02}",
         r"\tablefontsize",
         r"\begin{tabular}{@{}llcc@{}}",
         r"\toprule",
@@ -621,11 +621,11 @@ def write_metric_table(
             r"\bottomrule",
             r"\end{tabular}",
             r"\par\vspace{0.25em}",
-            r"\begin{minipage}{0.92\textwidth}",
+            r"\begin{minipage}{0.92\columnwidth}",
             r"\footnotesize\raggedright",
             r"The SSPA condition-wise Sinkhorn row uses the same \(30\)-seed update-budget-controlled run as Table~\ref{tab:wflow-swd-baselines}.",
             r"\end{minipage}",
-            r"\end{table*}",
+            r"\end{table}",
             "",
         ]
     )

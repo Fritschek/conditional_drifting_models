@@ -8,7 +8,7 @@ At the \(4\,\mathrm{dB}\) training point, analytic-channel training gives BER \(
 Training through the condition-wise Sinkhorn surrogate gives BER \(3.30\times 10^{-3}\) with 95\% CI \(4.30\times 10^{-4}\) and BLER \(1.39\times 10^{-1}\) with 95\% CI \(1.91\times 10^{-2}\).
 Thus the surrogate has a measurable long-block gap, but it does not cause a collapse of TurboAE training.
 
-\begin{figure*}[t]
+\begin{figure*}[!t]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf}
 \caption{\textbf{Long-block TurboAE AWGN check.} CNN TurboAE models are trained at block length \(64\), rate \(1/2\), and \(E_b/N_0=4\,\mathrm{dB}\), either through the analytic AWGN channel or through the condition-wise Sinkhorn AWGN surrogate. Curves are evaluated on the analytic AWGN channel over \(30\) seeds. The surrogate preserves the qualitative waterfall trend but remains above the analytic-channel training curve.}
