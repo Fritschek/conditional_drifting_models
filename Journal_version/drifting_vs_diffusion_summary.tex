@@ -25,19 +25,12 @@
 
 \begin{abstract}
 Accurate stochastic channel simulation is central to data-driven communication system design, especially when channel measurements are costly to acquire repeatedly or when differentiable learned surrogates are needed inside end-to-end optimization loops.
-Recent work has shown that conditional diffusion models are strong channel generators, but their inference cost scales with the number of reverse denoising steps.
-This paper studies conditional drifting models as a low-latency alternative and evaluates them against conditional denoising diffusion probabilistic modeling (DDPM), conditional denoising diffusion implicit modeling (DDIM), and conditional Wasserstein generative adversarial network (WGAN) baselines.
-We evaluate residual drifting, which models \(e=y-x\), direct-output drifting, which models \(p(y\mid x)\), an enhanced direct-output variant with a conditioning-aware kernel, and a new condition-wise Sinkhorn drifting variant motivated by Wasserstein-gradient-flow one-step generation.
-The generator-level benchmark covers additive white Gaussian noise (AWGN), Rayleigh fading, and solid-state power amplifier (SSPA) nonlinearity.
-Downstream channel-implant experiments additionally include a compact tapped-delay-line (TDL) wireless channel.
-The key modeling constraint is that a wireless channel generator keeps the condition \(x\) fixed.
-The true and generated joint laws share the same input marginal, and only the conditional output law should move.
-We therefore formulate a conditional Sinkhorn objective by integrating Sinkhorn divergences over fixed-input conditional laws \(p(\cdot\mid x)\), yielding a drift field that applies the Wasserstein-flow velocity separately for each transmitted-symbol condition.
-The reference diffusion/WGAN comparison shows that diffusion achieves the strongest sliced Wasserstein distance (SWD) overall, while direct-output drifting is the strongest one-shot generator under direct output-space evaluation and conditioning-aware kernels can improve downstream AWGN symbol error rate (SER).
-The drift-field ablation shows that condition-wise Sinkhorn drifting is the best-performing drifting-family surrogate in the symbolic-coding experiments on AWGN, Rayleigh, SSPA, and TDL.
-Diffusion remains the strongest learned downstream reference on the harder Rayleigh, SSPA, and TDL curve tests.
-On SSPA, the Sinkhorn result requires an update-budget-controlled W-Flow run because the sharp same-condition Sinkhorn field converges much earlier than the diffusion-style training preset.
-The results also show that global output-space SWD alone is insufficient for selecting a channel surrogate.
+Conditional diffusion models are strong channel generators, but their inference cost scales with the number of reverse denoising steps.
+This paper studies conditional drifting models as one-shot learned channel simulators and compares residual drifting, direct-output drifting, a conditioning-aware kernel variant, and condition-wise Sinkhorn drifting against conditional denoising diffusion probabilistic modeling (DDPM), denoising diffusion implicit modeling (DDIM), and Wasserstein generative adversarial network (WGAN) baselines.
+The central modeling point is that a channel generator should keep the transmitted symbol \(x\) fixed and transport only the conditional output law \(p(y\mid x)\).
+We therefore formulate a conditional Sinkhorn objective by integrating Sinkhorn divergences over fixed-input conditional laws, yielding a Wasserstein-flow drift field for each transmitted-symbol condition.
+Experiments on additive white Gaussian noise (AWGN), Rayleigh fading, solid-state power amplifier (SSPA) nonlinearity, and a compact tapped-delay-line (TDL) channel show that condition-wise Sinkhorn is the best-performing drifting-family surrogate in the symbolic-coding experiments, while diffusion remains the strongest learned reference on harder downstream SER curves.
+The results identify condition-wise Sinkhorn drifting as a low-latency, condition-preserving alternative and show that global output-space sliced Wasserstein distance (SWD) alone is insufficient for selecting a channel surrogate.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -339,21 +332,10 @@ T^{\varepsilon}_{q_{t,x},p_x}(y)
 T^{\varepsilon}_{q_{t,x},q_{t,x}}(y).
 \label{eq:condition_sinkhorn_velocity}
 \end{equation}
-Thus, if the unconditional Sinkhorn velocity has equality as its only stationary point for each fixed condition, then every stationary point of the conditional flow satisfies
-\begin{equation}
-q_{\theta,x}=p_x
-\quad
-\text{for } \mu\text{-a.e. }x.
-\end{equation}
-This is the conditional analogue needed for channel simulation.
-Its equilibrium is equality of the complete family of conditional channel laws.
-Matching a joint sample cloud under an arbitrary joint cost leaves this condition-wise equality unenforced.
-
-\paragraph{Theoretical status.}
-The preceding statement is a population-flow statement.
-For \(\mu\)-almost every \(x\), assume that \(p_x\) and \(q_{\theta,x}\) are Borel probability measures on \(\mathbb{R}^n\) with finite second moments and that the entropic OT potentials are differentiable along the considered distributional curve.
-Under the standard Sinkhorn-divergence assumptions used in \cite{feydy2019sinkhorn}, \(S_\varepsilon(q_{\theta,x},p_x)\geq 0\) and equality holds exactly when \(q_{\theta,x}=p_x\).
-Formally, an exact Wasserstein gradient flow of \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) satisfies
+This statement is made at the population-flow level.
+For \(\mu\)-almost every \(x\), assume that \(p_x\) and \(q_{t,x}\) are Borel probability measures on \(\mathbb{R}^n\) with finite second moments and that the entropic OT potentials are differentiable along the considered distributional curve.
+Under the standard Sinkhorn-divergence assumptions used in \cite{feydy2019sinkhorn}, \(S_\varepsilon(q_{t,x},p_x)\geq 0\) and equality holds exactly when \(q_{t,x}=p_x\).
+The exact Wasserstein gradient flow then satisfies
 \begin{equation}
 \frac{d}{dt}\mathcal{S}^{\mathrm{cond}}_{\varepsilon}(q_t,p)
 =
@@ -361,16 +343,23 @@ Formally, an exact Wasserstein gradient flow of \(\mathcal{S}^{\mathrm{cond}}_{\
 \int
 \|v_t(x,\cdot)\|_{L^2(q_{t,x})}^2
 \mu(dx)
-\leq 0,
+\leq 0.
 \end{equation}
-so a zero-velocity stationary point yields \(q_{t,x}=p_x\) for \(\mu\)-almost every \(x\) under the uniqueness condition above.
-The implemented algorithm is a finite-sample particle approximation of this flow.
-It estimates the barycentric velocity from minibatch Sinkhorn couplings and then performs a detached-target regression step, which corresponds to an explicit particle update followed by projection back into the generator class.
-This regression step is a flow-inspired training rule and differs from exact gradient descent on \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) with respect to \(\theta\).
-If the generator family cannot realize all conditional laws \(p_x\), the practical fixed point is the best representable conditional surrogate reached by this projected training dynamics.
+Thus, if the condition-wise Sinkhorn velocity has equality as its only stationary point for each fixed condition, then every stationary point of the conditional flow satisfies
+\begin{equation}
+q_{t,x}=p_x
+\quad
+\text{for } \mu\text{-a.e. }x.
+\end{equation}
+This is the conditional analogue needed for channel simulation.
+Its equilibrium is equality of the complete family of conditional channel laws.
+Matching a joint sample cloud under an arbitrary joint cost leaves this condition-wise equality unenforced.
 
-The empirical estimator follows the same condition-wise structure.
-For anchors \(x_i\sim\mu\), we draw multiple generated samples
+The empirical estimator used in training is a finite-sample particle approximation of this flow.
+It estimates the barycentric velocity from minibatch Sinkhorn couplings and then performs a detached-target regression step.
+This corresponds to an explicit particle update followed by projection back into the generator class, and it differs from exact gradient descent on \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) with respect to \(\theta\).
+If the generator family cannot realize all conditional laws \(p_x\), the practical fixed point is the best representable conditional surrogate reached by this projected training dynamics.
+For anchors \(x_i\sim\mu\), the estimator draws multiple generated samples
 \(\hat y_{i,k}=g_\theta(x_i,z_{i,k})\), multiple positive channel samples
 \(y_{i,j}\sim p(\cdot\mid x_i)\), and an independent generated reference batch
 \(\hat y'_{i,\ell}=g_\theta(x_i,z'_{i,\ell})\).
