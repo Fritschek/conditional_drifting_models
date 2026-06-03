@@ -54,21 +54,46 @@ This is far better than the corrected full-run failed checkpoint
 (`BER` around `1.3e-2` for seed 7), but not as strong as the accidental old
 legacy-temperature seed-7 checkpoint.
 
+## 30-Seed HPC Screen
+
+The SSPA-only HPC screen confirms that the compact corrected condition-wise
+Sinkhorn budget is the reliable setting to report. The W-Flow screen used
+seeds `7..36`, dataset size `120000`, batch size `4096`, and `160` epochs.
+
+| Variant | Direct SWD | Anchor SWD | Anchor GW2 |
+|---|---:|---:|---:|
+| Kernel target, compact budget | 0.02780 ± 0.00040 | 0.46014 | 1.68395 |
+| Condition-wise Sinkhorn | 0.00707 ± 0.00019 | 0.05662 | 0.23759 |
+| Condition-wise Sinkhorn, marginal temperature | 0.00834 ± 0.00021 | 0.06363 | 0.32200 |
+
+The corresponding `M_msg=64` downstream symbolic check gives:
+
+| Variant | BER | SER |
+|---|---:|---:|
+| Analytic channel | 6.72e-6 ± 1.9e-6 | 1.30e-5 ± 3.5e-6 |
+| Kernel target, compact budget | 6.61e-2 ± 4.6e-3 | 1.34e-1 ± 9.2e-3 |
+| Condition-wise Sinkhorn | 4.90e-5 ± 7.5e-6 | 9.33e-5 ± 1.4e-5 |
+| Condition-wise Sinkhorn, marginal temperature | 9.88e-5 ± 1.4e-5 | 2.01e-4 ± 3.1e-5 |
+
+Thus the corrected condition-wise Sinkhorn field is the best learned SSPA
+coding surrogate in the `M_msg=64` check. The failure was the full-budget corrected
+run, not the conditional transport objective itself.
+
 ## Candidate Fixes
 
-1. Use corrected within-fiber Sinkhorn but cap the SSPA effective optimizer
-   budget, for example `dataset_size=120000`, `batch_size=4096`,
-   `epochs=160`.
-2. Use marginal-temperature condition-wise Sinkhorn when running very long SSPA
-   budgets. This intentionally keeps the useful smoothing from the old run
-   without reintroducing the full global cost matrix.
-3. Test a lower learning rate or LR decay for the full SSPA budget if we need
-   to preserve the original 10M-sample preset.
+1. Report the corrected within-fiber Sinkhorn model with the compact SSPA
+   optimizer budget: `dataset_size=120000`, `batch_size=4096`, `epochs=160`.
+2. Keep marginal-temperature condition-wise Sinkhorn as a backup diagnostic,
+   but the 30-seed screen shows it is worse than the standard corrected
+   condition-wise field.
+3. If a future revision requires the original 10M-sample SSPA preset for every
+   method, rerun the corrected field with lower learning rate or learning-rate
+   decay rather than continuing fixed-step optimization of the sharp field.
 
-The next HPC screen should be SSPA-only over 30 seeds before a 100-seed rerun.
-Recommended variants:
+Recommended variants for any follow-up rerun:
 
 - `fiber_sinkhorn` with compact effective budget.
 - `fiber_sinkhorn_marginal` with the same compact budget.
 - `fiber_sinkhorn_marginal_lr3e4` if testing the full paper budget.
-- Existing `kernel_target` as the current SSPA learned-surrogate baseline.
+- Existing `kernel_target` as a comparison row, but not as the final SSPA
+  learned-surrogate baseline under the `M_msg=64` compact-budget check.

@@ -1,26 +1,36 @@
 \begin{table*}[t]
 \centering
-\caption{\textbf{Projected training and inference timing.} Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample.}
+\caption{\textbf{Projected training and inference timing on an NVIDIA RTX 5060 Ti GPU.} Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample.}
 \label{tab:timing-cuda}
 \tablestyle{3pt}{1.02}
 \tablefontsize
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}lcccccccccccc@{}}
 \toprule
-Method & \multicolumn{3}{c}{AWGN} & \multicolumn{3}{c}{Rayleigh} & \multicolumn{3}{c}{SSPA} & \multicolumn{3}{c}{OptFib} \\
+Method & \multicolumn{3}{c}{AWGN} & \multicolumn{3}{c}{Rayleigh} & \multicolumn{3}{c}{SSPA} & \multicolumn{3}{c}{TDL} \\
 \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13}
  & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] \\
 \midrule
 \rowcolor[gray]{0.9} \multicolumn{13}{l}{\textit{One-shot generators}} \\
-\headspace Drifting (res.) & 0.733 & 0.405 us & 0.734 & 0.730 & 0.407 us & 0.731 & 3.197 & 0.424 us & 3.198 & 0.054 & 0.410 us & 0.054 \\
-\headspace Drifting (dir.) & 0.724 & \textbf{0.381 us} & 0.725 & 0.725 & \textbf{0.382 us} & 0.726 & 3.183 & \textbf{0.396 us} & 3.184 & 0.049 & \textbf{0.382 us} & 0.049 \\
-\headspace Paper WGAN & 0.206 & 0.393 us & 0.207 & 0.202 & 0.386 us & 0.203 & 1.352 & 0.408 us & 1.354 & 0.236 & \textbf{0.382 us} & 0.236 \\
+Drifting (res.) & 1.309 & 0.131 us & 1.310 & 1.300 & 0.123 us & 1.300 & 5.656 & 0.121 us & 5.656 & 0.013 & 0.124 us & 0.013 \\
+Drifting (dir.) & 1.299 & 0.114 us & 1.300 & 1.299 & 0.117 us & 1.300 & 5.656 & 0.118 us & 5.656 & 0.007 & 0.116 us & \textbf{0.007} \\
+Joint-kernel drift & 1.863 & 0.116 us & 1.864 & 1.864 & 0.116 us & 1.864 & 8.112 & 0.119 us & 8.112 & 0.008 & 0.115 us & 0.008 \\
+Joint Sinkhorn & 0.917 & 0.116 us & 0.918 & 0.919 & 0.115 us & 0.920 & 3.956 & 0.117 us & 3.956 & 0.010 & 0.116 us & 0.010 \\
+Condition-wise Sinkhorn & 0.048 & 0.115 us & \textbf{0.048} & 0.048 & 0.115 us & \textbf{0.049} & 0.296 & 0.117 us & \textbf{0.297} & 0.009 & 0.115 us & 0.009 \\
+WGAN & 0.064 & 0.108 us & 0.064 & 0.085 & 0.108 us & 0.086 & 0.478 & 0.107 us & 0.478 & 0.022 & 0.108 us & 0.022 \\
 \midrule
 \rowcolor[gray]{0.9} \multicolumn{13}{l}{\textit{Diffusion samplers}} \\
-\headspace DDPM & \textbf{0.049} & 0.132 ms & 0.416 & \textbf{0.050} & 0.134 ms & 0.422 & \textbf{0.333} & 0.139 ms & 0.719 & \textbf{0.048} & 0.112 ms & 0.051 \\
-\headspace DDIM-100 & \textbf{0.049} & 0.114 ms & 0.366 & \textbf{0.050} & 0.115 ms & 0.371 & \textbf{0.333} & 0.120 ms & 0.666 & \textbf{0.048} & 0.107 ms & 0.051 \\
-\headspace DDIM-50 & \textbf{0.049} & 0.057 ms & 0.208 & \textbf{0.050} & 0.058 ms & 0.211 & \textbf{0.333} & 0.060 ms & 0.500 & \textbf{0.048} & 0.054 ms & 0.050 \\
-\headspace DDIM-20 & \textbf{0.049} & 0.023 ms & 0.113 & \textbf{0.050} & 0.023 ms & 0.115 & \textbf{0.333} & 0.024 ms & 0.400 & \textbf{0.048} & 0.022 ms & 0.049 \\
-\headspace DDIM-10 & \textbf{0.049} & 0.012 ms & \textbf{0.081} & \textbf{0.050} & 0.012 ms & \textbf{0.083} & \textbf{0.333} & 0.012 ms & \textbf{0.367} & \textbf{0.048} & 0.011 ms & \textbf{0.048} \\
+DDPM & 0.020 & 0.046 ms & 0.147 & 0.020 & 0.045 ms & 0.145 & 0.124 & 0.047 ms & 0.253 & 0.005 & 0.045 ms & 0.007 \\
+DDIM-100 & 0.020 & 0.039 ms & 0.128 & 0.020 & 0.039 ms & 0.128 & 0.124 & 0.039 ms & 0.231 & 0.005 & 0.039 ms & 0.006 \\
+DDIM-50 & 0.020 & 0.019 ms & 0.073 & 0.020 & 0.019 ms & 0.073 & 0.124 & 0.019 ms & 0.177 & 0.005 & 0.019 ms & 0.006 \\
+DDIM-20 & 0.020 & 0.008 ms & 0.042 & 0.020 & 0.008 ms & 0.042 & 0.124 & 0.008 ms & 0.145 & 0.005 & 0.008 ms & 0.006 \\
+DDIM-10 & 0.020 & 0.004 ms & 0.031 & 0.020 & 0.004 ms & 0.031 & 0.124 & 0.004 ms & 0.135 & 0.005 & 0.004 ms & 0.005 \\
 \bottomrule
 \end{tabular}
+}
+\par\vspace{0.25em}
+\begin{minipage}{0.96\textwidth}
+\footnotesize\raggedright
+All rows use the same 2\% extrapolation protocol. In the one-shot block, bold total times mark the lowest projected total for each channel. The W-Flow rows use the same one-shot generator architecture as direct drifting; their training-time differences come only from the drift-field computation.
+\end{minipage}
 \end{table*}

@@ -1,0 +1,15 @@
+{
+  "source_summary": "results/timing_suite_local_cuda_20260601_1755/timing_suite_summary.json",
+  "extra_timing_summaries": [
+    "results/timing_suite_tdl_cuda_20260603/timing_suite_summary.json"
+  ],
+  "output_dir": "Journal_version",
+  "devices": [
+    "cuda"
+  ],
+  "generated_files": [
+    "timing_summary_flat.csv",
+    "timing_summary.md",
+    "timing_table_cuda.tex"
+  ]
+}

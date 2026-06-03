@@ -85,6 +85,19 @@ PAPER2309_TIMING_PRESETS: dict[str, PaperTimingPreset] = {
         paper_wgan_epochs=160,
         reference_eval_size=10_000_000,
     ),
+    "TDL": PaperTimingPreset(
+        n=8,
+        ebn0_db=10.0,
+        rate=4.0 / 8.0,
+        diffusion_hidden_dim=128,
+        paper_wgan_hidden_dim=256,
+        dataset_size=120_000,
+        batch_size=512,
+        diffusion_epochs=60,
+        drifting_epochs=60,
+        paper_wgan_epochs=60,
+        reference_eval_size=100_000,
+    ),
 }
 
 OPTFIB_SUITE_PRESET = {

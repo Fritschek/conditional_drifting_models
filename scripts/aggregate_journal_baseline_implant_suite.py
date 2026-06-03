@@ -17,6 +17,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed-start", type=int, default=7)
     parser.add_argument("--num-seeds", type=int, default=30)
     parser.add_argument("--allow-missing", action="store_true")
+    parser.add_argument(
+        "--check-checkpoints",
+        action="store_true",
+        help="Fail if checkpoint files referenced by the result JSONs are unavailable from this filesystem.",
+    )
     return parser.parse_args()
 
 
@@ -61,6 +66,20 @@ def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
         writer.writerows(rows)
 
 
+def resolve_local_checkpoint(suite_dir: Path, checkpoint_text: str) -> tuple[Path, bool]:
+    checkpoint = Path(checkpoint_text)
+    if checkpoint.exists():
+        return checkpoint, True
+    parts = checkpoint.parts
+    if suite_dir.name in parts:
+        index = parts.index(suite_dir.name)
+        local_checkpoint = suite_dir.joinpath(*parts[index + 1 :])
+        if local_checkpoint.exists():
+            return local_checkpoint, True
+        return local_checkpoint, False
+    return checkpoint, False
+
+
 def main() -> None:
     args = parse_args()
     variants = [normalize_variant(variant) for variant in parse_csv_list(args.variants)]
@@ -71,6 +90,7 @@ def main() -> None:
     rows: list[dict[str, object]] = []
     missing: list[str] = []
     missing_rows: list[str] = []
+    missing_checkpoints: list[str] = []
     grouped: dict[tuple[str, str, str], list[float]] = defaultdict(list)
 
     for channel in channels:
@@ -86,14 +106,17 @@ def main() -> None:
                 if variant not in variant_set:
                     continue
                 seen_variants.add(variant)
-                checkpoint = Path(str(run.get("checkpoint", "")))
-                if not checkpoint.exists():
-                    missing_rows.append(f"{channel} seed {seed} variant {variant} missing checkpoint {checkpoint}")
+                checkpoint_source = str(run.get("checkpoint", ""))
+                checkpoint, checkpoint_exists = resolve_local_checkpoint(args.suite_dir, checkpoint_source)
+                if not checkpoint_exists:
+                    missing_checkpoints.append(f"{channel} seed {seed} variant {variant} missing checkpoint {checkpoint_source}")
                 row: dict[str, object] = {
                     "seed": int(seed),
                     "channel": channel,
                     "variant": variant,
                     "checkpoint": str(checkpoint),
+                    "checkpoint_source": checkpoint_source,
+                    "checkpoint_exists": checkpoint_exists,
                     "summary": run.get("summary"),
                     "trained": run.get("trained"),
                     "elapsed_seconds": run.get("elapsed_seconds"),
@@ -113,6 +136,8 @@ def main() -> None:
         raise FileNotFoundError("Missing baseline task result files:\n" + "\n".join(missing[:20]))
     if missing_rows and not args.allow_missing:
         raise ValueError("Missing baseline result rows:\n" + "\n".join(missing_rows[:20]))
+    if missing_checkpoints and args.check_checkpoints and not args.allow_missing:
+        raise ValueError("Missing baseline checkpoints:\n" + "\n".join(missing_checkpoints[:20]))
 
     summary_rows: list[dict[str, object]] = []
     for channel in channels:
@@ -135,6 +160,7 @@ def main() -> None:
         "seeds": seeds,
         "missing": missing,
         "missing_rows": missing_rows,
+        "missing_checkpoints": missing_checkpoints,
         "num_rows": len(rows),
     }
     summary_path = args.suite_dir / "journal_baseline_implant_results.json"

@@ -1,11 +1,11 @@
 \subsection{Channel models}
-We benchmark four channel families.
-All channels are implemented on real-valued vectors, but not all channels use the same interpretation of the coordinates.
-For AWGN and Rayleigh, the benchmark uses real-valued channel inputs and outputs directly.
-In the main benchmark, both channels use dimension \(n=7\).
-For SSPA and OptFib, the signal is again stored as a real vector, but adjacent entries are interpreted as paired in-phase and quadrature components.
-Thus SSPA uses \(n=8\), corresponding to four I/Q pairs, and OptFib uses \(n=2\), corresponding to one I/Q pair.
-Noise variables are sampled independently across real components unless the channel transformation itself introduces coupling.
+We use four stochastic channel families.
+All channels are implemented as real-valued maps \(x\mapsto y\), but the coordinate interpretation differs by channel.
+AWGN and Rayleigh use real-valued channel inputs and outputs directly with dimension \(n=7\).
+SSPA and TDL use paired in-phase/quadrature coordinates with \(n=8\), corresponding to four complex symbols.
+Noise variables are sampled independently across real coordinates unless the deterministic channel transformation or tapped-delay convolution introduces coupling.
+The generator-level DDPM/DDIM/WGAN comparison uses AWGN, Rayleigh, and SSPA because those channels have matched reference runs.
+The downstream channel-implant study additionally includes TDL as a wireless channel with memory.
 
 \textbf{AWGN:}
 \begin{equation}
@@ -58,37 +58,16 @@ n \sim \mathcal{N}\!\left(0,\frac{\sigma^2}{2}I\right).
 \end{equation}
 This channel introduces amplitude-dependent nonlinear distortion while preserving the input direction in the I/Q plane.
 
-\textbf{OptFib:}
-We include a simplified memoryless optical-fiber proxy channel following \cite{li2018e2efiber} for the choice of parameters.
-As in SSPA, the real-valued state is interpreted as an I/Q pair.
-Let the state after propagation step \(k\) be \(x^{(k)} = [x_I^{(k)},x_Q^{(k)}]^\top\).
-At each step, the instantaneous nonlinear phase is
+\textbf{TDL:}
+The TDL channel is a compact short-block approximation of the 3GPP TR 38.901 TDL-D profile \cite{tr38901}.
+The real-valued state is interpreted as four complex I/Q symbols.
+For each codeword, the channel samples complex taps and applies circular convolution,
 \begin{equation}
-\phi^{(k)}
+y_t
 =
-\gamma
-\left(\left(x_I^{(k)}\right)^2 + \left(x_Q^{(k)}\right)^2\right)\frac{L}{K_{\text{step}}}.
+\sum_{\ell=0}^{L_h-1} h_\ell x_{(t-\ell)\bmod N_c} + n_t,
 \end{equation}
-The deterministic Kerr-style rotation is
-\begin{equation}
-\begin{aligned}
-\tilde{x}_I^{(k+1)} &= x_I^{(k)}\cos\phi^{(k)} - x_Q^{(k)}\sin\phi^{(k)}, \\
-\tilde{x}_Q^{(k+1)} &= x_I^{(k)}\sin\phi^{(k)} + x_Q^{(k)}\cos\phi^{(k)},
-\end{aligned}
-\end{equation}
-followed by additive Gaussian perturbations at every step:
-\begin{equation}
-\begin{aligned}
-x_I^{(k+1)} &= \tilde{x}_I^{(k+1)} + \sigma_n \xi_I^{(k)}, \\
-x_Q^{(k+1)} &= \tilde{x}_Q^{(k+1)} + \sigma_n \xi_Q^{(k)},
-\end{aligned}
-\qquad
-\xi_I^{(k)},\xi_Q^{(k)} \overset{\text{i.i.d.}}{\sim} \mathcal{N}(0,1).
-\end{equation}
-When that optical-channel parameterization is used,
-\begin{equation}
-\sigma_n
-=
-\sqrt{\frac{10^{(P_n-30)/10}}{2K_{\text{step}}}},
-\end{equation}
-with \(P_n\) measured in dBm.
+where \(N_c=4\) is the number of complex symbols in the short codeword and \(n_t\) is circular complex Gaussian noise.
+The implemented profile uses the TDL-D line-of-sight structure with first-tap \(K\)-factor \(13.3\,\mathrm{dB}\).
+Because the symbolic benchmark uses only four complex symbols, continuous delays are rounded onto the short discrete grid and taps that collide on the same grid index are summed.
+This keeps the channel compatible with the short symbolic autoencoder while preserving the feature that the output is a random multipath mixture rather than a memoryless componentwise perturbation.

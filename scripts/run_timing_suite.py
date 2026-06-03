@@ -18,7 +18,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", type=str, default="")
     parser.add_argument("--devices", type=str, default="cpu,cuda")
     parser.add_argument("--seed", type=int, default=7)
-    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,OptFib")
+    parser.add_argument("--channels", type=str, default="AWGN,Rayleigh,SSPA,TDL")
     parser.add_argument(
         "--methods",
         type=str,
@@ -52,7 +52,7 @@ def parse_json_from_text(text: str, cmd: list[str]) -> dict:
 
 
 def preset_for_channel(channel: str) -> str:
-    if channel in {"AWGN", "Rayleigh", "SSPA"}:
+    if channel in {"AWGN", "Rayleigh", "SSPA", "TDL"}:
         return "paper2309"
     if channel == "OptFib":
         return "optfib_suite"

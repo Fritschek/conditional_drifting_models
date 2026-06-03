@@ -4,19 +4,20 @@
 \subsection{Problem formulation}
 We study learned conditional channel simulation.
 Let \(x \in \mathbb{R}^n\) denote the transmitted channel input and \(y \in \mathbb{R}^n\) the corresponding channel output.
-We consider two benchmark protocols.
-The unified drifting benchmark works in residual space and defines
+We consider two target parameterizations and two experimental protocols.
+The direct-output parameterization learns \(p(y\mid x)\) and predicts \(\hat y=g_\theta(x,z)\).
+The residual parameterization defines
 \begin{equation}
 e = y - x.
 \end{equation}
-In that protocol, generative models are trained to approximate the conditional residual law \(p(e \mid x)\), and channel outputs are reconstructed as
+In residual mode, generative models approximate \(p(e \mid x)\), and channel outputs are reconstructed as
 \begin{equation}
 \hat{y} = x + \hat{e}.
 \end{equation}
-This parameterization keeps the evaluation target aligned across additive, multiplicative, and nonlinear channels, and it is the representation used in the unified cross-channel benchmark that includes drifting and OptFib.
-
-By contrast, the benchmark protocol associated with \cite{paper2309} models the direct conditional channel-output law \(p(y \mid x)\).
-The distinction matters because the direct-output and residual protocols define different learning targets and induce different modeling biases.
+The generator-level protocol compares the proposed drifting family against conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, and SSPA, where matched reference runs are available.
+The drift-field ablation then holds the direct-output drifting architecture fixed and compares target-kernel, joint-kernel, joint Sinkhorn, and condition-wise Sinkhorn training fields over 100 seeds, except for the SSPA update-budget check described below.
+That ablation is evaluated with direct SWD, anchor-conditioned diagnostics, and downstream symbolic SER/BER, and additionally includes a compact TDL wireless channel.
+The distinction between direct-output and residual targets matters because the two protocols define different modeling biases: residual learning can simplify near-identity channels, while direct-output learning aligns with the conditional law used by diffusion, WGAN, and the downstream channel implants.
 
 \subsection{Conditional diffusion baseline}
 The diffusion baseline follows the channel-learning setting of \cite{paper2309} and uses a conditional DDPM objective \cite{ddpm} with DDIM sampling for deterministic inference trajectories \cite{ddim}.
@@ -43,9 +44,9 @@ The model is trained in \(v\)-prediction mode:
 \right\|_2^2
 \right].
 \end{equation}
-For AWGN, the paper notebook uses \(30\) epochs at learning rate \(10^{-4}\).
+For AWGN, the reference diffusion run uses \(30\) epochs at learning rate \(10^{-4}\).
 For Rayleigh, it uses a two-stage schedule of \(10\) epochs at \(10^{-3}\) followed by \(20\) epochs at \(10^{-4}\).
-For SSPA, the paper setup uses a longer training budget.
+For SSPA, the reference setup uses a longer training budget.
 At inference time, we report both the stochastic DDPM reverse chain and the deterministic DDIM trajectory.
 The DDIM trajectory uses skip-based index sets such as
 \( \{9,19,\ldots,99\} \) for DDIM(10) and
@@ -92,11 +93,12 @@ For channel simulation, two target parameterizations are meaningful.
 The first is the direct conditional channel-output law \(p(y \mid x)\), which treats the learned generator as a surrogate for the full channel law.
 The second is the residual law \(p(e \mid x)\) with \(e = y - x\), which injects the inductive bias that the channel output can be understood as the transmitted symbol plus a structured perturbation.
 The direct formulation is conceptually cleaner and corresponds to learning the channel law itself.
-The residual formulation is usually easier to optimize in the later unified benchmark, because the model does not need to relearn the identity component of the channel map.
+The residual formulation is usually easier to optimize on near-identity channels, because the model does not need to relearn the identity component of the channel map.
 
 In direct mode, the generator predicts \(\hat{y} = g_\theta(x, z)\) and is evaluated against samples from \(p(y \mid x)\).
 In residual mode, the generator predicts \(\hat{e} = g_\theta(x, z)\) and the channel output is reconstructed as \(\hat{y} = x + \hat{e}\).
-In the experiments, the direct formulation is used when comparing against direct-output diffusion and WGAN baselines, whereas the residual formulation is used in the unified benchmark where we study cross-channel robustness and latency.
+In the experiments, the direct formulation is used when comparing against direct-output diffusion and WGAN baselines and throughout the Sinkhorn drift-field ablation.
+The residual formulation is retained as a complementary parameterization because it exposes when the choice of target space changes the result.
 
 In the residual benchmark instantiation, the implemented generator is therefore
 \begin{equation}
@@ -155,12 +157,12 @@ g_i - \tilde{g}_i
 \end{equation}
 Thus, the generic update \(u \mapsto u + \eta V_{p,q}(u)\) becomes a kernel-based update estimated directly from minibatches of generated and true channel samples in the selected target space.
 
-The March 27 conference draft also includes an enhanced direct-output variant with a conditioning-aware kernel.
+We also include an enhanced direct-output variant with a conditioning-aware kernel.
 For this variant, sample interactions are computed on joint condition-target pairs \(k((x_i,y_i),(x_j,y_j))\) rather than on \(k(y_i,y_j)\) alone.
 This makes attraction and repulsion depend on both transmitted-symbol similarity and channel-output similarity, and the direct-output target kernel can additionally include residual similarity.
 The generator architecture and one-shot inference path are unchanged.
 
-The journal version additionally considers a Sinkhorn replacement for this heuristic kernel field, motivated by W-Flow \cite{han2026wflow}.
+We additionally consider a Sinkhorn replacement for this heuristic kernel field, motivated by W-Flow \cite{han2026wflow}.
 For channel simulation, the Sinkhorn field is applied conditionally rather than on the unrestricted joint space.
 Writing \(p(dx,dy)=\mu(dx)p_x(dy)\) and \(q_\theta(dx,dy)=\mu(dx)q_{\theta,x}(dy)\), the conditional objective is
 \begin{equation}
@@ -168,7 +170,7 @@ Writing \(p(dx,dy)=\mu(dx)p_x(dy)\) and \(q_\theta(dx,dy)=\mu(dx)q_{\theta,x}(dy
 =
 \int S_\varepsilon(q_{\theta,x},p_x)\,\mu(dx).
 \end{equation}
-The resulting fiberwise velocity is
+The resulting condition-wise velocity is
 \begin{equation}
 v_x(y)
 =
@@ -182,7 +184,7 @@ For measured data with only one output per condition, the corresponding approxim
 
 Empirically, the two parameterizations behave differently.
 At matched mid-budget settings, residual drifting is materially stronger than direct \(y \mid x\) drifting on AWGN, Rayleigh, and SSPA, which is consistent with the view that residual modeling supplies a useful near-identity inductive bias.
-For this reason, direct drifting is primarily used for direct-output baseline comparisons, whereas residual drifting is the stronger default in the later production-style benchmark.
+For this reason, both parameterizations are reported: direct drifting is used for direct-output comparisons and the Sinkhorn ablation, while residual drifting is retained as a diagnostic for near-identity channel structure.
 
 The corrected benchmark uses the following hyperparameters:
 \(\eta = 1.0\),
@@ -194,14 +196,14 @@ Unlike diffusion, inference requires only one forward pass through \(g_\theta(x,
 \subsection{Conditional GAN baseline}
 Two adversarial baselines are used.
 For the direct-output benchmark, we include a conditional WGAN baseline matching the comparison setup of \cite{paper2309}.
-For the unified residual benchmark, we include a stronger conditional GAN adapted from the \texttt{DM\_OptFib} code path.
+For the residual diagnostic benchmark, we include a stronger conditional GAN adapted from the nonlinear-channel code path.
 
-In the later benchmark, the generator receives the concatenated vector \([x, z]\), where \(z \sim \mathcal{N}(0, I)\), and outputs the full channel output \(\hat{y}\).
+In this benchmark, the generator receives the concatenated vector \([x, z]\), where \(z \sim \mathcal{N}(0, I)\), and outputs the full channel output \(\hat{y}\).
 Architecturally, the generator uses an input linear layer, two batch-normalized hidden blocks, a central hidden layer, two additional batch-normalized hidden blocks, and a residual skip from the condition input \(x\) to the output.
 The discriminator takes the concatenated pair \([y, x]\), processes it with a residual-style multilayer perceptron, concatenates the original input back into the hidden state, and produces a scalar realism score.
 
 Two adversarial objectives are implemented in the benchmark code: WGAN-GP and a stronger feature-aligned GAN mode denoted \texttt{GAN\_FA}.
-The later residual benchmark uses \texttt{GAN\_FA}, since it was substantially more stable than the plain WGAN-GP baseline in this channel-learning setting.
+The residual diagnostic benchmark uses \texttt{GAN\_FA}, since it was substantially more stable than the plain WGAN-GP baseline in this channel-learning setting.
 In \texttt{GAN\_FA}, the discriminator is trained with BCE-with-logits and label smoothing, and the generator is trained with an adversarial term plus an \(L_1\) reconstruction term:
 \begin{equation}
 \mathcal{L}_{G}
@@ -213,54 +215,30 @@ In \texttt{GAN\_FA}, the discriminator is trained with BCE-with-logits and label
 \end{equation}
 In the experiments, \(\alpha = 1.0\), generator updates are delayed relative to discriminator updates, and the default hidden width is \(128\).
 
-\subsection{Channel models}
-We benchmark four channels.
-
-\textbf{AWGN:}
-\begin{equation}
-y = x + n,
-\qquad
-n \sim \mathcal{N}(0, \sigma^2 I).
-\end{equation}
-
-\textbf{Rayleigh:}
-the transmitted symbol is multiplied elementwise by a Rayleigh fading coefficient and then corrupted by additive Gaussian noise.
-
-\textbf{SSPA:}
-the input amplitude is passed through a smooth solid-state power amplifier nonlinearity before additive noise is applied.
-
-\textbf{OptFib:}
-we include a simplified memoryless optical-fiber proxy channel adapted from \texttt{DM\_OptFib}.
-The I/Q pair is propagated through \(K_{\text{step}}\) repeated nonlinear phase rotations with per-step Gaussian noise injection.
-In the current benchmark, the default parameters are \(L = 5000\), \(\gamma = 1.27\), \(K_{\text{step}} = 50\), and \(P_n = -21.3\) dBm.
+\input{channel_models_subsection.tex}
 
 \subsection{Training protocol}
-We use two training protocols.
+We use two complementary protocols.
+First, the generator-level protocol compares the proposed drifting family against conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, and SSPA.
+Second, the drift-field ablation holds the direct-output drifting architecture fixed and compares target-space kernel drifting, conditioning-aware joint-kernel drifting, joint Sinkhorn drifting, and condition-wise Sinkhorn drifting over 100 seeds.
+The ablation reports direct SWD, anchor-conditioned diagnostics, and downstream symbolic SER/BER.
+The TDL channel is included in this second protocol because it tests a memory-bearing wireless channel, while no matched DDPM/DDIM/WGAN TDL reference run is reported.
 
-\textbf{Direct-output protocol.}
-This benchmark follows the setup of \cite{paper2309}.
-It uses direct \(y \mid x\) diffusion modeling, channel-specific hidden widths, channel-specific learning-rate schedules, and large paper-scale training sets.
-For AWGN and Rayleigh, the full-budget runs use \(T=100\), dataset size \(10^7\), batch size \(5000\), and channel-specific epoch schedules, while evaluation uses large sample sets and \(128\) SWD projections.
+For AWGN and Rayleigh, the setting is \(n=7\); for SSPA and TDL, \(n=8\).
+The downstream symbolic autoencoder uses message-alphabet size \(M_{\mathrm{msg}}=16\) for AWGN, Rayleigh, and TDL, and \(M_{\mathrm{msg}}=64\) for SSPA.
+Thus \(R=\log_2(M_{\mathrm{msg}})/n\), giving rates \(4/7\), \(4/7\), \(6/8\), and \(4/8\), respectively.
+The \((E_b/N_0,R)\) pairs are \((5\,\mathrm{dB},4/7)\) for AWGN, \((12\,\mathrm{dB},4/7)\) for Rayleigh, \((8\,\mathrm{dB},6/8)\) for SSPA, and \((10\,\mathrm{dB},4/8)\) for TDL.
 
-\textbf{Unified residual benchmark protocol.}
-This is the unified cross-channel benchmark used for drifting comparisons across AWGN, Rayleigh, SSPA, and OptFib.
-The corresponding runner is implemented in \texttt{run\_publication\_benchmark.py} and uses a common residual-space evaluation setup:
-\begin{itemize}
-\item diffusion horizon \(T=100\),
-\item residual dimension \(n=2\),
-\item noise standard deviation \(0.3\),
-\item training set size \(120{,}000\),
-\item diffusion epochs \(60\),
-\item GAN epochs \(120\),
-\item batch size \(512\),
-\item evaluation set size \(20{,}000\),
-\item GAN mode \texttt{GAN\_FA}.
-\end{itemize}
-In this later protocol, the drifting model uses the same channel samples and residual-space target as the diffusion and GAN baselines.
-To support publication-ready reporting, the runner performs multi-seed sweeps and stores per-seed results together with aggregate statistics.
+For the generator-level AWGN and Rayleigh runs, the training dataset size is \(10^7\), the batch size is \(5000\), and drifting, diffusion, and WGAN are trained for \(30\) epochs.
+For SSPA, the dataset size is \(10^7\), the batch size is \(4096\), and the training budget is \(160\) epochs.
+The reported SSPA condition-wise Sinkhorn row uses the same epoch count but a compact \(120{,}000\)-sample budget, which corresponds to approximately \(4.8\)k optimizer updates and matches the observed convergence of the corrected same-condition field.
+TDL uses the compact nonlinear-channel budget: dataset size \(120{,}000\), batch size \(512\), \(60\) drifting epochs, and evaluation size \(100{,}000\).
+Downstream symbolic autoencoders are trained through either the analytic channel or the learned channel implant and are always evaluated on the analytic channel.
 
 \subsection{Evaluation metric}
-The primary metric in the later unified benchmark is sliced Wasserstein distance (SWD) on residual vectors:
+The primary generator metric is sliced Wasserstein distance (SWD), computed in the target space used by each benchmark path.
+For direct-output models, we report SWD on generated and true channel outputs.
+For residual models, we report SWD on generated and true residual vectors:
 \begin{equation}
 \mathrm{SWD}\!\left(\{\hat{e}_i\}, \{e_i\}\right).
 \end{equation}
@@ -274,9 +252,9 @@ W_1\!\left(\{\langle \theta_m,e_i\rangle\}_{i=1}^N,\{\langle \theta_m,\hat e_i\r
 \end{equation}
 In other words, SWD measures how different the generated and true sample clouds look when viewed from many random one-dimensional directions.
 This makes it sensitive to both location and shape discrepancies while remaining much cheaper to estimate than a full high-dimensional Wasserstein distance.
-In the local residual benchmark code, SWD is estimated with \(256\) random one-dimensional projections.
-Residual-space SWD was selected over histogram \(L_1\) distance because it is better behaved across channel families and captures geometry in \(\mathbb{R}^2\) rather than only marginal overlap.
-In the direct-output benchmark, SWD is instead computed on the generated channel-output representation with the projection count used by the corresponding setup.
+In the generator-level runs, SWD is estimated with \(128\) random projections for AWGN, Rayleigh, and SSPA.
+The drift-field ablation additionally reports anchor-conditioned SWD and Gaussian-W2 diagnostics, where repeated outputs are sampled at fixed transmitted symbols.
+These conditional metrics are reported because global output-space SWD can disagree with downstream symbolic SER/BER.
 
 \subsection{Inference-time comparison}
 The latency comparison is measured separately from the fidelity benchmark.
@@ -285,5 +263,5 @@ This corresponds to an observed speedup of approximately \(260.8\times\) in favo
 
 \subsection{Reproducibility}
 The benchmark script exposes an explicit random seed argument and the publication runner defaults to deterministic execution unless disabled.
-Additional sanity checks include metric identity and symmetry checks for SWD, byte-identical reruns under fixed seed, finite-value validation of stored JSON result files, and small cross-seed ranking checks on AWGN and OptFib.
+Additional sanity checks include metric identity and symmetry checks for SWD, byte-identical reruns under fixed seed, finite-value validation of stored JSON result files, and small cross-seed ranking checks.
 These checks are not a substitute for the full publication-scale run, but they provide confidence that the benchmark pipeline is internally consistent.

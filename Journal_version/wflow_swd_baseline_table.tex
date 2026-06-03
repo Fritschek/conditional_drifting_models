@@ -1,0 +1,29 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report the ten-seed mean $\pm$ standard deviation from the diffusion/WGAN benchmark. The drifting-family rows contain direct drifting from the same ten-seed benchmark and the W-Flow drift-field ablation; W-Flow rows report all-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean.}
+\label{tab:wflow-swd-baselines}
+\tablestyle{4.5pt}{1.03}
+\tablefontsize
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Method & AWGN & Rayleigh & SSPA \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textit{Diffusion/WGAN reference baselines}} \\
+\headspace WGAN & 0.0198 $\pm$ 0.0050 & 0.0171 $\pm$ 0.0050 & 0.0287 $\pm$ 0.0156 \\
+\headspace DDPM & 0.0070 $\pm$ 0.0004 & 0.0079 $\pm$ 0.0008 & 0.0032 $\pm$ 0.0005 \\
+\headspace DDIM-100 & 0.0042 $\pm$ 0.0006 & 0.0044 $\pm$ 0.0007 & 0.0024 $\pm$ 0.0004 \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{4}{l}{\textit{Drifting family}} \\
+\headspace Direct drifting & 0.0100 $\pm$ 0.0007 & 0.0085 $\pm$ 0.0012 & \textbf{0.0060 $\pm$ 0.0008} \\
+\headspace Kernel target & 0.0106 $\pm$ 0.0001 & 0.0099 $\pm$ 0.0001 & 0.0070 $\pm$ 0.0001 \\
+\headspace Kernel joint & 0.0290 $\pm$ 0.0004 & 0.0492 $\pm$ 0.0002 & 0.0074 $\pm$ 0.0001 \\
+\headspace Joint Sinkhorn & 0.0148 $\pm$ 0.0002 & 0.0152 $\pm$ 0.0002 & 0.0117 $\pm$ 0.0002 \\
+\headspace Condition-wise Sinkhorn & \textbf{0.0058 $\pm$ 0.0001} & \textbf{0.0073 $\pm$ 0.0001} & 0.0071 $\pm$ 0.0002$^{\ast}$ \\
+\bottomrule
+\end{tabular}
+\par\vspace{0.25em}
+\begin{minipage}{0.92\textwidth}
+\footnotesize\raggedright
+\(\ast\) The SSPA condition-wise Sinkhorn value uses the corrected 30-seed update-budget-controlled run (\(120{,}000\) samples, batch \(4096\), \(160\) epochs), where the one-shot field saturated after roughly \(4.8\)k optimizer updates.
+\end{minipage}
+\end{table*}

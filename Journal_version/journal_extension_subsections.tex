@@ -1,46 +1,43 @@
-\section{Journal Extension Directions}
+\section{Additional Design Considerations}
 
-\subsection{Fiberwise Conditional Sinkhorn Drifting}
-The main journal extension is no longer only a broader benchmark; it is a corrected conditional transport formulation for drifting channel generators.
-Recent W-Flow work replaces heuristic drifting fields with Sinkhorn-divergence Wasserstein-gradient-flow velocities.
-For channels, this must be applied fiberwise: the input marginal is fixed, and only \(p(y\mid x)\) or \(p(e\mid x)\) should be transported.
-The journal version should therefore present conditional Sinkhorn drifting as
+\subsection{Condition-wise Sinkhorn drifting}
+The central transport point is that channel simulation is conditional.
+Recent W-Flow work replaces heuristic drifting fields with Sinkhorn-divergence Wasserstein-gradient-flow velocities, but an unrestricted joint transport on \((x,y)\) is not the right object when the transmitted-symbol marginal is fixed.
+For channels, only \(p(y\mid x)\) or \(p(e\mid x)\) is transported.
+The corresponding conditional Sinkhorn objective is
 \[
 \mathcal S_\varepsilon^{\mathrm{cond}}(q,p)=
 \int S_\varepsilon(q_x,p_x)\,\mu(dx),
 \]
-with velocity
+with condition-wise velocity
 \[
 v_x(y)=T^\varepsilon_{q_x,p_x}(y)-T^\varepsilon_{q_x,q_x}(y).
 \]
-This explains why naive joint Sinkhorn on \((x,y)\) can fail even though Sinkhorn improves the unconditional W-Flow setting.
+This explains why naive joint Sinkhorn on \((x,y)\) can differ from the proposed condition-wise field even when Sinkhorn improves the unconditional W-Flow setting.
 
-\subsection{End-to-End Learned Communication with Differentiable Channel Implants}
-An important journal-scale extension is to place the learned channel models inside end-to-end communication pipelines rather than restricting the study to generator-level benchmark metrics.
-The first fiberwise Sinkhorn AWGN implant result is already close to the analytic-channel SER, so downstream SER/BER should be reported alongside SWD.
-Direct, residual, joint Sinkhorn, and fiberwise Sinkhorn channel implants should be compared against diffusion and WGAN channel implants under downstream objectives such as achievable information rate, symbol error rate, or block error rate.
-This section should emphasize that all one-shot channel implants are differentiable but induce different gradient structure with respect to the transmitted symbol, which may affect transmitter and receiver optimization differently across channel regimes.
+\subsection{End-to-end learned communication}
+The learned channel models are also evaluated as differentiable channel implants inside end-to-end communication pipelines.
+In that setting, the relevant question is not only whether the generated sample cloud has low SWD, but whether training through the surrogate produces an encoder and decoder that perform well on the analytic or measured target channel.
+Direct drifting, residual drifting, joint Sinkhorn, and condition-wise Sinkhorn therefore need SER/BER or BLER checks alongside generator-level metrics.
+All one-shot channel implants are differentiable, but they induce different gradients with respect to the transmitted symbol, which can affect transmitter and receiver optimization differently across channel regimes.
 
-\subsection{Parameterization and Metric-Space Analysis}
-The camera-ready GLOBECOM version already shows that direct and residual drifting behave differently across channels and evaluation spaces.
-The journal version can elevate this into a systematic methodological study by treating target parameterization and evaluation space as first-class variables.
-This includes direct-output versus residual training targets, direct-output versus residual SWD evaluation, anchor-conditioned moment metrics, and their interaction with channel nonlinearity.
-Such a section would clarify when residual parameterization is a useful inductive bias and when direct-output modeling is preferable.
-It should also make clear that global SWD is not always aligned with coding performance.
+\subsection{Parameterization and metric-space analysis}
+Direct and residual drifting behave differently across channel classes and evaluation spaces.
+The manuscript therefore treats target parameterization and evaluation space as first-class variables: direct-output versus residual targets, direct-output versus residual SWD, anchor-conditioned diagnostics, and downstream coding metrics.
+This makes clear when residual parameterization is a useful near-identity inductive bias and when direct-output modeling is preferable.
+It also makes explicit that global SWD is not always aligned with coding performance.
 
-\subsection{Extended Channel Studies}
-The present benchmark covers AWGN, Rayleigh, SSPA, and a simplified optical-fiber proxy channel.
-The journal version should broaden this set to at least one richer setting, such as higher-dimensional fading channels, MIMO channels, memory channels, or more realistic optical models.
-The central question is whether the relative behavior of kernel drifting, fiberwise Sinkhorn drifting, and diffusion remains stable once the channel law departs more strongly from a near-identity structure.
+\subsection{Extended channel studies}
+The core generator-level reference comparison covers AWGN, Rayleigh, and SSPA.
+The drift-field and downstream studies additionally include TDL as a wireless channel with memory.
+This provides a first test of whether the relative behavior of kernel drifting, condition-wise Sinkhorn drifting, diffusion, and WGAN remains stable once the channel law departs from a memoryless componentwise perturbation.
 
-\subsection{Latency-Quality Tradeoffs Beyond Standard Diffusion}
-The current conference paper compares drifting primarily against DDPM, DDIM, and WGAN baselines.
-For a journal extension, this comparison can be widened to include accelerated diffusion strategies such as reduced-step DDIM, consistency models, distillation-based one-step diffusion, and the new Sinkhorn variants.
-This would allow the journal version to position drifting more precisely within the broader space of latency-conscious generative modeling, using not only inference speed but also projected training cost and total deployment cost.
+\subsection{Latency-quality tradeoffs}
+The reference comparison covers DDPM, DDIM, and WGAN channel generators.
+The drifting family is positioned within the broader space of latency-conscious generative modeling, including reduced-step DDIM, consistency-style generators, distillation-based one-step diffusion, and Sinkhorn-driven one-shot drift fields.
+The useful comparison is therefore not only final fidelity, but also inference latency, training cost, and deployment cost.
 
-\subsection{Limitations and Practical Design Guidelines}
-The journal version should also provide a more explicit discussion of limitations and model-selection guidance.
-Relevant issues include the dependence of reported quality on metric space, the suitability of residual parameterization for near-identity versus strongly nonlinear channels, the role of minibatch field estimation, and the limitations of the current optical proxy benchmark.
-The Sinkhorn extension adds one more practical limitation: exact fiberwise transport requires repeated samples at the same condition, which is available for simulators but not for arbitrary measured channels.
-For measured data, the journal version should discuss local conditional Sinkhorn as the practical approximation.
-This section can be turned into a practical guide that recommends direct, residual, or fiberwise Sinkhorn drifting, diffusion, or accelerated diffusion variants depending on channel structure, available data, and latency constraints.
+\subsection{Limitations and design guidance}
+Relevant limitations include the dependence of reported quality on metric space, the suitability of residual parameterization for near-identity versus strongly nonlinear channels, and the role of minibatch field estimation.
+Exact condition-wise transport also requires repeated samples at the same condition, which is available for simulators but not for arbitrary measured channels.
+For measured data, the practical approximation is local conditional Sinkhorn, where nearby conditions are grouped or kernel-weighted before solving the output-space Sinkhorn problem.
