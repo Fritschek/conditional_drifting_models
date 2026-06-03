@@ -1,7 +1,8 @@
 \subsection{Long-block TurboAE check}
 The symbolic autoencoder results above use short codewords, so we additionally run a longer-block neural-coding check with a CNN TurboAE-style encoder--decoder at block length \(64\), rate \(1/2\), and AWGN training point \(E_b/N_0=4\,\mathrm{dB}\).
 The TurboAE models are trained either through the analytic AWGN channel or through a condition-wise Sinkhorn AWGN surrogate and are then evaluated on the analytic AWGN channel.
-This experiment is not intended to replace the short-block multi-channel SER/BER study; it checks whether the learned one-shot channel implant remains usable in a longer differentiable coding loop.
+This experiment complements the short-block multi-channel SER/BER study.
+It checks whether the learned one-shot channel implant remains usable in a longer differentiable coding loop.
 
 Fig.~\ref{fig:turboae-long-block-curve} shows the resulting BER and BLER curves over \(30\) seeds.
 At the \(4\,\mathrm{dB}\) training point, analytic-channel training gives BER \(1.96\times 10^{-3}\) with 95\% CI \(5.21\times 10^{-4}\) and BLER \(8.18\times 10^{-2}\) with 95\% CI \(2.30\times 10^{-2}\).

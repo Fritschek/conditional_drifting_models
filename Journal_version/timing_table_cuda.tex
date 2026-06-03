@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering
-\caption{\textbf{Projected training and inference timing on an NVIDIA RTX 5060 Ti GPU.} Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample.}
+\caption{\textbf{Projected training and inference timing on an NVIDIA RTX 5060 Ti GPU.} Training hours are extrapolated from a 2\% timing run. Inference is reported as time per sample.}
 \label{tab:timing-cuda}
 \tablestyle{3pt}{1.02}
 \tablefontsize
@@ -31,6 +31,6 @@ DDIM-10 & 0.020 & 0.004 ms & 0.031 & 0.020 & 0.004 ms & 0.031 & 0.124 & 0.004 ms
 \par\vspace{0.25em}
 \begin{minipage}{0.96\textwidth}
 \footnotesize\raggedright
-All rows use the same 2\% extrapolation protocol. In the one-shot block, bold total times mark the lowest projected total for each channel. The W-Flow rows use the same one-shot generator architecture as direct drifting; their training-time differences come only from the drift-field computation.
+All rows use the same 2\% extrapolation protocol. In the one-shot block, bold total times mark the lowest projected total for each channel. The W-Flow rows use the same one-shot generator architecture as direct drifting. Their training-time differences come only from the drift-field computation.
 \end{minipage}
 \end{table*}

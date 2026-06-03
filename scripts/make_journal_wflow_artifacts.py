@@ -467,10 +467,10 @@ def write_wflow_swd_table(
     lines = [
         r"\begin{table*}[t]",
         r"\centering",
-        r"\caption{\textbf{Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report mean $\pm$ standard deviation from the diffusion/WGAN benchmark or from checkpoint-only direct-SWD evaluation. The drifting-family rows contain direct drifting from the same benchmark and the W-Flow drift-field ablation; W-Flow rows report the available-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean; dashes mark unavailable matched generator-level SWD values.}",
+        r"\caption{\textbf{Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report mean $\pm$ standard deviation from the diffusion/WGAN benchmark or from checkpoint-only direct-SWD evaluation. The drifting-family rows contain direct drifting from the same benchmark and the W-Flow drift-field ablation. W-Flow rows report the available-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean. Dashes mark unavailable matched generator-level SWD values.}",
         r"\label{tab:wflow-swd-baselines}",
-        r"\tablestyle{4.5pt}{1.03}",
-        r"\tablefontsize",
+        r"\tablestyle{5.8pt}{1.08}",
+        r"\footnotesize",
         rf"\begin{{tabular}}{{@{{}}{colspec}@{{}}}}",
         r"\toprule",
         "Method & " + " & ".join(channels) + r" \\",
@@ -533,7 +533,7 @@ def write_coding_table(
     lines = [
         r"\begin{table*}[t]",
         r"\centering",
-        r"\caption{\textbf{Downstream symbolic coding metrics for W-Flow channel surrogates.} Autoencoders are trained through each channel surrogate and evaluated on the analytic channel. Values are mean $\pm$ standard error over seeds. Lower is better; bold marks the best learned surrogate in each row, while the analytic channel is the reference floor.}",
+        r"\caption{\textbf{Downstream symbolic coding metrics for W-Flow channel surrogates.} Autoencoders are trained through each channel surrogate and evaluated on the analytic channel. Values are mean $\pm$ standard error over seeds. Lower is better. Bold marks the best learned surrogate in each row, while the analytic channel is the reference floor.}",
         r"\label{tab:wflow-ser-ber}",
         r"\tablestyle{3.4pt}{1.02}",
         r"\tablefontsize",
@@ -565,7 +565,7 @@ def write_coding_table(
             r"\par\vspace{0.25em}",
             r"\begin{minipage}{0.92\textwidth}",
             r"\footnotesize\raggedright",
-            r"SSPA uses the \(30\)-seed \(M_{\mathrm{msg}}=64\) update-budget screen; dashes mark variants not rerun under that SSPA coding setup.",
+            r"SSPA uses the \(30\)-seed \(M_{\mathrm{msg}}=64\) update-budget screen. Dashes mark variants not rerun under that SSPA coding setup.",
             r"\end{minipage}",
             r"\end{table*}",
             "",
@@ -583,7 +583,7 @@ def write_metric_table(
     lines = [
         r"\begin{table}[!t]",
         r"\centering",
-        r"\caption{\textbf{Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian-W2 are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are seed means; lower is better.}",
+        r"\caption{\textbf{Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian-W2 are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are seed means. Lower is better.}",
         r"\label{tab:wflow-conditional-metrics}",
         r"\tablestyle{3.4pt}{1.02}",
         r"\tablefontsize",
@@ -732,7 +732,7 @@ def write_markdown_summary(
             "Interpretation:",
             "- Condition-wise Sinkhorn is the best learned coding surrogate on AWGN, Rayleigh, SSPA, and TDL under the reported channel-specific coding setups.",
             "- TDL diffusion/WGAN direct-SWD reference rows are checkpoint-only evaluations of the trained baseline implants.",
-            "- The SSPA condition-wise row uses the corrected compact-budget M_msg=64 screen; the older full-budget corrected run was an over-optimization failure of the sharp field, not the reported SSPA model.",
+            "- The SSPA condition-wise row uses the corrected compact-budget M_msg=64 screen. The older full-budget corrected run was an over-optimization failure of the sharp field and is not the reported SSPA model.",
             "- Direct SWD and downstream coding do not always agree, so the paper reports both global and condition-wise diagnostics.",
         ]
     )

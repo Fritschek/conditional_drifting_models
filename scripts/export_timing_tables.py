@@ -134,7 +134,7 @@ def write_device_tex(device: str, channels: dict, out_path: Path) -> None:
     lines.append(r"\centering")
     lines.append(
         rf"\caption{{\textbf{{Projected training and inference timing on {device_label(device)}.}} "
-        r"Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample.}"
+        r"Training hours are extrapolated from a 2\% timing run. Inference is reported as time per sample.}"
     )
     lines.append(rf"\label{{tab:timing-{latex_escape(device)}}}")
     lines.append(r"\tablestyle{3pt}{1.02}")
@@ -201,7 +201,7 @@ def write_device_tex(device: str, channels: dict, out_path: Path) -> None:
     lines.append(r"\par\vspace{0.25em}")
     lines.append(r"\begin{minipage}{0.96\textwidth}")
     lines.append(r"\footnotesize\raggedright")
-    lines.append(r"All rows use the same 2\% extrapolation protocol. In the one-shot block, bold total times mark the lowest projected total for each channel. The W-Flow rows use the same one-shot generator architecture as direct drifting; their training-time differences come only from the drift-field computation.")
+    lines.append(r"All rows use the same 2\% extrapolation protocol. In the one-shot block, bold total times mark the lowest projected total for each channel. The W-Flow rows use the same one-shot generator architecture as direct drifting. Their training-time differences come only from the drift-field computation.")
     lines.append(r"\end{minipage}")
     lines.append(r"\end{table*}")
     out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
