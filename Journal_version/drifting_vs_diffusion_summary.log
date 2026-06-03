@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  3 JUN 2026 12:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  3 JUN 2026 22:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -508,33 +508,51 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
 (./wflow_coding_table.tex) (./wflow_all_ser_curve_figures.tex
-<figures/wflow_all_ser_curves.pdf, id=384, 516.70102pt x 358.16179pt>
-File: figures/wflow_all_ser_curves.pdf Graphic file (type pdf)
-<use figures/wflow_all_ser_curves.pdf>
-Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
-.
-(pdftex.def)             Requested size: 505.6778pt x 350.52615pt.
+<figures/wflow_awgn_ser_curves.pdf, id=387, 350.48001pt x 226.48131pt>
+File: figures/wflow_awgn_ser_curves.pdf Graphic file (type pdf)
+<use figures/wflow_awgn_ser_curves.pdf>
+Package pdftex.def Info: figures/wflow_awgn_ser_curves.pdf  used on input line 
+6.
+(pdftex.def)             Requested size: 252.0pt x 162.84523pt.
+<figures/wflow_rayleigh_ser_curves.pdf, id=388, 350.62521pt x 226.48131pt>
+File: figures/wflow_rayleigh_ser_curves.pdf Graphic file (type pdf)
+<use figures/wflow_rayleigh_ser_curves.pdf>
+Package pdftex.def Info: figures/wflow_rayleigh_ser_curves.pdf  used on input l
+ine 13.
+(pdftex.def)             Requested size: 252.0pt x 162.77957pt.
+<figures/wflow_sspa_ser_curves.pdf, id=389, 350.48001pt x 226.48131pt>
+File: figures/wflow_sspa_ser_curves.pdf Graphic file (type pdf)
+<use figures/wflow_sspa_ser_curves.pdf>
+Package pdftex.def Info: figures/wflow_sspa_ser_curves.pdf  used on input line 
+20.
+(pdftex.def)             Requested size: 252.0pt x 162.84523pt.
+<figures/wflow_tdl_ser_curves.pdf, id=390, 350.62521pt x 226.48131pt>
+File: figures/wflow_tdl_ser_curves.pdf Graphic file (type pdf)
+<use figures/wflow_tdl_ser_curves.pdf>
+Package pdftex.def Info: figures/wflow_tdl_ser_curves.pdf  used on input line 2
+7.
+(pdftex.def)             Requested size: 252.0pt x 162.77957pt.
 )
 (./wflow_curve_figures.tex
-<figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf, id=386, 584.84152pt x 232.
+Underfull \vbox (badness 2277) has occurred while \output is active []
+
+
+Underfull \vbox (badness 3049) has occurred while \output is active []
+
+ [9 <./figures/wflow_awgn_ser_curves.pdf> <./figures/wflow_rayleigh_ser_curves.
+pdf> <./figures/wflow_sspa_ser_curves.pdf> <./figures/wflow_tdl_ser_curves.pdf>
+]
+<figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf, id=671, 584.84152pt x 232.
 36398pt>
 File: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf Graphic file (type pdf
 )
 <use figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf>
 Package pdftex.def Info: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf  us
 ed on input line 13.
-(pdftex.def)             Requested size: 474.71906pt x 188.61798pt.
-) [9] [10 <./figures/wflow_all_ser_curves.pdf>]
-[11 <./figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-(./drifting_vs_diffusion_summary.bbl [12
-
-]) [13
-
-]
-(./drifting_vs_diffusion_summary.aux)
+(pdftex.def)             Requested size: 252.0pt x 100.12375pt.
+)
+(./drifting_vs_diffusion_summary.bbl [10 <./figures/turboae_awgn_l64_ber_bler_c
+urve_eval2k.pdf>]) [11] (./drifting_vs_diffusion_summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -544,13 +562,13 @@ hanged.
 (rerunfilecheck)             Checksum: 73955BE19B9C7CDE91DBAC7BC467EE43;3523.
  ) 
 Here is how much of TeX's memory you used:
- 11566 strings out of 469515
- 178771 string characters out of 5470807
- 640721 words of memory out of 5000000
- 39947 multiletter control sequences out of 15000+600000
+ 11593 strings out of 469515
+ 179859 string characters out of 5470807
+ 641262 words of memory out of 5000000
+ 39973 multiletter control sequences out of 15000+600000
  680281 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,14n,83p,724b,590s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,14n,83p,724b,454s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -571,10 +589,10 @@ rier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/s
 hare/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a
 .pfb>
-Output written on drifting_vs_diffusion_summary.pdf (13 pages, 426438 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (11 pages, 467237 bytes).
 PDF statistics:
- 707 PDF objects out of 1000 (max. 8388607)
- 381 compressed objects within 4 object streams
- 98 named destinations out of 1000 (max. 500000)
- 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 871 PDF objects out of 1000 (max. 8388607)
+ 406 compressed objects within 5 object streams
+ 99 named destinations out of 1000 (max. 500000)
+ 196 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -600,7 +600,7 @@ The downstream symbolic results in Table~\ref{tab:wflow-ser-ber} use the learned
 The analytic row is therefore a reference floor, not a learned model.
 We treat SER as the primary symbolic metric because the autoencoder message alphabet is finite; BER is retained in the table as an additional bit-level diagnostic.
 Within the W-Flow ablation table, condition-wise Sinkhorn is the most reliable drifting variant and fixes the SSPA failure mode once the update budget is matched to the sharp same-condition field.
-The full SER curves in Fig.~\ref{fig:wflow-all-ser-curves} add WGAN and diffusion references to this downstream comparison.
+The per-channel SER curves in Figs.~\ref{fig:wflow-awgn-ser-curves}--\ref{fig:wflow-tdl-ser-curves} add WGAN and diffusion references to this downstream comparison.
 At the nominal training point, condition-wise Sinkhorn nearly reaches the analytic AWGN floor, while diffusion is the strongest learned baseline on Rayleigh, SSPA, and TDL.
 On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget screen gives condition-wise Sinkhorn SER \(8.13\times10^{-5}\) at \(E_b/N_0=8\,\mathrm{dB}\), compared with \(7.50\times10^{-5}\) for WGAN, \(3.13\times10^{-5}\) for diffusion, and \(1.57\times10^{-5}\) for analytic-channel training.
 
@@ -608,13 +608,11 @@ On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget screen gives condition-wise S
 
 For SSPA, we follow the diffusion-channel setup of \cite{paper2309} more closely and use message alphabet \(M_{\mathrm{msg}}=64\), \(n=8\), rate \(6/8\), and training at \(E_b/N_0=8\,\mathrm{dB}\).
 The 30-seed SSPA screen in Table~\ref{tab:wflow-ser-ber} shows that the corrected condition-wise Sinkhorn implementation is reliable once the W-Flow update budget is matched to the observed convergence of the sharp same-condition field.
-Fig.~\ref{fig:wflow-all-ser-curves} reports SER over an \(E_b/N_0\) grid for AWGN, Rayleigh, SSPA, and TDL, which also shows where diffusion retains an advantage over one-shot drifting in downstream coding performance.
+Figs.~\ref{fig:wflow-awgn-ser-curves}--\ref{fig:wflow-tdl-ser-curves} report SER over an \(E_b/N_0\) grid for AWGN, Rayleigh, SSPA, and TDL, which also shows where diffusion retains an advantage over one-shot drifting in downstream coding performance.
 
 \input{wflow_all_ser_curve_figures.tex}
 
 \input{wflow_curve_figures.tex}
-
-\clearpage
 
 \section{Discussion}
 \subsection{Metric-space dependence}
