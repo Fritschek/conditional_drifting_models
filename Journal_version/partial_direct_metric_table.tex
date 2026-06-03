@@ -1,22 +1,27 @@
 \begin{table}[t]
 \centering
-\caption{\textbf{Direct- and residual-space SWD for residual drifting and WGAN.} Values are ten-seed mean and standard deviation; lower is better.}
+\caption{\textbf{Metric-space diagnostic for residual-mode drifting and WGAN.} Direct \(y\)-space SWD evaluates full channel outputs, while residual \(e=y-x\)-space SWD evaluates perturbations. Values are ten-seed mean and standard deviation; lower is better.}
 \label{tab:direct-vs-residual-metric}
 \tablestyle{4pt}{1.03}
 \tablefontsize
 \begin{tabular}{@{}lcc@{}}
 \toprule
-Method & Direct SWD & Residual SWD \\
+Method & Direct \(y\)-SWD & Residual \(e\)-SWD \\
 \midrule
 \rowcolor[gray]{0.9} \multicolumn{3}{l}{\textit{AWGN}} \\
-\headspace Drifting (res.) & 0.0670 $\pm$ 0.0138 & \textbf{0.0097} $\pm$ 0.0009 \\
+\headspace Residual drifting & 0.0670 $\pm$ 0.0138 & \textbf{0.0097} $\pm$ 0.0009 \\
 \headspace WGAN & 0.0198 $\pm$ 0.0050 & \textbf{0.0195} $\pm$ 0.0051 \\
 \rowcolor[gray]{0.9} \multicolumn{3}{l}{\textit{Rayleigh}} \\
-\headspace Drifting (res.) & 0.3681 $\pm$ 0.0031 & \textbf{0.0062} $\pm$ 0.0009 \\
+\headspace Residual drifting & 0.3681 $\pm$ 0.0031 & \textbf{0.0062} $\pm$ 0.0009 \\
 \headspace WGAN & 0.0171 $\pm$ 0.0050 & \textbf{0.0170} $\pm$ 0.0050 \\
 \rowcolor[gray]{0.9} \multicolumn{3}{l}{\textit{SSPA}} \\
-\headspace Drifting (res.) & 0.4812 $\pm$ 0.0022 & \textbf{0.0130} $\pm$ 0.0003 \\
+\headspace Residual drifting & 0.4812 $\pm$ 0.0022 & \textbf{0.0130} $\pm$ 0.0003 \\
 \headspace WGAN & 0.0287 $\pm$ 0.0156 & \textbf{0.0269} $\pm$ 0.0162 \\
 \bottomrule
 \end{tabular}
+\par\vspace{0.25em}
+\begin{minipage}{0.92\columnwidth}
+\footnotesize\raggedright
+The direct-output drifting row is a different generator and is reported in Table~\ref{tab:wflow-swd-baselines}; this table isolates how the residual-mode baseline changes when evaluated in \(y\)-space instead of its native residual space.
+\end{minipage}
 \end{table}

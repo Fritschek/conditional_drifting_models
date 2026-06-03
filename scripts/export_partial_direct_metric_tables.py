@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CHANNELS = ["AWGN", "Rayleigh", "SSPA", "OptFib"]
 ROWS = [
-    ("drifting_residual", "Drifting (res.)"),
+    ("drifting_residual", "Residual drifting"),
     ("wgan", "WGAN"),
 ]
 
@@ -46,7 +46,7 @@ def write_md(data: dict, out_path: Path) -> None:
         f"Source: `{data['suite_dir']}`",
         f"Seeds: `{data['seeds']}`",
         "",
-        "## Drifting (Residual) and WGAN in Both Metric Spaces",
+        "## Residual-Mode Drifting and WGAN in Both Metric Spaces",
         "",
         "| Channel | Method | Direct `y`-space SWD | Residual-space SWD |",
         "|---|---|---:|---:|",
@@ -64,13 +64,14 @@ def write_tex(data: dict, out_path: Path) -> None:
     lines = [
         r"\begin{table*}[t]",
         r"\centering",
-        r"\caption{Comparison of direct output-space SWD and residual-space SWD for residual drifting and WGAN over ten seeds. Lower is better.}",
+        r"\caption{\textbf{Metric-space diagnostic for residual-mode drifting and WGAN.} Direct \(y\)-space SWD evaluates full channel outputs, while residual \(e=y-x\)-space SWD evaluates perturbations. Values are ten-seed mean and standard deviation; lower is better.}",
         r"\label{tab:direct-vs-residual-metric}",
-        r"\resizebox{\textwidth}{!}{%",
-        r"\begin{tabular}{llcc}",
-        r"\hline",
-        r"Channel & Method & Direct $y$-space SWD & Residual-space SWD \\",
-        r"\hline",
+        r"\tablestyle{4pt}{1.03}",
+        r"\tablefontsize",
+        r"\begin{tabular}{@{}llcc@{}}",
+        r"\toprule",
+        r"Channel & Method & Direct \(y\)-SWD & Residual \(e\)-SWD \\",
+        r"\midrule",
     ]
     for channel in CHANNELS:
         block = data["aggregated"][channel]
@@ -80,9 +81,13 @@ def write_tex(data: dict, out_path: Path) -> None:
             )
     lines.extend(
         [
-            r"\hline",
-            r"\end{tabular}%",
-            r"}",
+            r"\bottomrule",
+            r"\end{tabular}",
+            r"\par\vspace{0.25em}",
+            r"\begin{minipage}{0.92\textwidth}",
+            r"\footnotesize\raggedright",
+            r"The direct-output drifting row is a different generator and is reported in Table~\ref{tab:wflow-swd-baselines}; this table isolates how the residual-mode baseline changes when evaluated in \(y\)-space instead of its native residual space.",
+            r"\end{minipage}",
             r"\end{table*}",
         ]
     )

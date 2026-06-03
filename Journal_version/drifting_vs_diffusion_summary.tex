@@ -573,6 +573,7 @@ On AWGN, Rayleigh, and SSPA, the condition-wise Sinkhorn row is faster to train 
 This diagnostic is separate from the direct-output SWD ranking above.
 To quantify the effect of the evaluation space, we compare residual drifting and WGAN under
 both direct \(y\)-space SWD and residual-space SWD in Table~\ref{tab:direct-vs-residual-metric}.
+The residual drifting row in this table is not the direct-output drifting row in Table~\ref{tab:wflow-swd-baselines}; it is the residual-mode generator evaluated after reconstructing \(y=x+\hat e\).
 WGAN changes little between the two metrics, whereas residual drifting degrades substantially in direct \(y\)-space, especially on Rayleigh and SSPA.
 This indicates that residual drifting is well aligned with residual modeling, but that its advantage does not transfer directly to full output-space matching.
 The Sinkhorn ablation is therefore reported in direct-output, anchor-conditioned, and downstream coding metrics rather than in residual space alone.

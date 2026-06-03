@@ -59,18 +59,18 @@
 \newlabel{tab:wflow-swd-baselines}{{III}{8}{\textbf {Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report the ten-seed mean $\pm $ standard deviation from the diffusion/WGAN benchmark. The drifting-family rows contain direct drifting from the same ten-seed benchmark and the W-Flow drift-field ablation; W-Flow rows report the available-seed mean $\pm $ standard error. Bold marks the best drifting-family row per channel under the reported mean}{table.3}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces \textbf  {Projected training and inference timing on an NVIDIA RTX 5060 Ti GPU.} Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample.}}{8}{table.4}\protected@file@percent }
 \newlabel{tab:timing-cuda}{{IV}{8}{\textbf {Projected training and inference timing on an NVIDIA RTX 5060 Ti GPU.} Training hours are extrapolated from a 2\% timing run; inference is reported as time per sample}{table.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces \textbf  {Direct- and residual-space SWD for residual drifting and WGAN.} Values are ten-seed mean and standard deviation; lower is better.}}{8}{table.5}\protected@file@percent }
-\newlabel{tab:direct-vs-residual-metric}{{V}{8}{\textbf {Direct- and residual-space SWD for residual drifting and WGAN.} Values are ten-seed mean and standard deviation; lower is better}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces \textbf  {Metric-space diagnostic for residual-mode drifting and WGAN.} Direct \(y\)-space SWD evaluates full channel outputs, while residual \(e=y-x\)-space SWD evaluates perturbations. Values are ten-seed mean and standard deviation; lower is better.}}{8}{table.5}\protected@file@percent }
+\newlabel{tab:direct-vs-residual-metric}{{V}{8}{\textbf {Metric-space diagnostic for residual-mode drifting and WGAN.} Direct \(y\)-space SWD evaluates full channel outputs, while residual \(e=y-x\)-space SWD evaluates perturbations. Values are ten-seed mean and standard deviation; lower is better}{table.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Conditional metrics and symbolic coding}{8}{subsection.4.4}\protected@file@percent }
 \citation{paper2309}
 \bibstyle{IEEEtran}
 \bibdata{references}
-\bibcite{paper2309}{1}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Long-block TurboAE check}{9}{subsection.4.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {V}Discussion}{9}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Metric-space dependence}{9}{subsection.5.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Conditional Sinkhorn scope}{9}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{9}{section.6}\protected@file@percent }
+\bibcite{paper2309}{1}
 \bibcite{kimicc2024}{2}
 \bibcite{lee2024highdimchannels}{3}
 \bibcite{gong2025dtoc}{4}
@@ -85,13 +85,13 @@
 \bibcite{drifting}{13}
 \bibcite{geometryofnoise}{14}
 \bibcite{han2026wflow}{15}
-\bibcite{cuturi2013sinkhorn}{16}
-\bibcite{feydy2019sinkhorn}{17}
 \@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces \textbf  {Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian-W2 are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref {tab:wflow-swd-baselines} and~\ref {tab:wflow-ser-ber}. Values are seed means; lower is better.}}{10}{table.6}\protected@file@percent }
 \newlabel{tab:wflow-conditional-metrics}{{VI}{10}{\textbf {Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian-W2 are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref {tab:wflow-swd-baselines} and~\ref {tab:wflow-ser-ber}. Values are seed means; lower is better}{table.6}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces \textbf  {Downstream symbolic coding metrics for W-Flow channel surrogates.} Autoencoders are trained through each channel surrogate and evaluated on the analytic channel. Values are mean $\pm $ standard error over seeds. Lower is better; bold marks the best learned surrogate in each row, while the analytic channel is the reference floor.}}{10}{table.7}\protected@file@percent }
 \newlabel{tab:wflow-ser-ber}{{VII}{10}{\textbf {Downstream symbolic coding metrics for W-Flow channel surrogates.} Autoencoders are trained through each channel surrogate and evaluated on the analytic channel. Values are mean $\pm $ standard error over seeds. Lower is better; bold marks the best learned surrogate in each row, while the analytic channel is the reference floor}{table.7}{}}
 \@writefile{toc}{\contentsline {section}{References}{10}{section*.1}\protected@file@percent }
+\bibcite{cuturi2013sinkhorn}{16}
+\bibcite{feydy2019sinkhorn}{17}
 \bibcite{tr38901}{18}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textbf  {SER curves for learned channel surrogates.} Symbolic autoencoders are trained through each surrogate at the nominal training point and evaluated on the analytic channel over an $E_b/N_0$ grid for AWGN, Rayleigh, SSPA, TDL. Curves report seed means with standard-error bars; points below the single-run Monte Carlo resolution are clipped to the dotted reporting floor and marked as upper bounds.}}{11}{figure.3}\protected@file@percent }
 \newlabel{fig:wflow-all-ser-curves}{{3}{11}{\textbf {SER curves for learned channel surrogates.} Symbolic autoencoders are trained through each surrogate at the nominal training point and evaluated on the analytic channel over an $E_b/N_0$ grid for AWGN, Rayleigh, SSPA, TDL. Curves report seed means with standard-error bars; points below the single-run Monte Carlo resolution are clipped to the dotted reporting floor and marked as upper bounds}{figure.3}{}}
