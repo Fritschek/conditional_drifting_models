@@ -2,7 +2,7 @@
 
 Date: 2026-06-01
 
-This note records the robustness check behind the asterisk in Table III.
+This note records the robustness check that originally motivated an asterisk in the direct-SWD comparison table.
 The audit compares means, medians, maxima, and downstream BER/SER for the completed W-Flow runs.
 
 ## Sources
@@ -16,7 +16,7 @@ The audit compares means, medians, maxima, and downstream BER/SER for the comple
 ## Finding
 
 Only the SSPA condition-wise Sinkhorn generator-level metrics show a severe heavy tail.
-The all-seed mean in Table III is correct, but it is dominated by four unstable generator-level seeds.
+The all-seed mean in the original 100-seed SSPA condition-wise Sinkhorn generator-level run was dominated by four unstable generator-level seeds.
 No other W-Flow channel/variant combination in the completed AWGN, Rayleigh, SSPA, or TDL data shows a comparable mean-vs-median instability.
 
 ## SSPA Condition-Wise Sinkhorn
@@ -40,7 +40,7 @@ Unstable generator-level seeds:
 | 99 | 0.9887 | 1.1978 | 19.245 |
 | 85 | 0.6905 | 0.8097 | 13.658 |
 
-The 30-seed SSPA BER/SER curve subset still contains seed 25, so reducing Table III to 30 seeds would not remove the issue.
+The 30-seed SSPA BER/SER curve subset still contains seed 25, so reducing the old full-budget table to the same seed range would not remove the issue.
 At 8 dB, condition-wise Sinkhorn remains the best learned SSPA surrogate in the M_msg=64 curve:
 
 | Variant | BER mean | SER mean |
@@ -90,6 +90,6 @@ The available ten local summaries under `results/enhanced_direct_hpc_20260324_20
 
 ## Interpretation
 
-The asterisk should stay only on the SSPA condition-wise Sinkhorn global-SWD value in Table III.
-The effect is a real generator-level stability caveat under random Gaussian SSPA inputs, not an aggregation typo.
+The final manuscript table reports the compact update-budget SSPA condition-wise Sinkhorn run directly, so the table no longer needs an asterisk marker.
+The old full-budget effect remains a real generator-level stability caveat under random Gaussian SSPA inputs, not an aggregation typo.
 It does not invalidate the downstream SSPA result, because the symbolic autoencoder probes a learned finite codebook region where condition-wise Sinkhorn remains the strongest learned surrogate.

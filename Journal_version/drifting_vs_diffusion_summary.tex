@@ -525,7 +525,7 @@ As an additional diagnostic, Table~\ref{tab:model-size} reports inference-networ
 \input{model_size_table.tex}
 \paragraph{Seeding and reporting.}
   The diffusion/WGAN reference benchmark results are reported as mean \(\pm\) standard deviation over ten seeds.
-  The Sinkhorn drift-field ablation is reported over 100 seeds unless a table note states otherwise; the SSPA update-budget check uses 30 seeds.
+  The Sinkhorn drift-field ablation is reported over 100 seeds unless stated otherwise; the SSPA update-budget check uses 30 seeds.
   W-Flow tables use mean \(\pm\) standard error to show the uncertainty of the seed average.
   Each run uses deterministic initialization to reduce run-to-run variance unrelated to model stochasticity.
 %\paragraph{Seeding and reporting.}
@@ -585,7 +585,7 @@ The compared variants are: the target-space kernel baseline, the conditioning-aw
 All four are one-shot generators at inference time; the difference is only the training-time drift field.
 
 The drifting-family block in Table~\ref{tab:wflow-swd-baselines} compares direct drifting and the proposed drift-field variants against the diffusion and WGAN reference rows.
-The comparison should be read with the reporting convention in mind: the DDPM/DDIM/WGAN and direct-drifting rows are ten-seed values, while the W-Flow rows are 100-seed estimates except for the marked SSPA update-budget check.
+The comparison should be read with the reporting convention in mind: the DDPM/DDIM/WGAN and direct-drifting rows are ten-seed values, while the W-Flow rows are 100-seed estimates except for the SSPA condition-wise Sinkhorn row, which uses the 30-seed update-budget check described in the experimental setup.
 Diffusion remains the strongest direct-SWD reference on AWGN, Rayleigh, and SSPA.
 Among the W-Flow variants, condition-wise Sinkhorn gives the best direct SWD on AWGN and Rayleigh.
 On SSPA, the global direct-SWD means of the best W-Flow rows are close, while the compact condition-wise run is substantially better than continuing the corrected field to the full diffusion-style budget.

@@ -384,7 +384,7 @@ def write_wflow_swd_table(path: Path, wflow_summary: dict[tuple[str, str], dict[
     lines = [
         r"\begin{table*}[t]",
         r"\centering",
-        r"\caption{\textbf{Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report the ten-seed mean $\pm$ standard deviation from the diffusion/WGAN benchmark. The drifting-family rows contain direct drifting from the same ten-seed benchmark and the W-Flow drift-field ablation; W-Flow rows report all-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean.}",
+        r"\caption{\textbf{Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report the ten-seed mean $\pm$ standard deviation from the diffusion/WGAN benchmark. The drifting-family rows contain direct drifting from the same ten-seed benchmark and the W-Flow drift-field ablation; W-Flow rows report the available-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean.}",
         r"\label{tab:wflow-swd-baselines}",
         r"\tablestyle{4.5pt}{1.03}",
         r"\tablefontsize",
@@ -413,19 +413,12 @@ def write_wflow_swd_table(path: Path, wflow_summary: dict[tuple[str, str], dict[
         for channel in CHANNELS:
             value, error = wflow_summary[(channel, variant)]["direct_swd"]
             cell = pm_fixed(value, error)
-            if channel == "SSPA" and variant == "fiber_sinkhorn":
-                cell += r"$^{\ast}$"
             cells.append(maybe_bold(cell, best_drifting[channel] == variant))
         lines.append(r"\headspace " + VARIANT_LABELS[variant] + " & " + " & ".join(cells) + r" \\")
     lines.extend(
         [
             r"\bottomrule",
             r"\end{tabular}",
-            r"\par\vspace{0.25em}",
-            r"\begin{minipage}{0.92\textwidth}",
-            r"\footnotesize\raggedright",
-            r"\(\ast\) The SSPA condition-wise Sinkhorn value uses the corrected 30-seed update-budget-controlled run (\(120{,}000\) samples, batch \(4096\), \(160\) epochs), where the one-shot field saturated after roughly \(4.8\)k optimizer updates.",
-            r"\end{minipage}",
             r"\end{table*}",
             "",
         ]
