@@ -583,7 +583,7 @@ def write_metric_table(
     lines = [
         r"\begin{table}[!t]",
         r"\centering",
-        r"\caption{\textbf{Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian-W2 are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are seed means. Lower is better.}",
+        r"\caption{\textbf{Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian Wasserstein-2 (GW2) are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are seed means. Lower is better.}",
         r"\label{tab:wflow-conditional-metrics}",
         r"\tablestyle{3.4pt}{1.02}",
         r"\tablefontsize",

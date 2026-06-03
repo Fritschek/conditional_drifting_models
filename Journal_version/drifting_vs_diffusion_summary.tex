@@ -32,9 +32,9 @@ The generator-level benchmark covers additive white Gaussian noise (AWGN), Rayle
 Downstream channel-implant experiments additionally include a compact tapped-delay-line (TDL) wireless channel.
 The key modeling constraint is that a wireless channel generator keeps the condition \(x\) fixed.
 The true and generated joint laws share the same input marginal, and only the conditional output law should move.
-We therefore define a conditional Sinkhorn divergence by integrating Sinkhorn divergences over fixed-input conditional laws \(p(\cdot\mid x)\), yielding a drift field that applies the Wasserstein-flow velocity separately for each transmitted-symbol condition.
-The reference diffusion/WGAN comparison shows that diffusion achieves the strongest sliced Wasserstein distance (SWD) overall, while direct-output drifting is the strongest one-shot generator under direct output-space evaluation and conditioning-aware kernels can improve downstream AWGN SER\@.
-The drift-field ablation shows that condition-wise Sinkhorn drifting is the strongest drifting-family symbolic-coding surrogate on AWGN, Rayleigh, SSPA, and TDL.
+We therefore formulate a conditional Sinkhorn objective by integrating Sinkhorn divergences over fixed-input conditional laws \(p(\cdot\mid x)\), yielding a drift field that applies the Wasserstein-flow velocity separately for each transmitted-symbol condition.
+The reference diffusion/WGAN comparison shows that diffusion achieves the strongest sliced Wasserstein distance (SWD) overall, while direct-output drifting is the strongest one-shot generator under direct output-space evaluation and conditioning-aware kernels can improve downstream AWGN symbol error rate (SER).
+The drift-field ablation shows that condition-wise Sinkhorn drifting is the best-performing drifting-family surrogate in the symbolic-coding experiments on AWGN, Rayleigh, SSPA, and TDL.
 Diffusion remains the strongest learned downstream reference on the harder Rayleigh, SSPA, and TDL curve tests.
 On SSPA, the Sinkhorn result requires an update-budget-controlled W-Flow run because the sharp same-condition Sinkhorn field converges much earlier than the diffusion-style training preset.
 The results also show that global output-space SWD alone is insufficient for selecting a channel surrogate.
@@ -79,19 +79,21 @@ This motivates a benchmark-oriented study that reports comparative results toget
 
 The emphasis of this study is on generator-level distributional accuracy, computational tradeoffs, and downstream channel-implant checks.
 A full communication-system design study over all modulation and coding regimes is outside the present scope.
+The condition-wise Sinkhorn estimator also assumes simulator-style access to repeated outputs at the same transmitted symbol.
+Measured datasets with only one observation per condition require local conditional approximations, which we discuss as a limitation and future extension.
 
 The main contributions are summarized as follows.
 \begin{itemize}
 \item We formulate conditional drifting generators for channel simulation in both residual form,
   using \(e = y - x\), and direct-output form, modeling \(p(y \mid x)\) directly.
-\item We identify the kernel attraction--repulsion field used in the drifting baseline as an empirical approximation, include a conditioning-aware direct-output kernel variant, and derive a condition-wise Sinkhorn alternative from a conditional Wasserstein-gradient-flow objective.
+\item We identify the kernel attraction--repulsion field used in the drifting baseline as an empirical approximation, include a conditioning-aware direct-output kernel variant, and formulate a condition-wise Sinkhorn alternative motivated by a conditional Wasserstein-gradient-flow objective.
 \item We show that channel simulation requires a condition-preserving Sinkhorn flow. Since the input marginal is fixed, transport must be constrained to the output law over each transmitted symbol.
 \item We compare the resulting drifting variants against conditional DDPM, conditional DDIM, and
   conditional WGAN reference models on AWGN, Rayleigh fading, and solid-state power amplifier (SSPA) channels, and we add a TDL wireless channel in the downstream channel-implant study.
 \item We quantify the accuracy--latency tradeoff and show that one-shot drifting provides large inference-time savings while remaining competitive in distributional accuracy. A symbolic AWGN case study illustrates that conditioning-aware kernel design can improve downstream direct-output drifting performance.
-\item We report a multi-seed drift-field ablation with direct SWD, anchor-conditioned metrics, and downstream SER/BER, and compare the distributional results against DDPM, DDIM, and WGAN wherever the protocols overlap.
+\item We report a multi-seed drift-field ablation with direct SWD, anchor-conditioned metrics, downstream SER, and bit error rate (BER), and compare the distributional results against DDPM, DDIM, and WGAN wherever the protocols overlap.
 \end{itemize}
-Source code will be made available through the first author's GitHub profile upon publication\footnote{\url{https://github.com/Fritschek}.}.
+Source code will be made available through the first author's GitHub repository upon publication\footnote{\url{https://github.com/Fritschek/conditional_drifting_models}.}.
 
 \section{Problem Formulation and Drifting Background}
 \subsection{What drifting changes conceptually}
@@ -347,6 +349,26 @@ This is the conditional analogue needed for channel simulation.
 Its equilibrium is equality of the complete family of conditional channel laws.
 Matching a joint sample cloud under an arbitrary joint cost leaves this condition-wise equality unenforced.
 
+\paragraph{Theoretical status.}
+The preceding statement is a population-flow statement.
+For \(\mu\)-almost every \(x\), assume that \(p_x\) and \(q_{\theta,x}\) are Borel probability measures on \(\mathbb{R}^n\) with finite second moments and that the entropic OT potentials are differentiable along the considered distributional curve.
+Under the standard Sinkhorn-divergence assumptions used in \cite{feydy2019sinkhorn}, \(S_\varepsilon(q_{\theta,x},p_x)\geq 0\) and equality holds exactly when \(q_{\theta,x}=p_x\).
+Formally, an exact Wasserstein gradient flow of \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) satisfies
+\begin{equation}
+\frac{d}{dt}\mathcal{S}^{\mathrm{cond}}_{\varepsilon}(q_t,p)
+=
+-
+\int
+\|v_t(x,\cdot)\|_{L^2(q_{t,x})}^2
+\mu(dx)
+\leq 0,
+\end{equation}
+so a zero-velocity stationary point yields \(q_{t,x}=p_x\) for \(\mu\)-almost every \(x\) under the uniqueness condition above.
+The implemented algorithm is a finite-sample particle approximation of this flow.
+It estimates the barycentric velocity from minibatch Sinkhorn couplings and then performs a detached-target regression step, which corresponds to an explicit particle update followed by projection back into the generator class.
+This regression step is a flow-inspired training rule and differs from exact gradient descent on \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) with respect to \(\theta\).
+If the generator family cannot realize all conditional laws \(p_x\), the practical fixed point is the best representable conditional surrogate reached by this projected training dynamics.
+
 The empirical estimator follows the same condition-wise structure.
 For anchors \(x_i\sim\mu\), we draw multiple generated samples
 \(\hat y_{i,k}=g_\theta(x_i,z_{i,k})\), multiple positive channel samples
@@ -369,6 +391,28 @@ followed by the detached regression target
 \hat y_{i,k}+\eta v_{i,k}
 \right).
 \end{equation}
+Table~\ref{tab:condition-wise-sinkhorn-algorithm} summarizes the resulting training update.
+
+\begin{table}[t]
+\caption{\textbf{Condition-wise Sinkhorn drifting update.}}
+\label{tab:condition-wise-sinkhorn-algorithm}
+\centering
+\tablestyle{3.8pt}{1.04}
+\footnotesize
+\begin{tabular}{@{}p{0.96\columnwidth}@{}}
+\toprule
+\textbf{Input:} generator \(g_\theta\), channel sampler \(p(\cdot\mid x)\), anchors \(\{x_i\}_{i=1}^{B}\), generated count \(K_g\), positive count \(K_p\), reference count \(K_r\), drift scale \(\eta\). \\
+\midrule
+1. Draw \(\hat y_{i,k}=g_\theta(x_i,z_{i,k})\), \(k=1,\ldots,K_g\). \\
+2. Draw positive samples \(y_{i,j}\sim p(\cdot\mid x_i)\), \(j=1,\ldots,K_p\). \\
+3. Draw generated reference samples \(\hat y'_{i,\ell}=g_\theta(x_i,z'_{i,\ell})\), \(\ell=1,\ldots,K_r\). \\
+4. For each anchor \(i\), solve two output-space Sinkhorn problems, \(\hat Q_i\!\leftrightarrow\!P_i\) and \(\hat Q_i\!\leftrightarrow\!\hat Q'_i\). \\
+5. Form barycentric velocity \(v_{i,k}=T^\varepsilon_{\hat Q_i,P_i}(\hat y_{i,k})-T^\varepsilon_{\hat Q_i,\hat Q'_i}(\hat y_{i,k})\). \\
+6. Regress \(g_\theta(x_i,z_{i,k})\) toward \(\mathrm{stopgrad}(\hat y_{i,k}+\eta v_{i,k})\). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 This estimator is exact for simulator channels where repeated draws at the same \(x_i\) are available.
 For measured channels with only one observation per condition, the same idea requires a local conditional approximation, for example by grouping nearby \(x\)-values or using condition-space kernel weights before solving the output-space Sinkhorn problem.
 
@@ -376,20 +420,6 @@ The major operational advantage is straightforward.
 Once training is complete, sampling requires only a single evaluation of \(g_\theta(x,z)\).
 In residual mode, this produces a channel residual sample \(\hat e\) followed by reconstruction \(\hat y=x+\hat e\). In direct mode, it produces \(\hat y\) directly.
 Sampling avoids reverse chains, ODE solvers, and per-sample iterative schedules at inference.
-
-%\begin{figure*}[t]
-%\centering
-%\input{figures/drifttrain_tikz.tex}
-%\caption{Training-time drifting update for conditional channel residual modeling. For a fixed transmitted symbol \(x\), the generator produces residual samples \(\hat e_i\), which are moved toward the true residual cloud through a drift field that combines attraction to data and repulsion among generated samples. The network is then regressed toward the drifted targets.}
-%\label{fig:drifttrain}
-%\end{figure*}
-
-%\begin{figure*}[t]
-%\centering
-%\input{figures/schematic_tikz.tex}
-%\caption{Inference-time schematic for residual-mode conditional drifting. Once the generator has been trained, sampling requires only a single forward pass of \(g_\theta(x,z)\), followed by residual-to-output reconstruction. In the direct-output parameterization, the same one-shot generator would produce \(\hat y\) directly instead of \(\hat e\).}
-%\label{fig:schematic}
-%\end{figure*}
 
 \begin{figure*}[t]
 \centering
@@ -450,13 +480,14 @@ Let
 r = \sqrt{x_I^2 + x_Q^2}
 \end{equation}
 denote the input amplitude.
-The nonlinear amplitude law used in the benchmark is
+The nonlinear gain factor used in the benchmark is
 \begin{equation}
 a(r)
 =
 \frac{G}{\left(1+\left(\frac{Gr}{A_0}\right)^{2p}\right)^{1/(2p)}},
 \end{equation}
 with default parameters \(p=3\), \(A_0=1.5\), and \(G=5.0\).
+Thus the output amplitude is \(a(r)r\), matching the Rapp-style AM/AM law \(Gr/(1+(Gr/A_0)^{2p})^{1/(2p)}\).
 The noiseless amplifier output is $\tilde{x} = a(r)\,x,$
 and the observed channel output is
 \begin{equation}
@@ -485,12 +516,17 @@ n_m\sim \mathcal{CN}(0,\sigma^2).
 The implemented profile uses the TDL-D line-of-sight structure with first-tap \(K\)-factor \(13.3\,\mathrm{dB}\).
 Because the codeword is short, the normalized path delays from the standard profile are rounded to a small set of effective circular shifts and path powers are renormalized after aggregation.
 This keeps the channel compatible with the short symbolic autoencoder while preserving the random multipath mixture structure.
+We use this TDL configuration as a compact channel-with-memory stress test.
+It is intentionally smaller than a full OFDM or long-block TDL evaluation.
 
 \subsection{Training protocol}
 The experiments are organized into two complementary protocols.
 First, the generator-level protocol compares the proposed drifting family against the established conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, and SSPA.
 Second, the drift-field ablation holds the drifting network fixed and compares target-space kernel drifting, conditioning-aware joint-kernel drifting, joint Sinkhorn drifting, and condition-wise Sinkhorn drifting.
 This second protocol is reported over 100 seeds for the main drift-field runs and is evaluated with direct SWD, anchor-conditioned metrics, and downstream symbolic SER/BER.
+It is the controlled comparison in this paper because the generator architecture, optimizer family, and one-shot inference path are held fixed across drift fields.
+The DDPM, DDIM, and WGAN rows provide best-effort reference baselines using stable model-family settings.
+A matched-capacity ranking against drifting would require an additional equal-parameter and equal-budget study.
 For SSPA, we additionally report a 30-seed update-budget-controlled condition-wise Sinkhorn run because the corrected same-condition transport field saturates after far fewer optimizer updates than the long diffusion-style SSPA preset.
 The TDL channel is included in the drift-field study and in the downstream SER curves with diffusion and WGAN references.
 For the direct-output SWD table, TDL W-Flow rows come from the drift-field ablation, and TDL DDPM/DDIM/WGAN rows are obtained by checkpoint-only direct-SWD evaluation of the corresponding trained baseline implants.
@@ -521,7 +557,9 @@ The benchmark is intended as a practical comparative study, with stable model-fa
 Architectures and training schedules were chosen as stable implementations for each model family.
 Identical parameter counts and compute budgets across drifting, diffusion, and WGAN are outside the benchmark design.
 The Sinkhorn rows are therefore reported as a drift-field ablation under a matched drifting architecture and training budget.
-They are compared to diffusion and WGAN wherever the observable metric and channel protocol overlap, but the downstream SER/BER table is limited to the learned drifting/Sinkhorn surrogates and the analytic-channel reference floor.
+They are compared to diffusion and WGAN wherever the observable metric and channel protocol overlap.
+The downstream W-Flow table focuses on the learned drifting/Sinkhorn surrogates and the analytic-channel reference floor.
+The SER curves add WGAN and DDIM-100 when all corresponding channel implants are available.
 
 As an additional diagnostic, Table~\ref{tab:model-size} reports inference-network parameter counts used in this benchmark.
 
@@ -529,10 +567,9 @@ As an additional diagnostic, Table~\ref{tab:model-size} reports inference-networ
 \paragraph{Seeding and reporting.}
   The diffusion/WGAN reference benchmark results are reported as mean \(\pm\) standard deviation over ten seeds.
   The Sinkhorn drift-field ablation is reported over 100 seeds unless stated otherwise. The SSPA update-budget check uses 30 seeds.
-  W-Flow tables use mean \(\pm\) standard error to show the uncertainty of the seed average.
+  We use standard deviation for the ten-seed reference rows to describe run-to-run variability.
+  W-Flow tables use mean \(\pm\) standard error because the main purpose of those rows is to compare seed-averaged drift-field variants.
   Each run uses deterministic initialization to reduce run-to-run variance unrelated to model stochasticity.
-%\paragraph{Seeding and reporting.}
-%All runs use deterministic initialization. For AWGN, Rayleigh, and SSPA, the SWD random-projection seed equals the run seed. Final benchmark tables report mean and standard deviation across the ten seeds.
 
 \subsection{Evaluation metric}
 The diffusion/WGAN/drifting reference comparison emphasizes generator-level distributional accuracy and timing, while the Sinkhorn drift-field ablation adds anchor-conditioned diagnostics and downstream symbolic SER/BER.
@@ -547,12 +584,18 @@ Given true samples \(P=\{v_i\}_{i=1}^N\) and generated samples \(Q=\{\hat v_i\}_
 W_1\!\left(\{\langle \theta_m,v_i\rangle\}_{i=1}^N,\{\langle \theta_m,\hat v_i\rangle\}_{i=1}^N\right).
 \end{equation*}
 Thus SWD compares the generated and true sample clouds through many one-dimensional views and captures geometric mismatch more faithfully than a purely bin-based marginal comparison. In our experiments, SWD is estimated using \(128\) random one-dimensional projections on AWGN,
-  Rayleigh, and SSPA.
+  Rayleigh, SSPA, and TDL.
+The projection directions are sampled from an isotropic Gaussian distribution, normalized to unit length, and generated from the deterministic metric seed associated with the run.
 SWD is used primarily for comparability with prior diffusion-channel benchmarks \cite{paper2309,kimicc2024}. Compared with histogram-based \(L_1\) distance, it also better captures sample geometry in \(\mathbb{R}^n\).
 SWD provides a geometry-aware comparison of conditional output distributions, but it leaves decision-relevant behavior such as error rates unmeasured.
 Those depend on the joint structure of \((x,y)\).
 For communication use, two generators with similar global sample-cloud discrepancy can induce different conditional means, conditional covariance errors, and downstream symbol-error rates.
 The Sinkhorn drift-field study therefore also includes anchor-conditioned moment metrics and symbolic channel-implant SER/BER checks when evaluating the proposed drifting variants.
+We interpret the metrics in the following order.
+Downstream SER, BER, and block error rate (BLER) under analytic-channel evaluation are the closest checks of communication usefulness.
+Anchor-conditioned metrics are the next diagnostic because they probe repeated outputs at fixed transmitted symbols.
+Global direct-output SWD is mainly a generator-level comparability metric.
+Residual-space SWD is kept as a parameterization diagnostic for residual-mode models.
 
 
 \section{Benchmark Results}
@@ -560,6 +603,7 @@ The Sinkhorn drift-field study therefore also includes anchor-conditioned moment
 Table~\ref{tab:wflow-swd-baselines} reports a unified direct-output SWD comparison across AWGN, Rayleigh, SSPA, and TDL.
 The reference rows summarize the diffusion and WGAN baselines.
 The drifting-family rows contain direct drifting and the proposed drift-field variants under a matched one-shot architecture.
+The controlled conclusion from this table is the ranking inside the drifting-family block, while the diffusion and WGAN rows provide reference context from their own stable training protocols.
 DDIM-100 gives the lowest direct-space SWD on AWGN, Rayleigh, and SSPA among the matched reference rows.
 Among the W-Flow variants, condition-wise Sinkhorn is strongest under direct SWD on AWGN, Rayleigh, and TDL, and is numerically close to the best SSPA W-Flow rows under the compact update-budget run.
 Within the full drifting-family block, condition-wise Sinkhorn is lowest on AWGN, Rayleigh, and TDL, while direct drifting remains lowest on SSPA under this global metric.
@@ -572,6 +616,14 @@ Thus, even when diffusion achieves the strongest SWD, one-shot generators retain
 The W-Flow variants retain the same one-shot inference path as direct drifting.
 Their cost differences are training-time drift-field costs.
 Table~\ref{tab:timing-cuda} therefore reports W-Flow ablation rows under the same \(2\%\) local CUDA timing protocol.
+The timing run uses PyTorch on a local NVIDIA RTX 5060 Ti GPU in standard float32 execution, without CUDA graph capture, \texttt{torch.compile}, or mixed precision.
+Training time is measured by running the actual training loop on \(2\%\) of the configured dataset size, rounded to full batches, and extrapolating by the ratio of timed optimizer steps to full optimizer steps.
+This includes synthetic channel sampling, forward and backward passes, optimizer updates, and the Sinkhorn computations used by W-Flow rows.
+It excludes checkpoint writing and downstream symbolic autoencoder training.
+Inference timing uses batch size \(512\), \(40\) batches per repeat, two warmup repeats, seven timed repeats, and CUDA synchronization around each repeat.
+It includes drawing the conditioning inputs and evaluating the generator.
+For diffusion rows, inference includes the complete DDPM or DDIM denoising trajectory and the same conditioning overhead.
+The total column adds projected training time to the time needed to generate the evaluation-sample budget listed in Table~\ref{tab:simulation-setup}.
 On AWGN, Rayleigh, and SSPA, the condition-wise Sinkhorn row is faster to train than the global kernel rows because it solves many small same-condition transport problems instead of forming a global minibatch interaction matrix.
 
 \input{timing_table_cuda.tex}
@@ -598,7 +650,7 @@ The anchor metrics draw repeated outputs at fixed transmitted symbols and theref
 Direct SWD is kept in Table~\ref{tab:wflow-swd-baselines}, and downstream BER/SER is kept in Table~\ref{tab:wflow-ser-ber}.
 This avoids reporting the same quantities in multiple tables.
 This changes the interpretation on several channels.
-For AWGN, Rayleigh, SSPA, and TDL, condition-wise Sinkhorn is the strongest drifting-family surrogate under the downstream BER/SER checks reported here.
+For AWGN, Rayleigh, SSPA, and TDL, condition-wise Sinkhorn is the best-performing drifting-family surrogate under the downstream BER/SER checks reported here.
 The full curve comparison below shows that diffusion remains the strongest learned reference on Rayleigh, SSPA, and TDL.
 On SSPA, the anchor-conditioned metrics also explain why the compact update-budget run is preferable.
 The same-condition Sinkhorn field matches fixed-input output clouds well, while the full-budget corrected run over-optimizes the sharp field.
@@ -649,8 +701,9 @@ Under direct output-space evaluation, direct-output drifting is the strongest on
 Residual-mode diagnostics are useful for understanding parameterization effects but remain secondary to the main channel-generator ranking.
 The W-Flow-inspired ablation shows that the drift-field design problem is genuinely conditional.
 Transporting the joint law of \((x,y)\) differs from transporting \(p(y\mid x)\) with a fixed input marginal.
-The completed Sinkhorn study confirms that condition-wise Sinkhorn is the strongest drifting-family symbolic-coding surrogate on AWGN, Rayleigh, SSPA, and TDL under the reported channel-specific coding setups.
+The completed Sinkhorn study confirms that condition-wise Sinkhorn is the best-performing drifting-family surrogate in the symbolic-coding experiments on AWGN, Rayleigh, SSPA, and TDL under the reported channel-specific coding setups.
 At the same time, the full downstream curves show that diffusion still provides the strongest learned reference on Rayleigh, SSPA, and TDL.
+The main advantage of condition-wise Sinkhorn drifting is therefore conditional structure with one-shot inference, while diffusion retains higher fidelity on several harder downstream tests.
 The SSPA study separates the transport objective from the optimizer budget.
 The corrected same-condition Sinkhorn field works well after convergence, but the full diffusion-style SSPA preset can over-optimize this sharper one-step field.
 Across the full set of results, global SWD, anchor-conditioned metrics, and downstream coding metrics can disagree.
