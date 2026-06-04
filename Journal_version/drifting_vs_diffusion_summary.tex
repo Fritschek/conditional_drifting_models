@@ -626,8 +626,18 @@ The key comparison is therefore geometric.
 Joint Sinkhorn builds a transport field from \((x,y)\)-features, while condition-wise Sinkhorn solves separate output-space transport problems over fixed \(x\)-fibers.
 This distinction is visible in the mixed metric behavior.
 Condition-wise Sinkhorn is the strongest W-Flow row under direct SWD on AWGN, Rayleigh, and TDL, while SSPA needs the compact update-budget run because the corrected same-condition field converges earlier than the long diffusion-style preset.
+Fig.~\ref{fig:conditional-fiber-diagnostic} shows the corresponding fixed-condition diagnostic for SSPA.
+For three transmitted-symbol anchors, the joint Sinkhorn field misses both the conditional mean and the local spread of the analytic output fiber.
+Condition-wise Sinkhorn keeps the generated cloud close to the analytic same-\(x\) cloud.
 The downstream checks below are the decisive test for this channel-simulator setting.
 They show why global SWD should be treated as a comparability diagnostic and supplemented by conditional or downstream metrics for model selection.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/conditional_fiber_diagnostic_sspa.pdf}
+\caption{\textbf{Fixed-condition SSPA output fibers.} Each row fixes one transmitted-symbol anchor \(x_i\) and plots repeated channel outputs in the first I/Q plane. The analytic channel is shown in gray. The learned columns overlay generated samples from joint Sinkhorn and condition-wise Sinkhorn on the same analytic cloud. Joint transport can match aspects of the global output distribution while displacing the fixed-\(x\) fiber. Condition-wise Sinkhorn better preserves the conditional output law.}
+\label{fig:conditional-fiber-diagnostic}
+\end{figure*}
 
 \subsection{Conditional metrics and symbolic coding}
 Table~\ref{tab:wflow-conditional-metrics} reports the corresponding anchor-conditioned diagnostics.
