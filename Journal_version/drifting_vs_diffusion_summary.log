@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  3 JUN 2026 23:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  4 JUN 2026 13:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -414,24 +414,24 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 (./drifting_vs_diffusion_summary.aux)
 \openout1 = `drifting_vs_diffusion_summary.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
 
 -- Lines per column: 58 (exact).
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -456,19 +456,19 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 23.
+Package hyperref Info: Link coloring OFF on input line 21.
 
 (./drifting_vs_diffusion_summary.out) (./drifting_vs_diffusion_summary.out)
 \@outlinefile=\write3
 \openout3 = `drifting_vs_diffusion_summary.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 30.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -478,70 +478,64 @@ onts/enc/dvips/base/8r.enc}
 
 
 ]
-Underfull \vbox (badness 1024) has occurred while \output is active []
-
- [2]
-LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 197.
-
-[3] [4]
-<figures/drifting_conditional_toy_figure_mpl.pdf, id=200, 685.13167pt x 236.739
+[2]
+LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 196.
+ [3]
+<figures/drifting_conditional_toy_figure_mpl.pdf, id=181, 685.13167pt x 236.739
 46pt>
 File: figures/drifting_conditional_toy_figure_mpl.pdf Graphic file (type pdf)
 <use figures/drifting_conditional_toy_figure_mpl.pdf>
 Package pdftex.def Info: figures/drifting_conditional_toy_figure_mpl.pdf  used 
-on input line 415.
+on input line 416.
 (pdftex.def)             Requested size: 361.19843pt x 124.80663pt.
-<figures/drifting_tiny_mlp_demo_mpl.pdf, id=201, 685.13167pt x 236.73946pt>
+<figures/drifting_tiny_mlp_demo_mpl.pdf, id=182, 685.13167pt x 236.73946pt>
 File: figures/drifting_tiny_mlp_demo_mpl.pdf Graphic file (type pdf)
 <use figures/drifting_tiny_mlp_demo_mpl.pdf>
 Package pdftex.def Info: figures/drifting_tiny_mlp_demo_mpl.pdf  used on input 
-line 422.
+line 423.
 (pdftex.def)             Requested size: 361.19843pt x 124.80663pt.
- [5] (./simulation_setup_table.tex)
+ [4] [5 <./figures/drifting_conditional_toy_figure_mpl.pdf> <./figures/drifting
+_tiny_mlp_demo_mpl.pdf>] (./simulation_setup_table.tex)
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
-33.
+34.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
+) (./model_size_table.tex)
+Underfull \vbox (badness 1097) has occurred while \output is active []
 
- [6 <./figures/drifting_conditional_toy_figure_mpl.pdf> <./figures/drifting_tin
-y_mlp_demo_mpl.pdf>] (./model_size_table.tex) (./wflow_swd_baseline_table.tex) 
-[7]
-(./timing_table_cuda.tex) (./wflow_conditional_metric_table.tex) [8]
-(./wflow_coding_table.tex) (./wflow_all_ser_curve_figures.tex
-<figures/wflow_awgn_ser_curves.pdf, id=395, 350.48001pt x 226.48131pt>
+ [6]
+(./wflow_swd_baseline_table.tex) [7] (./timing_table_cuda.tex)
+(./wflow_conditional_metric_table.tex) [8] (./wflow_coding_table.tex)
+(./wflow_all_ser_curve_figures.tex
+<figures/wflow_awgn_ser_curves.pdf, id=398, 350.48001pt x 226.48131pt>
 File: figures/wflow_awgn_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_awgn_ser_curves.pdf>
 Package pdftex.def Info: figures/wflow_awgn_ser_curves.pdf  used on input line 
 6.
 (pdftex.def)             Requested size: 252.0pt x 162.84523pt.
-<figures/wflow_rayleigh_ser_curves.pdf, id=396, 350.62521pt x 226.48131pt>
+<figures/wflow_rayleigh_ser_curves.pdf, id=399, 350.62521pt x 226.48131pt>
 File: figures/wflow_rayleigh_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_rayleigh_ser_curves.pdf>
 Package pdftex.def Info: figures/wflow_rayleigh_ser_curves.pdf  used on input l
 ine 13.
 (pdftex.def)             Requested size: 252.0pt x 162.77957pt.
-<figures/wflow_sspa_ser_curves.pdf, id=397, 350.48001pt x 226.48131pt>
+<figures/wflow_sspa_ser_curves.pdf, id=400, 350.48001pt x 226.48131pt>
 File: figures/wflow_sspa_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_sspa_ser_curves.pdf>
 Package pdftex.def Info: figures/wflow_sspa_ser_curves.pdf  used on input line 
 20.
 (pdftex.def)             Requested size: 252.0pt x 162.84523pt.
-<figures/wflow_tdl_ser_curves.pdf, id=398, 350.62521pt x 226.48131pt>
+<figures/wflow_tdl_ser_curves.pdf, id=401, 350.62521pt x 226.48131pt>
 File: figures/wflow_tdl_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_tdl_ser_curves.pdf>
 Package pdftex.def Info: figures/wflow_tdl_ser_curves.pdf  used on input line 2
 7.
 (pdftex.def)             Requested size: 252.0pt x 162.77957pt.
-)
-(./wflow_curve_figures.tex
+) (./wflow_curve_figures.tex [9 <./figures/wflow_awgn_ser_curves.pdf>]
+Underfull \vbox (badness 1005) has occurred while \output is active []
 
-LaTeX Warning: Text page 9 contains only floats.
-
-[9 <./figures/wflow_awgn_ser_curves.pdf>]
-<figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf, id=473, 584.84152pt x 232.
+<figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf, id=477, 584.84152pt x 232.
 36398pt>
 File: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf Graphic file (type pdf
 )
@@ -549,14 +543,9 @@ File: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf Graphic file (type pdf
 Package pdftex.def Info: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf  us
 ed on input line 14.
 (pdftex.def)             Requested size: 252.0pt x 100.12375pt.
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [10 <./figures/wflow_rayleigh_ser_curves.pdf> <./figures/wflow_sspa_ser_curves
-.pdf> <./figures/wflow_tdl_ser_curves.pdf> <./figures/turboae_awgn_l64_ber_bler
-_curve_eval2k.pdf>] (./drifting_vs_diffusion_summary.bbl [11]) [12
-
-]
+) [10 <./figures/wflow_rayleigh_ser_curves.pdf> <./figures/wflow_sspa_ser_curve
+s.pdf> <./figures/wflow_tdl_ser_curves.pdf> <./figures/turboae_awgn_l64_ber_ble
+r_curve_eval2k.pdf>] (./drifting_vs_diffusion_summary.bbl) [11]
 (./drifting_vs_diffusion_summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -564,16 +553,16 @@ L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `drifting_vs_diffusion_summary.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: 73955BE19B9C7CDE91DBAC7BC467EE43;3523.
+(rerunfilecheck)             Checksum: EC3847890C05ED6334CAAFBE258C7CA0;3777.
  ) 
 Here is how much of TeX's memory you used:
- 11605 strings out of 469515
- 180132 string characters out of 5470807
- 645026 words of memory out of 5000000
- 39979 multiletter control sequences out of 15000+600000
+ 11606 strings out of 469515
+ 180155 string characters out of 5470807
+ 641134 words of memory out of 5000000
+ 39980 multiletter control sequences out of 15000+600000
  680281 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,15n,83p,722b,594s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,15n,83p,722b,460s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -594,10 +583,10 @@ ts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
 ></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist
 /fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times
 /utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (12 pages, 490665 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (11 pages, 489637 bytes).
 PDF statistics:
- 886 PDF objects out of 1000 (max. 8388607)
+ 885 PDF objects out of 1000 (max. 8388607)
  418 compressed objects within 5 object streams
  102 named destinations out of 1000 (max. 500000)
- 196 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 204 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -13,24 +13,22 @@
 \newcommand{\tablefontsize}{\fontsize{7.2pt}{8.4pt}\selectfont}
 \newcommand\headspace{\hspace{.2em}}
 
-\title{Conditional Drifting Models for Learned Channel Simulation}
+\title{Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation}
 
-\author{
-\IEEEauthorblockN{Rick Fritschek and Rafael F. Schaefer}
-\IEEEauthorblockA{Chair of Information Theory and Machine Learning\\ Technische Universit{\"a}t Dresden, Germany}
-}
+\author{Rick Fritschek and Rafael F. Schaefer%
+\thanks{Rick Fritschek and Rafael F. Schaefer are with the Chair of Information Theory and Machine Learning, Technische Universit{\"a}t Dresden, Germany.}}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Accurate stochastic channel simulation is central to data-driven communication system design, especially when channel measurements are costly to acquire repeatedly or when differentiable learned surrogates are needed inside end-to-end optimization loops.
-Conditional diffusion models are strong channel generators, but their inference cost scales with the number of reverse denoising steps.
-This paper studies conditional drifting models as one-shot learned channel simulators and compares residual drifting, direct-output drifting, a conditioning-aware kernel variant, and condition-wise Sinkhorn drifting against conditional denoising diffusion probabilistic modeling (DDPM), denoising diffusion implicit modeling (DDIM), and Wasserstein generative adversarial network (WGAN) baselines.
-The central modeling point is that a channel generator should keep the transmitted symbol \(x\) fixed and transport only the conditional output law \(p(y\mid x)\).
-We therefore formulate a conditional Sinkhorn objective by integrating Sinkhorn divergences over fixed-input conditional laws, yielding a Wasserstein-flow drift field for each transmitted-symbol condition.
-Experiments on additive white Gaussian noise (AWGN), Rayleigh fading, solid-state power amplifier (SSPA) nonlinearity, and a compact tapped-delay-line (TDL) channel show that condition-wise Sinkhorn is the best-performing drifting-family surrogate in the symbolic-coding experiments, while diffusion remains the strongest learned reference on harder downstream SER curves.
-The results identify condition-wise Sinkhorn drifting as a low-latency, condition-preserving alternative and show that global output-space sliced Wasserstein distance (SWD) alone is insufficient for selecting a channel surrogate.
+Learned communication systems may evaluate stochastic channel surrogates millions of times inside differentiable training loops.
+Conditional diffusion models provide strong sample quality, with inference cost set by reverse denoising steps.
+This paper proposes condition-wise Sinkhorn drifting, a one-shot surrogate that replaces unconditional or global transport with per-condition transport over the laws \(p(y\mid x)\).
+We formulate a conditional Sinkhorn objective by integrating Sinkhorn divergences over fixed-input output laws and train a one-shot generator through detached particle updates.
+Experiments on additive white Gaussian noise (AWGN), Rayleigh fading, solid-state power amplifier (SSPA) nonlinearity, and a compact tapped-delay-line (TDL) channel compare the proposed method with conditional denoising diffusion probabilistic modeling (DDPM), denoising diffusion implicit modeling (DDIM), Wasserstein generative adversarial network (WGAN), and drifting ablations.
+Condition-wise Sinkhorn is the best-performing one-shot drifting-family surrogate under conditional diagnostics and symbolic-coding checks.
+Diffusion remains strongest on the hardest downstream symbol-error-rate (SER) curves, and global output-space sliced Wasserstein distance (SWD) alone is unreliable for model selection.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -53,7 +51,9 @@ More broadly, diffusion methods have also begun to influence adjacent wireless t
 This line of work is compelling because diffusion models are flexible, robust, and often more stable than earlier adversarial approaches.
 This improvement comes with a practical system cost.
 Inference requires an iterative reverse denoising procedure, and the latency scales with the number of diffusion steps.
-This tradeoff is manageable when the channel generator is called occasionally, but it becomes more problematic when it is embedded in inner loops of iterative training or repeated Monte Carlo evaluations. This latency bottleneck has motivated several acceleration strategies for diffusion, including skipped or reduced-step sampling as in denoising diffusion implicit modeling (DDIM), as well as one-step or few-step alternatives such as consistency models and distillation-based approaches that compress multi-step samplers into substantially shorter generation paths \cite{ddim,song2023consistency,yin2024onestep}.
+This tradeoff is manageable when the channel generator is called occasionally.
+It becomes more problematic when the generator is embedded in inner loops of iterative training or repeated Monte Carlo evaluations.
+This latency bottleneck has motivated several acceleration strategies for diffusion, including skipped or reduced-step sampling as in denoising diffusion implicit modeling (DDIM), as well as one-step or few-step alternatives such as consistency models and distillation-based approaches that compress multi-step samplers into substantially shorter generation paths \cite{ddim,song2023consistency,yin2024onestep}.
 This motivates the study of one-shot conditional generators for learned channel simulation.
 Among recently proposed generative paradigms, drifting models \cite{drifting} are particularly interesting because they learn the transport from a simple latent source to the target data distribution directly in the network parameters.
 Intuitively, diffusion spends computation at test time by progressively transforming noise into data through a reverse-time chain.
@@ -64,11 +64,13 @@ This perspective is also consistent with recent geometric analyses of generative
 Recent work on one-step generation via Wasserstein gradient flows (W-Flow) \cite{han2026wflow} sharpens this viewpoint by replacing heuristic drifting fields with Sinkhorn-divergence optimal-transport velocities.
 This is directly relevant to channel simulation, because the quality and stability of the drift field is the main design question once inference is constrained to one generator evaluation.
 
-That distinction makes the concept of drifting appealing for channel modeling.
-In a communication setting, the generator must be conditional on the transmitted symbol \(x\) and capture the full conditional law \(p(y \mid x)\).
-Because drifting is based on attraction and repulsion between generated and true samples, it is also an interesting candidate for studying whether one-shot conditional generators can avoid some of the mode-collapse behavior often associated with adversarial training.
-Because drifting was introduced only very recently, a widely adopted communication-channel baseline has yet to emerge.
-This motivates a benchmark-oriented study that reports comparative results together with the concrete conditional adaptation needed to integrate drifting into a channel-learning pipeline.
+The distinction between ordinary generation and channel simulation is central.
+In ordinary generative modeling, samples are transported in the data space until the model distribution matches the target distribution.
+In channel simulation, the transmitted symbol is fixed side information.
+The relevant target is the family of conditional laws \(\{p(\cdot\mid x)\}_{x\sim\mu}\).
+A generator can match the global output cloud while mixing conditional fibers, which produces an incorrect channel surrogate for communication-system training.
+This motivates a condition-wise transport formulation in which couplings preserve \(x\) and move only the output component \(y\).
+The proposed condition-wise Sinkhorn drifting implements this idea as a one-shot neural channel generator.
 
 The emphasis of this study is on generator-level distributional accuracy, computational tradeoffs, and downstream channel-implant checks.
 A full communication-system design study over all modulation and coding regimes is outside the present scope.
@@ -77,14 +79,11 @@ Measured datasets with only one observation per condition require local conditio
 
 The main contributions are summarized as follows.
 \begin{itemize}
-\item We formulate conditional drifting generators for channel simulation in both residual form,
-  using \(e = y - x\), and direct-output form, modeling \(p(y \mid x)\) directly.
-\item We identify the kernel attraction--repulsion field used in the drifting baseline as an empirical approximation, include a conditioning-aware direct-output kernel variant, and formulate a condition-wise Sinkhorn alternative motivated by a conditional Wasserstein-gradient-flow objective.
-\item We show that channel simulation requires a condition-preserving Sinkhorn flow. Since the input marginal is fixed, transport must be constrained to the output law over each transmitted symbol.
-\item We compare the resulting drifting variants against conditional DDPM, conditional DDIM, and
-  conditional WGAN reference models on AWGN, Rayleigh fading, and solid-state power amplifier (SSPA) channels, and we add a TDL wireless channel in the downstream channel-implant study.
-\item We quantify the accuracy--latency tradeoff and show that one-shot drifting provides large inference-time savings while remaining competitive in distributional accuracy. A symbolic AWGN case study illustrates that conditioning-aware kernel design can improve downstream direct-output drifting performance.
-\item We report a multi-seed drift-field ablation with direct SWD, anchor-conditioned metrics, downstream SER, and bit error rate (BER), and compare the distributional results against DDPM, DDIM, and WGAN wherever the protocols overlap.
+\item We formulate condition-wise Sinkhorn drifting for learned channel simulation by integrating Sinkhorn divergences over fixed-input output fibers \(p(\cdot\mid x)\).
+\item We connect this objective to a conditional Wasserstein-flow velocity, then state how the practical method differs from the population flow through finite-sample barycentric estimation and projected detached-target neural training.
+\item We implement conditional drifting in direct-output and residual parameterizations and compare target-kernel, conditioning-aware joint-kernel, joint Sinkhorn, and condition-wise Sinkhorn drift fields under a matched one-shot generator.
+\item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional WGAN reference models on AWGN, Rayleigh fading, SSPA, and compact TDL channel studies wherever the protocols overlap.
+\item We evaluate channel surrogates with direct SWD, anchor-conditioned moment metrics, downstream SER, bit error rate (BER), block error rate (BLER), and timing measurements, showing that communication usefulness is better reflected by conditional and downstream metrics than by global SWD alone.
 \end{itemize}
 Source code will be made available through the first author's GitHub repository upon publication\footnote{\url{https://github.com/Fritschek/conditional_drifting_models}.}.
 
@@ -277,7 +276,8 @@ In the direct-output setting, the target kernel can also incorporate residual si
 The generator architecture is unchanged.
 
 This kernel rule is the conditioning-aware baseline used for the direct-output drifting variants.
-It is computationally simple, but it also leaves the most important design choice--the minibatch coupling used to build \(V\)--as a channel-specific heuristic.
+It is computationally simple.
+It also leaves the most important design choice--the minibatch coupling used to build \(V\)--as a channel-specific heuristic.
 We therefore also study Sinkhorn-based drift fields that replace the row-normalized kernel interaction with the velocity in \eqref{eq:wflow_velocity}, while preserving the same detached-target training loop and the same one-shot inference path.
 
 \subsection{Condition-wise Sinkhorn drifting}
@@ -332,7 +332,7 @@ T^{\varepsilon}_{q_{t,x},p_x}(y)
 T^{\varepsilon}_{q_{t,x},q_{t,x}}(y).
 \label{eq:condition_sinkhorn_velocity}
 \end{equation}
-This statement is made at the population-flow level.
+This interpretation is deliberately limited to the population conditional optimal-transport flow.
 For \(\mu\)-almost every \(x\), assume that \(p_x\) and \(q_{t,x}\) are Borel probability measures on \(\mathbb{R}^n\) with finite second moments and that the entropic OT potentials are differentiable along the considered distributional curve.
 Under the standard Sinkhorn-divergence assumptions used in \cite{feydy2019sinkhorn}, \(S_\varepsilon(q_{t,x},p_x)\geq 0\) and equality holds exactly when \(q_{t,x}=p_x\).
 The exact Wasserstein gradient flow then satisfies
@@ -355,9 +355,10 @@ This is the conditional analogue needed for channel simulation.
 Its equilibrium is equality of the complete family of conditional channel laws.
 Matching a joint sample cloud under an arbitrary joint cost leaves this condition-wise equality unenforced.
 
-The empirical estimator used in training is a finite-sample particle approximation of this flow.
-It estimates the barycentric velocity from minibatch Sinkhorn couplings and then performs a detached-target regression step.
-This corresponds to an explicit particle update followed by projection back into the generator class, and it differs from exact gradient descent on \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) with respect to \(\theta\).
+The implemented algorithm adds two approximations to this population object.
+First, it estimates the barycentric velocity from finite minibatch Sinkhorn couplings.
+Second, it projects the explicit particle update back into the neural generator class through detached-target regression.
+The resulting update differs from exact gradient descent on \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) with respect to \(\theta\).
 If the generator family cannot realize all conditional laws \(p_x\), the practical fixed point is the best representable conditional surrogate reached by this projected training dynamics.
 For anchors \(x_i\sim\mu\), the estimator draws multiple generated samples
 \(\hat y_{i,k}=g_\theta(x_i,z_{i,k})\), multiple positive channel samples
@@ -576,7 +577,8 @@ Thus SWD compares the generated and true sample clouds through many one-dimensio
   Rayleigh, SSPA, and TDL.
 The projection directions are sampled from an isotropic Gaussian distribution, normalized to unit length, and generated from the deterministic metric seed associated with the run.
 SWD is used primarily for comparability with prior diffusion-channel benchmarks \cite{paper2309,kimicc2024}. Compared with histogram-based \(L_1\) distance, it also better captures sample geometry in \(\mathbb{R}^n\).
-SWD provides a geometry-aware comparison of conditional output distributions, but it leaves decision-relevant behavior such as error rates unmeasured.
+SWD provides a geometry-aware comparison of global output sample clouds.
+It leaves decision-relevant behavior such as error rates unmeasured.
 Those depend on the joint structure of \((x,y)\).
 For communication use, two generators with similar global sample-cloud discrepancy can induce different conditional means, conditional covariance errors, and downstream symbol-error rates.
 The Sinkhorn drift-field study therefore also includes anchor-conditioned moment metrics and symbolic channel-implant SER/BER checks when evaluating the proposed drifting variants.
@@ -617,33 +619,26 @@ On AWGN, Rayleigh, and SSPA, the condition-wise Sinkhorn row is faster to train 
 
 \input{timing_table_cuda.tex}
 
-\subsection{Sinkhorn drift-field interpretation}
-We next evaluate the W-Flow-inspired variants over the completed multi-seed drift-field ablation.
-The compared variants are the target-space kernel baseline, the conditioning-aware joint kernel, a naive joint Sinkhorn drift using \((x,y)\)-features, and the proposed condition-wise Sinkhorn drift.
-All four are one-shot generators at inference time and differ only in the training-time drift field.
-
-The drifting-family block in Table~\ref{tab:wflow-swd-baselines} compares direct drifting and the proposed drift-field variants against the diffusion and WGAN reference rows.
-The comparison should be read with the reporting convention in mind.
-The DDPM/DDIM/WGAN and direct-drifting rows are ten-seed values.
-The W-Flow rows are 100-seed estimates except for the SSPA condition-wise Sinkhorn row, which uses the 30-seed update-budget check described in the experimental setup.
-Diffusion remains the strongest direct-SWD reference on AWGN, Rayleigh, and SSPA.
-On TDL, condition-wise Sinkhorn is lower than the checkpoint-evaluated diffusion and WGAN references under direct-output SWD, even though the downstream SER curves still favor diffusion.
-Among the W-Flow variants, condition-wise Sinkhorn gives the best direct SWD on AWGN, Rayleigh, and TDL.
-On SSPA, the global direct-SWD means of the best W-Flow rows are close, while the compact condition-wise run is substantially better than continuing the corrected field to the full diffusion-style budget.
-Direct drifting remains a useful global-SWD reference inside the drifting family, but the downstream checks below show that global SWD alone cannot select a channel surrogate.
-This is already a warning that the single global sample-cloud metric can be misaligned with conditional channel usefulness.
+\subsection{Condition-wise drift-field interpretation}
+The W-Flow-inspired ablation isolates the drift-field design problem.
+The target-space kernel baseline, conditioning-aware joint kernel, naive joint Sinkhorn drift, and proposed condition-wise Sinkhorn drift all use the same one-shot generator architecture and differ only in how training particles are moved.
+The key comparison is therefore geometric.
+Joint Sinkhorn builds a transport field from \((x,y)\)-features, while condition-wise Sinkhorn solves separate output-space transport problems over fixed \(x\)-fibers.
+This distinction is visible in the mixed metric behavior.
+Condition-wise Sinkhorn is the strongest W-Flow row under direct SWD on AWGN, Rayleigh, and TDL, while SSPA needs the compact update-budget run because the corrected same-condition field converges earlier than the long diffusion-style preset.
+The downstream checks below are the decisive test for this channel-simulator setting.
+They show why global SWD should be treated as a comparability diagnostic and supplemented by conditional or downstream metrics for model selection.
 
 \subsection{Conditional metrics and symbolic coding}
 Table~\ref{tab:wflow-conditional-metrics} reports the corresponding anchor-conditioned diagnostics.
 The anchor metrics draw repeated outputs at fixed transmitted symbols and therefore probe the conditional law more directly than global SWD.
 Direct SWD is kept in Table~\ref{tab:wflow-swd-baselines}, and downstream BER/SER is kept in Table~\ref{tab:wflow-ser-ber}.
 This avoids reporting the same quantities in multiple tables.
-This changes the interpretation on several channels.
 For AWGN, Rayleigh, SSPA, and TDL, condition-wise Sinkhorn is the best-performing drifting-family surrogate under the downstream BER/SER checks reported here.
 The full curve comparison below shows that diffusion remains the strongest learned reference on Rayleigh, SSPA, and TDL.
 On SSPA, the anchor-conditioned metrics also explain why the compact update-budget run is preferable.
 The same-condition Sinkhorn field matches fixed-input output clouds well, while the full-budget corrected run over-optimizes the sharp field.
-This indicates that condition-wise transport is useful, but its optimizer budget must respect the geometry of saturated nonlinear channels.
+This indicates that condition-wise transport is useful and that its optimizer budget must respect the geometry of saturated nonlinear channels.
 
 \input{wflow_conditional_metric_table.tex}
 
@@ -667,9 +662,16 @@ Figs.~\ref{fig:wflow-awgn-ser-curves}--\ref{fig:wflow-tdl-ser-curves} report SER
 \input{wflow_curve_figures.tex}
 
 \section{Discussion}
+\subsection{Accuracy-latency operating point}
+Condition-wise Sinkhorn drifting targets a low-latency conditional-surrogate operating point.
+Diffusion remains the strongest learned reference on several hard downstream SER curves and pays for that fidelity through iterative sampling.
+The one-shot drifting path uses a single generator evaluation and preserves the fixed-input structure of the channel law.
+This makes it relevant when the learned channel is embedded in an inner training loop, where surrogate calls can dominate the computational budget.
+The main methodological lesson is that channel surrogates should be judged by conditional-law quality and downstream communication metrics in addition to global sample-cloud agreement.
+
 \subsection{Metric-space dependence}
 Direct and residual drifting behave differently across channel classes and evaluation spaces.
-Residual-space SWD is useful for checking a residual-mode generator, but it remains a secondary diagnostic for a channel simulator whose output is ultimately \(y\).
+Residual-space SWD is useful for checking a residual-mode generator and remains a secondary diagnostic for a channel simulator whose output is ultimately \(y\).
 The W-Flow run reinforces this metric-dependence message.
 Kernel target, joint kernel, joint Sinkhorn, and condition-wise Sinkhorn can swap order depending on whether the metric is global SWD, anchor-conditioned SWD, or downstream BER/SER\@.
 We therefore report direct-output SWD, anchor-conditioned moment metrics, and downstream coding metrics side by side.
@@ -683,21 +685,19 @@ For that regime, the appropriate practical variant is local conditional Sinkhorn
 Practical channel simulators may also need transport features that encode phase, amplitude, residual structure, or decoder-relevant projections.
 
 \section{Conclusion}
-This paper presented a comprehensive experimental study of conditional drifting models for learned channel simulation and compared them against conditional diffusion and WGAN baselines on AWGN, Rayleigh, and SSPA channels.
-The results show a clear tradeoff between fidelity and latency.
-Diffusion provides the strongest distributional accuracy overall under global SWD, while one-shot drifting remains competitive and retains substantially lower inference cost.
-Under direct output-space evaluation, direct-output drifting is the strongest one-shot generator among the non-diffusion reference models.
-Residual-mode diagnostics are useful for understanding parameterization effects but remain secondary to the main channel-generator ranking.
-The W-Flow-inspired ablation shows that the drift-field design problem is genuinely conditional.
-Transporting the joint law of \((x,y)\) differs from transporting \(p(y\mid x)\) with a fixed input marginal.
-The completed Sinkhorn study confirms that condition-wise Sinkhorn is the best-performing drifting-family surrogate in the symbolic-coding experiments on AWGN, Rayleigh, SSPA, and TDL under the reported channel-specific coding setups.
-At the same time, the full downstream curves show that diffusion still provides the strongest learned reference on Rayleigh, SSPA, and TDL.
-The main advantage of condition-wise Sinkhorn drifting is therefore conditional structure with one-shot inference, while diffusion retains higher fidelity on several harder downstream tests.
-The SSPA study separates the transport objective from the optimizer budget.
-The corrected same-condition Sinkhorn field works well after convergence, but the full diffusion-style SSPA preset can over-optimize this sharper one-step field.
+This paper makes one-shot drifting applicable to learned channel simulation by replacing unconditional transport with condition-wise Sinkhorn transport over fixed-input output fibers.
+The resulting generator preserves the transmitted symbol \(x\), transports only the conditional output law, and keeps the one-shot inference path that motivates drifting for inner-loop channel use.
+The population formulation identifies equality of \(p(\cdot\mid x)\) and \(q_\theta(\cdot\mid x)\) for \(\mu\)-almost every \(x\) as the correct equilibrium geometry.
+The implemented method is a finite-sample barycentric approximation followed by projected detached-target neural training.
+
+Experiments on AWGN, Rayleigh, SSPA, and compact TDL channels show a clear accuracy-latency tradeoff.
+Within the matched drifting-family ablation, condition-wise Sinkhorn is the best-performing one-shot surrogate under the downstream symbolic-coding checks.
+Diffusion remains the strongest learned reference on the hardest SER curves.
+This positions the contribution as a low-latency, condition-preserving operating point on the accuracy-latency frontier.
+The SSPA study also shows that optimizer budget is part of the drift-field design.
+The corrected same-condition field works well after convergence, while the full diffusion-style preset can over-optimize this sharper one-step field.
 Across the full set of results, global SWD, anchor-conditioned metrics, and downstream coding metrics can disagree.
-This makes metric choice a central part of learned channel simulation.
-It also motivates future channel-specific transport features and local conditional Sinkhorn approximations for measured channels.
+This makes metric choice a central part of learned channel simulation and motivates future work on channel-specific transport features and local conditional Sinkhorn approximations for measured channels.
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 
