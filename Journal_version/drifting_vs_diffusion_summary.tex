@@ -645,7 +645,7 @@ They show why global SWD should be treated as a comparability diagnostic and sup
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.92\textwidth]{figures/conditional_fiber_diagnostic_sspa.pdf}
+\includegraphics[width=0.66\textwidth]{figures/conditional_fiber_diagnostic_sspa.pdf}
 \caption{\textbf{Fixed-condition SSPA output fibers.} Each row fixes one transmitted-symbol anchor \(x_i\) and plots repeated channel outputs in the first I/Q plane. The analytic channel is shown in gray. The learned columns overlay generated samples from joint Sinkhorn and condition-wise Sinkhorn on the same analytic cloud. Joint transport can match aspects of the global output distribution while displacing the fixed-\(x\) fiber. Condition-wise Sinkhorn better preserves the conditional output law.}
 \label{fig:conditional-fiber-diagnostic}
 \end{figure*}
@@ -674,19 +674,6 @@ On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget screen gives condition-wise S
 As a longer-block robustness check, the same AWGN transfer behavior is observed with a CNN TurboAE-style encoder--decoder at block length \(n=64\), rate \(1/2\), and final analytic-channel evaluation.
 
 \input{wflow_coding_table.tex}
-
-Fig.~\ref{fig:metric-latency-diagnostics} summarizes two diagnostics that are easy to miss when reading the tables separately.
-Panel (a) plots W-Flow ablation points by direct-output SWD and downstream SER.
-Several points with better global SWD have worse downstream SER than a condition-aware Sinkhorn alternative, which is why global SWD is used only as a comparability diagnostic.
-Panel (b) plots learned implants by inference time per sample and equal-wall-clock downstream SER.
-It shows the intended operating-point distinction: DDIM-100 can remain strong on difficult channels, but one-shot Sinkhorn and WGAN implants complete many more autoencoder updates per fixed training budget.
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=0.90\textwidth]{figures/wflow_metric_latency_diagnostics.pdf}
-\caption{\textbf{Metric mismatch and accuracy-latency diagnostics.} Panel (a) compares direct-output SWD with downstream symbolic SER for W-Flow ablations. The plotted points use the same aggregate sources as Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Panel (b) compares learned channel implants by inference latency and equal-wall-clock symbolic SER from Table~\ref{tab:equal-wallclock-symbolic}. Colors denote channels and marker shapes denote methods.}
-\label{fig:metric-latency-diagnostics}
-\end{figure*}
 
 For SSPA, we follow the diffusion-channel setup of \cite{paper2309} more closely and use message alphabet \(M_{\mathrm{msg}}=64\), \(n=8\), rate \(6/8\), and training at \(E_b/N_0=8\,\mathrm{dB}\).
 The 30-seed SSPA screen in Table~\ref{tab:wflow-ser-ber} shows that the corrected condition-wise Sinkhorn implementation is reliable once the W-Flow update budget is matched to the observed convergence of the sharp same-condition field.
@@ -737,7 +724,7 @@ The implemented method is a finite-sample barycentric approximation followed by 
 Experiments on AWGN, Rayleigh, SSPA, and compact TDL channels show a clear accuracy-latency tradeoff.
 Within the matched drifting-family ablation, condition-wise Sinkhorn is the best-performing one-shot surrogate under the downstream symbolic-coding checks.
 Diffusion remains the strongest learned reference on the hardest SER curves.
-This positions the contribution as a low-latency, condition-preserving operating point on the accuracy-latency frontier.
+This positions the contribution as a low-latency, condition-preserving surrogate for settings where repeated channel calls are expensive.
 The SSPA study also shows that optimizer budget is part of the drift-field design.
 The corrected same-condition field works well after convergence, while the full diffusion-style preset can over-optimize this sharper one-step field.
 Across the full set of results, global SWD, anchor-conditioned metrics, and downstream coding metrics can disagree.
