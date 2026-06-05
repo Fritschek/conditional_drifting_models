@@ -1,24 +1,24 @@
 \begin{table*}[t]
 \centering
-\caption{\textbf{Downstream symbolic coding metrics for W-Flow channel surrogates.} Autoencoders are trained through each channel surrogate and evaluated on the analytic channel. Values are mean $\pm$ standard error over seeds. Lower is better. Bold marks the best learned surrogate in each row, while the analytic channel is the reference floor.}
+\caption{\textbf{Downstream symbolic coding metrics for Sinkhorn channel surrogates.} Autoencoders are trained through each channel surrogate and evaluated on the analytic channel. Values are mean $\pm$ standard error over seeds. Lower is better. Bold marks the best learned surrogate in each row, while the analytic channel is the reference floor.}
 \label{tab:wflow-ser-ber}
 \tablestyle{3.4pt}{1.02}
 \tablefontsize
-\begin{tabular}{@{}llccccc@{}}
+\begin{tabular}{@{}llccc@{}}
 \toprule
-Channel & Metric & Analytic & Kernel target & Kernel joint & Joint Sinkhorn & Condition-wise Sinkhorn \\
+Channel & Metric & Analytic & Joint Sinkhorn & Condition-wise Sinkhorn \\
 \midrule
-AWGN & BER & 0.00293 $\pm$ 4.0$\times 10^{-5}$ & 0.0187 $\pm$ 5.7$\times 10^{-4}$ & 0.0124 $\pm$ 3.8$\times 10^{-4}$ & 0.00388 $\pm$ 5.5$\times 10^{-5}$ & \textbf{0.00302 $\pm$ 4.2$\times 10^{-5}$} \\
-AWGN & SER & 0.00551 $\pm$ 7.3$\times 10^{-5}$ & 0.0351 $\pm$ 0.001 & 0.0233 $\pm$ 7.1$\times 10^{-4}$ & 0.00729 $\pm$ 9.7$\times 10^{-5}$ & \textbf{0.00568 $\pm$ 7.5$\times 10^{-5}$} \\
+AWGN & BER & 0.00293 $\pm$ 4.0$\times 10^{-5}$ & 0.00388 $\pm$ 5.5$\times 10^{-5}$ & \textbf{0.00302 $\pm$ 4.2$\times 10^{-5}$} \\
+AWGN & SER & 0.00551 $\pm$ 7.3$\times 10^{-5}$ & 0.00729 $\pm$ 9.7$\times 10^{-5}$ & \textbf{0.00568 $\pm$ 7.5$\times 10^{-5}$} \\
 \midrule
-Rayleigh & BER & 0.00273 $\pm$ 4.3$\times 10^{-5}$ & 0.0359 $\pm$ 7.1$\times 10^{-4}$ & 0.111 $\pm$ 0.0017 & 0.0177 $\pm$ 3.3$\times 10^{-4}$ & \textbf{0.00471 $\pm$ 8.2$\times 10^{-5}$} \\
-Rayleigh & SER & 0.00514 $\pm$ 8.0$\times 10^{-5}$ & 0.0685 $\pm$ 0.0012 & 0.208 $\pm$ 0.0032 & 0.0331 $\pm$ 5.6$\times 10^{-4}$ & \textbf{0.00881 $\pm$ 1.4$\times 10^{-4}$} \\
+Rayleigh & BER & 0.00273 $\pm$ 4.3$\times 10^{-5}$ & 0.0177 $\pm$ 3.3$\times 10^{-4}$ & \textbf{0.00471 $\pm$ 8.2$\times 10^{-5}$} \\
+Rayleigh & SER & 0.00514 $\pm$ 8.0$\times 10^{-5}$ & 0.0331 $\pm$ 5.6$\times 10^{-4}$ & \textbf{0.00881 $\pm$ 1.4$\times 10^{-4}$} \\
 \midrule
-SSPA & BER & 6.72$\times 10^{-6}$ $\pm$ 1.9$\times 10^{-6}$ & 0.0661 $\pm$ 0.0046 & -- & -- & \textbf{4.90$\times 10^{-5}$ $\pm$ 7.5$\times 10^{-6}$} \\
-SSPA & SER & 1.30$\times 10^{-5}$ $\pm$ 3.5$\times 10^{-6}$ & 0.134 $\pm$ 0.0092 & -- & -- & \textbf{9.33$\times 10^{-5}$ $\pm$ 1.4$\times 10^{-5}$} \\
+SSPA & BER & 6.72$\times 10^{-6}$ $\pm$ 1.9$\times 10^{-6}$ & -- & \textbf{4.90$\times 10^{-5}$ $\pm$ 7.5$\times 10^{-6}$} \\
+SSPA & SER & 1.30$\times 10^{-5}$ $\pm$ 3.5$\times 10^{-6}$ & -- & \textbf{9.33$\times 10^{-5}$ $\pm$ 1.4$\times 10^{-5}$} \\
 \midrule
-TDL & BER & 0.00158 $\pm$ 2.1$\times 10^{-5}$ & 0.0102 $\pm$ 2.6$\times 10^{-4}$ & 0.0098 $\pm$ 2.5$\times 10^{-4}$ & 0.0107 $\pm$ 3.7$\times 10^{-4}$ & \textbf{0.00293 $\pm$ 4.4$\times 10^{-5}$} \\
-TDL & SER & 0.00297 $\pm$ 3.6$\times 10^{-5}$ & 0.0194 $\pm$ 4.9$\times 10^{-4}$ & 0.0185 $\pm$ 4.6$\times 10^{-4}$ & 0.02 $\pm$ 6.3$\times 10^{-4}$ & \textbf{0.00546 $\pm$ 7.6$\times 10^{-5}$} \\
+TDL & BER & 0.00158 $\pm$ 2.1$\times 10^{-5}$ & 0.0107 $\pm$ 3.7$\times 10^{-4}$ & \textbf{0.00293 $\pm$ 4.4$\times 10^{-5}$} \\
+TDL & SER & 0.00297 $\pm$ 3.6$\times 10^{-5}$ & 0.02 $\pm$ 6.3$\times 10^{-4}$ & \textbf{0.00546 $\pm$ 7.6$\times 10^{-5}$} \\
 \bottomrule
 \end{tabular}
 \par\vspace{0.25em}

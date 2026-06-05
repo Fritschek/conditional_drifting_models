@@ -1,6 +1,6 @@
 \begin{table}[!t]
 \centering
-\caption{\textbf{Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian Wasserstein-2 (GW2) are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are seed means. Lower is better.}
+\caption{\textbf{Anchor-conditioned diagnostics for Sinkhorn drift fields.} Anchor SWD and Gaussian Wasserstein-2 (GW2) are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are seed means. Lower is better.}
 \label{tab:wflow-conditional-metrics}
 \tablestyle{3.4pt}{1.02}
 \tablefontsize
@@ -8,23 +8,15 @@
 \toprule
 Channel & Variant & Anchor SWD & Anchor GW2 \\
 \midrule
-AWGN & Kernel target & 0.3711 & 1.2565 \\
-AWGN & Kernel joint & 0.1425 & 0.5936 \\
 AWGN & Joint Sinkhorn & 0.1199 & 0.4443 \\
 AWGN & Condition-wise Sinkhorn & 0.1154 & 0.4277 \\
 \midrule
-Rayleigh & Kernel target & 0.3757 & 1.2869 \\
-Rayleigh & Kernel joint & 0.1994 & 0.8198 \\
 Rayleigh & Joint Sinkhorn & 0.1723 & 0.6929 \\
 Rayleigh & Condition-wise Sinkhorn & 0.1097 & 0.3820 \\
 \midrule
-SSPA & Kernel target & 0.2118 & 0.7631 \\
-SSPA & Kernel joint & 0.2135 & 0.7685 \\
 SSPA & Joint Sinkhorn & 0.2174 & 0.7876 \\
 SSPA & Condition-wise Sinkhorn & 0.0566 & 0.2376 \\
 \midrule
-TDL & Kernel target & 0.3155 & 1.1632 \\
-TDL & Kernel joint & 0.2934 & 1.0939 \\
 TDL & Joint Sinkhorn & 0.3221 & 1.1871 \\
 TDL & Condition-wise Sinkhorn & 0.1054 & 0.4444 \\
 \bottomrule

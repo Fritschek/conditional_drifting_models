@@ -81,7 +81,7 @@ The main contributions are summarized as follows.
 \begin{itemize}
 \item We formulate condition-wise Sinkhorn drifting for learned channel simulation by integrating Sinkhorn divergences over fixed-input output fibers \(p(\cdot\mid x)\).
 \item We connect this objective to a conditional Wasserstein-flow velocity, then state how the practical method differs from the population flow through finite-sample barycentric estimation and projected detached-target neural training.
-\item We implement conditional drifting in direct-output and residual parameterizations. Target-kernel and joint-kernel rows serve as diagnostic controls, while the central geometric comparison is joint/global Sinkhorn versus condition-wise Sinkhorn under a matched one-shot generator.
+\item We implement conditional drifting in direct-output and residual parameterizations. The central geometric comparison is joint/global Sinkhorn versus condition-wise Sinkhorn under a matched one-shot generator.
 \item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional WGAN reference models on AWGN, Rayleigh fading, SSPA, and compact TDL channel studies wherever the protocols overlap.
 \item We evaluate channel surrogates with direct SWD, anchor-conditioned moment metrics, downstream SER, bit error rate (BER), and timing measurements, showing that communication usefulness is better reflected by conditional and downstream metrics than by global SWD alone.
 \end{itemize}
@@ -519,7 +519,8 @@ It is intentionally smaller than a full OFDM or long-block TDL evaluation.
 \subsection{Training protocol}
 The experiments are organized into two complementary protocols.
 First, the generator-level protocol compares the proposed drifting family against the established conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, and SSPA.
-Second, the drift-field ablation holds the drifting network fixed and compares target-space kernel drifting, conditioning-aware joint-kernel drifting, joint Sinkhorn drifting, and condition-wise Sinkhorn drifting.
+Second, the drift-field ablation holds the drifting network fixed and compares global/joint Sinkhorn drifting with condition-wise Sinkhorn drifting.
+Target-space and conditioning-aware kernel drifts were run as supporting controls, but the main tables keep the transport comparison focused.
 This second protocol is reported over 100 seeds for the main drift-field runs and is evaluated with direct SWD, anchor-conditioned metrics, and downstream symbolic SER/BER.
 It is the controlled comparison in this paper because the generator architecture, optimizer family, and one-shot inference path are held fixed across drift fields.
 The DDPM, DDIM, and WGAN rows provide best-effort reference baselines using stable model-family settings.
@@ -541,8 +542,8 @@ Downstream symbolic autoencoders are trained through either the analytic channel
 Drifting uses a conditional MLP with latent dimension \(16\), hidden width \(128\), two hidden layers, \texttt{SiLU} activations, and Adam with learning rate \(10^{-3}\).
 The base drifting objective uses drift scale \(1.0\), median-heuristic bandwidth selection, minimum bandwidth \(0.2\), maximum drift norm \(2.0\), and repulsive weight \(1.0\).
 We train both parameterizations, direct drifting with target \(y\) and residual drifting with target \(e=y-x\).
-The four drift-field variants use the same direct-output generator architecture and detached-target update, but replace or modify the training drift field.
-The target-kernel row uses only target-space similarities, the joint-kernel row uses the conditioning-aware kernel, the joint Sinkhorn row uses a Sinkhorn/W-Flow drift in joint condition-output features, and the condition-wise row uses the per-anchor conditional Sinkhorn field in \eqref{eq:condition_sinkhorn_velocity}.
+The Sinkhorn drift-field variants use the same direct-output generator architecture and detached-target update, but replace the training drift field.
+The joint Sinkhorn row uses a Sinkhorn/W-Flow drift in joint condition-output features, while the condition-wise row uses the per-anchor conditional Sinkhorn field in \eqref{eq:condition_sinkhorn_velocity}.
 Unless otherwise stated, Sinkhorn variants use \(10\) Sinkhorn iterations, automatic entropic scale selection with minimum \(\varepsilon=10^{-3}\), four generated samples, four positive channel samples, and four generated reference samples per condition anchor.
 
 For AWGN, Rayleigh, and SSPA, diffusion models \(p(y\mid x)\) directly with \(v\)-prediction, cosine-ZF variance schedule, \(100\) diffusion steps, and EMA decay \(0.9\). Hidden widths are \(110\) (AWGN), \(128\) (Rayleigh), and \(110\) (SSPA). AWGN and Rayleigh use a two-stage learning-rate schedule (\(10\) epochs at \(10^{-3}\), then \(20\) epochs at \(10^{-4}\)), while SSPA uses a constant \(10^{-4}\) for \(160\) epochs. We report DDPM and DDIM with \(100\), \(50\), \(20\), and \(10\) denoising steps.
@@ -557,7 +558,6 @@ The Sinkhorn rows are therefore reported as a drift-field ablation under a match
 They are compared to diffusion and WGAN wherever the observable metric and channel protocol overlap.
 The downstream W-Flow table focuses on the learned drifting/Sinkhorn surrogates and the analytic-channel reference floor.
 The SER curves add WGAN and DDIM-100 when all corresponding channel implants are available.
-To keep the main interpretation narrow, target-kernel and joint-kernel rows are treated as supporting drift-field controls.
 The main ablation claim is the comparison between naive/global transport and the proposed condition-wise Sinkhorn transport.
 
 As an additional diagnostic, Table~\ref{tab:model-size} reports inference-network parameter counts used in this benchmark.
@@ -602,12 +602,10 @@ Residual-space SWD is kept as a parameterization diagnostic for residual-mode mo
 \subsection{Unified SWD benchmark across channels}
 Table~\ref{tab:wflow-swd-baselines} reports a unified direct-output SWD comparison across AWGN, Rayleigh, SSPA, and TDL.
 The reference rows summarize the diffusion and WGAN baselines.
-The drifting-family rows contain direct drifting and the proposed drift-field variants under a matched one-shot architecture.
-The kernel rows are included to diagnose the effect of conditioning features in the drift field.
-They are not used as separate headline methods.
+The drifting-family rows contain direct drifting and the two Sinkhorn drift fields under a matched one-shot architecture.
 The controlled conclusion from this table is the ranking inside the drifting-family block, while the diffusion and WGAN rows provide reference context from their own stable training protocols.
 DDIM-100 gives the lowest direct-space SWD on AWGN, Rayleigh, and SSPA among the matched reference rows.
-Among the W-Flow variants, condition-wise Sinkhorn is strongest under direct SWD on AWGN, Rayleigh, and TDL, and is numerically close to the best SSPA W-Flow rows under the compact update-budget run.
+Among the Sinkhorn variants, condition-wise Sinkhorn is strongest under direct SWD on AWGN, Rayleigh, and TDL, and is numerically close to direct drifting on SSPA under the compact update-budget run.
 Within the full drifting-family block, condition-wise Sinkhorn is lowest on AWGN, Rayleigh, and TDL, while direct drifting remains lowest on SSPA under this global metric.
 This already indicates that drift-field ranking depends on channel geometry.
 \input{wflow_swd_baseline_table.tex}
@@ -626,13 +624,13 @@ Inference timing uses batch size \(512\), \(40\) batches per repeat, two warmup 
 It includes drawing the conditioning inputs and evaluating the generator.
 For diffusion rows, inference includes the complete DDPM or DDIM denoising trajectory and the same conditioning overhead.
 The total column adds projected training time to the time needed to generate the evaluation-sample budget listed in Table~\ref{tab:simulation-setup}.
-On AWGN, Rayleigh, and SSPA, the condition-wise Sinkhorn row is faster to train than the global kernel rows because it solves many small same-condition transport problems instead of forming a global minibatch interaction matrix.
+On AWGN, Rayleigh, and SSPA, the condition-wise Sinkhorn row is faster to train than joint Sinkhorn because it solves many small same-condition transport problems instead of forming a global minibatch interaction matrix.
 
 \input{timing_table_cuda.tex}
 
 \subsection{Condition-wise drift-field interpretation}
 The W-Flow-inspired ablation isolates the drift-field design problem.
-The target-space kernel baseline, conditioning-aware joint kernel, naive joint Sinkhorn drift, and proposed condition-wise Sinkhorn drift all use the same one-shot generator architecture and differ only in how training particles are moved.
+Joint Sinkhorn drift and condition-wise Sinkhorn drift use the same one-shot generator architecture and differ only in how training particles are moved.
 The key comparison is therefore geometric.
 Joint Sinkhorn builds a transport field from \((x,y)\)-features, while condition-wise Sinkhorn solves separate output-space transport problems over fixed \(x\)-fibers.
 This distinction is visible in the mixed metric behavior.
@@ -667,7 +665,7 @@ The downstream symbolic results in Table~\ref{tab:wflow-ser-ber} use the learned
 The analytic row is therefore an analytic reference floor.
 We treat SER as the primary symbolic metric because the autoencoder message alphabet is finite.
 BER is retained in the table as an additional bit-level diagnostic.
-Within the W-Flow ablation table, condition-wise Sinkhorn is the most reliable drifting variant and fixes the SSPA failure mode once the update budget is matched to the sharp same-condition field.
+Within the Sinkhorn ablation table, condition-wise Sinkhorn is the more reliable drifting variant and fixes the SSPA failure mode once the update budget is matched to the sharp same-condition field.
 The per-channel SER curves in Fig.~\ref{fig:wflow-all-ser-curves} add WGAN and diffusion references to this downstream comparison.
 At the nominal training point, condition-wise Sinkhorn nearly reaches the analytic AWGN floor, while diffusion is the strongest learned baseline on Rayleigh, SSPA, and TDL.
 On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget screen gives condition-wise Sinkhorn SER \(8.13\times10^{-5}\) at \(E_b/N_0=8\,\mathrm{dB}\), compared with \(7.50\times10^{-5}\) for WGAN, \(3.13\times10^{-5}\) for diffusion, and \(1.57\times10^{-5}\) for analytic-channel training.
@@ -703,7 +701,7 @@ The main methodological lesson is that channel surrogates should be judged by co
 Direct and residual drifting behave differently across channel classes and evaluation spaces.
 Residual-space SWD is useful for checking a residual-mode generator and remains a secondary diagnostic for a channel simulator whose output is ultimately \(y\).
 The W-Flow run reinforces this metric-dependence message.
-Kernel target, joint kernel, joint Sinkhorn, and condition-wise Sinkhorn can swap order depending on whether the metric is global SWD, anchor-conditioned SWD, or downstream BER/SER\@.
+Joint Sinkhorn and condition-wise Sinkhorn can swap order depending on whether the metric is global SWD, anchor-conditioned SWD, or downstream BER/SER\@.
 We therefore report direct-output SWD, anchor-conditioned moment metrics, and downstream coding metrics side by side.
 Hyperparameter selection from a single global SWD score would miss these differences.
 
@@ -722,7 +720,7 @@ The population formulation identifies equality of \(p(\cdot\mid x)\) and \(q_\th
 The implemented method is a finite-sample barycentric approximation followed by projected detached-target neural training.
 
 Experiments on AWGN, Rayleigh, SSPA, and compact TDL channels show a clear accuracy-latency tradeoff.
-Within the matched drifting-family ablation, condition-wise Sinkhorn is the best-performing one-shot surrogate under the downstream symbolic-coding checks.
+Within the matched Sinkhorn drift-field ablation, condition-wise Sinkhorn is the best-performing one-shot surrogate under the downstream symbolic-coding checks.
 Diffusion remains the strongest learned reference on the hardest SER curves.
 This positions the contribution as a low-latency, condition-preserving surrogate for settings where repeated channel calls are expensive.
 The SSPA study also shows that optimizer budget is part of the drift-field design.

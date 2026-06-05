@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering
-\caption{\textbf{Direct-output SWD comparison for diffusion/WGAN references and drifting variants.} Lower is better. Reference rows report mean $\pm$ standard deviation from the diffusion/WGAN benchmark or from checkpoint-only direct-SWD evaluation. The drifting-family rows contain direct drifting from the same benchmark and the W-Flow drift-field ablation. W-Flow rows report the available-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean. Dashes mark unavailable matched generator-level SWD values.}
+\caption{\textbf{Direct-output SWD comparison for reference baselines and main drifting variants.} Lower is better. Reference rows report mean $\pm$ standard deviation from the diffusion/WGAN benchmark or from checkpoint-only direct-SWD evaluation. The drifting-family rows retain direct drifting and the two Sinkhorn transport fields used for the main ablation. W-Flow rows report the available-seed mean $\pm$ standard error. Bold marks the best drifting-family row per channel under the reported mean. Dashes mark unavailable matched generator-level SWD values.}
 \label{tab:wflow-swd-baselines}
 \tablestyle{5.8pt}{1.08}
 \footnotesize
@@ -15,8 +15,6 @@ Method & AWGN & Rayleigh & SSPA & TDL \\
 \midrule
 \rowcolor[gray]{0.9} \multicolumn{5}{l}{\textit{Drifting family}} \\
 \headspace Direct drifting & 0.0100 $\pm$ 0.0007 & 0.0085 $\pm$ 0.0012 & \textbf{0.0060 $\pm$ 0.0008} & -- \\
-\headspace Kernel target & 0.0106 $\pm$ 0.0001 & 0.0099 $\pm$ 0.0001 & 0.0070 $\pm$ 0.0001 & 0.0413 $\pm$ 0.0003 \\
-\headspace Kernel joint & 0.0290 $\pm$ 0.0004 & 0.0492 $\pm$ 0.0002 & 0.0074 $\pm$ 0.0001 & 0.0289 $\pm$ 0.0003 \\
 \headspace Joint Sinkhorn & 0.0148 $\pm$ 0.0002 & 0.0152 $\pm$ 0.0002 & 0.0117 $\pm$ 0.0002 & 0.0966 $\pm$ 0.0005 \\
 \headspace Condition-wise Sinkhorn & \textbf{0.0058 $\pm$ 0.0001} & \textbf{0.0073 $\pm$ 0.0001} & 0.0071 $\pm$ 0.0002 & \textbf{0.0118 $\pm$ 0.0002} \\
 \bottomrule

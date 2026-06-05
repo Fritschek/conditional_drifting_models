@@ -12,9 +12,7 @@ Method & \multicolumn{3}{c}{AWGN} & \multicolumn{3}{c}{Rayleigh} & \multicolumn{
  & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] & Train [h] & Inf. & Total [h] \\
 \midrule
 \rowcolor[gray]{0.9} \multicolumn{13}{l}{\textit{One-shot generators}} \\
-Drifting (res.) & 1.309 & 0.131 us & 1.310 & 1.300 & 0.123 us & 1.300 & 5.656 & 0.121 us & 5.656 & 0.013 & 0.124 us & 0.013 \\
 Drifting (dir.) & 1.299 & 0.114 us & 1.300 & 1.299 & 0.117 us & 1.300 & 5.656 & 0.118 us & 5.656 & 0.007 & 0.116 us & \textbf{0.007} \\
-Joint-kernel drift & 1.863 & 0.116 us & 1.864 & 1.864 & 0.116 us & 1.864 & 8.112 & 0.119 us & 8.112 & 0.008 & 0.115 us & 0.008 \\
 Joint Sinkhorn & 0.917 & 0.116 us & 0.918 & 0.919 & 0.115 us & 0.920 & 3.956 & 0.117 us & 3.956 & 0.010 & 0.116 us & 0.010 \\
 Condition-wise Sinkhorn & 0.048 & 0.115 us & \textbf{0.048} & 0.048 & 0.115 us & \textbf{0.049} & 0.296 & 0.117 us & \textbf{0.297} & 0.009 & 0.115 us & 0.009 \\
 WGAN & 0.064 & 0.108 us & 0.064 & 0.085 & 0.108 us & 0.086 & 0.478 & 0.107 us & 0.478 & 0.022 & 0.108 us & 0.022 \\

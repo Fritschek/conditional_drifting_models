@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  5 JUN 2026 14:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  5 JUN 2026 14:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -482,38 +482,39 @@ onts/enc/dvips/base/8r.enc}
 LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 191.
  [3] [4] [5] (./simulation_setup_table.tex)
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
-41.
+42.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) (./model_size_table.tex)
 [6] (./wflow_swd_baseline_table.tex) (./timing_table_cuda.tex) [7]
-<figures/conditional_fiber_diagnostic_sspa.pdf, id=243, 561.29652pt x 473.03369
+<figures/conditional_fiber_diagnostic_sspa.pdf, id=244, 561.29652pt x 473.03369
 pt>
 File: figures/conditional_fiber_diagnostic_sspa.pdf Graphic file (type pdf)
 <use figures/conditional_fiber_diagnostic_sspa.pdf>
 Package pdftex.def Info: figures/conditional_fiber_diagnostic_sspa.pdf  used on
- input line 648.
+ input line 646.
 (pdftex.def)             Requested size: 340.56189pt x 287.01271pt.
 
-(./wflow_conditional_metric_table.tex)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8]
-(./wflow_coding_table.tex) (./wflow_all_ser_curve_figures.tex
+(./wflow_conditional_metric_table.tex) [8] (./wflow_coding_table.tex)
+(./wflow_all_ser_curve_figures.tex
 <figures/wflow_all_ser_curves.pdf, id=262, 516.70102pt x 358.16179pt>
 File: figures/wflow_all_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_all_ser_curves.pdf>
 Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
 .
 (pdftex.def)             Requested size: 464.39685pt x 321.91087pt.
-) [9 <./figures/conditional_fiber_diagnostic_sspa.pdf>] (./equal_wallclock_symb
-olic_table.tex)
+)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10 <./figures/wflow_all_ser_curves.pdf>] [11] [12
 
-] (./drifting_vs_diffusion_summary.bbl) [13
+(./equal_wallclock_symbolic_table.tex) [9 <./figures/conditional_fiber_diagnost
+ic_sspa.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 <./figures/wflow_all_ser_curves.pdf>] [11] (./drifting_vs_diffusion_summar
+y.bbl)
+[12
 
 
 ] (./drifting_vs_diffusion_summary.aux)
@@ -526,13 +527,13 @@ hanged.
 (rerunfilecheck)             Checksum: EA320822FC69692C11AB5DAD206EEE9C;3865.
  ) 
 Here is how much of TeX's memory you used:
- 11566 strings out of 469515
- 178402 string characters out of 5470807
- 642154 words of memory out of 5000000
+ 11565 strings out of 469515
+ 178395 string characters out of 5470807
+ 637269 words of memory out of 5000000
  39939 multiletter control sequences out of 15000+600000
  680281 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,15n,83p,722b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,15n,83p,725b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -553,10 +554,10 @@ ts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
 ></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist
 /fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times
 /utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (13 pages, 517360 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (12 pages, 515983 bytes).
 PDF statistics:
- 585 PDF objects out of 1000 (max. 8388607)
- 368 compressed objects within 4 object streams
- 103 named destinations out of 1000 (max. 500000)
+ 579 PDF objects out of 1000 (max. 8388607)
+ 363 compressed objects within 4 object streams
+ 102 named destinations out of 1000 (max. 500000)
  179 words of extra memory for PDF output out of 10000 (max. 10000000)
 
