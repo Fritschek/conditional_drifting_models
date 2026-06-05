@@ -32,7 +32,7 @@ Diffusion remains strongest on the hardest downstream symbol-error-rate (SER) cu
 \end{abstract}
 
 \begin{IEEEkeywords}
-learned channel models, conditional generative modeling, diffusion models, drifting models, optimal transport, Sinkhorn divergence, Wasserstein gradient flows, inference latency
+learned channel simulation, conditional generative models, Sinkhorn divergence, diffusion models, inference latency
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -83,7 +83,7 @@ The main contributions are summarized as follows.
 \item We connect this objective to a conditional Wasserstein-flow velocity, then state how the practical method differs from the population flow through finite-sample barycentric estimation and projected detached-target neural training.
 \item We implement conditional drifting in direct-output and residual parameterizations. Target-kernel and joint-kernel rows serve as diagnostic controls, while the central geometric comparison is joint/global Sinkhorn versus condition-wise Sinkhorn under a matched one-shot generator.
 \item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional WGAN reference models on AWGN, Rayleigh fading, SSPA, and compact TDL channel studies wherever the protocols overlap.
-\item We evaluate channel surrogates with direct SWD, anchor-conditioned moment metrics, downstream SER, bit error rate (BER), block error rate (BLER), and timing measurements, showing that communication usefulness is better reflected by conditional and downstream metrics than by global SWD alone.
+\item We evaluate channel surrogates with direct SWD, anchor-conditioned moment metrics, downstream SER, bit error rate (BER), and timing measurements, showing that communication usefulness is better reflected by conditional and downstream metrics than by global SWD alone.
 \end{itemize}
 Source code will be made available through the first author's GitHub repository upon publication\footnote{\url{https://github.com/Fritschek/conditional_drifting_models}.}.
 
@@ -160,11 +160,6 @@ T^{\varepsilon}_{q,q}(u),
 where \(T^{\varepsilon}_{q,p}\) maps a generated sample to the barycenter of target samples under the entropic optimal-transport coupling, and \(T^{\varepsilon}_{q,q}\) is the generated self-transport projection.
 This has the same attraction--repulsion structure as the practical drifting rule.
 The weights come from a globally mass-constrained coupling that replaces independently row-normalized kernels.
-
-Fig.~\ref{fig:toy} gives a toy particle simulation in the spirit of the particle-based demonstrations used in \cite{drifting}.
-For two fixed channel inputs, we initialize mismatched conditional residual particle clouds and then evolve them under the same attraction--repulsion drift rule used in our channel benchmark.
-The figure illustrates the drift dynamics in a controlled setting and serves as a toy analogue of the full learned generator.
-To show that the same idea can train an explicit parameterized generator, Fig.~\ref{fig:toymlp} uses a tiny conditional MLP trained with the drifting objective on the same toy target.
 
 \subsection{Conditional channel simulation}
 We now specialize the generic drifting view to learned conditional channel simulation.
@@ -437,20 +432,6 @@ Once training is complete, sampling requires only a single evaluation of \(g_\th
 In residual mode, this produces a channel residual sample \(\hat e\) followed by reconstruction \(\hat y=x+\hat e\). In direct mode, it produces \(\hat y\) directly.
 Sampling avoids reverse chains, ODE solvers, and per-sample iterative schedules at inference.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.7\textwidth]{figures/drifting_conditional_toy_figure_mpl.pdf}
-\caption{Toy conditional particle simulation in residual space. Two different channel inputs induce two different target residual distributions. Starting from mismatched generated particle clouds, the middle panel applies one attraction--repulsion drift update of the form \(\tilde e=\mathrm{stopgrad}(\hat e+\eta V(\hat e))\), and the last panel shows the particle clouds after repeated updates. The figure is an actual toy simulation of the drift field.}
-\label{fig:toy}
-\end{figure*}
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.7\textwidth]{figures/drifting_tiny_mlp_demo_mpl.pdf}
-\caption{Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples. The middle panel shows samples from a randomly initialized tiny conditional MLP \(g_\theta(x,z)\). The right panel shows the same MLP after training with the drift objective, where the generated samples move close to the correct condition-dependent residual clouds.}
-\label{fig:toymlp}
-\end{figure*}
-
 \section{Experimental Setup}
 \subsection{Channel models}
 We use four stochastic channel families.
@@ -611,7 +592,7 @@ Those depend on the joint structure of \((x,y)\).
 For communication use, two generators with similar global sample-cloud discrepancy can induce different conditional means, conditional covariance errors, and downstream symbol-error rates.
 The Sinkhorn drift-field study therefore also includes anchor-conditioned moment metrics and symbolic channel-implant SER/BER checks when evaluating the proposed drifting variants.
 We interpret the metrics in the following order.
-Downstream SER, BER, and block error rate (BLER) under analytic-channel evaluation are the closest checks of communication usefulness.
+Downstream SER and BER under analytic-channel evaluation are the closest checks of communication usefulness.
 Anchor-conditioned metrics are the next diagnostic because they probe repeated outputs at fixed transmitted symbols.
 Global direct-output SWD is mainly a generator-level comparability metric.
 Residual-space SWD is kept as a parameterization diagnostic for residual-mode models.
@@ -687,7 +668,7 @@ The analytic row is therefore an analytic reference floor.
 We treat SER as the primary symbolic metric because the autoencoder message alphabet is finite.
 BER is retained in the table as an additional bit-level diagnostic.
 Within the W-Flow ablation table, condition-wise Sinkhorn is the most reliable drifting variant and fixes the SSPA failure mode once the update budget is matched to the sharp same-condition field.
-The per-channel SER curves in Figs.~\ref{fig:wflow-awgn-ser-curves}--\ref{fig:wflow-tdl-ser-curves} add WGAN and diffusion references to this downstream comparison.
+The per-channel SER curves in Fig.~\ref{fig:wflow-all-ser-curves} add WGAN and diffusion references to this downstream comparison.
 At the nominal training point, condition-wise Sinkhorn nearly reaches the analytic AWGN floor, while diffusion is the strongest learned baseline on Rayleigh, SSPA, and TDL.
 On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget screen gives condition-wise Sinkhorn SER \(8.13\times10^{-5}\) at \(E_b/N_0=8\,\mathrm{dB}\), compared with \(7.50\times10^{-5}\) for WGAN, \(3.13\times10^{-5}\) for diffusion, and \(1.57\times10^{-5}\) for analytic-channel training.
 
@@ -701,18 +682,16 @@ It shows the intended operating-point distinction: DDIM-100 can remain strong on
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/wflow_metric_latency_diagnostics.pdf}
+\includegraphics[width=0.90\textwidth]{figures/wflow_metric_latency_diagnostics.pdf}
 \caption{\textbf{Metric mismatch and accuracy-latency diagnostics.} Panel (a) compares direct-output SWD with downstream symbolic SER for W-Flow ablations. The plotted points use the same aggregate sources as Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Panel (b) compares learned channel implants by inference latency and equal-wall-clock symbolic SER from Table~\ref{tab:equal-wallclock-symbolic}. Colors denote channels and marker shapes denote methods.}
 \label{fig:metric-latency-diagnostics}
 \end{figure*}
 
 For SSPA, we follow the diffusion-channel setup of \cite{paper2309} more closely and use message alphabet \(M_{\mathrm{msg}}=64\), \(n=8\), rate \(6/8\), and training at \(E_b/N_0=8\,\mathrm{dB}\).
 The 30-seed SSPA screen in Table~\ref{tab:wflow-ser-ber} shows that the corrected condition-wise Sinkhorn implementation is reliable once the W-Flow update budget is matched to the observed convergence of the sharp same-condition field.
-Figs.~\ref{fig:wflow-awgn-ser-curves}--\ref{fig:wflow-tdl-ser-curves} report SER over an \(E_b/N_0\) grid for AWGN, Rayleigh, SSPA, and TDL, which also shows where diffusion retains an advantage over one-shot drifting in downstream coding performance.
+Fig.~\ref{fig:wflow-all-ser-curves} reports SER over an \(E_b/N_0\) grid for AWGN, Rayleigh, SSPA, and TDL, which also shows where diffusion retains an advantage over one-shot drifting in downstream coding performance.
 
 \input{wflow_all_ser_curve_figures.tex}
-
-\input{wflow_curve_figures.tex}
 
 \subsection{Equal wall-clock channel-implant training}
 The previous downstream tables compare final trained channel implants.
