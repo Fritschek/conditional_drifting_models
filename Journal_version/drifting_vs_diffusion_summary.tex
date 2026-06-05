@@ -1,4 +1,4 @@
-\documentclass[journal]{IEEEtran}
+\documentclass[10pt,journal]{IEEEtran}
 \usepackage{cite}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
@@ -671,6 +671,7 @@ Within the W-Flow ablation table, condition-wise Sinkhorn is the most reliable d
 The per-channel SER curves in Fig.~\ref{fig:wflow-all-ser-curves} add WGAN and diffusion references to this downstream comparison.
 At the nominal training point, condition-wise Sinkhorn nearly reaches the analytic AWGN floor, while diffusion is the strongest learned baseline on Rayleigh, SSPA, and TDL.
 On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget screen gives condition-wise Sinkhorn SER \(8.13\times10^{-5}\) at \(E_b/N_0=8\,\mathrm{dB}\), compared with \(7.50\times10^{-5}\) for WGAN, \(3.13\times10^{-5}\) for diffusion, and \(1.57\times10^{-5}\) for analytic-channel training.
+As a longer-block robustness check, the same AWGN transfer behavior is observed with a CNN TurboAE-style encoder--decoder at block length \(n=64\), rate \(1/2\), and final analytic-channel evaluation.
 
 \input{wflow_coding_table.tex}
 
