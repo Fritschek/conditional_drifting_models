@@ -671,6 +671,16 @@ Figs.~\ref{fig:wflow-awgn-ser-curves}--\ref{fig:wflow-tdl-ser-curves} report SER
 
 \input{wflow_curve_figures.tex}
 
+\subsection{Equal wall-clock channel-implant training}
+The previous downstream tables compare final trained channel implants.
+Table~\ref{tab:equal-wallclock-symbolic} instead fixes the symbolic autoencoder training time to \(1800\,\mathrm{s}\) per implant and records how many optimizer updates fit inside that budget.
+This directly measures the inner-loop setting that motivates one-shot channel surrogates.
+DDIM-100 provides a strong learned reference in final-performance comparisons, but its iterative sampler reduces the number of autoencoder updates by roughly one to two orders of magnitude relative to the one-shot implants.
+Under this equal wall-clock budget, condition-wise Sinkhorn is the best learned implant on AWGN and SSPA, DDIM-100 is best on Rayleigh, and WGAN is best on compact TDL.
+The result supports a limited claim: condition-wise Sinkhorn does not dominate diffusion or WGAN in every channel, but it reaches a competitive downstream operating point while retaining one-shot channel calls.
+
+\input{equal_wallclock_symbolic_table.tex}
+
 \section{Discussion}
 \subsection{Accuracy-latency operating point}
 Condition-wise Sinkhorn drifting targets a low-latency conditional-surrogate operating point.
