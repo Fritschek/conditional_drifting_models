@@ -679,6 +679,19 @@ Fig.~\ref{fig:wflow-all-ser-curves} reports SER over an \(E_b/N_0\) grid for AWG
 
 \input{wflow_all_ser_curve_figures.tex}
 
+The SER curves can also be summarized as an accuracy-latency operating point.
+Fig.~\ref{fig:snr-latency-tradeoff} converts each curve into the additional \(E_b/N_0\) needed to reach a channel-specific target SER relative to analytic-channel training, using the inference timings from Table~\ref{tab:timing-cuda}.
+This avoids comparing raw SER values across channels with different operating ranges.
+Condition-wise Sinkhorn has essentially no AWGN SNR penalty at one-shot latency, while DDIM-100 gives the lowest penalty on Rayleigh and SSPA at much higher inference cost.
+On compact TDL, all learned surrogates remain separated from the analytic reference by roughly \(1.5\)--\(1.7\,\mathrm{dB}\) at the plotted target.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.94\textwidth]{figures/wflow_snr_latency_tradeoff.pdf}
+\caption{\textbf{SNR penalty versus inference latency.} Each point reports the additional \(E_b/N_0\) required to reach the target SER shown in the panel title, relative to analytic-channel training on the same channel. Penalties are interpolated seed-wise from the SER curves in Fig.~\ref{fig:wflow-all-ser-curves} and shown as mean \(\pm\) standard error. Latency is the local CUDA inference time per generated channel sample from Table~\ref{tab:timing-cuda}. Lower left is better.}
+\label{fig:snr-latency-tradeoff}
+\end{figure*}
+
 \subsection{Equal wall-clock channel-implant training}
 The previous downstream tables compare final trained channel implants.
 Table~\ref{tab:equal-wallclock-symbolic} instead fixes the symbolic autoencoder training time to \(1800\,\mathrm{s}\) per implant and records how many optimizer updates fit inside that budget.

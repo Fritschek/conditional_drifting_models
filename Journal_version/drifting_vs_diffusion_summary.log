@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  5 JUN 2026 14:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  5 JUN 2026 14:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -507,14 +507,20 @@ Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+<figures/wflow_snr_latency_tradeoff.pdf, id=265, 508.64217pt x 319.4302pt>
+File: figures/wflow_snr_latency_tradeoff.pdf Graphic file (type pdf)
+<use figures/wflow_snr_latency_tradeoff.pdf>
+Package pdftex.def Info: figures/wflow_snr_latency_tradeoff.pdf  used on input 
+line 690.
+(pdftex.def)             Requested size: 485.04126pt x 304.617pt.
 
-(./equal_wallclock_symbolic_table.tex) [9 <./figures/conditional_fiber_diagnost
-ic_sspa.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+(./equal_wallclock_symbolic_table.tex [9 <./figures/conditional_fiber_diagnosti
+c_sspa.pdf>]) [10 <./figures/wflow_all_ser_curves.pdf>]
+Underfull \vbox (badness 3872) has occurred while \output is active []
 
- [10 <./figures/wflow_all_ser_curves.pdf>] [11] (./drifting_vs_diffusion_summar
-y.bbl)
-[12
+ [11 <./figures/wflow_snr_latency_tradeoff.pdf>] [12
+
+] (./drifting_vs_diffusion_summary.bbl) [13
 
 
 ] (./drifting_vs_diffusion_summary.aux)
@@ -527,13 +533,13 @@ hanged.
 (rerunfilecheck)             Checksum: EA320822FC69692C11AB5DAD206EEE9C;3865.
  ) 
 Here is how much of TeX's memory you used:
- 11565 strings out of 469515
- 178395 string characters out of 5470807
- 637269 words of memory out of 5000000
- 39939 multiletter control sequences out of 15000+600000
+ 11575 strings out of 469515
+ 178774 string characters out of 5470807
+ 637747 words of memory out of 5000000
+ 39947 multiletter control sequences out of 15000+600000
  680281 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,15n,83p,725b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,15n,83p,725b,477s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -554,10 +560,10 @@ ts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
 ></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist
 /fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times
 /utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (12 pages, 515983 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (13 pages, 538035 bytes).
 PDF statistics:
- 579 PDF objects out of 1000 (max. 8388607)
- 363 compressed objects within 4 object streams
- 102 named destinations out of 1000 (max. 500000)
- 179 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 656 PDF objects out of 1000 (max. 8388607)
+ 382 compressed objects within 4 object streams
+ 104 named destinations out of 1000 (max. 500000)
+ 184 words of extra memory for PDF output out of 10000 (max. 10000000)
 
