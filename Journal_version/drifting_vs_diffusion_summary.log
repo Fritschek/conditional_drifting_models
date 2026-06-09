@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  9 JUN 2026 15:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  9 JUN 2026 16:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -505,21 +505,20 @@ Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
 .
 (pdftex.def)             Requested size: 464.39685pt x 321.91087pt.
 )
-(./wflow_curve_figures.tex
-<figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf, id=278, 584.84152pt x 232.
-36398pt>
-File: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf Graphic file (type pdf
-)
-<use figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf>
-Package pdftex.def Info: figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf  us
-ed on input line 14.
-(pdftex.def)             Requested size: 252.0pt x 100.12375pt.
-) (./equal_wallclock_symbolic_table.tex) [9] [10 <./figures/conditional_fiber_d
-iagnostic_sspa.pdf>]
+(./equal_wallclock_symbolic_table.tex) (./wflow_curve_figures.tex
+<figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf, id=279, 255.39648pt
+ x 319.48222pt>
+File: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf Graphic file (t
+ype pdf)
+<use figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf>
+Package pdftex.def Info: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.
+pdf  used on input line 14.
+(pdftex.def)             Requested size: 211.67908pt x 264.79967pt.
+) [9] [10 <./figures/conditional_fiber_diagnostic_sspa.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [11 <./figures/wflow_all_ser_curves.pdf>] [12 <./figures/turboae_awgn_l64_ber_
-bler_curve_eval2k.pdf>] (./drifting_vs_diffusion_summary.bbl) [13
+bler_curve_eval2k_column.pdf>] (./drifting_vs_diffusion_summary.bbl) [13
 
 
 ]
@@ -530,12 +529,12 @@ L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `drifting_vs_diffusion_summary.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: A3527CD021A5CE5D3F31725344312DA7;4077.
+(rerunfilecheck)             Checksum: 4508E543EEE409EB092DB08E7869B73B;4077.
  ) 
 Here is how much of TeX's memory you used:
  11611 strings out of 469515
- 179528 string characters out of 5470807
- 648919 words of memory out of 5000000
+ 179577 string characters out of 5470807
+ 648781 words of memory out of 5000000
  39968 multiletter control sequences out of 15000+600000
  681829 words of font info for 146 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -563,9 +562,9 @@ fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times
 /utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/shar
 e/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type
 1/urw/times/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (13 pages, 570782 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (13 pages, 573151 bytes).
 PDF statistics:
- 675 PDF objects out of 1000 (max. 8388607)
+ 642 PDF objects out of 1000 (max. 8388607)
  400 compressed objects within 4 object streams
  108 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)

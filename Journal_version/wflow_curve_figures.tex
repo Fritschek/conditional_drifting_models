@@ -9,9 +9,9 @@ At the \(4\,\mathrm{dB}\) training point, analytic-channel training gives BER \(
 Training through the condition-wise Sinkhorn surrogate gives BER \(3.30\times 10^{-3}\) with 95\% CI \(4.30\times 10^{-4}\) and BLER \(1.39\times 10^{-1}\) with 95\% CI \(1.91\times 10^{-2}\).
 The long-block result therefore preserves the waterfall trend and shows successful surrogate-trained TurboAE optimization, with a measurable gap to analytic-channel training.
 
-\begin{figure}[!b]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\columnwidth]{figures/turboae_awgn_l64_ber_bler_curve_eval2k.pdf}
-\caption{\textbf{Long-block TurboAE AWGN check.} CNN TurboAE models are trained at block length \(64\), rate \(1/2\), and \(E_b/N_0=4\,\mathrm{dB}\), either through the analytic AWGN channel or through the condition-wise Sinkhorn AWGN surrogate. Curves are evaluated on the analytic AWGN channel over \(30\) seeds using \(2000\) evaluation blocks per seed and \(E_b/N_0\) point. The surrogate preserves the qualitative waterfall trend and remains above the analytic-channel training curve.}
+\includegraphics[width=0.84\columnwidth]{figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf}
+\caption{\textbf{Long-block TurboAE AWGN check.} CNN TurboAE models at block length \(64\), rate \(1/2\), are trained through either analytic AWGN or the condition-wise Sinkhorn AWGN surrogate and evaluated on analytic AWGN over \(30\) seeds. The surrogate preserves the waterfall trend with a measurable gap to analytic-channel training.}
 \label{fig:turboae-long-block-curve}
 \end{figure}

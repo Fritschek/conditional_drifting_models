@@ -275,7 +275,7 @@ The generator architecture is unchanged.
 
 This kernel rule is the conditioning-aware baseline used for the direct-output drifting variants.
 It is computationally simple.
-It also leaves the most important design choice--the minibatch coupling used to build \(V\)--as a channel-specific heuristic.
+Its main open design choice is the minibatch coupling used to build \(V\), which remains channel-specific.
 We therefore also study Sinkhorn-based drift fields that replace the row-normalized kernel interaction with the velocity in \eqref{eq:wflow_velocity}, while preserving the same detached-target training loop and the same one-shot inference path.
 
 \subsection{Condition-wise Sinkhorn drifting}
@@ -429,7 +429,7 @@ Equivalently, a generated local reference law
 can be used when the learned generator should match the same local conditioning bandwidth as the measured target estimate.
 The bandwidth \(h\) controls the usual bias--variance tradeoff: small neighborhoods preserve conditioning but increase estimator variance, while large neighborhoods reduce variance but approach a global transport problem.
 The experiments in this paper use simulator access and therefore the exact repeated-condition estimator.
-The local formulation is the intended measured-data extension and preserves the main constraint that couplings should move output samples locally in \(y\), not transport the condition variable itself.
+The local formulation is the intended measured-data extension and preserves the main constraint that couplings should move output samples locally in \(y\), while keeping the condition variable fixed.
 
 The major operational advantage is straightforward.
 Once training is complete, sampling requires only a single evaluation of \(g_\theta(x,z)\).
@@ -654,8 +654,8 @@ Condition-wise Sinkhorn is the strongest W-Flow row under direct SWD on AWGN, Ra
 Fig.~\ref{fig:conditional-fiber-diagnostic} shows the corresponding fixed-condition diagnostic for SSPA.
 For three transmitted-symbol anchors, the joint Sinkhorn field misses both the conditional mean and the local spread of the analytic output fiber.
 Condition-wise Sinkhorn keeps the generated cloud close to the analytic same-\(x\) cloud.
-The downstream checks below are the decisive test for this channel-simulator setting.
-They show why global SWD should be treated as a comparability diagnostic and supplemented by conditional or downstream metrics for model selection.
+In this channel-simulator setting, the downstream checks below are the more relevant test.
+Accordingly, global SWD is treated as a comparability diagnostic and supplemented by conditional or downstream metrics for model selection.
 
 \begin{figure*}[t]
 \centering
@@ -678,7 +678,7 @@ This indicates that condition-wise transport is useful and that its optimizer bu
 \input{wflow_conditional_metric_table.tex}
 
 Table~\ref{tab:sspa-budget-sensitivity} makes the SSPA budget selection explicit.
-The compact condition-wise Sinkhorn row is not a single selected seed; it is the 30-seed row used in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}.
+The compact condition-wise Sinkhorn result is aggregated over the same 30 seeds used in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}.
 The first two rows are single-seed local sanity checks of undertraining and are not used for the final performance claims.
 The long full-preset row is included as a failure mode of the same corrected field.
 With fixed drift scale and only \(K_g=K_p=K_r=4\) particles per anchor, the sharp same-condition field is a poor long-horizon optimizer unless stopped by conditional diagnostics.
@@ -687,7 +687,7 @@ It improves neither conditional diagnostics nor downstream SER, so the compact r
 \input{wflow_sspa_budget_table.tex}
 
 The downstream symbolic results in Table~\ref{tab:wflow-ser-ber} use the learned channel surrogate for autoencoder training and the analytic channel for final evaluation.
-The analytic row is therefore a separate analytic-channel training reference, not a formal lower bound for every finite training run.
+The analytic row gives a separate analytic-channel training reference; finite seeded training can still produce small deviations from an ideal lower-bound interpretation.
 We treat SER as the primary symbolic metric because the autoencoder message alphabet is finite.
 BER is retained in the table as an additional bit-level diagnostic.
 Within the Sinkhorn ablation table, condition-wise Sinkhorn is the more reliable drifting variant and fixes the SSPA failure mode once the update budget is matched to the sharp same-condition field.
@@ -704,17 +704,17 @@ Fig.~\ref{fig:wflow-all-ser-curves} reports SER over an \(E_b/N_0\) grid for AWG
 
 \input{wflow_all_ser_curve_figures.tex}
 
-\input{wflow_curve_figures.tex}
-
 \subsection{Equal wall-clock channel-implant training}
 The previous downstream tables compare final trained channel implants.
 Table~\ref{tab:equal-wallclock-symbolic} instead fixes the symbolic autoencoder training time to \(1800\,\mathrm{s}\) per implant and records how many optimizer updates fit inside that budget.
 This directly measures the inner-loop setting that motivates one-shot channel surrogates.
 DDIM-100 provides a strong learned reference in final-performance comparisons, but its iterative sampler reduces the number of autoencoder updates by roughly one to two orders of magnitude relative to the one-shot implants.
 Under this equal wall-clock budget, condition-wise Sinkhorn gives the lowest learned-implant SER on AWGN and SSPA, DDIM-100 is lowest on Rayleigh, and WGAN is lowest on compact TDL.
-The result supports a limited claim: condition-wise Sinkhorn reaches a competitive downstream operating point while retaining one-shot channel calls, although diffusion or WGAN can remain stronger on individual channels.
+Condition-wise Sinkhorn reaches a competitive downstream operating point while retaining one-shot channel calls, although diffusion or WGAN can remain stronger on individual channels.
 
 \input{equal_wallclock_symbolic_table.tex}
+
+\input{wflow_curve_figures.tex}
 
 \section{Discussion}
 \subsection{Accuracy-latency operating point}
