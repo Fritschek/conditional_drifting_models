@@ -480,15 +480,24 @@ Let
 r = \sqrt{x_I^2 + x_Q^2}
 \end{equation}
 denote the input amplitude.
-The nonlinear gain factor used in the benchmark is
+The multiplicative gain factor used in the benchmark is
 \begin{equation}
-a(r)
+a_{\mathrm{SSPA}}(r)
 =
 \frac{G}{\left(1+\left(\frac{Gr}{A_0}\right)^{2p}\right)^{1/(2p)}},
 \end{equation}
 with default parameters \(p=3\), \(A_0=1.5\), and \(G=5.0\).
-Thus the output amplitude is \(a(r)r\), matching the Rapp-style AM/AM law \(Gr/(1+(Gr/A_0)^{2p})^{1/(2p)}\).
-The noiseless amplifier output is $\tilde{x} = a(r)\,x,$
+Here \(a_{\mathrm{SSPA}}(r)\) is a gain, not the output amplitude.
+The corresponding output amplitude is
+\begin{equation}
+A_{\mathrm{out}}(r)
+=
+a_{\mathrm{SSPA}}(r)r
+=
+\frac{Gr}{\left(1+\left(\frac{Gr}{A_0}\right)^{2p}\right)^{1/(2p)}},
+\end{equation}
+which is the Rapp-style AM/AM law used in the benchmark.
+The noiseless amplifier output is $\tilde{x} = a_{\mathrm{SSPA}}(r)\,x,$
 and the observed channel output is
 \begin{equation}
 y = \tilde{x} + n,
@@ -539,7 +548,7 @@ For the direct-output SWD table, TDL W-Flow rows come from the drift-field ablat
 Table~\ref{tab:simulation-setup} collects the channel dimensions, message alphabets, training points, and generator-evaluation budgets.
 The noise standard deviations induced by these \((E_b/N_0,R)\) pairs are \(0.5260\), \(0.2350\), \(0.3251\), and \(0.3162\) for AWGN, Rayleigh, SSPA, and TDL.
 The SSPA condition-wise Sinkhorn row uses the compact update-budget screen because the corrected same-condition field had already converged at this budget.
-In our SSPA budget sweep, continuing to the full \(10^7\)-sample preset worsened the same-condition diagnostics for this sharper field.
+Table~\ref{tab:sspa-budget-sensitivity} reports the corresponding SSPA budget sensitivity: early budgets remain undertrained, the compact row is close to the analytic anchor floors, and the full \(10^7\)-sample preset worsens both anchor diagnostics and downstream SER for this sharper field.
 Downstream symbolic autoencoders are trained through either the analytic channel or a learned channel implant and are always evaluated on the analytic channel.
 Within each channel, the autoencoder architecture, optimizer schedule, message alphabet, rate, training \(E_b/N_0\), and epoch budget are fixed; only the channel implant used during training changes.
 Reported downstream uncertainty is taken over the complete seeded training and evaluation pipeline.
@@ -667,6 +676,13 @@ This indicates that condition-wise transport is useful and that its optimizer bu
 
 \input{wflow_conditional_metric_table.tex}
 
+Table~\ref{tab:sspa-budget-sensitivity} makes the SSPA budget selection explicit.
+The compact condition-wise Sinkhorn row is not a single selected seed; it is the 30-seed row used in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}.
+The long full-preset row is included as a failure mode of the same corrected field.
+It improves neither conditional diagnostics nor downstream SER, so the compact row is the reported SSPA operating point.
+
+\input{wflow_sspa_budget_table.tex}
+
 The downstream symbolic results in Table~\ref{tab:wflow-ser-ber} use the learned channel surrogate for autoencoder training and the analytic channel for final evaluation.
 The analytic row is therefore a separate analytic-channel training reference, not a formal lower bound for every finite training run.
 We treat SER as the primary symbolic metric because the autoencoder message alphabet is finite.
@@ -719,6 +735,7 @@ Measured channels are harder.
 With only one observation per \(x\), the exact conditional law \(p(\cdot\mid x)\) cannot be observed at a point.
 For that regime, the local conditional Sinkhorn approximation in Sec.~II estimates the target fiber from kernel-weighted neighborhoods in condition space and still solves the transport problem only in the output coordinate.
 This keeps the fixed-input geometry intact, but introduces bandwidth selection and neighborhood bias.
+This measured-data extension is not evaluated in the present experiments and should be regarded as future work rather than a validated measured-channel solution.
 Practical measured-channel simulators may also need transport features that encode phase, amplitude, residual structure, channel-state information, or decoder-relevant projections.
 
 \section{Conclusion}
