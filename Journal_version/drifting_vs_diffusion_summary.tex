@@ -52,7 +52,7 @@ This improvement comes with a practical system cost.
 Inference requires an iterative reverse denoising procedure, and the latency scales with the number of diffusion steps.
 This tradeoff is manageable when the channel generator is called occasionally.
 It becomes more problematic when the generator is embedded in inner loops of iterative training or repeated Monte Carlo evaluations.
-This latency bottleneck has motivated several acceleration strategies for diffusion, including skipped or reduced-step sampling as in denoising diffusion implicit modeling (DDIM), as well as one-step or few-step alternatives such as consistency models and distillation-based approaches that compress multi-step samplers into substantially shorter generation paths \cite{ddim,song2023consistency,yin2024onestep}.
+This latency bottleneck has motivated several acceleration strategies for denoising diffusion probabilistic modeling \cite{ddpm}, including skipped or reduced-step sampling as in denoising diffusion implicit modeling (DDIM), as well as one-step or few-step alternatives such as consistency models and distillation-based approaches that compress multi-step samplers into substantially shorter generation paths \cite{ddim,song2023consistency,yin2024onestep}.
 This motivates the study of one-shot conditional generators for learned channel simulation.
 Among recently proposed generative paradigms, drifting models \cite{drifting} are particularly interesting because they learn the transport from a simple latent source to the target data distribution directly in the network parameters.
 Intuitively, diffusion spends computation at test time by progressively transforming noise into data through a reverse-time chain.

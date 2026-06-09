@@ -28,12 +28,13 @@ M.~Kim, R.~Fritschek, and R.~F. Schaefer, ``Diffusion models for accurate
 
 \bibitem{kimicc2024}
 ------, ``Robust generation of channel distributions with diffusion models,''
-  in \emph{IEEE International Conference on Communications (ICC)}, 2024.
+  in \emph{ICC 2024 -- IEEE International Conference on Communications}, 2024,
+  pp. 330--335.
 
 \bibitem{lee2024highdimchannels}
 T.~Lee, J.~Park, H.~Kim, and J.~G. Andrews, ``Generating high dimensional
-  user-specific wireless channels using diffusion models,'' \emph{arXiv
-  preprint arXiv:2409.03924}, 2024.
+  user-specific wireless channels using diffusion models,'' \emph{IEEE
+  Transactions on Wireless Communications}, vol.~25, pp. 2907--2921, 2026.
 
 \bibitem{gong2025dtoc}
 X.~Gong, X.~Liu, A.~A. Lu, X.~Gao, X.~G. Xia, C.-X. Wang, and X.~You, ``Digital
@@ -60,13 +61,18 @@ Z.~Chen, H.~Shin, and A.~Nallanathan, ``Generative diffusion model-based
 \bibitem{zilberstein2024joint}
 N.~Zilberstein, A.~Swami, and S.~Segarra, ``Joint channel estimation and data
   detection in massive {MIMO} systems based on diffusion models,'' in
-  \emph{IEEE International Conference on Acoustics, Speech and Signal
-  Processing (ICASSP)}, 2024.
+  \emph{ICASSP 2024 -- IEEE International Conference on Acoustics, Speech and
+  Signal Processing}, 2024, pp. 13\,291--13\,295.
 
 \bibitem{liu2025mimoofdm}
 H.~Fu, W.~Si, and R.~Liu, ``Conditional denoising diffusion-based channel
   estimation for fast time-varying {MIMO-OFDM} systems,'' \emph{Digital Signal
   Processing}, vol. 164, p. 105283, 2025.
+
+\bibitem{ddpm}
+J.~Ho, A.~Jain, and P.~Abbeel, ``Denoising diffusion probabilistic models,'' in
+  \emph{Advances in Neural Information Processing Systems}, vol.~33, 2020, pp.
+  6840--6851.
 
 \bibitem{ddim}
 J.~Song, C.~Meng, and S.~Ermon, ``Denoising diffusion implicit models,'' in
@@ -84,20 +90,21 @@ Y.~Song, P.~Dhariwal, M.~Chen, and I.~Sutskever, ``Consistency models,'' in
 \bibitem{yin2024onestep}
 T.~Yin, M.~Gharbi, R.~Zhang, E.~Shechtman, F.~Durand, W.~T. Freeman, and
   T.~Park, ``One-step diffusion with distribution matching distillation,'' in
-  \emph{CVPR}, 2024.
+  \emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, Jun. 2024, pp. 6613--6623.
 
 \bibitem{drifting}
 M.~Deng, H.~Li, T.~Li, Y.~Du, and K.~He, ``Generative modeling via drifting,''
   \emph{arXiv preprint arXiv:2602.04770}, 2026.
 
 \bibitem{geometryofnoise}
-S.~Sahraee-Ardakan, M.~Delbracio, and P.~Milanfar, ``The geometry of noise: Why
+M.~Sahraee-Ardakan, M.~Delbracio, and P.~Milanfar, ``The geometry of noise: Why
   diffusion models don't need noise conditioning,'' \emph{arXiv preprint
   arXiv:2602.18428}, 2026.
 
 \bibitem{han2026wflow}
 J.~Han, P.~Li, Q.~Guo, R.~Xu, S.~Ermon, and E.~J. Cand{\`e}s, ``One-step
-  generative modeling via wasserstein gradient flows,'' \emph{arXiv preprint
+  generative modeling via {Wasserstein} gradient flows,'' \emph{arXiv preprint
   arXiv:2605.11755}, 2026.
 
 \bibitem{cuturi2013sinkhorn}
@@ -109,7 +116,7 @@ M.~Cuturi, ``Sinkhorn distances: Lightspeed computation of optimal transport,''
 \BIBentryALTinterwordspacing
 J.~Feydy, T.~S{\'e}journ{\'e}, F.-X. Vialard, S.-i. Amari, A.~Trouv{\'e}, and
   G.~Peyr{\'e}, ``Interpolating between optimal transport and {MMD} using
-  sinkhorn divergences,'' in \emph{Proceedings of the Twenty-Second
+  {Sinkhorn} divergences,'' in \emph{Proceedings of the Twenty-Second
   International Conference on Artificial Intelligence and Statistics}, ser.
   Proceedings of Machine Learning Research, vol.~89.\hskip 1em plus 0.5em minus
   0.4em\relax PMLR, 2019, pp. 2681--2690. [Online]. Available:
