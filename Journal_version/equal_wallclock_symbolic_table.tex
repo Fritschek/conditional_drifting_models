@@ -4,33 +4,31 @@
 \label{tab:equal-wallclock-symbolic}
 \tablestyle{3pt}{1.02}
 \tablefontsize
-\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}llccc@{}}
 \toprule
 Channel & Training implant & Updates [k] & SER & BER \\
 \midrule
-AWGN & Analytic & 705.7 & $3.54\times 10^{-3}\pm 3.94\times 10^{-5}$ & $1.89\times 10^{-3}\pm 2.31\times 10^{-5}$ \\
-& Condition-wise Sinkhorn & 626.8 & \textbf{$3.62\times 10^{-3}\pm 3.65\times 10^{-5}$} & $1.93\times 10^{-3}\pm 2.31\times 10^{-5}$ \\
-& WGAN & 641.8 & $3.70\times 10^{-3}\pm 4.06\times 10^{-5}$ & $1.98\times 10^{-3}\pm 2.87\times 10^{-5}$ \\
-& DDIM-100 & 21.5 & $5.32\times 10^{-3}\pm 1.36\times 10^{-4}$ & $2.83\times 10^{-3}\pm 6.82\times 10^{-5}$ \\
+AWGN & Analytic & 705.7 & $3.54\times 10^{-3}\err{3.94\times 10^{-5}}$ & $1.89\times 10^{-3}\err{2.31\times 10^{-5}}$ \\
+& Condition-wise Sinkhorn & 626.8 & $\mathbf{3.62\times 10^{-3}}\err{3.65\times 10^{-5}}$ & $1.93\times 10^{-3}\err{2.31\times 10^{-5}}$ \\
+& WGAN & 641.8 & $3.70\times 10^{-3}\err{4.06\times 10^{-5}}$ & $1.98\times 10^{-3}\err{2.87\times 10^{-5}}$ \\
+& DDIM-100 & 21.5 & $5.32\times 10^{-3}\err{1.36\times 10^{-4}}$ & $2.83\times 10^{-3}\err{6.82\times 10^{-5}}$ \\
 \midrule
-Rayleigh & Analytic & 656.3 & $2.25\times 10^{-3}\pm 4.57\times 10^{-5}$ & $1.22\times 10^{-3}\pm 2.94\times 10^{-5}$ \\
-& Condition-wise Sinkhorn & 602.1 & $5.40\times 10^{-3}\pm 1.11\times 10^{-4}$ & $2.92\times 10^{-3}\pm 7.00\times 10^{-5}$ \\
-& WGAN & 614.0 & $4.83\times 10^{-3}\pm 2.87\times 10^{-4}$ & $2.55\times 10^{-3}\pm 1.52\times 10^{-4}$ \\
-& DDIM-100 & 21.3 & \textbf{$4.64\times 10^{-3}\pm 1.08\times 10^{-4}$} & $2.47\times 10^{-3}\pm 6.10\times 10^{-5}$ \\
+Rayleigh & Analytic & 656.3 & $2.25\times 10^{-3}\err{4.57\times 10^{-5}}$ & $1.22\times 10^{-3}\err{2.94\times 10^{-5}}$ \\
+& Condition-wise Sinkhorn & 602.1 & $5.40\times 10^{-3}\err{1.11\times 10^{-4}}$ & $2.92\times 10^{-3}\err{7.00\times 10^{-5}}$ \\
+& WGAN & 614.0 & $4.83\times 10^{-3}\err{2.87\times 10^{-4}}$ & $2.55\times 10^{-3}\err{1.52\times 10^{-4}}$ \\
+& DDIM-100 & 21.3 & $\mathbf{4.64\times 10^{-3}}\err{1.08\times 10^{-4}}$ & $2.47\times 10^{-3}\err{6.10\times 10^{-5}}$ \\
 \midrule
-SSPA & Analytic & 635.6 & $1.33\times 10^{-6}\pm 6.31\times 10^{-7}$ & $7.78\times 10^{-7}\pm 3.81\times 10^{-7}$ \\
-& Condition-wise Sinkhorn & 617.1 & \textbf{$8.80\times 10^{-5}\pm 1.87\times 10^{-5}$} & $4.36\times 10^{-5}\pm 8.30\times 10^{-6}$ \\
-& WGAN & 627.3 & $9.83\times 10^{-5}\pm 3.15\times 10^{-5}$ & $4.50\times 10^{-5}\pm 1.27\times 10^{-5}$ \\
-& DDIM-100 & 21.4 & $9.00\times 10^{-5}\pm 4.64\times 10^{-5}$ & $4.03\times 10^{-5}\pm 1.72\times 10^{-5}$ \\
+SSPA & Analytic & 635.6 & $1.33\times 10^{-6}\err{6.31\times 10^{-7}}$ & $7.78\times 10^{-7}\err{3.81\times 10^{-7}}$ \\
+& Condition-wise Sinkhorn & 617.1 & $\mathbf{8.80\times 10^{-5}}\err{1.87\times 10^{-5}}$ & $4.36\times 10^{-5}\err{8.30\times 10^{-6}}$ \\
+& WGAN & 627.3 & $9.83\times 10^{-5}\err{3.15\times 10^{-5}}$ & $4.50\times 10^{-5}\err{1.27\times 10^{-5}}$ \\
+& DDIM-100 & 21.4 & $9.00\times 10^{-5}\err{4.64\times 10^{-5}}$ & $4.03\times 10^{-5}\err{1.72\times 10^{-5}}$ \\
 \midrule
-TDL & Analytic & 449.0 & $1.30\times 10^{-3}\pm 1.98\times 10^{-5}$ & $6.98\times 10^{-4}\pm 1.19\times 10^{-5}$ \\
-& Condition-wise Sinkhorn & 576.8 & $3.44\times 10^{-3}\pm 6.05\times 10^{-5}$ & $1.82\times 10^{-3}\pm 3.43\times 10^{-5}$ \\
-& WGAN & 587.6 & \textbf{$3.21\times 10^{-3}\pm 4.36\times 10^{-4}$} & $1.70\times 10^{-3}\pm 2.19\times 10^{-4}$ \\
-& DDIM-100 & 21.3 & $4.64\times 10^{-3}\pm 1.23\times 10^{-4}$ & $2.47\times 10^{-3}\pm 6.36\times 10^{-5}$ \\
+TDL & Analytic & 449.0 & $1.30\times 10^{-3}\err{1.98\times 10^{-5}}$ & $6.98\times 10^{-4}\err{1.19\times 10^{-5}}$ \\
+& Condition-wise Sinkhorn & 576.8 & $3.44\times 10^{-3}\err{6.05\times 10^{-5}}$ & $1.82\times 10^{-3}\err{3.43\times 10^{-5}}$ \\
+& WGAN & 587.6 & $\mathbf{3.21\times 10^{-3}}\err{4.36\times 10^{-4}}$ & $1.70\times 10^{-3}\err{2.19\times 10^{-4}}$ \\
+& DDIM-100 & 21.3 & $4.64\times 10^{-3}\err{1.23\times 10^{-4}}$ & $2.47\times 10^{-3}\err{6.36\times 10^{-5}}$ \\
 \bottomrule
 \end{tabular}
-}
 \par\vspace{0.25em}
 \begin{minipage}{0.96\textwidth}
 \footnotesize\raggedright
