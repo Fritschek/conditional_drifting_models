@@ -537,8 +537,8 @@ This second protocol is reported over 100 seeds for the main drift-field runs an
 It is the controlled comparison in this paper because the generator architecture, optimizer family, and one-shot inference path are held fixed across drift fields.
 The DDPM, DDIM, and WGAN rows provide best-effort reference baselines using stable model-family settings.
 A matched-capacity ranking against drifting would require an additional equal-parameter and equal-budget study.
-For SSPA, we additionally report a 30-seed update-budget-controlled condition-wise Sinkhorn run because the corrected same-condition transport field saturates after far fewer optimizer updates than the long diffusion-style SSPA preset.
-We treat this row as an SSPA budget screen, selected from W-Flow training and anchor diagnostics, rather than as a budget-insensitive optimum.
+For SSPA, we additionally report a 30-seed update-budget-controlled condition-wise Sinkhorn operating point because the corrected same-condition transport field saturates after far fewer optimizer updates than the long diffusion-style SSPA preset.
+This operating point is selected from W-Flow training behavior and anchor-conditioned diagnostics, rather than treated as a budget-insensitive optimum.
 The TDL channel is included in the drift-field study and in the downstream SER curves with diffusion and WGAN references.
 For the direct-output SWD table, TDL W-Flow rows come from the drift-field ablation, and TDL DDPM/DDIM/WGAN rows are obtained by checkpoint-only direct-SWD evaluation of the corresponding trained baseline implants.
 
@@ -547,7 +547,7 @@ For the direct-output SWD table, TDL W-Flow rows come from the drift-field ablat
 \paragraph{Channel and data settings.}
 Table~\ref{tab:simulation-setup} collects the channel dimensions, message alphabets, training points, and generator-evaluation budgets.
 The noise standard deviations induced by these \((E_b/N_0,R)\) pairs are \(0.5260\), \(0.2350\), \(0.3251\), and \(0.3162\) for AWGN, Rayleigh, SSPA, and TDL.
-The SSPA condition-wise Sinkhorn row uses the compact update-budget screen because the corrected same-condition field had already converged at this budget.
+The SSPA condition-wise Sinkhorn row uses the compact update-budget-controlled operating point because the corrected same-condition field had already converged at this budget.
 Table~\ref{tab:sspa-budget-sensitivity} reports the corresponding SSPA budget sensitivity: early budgets remain undertrained, the compact row is close to the analytic anchor floors, and the full \(10^7\)-sample preset worsens both anchor diagnostics and downstream SER for this sharper field.
 Downstream symbolic autoencoders are trained through either the analytic channel or a learned channel implant and are always evaluated on the analytic channel.
 Within each channel, the autoencoder architecture, optimizer schedule, message alphabet, rate, training \(E_b/N_0\), and epoch budget are fixed; only the channel implant used during training changes.
@@ -678,7 +678,9 @@ This indicates that condition-wise transport is useful and that its optimizer bu
 
 Table~\ref{tab:sspa-budget-sensitivity} makes the SSPA budget selection explicit.
 The compact condition-wise Sinkhorn row is not a single selected seed; it is the 30-seed row used in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}.
+The first two rows are single-seed local sanity checks of undertraining and are not used for the final performance claims.
 The long full-preset row is included as a failure mode of the same corrected field.
+With fixed drift scale and only \(K_g=K_p=K_r=4\) particles per anchor, the sharp same-condition field is a poor long-horizon optimizer unless stopped by conditional diagnostics.
 It improves neither conditional diagnostics nor downstream SER, so the compact row is the reported SSPA operating point.
 
 \input{wflow_sspa_budget_table.tex}
@@ -690,13 +692,13 @@ BER is retained in the table as an additional bit-level diagnostic.
 Within the Sinkhorn ablation table, condition-wise Sinkhorn is the more reliable drifting variant and fixes the SSPA failure mode once the update budget is matched to the sharp same-condition field.
 The per-channel SER curves in Fig.~\ref{fig:wflow-all-ser-curves} add WGAN and diffusion references to this downstream comparison.
 At the nominal training point, condition-wise Sinkhorn nearly reaches the analytic AWGN reference, while diffusion is the strongest learned baseline on Rayleigh, SSPA, and TDL.
-On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget screen gives condition-wise Sinkhorn SER \(8.13\times10^{-5}\) at \(E_b/N_0=8\,\mathrm{dB}\), compared with \(7.50\times10^{-5}\) for WGAN, \(3.13\times10^{-5}\) for diffusion, and \(1.57\times10^{-5}\) for analytic-channel training.
+On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget-controlled operating point gives condition-wise Sinkhorn SER \(8.13\times10^{-5}\) at \(E_b/N_0=8\,\mathrm{dB}\), compared with \(7.50\times10^{-5}\) for WGAN, \(3.13\times10^{-5}\) for diffusion, and \(1.57\times10^{-5}\) for analytic-channel training.
 The long-block TurboAE check below tests the same AWGN implant outside the short symbolic-codeword setting.
 
 \input{wflow_coding_table.tex}
 
 For SSPA, we follow the diffusion-channel setup of \cite{paper2309} more closely and use message alphabet \(M_{\mathrm{msg}}=64\), \(n=8\), rate \(6/8\), and training at \(E_b/N_0=8\,\mathrm{dB}\).
-The 30-seed SSPA screen in Table~\ref{tab:wflow-ser-ber} shows that the corrected condition-wise Sinkhorn implementation is reliable once the W-Flow update budget is matched to the observed convergence of the sharp same-condition field.
+The 30-seed SSPA operating point in Table~\ref{tab:wflow-ser-ber} shows that the corrected condition-wise Sinkhorn implementation is reliable once the W-Flow update budget is matched to the observed convergence of the sharp same-condition field.
 Fig.~\ref{fig:wflow-all-ser-curves} reports SER over an \(E_b/N_0\) grid for AWGN, Rayleigh, SSPA, and TDL, which also shows where diffusion retains an advantage over one-shot drifting in downstream coding performance.
 
 \input{wflow_all_ser_curve_figures.tex}

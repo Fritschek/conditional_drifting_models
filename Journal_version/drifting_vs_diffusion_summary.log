@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  9 JUN 2026 14:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  9 JUN 2026 14:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -496,8 +496,8 @@ Package pdftex.def Info: figures/conditional_fiber_diagnostic_sspa.pdf  used on
  input line 661.
 (pdftex.def)             Requested size: 340.56189pt x 287.01271pt.
 
-(./wflow_conditional_metric_table.tex) (./wflow_sspa_budget_table.tex)
-(./wflow_coding_table.tex) [8] (./wflow_all_ser_curve_figures.tex
+(./wflow_conditional_metric_table.tex) (./wflow_sspa_budget_table.tex) [8]
+(./wflow_coding_table.tex) (./wflow_all_ser_curve_figures.tex
 <figures/wflow_all_ser_curves.pdf, id=273, 516.70102pt x 358.16179pt>
 File: figures/wflow_all_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_all_ser_curves.pdf>
@@ -535,7 +535,7 @@ hanged.
 Here is how much of TeX's memory you used:
  11594 strings out of 469515
  179342 string characters out of 5470807
- 648416 words of memory out of 5000000
+ 648530 words of memory out of 5000000
  39957 multiletter control sequences out of 15000+600000
  680281 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -560,7 +560,7 @@ ts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
 ></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist
 /fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times
 /utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (13 pages, 543013 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (13 pages, 543426 bytes).
 PDF statistics:
  658 PDF objects out of 1000 (max. 8388607)
  389 compressed objects within 4 object streams

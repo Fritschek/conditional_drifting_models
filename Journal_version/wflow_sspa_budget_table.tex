@@ -1,22 +1,22 @@
 \begin{table*}[t]
 \centering
-\caption{\textbf{SSPA condition-wise Sinkhorn budget sensitivity.} The table reports the corrected condition-wise Sinkhorn field under increasing optimizer budgets. Updates are approximate optimizer steps, computed from dataset size, batch size, and epochs. Ratios divide the learned-vs-analytic anchor metric by the analytic-vs-analytic floor. The first two rows are single-seed local diagnostics; the last two rows are aggregated HPC runs. Lower is better.}
+\caption{\textbf{SSPA condition-wise Sinkhorn budget sensitivity.} The table reports the corrected condition-wise Sinkhorn field under increasing optimizer budgets. Updates are approximate optimizer steps, computed from dataset size, batch size, and epochs. Ratios divide the learned-vs-analytic anchor metric by the analytic-vs-analytic floor. The floor is estimated from two independent analytic channel sample sets at the same anchors. The first two rows are single-seed local diagnostics; the last two rows are aggregated HPC runs. Lower is better.}
 \label{tab:sspa-budget-sensitivity}
 \tablestyle{4.0pt}{1.03}
 \tablefontsize
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
-Screen & Updates & Seeds & Direct SWD & Anchor-SWD ratio & Anchor-GW2 ratio & SER at \(8\,\mathrm{dB}\) \\
+Run & Updates & Seeds & Direct SWD & Anchor-SWD ratio & Anchor-GW2 ratio & SER at \(8\,\mathrm{dB}\) \\
 \midrule
 Short local & \(0.31\mathrm{k}\) & 1 & \(1.07{\times}10^{-1}\) & 5.14 & 4.10 & -- \\
 Early compact & \(0.88\mathrm{k}\) & 1 & \(4.09{\times}10^{-2}\) & 4.50 & 3.88 & -- \\
-Reported compact & \(4.69\mathrm{k}\) & 30 & \(7.07{\times}10^{-3}\pm1.9{\times}10^{-4}\) & \(1.13\pm0.005\) & \(1.15\pm0.004\) & \(9.33{\times}10^{-5}\pm1.4{\times}10^{-5}\) \\
+Reported operating point & \(4.69\mathrm{k}\) & 30 & \(7.07{\times}10^{-3}\pm1.9{\times}10^{-4}\) & \(1.13\pm0.005\) & \(1.15\pm0.004\) & \(9.33{\times}10^{-5}\pm1.4{\times}10^{-5}\) \\
 Full preset & \(390.6\mathrm{k}\) & 100 & \(1.53\pm0.02\) & \(35.5\pm0.4\) & \(60.1\pm0.7\) & \(2.70{\times}10^{-2}\pm2.2{\times}10^{-3}\) \\
 \bottomrule
 \end{tabular}
 \par\vspace{0.25em}
 \begin{minipage}{0.94\textwidth}
 \footnotesize\raggedright
-The reported SSPA condition-wise Sinkhorn model is the compact \(4.69\mathrm{k}\)-update row. The full-preset row uses the long diffusion-style SSPA budget with the same corrected field and is included only as a sensitivity diagnostic.
+The reported SSPA condition-wise Sinkhorn model is the \(4.69\mathrm{k}\)-update operating point selected by anchor-conditioned diagnostics. The full-preset row uses the long diffusion-style SSPA budget with the same corrected field and is included only as a sensitivity diagnostic.
 \end{minipage}
 \end{table*}
