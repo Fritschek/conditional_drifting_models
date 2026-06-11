@@ -426,9 +426,9 @@ All channels are implemented as real-valued maps \(x\mapsto y\), but the coordin
 AWGN and Rayleigh use real-valued vectors directly and have dimension \(n=7\) in the generator-level benchmark.
 SSPA and TDL use paired in-phase/quadrature coordinates with \(n=8\), corresponding to four complex symbols.
 Noise variables are sampled independently across real coordinates unless the deterministic channel transformation or tapped-delay convolution introduces coupling.
-The original generator-level comparison uses AWGN, Rayleigh, and SSPA because these channels have matched DDPM, DDIM, WGAN, and drifting reference runs.
-The downstream channel-implant study additionally includes TDL as a wireless channel with memory.
-For this channel, the DDPM, DDIM, and WGAN direct-output SWD rows are evaluated from the trained baseline checkpoints used in the SER-curve study.
+The generator-level reference comparison is reported on AWGN, Rayleigh, and SSPA, where matched DDPM, DDIM, WGAN, and direct-drifting reference runs are available.
+TDL is included in the Sinkhorn drift-field ablation and downstream channel-implant study as a compact wireless channel with memory.
+For TDL, the DDPM, DDIM, and WGAN direct-output SWD rows are evaluated from the trained baseline checkpoints used in the SER-curve study.
 
 \textbf{AWGN:}
 \begin{equation}
@@ -452,6 +452,7 @@ u_k,v_k \overset{\text{i.i.d.}}{\sim} \mathcal{N}(0,1),
 and \(n \sim \mathcal{N}(0,\sigma^2 I)\).
 
 Each real component is therefore scaled by an independent Rayleigh-distributed magnitude before noise is added.
+The downstream encoder and decoder are not given \(h_k\), and no explicit equalization is applied.
 As implemented here, Rayleigh is a real-valued vector channel.
 The paired-I/Q complex representation is used for SSPA and TDL.
 
@@ -514,6 +515,7 @@ It is intentionally smaller than a full OFDM or long-block TDL evaluation.
 \subsection{Training protocol}
 The experiments are organized into two complementary protocols.
 First, the generator-level protocol compares the proposed drifting family against the established conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, and SSPA.
+TDL is added wherever the corresponding trained implants or W-Flow drift-field runs are available, including the drift-field study and downstream SER curves.
 Second, the drift-field ablation holds the drifting network fixed and compares global/joint Sinkhorn drifting with condition-wise Sinkhorn drifting.
 Target-space and conditioning-aware kernel drifts were run as supporting controls, but the main tables keep the transport comparison focused.
 This second protocol is reported over 100 seeds for the main drift-field runs and is evaluated with direct SWD, anchor-conditioned metrics, and downstream symbolic SER/BER.
@@ -555,7 +557,7 @@ The Sinkhorn rows are therefore reported as a drift-field ablation under a match
 They are compared to diffusion and WGAN wherever the observable metric and channel protocol overlap.
 The downstream W-Flow table focuses on the learned drifting/Sinkhorn surrogates and the analytic-channel reference training condition.
 The SER curves add WGAN and DDIM-100 when all corresponding channel implants are available.
-The main ablation claim is the comparison between naive/global transport and the proposed condition-wise Sinkhorn transport.
+The central ablation is the drift-field geometry: joint/global transport versus condition-wise Sinkhorn transport under the same one-shot generator.
 
 As an additional diagnostic, Table~\ref{tab:model-size} reports inference-network parameter counts used in this benchmark.
 The Sinkhorn rows have the same parameter count as direct drifting because the transport computation changes the training update, not the deployed generator.
@@ -589,10 +591,10 @@ It leaves decision-relevant behavior such as error rates unmeasured.
 Those depend on the joint structure of \((x,y)\).
 For communication use, two generators with similar global sample-cloud discrepancy can induce different conditional means, conditional covariance errors, and downstream symbol-error rates.
 The Sinkhorn drift-field study therefore also includes anchor-conditioned moment metrics and symbolic channel-implant SER/BER checks when evaluating the proposed drifting variants.
-For communication use, the evaluation priority is as follows.
-Downstream SER and BER under analytic-channel evaluation are the closest checks of communication usefulness.
-Anchor-conditioned metrics are the next diagnostic because they probe repeated outputs at fixed transmitted symbols.
-Global direct-output SWD is mainly a generator-level comparability metric.
+We therefore report both downstream-dependent and generator-level metrics.
+Downstream SER and BER under analytic-channel evaluation measure the utility of a surrogate inside the trained communication system, but they also depend on the chosen encoder, decoder, optimizer, and training point.
+SWD is independent of a downstream receiver and remains useful for comparing output distributions across generators, while global SWD can miss fixed-input conditional errors.
+Anchor-conditioned metrics bridge these views by probing repeated outputs at fixed transmitted symbols.
 
 
 \section{Benchmark Results}
@@ -649,8 +651,7 @@ Accordingly, global SWD is treated as a comparability diagnostic and supplemente
 \subsection{Conditional metrics and symbolic coding}
 Table~\ref{tab:wflow-conditional-metrics} reports the corresponding anchor-conditioned diagnostics.
 The anchor metrics draw repeated outputs at fixed transmitted symbols and therefore probe the conditional law more directly than global SWD.
-Direct SWD is kept in Table~\ref{tab:wflow-swd-baselines}, and downstream BER/SER is kept in Table~\ref{tab:wflow-ser-ber}.
-This avoids reporting the same quantities in multiple tables.
+Direct SWD is reported in Table~\ref{tab:wflow-swd-baselines}, and downstream BER/SER is reported in Table~\ref{tab:wflow-ser-ber}.
 For AWGN, Rayleigh, SSPA, and TDL, condition-wise Sinkhorn is the strongest evaluated drifting-family surrogate under the downstream BER/SER checks reported here.
 The full curve comparison below shows that diffusion remains the strongest learned reference on Rayleigh, SSPA, and TDL.
 On SSPA, the anchor-conditioned metrics also explain the compact update-budget run.
