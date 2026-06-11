@@ -259,8 +259,8 @@ and the generator is optimized by
 g_i - \tilde{g}_i
 \right\|_2^2.
 \end{equation}
-In other words, the generic update \(u \mapsto u + \eta V_{p,q}(u)\) from the drifting formulation is realized here with a kernel-based drift field estimated directly from minibatches of true and generated samples in the selected target space.
-At a high level, this empirical drift field can be interpreted as a kernel particle interaction rule.
+The generic update \(u \mapsto u + \eta V_{p,q}(u)\) from the drifting formulation is realized here with a kernel-based drift field estimated directly from minibatches of true and generated samples in the selected target space.
+This empirical field acts as a kernel particle interaction rule.
 The attraction term pulls generated samples toward the target sample cloud, while the repulsion term prevents generated particles from collapsing onto a few modes.
 In this sense, the method is related in spirit to kernel-based distribution shaping and MMD-like matching.
 Here it is used as a practical training rule, without deriving a formal discrepancy minimization objective.
@@ -333,7 +333,7 @@ T^{\varepsilon}_{q_{t,x},q_{t,x}}(y).
 \label{eq:condition_sinkhorn_velocity}
 \end{equation}
 
-The following proposition states the channel-simulation consequence of applying the Sinkhorn divergence condition-wise.
+For channel simulation, the key consequence is the following equilibrium statement.
 \begin{proposition}[Condition-wise Sinkhorn equilibrium]
 Under the standard Sinkhorn-divergence assumptions of \cite{feydy2019sinkhorn}, the conditional objective \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) is nonnegative and is zero exactly when
 \begin{equation}
@@ -358,15 +358,14 @@ The zero-set statement follows by applying the nonnegativity and unique-zero pro
 The derivative identity is the same fixed-condition W-Flow identity, again integrated over \(\mu\).
 \hfill\(\square\)
 
-This interpretation is deliberately limited to the population conditional optimal-transport flow.
-This is the conditional analogue needed for channel simulation.
-Matching a joint sample cloud under an arbitrary joint cost leaves this condition-wise equality unenforced.
+The proposition gives the population conditional optimal-transport picture needed for channel simulation: equality is enforced for almost every fixed input.
+Matching a joint sample cloud under an arbitrary joint cost does not enforce this condition-wise equality.
 
-The implemented algorithm adds two approximations to this population object.
+The implemented algorithm approximates this population object in two ways.
 First, it estimates the barycentric velocity from finite minibatch Sinkhorn couplings.
 Second, it projects the explicit particle update back into the neural generator class through detached-target regression.
 The resulting update differs from exact gradient descent on \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) with respect to \(\theta\).
-We therefore use the population conditional flow as a fixed-point guide, not as a claim that the detached neural update is an unbiased gradient estimator for the objective above.
+The population conditional flow therefore serves as a fixed-point guide for the projected training rule.
 If the generator family cannot realize all conditional laws \(p_x\), the practical fixed point is the best representable conditional surrogate reached by this projected training dynamics.
 For anchors \(x_i\sim\mu\), the estimator draws multiple generated samples
 \(\hat y_{i,k}=g_\theta(x_i,z_{i,k})\), multiple positive channel samples
@@ -549,7 +548,7 @@ It is the controlled comparison in this paper because the generator architecture
 The DDPM, DDIM, and WGAN rows provide best-effort reference baselines using stable model-family settings.
 A matched-capacity ranking against drifting would require an additional equal-parameter and equal-budget study.
 For SSPA, we additionally report a 30-seed update-budget-controlled condition-wise Sinkhorn operating point because the corrected same-condition transport field saturates after far fewer optimizer updates than the long diffusion-style SSPA preset.
-This operating point is selected from W-Flow training behavior and anchor-conditioned diagnostics, rather than treated as a budget-insensitive optimum.
+The selected operating point follows the observed W-Flow training behavior and the anchor-conditioned diagnostics.
 The TDL channel is included in the drift-field study and in the downstream SER curves with diffusion and WGAN references.
 For the direct-output SWD table, TDL W-Flow rows come from the drift-field ablation, and TDL DDPM/DDIM/WGAN rows are obtained by checkpoint-only direct-SWD evaluation of the corresponding trained baseline implants.
 
@@ -617,7 +616,7 @@ It leaves decision-relevant behavior such as error rates unmeasured.
 Those depend on the joint structure of \((x,y)\).
 For communication use, two generators with similar global sample-cloud discrepancy can induce different conditional means, conditional covariance errors, and downstream symbol-error rates.
 The Sinkhorn drift-field study therefore also includes anchor-conditioned moment metrics and symbolic channel-implant SER/BER checks when evaluating the proposed drifting variants.
-We interpret the metrics in the following order.
+For communication use, the evaluation priority is as follows.
 Downstream SER and BER under analytic-channel evaluation are the closest checks of communication usefulness.
 Anchor-conditioned metrics are the next diagnostic because they probe repeated outputs at fixed transmitted symbols.
 Global direct-output SWD is mainly a generator-level comparability metric.
@@ -633,7 +632,7 @@ The controlled conclusion from this table is the ranking inside the drifting-fam
 DDIM-100 gives the lowest direct-space SWD on AWGN, Rayleigh, and SSPA among the matched reference rows.
 Among the Sinkhorn variants, condition-wise Sinkhorn is strongest under direct SWD on AWGN, Rayleigh, and TDL, and is numerically close to direct drifting on SSPA under the compact update-budget run.
 Within the full drifting-family block, condition-wise Sinkhorn is lowest on AWGN, Rayleigh, and TDL, while direct drifting remains lowest on SSPA under this global metric.
-This already indicates that drift-field ranking depends on channel geometry.
+The drift-field ranking is therefore channel-dependent.
 \input{wflow_swd_baseline_table.tex}
 
 Timing follows the expected pattern.
@@ -659,8 +658,7 @@ At inference, W-Flow, direct drifting, and WGAN retain one generator call per sa
 \subsection{Condition-wise drift-field interpretation}
 The W-Flow-inspired ablation isolates the drift-field design problem.
 Joint Sinkhorn drift and condition-wise Sinkhorn drift use the same one-shot generator architecture and differ only in how training particles are moved.
-The key comparison is therefore geometric.
-Joint Sinkhorn builds a transport field from \((x,y)\)-features, while condition-wise Sinkhorn solves separate output-space transport problems at fixed \(x\).
+Geometrically, joint Sinkhorn builds a transport field from \((x,y)\)-features, while condition-wise Sinkhorn solves separate output-space transport problems at fixed \(x\).
 This distinction is visible in the mixed metric behavior.
 Condition-wise Sinkhorn is the strongest W-Flow row under direct SWD on AWGN, Rayleigh, and TDL, while SSPA needs the compact update-budget run because the corrected same-condition field converges earlier than the long diffusion-style preset.
 Fig.~\ref{fig:conditional-fiber-diagnostic} shows the corresponding fixed-condition diagnostic for SSPA.
@@ -683,19 +681,21 @@ Direct SWD is kept in Table~\ref{tab:wflow-swd-baselines}, and downstream BER/SE
 This avoids reporting the same quantities in multiple tables.
 For AWGN, Rayleigh, SSPA, and TDL, condition-wise Sinkhorn is the strongest evaluated drifting-family surrogate under the downstream BER/SER checks reported here.
 The full curve comparison below shows that diffusion remains the strongest learned reference on Rayleigh, SSPA, and TDL.
-On SSPA, the anchor-conditioned metrics also explain why the compact update-budget run is preferable.
-The same-condition Sinkhorn field matches fixed-input output clouds well at the compact budget, while the full-budget corrected run degrades the sharp fixed-condition field.
-This indicates that condition-wise transport is useful and that its optimizer budget is part of the model selection problem for saturated nonlinear channels.
+On SSPA, the anchor-conditioned metrics also explain the compact update-budget run.
+At this budget, the same-condition Sinkhorn field matches fixed-input output clouds well.
+The full-budget corrected run then degrades the sharp fixed-condition field.
+The optimizer budget is therefore part of the model selection problem for saturated nonlinear channels.
 
 \input{wflow_conditional_metric_table.tex}
 
 Table~\ref{tab:sspa-budget-sensitivity} makes the SSPA budget selection explicit.
 The compact condition-wise Sinkhorn result is aggregated over the same 30 seeds used in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}.
-The first two rows are single-seed local sanity checks of undertraining and are not used for the final performance claims.
-The long full-preset row is included as a failure mode of the same corrected field.
-With fixed drift scale and only \(K_g=K_p=K_r=4\) particles per anchor, the sharp same-condition field is a poor long-horizon optimizer unless stopped by conditional diagnostics.
-The failure is best interpreted as optimizer-budget sensitivity of the finite-particle field: after the anchor cloud reaches the analytic floor, continued few-particle updates can over-correct the saturated amplitude law and increase conditional mean and spread errors.
-It improves neither conditional diagnostics nor downstream SER, so the compact row is the reported SSPA operating point.
+The first two rows are single-seed local sanity checks of undertraining.
+They are not used for the final performance claims.
+The long full-preset row documents a failure mode of the same corrected field.
+With fixed drift scale and only \(K_g=K_p=K_r=4\) particles per anchor, the sharp same-condition field becomes a poor long-horizon optimizer unless stopped by conditional diagnostics.
+After the anchor cloud reaches the analytic floor, continued few-particle updates can over-correct the saturated amplitude law and increase conditional mean and spread errors.
+The full-preset row improves neither conditional diagnostics nor downstream SER, so the compact row is the reported SSPA operating point.
 
 \input{wflow_sspa_budget_table.tex}
 
@@ -719,7 +719,7 @@ Fig.~\ref{fig:wflow-all-ser-curves} reports SER over an \(E_b/N_0\) grid for AWG
 
 \subsection{Equal wall-clock channel-implant training}
 The previous downstream tables compare final trained channel implants.
-Table~\ref{tab:equal-wallclock-symbolic} instead fixes the symbolic autoencoder training time to \(1800\,\mathrm{s}\) per implant and records how many optimizer updates fit inside that budget.
+The equal-wall-clock experiment fixes the symbolic autoencoder training time to \(1800\,\mathrm{s}\) per implant and records how many optimizer updates fit inside that budget.
 This directly measures the inner-loop setting that motivates one-shot channel surrogates.
 DDIM-100 provides a strong learned reference in final-performance comparisons, but its iterative sampler reduces the number of autoencoder updates by roughly one to two orders of magnitude relative to the one-shot implants.
 Under this equal wall-clock budget, condition-wise Sinkhorn gives the lowest learned-implant SER on AWGN and SSPA, DDIM-100 is lowest on Rayleigh, and WGAN is lowest on compact TDL.
@@ -753,7 +753,8 @@ Measured channels are harder.
 With only one observation per \(x\), the exact conditional law \(p(\cdot\mid x)\) cannot be observed at a point.
 For that regime, the local conditional Sinkhorn approximation in Sec.~II estimates the target fixed-input output law from kernel-weighted neighborhoods in condition space and still solves the transport problem only in the output coordinate.
 This keeps the fixed-input geometry intact, but introduces bandwidth selection and neighborhood bias.
-We do not evaluate this measured-data approximation in the present experiments, so it should be regarded as future work rather than a validated measured-channel solution.
+The present experiments do not evaluate this measured-data approximation.
+Validating it for measured-channel data is left for future work.
 Practical measured-channel simulators may also need transport features that encode phase, amplitude, residual structure, channel-state information, or decoder-relevant projections.
 
 \section{Conclusion}
