@@ -515,7 +515,7 @@ It is intentionally smaller than a full OFDM or long-block TDL evaluation.
 \subsection{Training protocol}
 The experiments are organized into two complementary protocols.
 First, the generator-level protocol compares the proposed drifting family against the established conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, and SSPA.
-TDL is added wherever the corresponding trained implants or W-Flow drift-field runs are available, including the drift-field study and downstream SER curves.
+TDL is included in the final reported benchmark through the Sinkhorn drift-field ablation, the direct-SWD comparison, and the downstream SER curves.
 Second, the drift-field ablation holds the drifting network fixed and compares global/joint Sinkhorn drifting with condition-wise Sinkhorn drifting.
 Target-space and conditioning-aware kernel drifts were run as supporting controls, but the main tables keep the transport comparison focused.
 This second protocol is reported over 100 seeds for the main drift-field runs and is evaluated with direct SWD, anchor-conditioned metrics, and downstream symbolic SER/BER.
