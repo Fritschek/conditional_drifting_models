@@ -86,7 +86,7 @@ The main contributions are summarized as follows.
 \item We formulate condition-wise Sinkhorn drifting for learned channel simulation by integrating Sinkhorn divergences over the fixed-input conditional laws \(p(\cdot\mid x)\).
 \item We connect this objective to a conditional Wasserstein-flow velocity, then state how the practical method differs from the population flow through finite-sample barycentric estimation and projected detached-target neural training.
 \item We implement direct-output conditional drifting and compare joint/global Sinkhorn transport with condition-wise Sinkhorn transport under a matched one-shot generator.
-\item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional WGAN reference models on AWGN, Rayleigh fading, SSPA, and compact TDL channel studies wherever the protocols overlap.
+\item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional WGAN reference models across AWGN, Rayleigh fading, SSPA, and compact TDL channels using generator-level metrics, downstream coding checks, and latency measurements.
 \item We evaluate channel surrogates with direct SWD, anchor-conditioned moment metrics, downstream SER, bit error rate (BER), and timing measurements, showing that communication usefulness is better reflected by conditional and downstream metrics than by global SWD alone.
 \end{itemize}
 Source code will be made available through the first author's GitHub repository upon publication\footnote{\url{https://github.com/Fritschek/conditional_drifting_models}.}.
