@@ -25,7 +25,7 @@
 \begin{abstract}
 Learned communication systems may evaluate stochastic channel surrogates millions of times inside differentiable training loops, making diffusion-style reverse sampling expensive.
 This paper proposes condition-wise Sinkhorn drifting, a one-shot channel surrogate that preserves the transmitted symbol and transports only the conditional output laws \(p(y\mid x)\).
-We formulate a conditional Sinkhorn objective over fixed-input output fibers and train the generator with finite-sample barycentric velocities followed by detached particle regression.
+We formulate a conditional Sinkhorn objective over repeated outputs at the same transmitted symbol and train the generator with finite-sample barycentric velocities followed by detached particle regression.
 Experiments on additive white Gaussian noise (AWGN), Rayleigh fading, solid-state power amplifier (SSPA) nonlinearity, and a compact tapped-delay-line (TDL) channel compare direct drifting, joint Sinkhorn drifting, condition-wise Sinkhorn drifting, conditional denoising diffusion probabilistic modeling (DDPM), denoising diffusion implicit modeling (DDIM), and Wasserstein generative adversarial network (WGAN) references.
 Within the evaluated one-shot drifting-family variants, condition-wise Sinkhorn is strongest under conditional diagnostics and symbolic-coding checks, while diffusion remains strongest on the hardest downstream symbol-error-rate (SER) curves.
 The results show that global output-space sliced Wasserstein distance (SWD) alone is unreliable for channel-surrogate selection.
@@ -69,11 +69,11 @@ The distinction between ordinary generation and channel simulation is central.
 In ordinary generative modeling, samples are transported in the data space until the model distribution matches the target distribution.
 In channel simulation, the transmitted symbol is fixed side information.
 The relevant target is the family of conditional laws \(\{p(\cdot\mid x)\}_{x\sim\mu}\).
-A generator can match the global output cloud while mixing conditional fibers, which produces an incorrect channel surrogate for communication-system training.
+A generator can match the global output cloud while mixing samples from different transmitted symbols, which produces an incorrect channel surrogate for communication-system training.
 This motivates a condition-wise transport formulation in which couplings preserve \(x\) and move only the output component \(y\).
 The proposed condition-wise Sinkhorn drifting implements this idea as a one-shot neural channel generator.
 It uses drifting's detached-target regression and the Sinkhorn/W-Flow barycentric velocity as building blocks.
-The channel-specific contribution is to constrain the transport problem to fixed-input output fibers, so that the learned surrogate moves samples inside \(p(y\mid x)\) rather than across different transmitted symbols.
+The channel-specific contribution is to constrain the transport problem to repeated outputs at the same transmitted symbol, so that the learned surrogate moves samples inside \(p(y\mid x)\) rather than across different transmitted symbols.
 
 The emphasis of this study is on generator-level distributional accuracy, computational tradeoffs, and downstream channel-implant checks.
 A full communication-system design study over all modulation and coding regimes is outside the present scope.
@@ -82,7 +82,7 @@ Measured datasets with only one observation per condition require local conditio
 
 The main contributions are summarized as follows.
 \begin{itemize}
-\item We formulate condition-wise Sinkhorn drifting for learned channel simulation by integrating Sinkhorn divergences over fixed-input output fibers \(p(\cdot\mid x)\).
+\item We formulate condition-wise Sinkhorn drifting for learned channel simulation by integrating Sinkhorn divergences over the fixed-input conditional laws \(p(\cdot\mid x)\).
 \item We connect this objective to a conditional Wasserstein-flow velocity, then state how the practical method differs from the population flow through finite-sample barycentric estimation and projected detached-target neural training.
 \item We implement conditional drifting in direct-output and residual parameterizations. The central geometric comparison is joint/global Sinkhorn versus condition-wise Sinkhorn under a matched one-shot generator.
 \item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional WGAN reference models on AWGN, Rayleigh fading, SSPA, and compact TDL channel studies wherever the protocols overlap.
@@ -301,7 +301,7 @@ S_{\varepsilon}\!\left(q_{\theta,x},p_x\right)
 \label{eq:conditional_sinkhorn}
 \end{equation}
 where the Sinkhorn divergence is computed separately for each fixed transmitted symbol, either on \(y\) in direct-output mode or on \(e=y-x\) in residual mode.
-In measure-theoretic terms, the conditional law \(p_x=p(\cdot\mid x)\) is the output fiber over condition \(x\).
+For brevity, we call the output cloud at a fixed transmitted symbol an output fiber; in measure-theoretic terms, \(p_x=p(\cdot\mid x)\) is the conditional measure over that fiber.
 Throughout the paper we refer to the resulting estimator as condition-wise Sinkhorn drifting.
 Equivalently, admissible couplings must preserve the condition.
 \begin{equation}
@@ -648,7 +648,7 @@ On AWGN, Rayleigh, and SSPA, the condition-wise Sinkhorn row is faster to train 
 The W-Flow-inspired ablation isolates the drift-field design problem.
 Joint Sinkhorn drift and condition-wise Sinkhorn drift use the same one-shot generator architecture and differ only in how training particles are moved.
 The key comparison is therefore geometric.
-Joint Sinkhorn builds a transport field from \((x,y)\)-features, while condition-wise Sinkhorn solves separate output-space transport problems over fixed \(x\)-fibers.
+Joint Sinkhorn builds a transport field from \((x,y)\)-features, while condition-wise Sinkhorn solves separate output-space transport problems at fixed \(x\).
 This distinction is visible in the mixed metric behavior.
 Condition-wise Sinkhorn is the strongest W-Flow row under direct SWD on AWGN, Rayleigh, and TDL, while SSPA needs the compact update-budget run because the corrected same-condition field converges earlier than the long diffusion-style preset.
 Fig.~\ref{fig:conditional-fiber-diagnostic} shows the corresponding fixed-condition diagnostic for SSPA.
@@ -736,13 +736,13 @@ Hyperparameter selection from a single global SWD score would miss these differe
 The condition-wise estimator is directly applicable to analytic or simulator channels because repeated outputs can be drawn at the same transmitted symbol.
 Measured channels are harder.
 With only one observation per \(x\), the exact conditional law \(p(\cdot\mid x)\) cannot be observed at a point.
-For that regime, the local conditional Sinkhorn approximation in Sec.~II estimates the target fiber from kernel-weighted neighborhoods in condition space and still solves the transport problem only in the output coordinate.
+For that regime, the local conditional Sinkhorn approximation in Sec.~II estimates the target fixed-input output law from kernel-weighted neighborhoods in condition space and still solves the transport problem only in the output coordinate.
 This keeps the fixed-input geometry intact, but introduces bandwidth selection and neighborhood bias.
 This measured-data extension is not evaluated in the present experiments and should be regarded as future work rather than a validated measured-channel solution.
 Practical measured-channel simulators may also need transport features that encode phase, amplitude, residual structure, channel-state information, or decoder-relevant projections.
 
 \section{Conclusion}
-This paper makes one-shot drifting applicable to learned channel simulation by replacing unconditional transport with condition-wise Sinkhorn transport over fixed-input output fibers.
+This paper makes one-shot drifting applicable to learned channel simulation by replacing unconditional transport with condition-wise Sinkhorn transport over fixed-input conditional output laws.
 The resulting generator preserves the transmitted symbol \(x\), transports only the conditional output law, and keeps the one-shot inference path that motivates drifting for inner-loop channel use.
 The population formulation identifies equality of \(p(\cdot\mid x)\) and \(q_\theta(\cdot\mid x)\) for \(\mu\)-almost every \(x\) as the correct equilibrium geometry.
 The implemented method is a finite-sample barycentric approximation followed by projected detached-target neural training.
