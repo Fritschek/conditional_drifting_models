@@ -472,15 +472,7 @@ a_{\mathrm{SSPA}}(r)
 \end{equation}
 with default parameters \(p=3\), \(A_0=1.5\), and \(G=5.0\).
 Here \(a_{\mathrm{SSPA}}(r)\) is a gain, not the output amplitude.
-The corresponding output amplitude is
-\begin{equation}
-A_{\mathrm{out}}(r)
-=
-a_{\mathrm{SSPA}}(r)r
-=
-\frac{Gr}{\left(1+\left(\frac{Gr}{A_0}\right)^{2p}\right)^{1/(2p)}},
-\end{equation}
-which is the Rapp-style AM/AM law used in the benchmark.
+The corresponding output amplitude is \(A_{\mathrm{out}}(r)=a_{\mathrm{SSPA}}(r)r\), the Rapp-style AM/AM law used in the benchmark.
 The noiseless amplifier output is $\tilde{x} = a_{\mathrm{SSPA}}(r)\,x,$
 and the observed channel output is
 \begin{equation}
@@ -685,7 +677,7 @@ Fig.~\ref{fig:wflow-all-ser-curves} reports SER over an \(E_b/N_0\) grid for AWG
 The previous downstream tables compare final trained channel implants.
 The equal-wall-clock experiment fixes the symbolic autoencoder training time to \(1800\,\mathrm{s}\) per implant and records how many optimizer updates fit inside that budget.
 This directly measures the inner-loop setting that motivates one-shot channel surrogates.
-DDIM-100 provides a strong learned reference in final-performance comparisons, but its iterative sampler reduces the number of autoencoder updates by roughly one to two orders of magnitude relative to the one-shot implants.
+DDIM-100 is a strong learned reference in final-performance comparisons, but its iterative sampler leaves one to two orders of magnitude fewer autoencoder updates within the same budget.
 Under this equal wall-clock budget, condition-wise Sinkhorn gives the lowest learned-implant SER on AWGN and SSPA, DDIM-100 is lowest on Rayleigh, and WGAN is lowest on compact TDL.
 Condition-wise Sinkhorn reaches a competitive downstream operating point while retaining one-shot channel calls, although diffusion or WGAN can remain stronger on individual channels.
 
@@ -699,9 +691,9 @@ Condition-wise Sinkhorn drifting targets a low-latency conditional-surrogate ope
 Diffusion remains the strongest learned reference on several hard downstream SER curves and pays for that fidelity through iterative sampling.
 The one-shot drifting path uses a single generator evaluation and preserves the fixed-input structure of the channel law.
 This makes it relevant when the learned channel is embedded in an inner training loop, where surrogate calls can dominate the computational budget.
-Diffusion is the safer choice when final standalone fidelity dominates and its sampler cost is acceptable.
+Diffusion is preferable when final standalone fidelity dominates and its sampler cost is acceptable.
 One-shot Sinkhorn is most attractive when repeated channel calls dominate and the observed SER gap is within tolerance.
-The main methodological lesson is that channel surrogates should be judged by conditional-law quality and downstream communication metrics in addition to global sample-cloud agreement.
+Channel surrogates should therefore be judged by conditional-law quality and downstream communication metrics in addition to global sample-cloud agreement.
 
 \subsection{Metric-space dependence}
 The W-Flow run reinforces the metric-dependence of channel-surrogate evaluation.
@@ -729,8 +721,6 @@ Experiments on AWGN, Rayleigh, SSPA, and compact TDL channels show a clear accur
 Within the matched Sinkhorn drift-field ablation, condition-wise Sinkhorn is the strongest evaluated one-shot surrogate under the downstream symbolic-coding checks.
 Diffusion remains the strongest learned reference on the hardest SER curves.
 This positions the contribution as a low-latency, condition-preserving surrogate for settings where repeated channel calls are expensive.
-The SSPA study also shows that optimizer budget is part of the drift-field design.
-The corrected same-condition field works well after convergence, and the full diffusion-style preset can degrade this sharper one-step field.
 Across the full set of results, global SWD, anchor-conditioned metrics, and downstream coding metrics can disagree.
 This makes metric choice a central part of learned channel simulation and motivates future work on channel-specific transport features and local conditional Sinkhorn approximations for measured channels.
 \bibliographystyle{IEEEtran}
