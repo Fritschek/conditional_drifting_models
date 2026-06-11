@@ -29,7 +29,7 @@ This paper proposes condition-wise Sinkhorn drifting, a one-shot channel surroga
 We formulate a conditional Sinkhorn objective over repeated outputs at the same transmitted symbol and train the generator with finite-sample barycentric velocities followed by detached particle regression.
 Experiments on additive white Gaussian noise (AWGN), Rayleigh fading, solid-state power amplifier (SSPA) nonlinearity, and a compact tapped-delay-line (TDL) channel compare direct drifting, joint Sinkhorn drifting, condition-wise Sinkhorn drifting, conditional denoising diffusion probabilistic modeling (DDPM), denoising diffusion implicit modeling (DDIM), and Wasserstein generative adversarial network (WGAN) references.
 Within the evaluated one-shot drifting-family variants, condition-wise Sinkhorn is strongest under conditional diagnostics and symbolic-coding checks, while diffusion remains strongest on the hardest downstream symbol-error-rate (SER) curves.
-The results show that global output-space sliced Wasserstein distance (SWD) alone is unreliable for channel-surrogate selection.
+The resulting operating point is a condition-preserving one-shot simulator for settings where repeated channel calls make diffusion-style sampling too costly.
 \end{abstract}
 
 \begin{IEEEkeywords}
