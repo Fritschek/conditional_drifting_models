@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 10:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 10:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -538,7 +538,7 @@ hanged.
 Here is how much of TeX's memory you used:
  11620 strings out of 469515
  179737 string characters out of 5470807
- 648981 words of memory out of 5000000
+ 647981 words of memory out of 5000000
  39977 multiletter control sequences out of 15000+600000
  681829 words of font info for 146 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -567,7 +567,7 @@ e1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.p
 fb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (13 pages, 583115 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (13 pages, 583139 bytes).
 PDF statistics:
  647 PDF objects out of 1000 (max. 8388607)
  402 compressed objects within 5 object streams

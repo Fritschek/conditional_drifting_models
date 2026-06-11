@@ -701,7 +701,8 @@ The full-preset row improves neither conditional diagnostics nor downstream SER,
 \input{wflow_sspa_budget_table.tex}
 
 The downstream symbolic results in Table~\ref{tab:wflow-ser-ber} use the learned channel surrogate for autoencoder training and the analytic channel for final evaluation.
-The analytic row gives a separate analytic-channel training reference; finite seeded training can still produce small deviations from an ideal lower-bound interpretation.
+The analytic row reports autoencoder training through the analytic channel.
+Because training and evaluation are finite seeded runs, it can still deviate slightly from an ideal lower-bound interpretation.
 We treat SER as the primary symbolic metric because the autoencoder message alphabet is finite.
 BER is retained in the table as an additional bit-level diagnostic.
 Within the Sinkhorn ablation table, condition-wise Sinkhorn is the more reliable drifting variant and fixes the SSPA failure mode once the update budget is matched to the sharp same-condition field.
