@@ -1,0 +1,37 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Anchor-conditioned diagnostics for W-Flow variants.} Anchor SWD and Gaussian-W2 are computed from repeated samples at fixed channel inputs. Direct SWD and BER/SER are reported separately in Tables~\ref{tab:wflow-swd-baselines} and~\ref{tab:wflow-ser-ber}. Values are 100-seed means; lower is better.}
+\label{tab:wflow-conditional-metrics}
+\tablestyle{6.0pt}{1.03}
+\tablefontsize
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Channel & Variant & Anchor SWD & Anchor GW2 \\
+\midrule
+AWGN & Kernel target & 0.3711 & 1.2565 \\
+AWGN & Kernel joint & 0.1425 & 0.5936 \\
+AWGN & Joint Sinkhorn & 0.1199 & 0.4443 \\
+AWGN & Fiberwise Sinkhorn & 0.1158 & 0.4325 \\
+\midrule
+Rayleigh & Kernel target & 0.3757 & 1.2869 \\
+Rayleigh & Kernel joint & 0.1994 & 0.8198 \\
+Rayleigh & Joint Sinkhorn & 0.1723 & 0.6929 \\
+Rayleigh & Fiberwise Sinkhorn & 0.1112 & 0.3919 \\
+\midrule
+SSPA & Kernel target & 0.2118 & 0.7631 \\
+SSPA & Kernel joint & 0.2135 & 0.7685 \\
+SSPA & Joint Sinkhorn & 0.2174 & 0.7876 \\
+SSPA & Fiberwise Sinkhorn & 0.0996 & 1.0267 \\
+\midrule
+OptFib & Kernel target & 0.6412 & 1.0621 \\
+OptFib & Kernel joint & 0.4389 & 0.6400 \\
+OptFib & Joint Sinkhorn & 0.2555 & 0.3481 \\
+OptFib & Fiberwise Sinkhorn & 0.8314 & 1.5395 \\
+\midrule
+TDL & Kernel target & 0.3155 & 1.1632 \\
+TDL & Kernel joint & 0.2934 & 1.0939 \\
+TDL & Joint Sinkhorn & 0.3221 & 1.1871 \\
+TDL & Fiberwise Sinkhorn & 0.1134 & 0.5287 \\
+\bottomrule
+\end{tabular}
+\end{table*}
