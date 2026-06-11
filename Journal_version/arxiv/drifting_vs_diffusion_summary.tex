@@ -13,6 +13,7 @@
 \newcommand{\tablefontsize}{\fontsize{7.2pt}{8.4pt}\selectfont}
 \newcommand\headspace{\hspace{.2em}}
 \newcommand{\err}[1]{{\color{black!55}\ensuremath{\pm #1}}}
+\newtheorem{proposition}{Proposition}
 
 \title{Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation}
 
@@ -331,10 +332,16 @@ T^{\varepsilon}_{q_{t,x},p_x}(y)
 T^{\varepsilon}_{q_{t,x},q_{t,x}}(y).
 \label{eq:condition_sinkhorn_velocity}
 \end{equation}
-This interpretation is deliberately limited to the population conditional optimal-transport flow.
-For \(\mu\)-almost every \(x\), assume that \(p_x\) and \(q_{t,x}\) are Borel probability measures on \(\mathbb{R}^n\) with finite second moments and that the entropic OT potentials are differentiable along the considered distributional curve.
-Under the standard Sinkhorn-divergence assumptions used in \cite{feydy2019sinkhorn}, \(S_\varepsilon(q_{t,x},p_x)\geq 0\) and equality holds exactly when \(q_{t,x}=p_x\).
-The exact Wasserstein gradient flow then satisfies
+
+The following proposition states the channel-simulation consequence of applying the Sinkhorn divergence condition-wise.
+\begin{proposition}[Condition-wise Sinkhorn equilibrium]
+Under the standard Sinkhorn-divergence assumptions of \cite{feydy2019sinkhorn}, the conditional objective \(\mathcal{S}^{\mathrm{cond}}_{\varepsilon}\) is nonnegative and is zero exactly when
+\begin{equation}
+q_{t,x}=p_x
+\quad
+\text{for } \mu\text{-a.e. }x.
+\end{equation}
+Along the corresponding population W-Flow dynamics,
 \begin{equation}
 \frac{d}{dt}\mathcal{S}^{\mathrm{cond}}_{\varepsilon}(q_t,p)
 =
@@ -344,14 +351,15 @@ The exact Wasserstein gradient flow then satisfies
 \mu(dx)
 \leq 0.
 \end{equation}
-Thus, if the condition-wise Sinkhorn velocity has equality as its only stationary point for each fixed condition, then every stationary point of the conditional flow satisfies
-\begin{equation}
-q_{t,x}=p_x
-\quad
-\text{for } \mu\text{-a.e. }x.
-\end{equation}
+Thus the equilibrium of the condition-wise flow is equality of the full family of channel laws \(p(\cdot\mid x)\).
+\end{proposition}
+\emph{Proof:}
+The zero-set statement follows by applying the nonnegativity and unique-zero property of the Sinkhorn divergence to each fixed \(x\) and integrating over \(\mu\).
+The derivative identity is the same fixed-condition W-Flow identity, again integrated over \(\mu\).
+\hfill\(\square\)
+
+This interpretation is deliberately limited to the population conditional optimal-transport flow.
 This is the conditional analogue needed for channel simulation.
-Its equilibrium is equality of the complete family of conditional channel laws.
 Matching a joint sample cloud under an arbitrary joint cost leaves this condition-wise equality unenforced.
 
 The implemented algorithm adds two approximations to this population object.

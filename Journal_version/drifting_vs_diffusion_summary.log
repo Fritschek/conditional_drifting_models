@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 09:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 09:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -407,45 +407,47 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip58
 )
+\c@proposition=\count319
+
 (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count319
+\l__color_backend_stack_int=\count320
 )
 (./drifting_vs_diffusion_summary.aux)
 \openout1 = `drifting_vs_diffusion_summary.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
 
 -- Lines per column: 58 (exact).
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count320
+\scratchcounter=\count321
 \scratchdimen=\dimen258
 \scratchbox=\box59
-\nofMPsegments=\count321
-\nofMParguments=\count322
+\nofMPsegments=\count322
+\nofMParguments=\count323
 \everyMPshowfont=\toks26
-\MPscratchCnt=\count323
+\MPscratchCnt=\count324
 \MPscratchDim=\dimen259
-\MPnumerator=\count324
-\makeMPintoPDFobject=\count325
+\MPnumerator=\count325
+\makeMPintoPDFobject=\count326
 \everyMPtoPDFconversion=\toks27
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -456,19 +458,19 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 22.
+Package hyperref Info: Link coloring OFF on input line 23.
 
 (./drifting_vs_diffusion_summary.out) (./drifting_vs_diffusion_summary.out)
 \@outlinefile=\write3
 \openout3 = `drifting_vs_diffusion_summary.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 28.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 28.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -481,11 +483,11 @@ onts/enc/dvips/base/8r.enc}
 Underfull \vbox (badness 2903) has occurred while \output is active []
 
  [2]
-LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 194.
+LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 195.
 
 [3] [4] [5] (./simulation_setup_table.tex)
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
-59.
+67.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -494,12 +496,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6]
 (./wflow_swd_baseline_table.tex) [7] (./timing_table_cuda.tex)
-<figures/conditional_fiber_diagnostic_sspa.pdf, id=252, 561.29652pt x 473.03369
+<figures/conditional_fiber_diagnostic_sspa.pdf, id=253, 561.29652pt x 473.03369
 pt>
 File: figures/conditional_fiber_diagnostic_sspa.pdf Graphic file (type pdf)
 <use figures/conditional_fiber_diagnostic_sspa.pdf>
 Package pdftex.def Info: figures/conditional_fiber_diagnostic_sspa.pdf  used on
- input line 663.
+ input line 671.
 (pdftex.def)             Requested size: 340.56189pt x 287.01271pt.
 
 Underfull \vbox (badness 2277) has occurred while \output is active []
@@ -507,7 +509,7 @@ Underfull \vbox (badness 2277) has occurred while \output is active []
 
 (./wflow_conditional_metric_table.tex) (./wflow_sspa_budget_table.tex) [8]
 (./wflow_coding_table.tex) (./wflow_all_ser_curve_figures.tex
-<figures/wflow_all_ser_curves.pdf, id=275, 516.70102pt x 358.16179pt>
+<figures/wflow_all_ser_curves.pdf, id=276, 516.70102pt x 358.16179pt>
 File: figures/wflow_all_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_all_ser_curves.pdf>
 Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
@@ -515,7 +517,7 @@ Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
 (pdftex.def)             Requested size: 464.39685pt x 321.91087pt.
 )
 (./equal_wallclock_symbolic_table.tex) (./wflow_curve_figures.tex [9]
-<figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf, id=285, 255.39648pt
+<figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf, id=286, 255.39648pt
  x 319.48222pt>
 File: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf Graphic file (t
 ype pdf)
@@ -541,10 +543,10 @@ hanged.
 (rerunfilecheck)             Checksum: 4508E543EEE409EB092DB08E7869B73B;4077.
  ) 
 Here is how much of TeX's memory you used:
- 11611 strings out of 469515
- 179577 string characters out of 5470807
- 648178 words of memory out of 5000000
- 39968 multiletter control sequences out of 15000+600000
+ 11620 strings out of 469515
+ 179737 string characters out of 5470807
+ 648257 words of memory out of 5000000
+ 39977 multiletter control sequences out of 15000+600000
  681829 words of font info for 146 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,15n,83p,748b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -566,15 +568,16 @@ dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 ></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/
-fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times
-/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/shar
-e/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type
-1/urw/times/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (13 pages, 573400 bytes).
+xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/
+fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/typ
+e1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.p
+fb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-d
+ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/tim
+es/utmri8a.pfb>
+Output written on drifting_vs_diffusion_summary.pdf (13 pages, 581848 bytes).
 PDF statistics:
- 642 PDF objects out of 1000 (max. 8388607)
- 400 compressed objects within 4 object streams
+ 648 PDF objects out of 1000 (max. 8388607)
+ 403 compressed objects within 5 object streams
  108 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
