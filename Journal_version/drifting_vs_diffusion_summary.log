@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 10:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 10:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -480,38 +480,47 @@ onts/enc/dvips/base/8r.enc}
 
 
 ]
-Underfull \vbox (badness 2903) has occurred while \output is active []
-
- [2]
-LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 195.
-
-[3] [4] [5] (./simulation_setup_table.tex)
+[2] [3] [4] [5] (./simulation_setup_table.tex
+LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 7.
+)
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
-67.
+40.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) (./model_size_table.tex)
-[6] (./wflow_swd_baseline_table.tex) [7] (./timing_table_cuda.tex)
-<figures/conditional_fiber_diagnostic_sspa.pdf, id=253, 561.29652pt x 473.03369
+[6] (./wflow_swd_baseline_table.tex) (./timing_table_cuda.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+<figures/conditional_fiber_diagnostic_sspa.pdf, id=251, 561.29652pt x 473.03369
 pt>
 File: figures/conditional_fiber_diagnostic_sspa.pdf Graphic file (type pdf)
 <use figures/conditional_fiber_diagnostic_sspa.pdf>
 Package pdftex.def Info: figures/conditional_fiber_diagnostic_sspa.pdf  used on
- input line 673.
+ input line 644.
 (pdftex.def)             Requested size: 340.56189pt x 287.01271pt.
 
-(./wflow_conditional_metric_table.tex) (./wflow_sspa_budget_table.tex [8])
-(./wflow_coding_table.tex) (./wflow_all_ser_curve_figures.tex
-<figures/wflow_all_ser_curves.pdf, id=276, 516.70102pt x 358.16179pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+(./wflow_conditional_metric_table.tex) [8] (./wflow_sspa_budget_table.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+(./wflow_coding_table.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9 <./figures/conditional_fiber_diagnostic_sspa.pdf>] (./wflow_all_ser_curve_f
+igures.tex
+<figures/wflow_all_ser_curves.pdf, id=335, 516.70102pt x 358.16179pt>
 File: figures/wflow_all_ser_curves.pdf Graphic file (type pdf)
 <use figures/wflow_all_ser_curves.pdf>
 Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
 .
 (pdftex.def)             Requested size: 464.39685pt x 321.91087pt.
-)
-(./equal_wallclock_symbolic_table.tex) (./wflow_curve_figures.tex [9]
-<figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf, id=283, 255.39648pt
+) (./equal_wallclock_symbolic_table.tex) (./wflow_curve_figures.tex
+<figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf, id=337, 255.39648pt
  x 319.48222pt>
 File: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf Graphic file (t
 ype pdf)
@@ -519,11 +528,9 @@ ype pdf)
 Package pdftex.def Info: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.
 pdf  used on input line 14.
 (pdftex.def)             Requested size: 211.67908pt x 264.79967pt.
-) [10 <./figures/conditional_fiber_diagnostic_sspa.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11 <./figures/wflow_all_ser_curves.pdf>] (./drifting_vs_diffusion_summary.bbl
- [12 <./figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf>]) [13
+) [10]
+(./drifting_vs_diffusion_summary.bbl [11 <./figures/wflow_all_ser_curves.pdf>]
+[12 <./figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf>]) [13
 
 ]
 (./drifting_vs_diffusion_summary.aux)
@@ -536,13 +543,13 @@ hanged.
 (rerunfilecheck)             Checksum: 4508E543EEE409EB092DB08E7869B73B;4077.
  ) 
 Here is how much of TeX's memory you used:
- 11620 strings out of 469515
- 179737 string characters out of 5470807
- 647981 words of memory out of 5000000
- 39977 multiletter control sequences out of 15000+600000
+ 11617 strings out of 469515
+ 179698 string characters out of 5470807
+ 642191 words of memory out of 5000000
+ 39976 multiletter control sequences out of 15000+600000
  681829 words of font info for 146 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,15n,83p,748b,475s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,15n,83p,747b,592s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/share/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-dist/fonts/type1/public/a
@@ -567,10 +574,10 @@ e1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.p
 fb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (13 pages, 583139 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (13 pages, 580298 bytes).
 PDF statistics:
- 647 PDF objects out of 1000 (max. 8388607)
- 402 compressed objects within 5 object streams
- 108 named destinations out of 1000 (max. 500000)
+ 644 PDF objects out of 1000 (max. 8388607)
+ 400 compressed objects within 4 object streams
+ 106 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 

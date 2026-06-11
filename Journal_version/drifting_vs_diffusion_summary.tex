@@ -85,7 +85,7 @@ The main contributions are summarized as follows.
 \begin{itemize}
 \item We formulate condition-wise Sinkhorn drifting for learned channel simulation by integrating Sinkhorn divergences over the fixed-input conditional laws \(p(\cdot\mid x)\).
 \item We connect this objective to a conditional Wasserstein-flow velocity, then state how the practical method differs from the population flow through finite-sample barycentric estimation and projected detached-target neural training.
-\item We implement conditional drifting in direct-output and residual parameterizations. The central geometric comparison is joint/global Sinkhorn versus condition-wise Sinkhorn under a matched one-shot generator.
+\item We implement direct-output conditional drifting and compare joint/global Sinkhorn transport with condition-wise Sinkhorn transport under a matched one-shot generator.
 \item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional WGAN reference models on AWGN, Rayleigh fading, SSPA, and compact TDL channel studies wherever the protocols overlap.
 \item We evaluate channel surrogates with direct SWD, anchor-conditioned moment metrics, downstream SER, bit error rate (BER), and timing measurements, showing that communication usefulness is better reflected by conditional and downstream metrics than by global SWD alone.
 \end{itemize}
@@ -171,48 +171,23 @@ Let \(x \in \mathbb{R}^n\) denote the transmitted channel input and \(y \in \mat
 The objective is to learn a conditional generator that reproduces the channel law given \(x\).
 In this setting, conditioning enters through the transmitted symbol, while stochasticity is carried by a latent variable \(z \sim \mathcal{N}(0, I)\).
 
-Two target parameterizations are useful in the experiments.
-The first is the direct channel-output formulation, in which the generator approximates \(p(y \mid x)\) and predicts \(\hat{y} = g_\theta(x, z)\).
-The second is the residual formulation, in which
+The experiments use a direct channel-output formulation.
+The generator approximates \(p(y \mid x)\) and predicts
 \begin{equation}
-e = y - x
+\hat{y} = g_\theta(x,z).
 \end{equation}
-is modeled instead, so that the generator approximates \(p(e \mid x)\) and the channel output is reconstructed as
-\begin{equation}
-\hat{y} = x + \hat{e}.
-\end{equation}
-The direct formulation learns the channel law itself.
-The residual formulation injects the inductive bias that the channel output can be understood as the transmitted symbol plus a structured perturbation.
-In the experiments below, the direct formulation aligns naturally with direct-output diffusion and WGAN baselines.
-The residual formulation is often easier to optimize, although it can fall short on nonlinear channels.
-
-\begin{table}[t]
-\caption{\textbf{Two target parameterizations for conditional drifting.}}
-\label{tab:drifting_modes}
-\centering
-\tablestyle{5pt}{1.03}
-\tablefontsize
-\begin{tabular}{@{}p{1.0cm}p{1.50cm}p{1.60cm}p{2.00cm}@{}}
-\toprule
-Mode & Output of \(g_\theta\) & Target object & Short interpretation \\
-\midrule
-Direct & \(\hat y\) & Learn \(p(y \mid x)\) & Learns the channel law directly\\
-Residual & \(\hat e\), then \(\hat y=x+\hat e\) & Learn \(p(e \mid x)\) with \(e=y-x\) & Learns the channel perturbation\\
-\bottomrule
-\end{tabular}
-\end{table}
+This choice aligns the drifting generator with the direct-output diffusion and WGAN baselines and with the downstream channel-implant evaluation, where the learned surrogate is used as a simulator for \(y\) given \(x\).
+Residual-output variants were examined during development and left out of the final benchmark after weaker direct-output and downstream channel-implant performance.
 
 \subsection{Conditional drifting model}
   We use a practical conditional adaptation inspired by \cite{drifting}.
   To avoid confusion with the communication input symbol \(x\), we use \(u\) above for the generic
   sample variable in the abstract formulation and reserve \(x\) below for the transmitted symbol.
-  In our implementation, drifting can be applied either in direct-output space or in residual space.
-  In direct mode, the generator predicts \(\hat y = g_\theta(x,z)\). In residual mode, it predicts
-  \(\hat e = g_\theta(x,z)\) with reconstruction \(\hat y = x + \hat e\), where
+  In our implementation, the generator predicts \(\hat y = g_\theta(x,z)\), where
   \begin{equation}
   z \sim \mathcal{N}(0, I).
   \end{equation}
-  In both cases, \(g_\theta\) is implemented as a two-hidden-layer multilayer perceptron with hidden
+  The network is implemented as a two-hidden-layer multilayer perceptron with hidden
   width \(128\), latent dimension \(16\), and SiLU activations.
 \begin{equation}
 [x, z]
@@ -227,7 +202,7 @@ Residual & \(\hat e\), then \(\hat y=x+\hat e\) & Learn \(p(e \mid x)\) with \(e
 \rightarrow
 \mathrm{Linear}.
 \end{equation}
-The training target is formed from an attraction--repulsion drift field in the chosen target space. This is a concrete channel-specific instantiation of the generic field \(V_{p,q}\).
+The training target is formed from an attraction--repulsion drift field in direct output space. This is a concrete channel-specific instantiation of the generic field \(V_{p,q}\).
 Given generated samples \(G = \{g_i\}\) and positive samples \(P = \{p_j\}\), we compute
 \begin{equation}
 V(g_i)
@@ -242,7 +217,7 @@ V(g_i)
 \right),
 \end{equation}
 where \(w^{(P)}\) and \(w^{(G)}\) are row-normalized RBF kernel weights.
-The first term attracts each generated sample toward a local barycenter of true samples in the chosen target space, and the second term repels it from nearby generated samples to reduce collapse.
+The first term attracts each generated sample toward a local barycenter of true output samples, and the second term repels it from nearby generated samples to reduce collapse.
 This yields a detached target
 \begin{equation}
 \tilde{g}_i
@@ -259,7 +234,7 @@ and the generator is optimized by
 g_i - \tilde{g}_i
 \right\|_2^2.
 \end{equation}
-The generic update \(u \mapsto u + \eta V_{p,q}(u)\) from the drifting formulation is realized here with a kernel-based drift field estimated directly from minibatches of true and generated samples in the selected target space.
+The generic update \(u \mapsto u + \eta V_{p,q}(u)\) from the drifting formulation is realized here with a kernel-based drift field estimated directly from minibatches of true and generated output samples.
 This empirical field acts as a kernel particle interaction rule.
 The attraction term pulls generated samples toward the target sample cloud, while the repulsion term prevents generated particles from collapsing onto a few modes.
 In this sense, the method is related in spirit to kernel-based distribution shaping and MMD-like matching.
@@ -271,7 +246,7 @@ These settings were chosen because they produced stable training behavior and ma
 \paragraph{Conditioning-aware kernel variant.}
 For the enhanced direct-output drifting model, we replace the target-only kernel by a kernel on joint condition-target pairs.
 Instead of computing sample interactions from \(k(y_i,y_j)\), we compute them from \(k((x_i,y_i),(x_j,y_j))\), so that attraction and repulsion depend on similarity in both the channel input and the output space.
-In the direct-output setting, the target kernel can also incorporate residual similarity, yielding a drift field that is more closely aligned with the conditional channel structure.
+This aligns the drift field more closely with the conditional channel structure.
 The generator architecture is unchanged.
 
 This kernel rule is the conditioning-aware baseline used for the direct-output drifting variants.
@@ -301,7 +276,7 @@ S_{\varepsilon}\!\left(q_{\theta,x},p_x\right)
 \mu(dx),
 \label{eq:conditional_sinkhorn}
 \end{equation}
-where the Sinkhorn divergence is computed separately for each fixed transmitted symbol, either on \(y\) in direct-output mode or on \(e=y-x\) in residual mode.
+where the Sinkhorn divergence is computed separately over output samples for each fixed transmitted symbol.
 For brevity, we call the output cloud at a fixed transmitted symbol an output fiber.
 In measure-theoretic terms, \(p_x=p(\cdot\mid x)\) is the conditional measure over that fiber.
 Throughout the paper we refer to the resulting estimator as condition-wise Sinkhorn drifting.
@@ -441,8 +416,7 @@ The local formulation is included only as a measured-data direction.
 Bandwidth selection and neighborhood bias remain open.
 
 The major operational advantage is straightforward.
-Once training is complete, sampling requires only a single evaluation of \(g_\theta(x,z)\).
-In residual mode, this produces a channel residual sample \(\hat e\) followed by reconstruction \(\hat y=x+\hat e\). In direct mode, it produces \(\hat y\) directly.
+Once training is complete, sampling requires only a single evaluation of \(g_\theta(x,z)\), which produces \(\hat y\) directly.
 Sampling avoids reverse chains, ODE solvers, and per-sample iterative schedules at inference.
 
 \section{Experimental Setup}
@@ -478,7 +452,6 @@ u_k,v_k \overset{\text{i.i.d.}}{\sim} \mathcal{N}(0,1),
 and \(n \sim \mathcal{N}(0,\sigma^2 I)\).
 
 Each real component is therefore scaled by an independent Rayleigh-distributed magnitude before noise is added.
-This multiplicative channel is correspondingly less aligned with a pure residual perturbation view.
 As implemented here, Rayleigh is a real-valued vector channel.
 The paired-I/Q complex representation is used for SSPA and TDL.
 
@@ -566,7 +539,6 @@ Reported downstream uncertainty is taken over the complete seeded training and e
 \paragraph{Model settings.}
 Drifting uses a conditional MLP with latent dimension \(16\), hidden width \(128\), two hidden layers, \texttt{SiLU} activations, and Adam with learning rate \(10^{-3}\).
 The base drifting objective uses drift scale \(1.0\), median-heuristic bandwidth selection, minimum bandwidth \(0.2\), maximum drift norm \(2.0\), and repulsive weight \(1.0\).
-We train both parameterizations, direct drifting with target \(y\) and residual drifting with target \(e=y-x\).
 The Sinkhorn drift-field variants use the same direct-output generator architecture and detached-target update, but replace the training drift field.
 The joint Sinkhorn row uses a Sinkhorn/W-Flow drift in joint condition-output features, while the condition-wise row uses the per-anchor conditional Sinkhorn field in \eqref{eq:condition_sinkhorn_velocity}.
 Unless otherwise stated, Sinkhorn variants use \(10\) Sinkhorn iterations, automatic entropic scale selection with minimum \(\varepsilon=10^{-3}\), four generated samples, four positive channel samples, and four generated reference samples per condition anchor.
@@ -598,8 +570,8 @@ The Sinkhorn rows have the same parameter count as direct drifting because the t
 
 \subsection{Evaluation metric}
 The diffusion/WGAN/drifting reference comparison emphasizes generator-level distributional accuracy and timing, while the Sinkhorn drift-field ablation adds anchor-conditioned diagnostics and downstream symbolic SER/BER.
-The primary metric is sliced Wasserstein distance (SWD), computed in the target space used by each benchmark path.
-For direct-output models, we report \(\mathrm{SWD}\!\left(\{\hat{y}_i\}, \{y_i\}\right)\). For residual models, we report \(\mathrm{SWD}\!\left(\{\hat{e}_i\}, \{e_i\}\right)\).
+The primary generator metric is direct-output sliced Wasserstein distance (SWD).
+For generated channel outputs, we report \(\mathrm{SWD}\!\left(\{\hat{y}_i\}, \{y_i\}\right)\).
 Given true samples \(P=\{v_i\}_{i=1}^N\) and generated samples \(Q=\{\hat v_i\}_{i=1}^N\), SWD is estimated by drawing random unit directions \(\theta_m\), projecting both clouds onto those directions, computing the one-dimensional Wasserstein distance for each projection, and averaging over projections:
 \begin{equation*}
 \mathrm{SWD}(P,Q)
@@ -621,7 +593,6 @@ For communication use, the evaluation priority is as follows.
 Downstream SER and BER under analytic-channel evaluation are the closest checks of communication usefulness.
 Anchor-conditioned metrics are the next diagnostic because they probe repeated outputs at fixed transmitted symbols.
 Global direct-output SWD is mainly a generator-level comparability metric.
-Residual-space SWD is kept as a parameterization diagnostic for residual-mode models.
 
 
 \section{Benchmark Results}
@@ -742,9 +713,7 @@ One-shot Sinkhorn is most attractive when repeated channel calls dominate and th
 The main methodological lesson is that channel surrogates should be judged by conditional-law quality and downstream communication metrics in addition to global sample-cloud agreement.
 
 \subsection{Metric-space dependence}
-Direct and residual drifting behave differently across channel classes and evaluation spaces.
-Residual-space SWD is useful for checking a residual-mode generator and remains a secondary diagnostic for a channel simulator whose output is ultimately \(y\).
-The W-Flow run reinforces this metric-dependence message.
+The W-Flow run reinforces the metric-dependence of channel-surrogate evaluation.
 Joint Sinkhorn and condition-wise Sinkhorn can swap order depending on whether the metric is global SWD, anchor-conditioned SWD, or downstream BER/SER\@.
 We therefore report direct-output SWD, anchor-conditioned moment metrics, and downstream coding metrics side by side.
 Hyperparameter selection from a single global SWD score would miss these differences.
@@ -757,7 +726,7 @@ For that regime, the local conditional Sinkhorn approximation in Sec.~II estimat
 This keeps the fixed-input geometry intact, but introduces bandwidth selection and neighborhood bias.
 The present experiments do not evaluate this measured-data approximation.
 Validating it for measured-channel data is left for future work.
-Practical measured-channel simulators may also need transport features that encode phase, amplitude, residual structure, channel-state information, or decoder-relevant projections.
+Practical measured-channel simulators may also need transport features that encode phase, amplitude, input-output geometry, channel-state information, or decoder-relevant projections.
 
 \section{Conclusion}
 This paper makes one-shot drifting applicable to learned channel simulation by replacing unconditional transport with condition-wise Sinkhorn transport over fixed-input conditional output laws.
