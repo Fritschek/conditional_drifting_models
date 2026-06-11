@@ -586,6 +586,7 @@ The SER curves add WGAN and DDIM-100 when all corresponding channel implants are
 The main ablation claim is the comparison between naive/global transport and the proposed condition-wise Sinkhorn transport.
 
 As an additional diagnostic, Table~\ref{tab:model-size} reports inference-network parameter counts used in this benchmark.
+The Sinkhorn rows have the same parameter count as direct drifting because the transport computation changes the training update, not the deployed generator.
 
 \input{model_size_table.tex}
 \paragraph{Seeding and reporting.}
