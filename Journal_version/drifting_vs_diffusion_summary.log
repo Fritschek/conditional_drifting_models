@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 09:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 09:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -487,7 +487,7 @@ LaTeX Font Info:    Calculating math sizes for size <7.2> on input line 195.
 
 [3] [4] [5] (./simulation_setup_table.tex)
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
-67.
+68.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -501,13 +501,13 @@ pt>
 File: figures/conditional_fiber_diagnostic_sspa.pdf Graphic file (type pdf)
 <use figures/conditional_fiber_diagnostic_sspa.pdf>
 Package pdftex.def Info: figures/conditional_fiber_diagnostic_sspa.pdf  used on
- input line 671.
+ input line 674.
 (pdftex.def)             Requested size: 340.56189pt x 287.01271pt.
 
-Underfull \vbox (badness 2277) has occurred while \output is active []
-
-
 (./wflow_conditional_metric_table.tex) (./wflow_sspa_budget_table.tex) [8]
+Underfull \vbox (badness 2197) has occurred while \output is active []
+
+
 (./wflow_coding_table.tex) (./wflow_all_ser_curve_figures.tex
 <figures/wflow_all_ser_curves.pdf, id=276, 516.70102pt x 358.16179pt>
 File: figures/wflow_all_ser_curves.pdf Graphic file (type pdf)
@@ -517,7 +517,7 @@ Package pdftex.def Info: figures/wflow_all_ser_curves.pdf  used on input line 6
 (pdftex.def)             Requested size: 464.39685pt x 321.91087pt.
 )
 (./equal_wallclock_symbolic_table.tex) (./wflow_curve_figures.tex [9]
-<figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf, id=286, 255.39648pt
+<figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf, id=285, 255.39648pt
  x 319.48222pt>
 File: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf Graphic file (t
 ype pdf)
@@ -525,15 +525,11 @@ ype pdf)
 Package pdftex.def Info: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.
 pdf  used on input line 14.
 (pdftex.def)             Requested size: 211.67908pt x 264.79967pt.
-) [10 <./figures/conditional_fiber_diagnostic_sspa.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+) [10 <./figures/conditional_fiber_diagnostic_sspa.pdf>] [11 <./figures/wflow_a
+ll_ser_curves.pdf>] (./drifting_vs_diffusion_summary.bbl [12 <./figures/turboae
+_awgn_l64_ber_bler_curve_eval2k_column.pdf>]) [13
 
- [11 <./figures/wflow_all_ser_curves.pdf>] [12 <./figures/turboae_awgn_l64_ber_
-bler_curve_eval2k_column.pdf>] (./drifting_vs_diffusion_summary.bbl) [13
-
-
-]
-(./drifting_vs_diffusion_summary.aux)
+] (./drifting_vs_diffusion_summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -545,7 +541,7 @@ hanged.
 Here is how much of TeX's memory you used:
  11620 strings out of 469515
  179737 string characters out of 5470807
- 648257 words of memory out of 5000000
+ 647650 words of memory out of 5000000
  39977 multiletter control sequences out of 15000+600000
  681829 words of font info for 146 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -574,7 +570,7 @@ e1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.p
 fb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (13 pages, 581848 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (13 pages, 583168 bytes).
 PDF statistics:
  648 PDF objects out of 1000 (max. 8388607)
  403 compressed objects within 5 object streams

@@ -79,7 +79,7 @@ The channel-specific contribution is to constrain the transport problem to repea
 The emphasis of this study is on generator-level distributional accuracy, computational tradeoffs, and downstream channel-implant checks.
 A full communication-system design study over all modulation and coding regimes is outside the present scope.
 The condition-wise Sinkhorn estimator also assumes simulator-style access to repeated outputs at the same transmitted symbol.
-Measured datasets with only one observation per condition require local conditional approximations, which we discuss as a limitation and future extension.
+Measured datasets with only one observation per condition require local conditional approximations, which we formulate only as a limitation and future extension.
 
 The main contributions are summarized as follows.
 \begin{itemize}
@@ -438,7 +438,8 @@ Equivalently, a generated local reference law
 can be used when the learned generator should match the same local conditioning bandwidth as the measured target estimate.
 The bandwidth \(h\) controls the usual bias--variance tradeoff: small neighborhoods preserve conditioning but increase estimator variance, while large neighborhoods reduce variance but approach a global transport problem.
 The experiments in this paper use simulator access and therefore the exact repeated-condition estimator.
-The local formulation is the intended measured-data extension and preserves the main constraint that couplings should move output samples locally in \(y\), while keeping the condition variable fixed.
+The local formulation is included only as a measured-data direction.
+Bandwidth selection and neighborhood bias remain open.
 
 The major operational advantage is straightforward.
 Once training is complete, sampling requires only a single evaluation of \(g_\theta(x,z)\).
@@ -650,6 +651,8 @@ It includes drawing the conditioning inputs and evaluating the generator.
 For diffusion rows, inference includes the complete DDPM or DDIM denoising trajectory and the same conditioning overhead.
 The total column adds projected training time to the time needed to generate the evaluation-sample budget listed in Table~\ref{tab:simulation-setup}.
 On AWGN, Rayleigh, and SSPA, the condition-wise Sinkhorn row is faster to train than joint Sinkhorn because it solves many small same-condition transport problems instead of forming a global minibatch interaction matrix.
+This agrees with the leading coupling cost: with \(B\) anchors, \(K_g\) generated particles, \(K_p\) positives, \(K_r\) generated references, and \(I\) Sinkhorn iterations, condition-wise Sinkhorn scales as \(O(I B K_g(K_p+K_r))\), while joint Sinkhorn over the expanded batch scales as \(O(I B^2 K_g(K_p+K_r))\).
+At inference, W-Flow, direct drifting, and WGAN retain one generator call per sample, whereas DDPM/DDIM use \(T\) denoising-network evaluations.
 
 \input{timing_table_cuda.tex}
 
@@ -691,6 +694,7 @@ The compact condition-wise Sinkhorn result is aggregated over the same 30 seeds 
 The first two rows are single-seed local sanity checks of undertraining and are not used for the final performance claims.
 The long full-preset row is included as a failure mode of the same corrected field.
 With fixed drift scale and only \(K_g=K_p=K_r=4\) particles per anchor, the sharp same-condition field is a poor long-horizon optimizer unless stopped by conditional diagnostics.
+The failure is best interpreted as optimizer-budget sensitivity of the finite-particle field: after the anchor cloud reaches the analytic floor, continued few-particle updates can over-correct the saturated amplitude law and increase conditional mean and spread errors.
 It improves neither conditional diagnostics nor downstream SER, so the compact row is the reported SSPA operating point.
 
 \input{wflow_sspa_budget_table.tex}
@@ -731,6 +735,8 @@ Condition-wise Sinkhorn drifting targets a low-latency conditional-surrogate ope
 Diffusion remains the strongest learned reference on several hard downstream SER curves and pays for that fidelity through iterative sampling.
 The one-shot drifting path uses a single generator evaluation and preserves the fixed-input structure of the channel law.
 This makes it relevant when the learned channel is embedded in an inner training loop, where surrogate calls can dominate the computational budget.
+Diffusion is the safer choice when final standalone fidelity dominates and its sampler cost is acceptable.
+One-shot Sinkhorn is most attractive when repeated channel calls dominate and the observed SER gap is within tolerance.
 The main methodological lesson is that channel surrogates should be judged by conditional-law quality and downstream communication metrics in addition to global sample-cloud agreement.
 
 \subsection{Metric-space dependence}
@@ -747,7 +753,7 @@ Measured channels are harder.
 With only one observation per \(x\), the exact conditional law \(p(\cdot\mid x)\) cannot be observed at a point.
 For that regime, the local conditional Sinkhorn approximation in Sec.~II estimates the target fixed-input output law from kernel-weighted neighborhoods in condition space and still solves the transport problem only in the output coordinate.
 This keeps the fixed-input geometry intact, but introduces bandwidth selection and neighborhood bias.
-This measured-data extension is not evaluated in the present experiments and should be regarded as future work rather than a validated measured-channel solution.
+We do not evaluate this measured-data approximation in the present experiments, so it should be regarded as future work rather than a validated measured-channel solution.
 Practical measured-channel simulators may also need transport features that encode phase, amplitude, residual structure, channel-state information, or decoder-relevant projections.
 
 \section{Conclusion}
@@ -764,7 +770,6 @@ The SSPA study also shows that optimizer budget is part of the drift-field desig
 The corrected same-condition field works well after convergence, and the full diffusion-style preset can degrade this sharper one-step field.
 Across the full set of results, global SWD, anchor-conditioned metrics, and downstream coding metrics can disagree.
 This makes metric choice a central part of learned channel simulation and motivates future work on channel-specific transport features and local conditional Sinkhorn approximations for measured channels.
-\clearpage
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 
