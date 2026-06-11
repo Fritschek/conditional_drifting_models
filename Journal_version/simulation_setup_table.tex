@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering
-\caption{\textbf{Simulation setup used for the journal experiments.} The listed \(E_b/N_0\) values are the nominal channel-model and autoencoder training points. Generator-level AWGN/Rayleigh/SSPA reference rows use ten seeds. W-Flow rows use 100 seeds except for the 30-seed SSPA update-budget-controlled operating point. All SWD evaluations use 128 random projections.}
+\caption{\textbf{Simulation setup used for the journal experiments.} The listed \(E_b/N_0\) values are the nominal channel-model and autoencoder training points. Generator-level AWGN/Rayleigh/SSPA reference rows use ten seeds; TDL reference rows use 30 checkpoint evaluations. W-Flow rows use 100 seeds except for the 30-seed SSPA update-budget-controlled operating point. All SWD evaluations use 128 random projections.}
 \label{tab:simulation-setup}
 \tablestyle{4.2pt}{1.04}
 \tablefontsize
@@ -12,7 +12,7 @@ AWGN & 7 & 16 & \(4/7\) & \(5\,\mathrm{dB}\) & \(10^7 / 5000 / 30\) & \(10^6\) &
 Rayleigh & 7 & 16 & \(4/7\) & \(12\,\mathrm{dB}\) & \(10^7 / 5000 / 30\) & \(10^6\) & Reference + W-Flow \\
 SSPA reference & 8 & 64 & \(6/8\) & \(8\,\mathrm{dB}\) & \(10^7 / 4096 / 160\) & \(10^6\) & DDPM/DDIM/WGAN + direct drifting \\
 SSPA W-Flow operating point & 8 & 64 & \(6/8\) & \(8\,\mathrm{dB}\) & \(1.2{\times}10^5 / 4096 / 160\) & \(10^6\) & Reported condition-wise Sinkhorn \\
-TDL & 8 & 16 & \(4/8\) & \(10\,\mathrm{dB}\) & \(1.2{\times}10^5 / 512 / 60\) & \(10^5\) & W-Flow + downstream curves \\
+TDL & 8 & 16 & \(4/8\) & \(10\,\mathrm{dB}\) & \(1.2{\times}10^5 / 512 / 60\) & \(10^5\) & Reference + W-Flow \\
 \bottomrule
 \end{tabular}
 \end{table*}

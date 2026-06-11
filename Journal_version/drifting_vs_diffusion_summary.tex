@@ -426,8 +426,8 @@ All channels are implemented as real-valued maps \(x\mapsto y\), but the coordin
 AWGN and Rayleigh use real-valued vectors directly and have dimension \(n=7\) in the generator-level benchmark.
 SSPA and TDL use paired in-phase/quadrature coordinates with \(n=8\), corresponding to four complex symbols.
 Noise variables are sampled independently across real coordinates unless the deterministic channel transformation or tapped-delay convolution introduces coupling.
-The generator-level reference comparison is reported on AWGN, Rayleigh, and SSPA, where matched DDPM, DDIM, WGAN, and direct-drifting reference runs are available.
-TDL is included in the Sinkhorn drift-field ablation and downstream channel-implant study as a compact wireless channel with memory.
+The generator-level comparison is reported on AWGN, Rayleigh, SSPA, and TDL.
+AWGN, Rayleigh, and SSPA include the plain direct-drifting reference row, while the TDL drifting-family comparison focuses on the two Sinkhorn drift fields used in the final ablation.
 For TDL, the DDPM, DDIM, and WGAN direct-output SWD rows are evaluated from the trained baseline checkpoints used in the SER-curve study.
 
 \textbf{AWGN:}
@@ -514,8 +514,7 @@ It is intentionally smaller than a full OFDM or long-block TDL evaluation.
 
 \subsection{Training protocol}
 The experiments are organized into two complementary protocols.
-First, the generator-level protocol compares the proposed drifting family against the established conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, and SSPA.
-TDL is included in the final reported benchmark through the Sinkhorn drift-field ablation, the direct-SWD comparison, and the downstream SER curves.
+First, the generator-level protocol compares one-shot drifting-family generators against established conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, SSPA, and TDL.
 Second, the drift-field ablation holds the drifting network fixed and compares global/joint Sinkhorn drifting with condition-wise Sinkhorn drifting.
 Target-space and conditioning-aware kernel drifts were run as supporting controls, but the main tables keep the transport comparison focused.
 This second protocol is reported over 100 seeds for the main drift-field runs and is evaluated with direct SWD, anchor-conditioned metrics, and downstream symbolic SER/BER.
@@ -524,7 +523,6 @@ The DDPM, DDIM, and WGAN rows provide best-effort reference baselines using stab
 A matched-capacity ranking against drifting would require an additional equal-parameter and equal-budget study.
 For SSPA, we additionally report a 30-seed update-budget-controlled condition-wise Sinkhorn operating point because the corrected same-condition transport field saturates after far fewer optimizer updates than the long diffusion-style SSPA preset.
 The selected operating point follows the observed W-Flow training behavior and the anchor-conditioned diagnostics.
-The TDL channel is included in the drift-field study and in the downstream SER curves with diffusion and WGAN references.
 For the direct-output SWD table, TDL W-Flow rows come from the drift-field ablation, and TDL DDPM/DDIM/WGAN rows are obtained by checkpoint-only direct-SWD evaluation of the corresponding trained baseline implants.
 
 \input{simulation_setup_table.tex}
@@ -545,9 +543,9 @@ The Sinkhorn drift-field variants use the same direct-output generator architect
 The joint Sinkhorn row uses a Sinkhorn/W-Flow drift in joint condition-output features, while the condition-wise row uses the per-anchor conditional Sinkhorn field in \eqref{eq:condition_sinkhorn_velocity}.
 Unless otherwise stated, Sinkhorn variants use \(10\) Sinkhorn iterations, automatic entropic scale selection with minimum \(\varepsilon=10^{-3}\), four generated samples, four positive channel samples, and four generated reference samples per condition anchor.
 
-For AWGN, Rayleigh, and SSPA, diffusion models \(p(y\mid x)\) directly with \(v\)-prediction, cosine-ZF variance schedule, \(100\) diffusion steps, and EMA decay \(0.9\). Hidden widths are \(110\) (AWGN), \(128\) (Rayleigh), and \(110\) (SSPA). AWGN and Rayleigh use a two-stage learning-rate schedule (\(10\) epochs at \(10^{-3}\), then \(20\) epochs at \(10^{-4}\)), while SSPA uses a constant \(10^{-4}\) for \(160\) epochs. We report DDPM and DDIM with \(100\), \(50\), \(20\), and \(10\) denoising steps.
+For AWGN, Rayleigh, SSPA, and TDL, diffusion models \(p(y\mid x)\) directly with \(v\)-prediction, cosine-ZF variance schedule, \(100\) diffusion steps, and EMA decay \(0.9\). Hidden widths are \(110\) (AWGN and SSPA) and \(128\) (Rayleigh and TDL). AWGN and Rayleigh use a two-stage learning-rate schedule (\(10\) epochs at \(10^{-3}\), then \(20\) epochs at \(10^{-4}\)), while SSPA and TDL use a constant \(10^{-4}\) for \(160\) and \(60\) epochs, respectively. We report DDPM and DDIM with \(100\), \(50\), \(20\), and \(10\) denoising steps.
 
-WGAN uses a conditional Wasserstein objective with RMSprop at \(10^{-4}\) for generator and critic, five critic updates per generator update, and weight clipping at \(0.01\). Hidden widths are \(128\) (AWGN) and \(256\) (Rayleigh/SSPA). WGAN is reported in direct output space wherever it is compared against direct-output channel generators.
+WGAN uses a conditional Wasserstein objective with RMSprop at \(10^{-4}\) for generator and critic, five critic updates per generator update, and weight clipping at \(0.01\). Hidden widths are \(128\) (AWGN) and \(256\) (Rayleigh, SSPA, and TDL). WGAN is reported in direct output space wherever it is compared against direct-output channel generators.
 
 \paragraph{Experimental fairness.}
 The benchmark is intended as a practical comparative study, with stable model-family implementations prioritized over strict matched-capacity control.
