@@ -258,7 +258,7 @@ We therefore also study Sinkhorn-based drift fields that replace the row-normali
 The W-Flow objective in \cite{han2026wflow} is unconditional.
 Both \(p\) and \(q_\theta\) are distributions on the generated sample space.
 For channel simulation, the generated and true joint laws share the same transmitted-symbol marginal.
-Writing \(\mu\) for the input distribution,
+Writing \(\mu=P_X\) for the input marginal and \(p_x=P_{Y\mid X=x}\) for the conditional output law, the target and generated joint laws disintegrate as
 \begin{equation}
 p(dx,dy)=\mu(dx)p_x(dy),
 \qquad
