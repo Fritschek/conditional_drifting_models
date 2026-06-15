@@ -48,13 +48,13 @@ The practical question is whether a generative model can match the channel distr
 
 Recent work on diffusion-based channel modeling has shown that conditional diffusion models can generate high-quality channel samples across standard benchmarks such as additive white Gaussian noise (AWGN), Rayleigh fading, and nonlinear amplifier channels \cite{paper2309}.
 Follow-up work has further studied robustness and speed-quality tradeoffs for diffusion-based channel generation \cite{kimicc2024}, extended diffusion-based channel synthesis to high-dimensional user-specific channels \cite{lee2024highdimchannels}, and proposed diffusion-driven digital-twin-style generation of statistical channel state information from sensing and location information \cite{gong2025dtoc}.
-More broadly, diffusion methods have also begun to influence adjacent wireless tasks such as high-dimensional channel estimation \cite{zhou2025channelestimation}, low-complexity multiple-input multiple-output (MIMO) channel estimation \cite{fesl2024mimoestimation,chen2025mimovi}, joint channel estimation and data detection \cite{zilberstein2024joint}, and fast time-varying MIMO orthogonal frequency-division multiplexing (MIMO-OFDM) estimation \cite{liu2025mimoofdm}.
+More broadly, diffusion methods have also begun to influence adjacent wireless tasks such as high-dimensional channel estimation \cite{zhou2025channelestimation}, low-complexity multiple-input multiple-output (MIMO) channel estimation \cite{fesl2024mimoestimation,chen2025mimovi}, joint channel estimation and data detection \cite{zilberstein2024joint}, and fast time-varying MIMO orthogonal frequency-division multiplexing (OFDM) estimation \cite{liu2025mimoofdm}.
 This line of work is compelling because diffusion models are flexible, robust, and often more stable than earlier adversarial approaches.
 This improvement comes with a practical system cost.
 Inference requires an iterative reverse denoising procedure, and the latency scales with the number of diffusion steps.
 This tradeoff is manageable when the channel generator is called occasionally.
 It becomes more problematic when the generator is embedded in inner loops of iterative training or repeated Monte Carlo evaluations.
-This latency bottleneck has motivated several acceleration strategies for denoising diffusion probabilistic modeling \cite{ddpm}, including skipped or reduced-step sampling as in denoising diffusion implicit modeling (DDIM), as well as one-step or few-step alternatives such as consistency models and distillation-based approaches that compress multi-step samplers into substantially shorter generation paths \cite{ddim,song2023consistency,yin2024onestep}.
+This latency bottleneck has motivated several acceleration strategies for the denoising diffusion probabilistic model (DDPM) \cite{ddpm}, including skipped or reduced-step sampling as in denoising diffusion implicit modeling (DDIM), as well as one-step or few-step alternatives such as consistency models and distillation-based approaches that compress multi-step samplers into substantially shorter generation paths \cite{ddim,song2023consistency,yin2024onestep}.
 This motivates the study of one-shot conditional generators for learned channel simulation.
 Among recently proposed generative paradigms, drifting models \cite{drifting} are particularly interesting because they learn the transport from a simple latent source to the target data distribution directly in the network parameters.
 Intuitively, diffusion spends computation at test time by progressively transforming noise into data through a reverse-time chain.
@@ -86,8 +86,8 @@ The main contributions are summarized as follows.
 \item We formulate condition-wise Sinkhorn drifting for learned channel simulation by integrating Sinkhorn divergences over the fixed-input conditional laws \(p(\cdot\mid x)\).
 \item We connect this objective to a conditional Wasserstein-flow velocity, then state how the practical method differs from the population flow through finite-sample barycentric estimation and projected detached-target neural training.
 \item We implement direct-output conditional drifting and compare joint/global Sinkhorn transport with condition-wise Sinkhorn transport under a matched one-shot generator.
-\item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional WGAN reference models across AWGN, Rayleigh fading, SSPA, and compact TDL channels using generator-level metrics, downstream coding checks, and latency measurements.
-\item We evaluate channel surrogates with direct SWD, anchor-conditioned moment metrics, downstream SER, bit error rate (BER), and timing measurements, showing that communication usefulness is better reflected by conditional and downstream metrics than by global SWD alone.
+\item We compare the proposed one-shot surrogate against conditional DDPM, conditional DDIM, and conditional Wasserstein generative adversarial network (WGAN) reference models across AWGN, Rayleigh fading, solid-state power amplifier (SSPA), and compact tapped-delay-line (TDL) channels using generator-level metrics, downstream coding checks, and latency measurements.
+\item We evaluate channel surrogates with direct sliced Wasserstein distance (SWD), anchor-conditioned moment metrics, downstream symbol-error rate (SER), bit error rate (BER), and timing measurements, showing that communication usefulness is better reflected by conditional and downstream metrics than by global SWD alone.
 \end{itemize}
 Source code will be made available through the first author's GitHub repository upon publication\footnote{\url{https://github.com/Fritschek/conditional_drifting_models}.}.
 
@@ -187,8 +187,8 @@ Residual-output variants were examined during development and left out of the fi
   \begin{equation}
   z \sim \mathcal{N}(0, I).
   \end{equation}
-  The network is implemented as a two-hidden-layer multilayer perceptron with hidden
-  width \(128\), latent dimension \(16\), and SiLU activations.
+  The network is implemented as a two-hidden-layer multilayer perceptron (MLP) with hidden
+  width \(128\), latent dimension \(16\), and sigmoid linear unit (SiLU) activations.
 \begin{equation}
 [x, z]
 \rightarrow
@@ -216,7 +216,7 @@ V(g_i)
 \sum_k w^{(G)}_{ik} g_k - g_i
 \right),
 \end{equation}
-where \(w^{(P)}\) and \(w^{(G)}\) are row-normalized RBF kernel weights.
+where \(w^{(P)}\) and \(w^{(G)}\) are row-normalized radial basis function kernel weights.
 The first term attracts each generated sample toward a local barycenter of true output samples, and the second term repels it from nearby generated samples to reduce collapse.
 This yields a detached target
 \begin{equation}
@@ -237,7 +237,7 @@ g_i - \tilde{g}_i
 The generic update \(u \mapsto u + \eta V_{p,q}(u)\) from the drifting formulation is realized here with a kernel-based drift field estimated directly from minibatches of true and generated output samples.
 This empirical field acts as a kernel particle interaction rule.
 The attraction term pulls generated samples toward the target sample cloud, while the repulsion term prevents generated particles from collapsing onto a few modes.
-In this sense, the method is related in spirit to kernel-based distribution shaping and MMD-like matching.
+In this sense, the method is related in spirit to kernel-based distribution shaping and maximum mean discrepancy matching.
 Here it is used as a practical training rule, without deriving a formal discrepancy minimization objective.
 
 In the simulations, the drift scale is \(\eta=1.0\), the repulsive weight is \(\lambda=1.0\), the minimum kernel bandwidth is \(0.2\), and the maximum drift norm is \(2.0\).
@@ -424,7 +424,7 @@ Sampling avoids reverse chains, ODE solvers, and per-sample iterative schedules 
 We use four stochastic channel families.
 All channels are implemented as real-valued maps \(x\mapsto y\), but the coordinate interpretation differs by channel.
 AWGN and Rayleigh use real-valued vectors directly and have dimension \(n=7\) in the generator-level benchmark.
-SSPA and TDL use paired in-phase/quadrature coordinates with \(n=8\), corresponding to four complex symbols.
+SSPA and TDL use paired in-phase/quadrature (I/Q) coordinates with \(n=8\), corresponding to four complex symbols.
 Noise variables are sampled independently across real coordinates unless the deterministic channel transformation or tapped-delay convolution introduces coupling.
 The generator-level comparison is reported on AWGN, Rayleigh, SSPA, and TDL.
 AWGN, Rayleigh, and SSPA include the plain direct-drifting reference row, while the TDL drifting-family comparison focuses on the two Sinkhorn drift fields used in the final ablation.
@@ -472,7 +472,7 @@ a_{\mathrm{SSPA}}(r)
 \end{equation}
 with default parameters \(p=3\), \(A_0=1.5\), and \(G=5.0\).
 Here \(a_{\mathrm{SSPA}}(r)\) is a gain, not the output amplitude.
-The corresponding output amplitude is \(A_{\mathrm{out}}(r)=a_{\mathrm{SSPA}}(r)r\), the Rapp-style AM/AM law used in the benchmark.
+The corresponding output amplitude is \(A_{\mathrm{out}}(r)=a_{\mathrm{SSPA}}(r)r\), the Rapp-style amplitude-to-amplitude law used in the benchmark.
 The noiseless amplifier output is $\tilde{x} = a_{\mathrm{SSPA}}(r)\,x,$
 and the observed channel output is
 \begin{equation}
@@ -483,7 +483,7 @@ n \sim \mathcal{N}\!\left(0,\frac{\sigma^2}{2}I\right).
 This channel introduces amplitude-dependent nonlinear distortion while preserving the input direction in the I/Q plane.
 
 \textbf{TDL:}
-The TDL channel is a compact short-block approximation of the 3GPP TR 38.901 TDL-D profile \cite{tr38901}.
+The TDL channel is a compact short-block approximation of the Third Generation Partnership Project (3GPP) Technical Report 38.901 TDL-D profile \cite{tr38901}.
 The real vector is interpreted as a complex codeword \(s_m=x_{2m}+j x_{2m+1}\), \(m=0,\ldots,N_c-1\), with \(N_c=4\) complex channel uses in the symbolic coding runs.
 For each codeword, the channel samples a finite set of complex taps and applies circular convolution,
 \begin{equation}
@@ -534,7 +534,7 @@ The Sinkhorn drift-field variants use the same direct-output generator architect
 The joint Sinkhorn row uses a Sinkhorn/W-Flow drift in joint condition-output features, while the condition-wise row uses the per-anchor conditional Sinkhorn field in \eqref{eq:condition_sinkhorn_velocity}.
 Unless otherwise stated, Sinkhorn variants use \(10\) Sinkhorn iterations, automatic entropic scale selection with minimum \(\varepsilon=10^{-3}\), four generated samples, four positive channel samples, and four generated reference samples per condition anchor.
 
-For AWGN, Rayleigh, SSPA, and TDL, diffusion models \(p(y\mid x)\) directly with \(v\)-prediction, cosine-ZF variance schedule, \(100\) diffusion steps, and EMA decay \(0.9\). Hidden widths are \(110\) (AWGN and SSPA) and \(128\) (Rayleigh and TDL). AWGN and Rayleigh use a two-stage learning-rate schedule (\(10\) epochs at \(10^{-3}\), then \(20\) epochs at \(10^{-4}\)), while SSPA and TDL use a constant \(10^{-4}\) for \(160\) and \(60\) epochs, respectively. We report DDPM and DDIM with \(100\), \(50\), \(20\), and \(10\) denoising steps.
+For AWGN, Rayleigh, SSPA, and TDL, diffusion models \(p(y\mid x)\) directly with \(v\)-prediction, an unclipped cosine variance schedule, \(100\) diffusion steps, and exponential moving average decay \(0.9\). Hidden widths are \(110\) (AWGN and SSPA) and \(128\) (Rayleigh and TDL). AWGN and Rayleigh use a two-stage learning-rate schedule (\(10\) epochs at \(10^{-3}\), then \(20\) epochs at \(10^{-4}\)), while SSPA and TDL use a constant \(10^{-4}\) for \(160\) and \(60\) epochs, respectively. We report DDPM and DDIM with \(100\), \(50\), \(20\), and \(10\) denoising steps.
 
 WGAN uses a conditional Wasserstein objective with RMSprop at \(10^{-4}\) for generator and critic, five critic updates per generator update, and weight clipping at \(0.01\). Hidden widths are \(128\) (AWGN) and \(256\) (Rayleigh, SSPA, and TDL). WGAN is reported in direct output space wherever it is compared against direct-output channel generators.
 
@@ -599,11 +599,11 @@ The drift-field ranking is therefore channel-dependent.
 \input{wflow_swd_baseline_table.tex}
 
 Timing follows the expected pattern.
-Drifting and WGAN operate at roughly \(0.1\,\mu\mathrm{s}\) per sample on the local CUDA timing setup, while DDPM and DDIM require microsecond-to-tens-of-microseconds sampling times depending on the sampler and the number of denoising steps.
+Drifting and WGAN operate at roughly \(0.1\,\mu\mathrm{s}\) per sample on the local graphics processing unit (GPU) timing setup, while DDPM and DDIM require microsecond-to-tens-of-microseconds sampling times depending on the sampler and the number of denoising steps.
 Thus, even when diffusion achieves the strongest SWD, one-shot generators retain a substantial practical latency advantage.
 The W-Flow variants retain the same one-shot inference path as direct drifting.
 Their cost differences are training-time drift-field costs.
-Table~\ref{tab:timing-cuda} therefore reports W-Flow ablation rows under the same \(2\%\) local CUDA timing protocol.
+Table~\ref{tab:timing-cuda} therefore reports W-Flow ablation rows under the same \(2\%\) local GPU timing protocol.
 The timing run uses PyTorch on a local NVIDIA RTX 5060 Ti GPU in standard float32 execution, without CUDA graph capture, \texttt{torch.compile}, or mixed precision.
 Training time is measured by running the actual training loop on \(2\%\) of the configured dataset size, rounded to full batches, and extrapolating by the ratio of timed optimizer steps to full optimizer steps.
 This includes synthetic channel sampling, forward and backward passes, optimizer updates, and the Sinkhorn computations used by W-Flow rows.
@@ -663,7 +663,7 @@ Within the Sinkhorn ablation table, condition-wise Sinkhorn is the strongest dow
 The per-channel SER curves in Fig.~\ref{fig:wflow-all-ser-curves} add WGAN and diffusion references to this downstream comparison.
 At the nominal training point, condition-wise Sinkhorn nearly reaches the analytic AWGN reference, while diffusion is the strongest learned baseline on Rayleigh, SSPA, and TDL.
 On SSPA, the \(M_{\mathrm{msg}}=64\) update-budget-controlled operating point gives condition-wise Sinkhorn SER \(8.13\times10^{-5}\) at \(E_b/N_0=8\,\mathrm{dB}\), compared with \(7.50\times10^{-5}\) for WGAN, \(3.13\times10^{-5}\) for diffusion, and \(1.57\times10^{-5}\) for analytic-channel training.
-The long-block TurboAE check below tests the same AWGN implant outside the short symbolic-codeword setting.
+The long-block check below tests the same AWGN implant outside the short symbolic-codeword setting.
 
 \input{wflow_coding_table.tex}
 
@@ -718,11 +718,9 @@ The population formulation identifies equality of \(p(\cdot\mid x)\) and \(q_\th
 The implemented method is a finite-sample barycentric approximation followed by projected detached-target neural training.
 
 Experiments on AWGN, Rayleigh, SSPA, and compact TDL channels show a clear accuracy-latency tradeoff.
-Within the matched Sinkhorn drift-field ablation, condition-wise Sinkhorn is the strongest evaluated one-shot surrogate under the downstream symbolic-coding checks.
-Diffusion remains the strongest learned reference on the hardest SER curves.
-This positions the contribution as a low-latency, condition-preserving surrogate for settings where repeated channel calls are expensive.
-Across the full set of results, global SWD, anchor-conditioned metrics, and downstream coding metrics can disagree.
-This makes metric choice a central part of learned channel simulation and motivates future work on channel-specific transport features and local conditional Sinkhorn approximations for measured channels.
+Within the matched Sinkhorn drift-field ablation, condition-wise Sinkhorn is the strongest evaluated one-shot surrogate under downstream symbolic-coding checks, while diffusion remains strongest on the hardest learned-reference SER curves.
+This positions the method as a low-latency, condition-preserving surrogate for settings where repeated channel calls are expensive.
+The disagreement between global SWD, anchor-conditioned metrics, and downstream coding metrics makes metric choice a central part of learned channel simulation and motivates future work on channel-specific transport features and local conditional Sinkhorn approximations for measured channels.
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 

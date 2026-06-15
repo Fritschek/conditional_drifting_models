@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  11 JUN 2026 15:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.31)  15 JUN 2026 11:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -480,7 +480,7 @@ onts/enc/dvips/base/8r.enc}
 
 
 ]
-Underfull \vbox (badness 2903) has occurred while \output is active []
+Underfull \vbox (badness 1024) has occurred while \output is active []
 
  [2]
 [3] [4] (./simulation_setup_table.tex
@@ -530,10 +530,10 @@ File: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf Graphic file (t
 ype pdf)
 <use figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf>
 Package pdftex.def Info: figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.
-pdf  used on input line 14.
+pdf  used on input line 13.
 (pdftex.def)             Requested size: 211.67908pt x 264.79967pt.
-) [11 <./figures/turboae_awgn_l64_ber_bler_curve_eval2k_column.pdf>] (./driftin
-g_vs_diffusion_summary.bbl) [12]
+) (./drifting_vs_diffusion_summary.bbl [11 <./figures/turboae_awgn_l64_ber_bler
+_curve_eval2k_column.pdf>]) [12]
 (./drifting_vs_diffusion_summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -541,12 +541,12 @@ L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `drifting_vs_diffusion_summary.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: 4508E543EEE409EB092DB08E7869B73B;4077.
+(rerunfilecheck)             Checksum: 2F560B79D46A7C094C51E12BAD5C2F72;4189.
  ) 
 Here is how much of TeX's memory you used:
  11615 strings out of 469515
  179680 string characters out of 5470807
- 643990 words of memory out of 5000000
+ 643915 words of memory out of 5000000
  39976 multiletter control sequences out of 15000+600000
  681829 words of font info for 146 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -575,7 +575,7 @@ e1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.p
 fb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on drifting_vs_diffusion_summary.pdf (12 pages, 578589 bytes).
+Output written on drifting_vs_diffusion_summary.pdf (12 pages, 578671 bytes).
 PDF statistics:
  639 PDF objects out of 1000 (max. 8388607)
  396 compressed objects within 4 object streams
