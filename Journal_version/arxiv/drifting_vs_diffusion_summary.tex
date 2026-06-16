@@ -244,16 +244,9 @@ Here it is used as a practical training rule, without deriving a formal discrepa
 In the simulations, the drift scale is \(\eta=1.0\), the repulsive weight is \(\lambda=1.0\), the minimum kernel bandwidth is \(0.2\), and the maximum drift norm is \(2.0\).
 These settings were chosen because they produced stable training behavior and materially improved the early AWGN drifting baselines.
 
-\paragraph{Conditioning-aware kernel variant.}
-For the enhanced direct-output drifting model, we replace the target-only kernel by a kernel on joint condition-target pairs.
-Instead of computing sample interactions from \(k(y_i,y_j)\), we compute them from \(k((x_i,y_i),(x_j,y_j))\), so that attraction and repulsion depend on similarity in both the channel input and the output space.
-This aligns the drift field more closely with the conditional channel structure.
-The generator architecture is unchanged.
-
-This kernel rule is the conditioning-aware baseline used for the direct-output drifting variants.
-It is computationally simple.
-Its main open design choice is the minibatch coupling used to build \(V\), which remains channel-specific.
-We therefore also study Sinkhorn-based drift fields that replace the row-normalized kernel interaction with the velocity in \eqref{eq:wflow_velocity}, while preserving the same detached-target training loop and the same one-shot inference path.
+The direct-drifting kernel field serves as the plain one-shot drifting baseline in the experiments.
+Its quality still depends on bandwidth selection and on how minibatch interactions approximate the conditional channel geometry.
+To reduce this channel-specific kernel-design burden, the main drift-field ablation replaces the row-normalized kernel interaction by Sinkhorn/W-Flow barycentric velocities while preserving the same detached-target training loop and the same one-shot inference path.
 
 \subsection{Condition-wise Sinkhorn drifting}
 The W-Flow objective in \cite{han2026wflow} is unconditional.
@@ -509,7 +502,7 @@ It is intentionally smaller than a full OFDM or long-block TDL evaluation.
 The experiments are organized into two complementary protocols.
 First, the generator-level protocol compares one-shot drifting-family generators against established conditional DDPM, DDIM, and WGAN references on AWGN, Rayleigh, SSPA, and TDL.
 Second, the drift-field ablation holds the drifting network fixed and compares global/joint Sinkhorn drifting with condition-wise Sinkhorn drifting.
-Target-space and conditioning-aware kernel drifts were run as supporting controls, but the main tables keep the transport comparison focused.
+The final tables keep the drift-field comparison focused on direct drifting and the two Sinkhorn transport fields.
 This second protocol is reported over 100 seeds for the main drift-field runs and is evaluated with direct SWD, anchor-conditioned metrics, and downstream symbolic SER/BER.
 It is the controlled comparison in this paper because the generator architecture, optimizer family, and one-shot inference path are held fixed across drift fields.
 The DDPM, DDIM, and WGAN rows provide best-effort reference baselines using stable model-family settings.
