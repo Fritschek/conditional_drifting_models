@@ -1,6 +1,6 @@
-# Conditional Drifting Models for Learned Channel Simulation
+# Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation
 
-Code for the paper "Conditional Drifting Models for Learned Channel Simulation".
+Code for the paper ["Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation"](https://arxiv.org/abs/2606.17893).
 
 The repository implements the generator-level channel simulators used in the
 paper:
