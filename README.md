@@ -33,21 +33,6 @@ Use `--variant direct`, `--variant joint_sinkhorn`, or
 `--variant conditionwise_sinkhorn` to select the generator. For multi-seed
 experiments, run the same command over the desired seeds and channels.
 
-## Quick Matrix Check
-
-The following command exercises all public channel and generator paths:
-
-```bash
-python scripts/run_quick_model_checks.py \
-  --device cuda \
-  --seed 7 \
-  --epochs 2 \
-  --dataset-size 2048 \
-  --eval-size 2048 \
-  --batch-size 128 \
-  --out results/quick_model_checks.json
-```
-
 ## Paper-Scale Generator Runs
 
 The larger generator-level settings use the same command-line knobs. For AWGN
