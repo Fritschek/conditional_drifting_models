@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Model parameter counts in the benchmark setup.} Counts refer to inference-time networks. Sinkhorn drifting uses the same one-shot generator as direct drifting. Its Sinkhorn couplings are training-time computations and add no inference-time parameters. DDPM and DDIM share the same denoiser weights. WGAN rows report generator-side parameters.}
+\label{tab:model-size}
+\tablestyle{4pt}{1.03}
+\tablefontsize
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Model & AWGN & Rayleigh & SSPA & TDL \\
+\midrule
+Direct drifting & 20{,}487 & 20{,}487 & 20{,}744 & 20{,}744 \\
+Sinkhorn drifting variants & 20{,}487 & 20{,}487 & 20{,}744 & 20{,}744 \\
+Diffusion denoiser (DDPM / DDIM) & 59{,}847 & 74{,}247 & 60{,}178 & 74{,}632 \\
+WGAN generator & 19{,}335 & 71{,}431 & 72{,}200 & 72{,}200 \\
+\bottomrule
+\end{tabular}
+\end{table}
