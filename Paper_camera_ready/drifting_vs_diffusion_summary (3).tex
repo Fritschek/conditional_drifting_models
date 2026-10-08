@@ -4,12 +4,8 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage[table]{xcolor}
-\usepackage{siunitx}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
-\sisetup{round-mode=places,round-precision=4}
 \hbadness=10000
 \hfuzz=20pt
 
@@ -73,7 +69,7 @@ Drifting, in contrast, spends computation during training: Generated samples are
 Once trained, sampling is therefore naturally one-shot.
 %This perspective is also consistent with recent geometric analyses of generative dynamics that relate diffusion-like behavior to autonomous vector-field structure and marginalized noise geometry \cite{geometryofnoise}.
 
-That distinction makes the concept of drifting conceptually appealing for channel modeling.
+That distinction makes drifting conceptually appealing for channel modeling.
 In a communication setting, the generator must be conditional on the transmitted symbol \(x\), and it must capture not just a marginal sample cloud, but the conditional law \(p(y | x)\). Because drifting is based on attraction and repulsion between generated and true samples rather than an adversarial discriminator game, it is also an interesting candidate for studying whether one-shot conditional generators can avoid some of the mode-collapse behavior often associated with adversarial training.
 Because drifting was introduced only very recently, no widely adopted communication-channel baseline has yet emerged. This motivates reporting not only benchmark outcomes, but also the concrete conditional adaptation needed to integrate drifting into an existing channel-learning pipeline.
 
@@ -90,7 +86,7 @@ diffusion probabilistic modeling (DDPM), conditional DDIM, and conditional Wasse
 generative adversarial network (WGAN) models on AWGN, Rayleigh fading, solid-state power amplifier (SSPA), and optical-fiber (OptFib) proxy channels.
 \item We quantify the accuracy--latency tradeoff and show that one-shot drifting provides large inference-time savings while remaining competitive in distributional accuracy, while a symbolic AWGN case study illustrates that conditioning-aware kernel design can improve downstream direct-output drifting performance.
 \end{itemize}
-Code will be released upon publication\footnote{Code repository: \url{https://github.com/Fritschek}.}.
+Source code is available online\footnote{\url{https://github.com/Fritschek/conditional_drifting_models}.}.
 
 \section{Problem Formulation and Drifting Background}
 \subsection{What Drifting Changes Conceptually}
@@ -145,7 +141,7 @@ Once the generator has learned to emit samples near equilibrium, sampling only r
 
 Fig.~\ref{fig:toy} gives an actual toy particle simulation in the spirit of the particle-based demonstrations used in \cite{drifting}.
 For two fixed channel inputs, we initialize mismatched conditional residual particle clouds and then evolve them under the same attraction--repulsion drift rule used in our channel benchmark.
-The figure, therefore, illustrates real drift dynamics rather than a hand-drawn schematic, while still serving only as a toy analogue of the full learned generator.
+The figure therefore illustrates real drift dynamics rather than a hand-drawn schematic, while still serving only as a toy analogue of the full learned generator.
 To show that the same idea can train an explicit parameterized generator, Fig.~\ref{fig:toymlp} uses a tiny conditional MLP trained with the drifting objective on the same toy target.
 %For contrast, Fig.~\ref{fig:toydiff} shows an oracle conditional diffusion-style reverse trajectory on the same target, making the difference in sampling path length visually explicit.
 
@@ -256,7 +252,7 @@ g_i - \tilde{g}_i
 In other words, the generic update \(u \mapsto u + \eta V_{p,q}(u)\) from the drifting formulation is realized here with a kernel-based drift field estimated directly from the minibatches of true and generated samples in the selected target space.
 
 In the simulations, the drift scale is \(\eta=1.0\), the repulsive weight is \(\lambda=1.0\), the minimum kernel bandwidth is \(0.2\), and the maximum drift norm is \(2.0\).
-These settings were chosen because they produced stable training behavior and materially improved the early AWGN drifting baselines.
+These settings are used throughout the drifting benchmark and gave stable behavior across the channel families considered here.
 
 The major operational advantage is straightforward:
 Once training is complete, sampling requires only a single evaluation of \(g_\theta(x,z)\).
@@ -320,6 +316,7 @@ and $n \sim \mathcal{N}(0,\sigma^2 I).$
 Each real component is therefore scaled by an independent Rayleigh-distributed magnitude before noise is added.
 This channel is multiplicative rather than additive and is correspondingly less aligned with a pure residual perturbation view.
 %As implemented here, Rayleigh is also a real-valued vector channel rather than a paired-I/Q complex channel.
+The fading amplitudes are latent channel randomness and are not supplied as additional conditioning variables.
 
 \textbf{SSPA:}
 The input is passed through a smooth, solid-state power amplifier nonlinearity before additive noise is applied.
@@ -329,14 +326,14 @@ Let
 r = \sqrt{x_I^2 + x_Q^2}
 \end{equation}
 denote the input amplitude.
-The nonlinear amplitude law used in the benchmark is
+The amplitude-dependent gain used in the benchmark is
 \begin{equation}
 a(r)
 =
 \frac{G}{\left(1+\left(\frac{Gr}{A_0}\right)^{2p}\right)^{1/(2p)}},
 \end{equation}
 with default parameters \(p=3\), \(A_0=1.5\), and \(G=5.0\).
-The noiseless amplifier output is $\tilde{x} = a(r)\,x,$
+Thus the noiseless output amplitude is \(a(r)r\), and the noiseless amplifier output is \(\tilde{x} = a(r)x\).
 and the observed channel output is
 \begin{equation}
 y = \tilde{x} + n,
@@ -389,7 +386,7 @@ For AWGN and Rayleigh, the setting is \(n=7\), while for SSPA it is \(n=8\). The
 
 \paragraph{Data and optimization settings}
 For AWGN and Rayleigh, we use training dataset size \(10^7\), batch size \(5000\), and \(30\) epochs for drifting, diffusion, and WGAN. For SSPA, we use a training dataset size \(10^7\), batch size \(4096\), and \(160\) epochs for all three method families. For these three channels, we evaluate each method on \(10^6\) samples and use \(128\) sliced
-Wasserstein distanc (SWD) projections. OptFib is benchmarked separately with training dataset size \(120{,}000\), batch size \(512\), \(60\) training epochs, evaluation size \(100{,}000\), and \(256\) SWD projections.
+Wasserstein distance (SWD) projections. OptFib is benchmarked separately with training dataset size \(120{,}000\), batch size \(512\), \(60\) training epochs, evaluation size \(100{,}000\), and \(256\) SWD projections.
 
 \paragraph{Model settings}
 Drifting uses a conditional MLP with latent dimension \(16\), hidden width \(128\), two hidden layers, \texttt{SiLU} activations, and Adam with learning rate \(10^{-3}\). The drifting objective uses drift scale \(1.0\), median-heuristic bandwidth selection, minimum bandwidth \(0.2\), maximum drift norm \(2.0\), and repulsive weight \(1.0\). We train both parameterizations: direct drifting with target \(y\) and residual drifting with target \(e=y-x\).
@@ -436,8 +433,11 @@ Reduced-step DDIM variants degrade systematically as the number of sampling step
 
 Timing results follow the expected pattern: Drifting and WGAN operate at roughly \(0.38\) to
 \(0.42\,\mu\mathrm{s}\) per sample, whereas DDPM and DDIM range from about \(0.01\) to \(0.13\,
-\mathrm{ms}\), depending on the sampler and the number of denoising steps. Thus, even when diffusion
-achieves the strongest SWD, one-shot generators retain a substantial practical latency advantage.
+\mathrm{ms}\), depending on the sampler and the number of denoising steps. Inference timings were
+measured on an NVIDIA GeForce RTX 5060 Ti using seven CUDA-synchronized repeats with batch size
+\(512\) and \(40\) batches per repeat; the largest relative standard deviation was \(1.4\%\). Thus,
+even when diffusion achieves the strongest SWD, one-shot generators retain a substantial practical
+latency advantage.
 \input{benchmark_table_all_channels.tex}
 
 
@@ -446,7 +446,7 @@ This highlights the importance of understanding how generator-level distribution
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\columnwidth]{awgn_ser_symbolic_direct_compare.pdf}
+\includegraphics[width=0.95\columnwidth]{figures/awgn_ser_symbolic_direct_compare.pdf}
 \caption{End-to-end symbolic AWGN SER for a \((4,7)\) autoencoder trained through analytic and learned channel surrogates. Diffusion and WGAN remain closest to the analytic baseline, while the conditioning-aware direct drifting variant improves upon standard direct drifting. This illustrates that generator-level metrics such as SWD do not fully capture decision-relevant structure.}
 \label{fig:awgn-ser-symbolic}
 \vspace{-1em}

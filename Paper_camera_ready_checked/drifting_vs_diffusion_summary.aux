@@ -1,0 +1,65 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{paper2309}
+\citation{kimicc2024}
+\citation{lee2024highdimchannels}
+\citation{gong2025dtoc}
+\citation{fesl2024mimoestimation,liu2025mimoofdm}
+\citation{banerjee2026phyanna,roessler2026aiml6g}
+\citation{ddpm}
+\citation{ddim,song2023consistency,yin2024onestep}
+\citation{drifting}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\citation{wgan}
+\citation{drifting}
+\citation{drifting}
+\citation{drifting}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Problem Formulation and Drifting Background}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}What Drifting Changes Conceptually}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Conditional Channel Simulation}{2}{subsection.2.2}\protected@file@percent }
+\citation{drifting}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Toy conditional particle simulation in residual space. Two inputs induce different target residual distributions. Starting from mismatched generated particles, the middle panel applies one attraction--repulsion drift update, and the last panel shows the particles after repeated updates.}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:toy}{{1}{3}{Toy conditional particle simulation in residual space. Two inputs induce different target residual distributions. Starting from mismatched generated particles, the middle panel applies one attraction--repulsion drift update, and the last panel shows the particles after repeated updates}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Toy conditional MLP trained with the drifting objective. The panels show target conditional residual samples, the randomly initialized generator, and the same generator after drifting training.}}{3}{figure.2}\protected@file@percent }
+\newlabel{fig:toymlp}{{2}{3}{Toy conditional MLP trained with the drifting objective. The panels show target conditional residual samples, the randomly initialized generator, and the same generator after drifting training}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Conditional Drifting Model}{3}{subsection.2.3}\protected@file@percent }
+\citation{li2018e2efiber}
+\citation{kimicc2024}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {II-C}0a}Conditioning-aware kernel variant.}{4}{paragraph.2.3.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Experimental Setup}{4}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Channel Models}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Training Protocol}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0a}Channel settings}{4}{paragraph.3.2.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0b}Data and optimization settings}{4}{paragraph.3.2.0.2}\protected@file@percent }
+\citation{paper2309,kimicc2024}
+\bibstyle{IEEEtran}
+\bibdata{references}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0c}Model settings}{5}{paragraph.3.2.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {III-B}0d}Experimental Fairness}{5}{paragraph.3.2.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Evaluation Metric}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{5}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Main SWD Benchmark Across Channels}{5}{subsection.4.1}\protected@file@percent }
+\bibcite{paper2309}{1}
+\bibcite{kimicc2024}{2}
+\bibcite{lee2024highdimchannels}{3}
+\bibcite{gong2025dtoc}{4}
+\bibcite{fesl2024mimoestimation}{5}
+\bibcite{liu2025mimoofdm}{6}
+\bibcite{banerjee2026phyanna}{7}
+\bibcite{roessler2026aiml6g}{8}
+\bibcite{ddpm}{9}
+\bibcite{ddim}{10}
+\bibcite{song2023consistency}{11}
+\bibcite{yin2024onestep}{12}
+\bibcite{drifting}{13}
+\bibcite{wgan}{14}
+\bibcite{li2018e2efiber}{15}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces \textbf  {Ten-seed SWD benchmark across all channels.} Lower is better. Direct output-space SWD is reported unless the row label explicitly indicates residual-space SWD. The residual-space row is included for diagnostic purposes only.}}{6}{table.1}\protected@file@percent }
+\newlabel{tab:benchmark-all-channels}{{I}{6}{\textbf {Ten-seed SWD benchmark across all channels.} Lower is better. Direct output-space SWD is reported unless the row label explicitly indicates residual-space SWD. The residual-space row is included for diagnostic purposes only}{table.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces End-to-end symbolic AWGN SER for a \((4,7)\) autoencoder trained through analytic and learned channel surrogates. Diffusion and WGAN remain closest to the analytic baseline, while the conditioning-aware direct drifting variant improves upon standard direct drifting. This illustrates that generator-level metrics such as SWD do not fully capture decision-relevant structure.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:awgn-ser-symbolic}{{3}{6}{End-to-end symbolic AWGN SER for a \((4,7)\) autoencoder trained through analytic and learned channel surrogates. Diffusion and WGAN remain closest to the analytic baseline, while the conditioning-aware direct drifting variant improves upon standard direct drifting. This illustrates that generator-level metrics such as SWD do not fully capture decision-relevant structure}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Conclusion}{6}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{6}{section*.1}\protected@file@percent }
+\gdef \@abspage@last{6}

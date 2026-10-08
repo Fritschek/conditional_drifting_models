@@ -41,32 +41,15 @@ X.~Gong, X.~Liu, A.~A. Lu, X.~Gao, X.~G. Xia, C.-X. Wang, and X.~You, ``Digital
   state information generation,'' \emph{IEEE Transactions on Wireless
   Communications}, vol.~24, no.~5, pp. 3805--3821, 2025.
 
-\bibitem{zhou2025channelestimation}
-X.~Zhou, L.~Liang, J.~Zhang, P.~Jiang, Y.~Li, and S.~Jin, ``Generative
-  diffusion models for high dimensional channel estimation,'' \emph{IEEE
-  Transactions on Wireless Communications}, vol.~24, no.~7, pp. 5840--5854,
-  2025.
+\bibitem{banerjee2026phyanna}
+B.~Banerjee \emph{et~al.}, ``{6G} {PHY}: Insights from {6G-ANNA} research
+  initiative,'' \emph{IEEE Open Journal of the Communications Society}, vol.~7,
+  pp. 1210--1234, 2026.
 
-\bibitem{fesl2024mimoestimation}
-B.~Fesl, M.~Baur, F.~Strasser, M.~Joham, and W.~Utschick, ``Diffusion-based
-  generative prior for low-complexity {MIMO} channel estimation,'' \emph{IEEE
-  Wireless Communications Letters}, vol.~13, no.~12, pp. 3493--3497, 2024.
-
-\bibitem{chen2025mimovi}
-Z.~Chen, H.~Shin, and A.~Nallanathan, ``Generative diffusion model-based
-  variational inference for {MIMO} channel estimation,'' \emph{IEEE
-  Transactions on Communications}, vol.~73, no.~10, pp. 9254--9269, 2025.
-
-\bibitem{zilberstein2024joint}
-N.~Zilberstein, A.~Swami, and S.~Segarra, ``Joint channel estimation and data
-  detection in massive {MIMO} systems based on diffusion models,'' in
-  \emph{IEEE International Conference on Acoustics, Speech and Signal
-  Processing (ICASSP)}, 2024.
-
-\bibitem{liu2025mimoofdm}
-H.~Fu, W.~Si, and R.~Liu, ``Conditional denoising diffusion-based channel
-  estimation for fast time-varying {MIMO-OFDM} systems,'' \emph{Digital Signal
-  Processing}, vol. 164, p. 105283, 2025.
+\bibitem{roessler2026aiml6g}
+A.~Roessler \emph{et~al.}, ``{AI/ML}-driven {6G} network solutions with energy
+  efficiency considerations,'' \emph{IEEE Access}, vol.~14, pp.
+  39\,617--39\,645, 2026.
 
 \bibitem{ddim}
 J.~Song, C.~Meng, and S.~Ermon, ``Denoising diffusion implicit models,'' in

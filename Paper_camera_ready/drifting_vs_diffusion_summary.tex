@@ -4,12 +4,8 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage[table]{xcolor}
-\usepackage{siunitx}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
-\sisetup{round-mode=places,round-precision=4}
 \hbadness=10000
 \hfuzz=20pt
 
@@ -54,7 +50,7 @@ The question is therefore not merely whether a generative model can match the ch
 
 Recent work on diffusion-based channel modeling has shown that conditional diffusion models can generate high-quality channel samples across standard benchmarks such as AWGN, Rayleigh, and nonlinear amplifier channels \cite{paper2309}.
 Follow-up work has further studied robustness and speed-quality tradeoffs for diffusion-based channel generation \cite{kimicc2024}, extended diffusion-based channel synthesis to high-dimensional user-specific channels \cite{lee2024highdimchannels}, and proposed diffusion-driven digital-twin style generation of statistical channel state information from sensing and location information \cite{gong2025dtoc}.
-More broadly, diffusion methods have also begun to influence adjacent wireless tasks such as high-dimensional channel estimation \cite{zhou2025channelestimation}, low-complexity MIMO channel estimation \cite{fesl2024mimoestimation,chen2025mimovi}, joint channel estimation and data detection \cite{zilberstein2024joint}, and fast time-varying MIMO-OFDM estimation \cite{liu2025mimoofdm}.
+Recent 6G overview papers also identify generative and diffusion-based methods as part of the emerging AI/ML physical-layer toolbox \cite{banerjee2026phyanna,roessler2026aiml6g}.
 That line of work is compelling because diffusion models are flexible, robust, and often more stable than earlier adversarial approaches.
 However, this improvement comes with a practical systems cost: inference requires an iterative reverse denoising procedure, and the latency scales with the number of diffusion steps.
 This tradeoff is manageable when the channel generator is called occasionally, but it becomes more problematic when it is embedded in inner loops of iterative training or repeated Monte Carlo evaluation. This latency bottleneck has motivated several acceleration strategies for diffusion, including skipped or reduced-step sampling as in DDIM, as well as one-step or few-step alternatives such as consistency models and distillation-based approaches that compress multi-step samplers into substantially shorter generation paths \cite{ddim,song2023consistency,yin2024onestep}.
@@ -83,7 +79,7 @@ The main contributions are summarized as follows.
   conditional WGAN models on AWGN, Rayleigh, SSPA, and optical-fiber proxy channels.
 \item We quantify the accuracy--latency tradeoff and show that one-shot drifting provides large inference-time savings while remaining competitive in distributional accuracy.
 \end{itemize}
-Code will be released upon publication\footnote{Code repository: \url{https://github.com/Fritschek}.}.
+Source code is available online\footnote{\url{https://github.com/Fritschek/conditional_drifting_models}.}.
 
 \section{Problem Formulation and Drifting Background}
 \subsection{What drifting changes conceptually}
@@ -237,7 +233,7 @@ g_i - \tilde{g}_i
 In other words, the generic update \(u \mapsto u + \eta V_{p,q}(u)\) from the drifting formulation is realized here with a kernel-based drift field estimated directly from minibatches of true and generated samples in the selected target space.
 
 In the simulations, the drift scale is \(\eta=1.0\), the repulsive weight is \(\lambda=1.0\), the minimum kernel bandwidth is \(0.2\), and the maximum drift norm is \(2.0\).
-These settings were chosen because they produced stable residual distributions and materially improved the early AWGN drifting baselines.
+These settings are used throughout the drifting benchmark and gave stable behavior across the channel families considered here.
 
 The major operational advantage is straightforward:
 once training is complete, sampling requires only a single evaluation of \(g_\theta(x,z)\).
@@ -260,15 +256,15 @@ There is no reverse chain, no ODE solver, and no per-sample iterative schedule a
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.7\textwidth]{figures/drifting_conditional_toy_figure_mpl.pdf}
-\caption{Toy conditional particle simulation in residual space. Two different channel inputs induce two different target residual distributions. Starting from mismatched generated particle clouds, the middle panel applies one attraction--repulsion drift update of the form \(\tilde e=\mathrm{stopgrad}(\hat e+\eta V(\hat e))\), and the last panel shows the particle clouds after repeated updates. This figure is an actual toy simulation of the drift field, not a hand-drawn schematic.}
+\includegraphics[width=0.62\textwidth]{figures/drifting_conditional_toy_figure_mpl.pdf}
+\caption{Toy conditional particle simulation in residual space. Two channel inputs induce different target residual distributions. Starting from mismatched generated particles, the middle panel applies one attraction--repulsion drift update \(\tilde e=\mathrm{stopgrad}(\hat e+\eta V(\hat e))\), and the last panel shows the particles after repeated updates.}
 \label{fig:toy}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.7\textwidth]{figures/drifting_tiny_mlp_demo_mpl.pdf}
-\caption{Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples. The middle panel shows samples from a randomly initialized tiny conditional MLP \(g_\theta(x,z)\). The right panel shows the same MLP after training with the drift objective, where the generated samples move close to the correct condition-dependent residual clouds.}
+\includegraphics[width=0.62\textwidth]{figures/drifting_tiny_mlp_demo_mpl.pdf}
+\caption{Toy conditional MLP trained with the drifting objective. The left panel shows target conditional residual samples, the middle panel shows the randomly initialized generator, and the right panel shows the same generator after drifting training.}
 \label{fig:toymlp}
 \end{figure*}
 
@@ -309,6 +305,7 @@ and $n \sim \mathcal{N}(0,\sigma^2 I).$
 Each real component is therefore scaled by an independent Rayleigh-distributed magnitude before noise is added.
 This channel is multiplicative rather than additive and is correspondingly less aligned with a pure residual perturbation view.
 As implemented here, Rayleigh is also a real-valued vector channel rather than a paired-I/Q complex channel.
+The fading amplitudes are latent channel randomness and are not supplied as additional conditioning variables.
 
 \textbf{SSPA:}
 the input is passed through a smooth solid-state power amplifier nonlinearity before additive noise is applied.
@@ -318,14 +315,14 @@ Let
 r = \sqrt{x_I^2 + x_Q^2}
 \end{equation}
 denote the input amplitude.
-The nonlinear amplitude law used in the benchmark is
+The amplitude-dependent gain used in the benchmark is
 \begin{equation}
 a(r)
 =
 \frac{G}{\left(1+\left(\frac{Gr}{A_0}\right)^{2p}\right)^{1/(2p)}},
 \end{equation}
 with default parameters \(p=3\), \(A_0=1.5\), and \(G=5.0\).
-The noiseless amplifier output is $\tilde{x} = a(r)\,x,$
+Thus the noiseless output amplitude is \(a(r)r\), and the noiseless amplifier output is \(\tilde{x} = a(r)x\).
 and the observed channel output is
 \begin{equation}
 y = \tilde{x} + n,
@@ -417,7 +414,10 @@ SWD is used primarily for comparability with prior diffusion-channel benchmarks 
 \subsection{Main SWD benchmark across channels}
 Table~\ref{tab:benchmark-all-channels} reports the SWD benchmark across AWGN, Rayleigh, SSPA, and
 OptFib. Direct output-space SWD is used throughout the table except for the additional residual-native row ``Drifting (res., \(e\))'', which reports residual-space SWD for the residual parameterization. DDIM-100 achieves the lowest direct-space SWD on AWGN, Rayleigh, and SSPA, while DDPM is strongest on OptFib. Among the one-shot generators under direct-space evaluation, direct-output drifting is consistently strongest across all four channels, whereas residual drifting degrades substantially once judged against the full \(p(y \mid x)\) relation. The extra residual-space row makes clear that residual drifting remains strong in its native target space. Reduced-step DDIM variants degrade systematically as the number of sampling steps is reduced.
-Table~\ref{tab:timing-cuda} summarizes projected CUDA training and inference timing. The main timing result is that one-shot generators operate at microsecond-level inference, whereas diffusion samplers remain in the millisecond regime, yielding a substantial latency gap across all channels.
+Table~\ref{tab:timing-cuda} summarizes projected CUDA training and inference timing on an NVIDIA GeForce RTX 5060 Ti GPU.
+Training hours use the same 2\% extrapolation protocol for each channel and method.
+Inference values are means over seven CUDA-synchronized repeats with batch size \(512\) and \(40\) batches per repeat; the largest relative standard deviation is \(1.4\%\).
+The main timing result is that one-shot generators operate at microsecond-level inference, whereas diffusion samplers remain in the millisecond regime, yielding a substantial latency gap across all channels.
 \input{benchmark_table_all_channels.tex}
 
 \input{timing_table_cuda.tex}

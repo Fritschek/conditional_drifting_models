@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Ten-seed SWD benchmark across all channels.} Lower is better. Direct output-space SWD is reported unless the row label explicitly indicates residual-space SWD. The residual-space row is included for diagnostic purposes only.}
+\label{tab:benchmark-all-channels}
+\tablestyle{6.5pt}{1.03}
+\tablefontsize
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Method & AWGN & Rayleigh & SSPA & OptFib \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{5}{l}{\textit{One-shot generators}} \\
+\headspace Drifting (dir.) & 0.0100 $\pm$ 0.0007 & 0.0085 $\pm$ 0.0012 & \textbf{0.0060} $\pm$ 0.0008 & \textbf{0.0275} $\pm$ 0.0104 \\
+\headspace Drifting (res., $y$) & 0.0670 $\pm$ 0.0138 & 0.3681 $\pm$ 0.0031 & 0.4812 $\pm$ 0.0022 & 0.3864 $\pm$ 0.0211 \\
+\headspace Drifting (res., $e$)[residual space] & \textbf{0.0097} $\pm$ 0.0009 & \textbf{0.0062} $\pm$ 0.0009 & 0.0130 $\pm$ 0.0003 & 0.0463 $\pm$ 0.0082 \\
+\headspace Paper WGAN & 0.0198 $\pm$ 0.0050 & 0.0171 $\pm$ 0.0050 & 0.0287 $\pm$ 0.0156 & 0.0414 $\pm$ 0.0179 \\
+\midrule
+\rowcolor[gray]{0.9} \multicolumn{5}{l}{\textit{Diffusion samplers}} \\
+\headspace DDPM & 0.0070 $\pm$ 0.0004 & 0.0079 $\pm$ 0.0008 & 0.0032 $\pm$ 0.0005 & \textbf{0.0088} $\pm$ 0.0019 \\
+\headspace DDIM-100 & \textbf{0.0042} $\pm$ 0.0006 & \textbf{0.0044} $\pm$ 0.0007 & \textbf{0.0024} $\pm$ 0.0004 & 0.0584 $\pm$ 0.0148 \\
+\headspace DDIM-50 & 0.0064 $\pm$ 0.0004 & 0.0066 $\pm$ 0.0010 & 0.0030 $\pm$ 0.0005 & -- \\
+\headspace DDIM-20 & 0.0143 $\pm$ 0.0003 & 0.0146 $\pm$ 0.0014 & 0.0056 $\pm$ 0.0006 & -- \\
+\headspace DDIM-10 & 0.0264 $\pm$ 0.0004 & 0.0271 $\pm$ 0.0013 & 0.0092 $\pm$ 0.0008 & -- \\
+\bottomrule
+\end{tabular}
+\end{table*}

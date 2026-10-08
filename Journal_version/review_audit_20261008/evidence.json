@@ -1,0 +1,264 @@
+{
+  "local_upload_bundle": {
+    "path": "Journal_version/tcom_upload.zip",
+    "sha256": "b696487568f521faf953acbeaf684866bfbba7688222a29a608bc35f3258a4aa",
+    "matches_working_sources": {
+      "conditionwise_sinkhorn_drifting.tex": true,
+      "timing_table_cuda.tex": true,
+      "wflow_coding_table.tex": true,
+      "wflow_sspa_budget_table.tex": true,
+      "wflow_curve_figures.tex": true
+    }
+  },
+  "awgn_ddim100_timing": {
+    "train_hours": 0.01972012561110306,
+    "batch_amortized_milliseconds_per_sample": 0.03913366329525912,
+    "implied_generation_samples": 10000000,
+    "saved_total_hours": 0.12842474587571173,
+    "total_hours_for_one_million": 0.030590587637563928,
+    "total_hours_for_ten_million": 0.12842474587571173
+  },
+  "sspa_generator_budgets": {
+    "full": {
+      "suite": "journal_wflow_fiber_fixed_paper_hpc_20260601_161729",
+      "swd": {
+        "count": 100,
+        "mean": 1.5344282817840575,
+        "median": 1.5171291828155518,
+        "minimum": 1.0580787658691406,
+        "maximum": 2.0288727283477783,
+        "sem": 0.01927204917894361
+      },
+      "seed7_config": {
+        "n": 8,
+        "noise_std": 0.3250531435997416,
+        "condition_power": null,
+        "condition_centers": null,
+        "condition_jitter_std": 0.0,
+        "condition_context_mode": "input",
+        "condition_feature_mode": "raw",
+        "optfib_gamma": 1.27,
+        "optfib_length": 5000.0,
+        "physics_base_mode": "identity",
+        "physics_base_optfib_kstep": 20,
+        "physics_base_optfib_pn_dbm": -21.3,
+        "dataset_size": 10000000,
+        "batch_size": 4096,
+        "epochs": 160,
+        "learning_rate": 0.001,
+        "lr_decay_epoch": 0,
+        "lr_decay_factor": 0.1,
+        "latent_dim": 16,
+        "latent_input_scale": 1.0,
+        "hidden_dim": 128,
+        "condition_input_scale": 1.0,
+        "output_init_scale": 1.0,
+        "drift_field": "fiber_sinkhorn",
+        "drift_scale": 1.0,
+        "bandwidth": null,
+        "min_bandwidth": 0.2,
+        "max_drift_norm": 2.0,
+        "repulsive_weight": 1.0,
+        "eval_size": 1000000,
+        "swd_projections": 128,
+        "is_residual": false,
+        "use_conditional_kernel": false,
+        "conditioning_mode": "none",
+        "condition_metric": "euclidean",
+        "condition_kernel_scale": 0.5,
+        "target_kernel_scale": 1.0,
+        "condition_bandwidth": null,
+        "target_bandwidth": null,
+        "local_condition_k": 32,
+        "condition_radius": null,
+        "mixture_alpha": 0.5,
+        "target_kernel_mode": "raw",
+        "residual_target_scale": 1.0,
+        "adaptive_condition_bandwidth": false,
+        "adaptive_target_bandwidth": false,
+        "adaptive_bandwidth_k": 16,
+        "condition_embedding_dim": 0,
+        "condition_embedding_hidden_dim": 64,
+        "positive_queue_size": 0,
+        "positive_reference_size": 0,
+        "sinkhorn_epsilon": null,
+        "sinkhorn_min_epsilon": 0.001,
+        "sinkhorn_iterations": 10,
+        "fiber_generated_samples": 4,
+        "fiber_positive_samples": 4,
+        "fiber_reference_samples": 4,
+        "fiber_moment_mean_weight": 1.0,
+        "fiber_moment_cov_weight": 1.0,
+        "fiber_supervised_weight": 0.0
+      },
+      "actual_optimizer_updates": 390720
+    },
+    "compact": {
+      "suite": "journal_wflow_sspa_budget_screen_20260602_071106",
+      "swd": {
+        "count": 30,
+        "mean": 0.007071426371112466,
+        "median": 0.007076589157804847,
+        "minimum": 0.005256286822259426,
+        "maximum": 0.009458570741117,
+        "sem": 0.0001865701317493984
+      },
+      "seed7_config": {
+        "n": 8,
+        "noise_std": 0.3250531435997416,
+        "condition_power": null,
+        "condition_centers": null,
+        "condition_jitter_std": 0.0,
+        "condition_context_mode": "input",
+        "condition_feature_mode": "raw",
+        "optfib_gamma": 1.27,
+        "optfib_length": 5000.0,
+        "physics_base_mode": "identity",
+        "physics_base_optfib_kstep": 20,
+        "physics_base_optfib_pn_dbm": -21.3,
+        "dataset_size": 120000,
+        "batch_size": 4096,
+        "epochs": 160,
+        "learning_rate": 0.001,
+        "lr_decay_epoch": 0,
+        "lr_decay_factor": 0.1,
+        "latent_dim": 16,
+        "latent_input_scale": 1.0,
+        "hidden_dim": 128,
+        "condition_input_scale": 1.0,
+        "output_init_scale": 1.0,
+        "drift_field": "fiber_sinkhorn",
+        "drift_scale": 1.0,
+        "bandwidth": null,
+        "min_bandwidth": 0.2,
+        "max_drift_norm": 2.0,
+        "repulsive_weight": 1.0,
+        "eval_size": 100000,
+        "swd_projections": 128,
+        "is_residual": false,
+        "use_conditional_kernel": false,
+        "conditioning_mode": "none",
+        "condition_metric": "euclidean",
+        "condition_kernel_scale": 0.5,
+        "target_kernel_scale": 1.0,
+        "condition_bandwidth": null,
+        "target_bandwidth": null,
+        "local_condition_k": 32,
+        "condition_radius": null,
+        "mixture_alpha": 0.5,
+        "target_kernel_mode": "raw",
+        "residual_target_scale": 1.0,
+        "adaptive_condition_bandwidth": false,
+        "adaptive_target_bandwidth": false,
+        "adaptive_bandwidth_k": 16,
+        "condition_embedding_dim": 0,
+        "condition_embedding_hidden_dim": 64,
+        "positive_queue_size": 0,
+        "positive_reference_size": 0,
+        "sinkhorn_epsilon": null,
+        "sinkhorn_min_epsilon": 0.001,
+        "sinkhorn_iterations": 10,
+        "sinkhorn_epsilon_mode": "within",
+        "sinkhorn_epsilon_samples": 2048,
+        "sinkhorn_epsilon_scale": 1.0,
+        "fiber_generated_samples": 4,
+        "fiber_positive_samples": 4,
+        "fiber_reference_samples": 4,
+        "fiber_moment_mean_weight": 1.0,
+        "fiber_moment_cov_weight": 1.0,
+        "fiber_supervised_weight": 0.0
+      },
+      "actual_optimizer_updates": 4800
+    }
+  },
+  "sspa_ser_at_8db": {
+    "analytic": {
+      "curve": {
+        "count": 30,
+        "mean": 1.5666667410793405e-05,
+        "median": 1.0000000474974514e-05,
+        "minimum": 0.0,
+        "maximum": 5.0000002374872565e-05,
+        "sem": 2.9432696227099813e-06
+      },
+      "table": {
+        "count": 30,
+        "mean": 1.3000000617466867e-05,
+        "median": 1.0000000474974514e-05,
+        "minimum": 0.0,
+        "maximum": 0.00010000000474974513,
+        "sem": 3.495481649970798e-06
+      },
+      "identical_training_histories": 30,
+      "identical_configs": 30
+    },
+    "fiber_sinkhorn": {
+      "curve": {
+        "count": 30,
+        "mean": 8.133333719645937e-05,
+        "median": 7.500000356230885e-05,
+        "minimum": 0.0,
+        "maximum": 0.0002300000109244138,
+        "sem": 1.0951653241021321e-05
+      },
+      "table": {
+        "count": 30,
+        "mean": 9.33333377664288e-05,
+        "median": 8.000000379979611e-05,
+        "minimum": 0.0,
+        "maximum": 0.0002500000118743628,
+        "sem": 1.4185417609478283e-05
+      },
+      "identical_training_histories": 30,
+      "identical_configs": 30
+    },
+    "wgan": {
+      "curve": {
+        "count": 30,
+        "mean": 7.500000352350373e-05,
+        "median": 6.0000002849847076e-05,
+        "minimum": 0.0,
+        "maximum": 0.00041000001947395505,
+        "sem": 1.5076434315574943e-05
+      }
+    },
+    "diffusion_ddim100": {
+      "curve": {
+        "count": 30,
+        "mean": 3.133333482158681e-05,
+        "median": 3.0000001424923538e-05,
+        "minimum": 0.0,
+        "maximum": 0.0001500000071246177,
+        "sem": 6.0975470609311676e-06
+      }
+    }
+  },
+  "turboae": {
+    "surrogate_count": 30,
+    "surrogate_dimensions": [
+      2
+    ],
+    "surrogate_noise_stds": [
+      0.6309573444801932
+    ],
+    "surrogate_epochs": [
+      30
+    ],
+    "autoencoder_count": 30,
+    "information_block_lengths": [
+      64
+    ],
+    "channel_lengths": [
+      128
+    ],
+    "rates": [
+      0.5
+    ],
+    "decoder_ebno_offsets": [
+      [
+        -3.5,
+        0.0
+      ]
+    ]
+  }
+}

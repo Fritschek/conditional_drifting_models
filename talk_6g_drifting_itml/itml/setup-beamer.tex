@@ -1,0 +1,146 @@
+%%% FONT SETTINGS
+\setbeamerfont{block body reference}{size=\scriptsize}
+\setbeamerfont{block title reference}{size=\scriptsize}
+
+\setbeamerfont{description item}{series=\mdseries}
+\setbeamerfont{alerted text}{series=\bfseries\boldmath}
+
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\footnotesize}
+\setbeamerfont{author}{size=\footnotesize}
+\setbeamerfont{institute}{size=\scriptsize}
+\setbeamerfont{date}{size=\scriptsize}
+
+\setbeamerfont{normal text}{size=\small}
+\AtBeginDocument{\usebeamerfont{normal text}}
+
+%%% SLIDE COLORS
+
+%%%%%%%%
+\setbeamercolor{normal text}{%
+	fg=tudBlueDark90,
+	bg=tudWhite,
+}
+\setbeamercolor{alerted text}{%
+	fg=tudBlue80,
+}
+\setbeamercolor{palette primary}{%
+	use=normal text,
+	fg=normal text.fg,
+	bg=tudBlueLight20,%normal text.bg
+}
+
+%%%%%%%%
+\setbeamercolor{title}{%
+	%fg=tudBlueMid100
+	fg=tudBlueDark90
+}
+\setbeamercolor{subtitle}{%
+	%fg=tudBlueMid70
+	fg=tudBlueDark60
+}
+\setbeamercolor{title separator}{
+	fg=tudBlueMid40
+}
+\setbeamercolor{author}{%
+	%fg=tudBlueMid100
+	fg=tudBlueDark90
+}
+\setbeamercolor{institute}{%
+	%fg=tudBlueMid70
+	fg=tudBlueDark60
+}
+\setbeamercolor{date}{%
+	%fg=tudBlueMid100
+	fg=tudBlueDark90
+}
+
+%%%%%%%%
+\setbeamercolor{frametitle}{
+	bg=tudBlueLight15,
+	fg=tudBlueDark90
+}
+\setbeamercolor{progress bar}{
+	bg=tudBlueMid40,
+	fg=tudBlueMid100	
+}
+\setbeamercolor{footlinecolor}{
+	fg=tudBlueDark50
+}
+\setbeamercolor{footlinecolorAlt}{
+	fg=tudBlueDark70
+}
+\setbeamercolor{standout}{
+	bg=tudBlueLight15,
+	fg=tudBlueDark90
+}
+
+%%%%%%%%
+\setbeamercolor{block title}{
+	bg=tudBlueLight25,
+}
+\setbeamercolor{block body}{
+	bg=tudBlueLight10,
+}
+\setbeamercolor{block title alerted}{%
+	use={palette primary, alerted text},
+	fg=palette primary.bg,
+	bg=alerted text.fg
+}
+\setbeamercolor{block title example}{%
+	use={block title, alerted text},
+	bg=block title.bg,
+	fg=alerted text.fg
+}
+%
+
+%%%%
+\setbeamercolor{extraalert}{
+	fg=tudOrange90
+}
+
+
+%%% LINE/PROGRESSBAR SETTINGS
+\makeatletter
+\setlength{\moloch@progressinheadfoot@linewidth}{0.75pt}
+%\setlength{\moloch@titleseparator@linewidth}{0.5pt}
+\setlength{\moloch@progressonsectionpage@linewidth}{0.75pt}
+\makeatother
+
+\newcommand*{\seprule}{{\par\color{tudBlueMid30}\hrulefill\par\vspace*{1ex plus 0pt minus .5ex}}}
+
+
+%%% TITLE PAGE SETTINGS
+\setbeamertemplate{title page}{
+\begin{minipage}[b][\textheight]{\textwidth}
+	\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+	\vspace*{5ex}%
+	\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+	\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+	\vspace*{2.5ex}%
+	\usebeamertemplate*{title separator}
+
+	\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+	\ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+	\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+	\vfil
+	\vspace*{1mm}
+\end{minipage}
+}
+
+%%% LOGO PLACEMENT SETTINGS
+\titlegraphic{\includegraphics[height=0.185\textheight]{itml/logos/logo-tud-bluedark90-white-margins.pdf}\hfill\includegraphics[height=.15\textheight]{itml/logos/logo-itml-color-beamer-presentation.pdf}}
+
+%%% FOOTLINE SETTINGS
+\newcommand{\setfootlinecolor}[1]{{\usebeamercolor[fg]{footlinecolor} #1}}
+\newcommand{\setfootlinecolorAlt}[1]{{\usebeamercolor[fg]{footlinecolorAlt} #1}}
+\newcommand{\footlinetitle}[1]{%
+\setbeamertemplate{footline}[text line]{\parbox{\linewidth}{\setfootlinecolor{\rule{0ex}{2.5ex}#1} ~\hfill~  \setfootlinecolorAlt{\insertframenumber}\\[-0.9ex]}}
+}
+
+%%% EXTRA ALERT COMMANDS
+\newcommand{\aalert}[1]{{\usebeamercolor[fg]{extraalert} #1}}
+\newcommand{\aaalert}[1]{{\usebeamercolor[fg]{extraalert}\bfseries #1}}
+
+%%% CUSTOM ENVIRONMENTS
+\newenvironment{blockwithoutheader}{\setbeamercolor{block body}{bg=tudBlueLight25}\begin{block}{\vspace*{-3ex}}}{\end{block}}

@@ -40,6 +40,8 @@ def configure_matplotlib():
             "axes.facecolor": COLORS["panel"],
             "savefig.facecolor": "white",
             "savefig.bbox": "tight",
+            "pdf.fonttype": 42,
+            "ps.fonttype": 42,
         }
     )
 

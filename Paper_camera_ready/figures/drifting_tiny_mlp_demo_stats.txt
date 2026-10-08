@@ -1,0 +1,4 @@
+init_err_cond1=1.0455
+init_err_cond2=1.2364
+final_err_cond1=0.1138
+final_err_cond2=0.1145
