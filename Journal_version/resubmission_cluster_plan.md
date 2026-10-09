@@ -181,8 +181,12 @@ implementations and measured sampling floors. The subsequent
 checks against pathwise empirical derivatives, fixed raw-moment augmentation,
 and SSPA seed-8/9 checks against frozen-codec gradients. It resolves numerical
 step bias and detects the large-variance failure, but still misses some
-task-gradient orderings. Keep the selection-value gate open. Next use
-same-input controlled value/derivative interventions; passive-data sampling,
+task-gradient orderings. The [exact-law and matched-value controls](metric_controls_results_20261009.md)
+then confirmed reparameterization-dependent estimator variance and useful
+population derivative information at identical inputs. The Gaussian control
+also admits a simple mean/Jacobian solution. Keep the selection-value gate
+open. Next separate candidate-specific estimation noise and population
+error on a small same-input learned-model check; passive-data sampling,
 heavy-tail robustness and useful selection beyond simple controls remain open.
 
 The [local report](gradient_fidelity_local_pilot_20261008.md) covers seed 7 on

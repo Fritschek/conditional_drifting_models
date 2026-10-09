@@ -18,6 +18,7 @@ The author has no fixed deadline or compute cap and is willing to run simulation
 - [Completed decoder-free metric feasibility pilot](channel_feature_metric_pilot_20261009.md): full-kernel and moment derivatives, 128/512 samples, fixed inputs, shared versus independent noise. Estimation works, but added screening value is not established; retain sampling-floor and large-variance limitations.
 - [Derivative resolution and additional-seed checks](metric_resolution_results_20261009.md): autograd reference, convergent small-step differences, fixed moment augmentation, SSPA seeds 8/9 and frozen-codec validation. Numerical checks pass, but the score still misses task-dependent gradient orderings.
 - [Independent assessment of the new experiments](metric_experiment_assessment_20261009.md): separates direction from magnitude, identifies candidate-specific derivative-estimator variance, specifies an exact-law rotation control and same-input intervention, and records the current checkout's missing October raw artifacts.
+- [Completed exact-law and matched-value controls](metric_controls_results_20261009.md): the proposed A/B controls now ran locally. Rotation changes estimator variance despite identical laws; same-input perturbations isolate useful derivative information. Simple moments remain sufficient in this Gaussian control. All October raw results are present on the Linux host.
 - [Actual decision and all 22 reviewer comments](review_audit_20261008/README.md#full-review-reports).
 
 ## 1. Recommendation
@@ -54,10 +55,11 @@ Seeds 8/9 were scored without fitting against their task outcomes. They still
 do not validate added selection value: on a seed-9 frozen codec, WGAN has
 worse SWD but better gradient alignment than selected Sinkhorn, and the
 generic derivative score also misses this ordering. Do not rerun these checks
-as unstarted work. Next, use same-input controlled value/derivative
-interventions; retain analytic sampling floors and separate value, direction,
-magnitude, and actual normalized-step outcomes. Passive-data feasibility and
-heavy-tail robustness remain open.
+as unstarted work. The subsequent exact-law and same-input synthetic controls
+are also complete (see below). Retain candidate-specific uncertainty as well
+as analytic null controls, and separate value, direction, magnitude and actual
+normalized-step outcomes. Passive-data feasibility and heavy-tail robustness
+remain open.
 
 All values below are encoder-gradient comparisons at identical frozen codecs,
 using existing seed-7 generators. Each gradient averages four Monte Carlo
@@ -83,7 +85,19 @@ comparisons are described above.
 **Immediate order:** derivative-resolution, raw-moment augmentation, and the
 additional seed-8/9 checkpoint checks are complete. The report join now protects
 codec identity and stored task contracts, with nine focused tests passing.
-Follow the [new assessment](metric_experiment_assessment_20261009.md): restore the compact October evidence bundle to this checkout, then run the exact-law rotation control to separate candidate-specific estimator variance from population discrepancy. Next run same-input, matched-value-error interventions, keeping expected-gradient error, equal-length progress, and common-learning-rate progress distinct. Freeze score choices before testing genuinely unused seeds/families. Keep P1 stability/correctness and modern-baseline work; these pilots do not resolve either. The metric must add held-out value beyond cheaper checks before it earns a central role.
+The [assessment's A/B controls](metric_controls_results_20261009.md) have now
+run on this Linux host, where the October evidence is present. At N=512 the
+ordinary RBF derivative norm rises from 0.114 to 0.928 for an exact-law
+reparameterization; independent cross traces target zero without clipping.
+The matched-value experiment shows derivative information beyond pointwise
+SWD/MMD, but simple mean/Jacobian information also captures this Gaussian
+example. Next separate candidate-specific estimator noise from population
+error on a small, same-input learned-model check, retaining absolute gradient
+error, direction and magnitude as separate targets. Do not rerun A/B as
+unstarted work or call a squared-trace estimator an operator-norm confidence
+bound. Freeze choices before genuinely unused model/task cases. Keep P1
+stability/correctness and modern-baseline work; these controls resolve neither.
+The metric must add held-out value beyond cheaper checks before a central role.
 
 ## 2. What was actually checked
 
@@ -99,6 +113,7 @@ Follow the [new assessment](metric_experiment_assessment_20261009.md): restore t
 | Local gradient-fidelity study | Completed on RTX 5060 Ti using saved seed-7 checkpoints, with four frozen channel/codec comparisons and a higher-sample SSPA confirmation. See the linked pilot report and raw result directories. |
 | Decoder-free feature metric | Completed 128/512-sample panels: 2,430/1,458 observations; 13 estimator/gradient tests pass. Uses existing checkpoints and fixed radial inputs. Held-out predictive/selection utility remains open. |
 | Derivative resolution and moment augmentation | Completed 1,350 step-comparison records, 558 pathwise records and 62 metric/task joins, including SSPA seeds 8/9. The combined feature/gradient suite now has 18 passing tests. Still no validated selector. |
+| Exact-law and same-input controls | Completed 192 rotation records, 480 matched-value records and 3,840 probe-gradient records, with exact population references. All 37 current feature/gradient/report/control tests pass. Candidate-dependent variance confirmed; kernel-specific selection benefit remains open. |
 | New training / cluster measurements | None performed. All new run counts and thresholds below are proposed protocol choices. |
 
 The earlier missing-archive warning applied to the other checkout. Do not
@@ -204,7 +219,7 @@ The accepted conference paper already covers conditional direct/residual driftin
 
 ## 8. Ready-to-paste instruction for the next Codex session
 
-> Read `Journal_version/resubmission_handover.md`, `resubmission_cluster_plan.md`, `resubmission_manuscript_plan.md`, `theory_preoptimization_channel_metric.md`, `gradient_fidelity_local_pilot_20261008.md`, `channel_feature_metric_pilot_20261009.md`, and `metric_resolution_results_20261009.md` before changing anything. The seed-7 pilots and numerical/moment checks on seeds 7--9 have run, including frozen-codec validation on seeds 8/9. These are exploratory evidence, not a validated selector. Check archive availability before requesting transfers. Treat submitted artifacts and numerical reports as historical records. Finish P0 contracts and implement the P1 reference harness; use same-input controlled value/derivative interventions and missing T1/T2 controls before expanding P3. Passive-data estimation and heavy-tail controls remain open. Prepare theory/attribution changes in a separate revision source. Follow exact sampling, split, timing, and count contracts. Use bounded smoke tests, not the misleading full-budget environment check. Produce dry-run manifests and measured resource estimates before large submission. Keep missing data and unresolved provenance explicit. Freeze the protocol before confirmation, report negative results, and update the claim accordingly. Do not submit a paper or contact editors without the author's instruction.
+> Read `Journal_version/resubmission_handover.md`, `resubmission_cluster_plan.md`, `resubmission_manuscript_plan.md`, `theory_preoptimization_channel_metric.md`, `gradient_fidelity_local_pilot_20261008.md`, `channel_feature_metric_pilot_20261009.md`, `metric_resolution_results_20261009.md`, `metric_experiment_assessment_20261009.md`, and `metric_controls_results_20261009.md` before changing anything. The seed-7 pilots, numerical/moment checks on seeds 7--9, and exact-law/matched-value synthetic controls have run. They are exploratory evidence, not a validated selector. All October raw evidence is present on the Linux host and a compact evidence archive is documented in the controls report. Check availability before requesting transfers. Treat submitted artifacts and numerical reports as historical records. Finish P0 contracts and implement the P1 reference harness. Before expanding P3, separate candidate-specific estimator variance from population discrepancy on a small same-input learned-model comparison; retain simple moment/Jacobian baselines and distinct absolute-error, direction and magnitude targets. Do not repeat A/B as unstarted work. Passive-data estimation, heavy-tail controls, missing T1/T2 interventions and trained-model selection utility remain open. Prepare theory/attribution changes in a separate revision source. Follow exact sampling, split, timing and count contracts. Use bounded smoke tests, not the misleading full-budget environment check. Produce dry-run manifests and measured resource estimates before large submission. Keep missing data and unresolved provenance explicit. Freeze the protocol before confirmation, report negative results and update the claim accordingly. Do not submit a paper or contact editors without the author's instruction.
 
 ## 9. Completion criteria
 

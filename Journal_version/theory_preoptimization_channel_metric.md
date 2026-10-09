@@ -322,3 +322,22 @@ feature Jacobians. The new score is not intrinsically robust to heavy tails.
 Recovering a variance failure and resolving finite-difference truncation are
 necessary checks. Neither alone establishes an advantage over conditional
 SWD or validates a pre-optimization selector.
+
+### Exact-law and same-input controls completed
+
+The [follow-up controls](metric_controls_results_20261009.md) now provide
+explicit checks of the assessment's variance decomposition and same-input
+mechanism. Orthogonal, input-dependent Gaussian noise rotations preserve the
+full conditional law while increasing empirical derivative norms. At N=512,
+the ordinary RBF derivative norm increases from 0.114 to 0.928 without any
+population mismatch. Independent-split cross traces remain signed and target
+zero in expectation. This proves neither unbiasedness of their eigenvalue
+norms nor finite-sample confidence coverage.
+
+The matched-value control keeps the laws at the evaluated inputs fixed while
+varying local mean Jacobians. Exact kernel and polynomial task-class bounds
+hold on the tested probes, including unused directions/probes. This supports
+additional derivative information, but ordinary mean/Jacobian errors suffice
+for these Gaussian mean perturbations. A kernel-specific selection benefit
+on learned channels remains unestablished. Candidate-specific sampling noise
+must accompany any later empirical derivative-fidelity claim.

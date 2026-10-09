@@ -168,3 +168,44 @@ def moment_scores(p, q, dimension, step):
         "mean_derivative_op": torch.linalg.matrix_norm(derivatives(means), ord=2).item(),
         "covariance_derivative_op": torch.linalg.matrix_norm(derivatives(cov), ord=2).item(),
     }
+
+
+def pathwise_cross_embedding_matrices(left_clouds, right_clouds, bandwidths, block_size=256):
+    """Bilinear empirical embedding products, tiled over the left samples.
+
+    Each argument is (p, q, Jp, Jq). Independent left/right draws give an
+    unbiased cross Gram matrix for the population discrepancy. Its symmetric
+    part need not be PSD; do not pass it to embedding_matrix_scores or clip it.
+    Identical arguments give the ordinary empirical squared-norm matrices.
+    """
+    if not bandwidths or min(bandwidths) <= 0 or block_size < 1:
+        raise ValueError("Positive bandwidths and block size required.")
+
+    def unpack(clouds):
+        p, q, jp, jq = [v.double() for v in clouds]
+        y, jac = torch.cat((p, q)), torch.cat((jp, jq))
+        w = torch.cat((p.new_full((len(p),), 1 / len(p)), q.new_full((len(q),), -1 / len(q))))
+        d = y.shape[1]
+        phi_jac = torch.cat((jac / d**.5,
+            (torch.einsum("noa,np->nopa", jac, y)
+             + torch.einsum("no,npa->nopa", y, jac)).flatten(1, 2) / d), dim=1)
+        return y, jac, w, w @ polynomial_features(y), torch.einsum("n,nfa->fa", w, phi_jac)
+
+    y, jy, wy, my, dmy = unpack(left_clouds)
+    z, jz, wz, mz, dmz = unpack(right_clouds)
+    rbf = y.new_zeros(jy.shape[-1] + 1, jz.shape[-1] + 1)
+    for start in range(0, len(y), block_size):
+        yy, jj, ww = y[start:start+block_size], jy[start:start+block_size], wy[start:start+block_size]
+        delta = yy[:, None] - z[None]
+        distance = delta.square().sum(-1)
+        ly = torch.einsum("ijo,ioa->ija", delta, jj)
+        rz = torch.einsum("ijo,job->ijb", delta, jz)
+        for length in bandwidths:
+            signed = torch.exp(-distance / (2 * length**2)) * ww[:, None] * wz[None] / len(bandwidths)
+            rbf[0, 0] += signed.sum()
+            rbf[1:, 1:] += torch.einsum("ij,ioa,job->ab", signed, jj, jz) / length**2
+            rbf[1:, 1:] -= torch.einsum("ij,ija,ijb->ab", signed, ly, rz) / length**4
+    moments = torch.zeros_like(rbf)
+    moments[0, 0] = my.dot(mz)
+    moments[1:, 1:] = dmy.T @ dmz
+    return {"rbf": rbf, "moments": moments, "augmented": rbf + moments}
