@@ -47,7 +47,7 @@ same-input causal validation. Historical training budgets and architectures
 are still unmatched. Seeds 8 and 9 are additional exploratory checkpoint
 checks, not a publication-level confirmatory study.
 
-## Finite differences converge to the empirical derivative
+## Finite-difference score norms approach pathwise empirical score norms
 
 Relative discrepancy in the **RBF derivative operator norm**, against
 pathwise differentiation of the same sampled embedding. Median and maximum
@@ -67,14 +67,23 @@ MC repetition 0. Small-step float32 roundoff is visible on AWGN. The samplewise
 Jacobian checks also improve, with slower convergence possible at WGAN ReLU
 boundaries. There is no reason to reduce h indefinitely in float32.
 
-This establishes numerical differentiation accuracy **for the empirical map**.
-It does not remove the population sampling floor. For example, the N=512
+This checks numerical resolution of the **reported scalar derivative norm**.
+It does not compute the norm of the difference between the full finite-difference
+and pathwise derivative operators, nor establish their orientation agreement.
+The samplewise Jacobian checks are additional, distinct evidence. It also does
+not remove the population sampling floor. For example, the N=512
 pathwise RBF derivative floors are 0.06327 on AWGN and 0.35605 on SSPA. The
 previous SSPA h=0.05 CRN floor was 0.3128 using three repetitions: step bias and
 the repetition count differ, so these are not identical estimates.
 
 Autograd needs differentiable simulator access. CRN needs reproducible noise
 across perturbations. Neither is a remedy for passive single-observation data.
+
+The analytic-versus-analytic floor is a particular null control, not a universal
+error bar for every candidate. Each generator can have different pathwise
+feature-derivative variance, even when its conditional laws are exactly right.
+The [independent assessment](metric_experiment_assessment_20261009.md) gives
+the variance decomposition and an exact-law rotation control to test this.
 
 ## Moments expose the variance failure across the three seeds
 

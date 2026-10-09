@@ -3,6 +3,7 @@
 import argparse
 import csv
 import json
+import math
 from pathlib import Path
 
 import matplotlib
@@ -34,6 +35,57 @@ def load_suite(path):
         if len(actual) != len(set(actual)) or set(actual) != expected:
             raise ValueError(f"Missing or duplicate metric rows: {path}, {channel}")
     return result
+
+
+def task_contract(payload, config):
+    """Extract task identity, deliberately excluding Monte Carlo budgets.
+
+    Older results may lack split-reference diagnostics or a top-level step
+    list; the latter can be recovered from the recorded method steps. Codec
+    configuration does not certify the runner's power-normalization semantics:
+    legacy files did not record that override, so this checks stored metadata
+    only, not unstored protocol/source equivalence.
+    """
+    codec_sha = payload.get("codec", {}).get("sha256")
+    if not codec_sha:
+        raise ValueError("Missing codec checkpoint SHA in task contract")
+    required = ("noise_std", "rate", "ebno_db", "codec_config")
+    for name in required:
+        if name not in payload or payload[name] is None:
+            raise ValueError(f"Missing {name} in task contract")
+
+    declared_steps = config.get("steps")
+    steps = tuple(declared_steps) if declared_steps is not None else None
+    for method, row in payload["methods"].items():
+        method_steps = row.get("steps")
+        if method_steps is None or any("fraction" not in step for step in method_steps):
+            raise ValueError(f"Missing recorded step fractions for {method}")
+        fractions = tuple(step["fraction"] for step in method_steps)
+        if steps is None:
+            steps = fractions
+        elif fractions != steps:
+            raise ValueError(f"Mismatched step fractions within task: {method}")
+    if not steps:
+        raise ValueError("Missing step fractions in task contract")
+
+    return {"codec_sha256": codec_sha, "steps": steps,
+            **{name: payload[name] for name in required}}
+
+
+def check_task_contract(contracts, key, payload, config):
+    """Reject incompatible tasks sharing a (seed, channel, codec-label) key."""
+    candidate = task_contract(payload, config)
+    previous = contracts.get(key)
+    if previous is not None:
+        for name in ("codec_sha256", "codec_config", "steps"):
+            if candidate[name] != previous[name]:
+                raise ValueError(f"Mismatched task contract {name}: {key}")
+        for name in ("noise_std", "rate", "ebno_db"):
+            if not math.isclose(candidate[name], previous[name], rel_tol=1e-6, abs_tol=1e-12):
+                raise ValueError(f"Mismatched task contract {name}: {key}")
+    else:
+        contracts[key] = candidate
+    return candidate
 
 
 def main():
@@ -90,12 +142,13 @@ def main():
                 score[name + "_mc_se"] = float(np.std(means, ddof=1) / np.sqrt(len(means))) if len(means) > 1 else None
             scores[key], manifests[key] = score, manifest
     save_csv(out / "metric_summary.csv", list(scores.values()))
-    targets = {}
+    targets, task_contracts = {}, {}
     for path in args.gradient_suites:
         result = json.loads((path / "results.json").read_text())
         seed = result["config"]["seed"]
         for comparison, payload in result["comparisons"].items():
             channel, codec = comparison.split("/")
+            contract = check_task_contract(task_contracts, (seed, channel, codec), payload, result["config"])
             for method, row in payload["methods"].items():
                 if (seed, channel, method) not in scores:
                     continue
@@ -105,6 +158,7 @@ def main():
                 if method != "analytic" and row["checkpoint"]["sha256"] != manifest["checkpoints"][f"{channel}/{method}"]["sha256"]:
                     raise ValueError("Mismatched generator checkpoint")
                 target = scores[seed, channel, method] | {"codec": codec, "task_source": str(path),
+                    "codec_sha256": contract["codec_sha256"],
                     "gradient_samples": result["config"]["gradient_samples"],
                     "reference_samples": result["config"]["reference_samples"],
                     "encoder_cosine": row["encoder_alignment"]["cosine"],

@@ -17,6 +17,7 @@ The author has no fixed deadline or compute cap and is willing to run simulation
 - [Completed local gradient-fidelity pilot](gradient_fidelity_local_pilot_20261008.md): seed-7 AWGN/SSPA results, two frozen codecs per channel, higher-sample SSPA confirmation, checks, and reproduction commands. This is task-dependent development evidence, not a validated pre-optimization score.
 - [Completed decoder-free metric feasibility pilot](channel_feature_metric_pilot_20261009.md): full-kernel and moment derivatives, 128/512 samples, fixed inputs, shared versus independent noise. Estimation works, but added screening value is not established; retain sampling-floor and large-variance limitations.
 - [Derivative resolution and additional-seed checks](metric_resolution_results_20261009.md): autograd reference, convergent small-step differences, fixed moment augmentation, SSPA seeds 8/9 and frozen-codec validation. Numerical checks pass, but the score still misses task-dependent gradient orderings.
+- [Independent assessment of the new experiments](metric_experiment_assessment_20261009.md): separates direction from magnitude, identifies candidate-specific derivative-estimator variance, specifies an exact-law rotation control and same-input intervention, and records the current checkout's missing October raw artifacts.
 - [Actual decision and all 22 reviewer comments](review_audit_20261008/README.md#full-review-reports).
 
 ## 1. Recommendation
@@ -75,17 +76,14 @@ The pilot uses explicit full-codebook power normalization and fixed noise. Its
 SER values are not replacements for the submitted paper's minibatch-normalized
 training results. Its steps normalize each gradient to a common parameter-step
 norm. They test direction, not the effect of magnitude under a common SGD
-learning rate or under Adam. No early/middle/late trajectory, multiple-generator-
-seed comparison, or complete downstream retraining was run.
+learning rate or under Adam. No early/middle/late trajectory or complete
+downstream retraining was run; the later exploratory seed-8/9 checkpoint
+comparisons are described above.
 
-**Immediate order:** extend the completed metric pilot with derivative-resolution
-and moment/tail checks, while extending T1/T2 with more seeds and common
-learning-rate interventions. Freeze feature/kernel scales, input coverage,
-finite-difference resolution, and score aggregation before testing unused
-seeds/families. The already inspected seed-7 results cannot serve as held-out
-validation. Keep P1 stability/correctness work and the modern-baseline plan;
-this pilot does not resolve either. A kernel score must beat cheaper value-only
-and derivative-aware moment baselines before it earns a central role.
+**Immediate order:** derivative-resolution, raw-moment augmentation, and the
+additional seed-8/9 checkpoint checks are complete. The report join now protects
+codec identity and stored task contracts, with nine focused tests passing.
+Follow the [new assessment](metric_experiment_assessment_20261009.md): restore the compact October evidence bundle to this checkout, then run the exact-law rotation control to separate candidate-specific estimator variance from population discrepancy. Next run same-input, matched-value-error interventions, keeping expected-gradient error, equal-length progress, and common-learning-rate progress distinct. Freeze score choices before testing genuinely unused seeds/families. Keep P1 stability/correctness and modern-baseline work; these pilots do not resolve either. The metric must add held-out value beyond cheaper checks before it earns a central role.
 
 ## 2. What was actually checked
 
