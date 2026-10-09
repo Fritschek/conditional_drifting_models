@@ -1,6 +1,10 @@
 # Cluster work specification
 
-Companion to [the resubmission handover](resubmission_handover.md). All new designs below are **proposed**; they have not been run. Existing command examples were checked against source, not executed on a GPU. Newly named revision scripts must be implemented before use.
+Companion to [the resubmission handover](resubmission_handover.md). The cluster
+designs below remain **proposed**. The separate [local gradient pilot](gradient_fidelity_local_pilot_20261008.md)
+has run on a GPU and partially implements P3/T1/T2. Its existing runner is
+`scripts/run_local_gradient_fidelity.py`; newly named revision scripts below
+still require implementation. Do not confuse those statuses.
 
 ## 1. Freeze the experimental contract first
 
@@ -35,7 +39,8 @@ Tuning allowance: start with at most six configurations per method/channel/capac
 
 ## 2. P0 — restore evidence and fix the measurement interfaces
 
-Restore at least the following referenced archives/checkpoints (paths relative to repo):
+Check the following referenced archives/checkpoints (paths relative to repo),
+restoring only missing inputs on the execution machine:
 
 - `results/timing_suite_local_cuda_20260601_1755/`
 - `results/timing_suite_wflow_20260601_1715/`
@@ -46,7 +51,12 @@ Restore at least the following referenced archives/checkpoints (paths relative t
 - `results/turboae_long_block_hpc_20260529_165218/`
 - Baseline/other suites identified by the retained figure and table export manifests.
 
-Run `scripts/audit_journal_review_evidence.py` only after restoring its inputs. A successful rerun verifies saved records, not the reproducibility of training. Keep unknown source versions explicit; the saved model config is not proof of the source commit that ran it.
+On 9 October the local audit completed and reproduced the retained evidence
+JSON exactly. These inputs are therefore available here; another checkout may
+lack the git-ignored results. Run `scripts/audit_journal_review_evidence.py`
+after checking its inputs. Success verifies saved records, not reproducibility
+of training. Keep unknown source versions explicit; a saved model config does
+not prove which source commit produced it.
 
 Implementation tasks:
 
@@ -159,9 +169,56 @@ Use one unit per column. Total simulator cost for N calls is `T_train + N*t_call
 
 ## 5. P3 — learned-codeword, gradient, and downstream experiments
 
+### Completed development pilot and remaining controls
+
+The separate [decoder-free metric pilot](channel_feature_metric_pilot_20261009.md)
+has now run using `scripts/run_channel_feature_metric_pilot.py` and
+`conditional_drifting/feature_metrics.py`. It covers full-kernel MMD and
+embedding derivatives, moment derivatives and SWD, with 128/512 samples,
+three perturbation sizes and both shared/independent noise. Reuse these
+implementations and measured sampling floors. The subsequent
+[resolution study](metric_resolution_results_20261009.md) completed smaller-step
+checks against pathwise empirical derivatives, fixed raw-moment augmentation,
+and SSPA seed-8/9 checks against frozen-codec gradients. It resolves numerical
+step bias and detects the large-variance failure, but still misses some
+task-gradient orderings. Keep the selection-value gate open. Next use
+same-input controlled value/derivative interventions; passive-data sampling,
+heavy-tail robustness and useful selection beyond simple controls remain open.
+
+The [local report](gradient_fidelity_local_pilot_20261008.md) covers seed 7 on
+AWGN/SSPA, two frozen codecs per channel, analytic gradient finite differences,
+codeword SWD, expected input/encoder gradients, independent Monte Carlo floors,
+and equal-norm single encoder steps evaluated on the analytic channel. Six
+focused tests pass. The higher-sample SSPA run uses four repeats of 8,192
+surrogate draws per codeword and 65,536 analytic-reference draws per codeword.
+These are existing unequal-budget generator checkpoints, not the controlled
+P2 comparison. Treat them as development cases.
+
+Reuse this runner before writing a second gradient estimator. Missing pieces
+are three development generator seeds, common early/middle/late reference
+codecs, Gaussian anchors and input neighborhoods, a declared reference-noise
+threshold, surrogate as well as analytic finite differences at multiple step
+sizes, and richer per-message/absolute-error and gradient-variance exports.
+The existing JSON and tensor files retain aggregate and repeat-level data.
+
+Add common-learning-rate SGD interventions alongside the current equal-norm
+steps. The former test direction and magnitude together; the latter isolate
+direction. Choose step sizes using an analytic-only development calibration,
+not separately to make each surrogate improve. Keep actual Adam training as
+a separate endpoint. No receiver-only, encoder-only multi-step, or joint AE
+training intervention has been completed by this local pilot.
+
+For the pre-optimization score, keep all decoder losses out of score
+construction. Compare feature-value error alone against value plus derivative
+error, ordinary moments against moments plus their derivatives, and SWD/MMD
+references. Resolve exact-channel sampling floors and finite-difference bias
+before ranking models. Freeze the design before unused seeds or model families
+are evaluated. A failure to improve screening utility is a valid result; do
+not replace the current selector merely because a new score has a theorem.
+
 The [theory follow-up, Sections 10–11](theory_swd_downstream_gradient_fidelity.md#10-concrete-p3-addendum-test-mechanism-before-scaling) adds a staged mechanism study: common-checkpoint diagnostics, receiver-only versus encoder-only controls, and matched one-step gradient interventions. Run these on development seeds before expanding the confirmatory study. They supplement the experiment plan below; they do not change its validation selector or make analytic gradient access free.
 
-The author's subsequent objective is a metric computed **before candidate-specific downstream optimization**. The [metric proposal, Section 8](theory_preoptimization_channel_metric.md#8-practical-pilot-and-changes-to-the-handover) specifies a small pilot using conditional feature values and input derivatives. Compute that score without the trained decoders below; use the decoder/AE experiments as held-out validation of its predictive value. The candidate's task-class bounds do not yet establish a practical BER predictor, so retain the existing primary selection protocol until it is validated.
+The author's subsequent objective is a metric computed **before candidate-specific downstream optimization**. The [metric proposal, Section 8](theory_preoptimization_channel_metric.md#8-practical-pilot-and-changes-to-the-handover) and completed local pilot use conditional feature values and input derivatives. Keep trained decoders out of score computation; use future unused model/task cases to validate predictive value after freezing the score. Existing seed-7 codec results are development evidence, not held-out validation. The candidate's task-class bounds and present measurements do not establish a practical BER predictor, so retain the existing primary selection protocol.
 
 Reuse `evaluate_implant_conditional_metrics` in `conditional_drifting/symbolic_ae.py`; it already evaluates learned codewords and analytic floors. Add a common saved-checkpoint adapter for all models instead of reimplementing the metrics in each runner.
 

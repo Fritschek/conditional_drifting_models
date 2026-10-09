@@ -2,14 +2,21 @@
 
 Prepared 8 October 2026 against commit `726db308c46fe1df67319934ed35ef8dd8d79945`.
 
+Updated 9 October 2026 with the local gradient-fidelity pilot and a successful
+evidence-audit rerun. The original assessment below was made on another
+checkout; archive availability and completed work are reconciled here.
+
 **Start here.** This is the execution plan for revising *Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation*, rejected as TCOM-TPS-26-1722. It supersedes the recommendations in `conditional_drifting_journal_strategy.md` and `journal_execution_roadmap.md`; keep those files as historical notes. It builds on, and corrects/extends, `review_audit_20261008/README.md`.
 
-The author has no fixed deadline or compute cap and is willing to run simulations on roughly the previous scale. The author asks us to recommend the venue. This task produced a plan; it did not launch cluster jobs, submit a paper, send correspondence, or generate new experimental results.
+The author has no fixed deadline or compute cap and is willing to run simulations on roughly the previous scale. The author asks us to recommend the venue. The initial assessment produced a plan. A separate local checkpoint study is now complete, as recorded below; no new generator training, cluster jobs, submissions, or correspondence are claimed.
 
 - [Cluster implementation and experiment protocol](resubmission_cluster_plan.md): code tasks, controls, seeds, selection, job matrix, outputs, and existing commands.
 - [Manuscript revision and mathematical audit](resubmission_manuscript_plan.md): replacement claims, proofs/counterexamples, section changes, and figure plan.
 - [SWD, downstream risk, and gradient fidelity](theory_swd_downstream_gradient_fidelity.md): follow-up theory, a fixed-power counterexample, sufficient conditions, and controlled P3 interventions.
 - [Metric before downstream optimization](theory_preoptimization_channel_metric.md): the author's stronger target; a candidate based on conditional feature values and input derivatives, task-class guarantees, estimation bounds, and validation requirements.
+- [Completed local gradient-fidelity pilot](gradient_fidelity_local_pilot_20261008.md): seed-7 AWGN/SSPA results, two frozen codecs per channel, higher-sample SSPA confirmation, checks, and reproduction commands. This is task-dependent development evidence, not a validated pre-optimization score.
+- [Completed decoder-free metric feasibility pilot](channel_feature_metric_pilot_20261009.md): full-kernel and moment derivatives, 128/512 samples, fixed inputs, shared versus independent noise. Estimation works, but added screening value is not established; retain sampling-floor and large-variance limitations.
+- [Derivative resolution and additional-seed checks](metric_resolution_results_20261009.md): autograd reference, convergent small-step differences, fixed moment augmentation, SSPA seeds 8/9 and frozen-codec validation. Numerical checks pass, but the score still misses task-dependent gradient orderings.
 - [Actual decision and all 22 reviewer comments](review_audit_20261008/README.md#full-review-reports).
 
 ## 1. Recommendation
@@ -26,11 +33,59 @@ Build the revision around this question:
 
 The strongest possible evidence would connect **conditional fidelity, fidelity of optimization gradients, and actual downstream performance per training time**, including a larger jointly generated channel block. Whether that connection holds is to be tested. Do not promise a Pareto advantage or a mechanistic explanation of instability in advance.
 
-The 9 October [theory follow-up](theory_swd_downstream_gradient_fidelity.md) makes this direction concrete: exact conditional laws at the current unit-power codebook and arbitrarily small uniform conditional Wasserstein error can coexist with a reversed transmitter gradient. It also proves positive loss-transfer, curvature-to-gradient, and biased-descent bounds under explicit assumptions. These establish a possible mechanism, not its cause in the existing runs or a Sinkhorn-specific guarantee. Prioritize its small T1/T2 diagnostic before expanding P3; a successful mechanism study could strengthen the TCOM case, but the present venue recommendation remains conditional on evidence.
+The 9 October [theory follow-up](theory_swd_downstream_gradient_fidelity.md) makes this direction concrete: exact conditional laws at the current unit-power codebook and arbitrarily small uniform conditional Wasserstein error can coexist with a reversed transmitter gradient. It also proves positive loss-transfer, curvature-to-gradient, and biased-descent bounds under explicit assumptions. These establish a possible mechanism, not its cause in the existing runs or a Sinkhorn-specific guarantee. The local pilot now supplies partial T1/T2 evidence. Extend it as specified below rather than repeating it as unstarted work. A successful mechanism study could strengthen the TCOM case, but the present venue recommendation remains conditional on evidence.
 
 **Refined author objective:** develop a useful channel-surrogate metric that can be computed before candidate-specific downstream encoder/decoder optimization. The [metric proposal](theory_preoptimization_channel_metric.md) separates that objective from diagnostics through a trained decoder. Its candidate has explicit function-class guarantees but is not a validated predictor of final BER. Keep the small downstream runs to validate the metric; do not make their trained decoders an undeclared input to the claimed pre-optimization score, and do not switch the main selection protocol before that validation.
 
 Use **channel simulation**, learning `p(y | x)`, throughout. Receiver-side channel estimation from pilots is a different problem and is not what the current experiments evaluate.
+
+### Local evidence now available
+
+The subsequent [decoder-free metric pilot](channel_feature_metric_pilot_20261009.md)
+is also complete. Its score does not use the codecs below. It finds strong
+sampling-access dependence and a useful SSPA signal, but no established benefit
+over simpler distribution/moment checks. The bounded kernel understates a
+large-variance failure relative to other models. The subsequent
+[resolution and seed checks](metric_resolution_results_20261009.md) are also
+complete. Finite differences converge to pathwise empirical derivatives,
+and fixed raw-moment features expose the variance failure across seeds 7--9.
+Seeds 8/9 were scored without fitting against their task outcomes. They still
+do not validate added selection value: on a seed-9 frozen codec, WGAN has
+worse SWD but better gradient alignment than selected Sinkhorn, and the
+generic derivative score also misses this ordering. Do not rerun these checks
+as unstarted work. Next, use same-input controlled value/derivative
+interventions; retain analytic sampling floors and separate value, direction,
+magnitude, and actual normalized-step outcomes. Passive-data feasibility and
+heavy-tail robustness remain open.
+
+All values below are encoder-gradient comparisons at identical frozen codecs,
+using existing seed-7 generators. Each gradient averages four Monte Carlo
+repeats; these repeats are not independent training seeds. SSPA uses the
+higher-sample confirmation, not the initial lower-sample estimates.
+
+| Observation | Local evidence | Consequence for the research plan |
+| --- | --- | --- |
+| AWGN gradients are close to the analytic reference | Condition-wise Sinkhorn cosine 0.948 / 0.943 at analytic-trained / Sinkhorn-trained codecs; independent analytic estimates 0.975 / 0.951 | Useful calibration case, not a resolved superiority ranking |
+| SSPA mismatch persists after increasing samples | Sinkhorn cosine 0.852 / 0.625, norm ratio 0.531 / 0.128; DDIM-100 cosine 0.995 / 0.975 | Derivative fidelity is a concrete measurement target; it is not an established Sinkhorn advantage |
+| SWD and gradient direction rank methods differently | At the analytic-trained SSPA codec, Sinkhorn conditional SWD 0.02790 vs DDIM-10 0.04865, but encoder cosine 0.852 vs 0.956 | Test whether a derivative-aware score adds information beyond distribution-only scores |
+| Direction alone also misses information | DDIM-10 encoder norm ratio is only 0.048 at that codec | Report direction and magnitude separately, with sampling uncertainty |
+| Sinkhorn steps remain useful | Small equal-norm encoder steps lower true-channel loss at both SSPA codecs | Do not equate imperfect fidelity with a reversed or unusable update |
+
+The pilot uses explicit full-codebook power normalization and fixed noise. Its
+SER values are not replacements for the submitted paper's minibatch-normalized
+training results. Its steps normalize each gradient to a common parameter-step
+norm. They test direction, not the effect of magnitude under a common SGD
+learning rate or under Adam. No early/middle/late trajectory, multiple-generator-
+seed comparison, or complete downstream retraining was run.
+
+**Immediate order:** extend the completed metric pilot with derivative-resolution
+and moment/tail checks, while extending T1/T2 with more seeds and common
+learning-rate interventions. Freeze feature/kernel scales, input coverage,
+finite-difference resolution, and score aggregation before testing unused
+seeds/families. The already inspected seed-7 results cannot serve as held-out
+validation. Keep P1 stability/correctness work and the modern-baseline plan;
+this pilot does not resolve either. A kernel score must beat cheaper value-only
+and derivative-aware moment baselines before it earns a central role.
 
 ## 2. What was actually checked
 
@@ -41,11 +96,19 @@ Use **channel simulation**, learning `p(y | x)`, throughout. Receiver-side chann
 | Actual reviews | Editor rejection and 7 + 5 + 10 numbered comments preserved in the prior audit. Their source is the author's pasted decision, as documented there. |
 | `tcom_review_comments.md` | Earlier pre-submission feedback, **not the rejection reports**. Its major-revision recommendation and probabilities are not decision evidence. |
 | Conference | Inspected `Paper_camera_ready_checked/drifting_vs_diffusion_summary.tex`; repository README also identifies the older `(3).tex` source. Verify the exact accepted camera-ready bundle and bibliographic status before final disclosure. |
-| Earlier saved numerical audit | Read `review_audit_20261008/evidence.json`; arithmetic can be checked from those stored values. Raw June records needed for independent regeneration are absent locally. |
-| Audit rerun | `python3 scripts/audit_journal_review_evidence.py` failed at missing `results/timing_suite_local_cuda_20260601_1755/timing_suite_summary.json`. It did not reproduce the full audit. Restore missing archives before treating its results as freshly verified. |
+| Earlier saved numerical audit | `review_audit_20261008/evidence.json` retained. The raw records needed by its audit are present in this local checkout. |
+| Audit rerun | On 9 October, `python3 scripts/audit_journal_review_evidence.py --out /tmp/journal_review_evidence_recheck_20261009.json` completed successfully. Parsed output exactly matches the retained evidence JSON, including 100/30 full/compact SSPA runs and 30 TurboAE runs. This verifies saved records, not original training reproducibility. |
+| Local gradient-fidelity study | Completed on RTX 5060 Ti using saved seed-7 checkpoints, with four frozen channel/codec comparisons and a higher-sample SSPA confirmation. See the linked pilot report and raw result directories. |
+| Decoder-free feature metric | Completed 128/512-sample panels: 2,430/1,458 observations; 13 estimator/gradient tests pass. Uses existing checkpoints and fixed radial inputs. Held-out predictive/selection utility remains open. |
+| Derivative resolution and moment augmentation | Completed 1,350 step-comparison records, 558 pathwise records and 62 metric/task joins, including SSPA seeds 8/9. The combined feature/gradient suite now has 18 passing tests. Still no validated selector. |
 | New training / cluster measurements | None performed. All new run counts and thresholds below are proposed protocol choices. |
 
-The June timing, corrected-fiber, compact SSPA, SER-curve, baseline, and TurboAE directories must be restored from the cluster or original storage. The local `results_hpc/` contains March suites, which are not substitutes. A missing archive does not invalidate the existing result; it limits what can be independently checked from this checkout.
+The earlier missing-archive warning applied to the other checkout. Do not
+repeat a bulk restoration on this machine merely because that warning appeared
+in the initial handover. New systems must check availability: `results/` is
+ignored by git, so pushing these notes does not transfer raw data or weights.
+Restore only missing required inputs. Unknown historical source versions and
+the remaining measurement-contract repairs still belong to P0.
 
 ## 3. Findings that change the previous plan
 
@@ -65,7 +128,7 @@ The June timing, corrected-fiber, compact SSPA, SER-curve, baseline, and TurboAE
 | P0: provenance and numerical contracts | Restore archives, freeze source/config hashes, unify units/noise/power, integer counts and split labels, bounded smoke test | Machine-readable input manifest and audit report with missing items explicit | First |
 | P1: transport correctness and stability | High-accuracy common-epsilon reference, numerical residuals, controlled SSPA trajectories, matched-particle geometry comparison | Solver checks, actual trajectory plots, selected and last checkpoints | P0 |
 | P2: competitive comparison | Matched-capacity/data-access generator study; measured compute curves; low-step DDIM, flow matching, true one-step comparator, simple Gaussian reference | Conditional metrics and uncertainty for all methods; full generator costs | P0, P1 for frozen proposed method |
-| P3: communication utility | Learned-codeword diagnostics, expected-loss gradient checks, equal-update and equal-time AE training, TurboAE protocol repair | Actual SER/BER/BLER versus time, gradient diagnostics, separately seeded test | P2 checkpoints |
+| P3: communication utility | Extend completed local gradient pilot; validate the decoder-free score; equal-update and equal-time AE training; TurboAE repair | Actual SER/BER/BLER versus time, held-out metric validation, separately seeded test | Local development evidence available; confirmatory comparisons need P2 checkpoints |
 | P4: larger structured channel | Joint 64-complex-use generation with validated multipath/boundaries/noise and a communication endpoint | Conditional temporal/cross-coordinate accuracy and receiver performance | Pilot success; P0 channel contracts |
 | P5: manuscript and response | Correct theory/attribution now; integrate validated figures and claims later | Revised paper, extension statement, response matrix, source-to-number manifest | Starts immediately; ends after P1–P4 |
 | P6: sparse observations, optional | Fixed one-output-per-input dataset and local conditional estimator | Held-out evaluation with neighborhood bias/coverage diagnostics | Only if retaining sparse/passive-measurement claims |
@@ -143,7 +206,7 @@ The accepted conference paper already covers conditional direct/residual driftin
 
 ## 8. Ready-to-paste instruction for the next Codex session
 
-> Read `Journal_version/resubmission_handover.md`, `resubmission_cluster_plan.md`, and `resubmission_manuscript_plan.md` before changing anything. Treat the submitted ZIP and existing numerical reports as historical records. Start P0 and implement the P1 reference/diagnostic harness; in parallel prepare the corrected theory and attribution in a separate revision source. The current deliverable is a validated cluster run bundle and revised manuscript scaffold, not fabricated experimental conclusions. Follow the exact sampling, split, timing, and count contracts. Use bounded smoke tests; do not execute the existing misleading full-budget environment check. Produce dry-run task manifests and resource estimates from measured pilots before large submission. Keep missing archives and unresolved provenance explicit. After pilots, freeze the protocol and assemble the confirmatory run matrix. Report negative results and update the scientific claim accordingly. Do not submit a paper or contact editors without the author's instruction.
+> Read `Journal_version/resubmission_handover.md`, `resubmission_cluster_plan.md`, `resubmission_manuscript_plan.md`, `theory_preoptimization_channel_metric.md`, `gradient_fidelity_local_pilot_20261008.md`, `channel_feature_metric_pilot_20261009.md`, and `metric_resolution_results_20261009.md` before changing anything. The seed-7 pilots and numerical/moment checks on seeds 7--9 have run, including frozen-codec validation on seeds 8/9. These are exploratory evidence, not a validated selector. Check archive availability before requesting transfers. Treat submitted artifacts and numerical reports as historical records. Finish P0 contracts and implement the P1 reference harness; use same-input controlled value/derivative interventions and missing T1/T2 controls before expanding P3. Passive-data estimation and heavy-tail controls remain open. Prepare theory/attribution changes in a separate revision source. Follow exact sampling, split, timing, and count contracts. Use bounded smoke tests, not the misleading full-budget environment check. Produce dry-run manifests and measured resource estimates before large submission. Keep missing data and unresolved provenance explicit. Freeze the protocol before confirmation, report negative results, and update the claim accordingly. Do not submit a paper or contact editors without the author's instruction.
 
 ## 9. Completion criteria
 
@@ -154,4 +217,5 @@ The accepted conference paper already covers conditional direct/residual driftin
 - Conference extension and prior rejection are disclosed as required.
 - Final PDF fits the chosen venue, with figures placed near their discussion, readable uncertainty, and no unsupported captions.
 
-This handover is a research and implementation plan. It neither establishes new performance claims nor guarantees publication.
+This handover combines a research plan with explicitly labeled local development
+evidence. It does not establish confirmatory performance claims or guarantee publication.

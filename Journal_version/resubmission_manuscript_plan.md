@@ -253,7 +253,26 @@ Yet
 
 which equals 2 at x=0 for every n, while the true derivative is 1. Thus even uniform conditional Wasserstein convergence does not control input derivatives of expected observables. All displayed expectations exist, and differentiation is elementary here. A first-moment probe suffices to disprove the universal implication; the communications experiment must use the actual fixed decoder loss.
 
-This supports the P3 diagnostic and a possible substantive finding: a fast surrogate can be useful for sample generation yet problematic for transmitter optimization. Whether that occurs in this study remains open until measured. If a gradient-aware correction is developed after the pilot, label it a new method, supply the full objective/assumptions, and ablate it against the corrected conditional W-Flow reference.
+This supports the P3 diagnostic and a possible substantive finding: a fast
+surrogate can be useful for sample generation yet imperfect for transmitter
+optimization. The [local seed-7 pilot](gradient_fidelity_local_pilot_20261008.md)
+now measures such a gap. On SSPA, condition-wise Sinkhorn has lower conditional
+SWD than DDIM-10 but a less aligned encoder-gradient direction at both frozen
+codecs. DDIM-10, in turn, strongly underestimates gradient magnitude. Useful
+Sinkhorn descent directions coexist with substantial gradient error. These
+are task-dependent development results under fixed power/noise conventions,
+not a demonstrated explanation of final BER or a fair model-family ranking.
+
+The pre-optimization feature/derivative metric now has a
+[working local estimator](channel_feature_metric_pilot_20261009.md), but its
+predictive/selection usefulness remains unvalidated. Its function-class bounds do not make the pilot's trained
+decoder an admissible hidden input to that score. A future main-paper result
+must distinguish distribution-value accuracy, derivative fidelity, and
+measured optimization utility, with a value-only versus derivative-aware
+ablation and held-out validation. If a gradient-aware correction is developed,
+label it a new method, supply its objective/assumptions, and ablate it against
+the corrected conditional W-Flow reference. Do not infer that Sinkhorn is
+intrinsically gradient-faithful; DDIM-100 is more faithful on this SSPA pilot.
 
 ## 6. Concrete manuscript edits by location
 

@@ -6,6 +6,17 @@ Research note, 9 October 2026. Companion to the [resubmission handover](resubmis
 
 **Status.** Sections 2–8 contain mathematical statements with self-contained proofs or explicitly identified standard facts. They do not establish what caused the existing experiments. The protocol and correction in Sections 10–11 are proposals. No cluster experiments were run for this note. The literature search establishes relevant precedents, not exhaustive novelty clearance. No theorem here proves that Sinkhorn drifting has more faithful input gradients than diffusion, flow matching, or another generator.
 
+**Local evidence added 9 October.** A separately executed
+[seed-7 AWGN/SSPA pilot](gradient_fidelity_local_pilot_20261008.md) partially
+implements T1/T2. Expected-loss gradients and equal-norm encoder steps are now
+measured, including a higher-sample SSPA confirmation. A subsequent
+[decoder-free metric feasibility pilot](channel_feature_metric_pilot_20261009.md)
+has run, but predictive value remains unvalidated and the training correction
+remains a proposal. The theoretical counterexample below
+must not be confused with the measured mechanism: tested Sinkhorn gradients
+were positively aligned and yielded useful small steps, despite substantial
+SSPA errors in direction and magnitude.
+
 ## 1. Precisely which quantities are being compared?
 
 Let the finite message set be \(\mathcal M\), with probabilities \(\pi_m>0\) summing to one. Let \(e_\phi:\mathcal M\to U\subseteq\mathbb R^k\) be an encoder. A channel is a Borel probability kernel \(x\mapsto P_x\) on \(\mathbb R^d\); its learned replacement is \(x\mapsto Q_x\). Unless stated otherwise, each output law has a finite first moment. These are **channel simulators**, learning \(P(dy\mid x)\); receiver-side channel estimation from pilots is a different task.
@@ -371,16 +382,33 @@ Artifacts: [numerical record](theory_artifacts/swd_gradient_counterexample.json)
 
 ### Stage T1 — common checkpoint diagnostics
 
+**Partially completed.** `scripts/run_local_gradient_fidelity.py` already
+compares the same frozen codec across saved generators, including power
+normalization derivatives, input and encoder gradients, analytic sampling
+floors, and codeword-conditioned SWD. It covers one generator seed and two
+final codec sources, not the three seeds and early/middle/late panel below.
+Use the higher-sample SSPA figures in the linked report: Sinkhorn encoder
+cosines 0.852 and 0.625, versus DDIM-100 0.995 and 0.975. The independent
+analytic comparisons are 0.998 and 0.993. This supports measuring the gap,
+without establishing that it caused the historical final SER differences.
+
 Start with AWGN and SSPA, three development generator seeds, and three common early/middle/late checkpoints of an analytic-trained reference AE. Reuse saved generators where compatible with the revised power/noise contracts; otherwise regenerate them. All surrogates see the same frozen encoder, decoder, labels, SNR, and codebook. This is a diagnostic panel, not a newly independent generator replicate for every decoder checkpoint.
 
 1. Measure global and conditional SWD; separate Gaussian anchors, actual codewords, and perturbed codeword neighborhoods.
 2. Reuse `evaluate_decoder_channel_metrics` for confusion-row TV, per-message SER differences, cross-entropy, and decoder margins. These are already implemented in `conditional_drifting/symbolic_ae.py`.
-3. Add a **separate** expected-loss gradient evaluator; the existing decoder diagnostic has `@torch.no_grad()`. Freeze generator and decoder parameters while preserving gradients with respect to inputs. Start with 4096 noise samples per selected message and four independent replicates, then use analytic-versus-analytic variability to assess whether this resolves the signal.
+3. Extend the **separate** evaluator in `scripts/run_local_gradient_fidelity.py`; the existing decoder diagnostic has `@torch.no_grad()`. Freeze generator and decoder parameters while preserving gradients with respect to inputs. Calibrate sampling against analytic-versus-analytic variability: the completed SSPA confirmation used four replicates of 8192 surrogate samples and 65536 analytic-reference samples per message. These are local budgets, not a universal resolution guarantee.
 4. Report \(D\) from (7), absolute parameter-gradient bias, true/surrogate gradient norms, inner product, and cosine only above a predeclared reference-noise threshold. A nearly zero reference gradient makes relative errors and cosine unstable. Estimate mean-gradient error separately from within-model sample-gradient variance; finite-sample squared differences are upward biased by estimator noise.
 5. For a subset, compare expected pathwise gradients with centered finite differences of expected loss at step sizes \(h/2,h,2h\). Reuse random numbers within each simulator across the paired perturbations when supported. Identical numeric seeds across different latent parameterizations do not establish a meaningful cross-model coupling.
 6. Record the complete power-normalization derivative and both raw-input and encoder-parameter gradients. Probability/logit margin diagnostics are useful, but they are **not** the Euclidean boundary distance in (1) without an additional geometric bound.
 
 ### Stage T2 — controlled interventions
+
+**Current evidence is an equal-norm intervention.** The local pilot takes
+`-s * g_Q / ||g_Q||` with the same `s` across methods and evaluates independent,
+paired true-channel losses. This tests direction. It is not the common-eta
+update `-eta * g_Q` needed to compare magnitude effects under the same SGD
+learning rate. Neither receiver-only nor multi-step encoder/joint training
+was performed. Complete those controls rather than calling T2 finished.
 
 Use matched initializations and held-out analytic evaluation. Initially use plain SGD for one-step interventions so that (10) has the same update rule; retain the actual optimizer in the separate full-training performance experiment.
 

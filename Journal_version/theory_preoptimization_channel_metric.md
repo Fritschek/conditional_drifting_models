@@ -6,7 +6,21 @@ Research direction, 9 October 2026. Extends [the SWD/gradient theory note](theor
 
 **Proposed direction:** compare conditional expectations of a fixed function class and their derivatives with respect to transmitted inputs. Kernel mean embeddings make the supremum over a large function class computable by norms rather than fitting downstream models. Below are precise population guarantees, a finite-sample version, and the limitations that prevent calling the candidate a validated predictor of final BER.
 
-The elementary bounds are proved here. The proposed metric's empirical usefulness, adequate loss-class coverage, useful numerical constants, and publication novelty are open. No estimator implementation or additional channel-training experiments are claimed in this note.
+The elementary bounds are proved here. The proposed metric's empirical usefulness, adequate loss-class coverage, useful numerical constants, and publication novelty are open. A full-kernel finite-difference estimator has now been implemented and tested in the [local metric pilot](channel_feature_metric_pilot_20261009.md). It has not demonstrated a predictive advantage over simpler controls; no new channel training was performed.
+
+**Evidence update, 9 October.** The [local gradient-fidelity study](gradient_fidelity_local_pilot_20261008.md)
+was run separately and is now part of the development evidence. It used trained
+decoders and therefore did not compute the score proposed here. Section 8
+below incorporates its results into the next experiment without treating that
+task-dependent test as validation of a decoder-free metric.
+
+**Subsequent metric pilot.** The [128/512-sample experiment](channel_feature_metric_pilot_20261009.md)
+computes decoder-free scores at fixed radial inputs. CRN substantially reduces
+the derivative sampling floor, SSPA mismatch remains visible, and moment
+checks expose a large-variance failure whose severity the bounded kernel
+does not rank correctly. Added value over ordinary MMD or derivative-aware
+moments remains unestablished. Keep this as development evidence, not a
+validated selector or final BER predictor.
 
 ## 1. Specify which downstream outcome is being predicted
 
@@ -196,7 +210,47 @@ The full score in (1) concerns **expected** gradients. Actual SGD also depends o
 
 ## 8. Practical pilot and changes to the handover
 
-Do not replace the main checkpoint selector yet. First build a small candidate-metric pilot:
+### What the completed local experiment changes
+
+The seed-7 AWGN/SSPA pilot establishes that the expected-gradient comparison
+is executable with existing checkpoints. It supplies initial validation
+targets for a new score, not that score itself. Its SSPA confirmation gives:
+
+| Frozen analytic-trained SSPA codec | Conditional SWD | Encoder-gradient cosine | Encoder-gradient norm ratio |
+| --- | ---:| ---:| ---:|
+| Independent analytic estimate | 0.00656 | 0.998 | 1.000 |
+| Condition-wise Sinkhorn | 0.02790 | 0.852 | 0.531 |
+| DDIM-10 | 0.04865 | 0.956 | 0.048 |
+| DDIM-100 | 0.01181 | 0.995 | 0.872 |
+
+Sinkhorn's better SWD than DDIM-10 does not imply a better encoder-gradient
+direction. DDIM-10's better direction does not imply a faithful gradient
+magnitude. Both effects belong in the validation outcomes. At the
+Sinkhorn-trained codec, its encoder cosine falls to 0.625 and its norm ratio
+to 0.128, despite similar conditional SWD (0.02875). A task-independent score
+can aim to flag fidelity risk across tasks; it cannot assign every decoder
+the same realized error or claim a universal monotone ranking of final BER.
+
+These observations support testing separate value and derivative components.
+They do not establish that the proposed embedding derivative captures this
+gap, that its upper bounds are tight, or that a kernel score is preferable to
+a simpler channel-specific estimate. In particular, the current AWGN and SSPA
+analytic laws are conditionally Gaussian with fixed additive covariance.
+Include conditional mean/covariance errors **and their input derivatives** as
+cheap comparators, alongside ordinary moments. Such moments do not identify an
+arbitrary non-Gaussian learned law, so retain distribution-sensitive checks.
+
+The existing one-step results use equal-norm parameter changes. Compare those
+directional outcomes and common-learning-rate outcomes separately when testing
+predictive value. Do not interpret a norm ratio as a predicted slowdown of Adam.
+All already inspected seed-7 codec/method results are development data. Hold
+out unused seeds or model families after freezing the score specification;
+fresh Monte Carlo draws alone do not create a new held-out model test.
+
+### Next implementation gate
+
+Do not replace the main checkpoint selector yet. The initial full-kernel
+feasibility part has run; the broader validation steps below remain the plan:
 
 1. Use repeated conditional samples on AWGN and SSPA, a fixed admissible power domain, and a frozen multiscale output kernel/probe bank. Start with a full-kernel calculation on small clouds; use random features only as an explicitly measured approximation if cost requires it.
 2. Compute mean-embedding error and input-derivative error at fixed anchors before inspecting any candidate-specific AE result. Compare coordinate derivatives on the small-dimensional pilot with a cheaper direction panel; the latter only certifies the probed directions unless an additional covering argument is supplied. Freeze normalization, bandwidths, step sizes, and aggregation on development data.
@@ -204,4 +258,67 @@ Do not replace the main checkpoint selector yet. First build a small candidate-m
 4. Use a restricted existing/new downstream evaluation set as **ground truth for validating the metric**, not as input to its computation. The previous note's trained-decoder and one-step diagnostics remain valuable validation tools.
 5. Freeze the score on development channels/methods/seeds, then evaluate its ranking and selection utility on held-out generator families or channel families, not merely held-out Monte Carlo draws. Measure rank agreement, false reassurance when the score is small, retained best downstream performance after screening, uncertainty, and total saved cost.
 
+Use a nested comparison: SWD and conditional SWD; ordinary conditional
+moments/MMD; moments plus input derivatives; embedding values plus input
+derivatives. Give each the same declared channel-query budget, or show its
+quality-versus-query-cost curve when budgets cannot be matched. Retain the
+full `(d0,d1)` panel first; do not fit a scalar weight to the already observed
+decoder rankings and call that a pre-optimization guarantee.
+
+Proceed to a larger campaign only if the estimator resolves departures from
+the exact-channel floor, is stable across the declared perturbation scales,
+and adds held-out screening value beyond these cheaper controls at an
+acceptable query cost. Otherwise refine the probes/estimation or retain the
+gradient study as a task-specific contribution. A useful theorem alone does
+not establish a useful screening instrument.
+
 Some downstream optimization is needed once to establish that a proposed predictor works. The operational goal is then to avoid retraining a downstream model for every later surrogate checkpoint or new candidate. The unresolved proof obligation is not just finding another distribution discrepancy: it is linking an **estimable and affordable** discrepancy to a useful task class with meaningful constants.
+
+## Numerical derivative reference and an unbounded feature component
+
+The follow-up [resolution protocol](metric_resolution_protocol_20261009.md)
+fixes an autograd reference and a moment augmentation. For a sampled output
+`y_i(x)` with Jacobian `J_i`, differentiating the finite mean embedding gives
+`mean_i D phi(y_i) J_i`. For an RBF with length scale `l`,
+
+```text
+D_y D_z k(y,z) = k(y,z) [I/l^2 - (y-z)(y-z)^T/l^4].
+```
+
+Contracting this matrix with sample Jacobians and signed P-Q empirical
+weights yields the derivative Gram matrix without an input difference step.
+This is a reference for the derivative of a **finite sampled embedding**,
+not an exact population derivative. Samples from P and Q are independent.
+Autograd requires differentiable simulator access; it cannot be applied
+directly to a passive dataset. The finite-difference comparison shares the
+same random draws at each perturbation within each simulator.
+
+A bounded kernel cannot make a value discrepancy grow with output variance
+without limit. Keep its distribution-sensitive component and add the fixed
+features
+
+```text
+Phi_aug(y) = (Phi_RBF(y), y/sqrt(d), vec(yy^T)/d),
+k_aug(y,z) = k_RBF(y,z) + y^T z/d + (y^T z)^2/d^2.
+```
+
+Here `d` is the real output dimension; unit per-coordinate input power is
+the existing channel convention. No coefficients are fitted to gradient or
+SER results. The second component estimates raw second moments, not centered
+covariances. Means and covariances remain useful separate checks. Report all
+components rather than relying only on a combined norm.
+
+The direct sum enlarges the supported loss class to include linear and
+quadratic output terms as well as RBF-RKHS terms. For any representation
+`ell_x(y)=<a(x),Phi_aug(y)>` with bounded coefficient and coefficient-derivative
+norms, the earlier gradient-error argument still gives
+`||D_x(E_P ell_x-E_Q ell_x)|| <= ||D_x a|| d0 + ||a|| d1`.
+This is not a claim that arbitrary decoder cross-entropy has such a
+representation or controlled approximation remainder. Existence of second
+moments is needed for the new mean embedding. Finite estimator variance needs
+fourth moments and, for derivative estimates, appropriate integrability of
+feature Jacobians. The new score is not intrinsically robust to heavy tails.
+
+Recovering a variance failure and resolving finite-difference truncation are
+necessary checks. Neither alone establishes an advantage over conditional
+SWD or validates a pre-optimization selector.

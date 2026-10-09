@@ -3,7 +3,7 @@ import torch
 from conditional_drifting.channels import sspa
 from conditional_drifting.symbolic_ae import SymbolicDecoder
 from scripts.run_local_gradient_fidelity import (
-    alignment, expected_loss, finite_difference_check, normalized_codebook, physical_channel,
+    alignment, encoder_gradient, expected_loss, finite_difference_check, normalized_codebook, physical_channel,
 )
 
 
@@ -50,3 +50,16 @@ def test_alignment_and_zero_reference():
     assert alignment(x, x)["relative_error"] == 0
     assert alignment(-x, x)["cosine"] < -.999
     assert alignment(x, x * 0)["relative_error"] is None
+
+
+def test_encoder_chain_rule():
+    torch.manual_seed(12)
+    encoder = torch.nn.Linear(4, 2)
+    decoder = torch.nn.Linear(2, 4)
+    messages = torch.eye(4)
+    codes = normalized_codebook(encoder, messages)
+    code_gradient, _ = expected_loss(codes, decoder, lambda x: x, 7, 12, 0)
+    via_codebook = encoder_gradient(encoder, messages, code_gradient)
+    loss = torch.nn.functional.cross_entropy(decoder(normalized_codebook(encoder, messages)), torch.arange(4))
+    direct = torch.cat([g.flatten() for g in torch.autograd.grad(loss, tuple(encoder.parameters()))])
+    torch.testing.assert_close(via_codebook, direct)
