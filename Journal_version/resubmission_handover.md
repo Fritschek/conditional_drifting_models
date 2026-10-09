@@ -4,10 +4,12 @@ Prepared 8 October 2026 against commit `726db308c46fe1df67319934ed35ef8dd8d79945
 
 **Start here.** This is the execution plan for revising *Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation*, rejected as TCOM-TPS-26-1722. It supersedes the recommendations in `conditional_drifting_journal_strategy.md` and `journal_execution_roadmap.md`; keep those files as historical notes. It builds on, and corrects/extends, `review_audit_20261008/README.md`.
 
-The author has no fixed deadline or compute cap and is willing to run simulations on roughly the previous scale. The author asks us to recommend the venue. No cluster jobs, submission, or correspondence are authorized by this planning document itself; the present task produced a plan, not new experimental results.
+The author has no fixed deadline or compute cap and is willing to run simulations on roughly the previous scale. The author asks us to recommend the venue. This task produced a plan; it did not launch cluster jobs, submit a paper, send correspondence, or generate new experimental results.
 
 - [Cluster implementation and experiment protocol](resubmission_cluster_plan.md): code tasks, controls, seeds, selection, job matrix, outputs, and existing commands.
 - [Manuscript revision and mathematical audit](resubmission_manuscript_plan.md): replacement claims, proofs/counterexamples, section changes, and figure plan.
+- [SWD, downstream risk, and gradient fidelity](theory_swd_downstream_gradient_fidelity.md): follow-up theory, a fixed-power counterexample, sufficient conditions, and controlled P3 interventions.
+- [Metric before downstream optimization](theory_preoptimization_channel_metric.md): the author's stronger target; a candidate based on conditional feature values and input derivatives, task-class guarantees, estimation bounds, and validation requirements.
 - [Actual decision and all 22 reviewer comments](review_audit_20261008/README.md#full-review-reports).
 
 ## 1. Recommendation
@@ -23,6 +25,10 @@ Build the revision around this question:
 > When does conditional Sinkhorn training provide accurate and useful one-evaluation channel simulators for communication-system optimization, compared with other fast generators under controlled sampling and compute budgets?
 
 The strongest possible evidence would connect **conditional fidelity, fidelity of optimization gradients, and actual downstream performance per training time**, including a larger jointly generated channel block. Whether that connection holds is to be tested. Do not promise a Pareto advantage or a mechanistic explanation of instability in advance.
+
+The 9 October [theory follow-up](theory_swd_downstream_gradient_fidelity.md) makes this direction concrete: exact conditional laws at the current unit-power codebook and arbitrarily small uniform conditional Wasserstein error can coexist with a reversed transmitter gradient. It also proves positive loss-transfer, curvature-to-gradient, and biased-descent bounds under explicit assumptions. These establish a possible mechanism, not its cause in the existing runs or a Sinkhorn-specific guarantee. Prioritize its small T1/T2 diagnostic before expanding P3; a successful mechanism study could strengthen the TCOM case, but the present venue recommendation remains conditional on evidence.
+
+**Refined author objective:** develop a useful channel-surrogate metric that can be computed before candidate-specific downstream encoder/decoder optimization. The [metric proposal](theory_preoptimization_channel_metric.md) separates that objective from diagnostics through a trained decoder. Its candidate has explicit function-class guarantees but is not a validated predictor of final BER. Keep the small downstream runs to validate the metric; do not make their trained decoders an undeclared input to the claimed pre-optimization score, and do not switch the main selection protocol before that validation.
 
 Use **channel simulation**, learning `p(y | x)`, throughout. Receiver-side channel estimation from pilots is a different problem and is not what the current experiments evaluate.
 
@@ -82,7 +88,7 @@ Parallelize P0 restoration with P5 theory/related-work editing and P2 baseline i
 
 Use 3 development seeds, expand to 5 if pilot variability warrants it, and freeze the protocol before confirmatory work. At least one reproducible, practically meaningful contribution must survive fair controls: an advantage in conditional accuracy/downstream time relative to competitive fast alternatives, or a well-supported mechanism explaining when the method succeeds or fails and how a principled modification improves it. A small numerical win without uncertainty does not meet this gate.
 
-If the learned Gaussian baseline is sufficient on AWGN/SSPA, report that. The structured case must establish why a more flexible simulator is useful; easy Gaussian fibers cannot carry a general generative-model advantage. If fast flow/consistency models dominate, change the claim or method. Do not remove the winning competitor or tune against the final test set.
+If the learned Gaussian baseline is sufficient on AWGN/SSPA, report that. The structured case must test whether the more flexible simulator adds value; Gaussian channel fibers cannot establish a need for non-Gaussian generative expressivity. A negative result may support a narrower efficiency or failure-mechanism contribution if that result is substantial and well evidenced. If fast flow/consistency models dominate, change the claim or method. Do not remove the winning competitor or tune against the final test set.
 
 ### Gate C: venue choice
 

@@ -1,5 +1,17 @@
 # Paper Folder
 
+## Resubmission work
+
+Start with [the resubmission handover](resubmission_handover.md), prepared after reviewing the actual TCOM rejection, the manuscript, implementation, earlier audit, and originating literature. It links a [cluster experiment specification](resubmission_cluster_plan.md) and [manuscript revision guide](resubmission_manuscript_plan.md). These supersede the older strategy/roadmap recommendations; the submitted paper and historical evidence remain unchanged.
+
+The actual decision and reports are in [the prior review audit](review_audit_20261008/README.md#full-review-reports). `tcom_review_comments.md` contains earlier pre-submission feedback, not the rejection reports. Several June raw result archives are absent from this checkout; the new handover distinguishes the saved audit evidence from independently reproduced results.
+
+The [SWD and gradient-fidelity research note](theory_swd_downstream_gradient_fidelity.md) adds a fixed-power Gaussian counterexample, positive risk/gradient bounds, literature context, and a controlled diagnostic protocol. Its mathematical constructions are separate from the paper's empirical results.
+
+The [pre-optimization metric proposal](theory_preoptimization_channel_metric.md) develops the next target: assess a surrogate from conditional sample features and their input sensitivity without fitting a downstream encoder or decoder. It states the task-class guarantee and the remaining estimation, coverage, and validation gaps.
+
+## Existing draft
+
 This folder contains the current paper draft and the minimum assets needed to keep it with the standalone repository.
 
 ## Contents
