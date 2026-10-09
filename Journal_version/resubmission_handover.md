@@ -2,9 +2,10 @@
 
 Prepared 8 October 2026 against commit `726db308c46fe1df67319934ed35ef8dd8d79945`.
 
-Updated 9 October 2026 with the local gradient-fidelity pilot and a successful
-evidence-audit rerun. The original assessment below was made on another
-checkout; archive availability and completed work are reconciled here.
+Updated 9 October 2026 through the gradient/metric pilots, completed synthetic
+controls, and independent regeneration of their tables from the transferred
+archive. Original simulations ran on the Linux host; the latest saved-record
+audit ran in the macOS checkout. Those are distinct verification steps.
 
 **Start here.** This is the execution plan for revising *Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation*, rejected as TCOM-TPS-26-1722. It supersedes the recommendations in `conditional_drifting_journal_strategy.md` and `journal_execution_roadmap.md`; keep those files as historical notes. It builds on, and corrects/extends, `review_audit_20261008/README.md`.
 
@@ -17,8 +18,9 @@ The author has no fixed deadline or compute cap and is willing to run simulation
 - [Completed local gradient-fidelity pilot](gradient_fidelity_local_pilot_20261008.md): seed-7 AWGN/SSPA results, two frozen codecs per channel, higher-sample SSPA confirmation, checks, and reproduction commands. This is task-dependent development evidence, not a validated pre-optimization score.
 - [Completed decoder-free metric feasibility pilot](channel_feature_metric_pilot_20261009.md): full-kernel and moment derivatives, 128/512 samples, fixed inputs, shared versus independent noise. Estimation works, but added screening value is not established; retain sampling-floor and large-variance limitations.
 - [Derivative resolution and additional-seed checks](metric_resolution_results_20261009.md): autograd reference, convergent small-step differences, fixed moment augmentation, SSPA seeds 8/9 and frozen-codec validation. Numerical checks pass, but the score still misses task-dependent gradient orderings.
-- [Independent assessment of the new experiments](metric_experiment_assessment_20261009.md): separates direction from magnitude, identifies candidate-specific derivative-estimator variance, specifies an exact-law rotation control and same-input intervention, and records the current checkout's missing October raw artifacts.
+- [Earlier independent assessment](metric_experiment_assessment_20261009.md): separates direction from magnitude and identifies candidate-specific estimator variance. Its A/B experiment proposals are complete and its missing-October-data warning is superseded below.
 - [Completed exact-law and matched-value controls](metric_controls_results_20261009.md): the proposed A/B controls now ran locally. Rotation changes estimator variance despite identical laws; same-input perturbations isolate useful derivative information. Simple moments remain sufficient in this Gaussian control. All October raw results are present on the Linux host.
+- [Assessment after the controls and next bounded gate](metric_controls_assessment_20261009.md): independently reproduces the archived tables, proves a derivative obstruction beyond the first three moments, and specifies one same-input learned-model check without downstream optimization. No kernel-specific selection advantage is established yet.
 - [Actual decision and all 22 reviewer comments](review_audit_20261008/README.md#full-review-reports).
 
 ## 1. Recommendation
@@ -86,14 +88,19 @@ comparisons are described above.
 additional seed-8/9 checkpoint checks are complete. The report join now protects
 codec identity and stored task contracts, with nine focused tests passing.
 The [assessment's A/B controls](metric_controls_results_20261009.md) have now
-run on this Linux host, where the October evidence is present. At N=512 the
+run on the Linux host; their archived report tables also reproduce in this
+macOS checkout. At N=512 the
 ordinary RBF derivative norm rises from 0.114 to 0.928 for an exact-law
 reparameterization; independent cross traces target zero without clipping.
 The matched-value experiment shows derivative information beyond pointwise
 SWD/MMD, but simple mean/Jacobian information also captures this Gaussian
-example. Next separate candidate-specific estimator noise from population
-error on a small, same-input learned-model check, retaining absolute gradient
-error, direction and magnitude as separate targets. Do not rerun A/B as
+example. The [latest assessment](metric_controls_assessment_20261009.md) now
+proves an analytic obstruction with all first three moments matched; it also
+records that a fourth-moment check detects that construction. Next run its
+bounded same-input learned-model gate with candidate-specific noise estimates
+and independently evaluated fixed loss probes. This requires no downstream
+optimization. Retain absolute gradient error, direction and magnitude as
+separate targets. Do not rerun A/B as
 unstarted work or call a squared-trace estimator an operator-norm confidence
 bound. Freeze choices before genuinely unused model/task cases. Keep P1
 stability/correctness and modern-baseline work; these controls resolve neither.
@@ -113,15 +120,16 @@ The metric must add held-out value beyond cheaper checks before a central role.
 | Local gradient-fidelity study | Completed on RTX 5060 Ti using saved seed-7 checkpoints, with four frozen channel/codec comparisons and a higher-sample SSPA confirmation. See the linked pilot report and raw result directories. |
 | Decoder-free feature metric | Completed 128/512-sample panels: 2,430/1,458 observations; 13 estimator/gradient tests pass. Uses existing checkpoints and fixed radial inputs. Held-out predictive/selection utility remains open. |
 | Derivative resolution and moment augmentation | Completed 1,350 step-comparison records, 558 pathwise records and 62 metric/task joins, including SSPA seeds 8/9. The combined feature/gradient suite now has 18 passing tests. Still no validated selector. |
-| Exact-law and same-input controls | Completed 192 rotation records, 480 matched-value records and 3,840 probe-gradient records, with exact population references. All 37 current feature/gradient/report/control tests pass. Candidate-dependent variance confirmed; kernel-specific selection benefit remains open. |
+| Exact-law and same-input controls | Completed 192 rotation records, 480 matched-value records and 3,840 probe-gradient records, with exact population references. The execution host reports 37 passing tests. The independent archive audit reproduces all three summary CSVs byte for byte and checks exactly; Torch tests were not rerun on macOS. Kernel-specific selection benefit remains open. |
 | New training / cluster measurements | None performed. All new run counts and thresholds below are proposed protocol choices. |
 
-The earlier missing-archive warning applied to the other checkout. Do not
-repeat a bulk restoration on this machine merely because that warning appeared
-in the initial handover. New systems must check availability: `results/` is
-ignored by git, so pushing these notes does not transfer raw data or weights.
-Restore only missing required inputs. Unknown historical source versions and
-the remaining measurement-contract repairs still belong to P0.
+The [committed October archive](evidence/README.md) now transfers the raw metric
+evidence through Git; 102 result files were restored and checked here. It does
+not contain training checkpoints. Other `results/` files remain ignored, so
+new systems must check availability and restore only missing required inputs.
+Do not repeat bulk restoration solely because an older note reports missing
+data. Unknown historical source versions and the remaining measurement-contract
+repairs still belong to P0.
 
 ## 3. Findings that change the previous plan
 

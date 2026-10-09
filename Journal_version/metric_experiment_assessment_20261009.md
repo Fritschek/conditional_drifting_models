@@ -2,6 +2,8 @@
 
 9 October 2026. Review of commit `c180522` and the gradient, feature-metric, and derivative-resolution reports. This is an assessment and next-experiment specification, not another experimental run.
 
+**Later status:** controls A/B below are now [completed](metric_controls_results_20261009.md). Their archive has been restored in this checkout and the report tables independently reproduced. The [subsequent assessment](metric_controls_assessment_20261009.md) supersedes the missing-October-data warning and immediate experiment queue below; the earlier observations are preserved as a dated record.
+
 **Decision:** the experiments strengthen the case that conditional distribution accuracy and transmitter-gradient fidelity are different. They do not yet establish that the proposed decoder-free kernel derivative score adds useful prediction beyond conditional SWD and simpler moment diagnostics. Continue a small controlled study; do not launch another large checkpoint-ranking campaign or replace model selection yet.
 
 ## 1. What was verified here

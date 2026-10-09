@@ -189,6 +189,15 @@ open. Next separate candidate-specific estimation noise and population
 error on a small same-input learned-model check; passive-data sampling,
 heavy-tail robustness and useful selection beyond simple controls remain open.
 
+The [post-control assessment](metric_controls_assessment_20261009.md#4-the-next-codex-handoff-one-bounded-learned-model-gate)
+is the immediate execution specification: existing seed-7 SSPA checkpoints,
+three common inputs, eight fixed losses, independent score/task sampling, and
+candidate-specific split estimates. Start with 512 samples, increasing only
+the unresolved or informative contrasts to 2048. No new downstream training
+or broad cluster ranking campaign is needed for this gate. Its analytic
+moment-matched construction is already proved and need not become another
+simulation campaign. Previously inspected seeds 8/9 remain development data.
+
 The [local report](gradient_fidelity_local_pilot_20261008.md) covers seed 7 on
 AWGN/SSPA, two frozen codecs per channel, analytic gradient finite differences,
 codeword SWD, expected input/encoder gradients, independent Monte Carlo floors,

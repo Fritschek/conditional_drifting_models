@@ -341,3 +341,23 @@ additional derivative information, but ordinary mean/Jacobian errors suffice
 for these Gaussian mean perturbations. A kernel-specific selection benefit
 on learned channels remains unestablished. Candidate-specific sampling noise
 must accompany any later empirical derivative-fidelity claim.
+
+### Beyond mean and covariance: an exact construction
+
+The [post-control assessment, Section 3](metric_controls_assessment_20261009.md#3-an-exact-result-beyond-mean-and-covariance)
+proves a stronger obstruction using five smooth Gaussian mixture components.
+The two channel families have identical first three moments and their input
+derivatives everywhere, and identical complete laws at the evaluated input.
+Their RBF embedding derivatives and a fixed smooth loss's expected derivatives
+nevertheless differ. A sequence even has uniformly vanishing total variation
+and every fixed finite-order Wasserstein distance while the local gradient
+discrepancy persists. Uniform curvature control is absent.
+
+This establishes higher-order information beyond mean/covariance diagnostics,
+not kernel necessity: a fourth-moment derivative detects this construction.
+The proof also exposes an access limitation: changing categorical mixture
+weights requires their derivative contribution, which naive pathwise
+autodifferentiation through a sampled component misses. The bounded cosine
+witness has no asserted Gaussian-RKHS norm; a separate norm-one kernel-section
+witness is supplied. The accompanying bounded learned-model gate is the next
+test of practical added value, without fitting a downstream model.

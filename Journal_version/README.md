@@ -10,6 +10,8 @@ The [SWD and gradient-fidelity research note](theory_swd_downstream_gradient_fid
 
 The [pre-optimization metric proposal](theory_preoptimization_channel_metric.md) develops the next target: assess a surrogate from conditional sample features and their input sensitivity without fitting a downstream encoder or decoder. It states the task-class guarantee and the remaining estimation, coverage, and validation gaps.
 
+The [latest control assessment](metric_controls_assessment_20261009.md) reproduces the October control tables from the committed evidence archive, explains the mixed results, proves a gradient obstruction beyond the first three moments, and gives the next bounded learned-model check. A useful kernel-specific selector is still unvalidated.
+
 ## Existing draft
 
 This folder contains the current paper draft and the minimum assets needed to keep it with the standalone repository.
