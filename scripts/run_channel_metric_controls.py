@@ -70,10 +70,11 @@ def gaussian_population_matrices(p, q, jp, jq):
     return result
 
 
-def split_metrics(first, second, block_size):
-    a = pathwise_cross_embedding_matrices(first, first, BANDWIDTHS, block_size)
-    b = pathwise_cross_embedding_matrices(second, second, BANDWIDTHS, block_size)
-    cross = pathwise_cross_embedding_matrices(first, second, BANDWIDTHS, block_size)
+def split_metrics(first, second, block_size, bandwidths=None, detailed=False):
+    bandwidths = BANDWIDTHS if bandwidths is None else bandwidths
+    a = pathwise_cross_embedding_matrices(first, first, bandwidths, block_size)
+    b = pathwise_cross_embedding_matrices(second, second, bandwidths, block_size)
+    cross = pathwise_cross_embedding_matrices(first, second, bandwidths, block_size)
     row = {}
     for name in a:
         ordinary = (a[name]+b[name])/2
@@ -87,6 +88,12 @@ def split_metrics(first, second, block_size):
         row[f"{name}_estimated_noise_trace"] = (ordinary[1:, 1:]-symmetric[1:, 1:]).trace().item()
         row[f"{name}_self_matrix"] = ordinary.cpu().tolist()
         row[f"{name}_cross_matrix"] = symmetric.cpu().tolist()
+        if detailed:
+            row[f"{name}_split1_matrix"] = a[name].cpu().tolist()
+            row[f"{name}_split2_matrix"] = b[name].cpu().tolist()
+            row[f"{name}_noise_matrix"] = (ordinary-symmetric).cpu().tolist()
+            if torch.linalg.eigvalsh((ordinary-symmetric)[1:, 1:])[0] < -1e-7:
+                raise ValueError("Split variance identity lost positive semidefiniteness")
     return row
 
 
@@ -103,30 +110,32 @@ def probes(device):
     return values
 
 
-def expected_output_loss_gradient(mean, probe, nodes=128):
+def expected_output_loss_gradient(mean, probe, nodes=128, sigma=SIGMA, bandwidths=None):
+    bandwidths = BANDWIDTHS if bandwidths is None else bandwidths
     kind, w, offset = probe["kind"], probe["w"], probe["offset"]
     t = mean.dot(w)-offset
     if kind == "quadratic":
         return t*w
     if kind == "cosine":
-        return torch.exp(-SIGMA**2*w.square().sum()/2)*t.sin()*w
+        return torch.exp(-sigma**2*w.square().sum()/2)*t.sin()*w
     if kind == "logistic":
         points, weights = np.polynomial.hermite.hermgauss(nodes)
         points, weights = mean.new_tensor(points), mean.new_tensor(weights)
-        logits = t + math.sqrt(2)*SIGMA*w.norm()*points
+        logits = t + math.sqrt(2)*sigma*w.norm()*points
         return (weights*torch.sigmoid(logits)).sum()/math.sqrt(math.pi)*w
     if kind == "rbf_section":
         delta = probe["center"]-mean
         result = torch.zeros_like(mean)
-        for length in BANDWIDTHS:
-            total = length**2+SIGMA**2
+        for length in bandwidths:
+            total = length**2+sigma**2
             value = (length**2/total)**(mean.numel()/2)*torch.exp(-delta.square().sum()/(2*total))
-            result += value*delta/total/len(BANDWIDTHS)
+            result += value*delta/total/len(bandwidths)
         return result
     raise ValueError(kind)
 
 
-def sampled_loss_gradient(y, jac, probe):
+def sampled_loss_gradient(y, jac, probe, bandwidths=None):
+    bandwidths = BANDWIDTHS if bandwidths is None else bandwidths
     kind, w = probe["kind"], probe["w"]
     t = y@w-probe["offset"]
     if kind == "quadratic":
@@ -137,7 +146,7 @@ def sampled_loss_gradient(y, jac, probe):
         dy = t.sin()[:, None]*w
     elif kind == "rbf_section":
         delta = probe["center"]-y
-        dy = sum(torch.exp(-delta.square().sum(-1)/(2*l*l))[:, None]*delta/(l*l) for l in BANDWIDTHS)/len(BANDWIDTHS)
+        dy = sum(torch.exp(-delta.square().sum(-1)/(2*l*l))[:, None]*delta/(l*l) for l in bandwidths)/len(bandwidths)
     else:
         raise ValueError(kind)
     return torch.einsum("no,noa->a", dy, jac)/len(y)

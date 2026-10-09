@@ -12,6 +12,12 @@ The [pre-optimization metric proposal](theory_preoptimization_channel_metric.md)
 
 The [latest control assessment](metric_controls_assessment_20261009.md) reproduces the October control tables from the committed evidence archive, explains the mixed results, proves a gradient obstruction beyond the first three moments, and gives the next bounded learned-model check. A useful kernel-specific selector is still unvalidated.
 
+That check is now [complete](learned_metric_gate_results_20261009.md): the same-input
+SSPA panel provides no kernel-specific added ordering information beyond simpler
+moment checks under the frozen rule. The report preserves all comparisons and
+both sample budgets. Its transfer archive is in `evidence/`, not the ignored
+`results/` folder. No new training or manuscript changes accompanied this test.
+
 ## Existing draft
 
 This folder contains the current paper draft and the minimum assets needed to keep it with the standalone repository.

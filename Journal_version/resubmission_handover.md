@@ -21,6 +21,7 @@ The author has no fixed deadline or compute cap and is willing to run simulation
 - [Earlier independent assessment](metric_experiment_assessment_20261009.md): separates direction from magnitude and identifies candidate-specific estimator variance. Its A/B experiment proposals are complete and its missing-October-data warning is superseded below.
 - [Completed exact-law and matched-value controls](metric_controls_results_20261009.md): the proposed A/B controls now ran locally. Rotation changes estimator variance despite identical laws; same-input perturbations isolate useful derivative information. Simple moments remain sufficient in this Gaussian control. All October raw results are present on the Linux host.
 - [Assessment after the controls and next bounded gate](metric_controls_assessment_20261009.md): independently reproduces the archived tables, proves a derivative obstruction beyond the first three moments, and specifies one same-input learned-model check without downstream optimization. No kernel-specific selection advantage is established yet.
+- [Completed same-input learned-model test](learned_metric_gate_results_20261009.md): the bounded SSPA test now ran at N=512/2048. All 72 final target contrasts were resolved by the frozen descriptive rule; none supplied kernel-specific added ordering information. Simple moment checks performed better on this panel. Stop expansion of this kernel-selector candidate, retain gradient fidelity as explanatory evidence, and return to P0/P1 and fair baselines. No new downstream training or manuscript changes were made.
 - [Actual decision and all 22 reviewer comments](review_audit_20261008/README.md#full-review-reports).
 
 ## 1. Recommendation
@@ -44,6 +45,17 @@ The 9 October [theory follow-up](theory_swd_downstream_gradient_fidelity.md) mak
 Use **channel simulation**, learning `p(y | x)`, throughout. Receiver-side channel estimation from pilots is a different problem and is not what the current experiments evaluate.
 
 ### Local evidence now available
+
+**Latest execution update:** the [same-input learned-model panel](learned_metric_gate_results_20261009.md)
+is complete and supersedes instructions below to run that gate. DDIM-10 has the
+smallest absolute loss-gradient error for 21/24 fixed input/probe cases, while
+selected Sinkhorn has the lowest conditional SWD at all three inputs. The RBF
+derivative score adds no resolved ordering information beyond cheaper checks
+under the frozen rule. These nested cases are not independent trained-model
+replications. Do not launch a confirmatory metric sweep on this evidence. The
+compact raw-statistics archive is under `Journal_version/evidence/`, outside the
+ignored results tree. Larger raw sample/Jacobian tensors and model weights remain
+local. This does not close the journal's stability, fairness or scale concerns.
 
 The subsequent [decoder-free metric pilot](channel_feature_metric_pilot_20261009.md)
 is also complete. Its score does not use the codecs below. It finds strong
@@ -227,7 +239,7 @@ The accepted conference paper already covers conditional direct/residual driftin
 
 ## 8. Ready-to-paste instruction for the next Codex session
 
-> Read `Journal_version/resubmission_handover.md`, `resubmission_cluster_plan.md`, `resubmission_manuscript_plan.md`, `theory_preoptimization_channel_metric.md`, `gradient_fidelity_local_pilot_20261008.md`, `channel_feature_metric_pilot_20261009.md`, `metric_resolution_results_20261009.md`, `metric_experiment_assessment_20261009.md`, and `metric_controls_results_20261009.md` before changing anything. The seed-7 pilots, numerical/moment checks on seeds 7--9, and exact-law/matched-value synthetic controls have run. They are exploratory evidence, not a validated selector. All October raw evidence is present on the Linux host and a compact evidence archive is documented in the controls report. Check availability before requesting transfers. Treat submitted artifacts and numerical reports as historical records. Finish P0 contracts and implement the P1 reference harness. Before expanding P3, separate candidate-specific estimator variance from population discrepancy on a small same-input learned-model comparison; retain simple moment/Jacobian baselines and distinct absolute-error, direction and magnitude targets. Do not repeat A/B as unstarted work. Passive-data estimation, heavy-tail controls, missing T1/T2 interventions and trained-model selection utility remain open. Prepare theory/attribution changes in a separate revision source. Follow exact sampling, split, timing and count contracts. Use bounded smoke tests, not the misleading full-budget environment check. Produce dry-run manifests and measured resource estimates before large submission. Keep missing data and unresolved provenance explicit. Freeze the protocol before confirmation, report negative results and update the claim accordingly. Do not submit a paper or contact editors without the author's instruction.
+> Start with `Journal_version/resubmission_handover.md` and `learned_metric_gate_results_20261009.md`, then read the linked cluster/manuscript plans and prior metric reports. The seed-7 pilots, seed-8/9 checks, synthetic A/B controls, and same-input learned-model gate are complete. The latter found no kernel-specific added ordering information under its frozen rule, even after separating score/target streams and refining to N=2048. Do not repeat these as unstarted work or launch a confirmatory sweep of this selector. Keep derivative fidelity as explanatory evidence and retain simple moment checks. Two compact evidence archives are under `Journal_version/evidence/`; the newest excludes large raw sample/Jacobian tensors and checkpoints, which remain on the Linux execution host. Check availability before requesting transfers. Next prioritize P0 contracts, the P1 transport reference and controlled SSPA stability, and fair modern fast baselines. Passive-data estimation, heavy-tail robustness, remaining causal interventions and trained-model selection utility are still open. Treat submitted artifacts as historical records and prepare manuscript changes in a separate revision source. Freeze sampling, selection, timing and count contracts before confirmation. Use bounded implementation checks and measured resource estimates before a large campaign. Preserve negative findings and missing provenance. Do not submit a paper or contact editors without the author's instruction.
 
 ## 9. Completion criteria
 

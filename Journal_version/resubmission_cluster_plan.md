@@ -6,6 +6,12 @@ has run on a GPU and partially implements P3/T1/T2. Its existing runner is
 `scripts/run_local_gradient_fidelity.py`; newly named revision scripts below
 still require implementation. Do not confuse those statuses.
 
+**Latest local result:** the [same-input SSPA metric gate](learned_metric_gate_results_20261009.md)
+is complete. It does not support scaling the current RBF derivative score into a
+checkpoint-selection campaign. Preserve its complete negative panel and retain
+simple moment checks; prioritize P0/P1 and fair fast baselines. The cluster work
+below remains proposed, and no cluster jobs were submitted by this local test.
+
 ## 1. Freeze the experimental contract first
 
 ### Inputs, randomness, and selection

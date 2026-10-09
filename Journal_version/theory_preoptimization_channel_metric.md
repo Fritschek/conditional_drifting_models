@@ -6,6 +6,15 @@ Research direction, 9 October 2026. Extends [the SWD/gradient theory note](theor
 
 **Proposed direction:** compare conditional expectations of a fixed function class and their derivatives with respect to transmitted inputs. Kernel mean embeddings make the supremum over a large function class computable by norms rather than fitting downstream models. Below are precise population guarantees, a finite-sample version, and the limitations that prevent calling the candidate a validated predictor of final BER.
 
+**Latest empirical decision:** the [same-input learned-model test](learned_metric_gate_results_20261009.md)
+completed the bounded gate proposed after the synthetic controls. The RBF
+derivative score had no resolved added ordering information beyond cheaper
+comparators in the seed-7 SSPA panel. Covariance/moment checks performed better
+there, without becoming validated selectors themselves. Retain the population
+bounds and gradient-fidelity distinction; stop expansion of this particular
+kernel-selector candidate. Do not treat the proposed experiments later in this
+note as overriding that completed negative test.
+
 The elementary bounds are proved here. The proposed metric's empirical usefulness, adequate loss-class coverage, useful numerical constants, and publication novelty are open. A full-kernel finite-difference estimator has now been implemented and tested in the [local metric pilot](channel_feature_metric_pilot_20261009.md). It has not demonstrated a predictive advantage over simpler controls; no new channel training was performed.
 
 **Evidence update, 9 October.** The [local gradient-fidelity study](gradient_fidelity_local_pilot_20261008.md)

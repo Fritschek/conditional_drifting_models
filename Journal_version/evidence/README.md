@@ -1,5 +1,28 @@
 # Research evidence
 
+## Same-input learned-model test
+
+`learned_metric_gate_evidence_20261009.tar.gz` contains the completed SSPA
+N=512/2048 panel's per-repeat scores, split matrices, task-gradient vectors,
+manifest, all report tables/contrasts, source snapshots, protocol, and result note.
+It is about 3.7 MB and is outside the ignored results tree.
+
+SHA-256: `84a437a2007eacf7265b8b41da8215a671c398f18730ed735e96526e6e689835`
+
+The archive reproduces report aggregation. Large individual-output/Jacobian `.pt`
+files and pretrained checkpoints are excluded and remain on the execution host.
+It is not a standalone training repository. Restore only the result directories
+without overwriting current code or existing results:
+
+```bash
+tar -xzf Journal_version/evidence/learned_metric_gate_evidence_20261009.tar.gz --keep-old-files results/
+```
+
+See [the result note](../learned_metric_gate_results_20261009.md) for the frozen
+decision rule, complete negative finding, scope limitations, and reproduction.
+
+## Earlier controls and pilots
+
 `metric_research_evidence_20261009.tar.gz` contains the completed October
 metric experiments, raw records, gradient tensors, figures and source snapshots.
 Training checkpoints are excluded. The archive is not covered by `.gitignore`.
