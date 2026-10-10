@@ -38,6 +38,14 @@ reference checks, exploratory derivative analysis and interruption overhead.
 Do not repeat the reference audit, continuation interface or 30k screen
 as unimplemented work. The numerical training module remains unchanged.
 
+The [independent full-budget assessment](sspa_full_budget_assessment_20261010.md)
+reproduces the reports and verifies all 234 checkpoint hashes and inherited
+checkpoint bytes. Final conditional variance is about 458/177/327 times truth
+for legacy/fixed/shared policies. It specifies the next frozen-cloud solver
+decomposition and matched intervention, and proves why zero expected finite-cloud
+drift at exact matching does not imply finite-step stability. No solver repair
+has yet been tested in training.
+
 **Start here.** This is the execution plan for revising *Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation*, rejected as TCOM-TPS-26-1722. It supersedes the recommendations in `conditional_drifting_journal_strategy.md` and `journal_execution_roadmap.md`; keep those files as historical notes. It builds on, and corrects/extends, `review_audit_20261008/README.md`.
 
 The author has no fixed deadline or compute cap and is willing to run simulations on roughly the previous scale. The author asks us to recommend the venue. The local checkpoint studies and nine SSPA trajectories through 390,720 updates are now complete, as recorded below. No cluster jobs, submissions, or correspondence were made.
@@ -53,6 +61,7 @@ The author has no fixed deadline or compute cap and is willing to run simulation
 - [Completed exact-law and matched-value controls](metric_controls_results_20261009.md): the proposed A/B controls now ran locally. Rotation changes estimator variance despite identical laws; same-input perturbations isolate useful derivative information. Simple moments remain sufficient in this Gaussian control. All October raw results are present on the Linux host.
 - [Assessment after the controls and next bounded gate](metric_controls_assessment_20261009.md): independently reproduces the archived tables, proves a derivative obstruction beyond the first three moments, and specifies one same-input learned-model check without downstream optimization. No kernel-specific selection advantage is established yet.
 - [Completed same-input learned-model test](learned_metric_gate_results_20261009.md): the bounded SSPA test now ran at N=512/2048. All 72 final target contrasts were resolved by the frozen descriptive rule; none supplied kernel-specific added ordering information. Simple moment checks performed better on this panel. Stop expansion of this kernel-selector candidate, retain gradient fidelity as explanatory evidence, and return to P0/P1 and fair baselines. No new downstream training or manuscript changes were made.
+- [Full-budget assessment and next solver intervention](sspa_full_budget_assessment_20261010.md): independently verified late failure in all nine paired trajectories; separate floor distortion, numerical solve error, finite-cloud noise and actual neural updates before claiming a cause or fix.
 - [Actual decision and all 22 reviewer comments](review_audit_20261008/README.md#full-review-reports).
 
 ## 1. Recommendation
@@ -149,8 +158,10 @@ proves an analytic obstruction with all first three moments matched; it also
 records that a fourth-moment check detects that construction. Its bounded
 same-input learned-model gate is now complete and negative for this selector.
 The [independent assessment](learned_metric_gate_assessment_20261010.md) closes
-that experiment queue. Resume P0 contracts, P1 stability/correctness and P2
-baseline preparation. Retain absolute gradient error, direction and magnitude
+that experiment queue. The restricted P0 resume/RNG/count contracts, P1a audit
+and full P1b epsilon trajectories have since completed. Proceed with the
+[frozen-cloud decomposition and conditional intervention](sspa_full_budget_assessment_20261010.md#5-concrete-next-experiment-numerical-decomposition-before-retraining),
+plus broader P0 repairs and P2 baseline preparation. Retain absolute gradient error, direction and magnitude
 as separate explanatory outcomes. Do not rerun A/B or the learned gate as
 unstarted work, or call a squared-trace estimate an operator-norm confidence
 bound. A replacement metric is a separate future hypothesis requiring unused
@@ -172,6 +183,7 @@ validation data, not the next automatic experiment.
 | Derivative resolution and moment augmentation | Completed 1,350 step-comparison records, 558 pathwise records and 62 metric/task joins, including SSPA seeds 8/9. The combined feature/gradient suite now has 18 passing tests. Still no validated selector. |
 | Exact-law and same-input controls | Completed 192 rotation records, 480 matched-value records and 3,840 probe-gradient records, with exact population references. The execution host reports 37 passing tests. The independent archive audit reproduces all three summary CSVs byte for byte and checks exactly; Torch tests were not rerun on macOS. Kernel-specific selection benefit remains open. |
 | Same-input learned-model gate | Completed 192 metric/1,536 task records; zero added-information contrasts under the frozen union rule. Execution host reports 48 passing tests. Independent NumPy audit reproduces numeric metric CSV fields exactly and task fields to 2.22e-16, with source/reference checks; no new Torch/GPU run here. Current selector expansion stopped. |
+| Full-budget SSPA trajectories | All 9 runs reach 390,720 updates and deteriorate. Independent report regeneration matches JSON/Markdown and all keyed CSV rows; all 234 checkpoint hashes and 54/72 inherited states verified. 145 reference solves remain unresolved. Execution-host tests and internal RNG audits are reported separately; no new training or Torch tests in this review. |
 | New training / cluster measurements | None performed. All new run counts and thresholds below are proposed protocol choices. |
 
 The [committed October archive](evidence/README.md) now transfers the raw metric
@@ -188,7 +200,7 @@ repairs still belong to P0.
 2. **The unique-equilibrium claim is too strong.** Unique zero of the Sinkhorn divergence and an energy-dissipation identity do not establish absence of other stationary measures. A collapsed symmetric counterexample is given in the manuscript plan. Keep a precise zero-set statement; remove unsupported global convergence and “best representable” language.
 3. **Detachment is not, by itself, the obstacle to a gradient interpretation.** An exact fixed-epsilon velocity gives an instantaneous detached-regression parameter gradient proportional to the objective gradient under an appropriate chain rule. The practical gaps include finite samples, independent self-reference, adaptive unequal epsilons, approximate couplings, clipping, and finite optimizer steps.
 4. **The supposedly controlled Sinkhorn comparison changes data exposure.** Current fiber training uses `B` anchors and `4B` samples of each particle type, whereas joint training uses `B` samples of each type. Equal architecture and epochs do not isolate geometry. Use identical repeated-anchor particles in the decisive comparison.
-5. **SSPA long-run degradation is not explained by the saved endpoints.** The prior audit records mean SWD about `1.5344` over 100 full runs versus `0.0070714` over 30 compact runs. Actual update counts are `390720` and `4800`. This supports a serious stability question; it does not prove a particular cause or validate early stopping.
+5. **SSPA late deterioration is now reproduced in controlled trajectories.** The original 100-full/30-compact endpoint comparison was ambiguous. All nine new paired trajectories first learn and then develop severe excess variance. Common epsilon is insufficient to prevent failure; solver replay and a matched correction are still needed to identify cause. The new conditional validation protocol differs from the historical SWD table, so do not compare their numerical values directly or call retrospective checkpoint selection online early stopping.
 6. **Downstream evaluation has additional controls to repair.** Symbolic codewords currently depend on minibatch normalization; analytic-channel SER is used for epoch selection in `train_symbolic_autoencoder`; rates are stored without exact trial counts. Separate validation/test streams and define the power convention. TurboAE also has a decoder-noise-distribution mismatch in the earlier audit.
 7. **A larger codeword is not a larger channel generator.** Existing TurboAE uses an `n=2` surrogate across independent pairs. The new structured case must generate the whole coupled block. Do not simply increase `--override-n`: its default latent dimension remains 16 and it retains the compact TDL construction.
 8. **Existing scripts are building blocks, not a ready revision suite.** In particular, `hpc/check_env.sh` calls a full-budget training runner despite labeling it a small smoke test. Replace that check before using it. New scripts in the cluster plan are explicitly proposed and do not yet exist.
@@ -198,7 +210,7 @@ repairs still belong to P0.
 | Package | Work and purpose | Completion evidence | Dependency |
 | --- | --- | --- | --- |
 | P0: provenance and numerical contracts | Restore archives, freeze source/config hashes, unify units/noise/power, integer counts and split labels, bounded smoke test | Machine-readable input manifest and audit report with missing items explicit | First |
-| P1: transport correctness and stability | High-accuracy common-epsilon reference, numerical residuals, controlled SSPA trajectories, matched-particle geometry comparison | Solver checks, actual trajectory plots, selected and last checkpoints | P0 |
+| P1: transport correctness and stability | Reference audit and nine long epsilon trajectories complete; next frozen-cloud decomposition, matched solver intervention, then pending geometry comparison | Existing failure evidence plus an independently assessed correction or operating rule | Restricted P0 contracts verified; broad interfaces remain pending |
 | P2: competitive comparison | Matched-capacity/data-access generator study; measured compute curves; low-step DDIM, flow matching, true one-step comparator, simple Gaussian reference | Conditional metrics and uncertainty for all methods; full generator costs | P0, P1 for frozen proposed method |
 | P3: communication utility | Extend gradient/mechanism diagnostics; equal-update and equal-time AE training; TurboAE repair. Current kernel-selector gate is complete and negative | Actual SER/BER/BLER versus time, separately seeded tests, scoped gradient/variance evidence | Confirmatory comparisons need P2 checkpoints; a new selector is not a prerequisite |
 | P4: larger structured channel | Joint 64-complex-use generation with validated multipath/boundaries/noise and a communication endpoint | Conditional temporal/cross-coordinate accuracy and receiver performance | Pilot success; P0 channel contracts |
@@ -278,7 +290,7 @@ The accepted conference paper already covers conditional direct/residual driftin
 
 ## 8. Ready-to-paste instruction for the next Codex session
 
-> Start with `Journal_version/resubmission_handover.md` and `sspa_full_budget_results_20261010.md`, then the linked protocol, reports and cluster/manuscript plans. All nine SSPA trajectories completed 390,720 updates; the continuation and derivative-record audits pass. All three epsilon policies deteriorate in all seeds, so common epsilon alone is not a stability fix. Selected SWD stays near 0.039, while final policy means are 1.9448, 1.2294 and 1.5343. The late failure involves excess variance and large covariance derivatives; mean-Jacobian changes are smaller. Solver errors grow, but causality is not proved; 145 reference solves hit their cap and remain explicitly unresolved. Next perform a small fixed-cloud solver decomposition, then a paired numerical intervention from pre-transition checkpoints if justified. Do not repeat the completed epsilon sweep or revive the closed kernel-selector study. The full evidence archive includes all checkpoints and traces. Fair modern fast baselines, broad P0 interfaces and structured-channel experiments remain pending. Preserve submitted artifacts and negative outcomes; no submission or editor contact without authorization.
+> Start with `Journal_version/resubmission_handover.md` and `sspa_full_budget_assessment_20261010.md`, then the linked results, protocol and cluster/manuscript plans. All nine SSPA trajectories completed 390,720 updates and deteriorated after good early fidelity. Common epsilon alone is not a fix. Selected validation SWD stays near 0.039; final policy means are 1.9448, 1.2294 and 1.5343, with variance about 458/177/327 times truth. Reports and checkpoint lineage have been independently checked. Large empirical covariance-derivative norms include sampling uncertainty; they are not downstream-gradient measurements. Solver errors grow, but causality is unproved and 145 reference solves remain unresolved. Follow the new assessment's fixed-cloud decomposition, including matched-iteration floored-kernel comparisons and signed variance diagnostics, then a paired solver intervention only if justified. Preserve parent provenance rather than relaxing exact-resume checks. Do not repeat the completed epsilon sweep or revive the closed kernel-selector study. Fair fast baselines, broader P0 interfaces and structured-channel experiments remain pending. Preserve submitted artifacts and negative outcomes; no submission or editor contact without authorization.
 
 ## 9. Completion criteria
 

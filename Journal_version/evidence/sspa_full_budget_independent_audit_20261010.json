@@ -1,0 +1,361 @@
+{
+  "commit": "0a9900b9fb3531e57d32fba0616c60df49a70fea",
+  "scope": "Saved-record and source audit; no new simulation, GPU checkpoint evaluation or Torch test rerun. Recorded training states were hash-checked without loading their Torch objects.",
+  "true_variance": 0.05282977308203711,
+  "full_report_checks": {
+    "tasks": 9,
+    "checkpoints": 234,
+    "training_records": 35163,
+    "reference_attempts": 3744,
+    "reference_failures": 145,
+    "max_reference_barycenter_rms": 7.799900300503852,
+    "max_postinitial_reference_barycenter_rms": 7.799900300503852,
+    "max_training_floor_fraction": 0.3863067626953125,
+    "max_training_row_relative": 0.9987378120422363,
+    "training_seconds": 11542.952407726101,
+    "validation_seconds": 198.28206927598268
+  },
+  "reproduction": {
+    "checks.json": true,
+    "policy_summary.json": true,
+    "summary.md": true,
+    "validation_csv_same_rows_independent_of_order": true
+  },
+  "recorded_numerical_source_hashes_match": {
+    "sspa_trajectory.py": true,
+    "channels.py": true,
+    "losses.py": true,
+    "metrics.py": true,
+    "model.py": true,
+    "training.py": true,
+    "transport_reference.py": true
+  },
+  "derivative_checkpoint_hashes_verified": 234,
+  "derivative_records": 702,
+  "parent_checkpoint_files_byte_equal": {
+    "sspa_epsilon_trajectories_20261010": 54,
+    "sspa_epsilon_trajectories_30k_20261010": 72
+  },
+  "policies": {
+    "legacy_separate_adaptive": {
+      "selected_swd_mean": 0.038892372200886406,
+      "selected_swd_sd": 0.00020954569214174195,
+      "final_swd_mean": 1.9448236227035522,
+      "final_swd_sd": 0.17782892482243798,
+      "final_variance_mean": 24.19253921508789,
+      "final_variance_over_truth": 457.9338089815439,
+      "selected_updates": [
+        80000,
+        80000,
+        50000
+      ],
+      "first_saved_threshold_updates": [
+        90000,
+        110000,
+        120000
+      ],
+      "reference_failures": 41
+    },
+    "fixed_common": {
+      "selected_swd_mean": 0.038448008398214974,
+      "selected_swd_sd": 0.0003001630174470352,
+      "final_swd_mean": 1.229444940884908,
+      "final_swd_sd": 0.0854298018007253,
+      "final_variance_mean": 9.339716593424479,
+      "final_variance_over_truth": 176.7888833995412,
+      "selected_updates": [
+        80000,
+        100000,
+        110000
+      ],
+      "first_saved_threshold_updates": [
+        110000,
+        150000,
+        150000
+      ],
+      "reference_failures": 44
+    },
+    "shared_adaptive": {
+      "selected_swd_mean": 0.038517266511917114,
+      "selected_swd_sd": 0.00022871537862330677,
+      "final_swd_mean": 1.5343467791875203,
+      "final_swd_sd": 0.18926268359483164,
+      "final_variance_mean": 17.251980463663738,
+      "final_variance_over_truth": 326.5579134113234,
+      "selected_updates": [
+        90000,
+        100000,
+        90000
+      ],
+      "first_saved_threshold_updates": [
+        100000,
+        120000,
+        110000
+      ],
+      "reference_failures": 60
+    }
+  },
+  "posthoc_transition_brackets": [
+    {
+      "policy": "legacy_separate_adaptive",
+      "seed": 9001,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 80000,
+          "conditional_swd": 0.038961924612522125,
+          "conditional_variance": 0.05038921535015106,
+          "mean_l2": 0.08599439263343811,
+          "floor_fraction": 0.0,
+          "row_relative": 0.00011754035949707031,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 8.403212488288789e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 90000,
+          "conditional_swd": 0.35542458295822144,
+          "conditional_variance": 3.3099288940429688,
+          "mean_l2": 0.42461395263671875,
+          "floor_fraction": 0.08935546875,
+          "row_relative": 0.49909305572509766,
+          "clipping_fraction": 0.18359375,
+          "converged_reference_barycenter_rms_max": 0.011042986567577294,
+          "reference_failures": 0
+        }
+      ]
+    },
+    {
+      "policy": "legacy_separate_adaptive",
+      "seed": 9002,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 100000,
+          "conditional_swd": 0.03959304466843605,
+          "conditional_variance": 0.05070880055427551,
+          "mean_l2": 0.09096892178058624,
+          "floor_fraction": 0.0,
+          "row_relative": 6.4373016357421875e-06,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 8.869671065614675e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 110000,
+          "conditional_swd": 0.1857011914253235,
+          "conditional_variance": 1.22360098361969,
+          "mean_l2": 0.2677900791168213,
+          "floor_fraction": 0.03759765625,
+          "row_relative": 0.09806883335113525,
+          "clipping_fraction": 0.0546875,
+          "converged_reference_barycenter_rms_max": 1.8622111794754177,
+          "reference_failures": 0
+        }
+      ]
+    },
+    {
+      "policy": "legacy_separate_adaptive",
+      "seed": 9003,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 110000,
+          "conditional_swd": 0.03959377855062485,
+          "conditional_variance": 0.05046014487743378,
+          "mean_l2": 0.08820697665214539,
+          "floor_fraction": 0.0,
+          "row_relative": 3.5762786865234375e-06,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 8.21505409361192e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 120000,
+          "conditional_swd": 0.39270293712615967,
+          "conditional_variance": 3.733933687210083,
+          "mean_l2": 0.5560824871063232,
+          "floor_fraction": 0.06201171875,
+          "row_relative": 0.10033166408538818,
+          "clipping_fraction": 0.1171875,
+          "converged_reference_barycenter_rms_max": 0.005925998917052501,
+          "reference_failures": 0
+        }
+      ]
+    },
+    {
+      "policy": "fixed_common",
+      "seed": 9001,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 100000,
+          "conditional_swd": 0.039341654628515244,
+          "conditional_variance": 0.05289154499769211,
+          "mean_l2": 0.08989756554365158,
+          "floor_fraction": 0.0,
+          "row_relative": 4.5299530029296875e-06,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 7.204133421705466e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 110000,
+          "conditional_swd": 0.0882774218916893,
+          "conditional_variance": 0.2780430316925049,
+          "mean_l2": 0.14156511425971985,
+          "floor_fraction": 0.02197265625,
+          "row_relative": 0.09954452514648438,
+          "clipping_fraction": 0.01953125,
+          "converged_reference_barycenter_rms_max": 1.439553820056657,
+          "reference_failures": 0
+        }
+      ]
+    },
+    {
+      "policy": "fixed_common",
+      "seed": 9002,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 140000,
+          "conditional_swd": 0.0392216220498085,
+          "conditional_variance": 0.05261079967021942,
+          "mean_l2": 0.08813968300819397,
+          "floor_fraction": 0.0,
+          "row_relative": 2.384185791015625e-07,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 8.49932488886879e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 150000,
+          "conditional_swd": 0.3055453300476074,
+          "conditional_variance": 3.5937273502349854,
+          "mean_l2": 0.42965102195739746,
+          "floor_fraction": 0.0537109375,
+          "row_relative": 0.10037809610366821,
+          "clipping_fraction": 0.095703125,
+          "converged_reference_barycenter_rms_max": 0.4321060043563762,
+          "reference_failures": 0
+        }
+      ]
+    },
+    {
+      "policy": "fixed_common",
+      "seed": 9003,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 140000,
+          "conditional_swd": 0.03905244171619415,
+          "conditional_variance": 0.052556708455085754,
+          "mean_l2": 0.08462308347225189,
+          "floor_fraction": 0.0,
+          "row_relative": 2.7418136596679688e-06,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 8.766691155754522e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 150000,
+          "conditional_swd": 0.1856476366519928,
+          "conditional_variance": 1.3594183921813965,
+          "mean_l2": 0.3096697926521301,
+          "floor_fraction": 0.0283203125,
+          "row_relative": 0.10059064626693726,
+          "clipping_fraction": 0.0625,
+          "converged_reference_barycenter_rms_max": 4.4705069306159315e-05,
+          "reference_failures": 0
+        }
+      ]
+    },
+    {
+      "policy": "shared_adaptive",
+      "seed": 9001,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 90000,
+          "conditional_swd": 0.03852422535419464,
+          "conditional_variance": 0.05319065600633621,
+          "mean_l2": 0.08565208315849304,
+          "floor_fraction": 0.0,
+          "row_relative": 5.841255187988281e-06,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 8.283888279662668e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 100000,
+          "conditional_swd": 0.278178334236145,
+          "conditional_variance": 1.601448893547058,
+          "mean_l2": 0.29862746596336365,
+          "floor_fraction": 0.10302734375,
+          "row_relative": 0.11146706342697144,
+          "clipping_fraction": 0.142578125,
+          "converged_reference_barycenter_rms_max": 0.7956544869942745,
+          "reference_failures": 0
+        }
+      ]
+    },
+    {
+      "policy": "shared_adaptive",
+      "seed": 9002,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 110000,
+          "conditional_swd": 0.03994045406579971,
+          "conditional_variance": 0.05438976734876633,
+          "mean_l2": 0.08670616894960403,
+          "floor_fraction": 0.0,
+          "row_relative": 0.0003885030746459961,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 6.651665080256688e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 120000,
+          "conditional_swd": 0.3181164562702179,
+          "conditional_variance": 3.637303113937378,
+          "mean_l2": 0.44038987159729004,
+          "floor_fraction": 0.08203125,
+          "row_relative": 0.49911022186279297,
+          "clipping_fraction": 0.166015625,
+          "converged_reference_barycenter_rms_max": 5.772419515752742,
+          "reference_failures": 0
+        }
+      ]
+    },
+    {
+      "policy": "shared_adaptive",
+      "seed": 9003,
+      "threshold_scope": "post-hoc first saved SWD above twice its 30k value; interval, not exact onset",
+      "bracket": [
+        {
+          "update": 100000,
+          "conditional_swd": 0.038901664316654205,
+          "conditional_variance": 0.05230283737182617,
+          "mean_l2": 0.08831319212913513,
+          "floor_fraction": 0.0,
+          "row_relative": 6.556510925292969e-07,
+          "clipping_fraction": 0.0,
+          "converged_reference_barycenter_rms_max": 8.21075855633109e-08,
+          "reference_failures": 0
+        },
+        {
+          "update": 110000,
+          "conditional_swd": 0.2559731900691986,
+          "conditional_variance": 2.3272907733917236,
+          "mean_l2": 0.3139037489891052,
+          "floor_fraction": 0.0537109375,
+          "row_relative": 0.10099190473556519,
+          "clipping_fraction": 0.078125,
+          "converged_reference_barycenter_rms_max": 0.8778001919346664,
+          "reference_failures": 1
+        }
+      ]
+    }
+  ]
+}

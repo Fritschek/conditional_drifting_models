@@ -1,5 +1,14 @@
 # Research evidence
 
+## Independent full-budget assessment
+
+`sspa_full_budget_independent_audit_20261010.json` records the independent report
+regeneration, numerical-source hashes, checkpoint/parent-byte verification,
+policy summaries, variance ratios and post-hoc transition brackets. It is a
+saved-evidence audit; GPU training, internal Torch checkpoint tensors and the
+execution host's tests were not rerun. See the
+[assessment](../sspa_full_budget_assessment_20261010.md) for scope and next steps.
+
 ## Full-budget SSPA stability experiment
 
 `sspa_full_budget_evidence_20261010.tar.gz` contains all nine completed

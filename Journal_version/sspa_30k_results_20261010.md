@@ -5,6 +5,8 @@ All nine existing trajectories continued from update 4,800 to update 30,000.
 No generator was restarted, no policy was dropped, and the numerical training
 module and validation panel were unchanged. This is development evidence.
 
+**Later status:** all nine trajectories have since [completed 390,720 updates](sspa_full_budget_results_20261010.md) and deteriorated. The final section below preserves the decision at 30k; it is no longer an instruction to launch that continuation. See the [independent assessment](sspa_full_budget_assessment_20261010.md) for the next experiment.
+
 ## Results
 
 Mean +/- training-seed SD for seeds 9001--9003:

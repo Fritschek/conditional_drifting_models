@@ -28,6 +28,14 @@ experiment is now [complete and audited](sspa_full_budget_results_20261010.md):
 all nine trajectories reach 390,720 and all deteriorate. Epsilon sharing alone
 does not fix long-run instability. Fixed-cloud solver decomposition and paired
 numerical interventions are the next bounded P1 steps; do not repeat this sweep.
+
+The [independent assessment](sspa_full_budget_assessment_20261010.md#5-concrete-next-experiment-numerical-decomposition-before-retraining)
+is the immediate specification. Freeze clouds and batch-level epsilon; separate
+iteration/stabilizer effects from floored-kernel distortion and dtype. Record
+signed particle-variance change and actual cloned neural-update effects. Then
+fork a verified 80k fixed-common checkpoint into control and only the justified
+solver corrections. A new intervention manifest must declare changed numerical
+source; never relax ordinary exact-resume checks or overwrite parent evidence.
 Fair baseline comparisons remain pending.
 
 ## 1. Freeze the experimental contract first
@@ -123,6 +131,10 @@ For a gradient check only, use compatible exact same-batch empirical self-transp
 Shared adaptive epsilon: a proposed pooled within-anchor cost statistic applied once to both solves; freeze the statistic definition in config. Fixed epsilon: calibrate a positive scale on training-only pilot clouds, then freeze it. Neither rule is automatically an exact gradient of a fixed objective if epsilon changes with the model.
 
 ### P1b: reproduce the SSPA issue along continuous trajectories
+
+**Completed experiment, historical specification below.** Do not relaunch the
+epsilon comparison described here. The next P1 work is the independent
+assessment's frozen-cloud decomposition and matched numerical intervention.
 
 **Completed execution:** all three policies and all three development seeds
 have reached 390,720 updates. The expanded frozen schedule contains 26 saved

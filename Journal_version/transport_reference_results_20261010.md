@@ -11,6 +11,11 @@ an explanation of the historical SSPA training deterioration. The next experimen
 should observe controlled continuous training trajectories, with numerical and
 statistical quantities logged separately.
 
+**Later status:** the restricted resume/RNG/count contracts and all nine
+[full-budget trajectories](sspa_full_budget_results_20261010.md) are now complete.
+The next-step text below is historical. The [independent assessment](sspa_full_budget_assessment_20261010.md)
+specifies the remaining numerical-mechanism experiment.
+
 ## Scope and implementation
 
 The reference solves uniform-mass entropic OT with cost ||u-v||^2/2 and KL relative

@@ -49,6 +49,12 @@ delays or reduces the failure but does not prevent it. The audit verifies 234
 checkpoints and paired RNG states. Exploratory covariance-derivative and solver
 checks narrow the next investigation without establishing a causal mechanism.
 
+The [independent full-budget assessment](sspa_full_budget_assessment_20261010.md)
+reproduces the report and verifies checkpoint lineage. It separates established
+variance deterioration from possible causes, gives an exact finite-cloud
+stationarity/finite-step distinction, and specifies the next solver replay and
+matched intervention. No numerical correction has yet been validated in training.
+
 ## Existing draft
 
 This folder contains the current paper draft and the minimum assets needed to keep it with the standalone repository.
