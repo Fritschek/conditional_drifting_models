@@ -264,7 +264,8 @@ def _sinkhorn_barycentric_projection(
     epsilon_sample_count: int = 2048,
     epsilon_scale: float = 1.0,
     eps: float = 1e-8,
-) -> torch.Tensor:
+    return_diagnostics: bool = False,
+) -> torch.Tensor | tuple[torch.Tensor, dict]:
     source_features = source_features.detach().float()
     target_features = target_features.detach().to(device=source_features.device, dtype=torch.float32)
     target_values = target_values.detach().to(device=source_features.device, dtype=torch.float32)
@@ -291,7 +292,15 @@ def _sinkhorn_barycentric_projection(
 
     coupling = u[:, None] * kernel * v[None, :]
     row_weights = coupling / (coupling.sum(dim=1, keepdim=True) + eps)
-    return row_weights @ target_values
+    center = row_weights @ target_values
+    if return_diagnostics:
+        return center, {
+            "epsilon": regularization, "cost": cost, "kernel": kernel,
+            "kernel_floor_mask": torch.exp(-scaled_cost) < eps,
+            "coupling": coupling, "row_weights": row_weights,
+            "source_mass": source_mass, "target_mass": target_mass,
+        }
+    return center
 
 
 def _batched_sinkhorn_barycentric_projection(
@@ -306,7 +315,8 @@ def _batched_sinkhorn_barycentric_projection(
     epsilon_sample_count: int = 2048,
     epsilon_scale: float = 1.0,
     eps: float = 1e-8,
-) -> torch.Tensor:
+    return_diagnostics: bool = False,
+) -> torch.Tensor | tuple[torch.Tensor, dict]:
     source_features = source_features.detach().float()
     target_features = target_features.detach().to(device=source_features.device, dtype=torch.float32)
     target_values = target_values.detach().to(device=source_features.device, dtype=torch.float32)
@@ -340,7 +350,15 @@ def _batched_sinkhorn_barycentric_projection(
 
     coupling = u[:, :, None] * kernel * v[:, None, :]
     row_weights = coupling / (coupling.sum(dim=2, keepdim=True) + eps)
-    return torch.bmm(row_weights, target_values)
+    center = torch.bmm(row_weights, target_values)
+    if return_diagnostics:
+        return center, {
+            "epsilon": regularization, "cost": cost, "kernel": kernel,
+            "kernel_floor_mask": torch.exp(-scaled_cost) < eps,
+            "coupling": coupling, "row_weights": row_weights,
+            "source_mass": source_mass, "target_mass": target_mass,
+        }
+    return center
 
 
 def _build_sinkhorn_features(

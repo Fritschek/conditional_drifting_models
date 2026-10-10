@@ -24,6 +24,31 @@ proves why a worst-case fidelity norm need not rank individual tasks. It closes
 the current selector study and returns the immediate plan to P0/P1 and fair
 baseline comparisons.
 
+The [small transport-reference audit](transport_reference_results_20261010.md)
+is also complete. It checks solver residuals, kernel-floor distortion, epsilon
+policies and the restricted detached-gradient identity. The tested SSPA-shaped
+clouds were numerically accurate; the historical training instability is still
+unexplained. Production training defaults were preserved.
+
+The [bounded SSPA trajectories](sspa_trajectory_results_20261010.md) now add nine
+newly trained generators, exact resume/RNG/count checks and a paired-checkpoint
+audit. Common epsilon improves the early variance deficit, but the three
+policies have similar conditional SWD at 4,800 updates. No late-budget stability
+claim follows. The shared pooled-median rule has an initial kernel-floor issue.
+All checkpoints and a compact report are included in its evidence archive.
+
+The [30k continuation](sspa_30k_results_20261010.md) is complete: all nine runs
+improve, with nearly tied final conditional SWD and intact continuation records.
+The [historical loss histories](sspa_historical_training_20261010.md) place their
+later transition roughly around 100k--160k updates, so the stability question
+remains open beyond this screen. Both new reports have transferable evidence.
+
+The [full-budget continuation](sspa_full_budget_results_20261010.md) is complete:
+all nine trajectories reach 390,720 updates and all deteriorate. Common epsilon
+delays or reduces the failure but does not prevent it. The audit verifies 234
+checkpoints and paired RNG states. Exploratory covariance-derivative and solver
+checks narrow the next investigation without establishing a causal mechanism.
+
 ## Existing draft
 
 This folder contains the current paper draft and the minimum assets needed to keep it with the standalone repository.

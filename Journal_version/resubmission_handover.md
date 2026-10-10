@@ -11,9 +11,36 @@ Updated 10 October with the independently audited negative learned-model metric
 gate. That candidate's expansion is closed; P0/P1 and competitive baselines are
 the immediate priorities.
 
+**Subsequent execution:** the [small transport-reference audit](transport_reference_results_20261010.md)
+has run. Its reference, solver instrumentation and restricted gradient checks are
+implemented; default training outputs are unchanged. One sharp broad-cloud
+reference failed the frozen cap and is explicitly unresolved. Healthy synthetic
+SSPA clouds had small solver error, while stress tests exposed floor distortion.
+This does not explain the historical degradation. The subsequent
+[bounded SSPA trajectories](sspa_trajectory_results_20261010.md) now also ran:
+three policies by three development seeds, 4,800 continuous updates each, with
+resume/RNG/count contracts checked on CPU and CUDA. Common epsilon improves
+the early variance deficit; final conditional SWD is nearly tied. The shared
+pooled-median rule has an initial kernel-floor issue. An
+[audited continuation through 30k](sspa_30k_results_20261010.md) is also complete
+for all nine runs, with no degradation at saved checkpoints. The recovered
+[historical loss histories](sspa_historical_training_20261010.md) place their
+late transition much later, around 78k--161k by a post-hoc descriptive threshold.
+The [full-budget continuation](sspa_full_budget_results_20261010.md) is now
+**complete and audited for all nine trajectories** at 390,720 updates. Every
+policy deteriorates in every seed. Final mean conditional SWD is 1.9448 legacy,
+1.2294 fixed-common and 1.5343 shared-adaptive, versus selected values near 0.039.
+Common epsilon delays or reduces degradation but does not fix it. Large late
+transport errors, variance blow-up and covariance-derivative growth are observed;
+causality remains unproven. Next use controlled solver replay/interventions,
+not another epsilon-only sweep. The result note records the 145 unconverged
+reference checks, exploratory derivative analysis and interruption overhead.
+Do not repeat the reference audit, continuation interface or 30k screen
+as unimplemented work. The numerical training module remains unchanged.
+
 **Start here.** This is the execution plan for revising *Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation*, rejected as TCOM-TPS-26-1722. It supersedes the recommendations in `conditional_drifting_journal_strategy.md` and `journal_execution_roadmap.md`; keep those files as historical notes. It builds on, and corrects/extends, `review_audit_20261008/README.md`.
 
-The author has no fixed deadline or compute cap and is willing to run simulations on roughly the previous scale. The author asks us to recommend the venue. The initial assessment produced a plan. A separate local checkpoint study is now complete, as recorded below; no new generator training, cluster jobs, submissions, or correspondence are claimed.
+The author has no fixed deadline or compute cap and is willing to run simulations on roughly the previous scale. The author asks us to recommend the venue. The local checkpoint studies and nine SSPA trajectories through 390,720 updates are now complete, as recorded below. No cluster jobs, submissions, or correspondence were made.
 
 - [Cluster implementation and experiment protocol](resubmission_cluster_plan.md): code tasks, controls, seeds, selection, job matrix, outputs, and existing commands.
 - [Manuscript revision and mathematical audit](resubmission_manuscript_plan.md): replacement claims, proofs/counterexamples, section changes, and figure plan.
@@ -251,7 +278,7 @@ The accepted conference paper already covers conditional direct/residual driftin
 
 ## 8. Ready-to-paste instruction for the next Codex session
 
-> Start with `Journal_version/resubmission_handover.md` and `learned_metric_gate_results_20261009.md`, then read the linked cluster/manuscript plans and prior metric reports. The seed-7 pilots, seed-8/9 checks, synthetic A/B controls, and same-input learned-model gate are complete. The latter found no kernel-specific added ordering information under its frozen rule, even after separating score/target streams and refining to N=2048. Do not repeat these as unstarted work or launch a confirmatory sweep of this selector. Keep derivative fidelity as explanatory evidence and retain simple moment checks. Two compact evidence archives are under `Journal_version/evidence/`; the newest excludes large raw sample/Jacobian tensors and checkpoints, which remain on the Linux execution host. Check availability before requesting transfers. Next prioritize P0 contracts, the P1 transport reference and controlled SSPA stability, and fair modern fast baselines. Passive-data estimation, heavy-tail robustness, remaining causal interventions and trained-model selection utility are still open. Treat submitted artifacts as historical records and prepare manuscript changes in a separate revision source. Freeze sampling, selection, timing and count contracts before confirmation. Use bounded implementation checks and measured resource estimates before a large campaign. Preserve negative findings and missing provenance. Do not submit a paper or contact editors without the author's instruction.
+> Start with `Journal_version/resubmission_handover.md` and `sspa_full_budget_results_20261010.md`, then the linked protocol, reports and cluster/manuscript plans. All nine SSPA trajectories completed 390,720 updates; the continuation and derivative-record audits pass. All three epsilon policies deteriorate in all seeds, so common epsilon alone is not a stability fix. Selected SWD stays near 0.039, while final policy means are 1.9448, 1.2294 and 1.5343. The late failure involves excess variance and large covariance derivatives; mean-Jacobian changes are smaller. Solver errors grow, but causality is not proved; 145 reference solves hit their cap and remain explicitly unresolved. Next perform a small fixed-cloud solver decomposition, then a paired numerical intervention from pre-transition checkpoints if justified. Do not repeat the completed epsilon sweep or revive the closed kernel-selector study. The full evidence archive includes all checkpoints and traces. Fair modern fast baselines, broad P0 interfaces and structured-channel experiments remain pending. Preserve submitted artifacts and negative outcomes; no submission or editor contact without authorization.
 
 ## 9. Completion criteria
 

@@ -1,5 +1,103 @@
 # Research evidence
 
+## Full-budget SSPA stability experiment
+
+`sspa_full_budget_evidence_20261010.tar.gz` contains all nine completed
+390,720-update trajectories: 234 scheduled checkpoints, latest-state copies,
+complete training/validation records, strict aggregation, continuation audit,
+all 702 exploratory derivative records, figures, numerical source/test snapshots,
+and the frozen protocol and result note. Degraded models and unconverged
+reference checks are retained. This is research evidence, not a standalone
+training repository or a public-code release.
+
+Size: 97,451,901 bytes (about 93 MiB); all 315 files verified byte-for-byte against
+their local inputs. The archive is below GitHub's 100 MiB per-file limit.
+
+SHA-256: `e093ff6aaa82e8b7eacc7d9040d4746aedc36a6b3aec5b722d85e4f8c9782ad9`
+
+```bash
+tar -xzf Journal_version/evidence/sspa_full_budget_evidence_20261010.tar.gz --keep-old-files results/
+```
+
+Restore only `results/` to avoid replacing current code with archived snapshots.
+The full-suite report is self-contained in this archive. To rerun the
+parent-comparison audit, also restore `sspa_30k_evidence_20261010.tar.gz`; the
+earlier short archive is needed only to audit the 30k suite against its own parent
+or reconstruct the complete earlier lineage. Existing files are preserved by
+`--keep-old-files`, with tar reporting a nonzero exit status for skipped files.
+
+See [the full-budget findings](../sspa_full_budget_results_20261010.md). All nine
+trajectories deteriorate late; common epsilon alone is not a stability fix. The
+next solver interventions described there are proposals, not completed work.
+
+## SSPA continuation to 30k and historical histories
+
+`sspa_30k_evidence_20261010.tar.gz` contains all nine extended trajectories,
+72 scheduled checkpoints (including inherited states), latest-state copies,
+validation/training traces, the continuation audit, reports/figures, source and
+test snapshots, and the frozen protocol/result notes. It also includes the
+16,000 historical epoch records extracted from the 100 old full-budget states.
+Historical model weights are not duplicated in this archive.
+
+Size: 21,926,669 bytes (about 22 MB); all 148 files verified against local inputs.
+
+SHA-256: `8883046f5ce162e9abf57dbe8478a75849ed77e46e45f9e426d7dd14ef9031d6`
+
+```bash
+tar -xzf Journal_version/evidence/sspa_30k_evidence_20261010.tar.gz --keep-old-files results/
+```
+
+The new report is reproducible from this archive. For the parent-comparison
+audit or exact continuation/resume, also restore the original
+`sspa_trajectory_evidence_20261010.tar.gz` described below, which supplies the
+parent manifest, records and original checkpoint paths. Restore only `results/`
+to avoid replacing current source with snapshots. Exact resume remains strict
+about configuration, numerical source, Torch version/device and recorded paths.
+
+See the [30k findings](../sspa_30k_results_20261010.md) and
+[historical-history interpretation](../sspa_historical_training_20261010.md).
+The 30k archive remains a historical snapshot. Its completed 390,720-update
+continuation is documented in the [full-budget report](../sspa_full_budget_results_20261010.md).
+
+## Bounded SSPA training trajectories
+
+`sspa_trajectory_evidence_20261010.tar.gz` contains all nine 4,800-update runs,
+54 scheduled training checkpoints plus latest-state copies, validation and
+training records, the paired-checkpoint audit, initial-cloud numerical probe,
+plots, source snapshots, tests, protocol and result note. The separate 100-update
+resource profile is included under its own directory, not pooled with the runs.
+Size: 15,579,619 bytes (about 15 MB); 129 files verified against the local inputs.
+
+SHA-256: `35607b48186a2c41396310ca052830331dfb48dfe69e5aac2b2562cb7cb9eafd`
+
+```bash
+tar -xzf Journal_version/evidence/sspa_trajectory_evidence_20261010.tar.gz --keep-old-files results/
+```
+
+This restores evidence without replacing current source. Unlike the older metric
+archives, this one includes the new training states needed for continuation.
+It supplements this repository rather than constituting a standalone codebase.
+See [the findings and reproduction commands](../sspa_trajectory_results_20261010.md).
+The short trajectories do not establish long-budget stability or SER/BER quality.
+
+## Transport-reference audit
+
+`transport_reference_evidence_20261010.tar.gz` contains the final small P1a
+transport panel, all input clouds and saved couplings, gradient/equilibrium checks,
+policy tables, reference source, optional production diagnostics, tests and notes.
+The superseded first development run is excluded. The archive is about 335 KB.
+
+SHA-256: `d01cd4052d420ab5681b169f55c7ff4deebd2872e0057e1f9c286b88d262e5b1`
+
+```bash
+tar -xzf Journal_version/evidence/transport_reference_evidence_20261010.tar.gz --keep-old-files results/
+```
+
+This restores result files without replacing current code. See the
+[result note](../transport_reference_results_20261010.md) for the explicit
+nonconverged reference case, scope limitations and reproduction commands.
+No training checkpoints are needed for this small synthetic audit.
+
 ## Independent learned-gate audit, 10 October
 
 `learned_metric_gate_independent_audit_20261010.json` records independent NumPy

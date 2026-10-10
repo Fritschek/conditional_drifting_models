@@ -12,6 +12,24 @@ checkpoint-selection campaign. Preserve its complete negative panel and retain
 simple moment checks; prioritize P0/P1 and fair fast baselines. The cluster work
 below remains proposed, and no cluster jobs were submitted by this local test.
 
+**Latest training execution:** the [bounded SSPA comparison](sspa_trajectory_results_20261010.md)
+completed all nine 4,800-update trajectories. Restricted SSPA resume, validation
+RNG and count contracts pass on CPU/CUDA. The broad P0 interfaces and longer P1b
+budgets remain unfinished. Common epsilon improves early variance recovery;
+endpoints are similar. See the result note for the shared-median initialization
+problem, all checkpoints, and the continuation requirement.
+
+**Continuation complete:** all nine trajectories now reach 30,000 updates with
+verified parent hashes and identical paired RNG consumption. See the
+[30k report](sspa_30k_results_20261010.md). No conditional-metric degradation
+appears at the saved checkpoints. Historical epoch losses rise much later,
+around 78k--161k by a post-hoc descriptive threshold. The full-budget stability
+experiment is now [complete and audited](sspa_full_budget_results_20261010.md):
+all nine trajectories reach 390,720 and all deteriorate. Epsilon sharing alone
+does not fix long-run instability. Fixed-cloud solver decomposition and paired
+numerical interventions are the next bounded P1 steps; do not repeat this sweep.
+Fair baseline comparisons remain pending.
+
 ## 1. Freeze the experimental contract first
 
 ### Inputs, randomness, and selection
@@ -85,6 +103,15 @@ P0 completion checks: a resumed tiny run matches an uninterrupted run within the
 
 ### P1a: small numerical reference
 
+**Implemented and run:** see [the transport-reference results](transport_reference_results_20261010.md)
+and `scripts/run_transport_reference_audit.py`. The frozen small panel, restricted
+gradient checks, and optional projection diagnostics are complete. The explicit
+reference failure and kernel-floor stress cases are retained. The policy study
+uses synthetic SSPA-shaped clouds, not trained trajectories. Shared-adaptive
+training and P0 trajectory contracts were subsequently implemented and tested
+in the restricted `conditional_drifting/sspa_trajectory.py` runner, leaving the
+legacy trainer unchanged. See the bounded P1b result linked above.
+
 Define `epsilon_policy` with distinct values `fixed_common`, `shared_adaptive`, `legacy_separate_adaptive`. The existing explicit `--sinkhorn-epsilon` provides fixed common epsilon; shared adaptive behavior requires a code change. Log actual cross/self epsilon even if equal.
 
 Use quadratic cost `0.5 * ||u-v||^2`, explicit uniform masses, and a high-accuracy float64 log-domain Sinkhorn reference. Stop that reference by both marginal residuals, not only an iteration count. Proposed small-problem tolerance: maximum relative row/column marginal error `1e-8`, with a hard iteration cap that fails visibly. Treat this as an engineering tolerance, not a theorem.
@@ -96,6 +123,14 @@ For a gradient check only, use compatible exact same-batch empirical self-transp
 Shared adaptive epsilon: a proposed pooled within-anchor cost statistic applied once to both solves; freeze the statistic definition in config. Fixed epsilon: calibrate a positive scale on training-only pilot clouds, then freeze it. Neither rule is automatically an exact gradient of a fixed objective if epsilon changes with the model.
 
 ### P1b: reproduce the SSPA issue along continuous trajectories
+
+**Completed execution:** all three policies and all three development seeds
+have reached 390,720 updates. The expanded frozen schedule contains 26 saved
+checkpoints per trajectory, including dense 80k--180k coverage. See the
+[full-budget results](sspa_full_budget_results_20261010.md). Every policy
+deteriorates in every seed. The plan below records the original experiment;
+it must not be launched again as unfinished work. Proceed to controlled solver
+interventions, keeping the completed evidence unchanged.
 
 First run the legacy corrected fiber policy with `B=4096`, `K_g=K_p=K_r=4`, learning rate `1e-3`, drift scale `1`, drift-norm cap `2`, the original Gaussian anchor law, and the documented SSPA channel. Keep fresh-data sampling and optimizer settings fixed.
 
