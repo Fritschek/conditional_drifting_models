@@ -18,6 +18,12 @@ moment checks under the frozen rule. The report preserves all comparisons and
 both sample budgets. Its transfer archive is in `evidence/`, not the ignored
 `results/` folder. No new training or manuscript changes accompanied this test.
 
+The [10 October independent assessment](learned_metric_gate_assessment_20261010.md)
+verifies those numerical records, examines the kernel's own loss probes, and
+proves why a worst-case fidelity norm need not rank individual tasks. It closes
+the current selector study and returns the immediate plan to P0/P1 and fair
+baseline comparisons.
+
 ## Existing draft
 
 This folder contains the current paper draft and the minimum assets needed to keep it with the standalone repository.

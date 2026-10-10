@@ -1,5 +1,20 @@
 # Research evidence
 
+## Independent learned-gate audit, 10 October
+
+`learned_metric_gate_independent_audit_20261010.json` records independent NumPy
+checks of the saved sufficient statistics, summary CSVs and frozen contrasts,
+plus explicitly post-hoc kernel-section and operator summaries. It is separate
+from the original experiment archive and does not alter the frozen protocol.
+After restoring that archive, regenerate it with a NumPy-enabled Python:
+
+```bash
+python Journal_version/figures_src/audit_learned_metric_gate_records.py
+```
+
+This does not rerun simulator sampling or the Torch tests. See the
+[independent assessment](../learned_metric_gate_assessment_20261010.md) for scope.
+
 ## Same-input learned-model test
 
 `learned_metric_gate_evidence_20261009.tar.gz` contains the completed SSPA

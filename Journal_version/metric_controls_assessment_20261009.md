@@ -2,6 +2,8 @@
 
 9 October 2026. Independent review of commit `dc13495`, the [completed controls](metric_controls_results_20261009.md), their implementation, and the transferred raw evidence. This updates the [earlier assessment](metric_experiment_assessment_20261009.md); its proposed controls A and B are complete.
 
+**Later status, 10 October:** Section 4's learned-model gate has now run and returned a negative result for the fixed kernel selector. The [new independent assessment](learned_metric_gate_assessment_20261010.md) supersedes this note's immediate experiment queue. The mathematical construction below remains valid.
+
 **Decision:** retain derivative fidelity as a research direction, but do not present the current empirical norm as a validated channel-selection metric. The controls establish a population mechanism and expose a substantial estimation confound. They do not establish kernel-specific usefulness on learned models. Resolve that narrower question with one bounded, decoder-free development check; keep the journal's stability, fairness, and modern-baseline work moving independently.
 
 ## 1. Verification and what the mixed results mean

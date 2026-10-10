@@ -1,0 +1,638 @@
+{
+  "commit": "90a444912ecfb060e4b5e2fa33cbe868c02824c3",
+  "raw_results_sha256": "444261373ea6bb66c831b2f91ad94488c939294c2bacd67678442a428893c3f2",
+  "verification_scope": "Independent NumPy recomputation from saved sufficient statistics; no sample/Jacobian recomputation, Torch tests or simulation rerun. Largest-eigenvalue and bound-utilization summaries are post-hoc diagnostics, not unbiased norm estimates or calibrated bounds.",
+  "record_counts": {
+    "metric": 192,
+    "task": 1536
+  },
+  "maximum_absolute_check_residuals": {
+    "self_average": 0.0,
+    "noise_identity": 0.0,
+    "cross_trace": 3.552713678800501e-15,
+    "self_trace": 3.552713678800501e-15,
+    "noise_trace": 2.220446049250313e-16,
+    "moment_cross": 4.263256414560601e-14,
+    "moment_noise": 4.440892098500626e-16,
+    "moment_self": 2.842170943040401e-14,
+    "task_cross": 1.1102230246251565e-16,
+    "task_self": 2.220446049250313e-16,
+    "task_noise": 2.168404344971009e-19,
+    "task_absolute_error": 1.1102230246251565e-16,
+    "metric_csv": 0.0,
+    "task_csv": 2.220446049250313e-16
+  },
+  "minimum_noise_matrix_eigenvalue": 2.9284623509352155e-17,
+  "source_hash_matches": {
+    "scripts/run_learned_metric_gate.py": true,
+    "Journal_version/learned_metric_gate_protocol_20261009.md": true,
+    "scripts/run_channel_metric_controls.py": true,
+    "conditional_drifting/feature_metrics.py": true,
+    "conditional_drifting/channels.py": true,
+    "conditional_drifting/e2e_implants.py": true,
+    "conditional_drifting/metrics.py": true
+  },
+  "distinct_seed_count": 864,
+  "refinement": [
+    {
+      "anchor": 0,
+      "refine": true,
+      "unresolved_targets": 1,
+      "potentially_informative": 5
+    },
+    {
+      "anchor": 1,
+      "refine": true,
+      "unresolved_targets": 0,
+      "potentially_informative": 8
+    },
+    {
+      "anchor": 2,
+      "refine": true,
+      "unresolved_targets": 0,
+      "potentially_informative": 3
+    }
+  ],
+  "contrasts_by_N": {
+    "512": {
+      "swd": {
+        "agrees": 48,
+        "opposes": 23,
+        "unresolved": 0
+      },
+      "rbf_cross_value_squared": {
+        "agrees": 48,
+        "opposes": 23,
+        "unresolved": 0
+      },
+      "mean_derivative_cross": {
+        "agrees": 53,
+        "opposes": 10,
+        "unresolved": 8
+      },
+      "covariance_derivative_cross": {
+        "agrees": 66,
+        "opposes": 5,
+        "unresolved": 0
+      },
+      "moments_cross_trace": {
+        "agrees": 61,
+        "opposes": 2,
+        "unresolved": 8
+      },
+      "fourth_derivative_cross": {
+        "agrees": 64,
+        "opposes": 7,
+        "unresolved": 0
+      },
+      "rbf_cross_trace": {
+        "agrees": 32,
+        "opposes": 31,
+        "unresolved": 8
+      },
+      "resolved_target_contrasts": 71,
+      "candidate_added_information": 0
+    },
+    "2048": {
+      "swd": {
+        "agrees": 48,
+        "opposes": 24,
+        "unresolved": 0
+      },
+      "rbf_cross_value_squared": {
+        "agrees": 48,
+        "opposes": 24,
+        "unresolved": 0
+      },
+      "mean_derivative_cross": {
+        "agrees": 54,
+        "opposes": 18,
+        "unresolved": 0
+      },
+      "covariance_derivative_cross": {
+        "agrees": 66,
+        "opposes": 6,
+        "unresolved": 0
+      },
+      "moments_cross_trace": {
+        "agrees": 61,
+        "opposes": 3,
+        "unresolved": 8
+      },
+      "fourth_derivative_cross": {
+        "agrees": 64,
+        "opposes": 8,
+        "unresolved": 0
+      },
+      "rbf_cross_trace": {
+        "agrees": 32,
+        "opposes": 32,
+        "unresolved": 8
+      },
+      "resolved_target_contrasts": 72,
+      "candidate_added_information": 0
+    }
+  },
+  "comparators_by_loss_kind": {
+    "512": {
+      "rbf_section": {
+        "swd": {
+          "agrees": 11,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "rbf_cross_value_squared": {
+          "agrees": 11,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "mean_derivative_cross": {
+          "agrees": 12,
+          "opposes": 3,
+          "unresolved": 2
+        },
+        "covariance_derivative_cross": {
+          "agrees": 17,
+          "opposes": 0,
+          "unresolved": 0
+        },
+        "moments_cross_trace": {
+          "agrees": 15,
+          "opposes": 0,
+          "unresolved": 2
+        },
+        "fourth_derivative_cross": {
+          "agrees": 15,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "rbf_cross_trace": {
+          "agrees": 7,
+          "opposes": 8,
+          "unresolved": 2
+        }
+      },
+      "quadratic": {
+        "swd": {
+          "agrees": 13,
+          "opposes": 5,
+          "unresolved": 0
+        },
+        "rbf_cross_value_squared": {
+          "agrees": 13,
+          "opposes": 5,
+          "unresolved": 0
+        },
+        "mean_derivative_cross": {
+          "agrees": 13,
+          "opposes": 3,
+          "unresolved": 2
+        },
+        "covariance_derivative_cross": {
+          "agrees": 17,
+          "opposes": 1,
+          "unresolved": 0
+        },
+        "moments_cross_trace": {
+          "agrees": 16,
+          "opposes": 0,
+          "unresolved": 2
+        },
+        "fourth_derivative_cross": {
+          "agrees": 17,
+          "opposes": 1,
+          "unresolved": 0
+        },
+        "rbf_cross_trace": {
+          "agrees": 9,
+          "opposes": 7,
+          "unresolved": 2
+        }
+      },
+      "logistic": {
+        "swd": {
+          "agrees": 12,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "rbf_cross_value_squared": {
+          "agrees": 12,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "mean_derivative_cross": {
+          "agrees": 14,
+          "opposes": 2,
+          "unresolved": 2
+        },
+        "covariance_derivative_cross": {
+          "agrees": 16,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "moments_cross_trace": {
+          "agrees": 15,
+          "opposes": 1,
+          "unresolved": 2
+        },
+        "fourth_derivative_cross": {
+          "agrees": 16,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "rbf_cross_trace": {
+          "agrees": 8,
+          "opposes": 8,
+          "unresolved": 2
+        }
+      },
+      "cosine": {
+        "swd": {
+          "agrees": 12,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "rbf_cross_value_squared": {
+          "agrees": 12,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "mean_derivative_cross": {
+          "agrees": 14,
+          "opposes": 2,
+          "unresolved": 2
+        },
+        "covariance_derivative_cross": {
+          "agrees": 16,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "moments_cross_trace": {
+          "agrees": 15,
+          "opposes": 1,
+          "unresolved": 2
+        },
+        "fourth_derivative_cross": {
+          "agrees": 16,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "rbf_cross_trace": {
+          "agrees": 8,
+          "opposes": 8,
+          "unresolved": 2
+        }
+      }
+    },
+    "2048": {
+      "rbf_section": {
+        "swd": {
+          "agrees": 11,
+          "opposes": 7,
+          "unresolved": 0
+        },
+        "rbf_cross_value_squared": {
+          "agrees": 11,
+          "opposes": 7,
+          "unresolved": 0
+        },
+        "mean_derivative_cross": {
+          "agrees": 13,
+          "opposes": 5,
+          "unresolved": 0
+        },
+        "covariance_derivative_cross": {
+          "agrees": 17,
+          "opposes": 1,
+          "unresolved": 0
+        },
+        "moments_cross_trace": {
+          "agrees": 15,
+          "opposes": 1,
+          "unresolved": 2
+        },
+        "fourth_derivative_cross": {
+          "agrees": 15,
+          "opposes": 3,
+          "unresolved": 0
+        },
+        "rbf_cross_trace": {
+          "agrees": 7,
+          "opposes": 9,
+          "unresolved": 2
+        }
+      },
+      "quadratic": {
+        "swd": {
+          "agrees": 13,
+          "opposes": 5,
+          "unresolved": 0
+        },
+        "rbf_cross_value_squared": {
+          "agrees": 13,
+          "opposes": 5,
+          "unresolved": 0
+        },
+        "mean_derivative_cross": {
+          "agrees": 13,
+          "opposes": 5,
+          "unresolved": 0
+        },
+        "covariance_derivative_cross": {
+          "agrees": 17,
+          "opposes": 1,
+          "unresolved": 0
+        },
+        "moments_cross_trace": {
+          "agrees": 16,
+          "opposes": 0,
+          "unresolved": 2
+        },
+        "fourth_derivative_cross": {
+          "agrees": 17,
+          "opposes": 1,
+          "unresolved": 0
+        },
+        "rbf_cross_trace": {
+          "agrees": 9,
+          "opposes": 7,
+          "unresolved": 2
+        }
+      },
+      "logistic": {
+        "swd": {
+          "agrees": 12,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "rbf_cross_value_squared": {
+          "agrees": 12,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "mean_derivative_cross": {
+          "agrees": 14,
+          "opposes": 4,
+          "unresolved": 0
+        },
+        "covariance_derivative_cross": {
+          "agrees": 16,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "moments_cross_trace": {
+          "agrees": 15,
+          "opposes": 1,
+          "unresolved": 2
+        },
+        "fourth_derivative_cross": {
+          "agrees": 16,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "rbf_cross_trace": {
+          "agrees": 8,
+          "opposes": 8,
+          "unresolved": 2
+        }
+      },
+      "cosine": {
+        "swd": {
+          "agrees": 12,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "rbf_cross_value_squared": {
+          "agrees": 12,
+          "opposes": 6,
+          "unresolved": 0
+        },
+        "mean_derivative_cross": {
+          "agrees": 14,
+          "opposes": 4,
+          "unresolved": 0
+        },
+        "covariance_derivative_cross": {
+          "agrees": 16,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "moments_cross_trace": {
+          "agrees": 15,
+          "opposes": 1,
+          "unresolved": 2
+        },
+        "fourth_derivative_cross": {
+          "agrees": 16,
+          "opposes": 2,
+          "unresolved": 0
+        },
+        "rbf_cross_trace": {
+          "agrees": 8,
+          "opposes": 8,
+          "unresolved": 2
+        }
+      }
+    }
+  },
+  "pooled_error_winners": {
+    "ddim10": 21,
+    "fiber_sinkhorn": 3
+  },
+  "kernel_section_error_winners": {
+    "ddim10": 6
+  },
+  "operator_diagnostics": [
+    {
+      "anchor": 0,
+      "method": "fiber_sinkhorn",
+      "mean_cross_trace": 0.29545166907470055,
+      "largest_eigenvalue_mean_cross": 0.10035996495827204,
+      "mean_ordinary_operator_norm": 0.33990310708716953
+    },
+    {
+      "anchor": 0,
+      "method": "wgan",
+      "mean_cross_trace": 1.0728381104746822,
+      "largest_eigenvalue_mean_cross": 0.39192006752714276,
+      "mean_ordinary_operator_norm": 0.637705476942729
+    },
+    {
+      "anchor": 0,
+      "method": "ddim10",
+      "mean_cross_trace": 1.0881239076936566,
+      "largest_eigenvalue_mean_cross": 0.5243214441471805,
+      "mean_ordinary_operator_norm": 0.731572836018998
+    },
+    {
+      "anchor": 1,
+      "method": "fiber_sinkhorn",
+      "mean_cross_trace": 0.19660661879497604,
+      "largest_eigenvalue_mean_cross": 0.06114878246455071,
+      "mean_ordinary_operator_norm": 0.2634270400616976
+    },
+    {
+      "anchor": 1,
+      "method": "wgan",
+      "mean_cross_trace": 0.7332084820247287,
+      "largest_eigenvalue_mean_cross": 0.2899099851543818,
+      "mean_ordinary_operator_norm": 0.5454250657404547
+    },
+    {
+      "anchor": 1,
+      "method": "ddim10",
+      "mean_cross_trace": 0.7982965681990402,
+      "largest_eigenvalue_mean_cross": 0.4234575510135218,
+      "mean_ordinary_operator_norm": 0.6569581518424465
+    },
+    {
+      "anchor": 2,
+      "method": "fiber_sinkhorn",
+      "mean_cross_trace": 1.2211341898509764,
+      "largest_eigenvalue_mean_cross": 0.6565545043925644,
+      "mean_ordinary_operator_norm": 0.8522782263325267
+    },
+    {
+      "anchor": 2,
+      "method": "wgan",
+      "mean_cross_trace": 8.958351256504713,
+      "largest_eigenvalue_mean_cross": 4.3764317790939185,
+      "mean_ordinary_operator_norm": 2.112929759205197
+    },
+    {
+      "anchor": 2,
+      "method": "ddim10",
+      "mean_cross_trace": 5.1037651056616244,
+      "largest_eigenvalue_mean_cross": 3.506590423716962,
+      "mean_ordinary_operator_norm": 1.8960058224201632
+    }
+  ],
+  "kernel_section_bound_utilization": [
+    {
+      "anchor": 0,
+      "method": "fiber_sinkhorn",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.009133390885352378,
+      "error_squared_over_cross_trace": 0.0002823434009558656
+    },
+    {
+      "anchor": 0,
+      "method": "fiber_sinkhorn",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.0017758775737147141,
+      "error_squared_over_cross_trace": 1.0674304757525276e-05
+    },
+    {
+      "anchor": 0,
+      "method": "wgan",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.012567838678795129,
+      "error_squared_over_cross_trace": 0.00014722684393298903
+    },
+    {
+      "anchor": 0,
+      "method": "wgan",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.0017040294396904695,
+      "error_squared_over_cross_trace": 2.7065745548944493e-06
+    },
+    {
+      "anchor": 0,
+      "method": "ddim10",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.004018179299956224,
+      "error_squared_over_cross_trace": 1.4838167576722583e-05
+    },
+    {
+      "anchor": 0,
+      "method": "ddim10",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.0007004429992465947,
+      "error_squared_over_cross_trace": 4.508865136815752e-07
+    },
+    {
+      "anchor": 1,
+      "method": "fiber_sinkhorn",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.0024111157037848135,
+      "error_squared_over_cross_trace": 2.956909066779745e-05
+    },
+    {
+      "anchor": 1,
+      "method": "fiber_sinkhorn",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.004928179744939847,
+      "error_squared_over_cross_trace": 0.00012353071197344649
+    },
+    {
+      "anchor": 1,
+      "method": "wgan",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.005664301573098977,
+      "error_squared_over_cross_trace": 4.375878498079002e-05
+    },
+    {
+      "anchor": 1,
+      "method": "wgan",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.008683616850855608,
+      "error_squared_over_cross_trace": 0.00010284278409359741
+    },
+    {
+      "anchor": 1,
+      "method": "ddim10",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.00174885344026538,
+      "error_squared_over_cross_trace": 3.831268324788136e-06
+    },
+    {
+      "anchor": 1,
+      "method": "ddim10",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.0027556087728170054,
+      "error_squared_over_cross_trace": 9.51197839414083e-06
+    },
+    {
+      "anchor": 2,
+      "method": "fiber_sinkhorn",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.019363021332119278,
+      "error_squared_over_cross_trace": 0.00030703144521230803
+    },
+    {
+      "anchor": 2,
+      "method": "fiber_sinkhorn",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.006099057493226499,
+      "error_squared_over_cross_trace": 3.0462256003348742e-05
+    },
+    {
+      "anchor": 2,
+      "method": "wgan",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.03903842360683634,
+      "error_squared_over_cross_trace": 0.00017012042440289583
+    },
+    {
+      "anchor": 2,
+      "method": "wgan",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.015163730773199323,
+      "error_squared_over_cross_trace": 2.566752791649158e-05
+    },
+    {
+      "anchor": 2,
+      "method": "ddim10",
+      "probe": "direction0_rbf_section",
+      "pooled_error": 0.012297748566673337,
+      "error_squared_over_cross_trace": 2.96319710406247e-05
+    },
+    {
+      "anchor": 2,
+      "method": "ddim10",
+      "probe": "direction1_rbf_section",
+      "pooled_error": 0.004417621047345464,
+      "error_squared_over_cross_trace": 3.823721373129254e-06
+    }
+  ]
+}

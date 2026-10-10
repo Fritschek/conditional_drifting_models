@@ -7,6 +7,10 @@ controls, and independent regeneration of their tables from the transferred
 archive. Original simulations ran on the Linux host; the latest saved-record
 audit ran in the macOS checkout. Those are distinct verification steps.
 
+Updated 10 October with the independently audited negative learned-model metric
+gate. That candidate's expansion is closed; P0/P1 and competitive baselines are
+the immediate priorities.
+
 **Start here.** This is the execution plan for revising *Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation*, rejected as TCOM-TPS-26-1722. It supersedes the recommendations in `conditional_drifting_journal_strategy.md` and `journal_execution_roadmap.md`; keep those files as historical notes. It builds on, and corrects/extends, `review_audit_20261008/README.md`.
 
 The author has no fixed deadline or compute cap and is willing to run simulations on roughly the previous scale. The author asks us to recommend the venue. The initial assessment produced a plan. A separate local checkpoint study is now complete, as recorded below; no new generator training, cluster jobs, submissions, or correspondence are claimed.
@@ -40,7 +44,7 @@ The strongest possible evidence would connect **conditional fidelity, fidelity o
 
 The 9 October [theory follow-up](theory_swd_downstream_gradient_fidelity.md) makes this direction concrete: exact conditional laws at the current unit-power codebook and arbitrarily small uniform conditional Wasserstein error can coexist with a reversed transmitter gradient. It also proves positive loss-transfer, curvature-to-gradient, and biased-descent bounds under explicit assumptions. These establish a possible mechanism, not its cause in the existing runs or a Sinkhorn-specific guarantee. The local pilot now supplies partial T1/T2 evidence. Extend it as specified below rather than repeating it as unstarted work. A successful mechanism study could strengthen the TCOM case, but the present venue recommendation remains conditional on evidence.
 
-**Refined author objective:** develop a useful channel-surrogate metric that can be computed before candidate-specific downstream encoder/decoder optimization. The [metric proposal](theory_preoptimization_channel_metric.md) separates that objective from diagnostics through a trained decoder. Its candidate has explicit function-class guarantees but is not a validated predictor of final BER. Keep the small downstream runs to validate the metric; do not make their trained decoders an undeclared input to the claimed pre-optimization score, and do not switch the main selection protocol before that validation.
+**Refined author objective:** develop a useful channel-surrogate metric that can be computed before candidate-specific downstream encoder/decoder optimization. The [metric proposal](theory_preoptimization_channel_metric.md) separates that objective from diagnostics through a trained decoder. Its candidate has explicit function-class guarantees but failed the bounded learned-model ordering gate. The broader objective remains open; do not make developing a new selector a prerequisite for finishing this paper. Keep the primary selection protocol and use derivative diagnostics to investigate mechanisms.
 
 Use **channel simulation**, learning `p(y | x)`, throughout. Receiver-side channel estimation from pilots is a different problem and is not what the current experiments evaluate.
 
@@ -56,6 +60,13 @@ replications. Do not launch a confirmatory metric sweep on this evidence. The
 compact raw-statistics archive is under `Journal_version/evidence/`, outside the
 ignored results tree. Larger raw sample/Jacobian tensors and model weights remain
 local. This does not close the journal's stability, fairness or scale concerns.
+
+The [10 October independent assessment](learned_metric_gate_assessment_20261010.md)
+reproduces the saved summaries and confirms no material implementation flaw.
+DDIM-10 wins all six kernel-section loss cases as well. It proves the exact
+distinction between a worst-case norm bound and uniform individual-loss ordering,
+and explains why the negative result does not refute the bound. The gate's union
+of cheaper comparators does not establish one operational replacement selector.
 
 The subsequent [decoder-free metric pilot](channel_feature_metric_pilot_20261009.md)
 is also complete. Its score does not use the codecs below. It finds strong
@@ -108,15 +119,15 @@ The matched-value experiment shows derivative information beyond pointwise
 SWD/MMD, but simple mean/Jacobian information also captures this Gaussian
 example. The [latest assessment](metric_controls_assessment_20261009.md) now
 proves an analytic obstruction with all first three moments matched; it also
-records that a fourth-moment check detects that construction. Next run its
-bounded same-input learned-model gate with candidate-specific noise estimates
-and independently evaluated fixed loss probes. This requires no downstream
-optimization. Retain absolute gradient error, direction and magnitude as
-separate targets. Do not rerun A/B as
-unstarted work or call a squared-trace estimator an operator-norm confidence
-bound. Freeze choices before genuinely unused model/task cases. Keep P1
-stability/correctness and modern-baseline work; these controls resolve neither.
-The metric must add held-out value beyond cheaper checks before a central role.
+records that a fourth-moment check detects that construction. Its bounded
+same-input learned-model gate is now complete and negative for this selector.
+The [independent assessment](learned_metric_gate_assessment_20261010.md) closes
+that experiment queue. Resume P0 contracts, P1 stability/correctness and P2
+baseline preparation. Retain absolute gradient error, direction and magnitude
+as separate explanatory outcomes. Do not rerun A/B or the learned gate as
+unstarted work, or call a squared-trace estimate an operator-norm confidence
+bound. A replacement metric is a separate future hypothesis requiring unused
+validation data, not the next automatic experiment.
 
 ## 2. What was actually checked
 
@@ -133,6 +144,7 @@ The metric must add held-out value beyond cheaper checks before a central role.
 | Decoder-free feature metric | Completed 128/512-sample panels: 2,430/1,458 observations; 13 estimator/gradient tests pass. Uses existing checkpoints and fixed radial inputs. Held-out predictive/selection utility remains open. |
 | Derivative resolution and moment augmentation | Completed 1,350 step-comparison records, 558 pathwise records and 62 metric/task joins, including SSPA seeds 8/9. The combined feature/gradient suite now has 18 passing tests. Still no validated selector. |
 | Exact-law and same-input controls | Completed 192 rotation records, 480 matched-value records and 3,840 probe-gradient records, with exact population references. The execution host reports 37 passing tests. The independent archive audit reproduces all three summary CSVs byte for byte and checks exactly; Torch tests were not rerun on macOS. Kernel-specific selection benefit remains open. |
+| Same-input learned-model gate | Completed 192 metric/1,536 task records; zero added-information contrasts under the frozen union rule. Execution host reports 48 passing tests. Independent NumPy audit reproduces numeric metric CSV fields exactly and task fields to 2.22e-16, with source/reference checks; no new Torch/GPU run here. Current selector expansion stopped. |
 | New training / cluster measurements | None performed. All new run counts and thresholds below are proposed protocol choices. |
 
 The [committed October archive](evidence/README.md) now transfers the raw metric
@@ -161,7 +173,7 @@ repairs still belong to P0.
 | P0: provenance and numerical contracts | Restore archives, freeze source/config hashes, unify units/noise/power, integer counts and split labels, bounded smoke test | Machine-readable input manifest and audit report with missing items explicit | First |
 | P1: transport correctness and stability | High-accuracy common-epsilon reference, numerical residuals, controlled SSPA trajectories, matched-particle geometry comparison | Solver checks, actual trajectory plots, selected and last checkpoints | P0 |
 | P2: competitive comparison | Matched-capacity/data-access generator study; measured compute curves; low-step DDIM, flow matching, true one-step comparator, simple Gaussian reference | Conditional metrics and uncertainty for all methods; full generator costs | P0, P1 for frozen proposed method |
-| P3: communication utility | Extend completed local gradient pilot; validate the decoder-free score; equal-update and equal-time AE training; TurboAE repair | Actual SER/BER/BLER versus time, held-out metric validation, separately seeded test | Local development evidence available; confirmatory comparisons need P2 checkpoints |
+| P3: communication utility | Extend gradient/mechanism diagnostics; equal-update and equal-time AE training; TurboAE repair. Current kernel-selector gate is complete and negative | Actual SER/BER/BLER versus time, separately seeded tests, scoped gradient/variance evidence | Confirmatory comparisons need P2 checkpoints; a new selector is not a prerequisite |
 | P4: larger structured channel | Joint 64-complex-use generation with validated multipath/boundaries/noise and a communication endpoint | Conditional temporal/cross-coordinate accuracy and receiver performance | Pilot success; P0 channel contracts |
 | P5: manuscript and response | Correct theory/attribution now; integrate validated figures and claims later | Revised paper, extension statement, response matrix, source-to-number manifest | Starts immediately; ends after P1–P4 |
 | P6: sparse observations, optional | Fixed one-output-per-input dataset and local conditional estimator | Held-out evaluation with neighborhood bias/coverage diagnostics | Only if retaining sparse/passive-measurement claims |

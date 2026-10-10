@@ -190,19 +190,19 @@ step bias and detects the large-variance failure, but still misses some
 task-gradient orderings. The [exact-law and matched-value controls](metric_controls_results_20261009.md)
 then confirmed reparameterization-dependent estimator variance and useful
 population derivative information at identical inputs. The Gaussian control
-also admits a simple mean/Jacobian solution. Keep the selection-value gate
-open. Next separate candidate-specific estimation noise and population
-error on a small same-input learned-model check; passive-data sampling,
-heavy-tail robustness and useful selection beyond simple controls remain open.
+also admits a simple mean/Jacobian solution. The subsequent same-input
+learned-model gate is now complete and negative for the current fixed kernel
+selector. Passive-data sampling, heavy-tail robustness and a useful alternative
+selector remain open research questions, not automatic next experiments.
 
 The [post-control assessment](metric_controls_assessment_20261009.md#4-the-next-codex-handoff-one-bounded-learned-model-gate)
-is the immediate execution specification: existing seed-7 SSPA checkpoints,
-three common inputs, eight fixed losses, independent score/task sampling, and
-candidate-specific split estimates. Start with 512 samples, increasing only
-the unresolved or informative contrasts to 2048. No new downstream training
-or broad cluster ranking campaign is needed for this gate. Its analytic
-moment-matched construction is already proved and need not become another
-simulation campaign. Previously inspected seeds 8/9 remain development data.
+is the historical specification of that completed test: existing seed-7 SSPA
+checkpoints, three common inputs, eight fixed losses and independent sampling
+at 512/2048 outputs per split. The [independent assessment](learned_metric_gate_assessment_20261010.md)
+reproduces the negative result and closes the gate. Return to P0/P1 and prepare
+P2 baselines; do not launch a larger kernel-ranking campaign or rerun the
+analytic moment-matched construction as a simulation. Previously inspected
+seeds 7--9 remain development data.
 
 The [local report](gradient_fidelity_local_pilot_20261008.md) covers seed 7 on
 AWGN/SSPA, two frozen codecs per channel, analytic gradient finite differences,
@@ -237,7 +237,7 @@ not replace the current selector merely because a new score has a theorem.
 
 The [theory follow-up, Sections 10–11](theory_swd_downstream_gradient_fidelity.md#10-concrete-p3-addendum-test-mechanism-before-scaling) adds a staged mechanism study: common-checkpoint diagnostics, receiver-only versus encoder-only controls, and matched one-step gradient interventions. Run these on development seeds before expanding the confirmatory study. They supplement the experiment plan below; they do not change its validation selector or make analytic gradient access free.
 
-The author's subsequent objective is a metric computed **before candidate-specific downstream optimization**. The [metric proposal, Section 8](theory_preoptimization_channel_metric.md#8-practical-pilot-and-changes-to-the-handover) and completed local pilot use conditional feature values and input derivatives. Keep trained decoders out of score computation; use future unused model/task cases to validate predictive value after freezing the score. Existing seed-7 codec results are development evidence, not held-out validation. The candidate's task-class bounds and present measurements do not establish a practical BER predictor, so retain the existing primary selection protocol.
+The author's subsequent objective is a metric computed **before candidate-specific downstream optimization**. The [metric proposal](theory_preoptimization_channel_metric.md) has task-class bounds, but its fixed kernel candidate failed the completed learned-model gate. Retain the existing primary selection protocol. A new metric would need a new hypothesis and unused model/task cases; do not turn this into an open-ended prerequisite for P3. Fixed-decoder gradients remain valid explanatory diagnostics, with their task dependence disclosed. Seeds 7--9 are development evidence.
 
 Reuse `evaluate_implant_conditional_metrics` in `conditional_drifting/symbolic_ae.py`; it already evaluates learned codewords and analytic floors. Add a common saved-checkpoint adapter for all models instead of reimplementing the metrics in each runner.
 

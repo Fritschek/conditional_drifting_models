@@ -15,6 +15,14 @@ bounds and gradient-fidelity distinction; stop expansion of this particular
 kernel-selector candidate. Do not treat the proposed experiments later in this
 note as overriding that completed negative test.
 
+The [independent 10 October assessment](learned_metric_gate_assessment_20261010.md#3-why-a-valid-fidelity-bound-can-fail-as-a-task-ranker)
+checks the results and supplies the exact ranking distinction: uniform
+feature-loss gradient ordering requires positive-semidefinite ordering of the
+loss-side operators \(DD^*\), which neither an operator norm nor a
+Hilbert--Schmidt norm implies. DDIM-10 also outperforms Sinkhorn on all six
+tested kernel-section losses, so loss-class membership alone does not explain
+the empirical reversal. The bound remains valid; this selector is unvalidated.
+
 The elementary bounds are proved here. The proposed metric's empirical usefulness, adequate loss-class coverage, useful numerical constants, and publication novelty are open. A full-kernel finite-difference estimator has now been implemented and tested in the [local metric pilot](channel_feature_metric_pilot_20261009.md). It has not demonstrated a predictive advantage over simpler controls; no new channel training was performed.
 
 **Evidence update, 9 October.** The [local gradient-fidelity study](gradient_fidelity_local_pilot_20261008.md)
@@ -368,5 +376,6 @@ The proof also exposes an access limitation: changing categorical mixture
 weights requires their derivative contribution, which naive pathwise
 autodifferentiation through a sampled component misses. The bounded cosine
 witness has no asserted Gaussian-RKHS norm; a separate norm-one kernel-section
-witness is supplied. The accompanying bounded learned-model gate is the next
-test of practical added value, without fitting a downstream model.
+witness is supplied. The accompanying bounded learned-model gate has since
+completed without establishing added ordering value; see the latest decision
+at the top of this note.
