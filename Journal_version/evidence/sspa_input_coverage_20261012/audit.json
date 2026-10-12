@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "ae_rows": 15,
+  "new_ae_checkpoints": 12,
+  "result_sha256": "74ebb586ef6f8ff660da089019dbdf092caf5150067397b5e9751139290bf51c",
+  "checkpoint_hashes": {
+    "results/sspa_input_coverage_20261012/analytic/ae209112/codec.pt": "9772df29d1043f2fe6bf220203174673ba596f9dc6f2eb95e3c040ee3b8dece6",
+    "results/sspa_input_coverage_20261012/analytic/ae209113/codec.pt": "706f1e2b7cec286333432c401dc99ef29a0f99a74c1a812a8da27a43cca7b2e0",
+    "results/sspa_input_coverage_20261012/gaussian_normal/ae209112/codec.pt": "0f3a84bee613a068faea0e56ce39637980b7e40ab91469b1b1bb5339fbc13593",
+    "results/sspa_input_coverage_20261012/gaussian_normal/ae209113/codec.pt": "423d2a8b3db81b2c1220c47208985481fa715d97023640178b3d457c4c3e3442",
+    "results/sspa_input_coverage_20261012/gaussian_broad/ae209111/codec.pt": "02c5eaf3a689bf5c6bfae8fa3a1bb7558ae4bb7790c6896e5caa61ac7223ba61",
+    "results/sspa_input_coverage_20261012/gaussian_broad/ae209112/codec.pt": "8acf53cc6b8a83889113536226752a32c8fb04766c38d23e76d81060b8b086e0",
+    "results/sspa_input_coverage_20261012/gaussian_broad/ae209113/codec.pt": "0e18db91d91ef4bf8777b7a91356b609adad3e32b8508a7b188512b40734e024",
+    "results/sspa_input_coverage_20261012/sinkhorn_normal/ae209112/codec.pt": "49eb3c0419beac6e1ab1379c650c7b2e8e9b90a934a952261486e0f71b3b4035",
+    "results/sspa_input_coverage_20261012/sinkhorn_normal/ae209113/codec.pt": "f44615aa48c626af49bebd52ccca9b26cde5fe35192166b236e0324b63d944f2",
+    "results/sspa_input_coverage_20261012/sinkhorn_broad/ae209111/codec.pt": "07ea49d864070667d077da04e9d2903a84533de508628b074a94c6aaa2773c52",
+    "results/sspa_input_coverage_20261012/sinkhorn_broad/ae209112/codec.pt": "6b8a7bdcf01c787a18bbdf7ce13a948aea2bb05cf37256f99f66a0125e58caec",
+    "results/sspa_input_coverage_20261012/sinkhorn_broad/ae209113/codec.pt": "1260dd28cd0a777fa488b0f983e532675824f3bf63a47034cc48a31140b2e6f0",
+    "results/sspa_input_coverage_20261012/gaussian_broad/generator.pt": "57de6092f5feacf6c5379e2b532469d98f4fd327fed0719a0cb2c77ce5aa8b60",
+    "results/sspa_input_coverage_20261012/sinkhorn_broad/generator.pt": "9c7b7eb3c4b1ee242d5e141a43cd9c427143f8c00708d611a195f1b50f252c03"
+  }
+}

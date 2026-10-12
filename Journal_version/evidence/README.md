@@ -1,5 +1,39 @@
 # Research evidence
 
+## Current handoff, 12 October
+
+Start with [the handover](../resubmission_handover.md) and
+[the status index](../experiment_status_20261011.md). The completed local round
+is ready for analysis; no simulation is running. Earlier reports and archived
+source snapshots describe their original execution state, not the current queue.
+
+- [Fresh-start replication](../sspa_fresh_results_20261011.md):
+  report tracked; checkpoint archive `sspa_fresh_evidence_20261011.tar.gz`
+  retained locally, not included in Git.
+- [Component isolation](../sspa_component_results_20261011.md):
+  report tracked; checkpoint archive `sspa_components_evidence_20261011.tar.gz`
+  retained locally, not included in Git.
+- [AWGN baseline development](../fast_baseline_development_results_20261012.md):
+  figures and summary in `fast_baseline_development_20261012/`.
+- [Six-family SSPA pilot](../fast_sspa_application_results_20261012.md):
+  `fast_sspa_application_20261012/` and its matching evidence archive.
+- [Input-coverage intervention](../sspa_input_coverage_results_20261012.md):
+  `sspa_input_coverage_20261012/` and its matching evidence archive.
+
+The SSPA family comparison and coverage intervention each use one generator
+seed. Multiple downstream AE initializations do not constitute independent
+generator replicas. These are development studies, not final model rankings.
+
+The full `results/` tree remains ignored by Git. The component, fresh-start,
+intervention and solver-replay checkpoint archives from 10--11 October are also
+local-only, along with the component/fresh-start checksum sidecars. Historical
+reports retain their archive names and reproduction commands; obtain those
+archives separately if checkpoint-level replay is needed. Earlier archives
+already committed before this handoff have not been removed from Git history.
+The new application/coverage reports do not constitute a complete checkpoint backup.
+Restore only an archive's `results/` entries when following its reproduction
+instructions, so historical source snapshots do not overwrite current code.
+
 ## Independent full-budget assessment
 
 `sspa_full_budget_independent_audit_20261010.json` records the independent report

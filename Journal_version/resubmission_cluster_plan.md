@@ -1,10 +1,52 @@
 # Cluster work specification
 
+**Priority update, 12 October:** application-focused modern baselines take
+precedence. The joint-versus-condition-wise geometry study below is optional,
+not a prerequisite or conditioning-novelty argument. See the implemented
+[fast-baseline protocol](fast_baseline_protocol_20261012.md) for official-source
+provenance, common budgets and downstream tests. Competitive tuning and the
+full comparison remain pending; short implementation checks are not paper data.
+
+The subsequent [SSPA application pilot](fast_sspa_application_results_20261012.md)
+has completed locally, including fully counted consistency distillation and
+downstream SER/BER for all six families. It identifies severe surrogate
+extrapolation at a few encoder-selected large-norm codewords despite valid
+average-power normalization. The controlled input-coverage and paired-AE test
+has since completed as linked below; fresh-generator replication remains ahead.
+All current rows remain development evidence. No new cluster jobs were launched.
+
+The subsequent [coverage intervention](sspa_input_coverage_results_20261012.md)
+has now completed locally with three paired AE initializations. Gaussian gains
+are consistent; Sinkhorn outcomes are mixed with a better worst case. Next
+replicate the fixed law across generator seeds before a large cluster campaign.
+
+**Status, 11 October:** the current local mechanism round is complete and ready
+for handoff. See [the status index](experiment_status_20261011.md) for the
+completed queue, pending journal campaign and newly requested optical-fiber
+follow-up. Component isolation now shows that changing only K4/B4096 to
+K64/B256 rescues the old SSPA trainer on seed 9001 through 390720. The remaining
+text includes historical execution notes; its earlier "next" instructions do
+not override the status index. The subsequent [fresh-start extension](sspa_fresh_results_20261011.md)
+is also complete: three unused development seeds, nine full generator runs,
+42 paired AE trials and six gradient comparisons. K4 failed late on all seeds;
+both K64 variants stayed stable. Healthy downstream rankings remain mixed.
+Matched modern baselines and the larger channel remain pending.
+
 Companion to [the resubmission handover](resubmission_handover.md). The cluster
 designs below remain **proposed**. The separate [local gradient pilot](gradient_fidelity_local_pilot_20261008.md)
 has run on a GPU and partially implements P3/T1/T2. Its existing runner is
 `scripts/run_local_gradient_fidelity.py`; newly named revision scripts below
 still require implementation. Do not confuse those statuses.
+
+**Current local completion:** the [three-seed solver replication](sspa_solver_replay_replication_20261010.md)
+and [24-run intervention matrix plus six full-budget extensions](sspa_intervention_results_20261010.md)
+are complete and audited. Numerical corrections alone fail; lower learning rate
+has one delayed failure; the official-style normalized K64 package remains
+accurate through 390720 on all three development seeds. It is a multi-component,
+warm-started result. Fresh training, unused development seeds and gradient/downstream
+checks have since been completed in the linked extension. Do not submit the completed local
+matrix again. No HPC jobs were launched. The execution notes below retain the
+chronology of the earlier pilots; the status index above is authoritative.
 
 **Latest local result:** the [same-input SSPA metric gate](learned_metric_gate_results_20261009.md)
 is complete. It does not support scaling the current RBF derivative score into a
@@ -37,6 +79,16 @@ fork a verified 80k fixed-common checkpoint into control and only the justified
 solver corrections. A new intervention manifest must declare changed numerical
 source; never relax ordinary exact-resume checks or overwrite parent evidence.
 Fair baseline comparisons remain pending.
+
+**Subsequent local work complete:** the [frozen-cloud replay](sspa_solver_replay_results_20261010.md)
+and [three-checkpoint repeated-update screen](sspa_update_screen_results_20261010.md)
+have now run. Do not launch those as pending tasks. Solver-only changes have
+negligible effects on the healthy panel; inherited optimizer history and abrupt
+normalization changes have much larger effects. These one-step results justify
+an optimizer/step-size intervention with unchanged and official-log controls,
+not a claim that the failure is solved. The screen's proposed continuation has
+now run under its own frozen protocol, with results linked above. No HPC jobs
+have been submitted.
 
 ## 1. Freeze the experimental contract first
 
@@ -174,7 +226,7 @@ After epsilon-policy screening, vary one group at a time around the selected dev
 
 | Factor | Proposed values | Control |
 | --- | --- | --- |
-| Generated/positive/reference samples | Common K = 4, 8, 16 | Report fixed-B cost; add fixed-BK comparison to separate particles per condition from total sample exposure |
+| Generated/positive/reference samples | K4/K64 comparison completed locally; K16/32 only if needed to locate a threshold | Report fixed-B cost; add fixed-BK comparison to separate particles per condition from total sample exposure |
 | Asymmetric clouds | (K_g,K_p,K_r) = (4,8,4), (4,4,8) | Tests which extra samples help, rather than changing all counts together |
 | Solver iterations | 10, 30, 100 | Report residuals; more iterations are not assumed to fix statistical error |
 | Common epsilon | 0.5, 1, 2 times frozen calibration scale | Same definition/units and training data law |

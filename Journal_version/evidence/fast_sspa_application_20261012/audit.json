@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "method": "analytic",
+      "codec_updates": 20000,
+      "codec_sha256": "7e6894caee15afb8141bb9fca43e4d0a89c44586ae0b3927ec0bf2a4a81102e7"
+    },
+    {
+      "method": "gaussian",
+      "codec_updates": 20000,
+      "codec_sha256": "a334e8a069869644ee4a38266421150b334029c0ca51199976b0b8fc5ed2b15e",
+      "oracle_outputs": 40960000,
+      "generator_sha256": "a1b615e993bf39d1493d06b65ceb853901200428e9925a3dfa73985701281651"
+    },
+    {
+      "method": "wgan",
+      "codec_updates": 20000,
+      "codec_sha256": "a3aad8baa9c335ad801f31b515afe4cb96e273e3d026089d274513a98c231f5e",
+      "oracle_outputs": 40960000,
+      "generator_sha256": "fed62383cd4842456a65b9148f7d09f7f20a47238901672f8fff86117f494f22"
+    },
+    {
+      "method": "diffusion",
+      "codec_updates": 20000,
+      "codec_sha256": "44aa8e51effd6b755b10cd93d432d4a733649ab70fc41bc9ac97494891a2b042",
+      "oracle_outputs": 40960000,
+      "generator_sha256": "eb3155c4e53ebac3d6039f7f32317f7f34824bc4b5f296664e125c36a85ca8fa"
+    },
+    {
+      "method": "flow",
+      "codec_updates": 20000,
+      "codec_sha256": "50b289803d7608bda0a61e5909710799ef4d211d6a1b868dacdf9668a49a085d",
+      "oracle_outputs": 40960000,
+      "generator_sha256": "0f24ae7df8995cbfb9402ecf5a5dd5000b211997b50bdc415f4df9e52e4c07e1"
+    },
+    {
+      "method": "sinkhorn",
+      "codec_updates": 20000,
+      "codec_sha256": "b325ba0bbc9a49bc5ddb6e064297871b234426f8c401f7803472d0d4c5855371",
+      "oracle_outputs": 40960000,
+      "generator_sha256": "70760e4138dde9f7468589f4e830ac0db70e6152f11d41dfebb2421b8b6e8a48"
+    },
+    {
+      "method": "consistency_distilled",
+      "codec_updates": 20000,
+      "codec_sha256": "cd7dd470d65c38e6d2811db2d340824265bec213d608329e85ac25dc535c1c4f",
+      "oracle_outputs": 40960000,
+      "generator_sha256": "4bfadc7d7c2e3b52cb9ba90227a550b8cf75da4aeee8313b14adf5e3a92d12e0"
+    }
+  ],
+  "source_hashes_verified": 35,
+  "settings": {
+    "channel": "SSPA",
+    "device": "cuda",
+    "seed": 9111,
+    "updates": 40000,
+    "batch_size": 1024,
+    "parameters": 60000,
+    "ae_updates": 20000,
+    "early_updates": 2000,
+    "ae_batch": 500,
+    "ae_eval_samples": 16384,
+    "eval_batch": 2048,
+    "eval_size": 16384,
+    "anchors": 64,
+    "anchor_samples": 256,
+    "projections": 128,
+    "gradient_samples": 8192,
+    "gradient_repeats": 4,
+    "surrogate_gradient_repeats": 2,
+    "timing_repeats": 10,
+    "save_every": 1000
+  }
+}

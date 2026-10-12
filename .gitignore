@@ -11,6 +11,13 @@ results/*.json
 results/*.csv
 results/*.png
 results/*.pdf
+# Local checkpoint archives; compact handoff reports remain tracked.
+Journal_version/evidence/sspa_components_evidence_20261011.tar.gz
+Journal_version/evidence/sspa_components_evidence_20261011.sha256
+Journal_version/evidence/sspa_fresh_evidence_20261011.tar.gz
+Journal_version/evidence/sspa_fresh_evidence_20261011.tar.sha256
+Journal_version/evidence/sspa_intervention_evidence_20261010.tar.gz
+Journal_version/evidence/sspa_solver_replay_evidence_20261010.tar.gz
 paper/figures/drifting_conditional_toy_figure_mpl.png
 paper/figures/drifting_tiny_mlp_demo_mpl.png
 paper/figures/toy_diffusion_oracle_demo_mpl.png

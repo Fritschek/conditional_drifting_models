@@ -1,5 +1,142 @@
 # Journal resubmission handover
 
+## Priority update, 12 October
+
+The current experiment round is ready for external analysis. No simulation is
+running. Review the completed evidence before authorizing further experiments.
+Git includes code, reports, compact results and figures. The large component,
+fresh-start, intervention and solver-replay checkpoint archives remain local
+and must be transferred separately for checkpoint-level reproduction. See
+[the evidence index](evidence/README.md) for availability.
+The immediate questions are which application-level contribution it supports,
+how far input coverage explains downstream failures, and which minimal tests
+are still needed. Historical next-step lists below are superseded by the latest
+completed-results reports and the current status index.
+
+The [controlled SSPA input-coverage intervention](sspa_input_coverage_results_20261012.md)
+is now complete: two fresh broader-input generators, twelve fresh AEs and three
+inherited control AEs. Gaussian improves in all three paired initializations
+(8.7x--76x lower 8 dB SER); Sinkhorn improves its worst case but slightly worsens
+the other two. Both substantially reduce tail mean error and optimistic transfer
+gaps, with no codeword clipping. Sinkhorn loses some ordinary-input accuracy.
+This is one generator seed, not three independent generator replicas. Repeat
+the frozen intervention with fresh generators before tuning/scaling; keep the
+mixed Sinkhorn outcomes and higher training-query energy explicit.
+
+Focus the next comparison on communication applications and fast competing
+generators. Conditioning itself is established prior work. The joint-versus-
+conditional geometry ablation is optional and does not block this work.
+The new [fast-baseline implementation/protocol](fast_baseline_protocol_20261012.md)
+uses pinned official DDIM, flow-matching, consistency and W-Flow routines,
+plus learned Gaussian and WGAN references. It provides shared capacity/query
+budgets, measured costs and differentiable downstream AE tests. Development
+defaults still need competitive-baseline validation and a frozen tuning allowance;
+implementation tests do not complete the scientific comparison.
+The [initial check report](fast_baseline_checks_20261012.md) records passing
+CPU/CUDA tests and the all-channel application pipeline. The subsequent
+[completed AWGN baseline development](fast_baseline_development_results_20261012.md)
+finds a large WGAN EMA-lag effect and validates the longer WGAN recipe on three
+development seeds. Official consistency distillation with fully counted learned
+EDM pretraining also passes three seeds; standalone CT remains under-dispersed.
+The [SSPA application pilot](fast_sspa_application_results_20261012.md) is now
+complete on development seed 9111: six matched-query generators, seven AEs,
+analytic-channel SER/BER curves, common-codec gradients and own-codebook checks.
+Sinkhorn has good conditional fidelity and similar SER to DDIM-20 in this seed;
+WGAN has the lowest numerical SER despite poor conditional fidelity. The
+Gaussian-trained encoder drives two codewords far into the training-law tails,
+where the surrogate mean violates physical saturation; those words account
+for 98.2% of its transfer errors. Similar error concentration appears in other
+families. The coverage intervention above tests this mechanism; fresh-generator
+replication and AE optimization remain ahead, rather than another conditioning
+novelty study or a blanket scalar-metric claim. All final-codec gradient references
+in this pilot are unresolved; the intermediate references pass the MC check.
+No final across-family ranking or paper campaign is complete. Seeds 9101--9105
+and 9111 are now development seeds, overriding any older confirmation assignment.
+
+**Current queue:** [Experiment status, 11 October](experiment_status_20261011.md).
+The local mechanism round and fresh-start/communication-utility extension are
+complete. Start with the [fresh-start results](sspa_fresh_results_20261011.md).
+All 9 generator, 42 AE and 6 gradient tasks finished, with 252 scheduled
+checkpoints audited. K4 deteriorated on all three fresh seeds; K64-only and
+official K64 stayed stable. Official K64 also improves expected encoder-gradient
+fidelity, but healthy-checkpoint SER rankings are mixed and early-selected K4
+remains competitive. Do not infer universal downstream superiority.
+The broader journal campaign is not complete. The portable evidence bundle is
+`Journal_version/evidence/sspa_fresh_evidence_20261011.tar.gz`.
+Optical fiber with larger conditional clouds is now a requested follow-up,
+not a running experiment or a prerequisite for this handoff.
+
+## Component isolation complete, 11 October
+
+The user asked which ingredient made the normalized K64 package work and
+whether it comes from the original authors. It directly uses the authors'
+W-Flow loss, with our SSPA architecture/raw coordinates and warm-start setting;
+it is distinct from the original Drifting JAX release. See the
+[component protocol](sspa_component_protocol_20261010.md).
+
+The [component results](sspa_component_results_20261011.md) now isolate the
+practical fix. Four deletions from the successful package reached 390720 on
+seed 9001. Returning to K4 failed (independent SWD 0.13262, variance 4.88055).
+Removing normalization, restoring the old epsilon, or restoring the old
+optimizer individually all passed. The additional **K64-only bridge in the
+unchanged old trainer also passed**, SWD 0.0206825 and variance 0.0524019.
+Only grouping changed from 4096 inputs x 4 outputs to 256 x 64, retaining the
+same 16384 outputs of each kind per update. The old solver, raw loss, epsilon,
+Adam state, learning rate and clipping remained unchanged; no EMA was used.
+
+Output: `results/sspa_components_20261011/` and
+`results/sspa_particle_bridge_20261011/`. All five paths are complete and
+audited: 85 checkpoints, parent/source hashes, exposure and optimizer checks.
+The successful reference is reproduced bitwise for 2000 updates. All 22
+focused CPU tests and four component CUDA tests passed. Both trajectory
+figures and all raw/EMA endpoints are retained. This is one deliberately
+selected development seed and a healthy warm start, not independent-seed,
+fresh-start or downstream confirmation. It establishes neither a universal
+failure of K4 nor K64 as the minimal required cloud size.
+
+## Completed follow-up execution, 10 October
+
+The user requested completion of the remaining experiments before the next
+handover. The [solver replay replication](sspa_solver_replay_replication_20261010.md)
+is complete on seeds 9002/9003 and audited. The
+[intervention matrix and full-budget follow-up](sspa_intervention_results_20261010.md)
+are also complete: eight branches by three development seeds through 200k, then
+two qualifying branches by all three seeds through 390720. All 24 tasks and six
+extensions finished without task errors. The source-frozen protocol, 93 focused
+CPU tests, CUDA resume/control checks and final audit passed.
+
+**Outcome:** numerical solver corrections, 100 iterations, beta1=0 and smaller
+drift scale do not prevent deterioration. Learning rate 0.0001 passes at 200k
+but one seed fails later. The official-style normalized K64 package remains
+accurate through 390720 on all three seeds, both raw and EMA. Raw independent
+SWD is 0.01963--0.01970 versus analytic floor 0.01835; variance remains close to
+0.05283. This is a warm-started, multi-component operating result on development
+seeds, not an isolated-K result or a downstream SER/gradient-fidelity result.
+
+Local suite: `results/sspa_interventions_20261010/`, including `completion.json`,
+`audit.json`, `endpoints.csv`, all checkpoints and three inspected trajectory
+figures. Parent bytes and original numerical files are unchanged. The audit
+checks all 36 historical control checkpoints, paired K4 RNG streams, exposure,
+optimizer interventions and frozen extension decisions. Ten of 432 small
+reference solves remain explicitly unresolved. See the result note for costs,
+full per-seed endpoints and limitations.
+
+The next decisions are fresh-initialization/held-out-seed verification of the
+normalized package, component isolation if a mechanism claim is intended, and
+gradient/downstream evaluation of those checkpoints. Modern fast baselines and
+the larger structured channel remain separate pending work. Do not rerun the
+completed replay, repeated-update screen or continuation matrix as missing work.
+
+Portable bundle: `Journal_version/evidence/sspa_intervention_evidence_20261010.tar.gz`
+(20,026,461 bytes; 290 individually verified files). SHA256:
+`787670fdef33250e58cdefbbad6379273e52e58f30135a500293668dbec7f675`.
+It contains the new result note, plots, records, source snapshots and selected
+checkpoints. The bundle README identifies the intermediate checkpoints and
+full replay tensors that remain local. Existing earlier evidence archives are
+retained alongside it.
+
+## Earlier Context
+
 Prepared 8 October 2026 against commit `726db308c46fe1df67319934ed35ef8dd8d79945`.
 
 Updated 9 October 2026 through the gradient/metric pilots, completed synthetic
@@ -45,6 +182,31 @@ for legacy/fixed/shared policies. It specifies the next frozen-cloud solver
 decomposition and matched intervention, and proves why zero expected finite-cloud
 drift at exact matching does not imply finite-step stability. No solver repair
 has yet been tested in training.
+
+**Latest execution:** the [frozen-cloud solver replay](sspa_solver_replay_results_20261010.md)
+is complete for seed 9001: 12 checkpoints, 192 method records and 168 cloned
+single-Adam-step comparisons. The six healthy reconstructed batches have tiny
+solver corrections. Degraded batches have substantial numerical sensitivity;
+24 reference-method updates were withheld because some anchors did not converge.
+Particle variance changes can have the opposite sign to neural variance changes.
+No numerical trigger or stability repair is established. The
+[official-code comparison](official_drifting_code_comparison_20261010.md) found
+the authors' W-Flow Torch and original Drifting JAX releases. Their W-Flow solver
+and our matched log-domain primitive agree exactly in 48 CPU comparisons.
+Official training also differs in particle count, normalization and optimizer.
+Check these separately before another long run; do not repeat the completed
+replay as unimplemented work.
+
+**Repeated-update screen complete:** [864 single-update trials](sspa_update_screen_results_20261010.md)
+now compare nine methods on the three fixed-common 100k checkpoints, with 32
+fresh paired batches each. Official-log versus production variance changes differ
+by at most 3.14e-10. Larger K reduces gradient noise when spending more samples,
+but not at fixed total outputs. Clearing only Adam's first moment changes the
+local direction substantially. Abrupt official normalization with inherited
+optimizer state amplifies updates; this is not a full official-training test.
+No long-run repair is established. Next isolate optimizer/step-size effects in
+a separately declared continuation, retaining unchanged and log-solver controls.
+Read the screen's caveats and protocol before designing it.
 
 **Start here.** This is the execution plan for revising *Condition-Wise Sinkhorn Drifting for One-Shot Learned Channel Simulation*, rejected as TCOM-TPS-26-1722. It supersedes the recommendations in `conditional_drifting_journal_strategy.md` and `journal_execution_roadmap.md`; keep those files as historical notes. It builds on, and corrects/extends, `review_audit_20261008/README.md`.
 
@@ -210,7 +372,7 @@ repairs still belong to P0.
 | Package | Work and purpose | Completion evidence | Dependency |
 | --- | --- | --- | --- |
 | P0: provenance and numerical contracts | Restore archives, freeze source/config hashes, unify units/noise/power, integer counts and split labels, bounded smoke test | Machine-readable input manifest and audit report with missing items explicit | First |
-| P1: transport correctness and stability | Reference audit and nine long epsilon trajectories complete; next frozen-cloud decomposition, matched solver intervention, then pending geometry comparison | Existing failure evidence plus an independently assessed correction or operating rule | Restricted P0 contracts verified; broad interfaces remain pending |
+| P1: transport correctness and stability | Reference/replay/trajectories/interventions complete; normalized K64 passes three seeds. Component isolation and K64-only old-trainer bridge complete on seed 9001. Next fresh training, unused seeds and pending geometry comparison | Audited failure and repair evidence on development warm starts; confirmatory operating rule still needs verification | Restricted P0 contracts verified; broad interfaces remain pending |
 | P2: competitive comparison | Matched-capacity/data-access generator study; measured compute curves; low-step DDIM, flow matching, true one-step comparator, simple Gaussian reference | Conditional metrics and uncertainty for all methods; full generator costs | P0, P1 for frozen proposed method |
 | P3: communication utility | Extend gradient/mechanism diagnostics; equal-update and equal-time AE training; TurboAE repair. Current kernel-selector gate is complete and negative | Actual SER/BER/BLER versus time, separately seeded tests, scoped gradient/variance evidence | Confirmatory comparisons need P2 checkpoints; a new selector is not a prerequisite |
 | P4: larger structured channel | Joint 64-complex-use generation with validated multipath/boundaries/noise and a communication endpoint | Conditional temporal/cross-coordinate accuracy and receiver performance | Pilot success; P0 channel contracts |
@@ -290,7 +452,7 @@ The accepted conference paper already covers conditional direct/residual driftin
 
 ## 8. Ready-to-paste instruction for the next Codex session
 
-> Start with `Journal_version/resubmission_handover.md` and `sspa_full_budget_assessment_20261010.md`, then the linked results, protocol and cluster/manuscript plans. All nine SSPA trajectories completed 390,720 updates and deteriorated after good early fidelity. Common epsilon alone is not a fix. Selected validation SWD stays near 0.039; final policy means are 1.9448, 1.2294 and 1.5343, with variance about 458/177/327 times truth. Reports and checkpoint lineage have been independently checked. Large empirical covariance-derivative norms include sampling uncertainty; they are not downstream-gradient measurements. Solver errors grow, but causality is unproved and 145 reference solves remain unresolved. Follow the new assessment's fixed-cloud decomposition, including matched-iteration floored-kernel comparisons and signed variance diagnostics, then a paired solver intervention only if justified. Preserve parent provenance rather than relaxing exact-resume checks. Do not repeat the completed epsilon sweep or revive the closed kernel-selector study. Fair fast baselines, broader P0 interfaces and structured-channel experiments remain pending. Preserve submitted artifacts and negative outcomes; no submission or editor contact without authorization.
+> Start with `Journal_version/experiment_status_20261011.md` and `sspa_component_results_20261011.md`, then the earlier three-seed intervention report and official-code comparison. The local mechanism round is complete and audited. The normalized K64 package passed three development seeds; subsequent component deletions and an old-trainer K64-only bridge all reached 390720 on seed 9001. Returning to K4 failed, while deleting normalization or restoring epsilon/optimizer individually passed. Changing only grouping to K64/B256 also rescued the old production trainer at matched output exposure. This establishes a practical grouping effect on one selected warm-start trajectory, not fresh-start convergence, a universal K threshold, downstream benefit or a complete instability theory. Decide next on cold-start/unused-seed verification and gradient/SER evaluation. Matched geometry, modern fast baselines, broad measurement repairs and the larger structured channel remain pending. Optical fiber with larger conditional clouds is requested for the backlog, not yet run. Preserve negative outcomes and submitted artifacts; do not repeat completed screens or revive the closed kernel-selector study. No submission or editor contact without authorization.
 
 ## 9. Completion criteria
 

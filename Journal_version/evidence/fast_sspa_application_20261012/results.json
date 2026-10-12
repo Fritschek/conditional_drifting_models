@@ -1,0 +1,2809 @@
+{
+  "channel": "SSPA",
+  "seed": 9111,
+  "rows": [
+    {
+      "method": "analytic",
+      "ae_train_seconds": 35.516173947631614,
+      "analytic_channel_evaluation": [
+        {
+          "ebno_db": 4.0,
+          "ce": 0.01597675674565835,
+          "ser": 0.0050945281982421875,
+          "ber": 0.002628167470296224,
+          "errors": 5342,
+          "bit_errors": 16535,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 6.0,
+          "ce": 0.0009582985386202836,
+          "ser": 0.00030517578125,
+          "ber": 0.00015370051066080728,
+          "errors": 320,
+          "bit_errors": 967,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 8.0,
+          "ce": 3.603216037317836e-05,
+          "ser": 5.7220458984375e-06,
+          "ber": 2.7020772298177085e-06,
+          "errors": 6,
+          "bit_errors": 17,
+          "trials": 1048576
+        }
+      ]
+    },
+    {
+      "method": "gaussian",
+      "cost": {
+        "train_seconds": 42.80453965027118,
+        "oracle_outputs": 40960000,
+        "counts": {
+          "oracle_outputs": 40960000,
+          "input_anchors": 40960000,
+          "generator_updates": 40000,
+          "critic_updates": 0,
+          "training_generated_outputs": 0,
+          "target_network_outputs": 0
+        },
+        "outer_updates": 40000,
+        "generator_updates": 40000,
+        "critic_parameters": 0,
+        "inference_parameters": 59872,
+        "nfe": 1,
+        "config": {
+          "channel": "SSPA",
+          "seed": 9111,
+          "family": "gaussian",
+          "parameters": 60000,
+          "batch_size": 1024,
+          "updates": 40000,
+          "train_seconds": 0.0,
+          "learning_rate": 0.0002,
+          "ema_decay": 0.999,
+          "inference_weights": "ema",
+          "samples_per_input": 64,
+          "sinkhorn_iterations": 10,
+          "sinkhorn_r": 0.05,
+          "diffusion_steps": 1000,
+          "consistency_sigma_min": 0.002,
+          "consistency_sigma_max": 80.0,
+          "consistency_sigma_data": 0.5,
+          "consistency_end_scales": 150,
+          "consistency_two_step_index": 22,
+          "gaussian_covariance": "diagonal",
+          "critic_steps": 5,
+          "critic_clip": 0.01
+        },
+        "ema_parameters": 59872,
+        "target_parameters": 0
+      },
+      "distribution": {
+        "global_swd": 0.006926114670932293,
+        "global_floor": 0.007292104884982109,
+        "conditional": {
+          "swd": 0.028763027861714363,
+          "gaussian_w2": 0.11138203740119934,
+          "mean_l2": 0.07034099102020264,
+          "covariance_fro": 0.039306603372097015
+        },
+        "analytic_floor": {
+          "swd": 0.025480521842837334,
+          "gaussian_w2": 0.10263943672180176,
+          "mean_l2": 0.05514133721590042,
+          "covariance_fro": 0.03918936848640442
+        },
+        "global_samples": 16384,
+        "anchors": 64,
+        "samples_per_anchor": 256,
+        "projections": 128
+      },
+      "moments": {
+        "mean_rmse": 0.021423138678073883,
+        "variance_ratio": 1.0041894198332906,
+        "analytic_variance": 0.05282977308203711,
+        "mean_mc_rmse_floor": 0.014365455130336368
+      },
+      "timing": [
+        {
+          "batch": 1,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            0.22360499133355916,
+            0.23392197908833623,
+            0.2183780015911907,
+            0.21347301662899554,
+            0.21101301535964012,
+            0.22182500106282532,
+            0.21887299953959882,
+            0.2456110087223351,
+            0.1983900147024542,
+            0.19820098532363772
+          ],
+          "mean_ms": 0.2183291013352573,
+          "std_ms": 0.014558730700836514,
+          "median_ms": 0.21862550056539476,
+          "p95_ms": 0.2403509453870356,
+          "amortized_ms_per_sample": 0.2183291013352573
+        },
+        {
+          "batch": 1,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            0.6050200026948005,
+            0.5784899985883385,
+            0.5698069871868938,
+            0.6615100137423724,
+            0.5640050221700221,
+            0.482388015370816,
+            0.43709398596547544,
+            0.42828600271604955,
+            0.4202860000077635,
+            0.4329939838498831
+          ],
+          "mean_ms": 0.5179880012292415,
+          "std_ms": 0.08772666883890853,
+          "median_ms": 0.5231965187704191,
+          "p95_ms": 0.6360895087709649,
+          "amortized_ms_per_sample": 0.5179880012292415
+        },
+        {
+          "batch": 500,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            0.2019460080191493,
+            0.2014519996009767,
+            0.20122301066294312,
+            0.23069701273925602,
+            0.2028580056503415,
+            0.20379602210596204,
+            0.20109201432205737,
+            0.20042000687681139,
+            0.20155200036242604,
+            0.1992009929381311
+          ],
+          "mean_ms": 0.20442370732780546,
+          "std_ms": 0.009315457462489862,
+          "median_ms": 0.20150199998170137,
+          "p95_ms": 0.2185915669542737,
+          "amortized_ms_per_sample": 0.0004088474146556109
+        },
+        {
+          "batch": 500,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            0.7191020122263581,
+            0.6426339969038963,
+            0.5746730021201074,
+            0.5678370071109384,
+            0.6113920244388282,
+            0.6770920008420944,
+            0.6514049891848117,
+            0.59833301929757,
+            0.5510119954124093,
+            0.45035500079393387
+          ],
+          "mean_ms": 0.6043835048330948,
+          "std_ms": 0.07527606062473116,
+          "median_ms": 0.6048625218681991,
+          "p95_ms": 0.7001975071034394,
+          "amortized_ms_per_sample": 0.0012087670096661896
+        }
+      ],
+      "gradients": {
+        "early": {
+          "code": {
+            "alignment": {
+              "cosine": 0.9708479976460609,
+              "relative_error": 0.2670248838395121,
+              "norm_ratio": 1.0885260462484705
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.9672565457797748,
+                "relative_error": 0.2861052312486774,
+                "norm_ratio": 1.0993225470885193
+              },
+              {
+                "cosine": 0.967314241359925,
+                "relative_error": 0.27987456266170824,
+                "norm_ratio": 1.0857482413886737
+              }
+            ],
+            "surrogate_mc_se_norm": 9.643277007853612e-05,
+            "reference_mc_se_norm": 7.494221063097939e-05,
+            "reference_signal_to_mc_se": 13.724178314208984,
+            "reference_split_alignment": {
+              "cosine": 0.9932987225941383,
+              "relative_error": 0.1167592326811952,
+              "norm_ratio": 1.0098839788010445
+            },
+            "reference_resolved": true
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.9910651855255522,
+              "relative_error": 0.1651315873545628,
+              "norm_ratio": 1.0884235087600593
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.9877734343376046,
+                "relative_error": 0.19770454965255743,
+                "norm_ratio": 1.109360631593018
+              },
+              {
+                "cosine": 0.9932670568380396,
+                "relative_error": 0.1382940678221575,
+                "norm_ratio": 1.0687964907992502
+              }
+            ],
+            "surrogate_mc_se_norm": 0.0020740909967571497,
+            "reference_mc_se_norm": 0.0017148443730548024,
+            "reference_signal_to_mc_se": 28.213869094848633,
+            "reference_split_alignment": {
+              "cosine": 0.9976812415067443,
+              "relative_error": 0.06813725504400713,
+              "norm_ratio": 0.9944339073122638
+            },
+            "reference_resolved": true
+          },
+          "analytic_losses": [
+            {
+              "ce": 0.0023148557338572573,
+              "ser": 4.1961669921875e-05,
+              "ber": 1.7801920572916668e-05,
+              "errors": 22,
+              "bit_errors": 56,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0023102104969439097,
+              "ser": 3.62396240234375e-05,
+              "ber": 2.0662943522135418e-05,
+              "errors": 19,
+              "bit_errors": 65,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002344368220292381,
+              "ser": 3.814697265625e-05,
+              "ber": 1.9709269205729168e-05,
+              "errors": 20,
+              "bit_errors": 62,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002307006781848031,
+              "ser": 2.47955322265625e-05,
+              "ber": 1.0808308919270834e-05,
+              "errors": 13,
+              "bit_errors": 34,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 0.0023871928051448776,
+              "ser": 3.0517578125e-05,
+              "ber": 1.4623006184895834e-05,
+              "errors": 16,
+              "bit_errors": 46,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0023931755085868645,
+              "ser": 3.4332275390625e-05,
+              "ber": 1.8437703450520832e-05,
+              "errors": 18,
+              "bit_errors": 58,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        },
+        "final": {
+          "code": {
+            "alignment": {
+              "cosine": 0.844657131917201,
+              "relative_error": 0.556132276989656,
+              "norm_ratio": 0.9954178032087919
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.6719230127942162,
+                "relative_error": 0.893803534822738,
+                "norm_ratio": 1.1722881734359996
+              },
+              {
+                "cosine": 0.8402649007195649,
+                "relative_error": 0.5864549303993213,
+                "norm_ratio": 1.0638146463488838
+              }
+            ],
+            "surrogate_mc_se_norm": 3.75259987777099e-05,
+            "reference_mc_se_norm": 3.232784729334526e-05,
+            "reference_signal_to_mc_se": 2.2672641277313232,
+            "reference_split_alignment": {
+              "cosine": 0.7328262135140877,
+              "relative_error": 0.9044961508801294,
+              "norm_ratio": 1.3287687830376658
+            },
+            "reference_resolved": false
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.9096525587497124,
+              "relative_error": 0.4267358200193091,
+              "norm_ratio": 0.8118198559992982
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.7428737836785105,
+                "relative_error": 0.6768561500638206,
+                "norm_ratio": 0.8428523131538108
+              },
+              {
+                "cosine": 0.9290996450600606,
+                "relative_error": 0.37007065425703417,
+                "norm_ratio": 0.9157415167121259
+              }
+            ],
+            "surrogate_mc_se_norm": 0.00031141217914409935,
+            "reference_mc_se_norm": 0.0002780980139505118,
+            "reference_signal_to_mc_se": 3.295793294906616,
+            "reference_split_alignment": {
+              "cosine": 0.8810418283623267,
+              "relative_error": 0.6067454814219965,
+              "norm_ratio": 1.2610086460583492
+            },
+            "reference_resolved": false
+          },
+          "analytic_losses": [
+            {
+              "ce": 3.8947846423553756e-05,
+              "ser": 1.1444091796875e-05,
+              "ber": 5.404154459635417e-06,
+              "errors": 6,
+              "bit_errors": 17,
+              "trials": 524288
+            },
+            {
+              "ce": 3.4628980636775e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 2.5431315104166665e-06,
+              "errors": 2,
+              "bit_errors": 8,
+              "trials": 524288
+            },
+            {
+              "ce": 3.136596728836594e-05,
+              "ser": 5.7220458984375e-06,
+              "ber": 2.86102294921875e-06,
+              "errors": 3,
+              "bit_errors": 9,
+              "trials": 524288
+            },
+            {
+              "ce": 2.7060221406749463e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 9.5367431640625e-07,
+              "errors": 2,
+              "bit_errors": 3,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 3.254859183865477e-05,
+              "ser": 5.7220458984375e-06,
+              "ber": 3.4968058268229165e-06,
+              "errors": 3,
+              "bit_errors": 11,
+              "trials": 524288
+            },
+            {
+              "ce": 2.9475655586530536e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 9.5367431640625e-07,
+              "errors": 2,
+              "bit_errors": 3,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        }
+      },
+      "codebook_distributions": {
+        "early": {
+          "global_swd": 0.00699327327311039,
+          "global_floor": 0.007165911141782999,
+          "conditional": {
+            "swd": 0.027639878913760185,
+            "gaussian_w2": 0.10772348195314407,
+            "mean_l2": 0.06518582254648209,
+            "covariance_fro": 0.03887402266263962
+          },
+          "analytic_floor": {
+            "swd": 0.025463992729783058,
+            "gaussian_w2": 0.10115496814250946,
+            "mean_l2": 0.05501921474933624,
+            "covariance_fro": 0.038502663373947144
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        },
+        "final": {
+          "global_swd": 0.006731538102030754,
+          "global_floor": 0.007003335282206535,
+          "conditional": {
+            "swd": 0.026628315448760986,
+            "gaussian_w2": 0.10656766593456268,
+            "mean_l2": 0.06110706925392151,
+            "covariance_fro": 0.03954903781414032
+          },
+          "analytic_floor": {
+            "swd": 0.025589119642972946,
+            "gaussian_w2": 0.10285142064094543,
+            "mean_l2": 0.05602496862411499,
+            "covariance_fro": 0.039153262972831726
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        }
+      },
+      "ae_train_seconds": 37.47610468696803,
+      "analytic_channel_evaluation": [
+        {
+          "ebno_db": 4.0,
+          "ce": 0.06874185705237323,
+          "ser": 0.017436981201171875,
+          "ber": 0.00915384292602539,
+          "errors": 18284,
+          "bit_errors": 57591,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 6.0,
+          "ce": 0.02324608530580008,
+          "ser": 0.0065059661865234375,
+          "ber": 0.003521601359049479,
+          "errors": 6822,
+          "bit_errors": 22156,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 8.0,
+          "ce": 0.009503430293079873,
+          "ser": 0.0031003952026367188,
+          "ber": 0.0017256736755371094,
+          "errors": 3251,
+          "bit_errors": 10857,
+          "trials": 1048576
+        }
+      ]
+    },
+    {
+      "method": "wgan",
+      "cost": {
+        "train_seconds": 68.31696896185167,
+        "oracle_outputs": 40960000,
+        "counts": {
+          "oracle_outputs": 40960000,
+          "input_anchors": 40960000,
+          "generator_updates": 8000,
+          "critic_updates": 40000,
+          "training_generated_outputs": 49152000,
+          "target_network_outputs": 0
+        },
+        "outer_updates": 40000,
+        "generator_updates": 8000,
+        "critic_parameters": 60181,
+        "inference_parameters": 60235,
+        "nfe": 1,
+        "config": {
+          "channel": "SSPA",
+          "seed": 9111,
+          "family": "wgan",
+          "parameters": 60000,
+          "batch_size": 1024,
+          "updates": 40000,
+          "train_seconds": 0.0,
+          "learning_rate": 0.0002,
+          "ema_decay": 0.999,
+          "inference_weights": "ema",
+          "samples_per_input": 64,
+          "sinkhorn_iterations": 10,
+          "sinkhorn_r": 0.05,
+          "diffusion_steps": 1000,
+          "consistency_sigma_min": 0.002,
+          "consistency_sigma_max": 80.0,
+          "consistency_sigma_data": 0.5,
+          "consistency_end_scales": 150,
+          "consistency_two_step_index": 22,
+          "gaussian_covariance": "diagonal",
+          "critic_steps": 5,
+          "critic_clip": 0.01
+        },
+        "ema_parameters": 60235,
+        "target_parameters": 0
+      },
+      "distribution": {
+        "global_swd": 0.024892427027225494,
+        "global_floor": 0.007292104884982109,
+        "conditional": {
+          "swd": 0.28652310371398926,
+          "gaussian_w2": 1.0645921230316162,
+          "mean_l2": 0.7543430924415588,
+          "covariance_fro": 0.5975030660629272
+        },
+        "analytic_floor": {
+          "swd": 0.025480521842837334,
+          "gaussian_w2": 0.10263943672180176,
+          "mean_l2": 0.05514133721590042,
+          "covariance_fro": 0.03918936848640442
+        },
+        "global_samples": 16384,
+        "anchors": 64,
+        "samples_per_anchor": 256,
+        "projections": 128
+      },
+      "moments": {
+        "mean_rmse": 0.29533201456069946,
+        "variance_ratio": 4.083011296393186,
+        "analytic_variance": 0.05282977308203711,
+        "mean_mc_rmse_floor": 0.014365455130336368
+      },
+      "timing": [
+        {
+          "batch": 1,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            0.18203500076197088,
+            0.18542501493357122,
+            0.18645901582203805,
+            0.18296600319445133,
+            0.1835089933592826,
+            0.18381900736130774,
+            0.1836039882618934,
+            0.18615100998431444,
+            0.1848170068114996,
+            0.18466799519956112
+          ],
+          "mean_ms": 0.18434530356898904,
+          "std_ms": 0.0014136904049020897,
+          "median_ms": 0.18424350128043443,
+          "p95_ms": 0.18632041319506243,
+          "amortized_ms_per_sample": 0.18434530356898904
+        },
+        {
+          "batch": 1,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            0.48345199320465326,
+            0.46068101073615253,
+            0.4472270084079355,
+            0.46490199747495353,
+            0.4315459809731692,
+            0.439337978605181,
+            0.44511500163935125,
+            0.46597400796599686,
+            0.44845000957138836,
+            0.43971301056444645
+          ],
+          "mean_ms": 0.4526397999143228,
+          "std_ms": 0.015757466289808394,
+          "median_ms": 0.44783850898966193,
+          "p95_ms": 0.4755868998472579,
+          "amortized_ms_per_sample": 0.4526397999143228
+        },
+        {
+          "batch": 500,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            0.19350400543771684,
+            0.2194889821112156,
+            0.1951000012923032,
+            0.21584299975074828,
+            0.18871200154535472,
+            0.1909879792947322,
+            0.18997798906639218,
+            0.18758801161311567,
+            0.1844360085669905,
+            0.2055340155493468
+          ],
+          "mean_ms": 0.1971171994227916,
+          "std_ms": 0.012247087401789158,
+          "median_ms": 0.19224599236622453,
+          "p95_ms": 0.2178482900490053,
+          "amortized_ms_per_sample": 0.0003942343988455832
+        },
+        {
+          "batch": 500,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            0.5262880004011095,
+            0.4627250018529594,
+            0.4974680196028203,
+            0.467180012492463,
+            0.5035419890191406,
+            0.4650790069717914,
+            0.4646640154533088,
+            0.45902899000793695,
+            0.4723140154965222,
+            0.49656201736070216
+          ],
+          "mean_ms": 0.4814851068658754,
+          "std_ms": 0.02278801986788776,
+          "median_ms": 0.4697470139944926,
+          "p95_ms": 0.5160522952792235,
+          "amortized_ms_per_sample": 0.0009629702137317509
+        }
+      ],
+      "gradients": {
+        "early": {
+          "code": {
+            "alignment": {
+              "cosine": 0.03447796494270178,
+              "relative_error": 178.3361652700049,
+              "norm_ratio": 178.3678428520007
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.03359921350929771,
+                "relative_error": 177.7073658372968,
+                "norm_ratio": 177.73815459051136
+              },
+              {
+                "cosine": 0.035330964434004734,
+                "relative_error": 179.06412712006411,
+                "norm_ratio": 179.09666925259583
+              }
+            ],
+            "surrogate_mc_se_norm": 0.004381389357149601,
+            "reference_mc_se_norm": 7.494221063097939e-05,
+            "reference_signal_to_mc_se": 13.724178314208984,
+            "reference_split_alignment": {
+              "cosine": 0.9932987225941383,
+              "relative_error": 0.1167592326811952,
+              "norm_ratio": 1.0098839788010445
+            },
+            "reference_resolved": true
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.6267050801184585,
+              "relative_error": 146.67324959732971,
+              "norm_ratio": 147.2978846168564
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.6198459665348628,
+                "relative_error": 146.3556608648556,
+                "norm_ratio": 146.97340306786003
+              },
+              {
+                "cosine": 0.6332983864628253,
+                "relative_error": 147.04603310557678,
+                "norm_ratio": 147.67729492808527
+              }
+            ],
+            "surrogate_mc_se_norm": 0.13868169486522675,
+            "reference_mc_se_norm": 0.0017148443730548024,
+            "reference_signal_to_mc_se": 28.213869094848633,
+            "reference_split_alignment": {
+              "cosine": 0.9976812415067443,
+              "relative_error": 0.06813725504400713,
+              "norm_ratio": 0.9944339073122638
+            },
+            "reference_resolved": true
+          },
+          "analytic_losses": [
+            {
+              "ce": 0.0023148557338572573,
+              "ser": 4.1961669921875e-05,
+              "ber": 1.7801920572916668e-05,
+              "errors": 22,
+              "bit_errors": 56,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0023102104969439097,
+              "ser": 3.62396240234375e-05,
+              "ber": 2.0662943522135418e-05,
+              "errors": 19,
+              "bit_errors": 65,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002344368220292381,
+              "ser": 3.814697265625e-05,
+              "ber": 1.9709269205729168e-05,
+              "errors": 20,
+              "bit_errors": 62,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002307006781848031,
+              "ser": 2.47955322265625e-05,
+              "ber": 1.0808308919270834e-05,
+              "errors": 13,
+              "bit_errors": 34,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 0.4197701227385551,
+              "ser": 0.11540031433105469,
+              "ber": 0.06009801228841146,
+              "errors": 60503,
+              "bit_errors": 189052,
+              "trials": 524288
+            },
+            {
+              "ce": 0.42023108166176826,
+              "ser": 0.11600494384765625,
+              "ber": 0.06043370564778646,
+              "errors": 60820,
+              "bit_errors": 190108,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        },
+        "final": {
+          "code": {
+            "alignment": {
+              "cosine": 0.13462451773163844,
+              "relative_error": 1451.3421438694636,
+              "norm_ratio": 1451.476430122246
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.13657979310385082,
+                "relative_error": 1453.7107045583955,
+                "norm_ratio": 1453.8469468200803
+              },
+              {
+                "cosine": 0.13234433796447656,
+                "relative_error": 1452.4613903604295,
+                "norm_ratio": 1452.5933964845533
+              }
+            ],
+            "surrogate_mc_se_norm": 0.005216591060161591,
+            "reference_mc_se_norm": 3.232784729334526e-05,
+            "reference_signal_to_mc_se": 2.2672641277313232,
+            "reference_split_alignment": {
+              "cosine": 0.7328262135140877,
+              "relative_error": 0.9044961508801294,
+              "norm_ratio": 1.3287687830376658
+            },
+            "reference_resolved": false
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.2679653110693151,
+              "relative_error": 1961.0890679790596,
+              "norm_ratio": 1961.3567966372757
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.25244487476108707,
+                "relative_error": 1964.018897216759,
+                "norm_ratio": 1964.2711037354522
+              },
+              {
+                "cosine": 0.28324817205806907,
+                "relative_error": 1960.121436231034,
+                "norm_ratio": 1960.40444978229
+              }
+            ],
+            "surrogate_mc_se_norm": 0.05689161643385887,
+            "reference_mc_se_norm": 0.0002780980139505118,
+            "reference_signal_to_mc_se": 3.295793294906616,
+            "reference_split_alignment": {
+              "cosine": 0.8810418283623267,
+              "relative_error": 0.6067454814219965,
+              "norm_ratio": 1.2610086460583492
+            },
+            "reference_resolved": false
+          },
+          "analytic_losses": [
+            {
+              "ce": 3.8947846423553756e-05,
+              "ser": 1.1444091796875e-05,
+              "ber": 5.404154459635417e-06,
+              "errors": 6,
+              "bit_errors": 17,
+              "trials": 524288
+            },
+            {
+              "ce": 3.4628980636775e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 2.5431315104166665e-06,
+              "errors": 2,
+              "bit_errors": 8,
+              "trials": 524288
+            },
+            {
+              "ce": 3.136596728836594e-05,
+              "ser": 5.7220458984375e-06,
+              "ber": 2.86102294921875e-06,
+              "errors": 3,
+              "bit_errors": 9,
+              "trials": 524288
+            },
+            {
+              "ce": 2.7060221406749463e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 9.5367431640625e-07,
+              "errors": 2,
+              "bit_errors": 3,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 0.20739681978011504,
+              "ser": 0.04150581359863281,
+              "ber": 0.021469751993815105,
+              "errors": 21761,
+              "bit_errors": 67538,
+              "trials": 524288
+            },
+            {
+              "ce": 0.20680098421871662,
+              "ser": 0.04148101806640625,
+              "ber": 0.021350860595703125,
+              "errors": 21748,
+              "bit_errors": 67164,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        }
+      },
+      "codebook_distributions": {
+        "early": {
+          "global_swd": 0.02475632354617119,
+          "global_floor": 0.007165911141782999,
+          "conditional": {
+            "swd": 0.24280154705047607,
+            "gaussian_w2": 0.9122207164764404,
+            "mean_l2": 0.6159440279006958,
+            "covariance_fro": 0.5165641903877258
+          },
+          "analytic_floor": {
+            "swd": 0.025463992729783058,
+            "gaussian_w2": 0.10115496814250946,
+            "mean_l2": 0.05501921474933624,
+            "covariance_fro": 0.038502663373947144
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        },
+        "final": {
+          "global_swd": 0.024636952206492424,
+          "global_floor": 0.007003335282206535,
+          "conditional": {
+            "swd": 0.17845886945724487,
+            "gaussian_w2": 0.691777229309082,
+            "mean_l2": 0.3498654365539551,
+            "covariance_fro": 0.4410274028778076
+          },
+          "analytic_floor": {
+            "swd": 0.025589119642972946,
+            "gaussian_w2": 0.10285142064094543,
+            "mean_l2": 0.05602496862411499,
+            "covariance_fro": 0.039153262972831726
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        }
+      },
+      "ae_train_seconds": 36.21404039062327,
+      "analytic_channel_evaluation": [
+        {
+          "ebno_db": 4.0,
+          "ce": 0.004852393535657029,
+          "ser": 0.0013265609741210938,
+          "ber": 0.0006872812906901041,
+          "errors": 1391,
+          "bit_errors": 4324,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 6.0,
+          "ce": 0.000465217715941435,
+          "ser": 6.4849853515625e-05,
+          "ber": 3.258387247721354e-05,
+          "errors": 68,
+          "bit_errors": 205,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 8.0,
+          "ce": 6.163409642923057e-05,
+          "ser": 1.9073486328125e-06,
+          "ber": 7.947285970052084e-07,
+          "errors": 2,
+          "bit_errors": 5,
+          "trials": 1048576
+        }
+      ]
+    },
+    {
+      "method": "diffusion",
+      "cost": {
+        "train_seconds": 51.13445993018104,
+        "oracle_outputs": 40960000,
+        "counts": {
+          "oracle_outputs": 40960000,
+          "input_anchors": 40960000,
+          "generator_updates": 40000,
+          "critic_updates": 0,
+          "training_generated_outputs": 0,
+          "target_network_outputs": 0
+        },
+        "outer_updates": 40000,
+        "generator_updates": 40000,
+        "critic_parameters": 0,
+        "inference_parameters": 60176,
+        "nfe": 20,
+        "config": {
+          "channel": "SSPA",
+          "seed": 9111,
+          "family": "diffusion",
+          "parameters": 60000,
+          "batch_size": 1024,
+          "updates": 40000,
+          "train_seconds": 0.0,
+          "learning_rate": 0.0002,
+          "ema_decay": 0.999,
+          "inference_weights": "ema",
+          "samples_per_input": 64,
+          "sinkhorn_iterations": 10,
+          "sinkhorn_r": 0.05,
+          "diffusion_steps": 1000,
+          "consistency_sigma_min": 0.002,
+          "consistency_sigma_max": 80.0,
+          "consistency_sigma_data": 0.5,
+          "consistency_end_scales": 150,
+          "consistency_two_step_index": 22,
+          "gaussian_covariance": "diagonal",
+          "critic_steps": 5,
+          "critic_clip": 0.01
+        },
+        "ema_parameters": 60176,
+        "target_parameters": 0
+      },
+      "distribution": {
+        "global_swd": 0.01914660632610321,
+        "global_floor": 0.007292104884982109,
+        "conditional": {
+          "swd": 0.044342365115880966,
+          "gaussian_w2": 0.17338259518146515,
+          "mean_l2": 0.1227492243051529,
+          "covariance_fro": 0.05198930948972702
+        },
+        "analytic_floor": {
+          "swd": 0.025480521842837334,
+          "gaussian_w2": 0.10263943672180176,
+          "mean_l2": 0.05514133721590042,
+          "covariance_fro": 0.03918936848640442
+        },
+        "global_samples": 16384,
+        "anchors": 64,
+        "samples_per_anchor": 256,
+        "projections": 128
+      },
+      "moments": {
+        "mean_rmse": 0.04619082063436508,
+        "variance_ratio": 0.8383375564154958,
+        "analytic_variance": 0.05282977308203711,
+        "mean_mc_rmse_floor": 0.014365455130336368
+      },
+      "timing": [
+        {
+          "batch": 1,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            13.281370018376037,
+            12.82412899308838,
+            12.700455990852788,
+            12.965317000634968,
+            12.744999025017023,
+            12.78513899887912,
+            13.59401800436899,
+            12.516356015112251,
+            12.677077989792451,
+            12.935011996887624
+          ],
+          "mean_ms": 12.902387403300963,
+          "std_ms": 0.31836539764052113,
+          "median_ms": 12.80463399598375,
+          "p95_ms": 13.453326410672162,
+          "amortized_ms_per_sample": 12.902387403300963
+        },
+        {
+          "batch": 1,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            15.942166995955631,
+            16.216236021136865,
+            16.038986010244116,
+            15.659646014682949,
+            16.394940990721807,
+            15.869841008679941,
+            16.0637829976622,
+            16.18508098181337,
+            15.956558985635638,
+            16.274107998469844
+          ],
+          "mean_ms": 16.060134800500236,
+          "std_ms": 0.21591324943790752,
+          "median_ms": 16.05138450395316,
+          "p95_ms": 16.340566144208424,
+          "amortized_ms_per_sample": 16.060134800500236
+        },
+        {
+          "batch": 500,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            12.880027992650867,
+            12.548093975055963,
+            12.35111997812055,
+            13.220294000348076,
+            12.560626986669376,
+            12.533372995676473,
+            12.952793971635401,
+            12.627260002773255,
+            12.843020987929776,
+            12.581094983033836
+          ],
+          "mean_ms": 12.709770587389357,
+          "std_ms": 0.25775369207232796,
+          "median_ms": 12.604177492903545,
+          "p95_ms": 13.099918987427372,
+          "amortized_ms_per_sample": 0.025419541174778716
+        },
+        {
+          "batch": 500,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            17.147993989055976,
+            16.463019012007862,
+            16.84442098485306,
+            19.11913199000992,
+            16.747556015616283,
+            16.73182999365963,
+            17.490983998868614,
+            17.938820004928857,
+            16.662153007928282,
+            16.697494022082537
+          ],
+          "mean_ms": 17.184340301901102,
+          "std_ms": 0.8130262000239716,
+          "median_ms": 16.79598850023467,
+          "p95_ms": 18.58799159672344,
+          "amortized_ms_per_sample": 0.0343686806038022
+        }
+      ],
+      "gradients": {
+        "early": {
+          "code": {
+            "alignment": {
+              "cosine": 0.7859628469488487,
+              "relative_error": 0.6236408795009113,
+              "norm_ratio": 0.8676056259841631
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.7872394052539965,
+                "relative_error": 0.6211631126125143,
+                "norm_ratio": 0.8620023215637119
+              },
+              {
+                "cosine": 0.7823266876639813,
+                "relative_error": 0.6298520517260578,
+                "norm_ratio": 0.875860923614358
+              }
+            ],
+            "surrogate_mc_se_norm": 4.986642306903377e-05,
+            "reference_mc_se_norm": 7.494221063097939e-05,
+            "reference_signal_to_mc_se": 13.724178314208984,
+            "reference_split_alignment": {
+              "cosine": 0.9932987225941383,
+              "relative_error": 0.1167592326811952,
+              "norm_ratio": 1.0098839788010445
+            },
+            "reference_resolved": true
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.960480976310253,
+              "relative_error": 0.40014731498369743,
+              "norm_ratio": 0.673006491281478
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.9617081620892627,
+                "relative_error": 0.39201193135958035,
+                "norm_ratio": 0.6814298301451468
+              },
+              {
+                "cosine": 0.9585519794087614,
+                "relative_error": 0.40905085737936087,
+                "norm_ratio": 0.665048144423178
+              }
+            ],
+            "surrogate_mc_se_norm": 0.0009432705701328814,
+            "reference_mc_se_norm": 0.0017148443730548024,
+            "reference_signal_to_mc_se": 28.213869094848633,
+            "reference_split_alignment": {
+              "cosine": 0.9976812415067443,
+              "relative_error": 0.06813725504400713,
+              "norm_ratio": 0.9944339073122638
+            },
+            "reference_resolved": true
+          },
+          "analytic_losses": [
+            {
+              "ce": 0.0023148557338572573,
+              "ser": 4.1961669921875e-05,
+              "ber": 1.7801920572916668e-05,
+              "errors": 22,
+              "bit_errors": 56,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0023102104969439097,
+              "ser": 3.62396240234375e-05,
+              "ber": 2.0662943522135418e-05,
+              "errors": 19,
+              "bit_errors": 65,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002344368220292381,
+              "ser": 3.814697265625e-05,
+              "ber": 1.9709269205729168e-05,
+              "errors": 20,
+              "bit_errors": 62,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002307006781848031,
+              "ser": 2.47955322265625e-05,
+              "ber": 1.0808308919270834e-05,
+              "errors": 13,
+              "bit_errors": 34,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 0.0016899094939617498,
+              "ser": 0.0,
+              "ber": 0.0,
+              "errors": 0,
+              "bit_errors": 0,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0016915781152420095,
+              "ser": 5.7220458984375e-06,
+              "ber": 1.5894571940104167e-06,
+              "errors": 3,
+              "bit_errors": 5,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        },
+        "final": {
+          "code": {
+            "alignment": {
+              "cosine": 0.5764100431025028,
+              "relative_error": 0.9062311340474932,
+              "norm_ratio": 0.18461493579967436
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.5146463292206861,
+                "relative_error": 0.9028400923320514,
+                "norm_ratio": 0.23183707105809673
+              },
+              {
+                "cosine": 0.6081983968731767,
+                "relative_error": 0.9146656580130318,
+                "norm_ratio": 0.15375526962014574
+              }
+            ],
+            "surrogate_mc_se_norm": 4.977576736564515e-06,
+            "reference_mc_se_norm": 3.232784729334526e-05,
+            "reference_signal_to_mc_se": 2.2672641277313232,
+            "reference_split_alignment": {
+              "cosine": 0.7328262135140877,
+              "relative_error": 0.9044961508801294,
+              "norm_ratio": 1.3287687830376658
+            },
+            "reference_resolved": false
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.708623000938417,
+              "relative_error": 0.8912124901585835,
+              "norm_ratio": 0.16419094817734856
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.6017591598633185,
+                "relative_error": 0.8932301736270529,
+                "norm_ratio": 0.20179137421399634
+              },
+              {
+                "cosine": 0.8055656295567014,
+                "relative_error": 0.8924910905167398,
+                "norm_ratio": 0.13812549727902362
+              }
+            ],
+            "surrogate_mc_se_norm": 4.970170630258508e-05,
+            "reference_mc_se_norm": 0.0002780980139505118,
+            "reference_signal_to_mc_se": 3.295793294906616,
+            "reference_split_alignment": {
+              "cosine": 0.8810418283623267,
+              "relative_error": 0.6067454814219965,
+              "norm_ratio": 1.2610086460583492
+            },
+            "reference_resolved": false
+          },
+          "analytic_losses": [
+            {
+              "ce": 3.8947846423553756e-05,
+              "ser": 1.1444091796875e-05,
+              "ber": 5.404154459635417e-06,
+              "errors": 6,
+              "bit_errors": 17,
+              "trials": 524288
+            },
+            {
+              "ce": 3.4628980636775e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 2.5431315104166665e-06,
+              "errors": 2,
+              "bit_errors": 8,
+              "trials": 524288
+            },
+            {
+              "ce": 3.136596728836594e-05,
+              "ser": 5.7220458984375e-06,
+              "ber": 2.86102294921875e-06,
+              "errors": 3,
+              "bit_errors": 9,
+              "trials": 524288
+            },
+            {
+              "ce": 2.7060221406749463e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 9.5367431640625e-07,
+              "errors": 2,
+              "bit_errors": 3,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 5.917886235717873e-06,
+              "ser": 0.0,
+              "ber": 0.0,
+              "errors": 0,
+              "bit_errors": 0,
+              "trials": 524288
+            },
+            {
+              "ce": 4.837498163823284e-06,
+              "ser": 0.0,
+              "ber": 0.0,
+              "errors": 0,
+              "bit_errors": 0,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        }
+      },
+      "codebook_distributions": {
+        "early": {
+          "global_swd": 0.01966037042438984,
+          "global_floor": 0.007165911141782999,
+          "conditional": {
+            "swd": 0.043136030435562134,
+            "gaussian_w2": 0.1641448438167572,
+            "mean_l2": 0.11376745998859406,
+            "covariance_fro": 0.04987001791596413
+          },
+          "analytic_floor": {
+            "swd": 0.025463992729783058,
+            "gaussian_w2": 0.10115496814250946,
+            "mean_l2": 0.05501921474933624,
+            "covariance_fro": 0.038502663373947144
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        },
+        "final": {
+          "global_swd": 0.01995186321437359,
+          "global_floor": 0.007003335282206535,
+          "conditional": {
+            "swd": 0.0410761721432209,
+            "gaussian_w2": 0.15572117269039154,
+            "mean_l2": 0.10916533321142197,
+            "covariance_fro": 0.047299280762672424
+          },
+          "analytic_floor": {
+            "swd": 0.025589119642972946,
+            "gaussian_w2": 0.10285142064094543,
+            "mean_l2": 0.05602496862411499,
+            "covariance_fro": 0.039153262972831726
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        }
+      },
+      "ae_train_seconds": 362.86136525211623,
+      "analytic_channel_evaluation": [
+        {
+          "ebno_db": 4.0,
+          "ce": 0.02817950710414152,
+          "ser": 0.008490562438964844,
+          "ber": 0.004057089487711589,
+          "errors": 8903,
+          "bit_errors": 25525,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 6.0,
+          "ce": 0.002730384794517704,
+          "ser": 0.0008869171142578125,
+          "ber": 0.0003719329833984375,
+          "errors": 930,
+          "bit_errors": 2340,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 8.0,
+          "ce": 0.0002269429311878568,
+          "ser": 6.771087646484375e-05,
+          "ber": 2.0662943522135418e-05,
+          "errors": 71,
+          "bit_errors": 130,
+          "trials": 1048576
+        }
+      ]
+    },
+    {
+      "method": "flow",
+      "cost": {
+        "train_seconds": 42.898835322470404,
+        "oracle_outputs": 40960000,
+        "counts": {
+          "oracle_outputs": 40960000,
+          "input_anchors": 40960000,
+          "generator_updates": 40000,
+          "critic_updates": 0,
+          "training_generated_outputs": 0,
+          "target_network_outputs": 0
+        },
+        "outer_updates": 40000,
+        "generator_updates": 40000,
+        "critic_parameters": 0,
+        "inference_parameters": 60176,
+        "nfe": 8,
+        "config": {
+          "channel": "SSPA",
+          "seed": 9111,
+          "family": "flow",
+          "parameters": 60000,
+          "batch_size": 1024,
+          "updates": 40000,
+          "train_seconds": 0.0,
+          "learning_rate": 0.0002,
+          "ema_decay": 0.999,
+          "inference_weights": "ema",
+          "samples_per_input": 64,
+          "sinkhorn_iterations": 10,
+          "sinkhorn_r": 0.05,
+          "diffusion_steps": 1000,
+          "consistency_sigma_min": 0.002,
+          "consistency_sigma_max": 80.0,
+          "consistency_sigma_data": 0.5,
+          "consistency_end_scales": 150,
+          "consistency_two_step_index": 22,
+          "gaussian_covariance": "diagonal",
+          "critic_steps": 5,
+          "critic_clip": 0.01
+        },
+        "ema_parameters": 60176,
+        "target_parameters": 0
+      },
+      "distribution": {
+        "global_swd": 0.0109403096139431,
+        "global_floor": 0.007292104884982109,
+        "conditional": {
+          "swd": 0.050615955144166946,
+          "gaussian_w2": 0.18936604261398315,
+          "mean_l2": 0.08189661800861359,
+          "covariance_fro": 0.06951092183589935
+        },
+        "analytic_floor": {
+          "swd": 0.025480521842837334,
+          "gaussian_w2": 0.10263943672180176,
+          "mean_l2": 0.05514133721590042,
+          "covariance_fro": 0.03918936848640442
+        },
+        "global_samples": 16384,
+        "anchors": 64,
+        "samples_per_anchor": 256,
+        "projections": 128
+      },
+      "moments": {
+        "mean_rmse": 0.02372334897518158,
+        "variance_ratio": 0.5916531041898522,
+        "analytic_variance": 0.05282977308203711,
+        "mean_mc_rmse_floor": 0.014365455130336368
+      },
+      "timing": [
+        {
+          "batch": 1,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            1.6978999774437398,
+            1.6989650030154735,
+            1.6928600089158863,
+            1.7207020136993378,
+            2.161745011107996,
+            1.7136669775936753,
+            1.7418029892724007,
+            1.7159649869427085,
+            1.6962639929261059,
+            1.7224439943674952
+          ],
+          "mean_ms": 1.756231495528482,
+          "std_ms": 0.1432870181665573,
+          "median_ms": 1.7148159822681919,
+          "p95_ms": 1.9727711012819777,
+          "amortized_ms_per_sample": 1.756231495528482
+        },
+        {
+          "batch": 1,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            3.021228010766208,
+            3.0592750117648393,
+            2.9748759989161044,
+            3.040603012777865,
+            3.111144993454218,
+            3.114478022325784,
+            3.035423986148089,
+            2.957291988423094,
+            3.01344899344258,
+            2.9896310006733984
+          ],
+          "mean_ms": 3.031740101869218,
+          "std_ms": 0.052699659134380815,
+          "median_ms": 3.0283259984571487,
+          "p95_ms": 3.1129781593335792,
+          "amortized_ms_per_sample": 3.031740101869218
+        },
+        {
+          "batch": 500,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            1.7590780043974519,
+            1.743875996908173,
+            1.7447650025133044,
+            1.7642129969317466,
+            1.7306969966739416,
+            1.7508830060251057,
+            2.220444002887234,
+            1.7642869788687676,
+            1.7466659774072468,
+            1.7984550213441253
+          ],
+          "mean_ms": 1.8023363983957097,
+          "std_ms": 0.14802867970721353,
+          "median_ms": 1.7549805052112788,
+          "p95_ms": 2.0305489611928347,
+          "amortized_ms_per_sample": 0.0036046727967914195
+        },
+        {
+          "batch": 500,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            3.097885986790061,
+            3.1258910021279007,
+            3.0778530053794384,
+            3.105720999883488,
+            3.074359003221616,
+            3.1747329921927303,
+            3.0724559910595417,
+            3.116897016298026,
+            3.122433990938589,
+            3.0743550159968436
+          ],
+          "mean_ms": 3.1042585003888234,
+          "std_ms": 0.03242820373605382,
+          "median_ms": 3.1018034933367744,
+          "p95_ms": 3.152754096663557,
+          "amortized_ms_per_sample": 0.006208517000777647
+        }
+      ],
+      "gradients": {
+        "early": {
+          "code": {
+            "alignment": {
+              "cosine": 0.9068183144329536,
+              "relative_error": 0.6391093302499181,
+              "norm_ratio": 0.42642244496328174
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.9071272739873439,
+                "relative_error": 0.6386012258501115,
+                "norm_ratio": 0.4268238106758925
+              },
+              {
+                "cosine": 0.9051581735295676,
+                "relative_error": 0.6400408461295438,
+                "norm_ratio": 0.4266567588800336
+              }
+            ],
+            "surrogate_mc_se_norm": 1.693695958238095e-05,
+            "reference_mc_se_norm": 7.494221063097939e-05,
+            "reference_signal_to_mc_se": 13.724178314208984,
+            "reference_split_alignment": {
+              "cosine": 0.9932987225941383,
+              "relative_error": 0.1167592326811952,
+              "norm_ratio": 1.0098839788010445
+            },
+            "reference_resolved": true
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.9723716294166601,
+              "relative_error": 0.62888105005068,
+              "norm_ratio": 0.38842132262056256
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.9716189131386592,
+                "relative_error": 0.6272118262157151,
+                "norm_ratio": 0.3907247856820271
+              },
+              {
+                "cosine": 0.9728489122448073,
+                "relative_error": 0.6306234020908051,
+                "norm_ratio": 0.3862307388811735
+              }
+            ],
+            "surrogate_mc_se_norm": 0.0003383256262168288,
+            "reference_mc_se_norm": 0.0017148443730548024,
+            "reference_signal_to_mc_se": 28.213869094848633,
+            "reference_split_alignment": {
+              "cosine": 0.9976812415067443,
+              "relative_error": 0.06813725504400713,
+              "norm_ratio": 0.9944339073122638
+            },
+            "reference_resolved": true
+          },
+          "analytic_losses": [
+            {
+              "ce": 0.0023148557338572573,
+              "ser": 4.1961669921875e-05,
+              "ber": 1.7801920572916668e-05,
+              "errors": 22,
+              "bit_errors": 56,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0023102104969439097,
+              "ser": 3.62396240234375e-05,
+              "ber": 2.0662943522135418e-05,
+              "errors": 19,
+              "bit_errors": 65,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002344368220292381,
+              "ser": 3.814697265625e-05,
+              "ber": 1.9709269205729168e-05,
+              "errors": 20,
+              "bit_errors": 62,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002307006781848031,
+              "ser": 2.47955322265625e-05,
+              "ber": 1.0808308919270834e-05,
+              "errors": 13,
+              "bit_errors": 34,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 0.0009452598892494279,
+              "ser": 0.0,
+              "ber": 0.0,
+              "errors": 0,
+              "bit_errors": 0,
+              "trials": 524288
+            },
+            {
+              "ce": 0.000946749893046217,
+              "ser": 0.0,
+              "ber": 0.0,
+              "errors": 0,
+              "bit_errors": 0,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        },
+        "final": {
+          "code": {
+            "alignment": {
+              "cosine": 0.7608551883431627,
+              "relative_error": 0.9721508043349244,
+              "norm_ratio": 0.03699207697627584
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.6471454784096629,
+                "relative_error": 0.9738295809882638,
+                "norm_ratio": 0.04122359975380144
+              },
+              {
+                "cosine": 0.7627867927724761,
+                "relative_error": 0.9707111267337978,
+                "norm_ratio": 0.038822855277714244
+              }
+            ],
+            "surrogate_mc_se_norm": 1.1233300938329194e-06,
+            "reference_mc_se_norm": 3.232784729334526e-05,
+            "reference_signal_to_mc_se": 2.2672641277313232,
+            "reference_split_alignment": {
+              "cosine": 0.7328262135140877,
+              "relative_error": 0.9044961508801294,
+              "norm_ratio": 1.3287687830376658
+            },
+            "reference_resolved": false
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.835133179674858,
+              "relative_error": 0.9750845385352707,
+              "norm_ratio": 0.030001336381860286
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.7626583846791616,
+                "relative_error": 0.9749385545616319,
+                "norm_ratio": 0.03317021007168253
+              },
+              {
+                "cosine": 0.8266446235345835,
+                "relative_error": 0.9753335838655722,
+                "norm_ratio": 0.03001614460937294
+              }
+            ],
+            "surrogate_mc_se_norm": 9.190051969198976e-06,
+            "reference_mc_se_norm": 0.0002780980139505118,
+            "reference_signal_to_mc_se": 3.295793294906616,
+            "reference_split_alignment": {
+              "cosine": 0.8810418283623267,
+              "relative_error": 0.6067454814219965,
+              "norm_ratio": 1.2610086460583492
+            },
+            "reference_resolved": false
+          },
+          "analytic_losses": [
+            {
+              "ce": 3.8947846423553756e-05,
+              "ser": 1.1444091796875e-05,
+              "ber": 5.404154459635417e-06,
+              "errors": 6,
+              "bit_errors": 17,
+              "trials": 524288
+            },
+            {
+              "ce": 3.4628980636775e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 2.5431315104166665e-06,
+              "errors": 2,
+              "bit_errors": 8,
+              "trials": 524288
+            },
+            {
+              "ce": 3.136596728836594e-05,
+              "ser": 5.7220458984375e-06,
+              "ber": 2.86102294921875e-06,
+              "errors": 3,
+              "bit_errors": 9,
+              "trials": 524288
+            },
+            {
+              "ce": 2.7060221406749463e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 9.5367431640625e-07,
+              "errors": 2,
+              "bit_errors": 3,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 1.0759848758645774e-06,
+              "ser": 0.0,
+              "ber": 0.0,
+              "errors": 0,
+              "bit_errors": 0,
+              "trials": 524288
+            },
+            {
+              "ce": 9.891051138133378e-07,
+              "ser": 0.0,
+              "ber": 0.0,
+              "errors": 0,
+              "bit_errors": 0,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        }
+      },
+      "codebook_distributions": {
+        "early": {
+          "global_swd": 0.011060578748583794,
+          "global_floor": 0.007165911141782999,
+          "conditional": {
+            "swd": 0.04898843169212341,
+            "gaussian_w2": 0.18333971500396729,
+            "mean_l2": 0.06816543638706207,
+            "covariance_fro": 0.0692196935415268
+          },
+          "analytic_floor": {
+            "swd": 0.025463992729783058,
+            "gaussian_w2": 0.10115496814250946,
+            "mean_l2": 0.05501921474933624,
+            "covariance_fro": 0.038502663373947144
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        },
+        "final": {
+          "global_swd": 0.01082819327712059,
+          "global_floor": 0.007003335282206535,
+          "conditional": {
+            "swd": 0.048497460782527924,
+            "gaussian_w2": 0.18354414403438568,
+            "mean_l2": 0.06475244462490082,
+            "covariance_fro": 0.06988167762756348
+          },
+          "analytic_floor": {
+            "swd": 0.025589119642972946,
+            "gaussian_w2": 0.10285142064094543,
+            "mean_l2": 0.05602496862411499,
+            "covariance_fro": 0.039153262972831726
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        }
+      },
+      "ae_train_seconds": 88.70131910796044,
+      "analytic_channel_evaluation": [
+        {
+          "ebno_db": 4.0,
+          "ce": 0.04943922589882277,
+          "ser": 0.014959335327148438,
+          "ber": 0.007632255554199219,
+          "errors": 15686,
+          "bit_errors": 48018,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 6.0,
+          "ce": 0.005355855046218494,
+          "ser": 0.0017881393432617188,
+          "ber": 0.0009137789408365885,
+          "errors": 1875,
+          "bit_errors": 5749,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 8.0,
+          "ce": 0.0004642917236523658,
+          "ser": 0.00014972686767578125,
+          "ber": 7.915496826171875e-05,
+          "errors": 157,
+          "bit_errors": 498,
+          "trials": 1048576
+        }
+      ]
+    },
+    {
+      "method": "sinkhorn",
+      "cost": {
+        "train_seconds": 136.64284391351976,
+        "oracle_outputs": 40960000,
+        "counts": {
+          "oracle_outputs": 40960000,
+          "input_anchors": 640000,
+          "generator_updates": 40000,
+          "critic_updates": 0,
+          "training_generated_outputs": 81920000,
+          "target_network_outputs": 0
+        },
+        "outer_updates": 40000,
+        "generator_updates": 40000,
+        "critic_parameters": 0,
+        "inference_parameters": 60235,
+        "nfe": 1,
+        "config": {
+          "channel": "SSPA",
+          "seed": 9111,
+          "family": "sinkhorn",
+          "parameters": 60000,
+          "batch_size": 1024,
+          "updates": 40000,
+          "train_seconds": 0.0,
+          "learning_rate": 0.0002,
+          "ema_decay": 0.999,
+          "inference_weights": "ema",
+          "samples_per_input": 64,
+          "sinkhorn_iterations": 10,
+          "sinkhorn_r": 0.05,
+          "diffusion_steps": 1000,
+          "consistency_sigma_min": 0.002,
+          "consistency_sigma_max": 80.0,
+          "consistency_sigma_data": 0.5,
+          "consistency_end_scales": 150,
+          "consistency_two_step_index": 22,
+          "gaussian_covariance": "diagonal",
+          "critic_steps": 5,
+          "critic_clip": 0.01
+        },
+        "ema_parameters": 60235,
+        "target_parameters": 0
+      },
+      "distribution": {
+        "global_swd": 0.007241281680762768,
+        "global_floor": 0.007292104884982109,
+        "conditional": {
+          "swd": 0.031838029623031616,
+          "gaussian_w2": 0.12433920055627823,
+          "mean_l2": 0.08182547241449356,
+          "covariance_fro": 0.04217694327235222
+        },
+        "analytic_floor": {
+          "swd": 0.025480521842837334,
+          "gaussian_w2": 0.10263943672180176,
+          "mean_l2": 0.05514133721590042,
+          "covariance_fro": 0.03918936848640442
+        },
+        "global_samples": 16384,
+        "anchors": 64,
+        "samples_per_anchor": 256,
+        "projections": 128
+      },
+      "moments": {
+        "mean_rmse": 0.026572033762931824,
+        "variance_ratio": 0.9885673905275756,
+        "analytic_variance": 0.05282977308203711,
+        "mean_mc_rmse_floor": 0.014365455130336368
+      },
+      "timing": [
+        {
+          "batch": 1,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            0.18082899623550475,
+            0.1892790023703128,
+            0.18228698172606528,
+            0.1813549897633493,
+            0.18056499538943172,
+            0.1829350076150149,
+            0.1842259953264147,
+            0.1797720033209771,
+            0.179391005076468,
+            0.17980800475925207
+          ],
+          "mean_ms": 0.18204469815827906,
+          "std_ms": 0.002968309326130663,
+          "median_ms": 0.18109199299942702,
+          "p95_ms": 0.18700514920055866,
+          "amortized_ms_per_sample": 0.18204469815827906
+        },
+        {
+          "batch": 1,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            0.5191539821680635,
+            0.5140260036569089,
+            0.5187999922782183,
+            0.5069210019428283,
+            0.6098809826653451,
+            0.5210369999986142,
+            0.544301001355052,
+            0.47969899605959654,
+            0.4776960122399032,
+            0.46506899525411427
+          ],
+          "mean_ms": 0.5156583967618644,
+          "std_ms": 0.04099028077560168,
+          "median_ms": 0.5164129979675636,
+          "p95_ms": 0.5803699910757131,
+          "amortized_ms_per_sample": 0.5156583967618644
+        },
+        {
+          "batch": 500,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            0.19203400006517768,
+            0.19071900169365108,
+            0.18737500067800283,
+            0.18633998115547,
+            0.1852429995778948,
+            0.18608500249683857,
+            0.18925301264971495,
+            0.18568901577964425,
+            0.1849289983510971,
+            0.18492800882086158
+          ],
+          "mean_ms": 0.1872595021268353,
+          "std_ms": 0.002546810181710057,
+          "median_ms": 0.1862124918261543,
+          "p95_ms": 0.1914422507979907,
+          "amortized_ms_per_sample": 0.0003745190042536706
+        },
+        {
+          "batch": 500,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            0.40357199031859636,
+            0.389681983506307,
+            0.4120139929000288,
+            0.38860199856571853,
+            0.3830139758065343,
+            0.375672010704875,
+            0.3853430098388344,
+            0.434896006481722,
+            0.39476598612964153,
+            0.38446098915301263
+          ],
+          "mean_ms": 0.39520219434052706,
+          "std_ms": 0.017464478613386437,
+          "median_ms": 0.38914199103601277,
+          "p95_ms": 0.42459910036996007,
+          "amortized_ms_per_sample": 0.0007904043886810541
+        }
+      ],
+      "gradients": {
+        "early": {
+          "code": {
+            "alignment": {
+              "cosine": 0.9365956226136011,
+              "relative_error": 0.3825347853003717,
+              "norm_ratio": 1.0900368891091567
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.9360004196238217,
+                "relative_error": 0.38801734672781085,
+                "norm_ratio": 1.099261703759591
+              },
+              {
+                "cosine": 0.929818290461735,
+                "relative_error": 0.40112621336886856,
+                "norm_ratio": 1.0893936404655202
+              }
+            ],
+            "surrogate_mc_se_norm": 9.970277460524812e-05,
+            "reference_mc_se_norm": 7.494221063097939e-05,
+            "reference_signal_to_mc_se": 13.724178314208984,
+            "reference_split_alignment": {
+              "cosine": 0.9932987225941383,
+              "relative_error": 0.1167592326811952,
+              "norm_ratio": 1.0098839788010445
+            },
+            "reference_resolved": true
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.9917400787564955,
+              "relative_error": 0.1357301065072275,
+              "norm_ratio": 1.0361365383496082
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.9913505919615102,
+                "relative_error": 0.14317566297586654,
+                "norm_ratio": 1.0485805373661314
+              },
+              {
+                "cosine": 0.9912111152702883,
+                "relative_error": 0.13645050991605934,
+                "norm_ratio": 1.0246508624541617
+              }
+            ],
+            "surrogate_mc_se_norm": 0.0016309571219608188,
+            "reference_mc_se_norm": 0.0017148443730548024,
+            "reference_signal_to_mc_se": 28.213869094848633,
+            "reference_split_alignment": {
+              "cosine": 0.9976812415067443,
+              "relative_error": 0.06813725504400713,
+              "norm_ratio": 0.9944339073122638
+            },
+            "reference_resolved": true
+          },
+          "analytic_losses": [
+            {
+              "ce": 0.0023148557338572573,
+              "ser": 4.1961669921875e-05,
+              "ber": 1.7801920572916668e-05,
+              "errors": 22,
+              "bit_errors": 56,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0023102104969439097,
+              "ser": 3.62396240234375e-05,
+              "ber": 2.0662943522135418e-05,
+              "errors": 19,
+              "bit_errors": 65,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002344368220292381,
+              "ser": 3.814697265625e-05,
+              "ber": 1.9709269205729168e-05,
+              "errors": 20,
+              "bit_errors": 62,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002307006781848031,
+              "ser": 2.47955322265625e-05,
+              "ber": 1.0808308919270834e-05,
+              "errors": 13,
+              "bit_errors": 34,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 0.0022936700065656623,
+              "ser": 4.38690185546875e-05,
+              "ber": 2.1616617838541668e-05,
+              "errors": 23,
+              "bit_errors": 68,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0022541420626112085,
+              "ser": 1.9073486328125e-05,
+              "ber": 9.5367431640625e-06,
+              "errors": 10,
+              "bit_errors": 30,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        },
+        "final": {
+          "code": {
+            "alignment": {
+              "cosine": 0.6693984247261253,
+              "relative_error": 0.7433942667862019,
+              "norm_ratio": 0.6964037374703398
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.6413946423288108,
+                "relative_error": 0.7679977744009617,
+                "norm_ratio": 0.6761461702510974
+              },
+              {
+                "cosine": 0.6267638117520673,
+                "relative_error": 0.7972953987317053,
+                "norm_ratio": 0.7956212325565127
+              }
+            ],
+            "surrogate_mc_se_norm": 1.7970955013879575e-05,
+            "reference_mc_se_norm": 3.232784729334526e-05,
+            "reference_signal_to_mc_se": 2.2672641277313232,
+            "reference_split_alignment": {
+              "cosine": 0.7328262135140877,
+              "relative_error": 0.9044961508801294,
+              "norm_ratio": 1.3287687830376658
+            },
+            "reference_resolved": false
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.8455525967691745,
+              "relative_error": 0.5691199502028693,
+              "norm_ratio": 0.648431538477549
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.8260295212042118,
+                "relative_error": 0.5902543412211524,
+                "norm_ratio": 0.6507441617720111
+              },
+              {
+                "cosine": 0.7872226600064993,
+                "relative_error": 0.6214687793917708,
+                "norm_ratio": 0.7101320627432426
+              }
+            ],
+            "surrogate_mc_se_norm": 0.0001909739658003673,
+            "reference_mc_se_norm": 0.0002780980139505118,
+            "reference_signal_to_mc_se": 3.295793294906616,
+            "reference_split_alignment": {
+              "cosine": 0.8810418283623267,
+              "relative_error": 0.6067454814219965,
+              "norm_ratio": 1.2610086460583492
+            },
+            "reference_resolved": false
+          },
+          "analytic_losses": [
+            {
+              "ce": 3.8947846423553756e-05,
+              "ser": 1.1444091796875e-05,
+              "ber": 5.404154459635417e-06,
+              "errors": 6,
+              "bit_errors": 17,
+              "trials": 524288
+            },
+            {
+              "ce": 3.4628980636775e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 2.5431315104166665e-06,
+              "errors": 2,
+              "bit_errors": 8,
+              "trials": 524288
+            },
+            {
+              "ce": 3.136596728836594e-05,
+              "ser": 5.7220458984375e-06,
+              "ber": 2.86102294921875e-06,
+              "errors": 3,
+              "bit_errors": 9,
+              "trials": 524288
+            },
+            {
+              "ce": 2.7060221406749463e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 9.5367431640625e-07,
+              "errors": 2,
+              "bit_errors": 3,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 1.9023197912027e-05,
+              "ser": 0.0,
+              "ber": 0.0,
+              "errors": 0,
+              "bit_errors": 0,
+              "trials": 524288
+            },
+            {
+              "ce": 2.2845738697263585e-05,
+              "ser": 1.9073486328125e-06,
+              "ber": 9.5367431640625e-07,
+              "errors": 1,
+              "bit_errors": 3,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        }
+      },
+      "codebook_distributions": {
+        "early": {
+          "global_swd": 0.0068051437847316265,
+          "global_floor": 0.007165911141782999,
+          "conditional": {
+            "swd": 0.03060808591544628,
+            "gaussian_w2": 0.11900196969509125,
+            "mean_l2": 0.07778886705636978,
+            "covariance_fro": 0.04070211201906204
+          },
+          "analytic_floor": {
+            "swd": 0.025463992729783058,
+            "gaussian_w2": 0.10115496814250946,
+            "mean_l2": 0.05501921474933624,
+            "covariance_fro": 0.038502663373947144
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        },
+        "final": {
+          "global_swd": 0.007003539241850376,
+          "global_floor": 0.007003335282206535,
+          "conditional": {
+            "swd": 0.028667792677879333,
+            "gaussian_w2": 0.11433660984039307,
+            "mean_l2": 0.06946420669555664,
+            "covariance_fro": 0.04133402556180954
+          },
+          "analytic_floor": {
+            "swd": 0.025589119642972946,
+            "gaussian_w2": 0.10285142064094543,
+            "mean_l2": 0.05602496862411499,
+            "covariance_fro": 0.039153262972831726
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        }
+      },
+      "ae_train_seconds": 37.20058955042623,
+      "analytic_channel_evaluation": [
+        {
+          "ebno_db": 4.0,
+          "ce": 0.02959319651563419,
+          "ser": 0.008879661560058594,
+          "ber": 0.004591623942057292,
+          "errors": 9311,
+          "bit_errors": 28888,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 6.0,
+          "ce": 0.003267465032479322,
+          "ser": 0.0011205673217773438,
+          "ber": 0.0005725224812825521,
+          "errors": 1175,
+          "bit_errors": 3602,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 8.0,
+          "ce": 0.00027904386609733933,
+          "ser": 7.724761962890625e-05,
+          "ber": 3.7829081217447914e-05,
+          "errors": 81,
+          "bit_errors": 238,
+          "trials": 1048576
+        }
+      ]
+    },
+    {
+      "method": "consistency_distilled",
+      "cost": {
+        "train_seconds": 81.5876002543373,
+        "oracle_outputs": 40960000,
+        "counts": {
+          "oracle_outputs": 20480000,
+          "input_anchors": 20480000,
+          "generator_updates": 20000,
+          "critic_updates": 0,
+          "training_generated_outputs": 0,
+          "target_network_outputs": 20480000,
+          "teacher_network_outputs": 40960000
+        },
+        "teacher_counts": {
+          "oracle_outputs": 20480000,
+          "input_anchors": 20480000,
+          "generator_updates": 20000,
+          "critic_updates": 0,
+          "training_generated_outputs": 0,
+          "target_network_outputs": 0
+        },
+        "teacher_train_seconds": 27.947359193029115,
+        "student_train_seconds": 53.64024106130819,
+        "teacher_parameters": 60176,
+        "teacher_pretraining_included": true,
+        "inference_parameters": 60176,
+        "nfe": 1,
+        "config": {
+          "channel": "SSPA",
+          "seed": 19111,
+          "family": "consistency",
+          "parameters": 60000,
+          "batch_size": 1024,
+          "updates": 20000,
+          "train_seconds": 0.0,
+          "learning_rate": 0.0002,
+          "ema_decay": 0.999,
+          "inference_weights": "ema",
+          "samples_per_input": 64,
+          "sinkhorn_iterations": 10,
+          "sinkhorn_r": 0.05,
+          "diffusion_steps": 1000,
+          "consistency_sigma_min": 0.002,
+          "consistency_sigma_max": 80.0,
+          "consistency_sigma_data": 0.5,
+          "consistency_end_scales": 150,
+          "consistency_two_step_index": 22,
+          "gaussian_covariance": "diagonal",
+          "critic_steps": 5,
+          "critic_clip": 0.01
+        },
+        "ema_parameters": 60176,
+        "target_parameters": 60176
+      },
+      "distribution": {
+        "global_swd": 0.007424358278512955,
+        "global_floor": 0.007292104884982109,
+        "conditional": {
+          "swd": 0.04016044735908508,
+          "gaussian_w2": 0.15406234562397003,
+          "mean_l2": 0.11225263774394989,
+          "covariance_fro": 0.04925522953271866
+        },
+        "analytic_floor": {
+          "swd": 0.025480521842837334,
+          "gaussian_w2": 0.10263943672180176,
+          "mean_l2": 0.05514133721590042,
+          "covariance_fro": 0.03918936848640442
+        },
+        "global_samples": 16384,
+        "anchors": 64,
+        "samples_per_anchor": 256,
+        "projections": 128
+      },
+      "moments": {
+        "mean_rmse": 0.03704988956451416,
+        "variance_ratio": 1.075835740367978,
+        "analytic_variance": 0.05282977308203711,
+        "mean_mc_rmse_floor": 0.014365455130336368
+      },
+      "timing": [
+        {
+          "batch": 1,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            0.3711989847943187,
+            0.38628600304946303,
+            0.3755440120585263,
+            0.3549109969753772,
+            0.3562169731594622,
+            0.3586020029615611,
+            0.358333985786885,
+            0.3618069749791175,
+            0.36672697751782835,
+            0.35429498529993
+          ],
+          "mean_ms": 0.36439218965824693,
+          "std_ms": 0.010493797366076316,
+          "median_ms": 0.3602044889703393,
+          "p95_ms": 0.3814521071035415,
+          "amortized_ms_per_sample": 0.36439218965824693
+        },
+        {
+          "batch": 1,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            0.7387030054815114,
+            0.7391439867205918,
+            0.7835750002413988,
+            0.7204790017567575,
+            0.6423210143111646,
+            0.7285600004252046,
+            0.7273710216395557,
+            0.6916630081832409,
+            0.6423300073947757,
+            0.633268995443359
+          ],
+          "mean_ms": 0.704741504159756,
+          "std_ms": 0.05049708262174754,
+          "median_ms": 0.7239250116981566,
+          "p95_ms": 0.7635810441570356,
+          "amortized_ms_per_sample": 0.704741504159756
+        },
+        {
+          "batch": 500,
+          "operation": "sampling",
+          "milliseconds_per_batch": [
+            0.38208600017242134,
+            0.36647700471803546,
+            0.3624990058597177,
+            0.3593220026232302,
+            0.3628439735621214,
+            0.373354007024318,
+            0.3913019900210202,
+            0.38495499757118523,
+            0.3873359819408506,
+            0.35388401011005044
+          ],
+          "mean_ms": 0.37240589736029506,
+          "std_ms": 0.013212074547371278,
+          "median_ms": 0.3699155058711767,
+          "p95_ms": 0.3895172863849439,
+          "amortized_ms_per_sample": 0.0007448117947205901
+        },
+        {
+          "batch": 500,
+          "operation": "forward_and_input_backward",
+          "milliseconds_per_batch": [
+            0.8482699922751635,
+            0.6445939943660051,
+            0.6105809879954904,
+            0.6102769984863698,
+            0.6434590031858534,
+            0.6531819817610085,
+            0.6582509959116578,
+            0.6374729855451733,
+            0.6387089961208403,
+            0.6271500024013221
+          ],
+          "mean_ms": 0.6571945938048884,
+          "std_ms": 0.06902647810884105,
+          "median_ms": 0.6410839996533468,
+          "p95_ms": 0.7627614439115857,
+          "amortized_ms_per_sample": 0.001314389187609777
+        }
+      ],
+      "gradients": {
+        "early": {
+          "code": {
+            "alignment": {
+              "cosine": 0.8493381334861246,
+              "relative_error": 0.6836087947198763,
+              "norm_ratio": 1.2837299488004281
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.8443854189112839,
+                "relative_error": 0.698999698518019,
+                "norm_ratio": 1.2933701783388907
+              },
+              {
+                "cosine": 0.8501865867481534,
+                "relative_error": 0.6798717834879102,
+                "norm_ratio": 1.2803526875388915
+              }
+            ],
+            "surrogate_mc_se_norm": 9.252183372154832e-05,
+            "reference_mc_se_norm": 7.494221063097939e-05,
+            "reference_signal_to_mc_se": 13.724178314208984,
+            "reference_split_alignment": {
+              "cosine": 0.9932987225941383,
+              "relative_error": 0.1167592326811952,
+              "norm_ratio": 1.0098839788010445
+            },
+            "reference_resolved": true
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.9718722141366649,
+              "relative_error": 0.24694203769253073,
+              "norm_ratio": 1.046141794656838
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.9697820642311649,
+                "relative_error": 0.25788505878380535,
+                "norm_ratio": 1.0533401616747138
+              },
+              {
+                "cosine": 0.9724543228617974,
+                "relative_error": 0.24284655476775513,
+                "norm_ratio": 1.040585514067921
+              }
+            ],
+            "surrogate_mc_se_norm": 0.0020292990375310183,
+            "reference_mc_se_norm": 0.0017148443730548024,
+            "reference_signal_to_mc_se": 28.213869094848633,
+            "reference_split_alignment": {
+              "cosine": 0.9976812415067443,
+              "relative_error": 0.06813725504400713,
+              "norm_ratio": 0.9944339073122638
+            },
+            "reference_resolved": true
+          },
+          "analytic_losses": [
+            {
+              "ce": 0.0023148557338572573,
+              "ser": 4.1961669921875e-05,
+              "ber": 1.7801920572916668e-05,
+              "errors": 22,
+              "bit_errors": 56,
+              "trials": 524288
+            },
+            {
+              "ce": 0.0023102104969439097,
+              "ser": 3.62396240234375e-05,
+              "ber": 2.0662943522135418e-05,
+              "errors": 19,
+              "bit_errors": 65,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002344368220292381,
+              "ser": 3.814697265625e-05,
+              "ber": 1.9709269205729168e-05,
+              "errors": 20,
+              "bit_errors": 62,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002307006781848031,
+              "ser": 2.47955322265625e-05,
+              "ber": 1.0808308919270834e-05,
+              "errors": 13,
+              "bit_errors": 34,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 0.0025810625174926827,
+              "ser": 2.288818359375e-05,
+              "ber": 1.2079874674479166e-05,
+              "errors": 12,
+              "bit_errors": 38,
+              "trials": 524288
+            },
+            {
+              "ce": 0.002597911602606473,
+              "ser": 3.814697265625e-05,
+              "ber": 2.09808349609375e-05,
+              "errors": 20,
+              "bit_errors": 66,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        },
+        "final": {
+          "code": {
+            "alignment": {
+              "cosine": 0.8183209079310333,
+              "relative_error": 0.6659727582527541,
+              "norm_ratio": 1.1547266496951294
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.6788624177267958,
+                "relative_error": 0.9434391431206959,
+                "norm_ratio": 1.271257217648422
+              },
+              {
+                "cosine": 0.8225145787068956,
+                "relative_error": 0.7105543649368545,
+                "norm_ratio": 1.2484461902552737
+              }
+            ],
+            "surrogate_mc_se_norm": 3.6937195545760915e-05,
+            "reference_mc_se_norm": 3.232784729334526e-05,
+            "reference_signal_to_mc_se": 2.2672641277313232,
+            "reference_split_alignment": {
+              "cosine": 0.7328262135140877,
+              "relative_error": 0.9044961508801294,
+              "norm_ratio": 1.3287687830376658
+            },
+            "reference_resolved": false
+          },
+          "encoder": {
+            "alignment": {
+              "cosine": 0.8905759064490119,
+              "relative_error": 0.48199620282202654,
+              "norm_ratio": 1.050093255606811
+            },
+            "per_repeat_alignment": [
+              {
+                "cosine": 0.7470567652839064,
+                "relative_error": 0.7241020877398563,
+                "norm_ratio": 1.0341414984650212
+              },
+              {
+                "cosine": 0.9335892305906869,
+                "relative_error": 0.4325835451930942,
+                "norm_ratio": 1.1759059139757477
+              }
+            ],
+            "surrogate_mc_se_norm": 0.0003219775971956551,
+            "reference_mc_se_norm": 0.0002780980139505118,
+            "reference_signal_to_mc_se": 3.295793294906616,
+            "reference_split_alignment": {
+              "cosine": 0.8810418283623267,
+              "relative_error": 0.6067454814219965,
+              "norm_ratio": 1.2610086460583492
+            },
+            "reference_resolved": false
+          },
+          "analytic_losses": [
+            {
+              "ce": 3.8947846423553756e-05,
+              "ser": 1.1444091796875e-05,
+              "ber": 5.404154459635417e-06,
+              "errors": 6,
+              "bit_errors": 17,
+              "trials": 524288
+            },
+            {
+              "ce": 3.4628980636775e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 2.5431315104166665e-06,
+              "errors": 2,
+              "bit_errors": 8,
+              "trials": 524288
+            },
+            {
+              "ce": 3.136596728836594e-05,
+              "ser": 5.7220458984375e-06,
+              "ber": 2.86102294921875e-06,
+              "errors": 3,
+              "bit_errors": 9,
+              "trials": 524288
+            },
+            {
+              "ce": 2.7060221406749463e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 9.5367431640625e-07,
+              "errors": 2,
+              "bit_errors": 3,
+              "trials": 524288
+            }
+          ],
+          "surrogate_losses": [
+            {
+              "ce": 3.190735185576443e-05,
+              "ser": 5.7220458984375e-06,
+              "ber": 3.4968058268229165e-06,
+              "errors": 3,
+              "bit_errors": 11,
+              "trials": 524288
+            },
+            {
+              "ce": 2.99541439705564e-05,
+              "ser": 3.814697265625e-06,
+              "ber": 6.357828776041666e-07,
+              "errors": 2,
+              "bit_errors": 2,
+              "trials": 524288
+            }
+          ],
+          "samples_per_message": 8192,
+          "reference_repeats": 4,
+          "surrogate_repeats": 2,
+          "qualification": "Resolution flag is a Monte Carlo heuristic, not a population guarantee"
+        }
+      },
+      "codebook_distributions": {
+        "early": {
+          "global_swd": 0.00765804760158062,
+          "global_floor": 0.007165911141782999,
+          "conditional": {
+            "swd": 0.03459812328219414,
+            "gaussian_w2": 0.1342024803161621,
+            "mean_l2": 0.09247636795043945,
+            "covariance_fro": 0.04482327401638031
+          },
+          "analytic_floor": {
+            "swd": 0.025463992729783058,
+            "gaussian_w2": 0.10115496814250946,
+            "mean_l2": 0.05501921474933624,
+            "covariance_fro": 0.038502663373947144
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        },
+        "final": {
+          "global_swd": 0.006774031091481447,
+          "global_floor": 0.007003335282206535,
+          "conditional": {
+            "swd": 0.031759217381477356,
+            "gaussian_w2": 0.12491340190172195,
+            "mean_l2": 0.08039626479148865,
+            "covariance_fro": 0.04415181279182434
+          },
+          "analytic_floor": {
+            "swd": 0.025589119642972946,
+            "gaussian_w2": 0.10285142064094543,
+            "mean_l2": 0.05602496862411499,
+            "covariance_fro": 0.039153262972831726
+          },
+          "global_samples": 16384,
+          "anchors": 64,
+          "samples_per_anchor": 256,
+          "projections": 128
+        }
+      },
+      "ae_train_seconds": 41.77224457578268,
+      "analytic_channel_evaluation": [
+        {
+          "ebno_db": 4.0,
+          "ce": 0.034526519832070335,
+          "ser": 0.010066986083984375,
+          "ber": 0.00550079345703125,
+          "errors": 10556,
+          "bit_errors": 34608,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 6.0,
+          "ce": 0.00572126177780774,
+          "ser": 0.0018596649169921875,
+          "ber": 0.0011819203694661458,
+          "errors": 1950,
+          "bit_errors": 7436,
+          "trials": 1048576
+        },
+        {
+          "ebno_db": 8.0,
+          "ce": 0.001295214200510486,
+          "ser": 0.0004367828369140625,
+          "ber": 0.00030422210693359375,
+          "errors": 458,
+          "bit_errors": 1914,
+          "trials": 1048576
+        }
+      ]
+    }
+  ]
+}
