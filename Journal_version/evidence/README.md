@@ -1,5 +1,16 @@
 # Research evidence
 
+## Independent application and coverage audit, 12 October
+
+[Audit records](application_coverage_independent_audit_20261012.json) and
+[assessment](../application_coverage_assessment_20261012.md) verify the two
+compact archive hashes, all 30 archived files, 35 local source hashes, provenance,
+66 main curve points, inherited controls, codebook power and per-message errors.
+Regenerate with `python3 Journal_version/figures_src/audit_application_coverage_20261012.py`.
+This is a portable-record audit, not a GPU or checkpoint rerun; neither compact
+archive contains model weights. October 10–11 stability conclusions use tracked
+reports and inspected code because their new raw bundles are absent here.
+
 ## Current handoff, 12 October
 
 Start with [the handover](../resubmission_handover.md) and

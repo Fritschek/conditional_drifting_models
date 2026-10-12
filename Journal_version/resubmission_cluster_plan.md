@@ -1,5 +1,15 @@
 # Cluster work specification
 
+**Independent assessment, 12 October:** read the
+[current analysis and bounded handover](application_coverage_assessment_20261012.md#7-concrete-next-handover)
+before using historical task lists below. The next proposed coverage replication
+is three fresh generator seeds x two families x two input laws, with three AEs
+per generator: 12 generator runs, 36 surrogate AEs and nine analytic references.
+Keep the existing mixture, normalization and budgets frozen; allocate unused
+seed IDs in a new protocol. Saved-model sampler checks precede final family
+rankings. No new experiment was launched. The compact-record audit is complete;
+the new large checkpoint bundles are not present in this checkout.
+
 **Priority update, 12 October:** application-focused modern baselines take
 precedence. The joint-versus-condition-wise geometry study below is optional,
 not a prerequisite or conditioning-novelty argument. See the implemented

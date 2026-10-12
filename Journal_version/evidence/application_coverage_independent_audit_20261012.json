@@ -1,0 +1,146 @@
+{
+  "scope": "Portable records only; no GPU execution, checkpoint tensors, or external upstream source revalidation",
+  "archives": {
+    "fast_sspa_application": {
+      "sha256": "15e39ba0c7dfe1f919a044bb1fcb258848480208f4149d54df63df3736390201",
+      "byte_identical_files": 17,
+      "checkpoint_files": 0
+    },
+    "sspa_input_coverage": {
+      "sha256": "cf0e6e89d7c53f9face68b7e9050503b93aa035241e1791e80f82aed22366660",
+      "byte_identical_files": 13,
+      "checkpoint_files": 0
+    }
+  },
+  "local_adapter_hashes_verified": 35,
+  "application_rows": 7,
+  "application_curve_points": 21,
+  "coverage_rows": 15,
+  "coverage_curve_points": 45,
+  "inherited_curve_records_identical": 9,
+  "gradient_reference_flags_verified": 24,
+  "query_energy_ratio": 6.083333333333333,
+  "actual_codebook_radius_bound": 22.627416997969522,
+  "normalization": "Scalar grand-mean subtraction followed by unit mean square over all coordinates",
+  "maximum_absolute_coordinate_mean": 0.31726596446242183,
+  "paired_8db": {
+    "gaussian": [
+      {
+        "ae_seed": 209111,
+        "normal_ser_8db": 0.0031003952026367188,
+        "broad_ser_8db": 4.100799560546875e-05,
+        "normal_divided_by_broad": 75.6046511627907,
+        "normal_errors": 3251,
+        "broad_errors": 43
+      },
+      {
+        "ae_seed": 209112,
+        "normal_ser_8db": 0.0008306503295898438,
+        "broad_ser_8db": 9.5367431640625e-05,
+        "normal_divided_by_broad": 8.71,
+        "normal_errors": 871,
+        "broad_errors": 100
+      },
+      {
+        "ae_seed": 209113,
+        "normal_ser_8db": 0.004525184631347656,
+        "broad_ser_8db": 0.00011157989501953125,
+        "normal_divided_by_broad": 40.55555555555556,
+        "normal_errors": 4745,
+        "broad_errors": 117
+      }
+    ],
+    "sinkhorn": [
+      {
+        "ae_seed": 209111,
+        "normal_ser_8db": 7.724761962890625e-05,
+        "broad_ser_8db": 9.918212890625e-05,
+        "normal_divided_by_broad": 0.7788461538461539,
+        "normal_errors": 81,
+        "broad_errors": 104
+      },
+      {
+        "ae_seed": 209112,
+        "normal_ser_8db": 3.4332275390625e-05,
+        "broad_ser_8db": 4.00543212890625e-05,
+        "normal_divided_by_broad": 0.8571428571428571,
+        "normal_errors": 36,
+        "broad_errors": 42
+      },
+      {
+        "ae_seed": 209113,
+        "normal_ser_8db": 0.000446319580078125,
+        "broad_ser_8db": 9.441375732421875e-05,
+        "normal_divided_by_broad": 4.7272727272727275,
+        "normal_errors": 468,
+        "broad_errors": 99
+      }
+    ]
+  },
+  "error_localization": {
+    "gaussian": {
+      "total_errors": 1560,
+      "errors_two_largest_norms": 1532,
+      "max_norm": 10.271733283996582
+    },
+    "wgan": {
+      "total_errors": 0,
+      "errors_two_largest_norms": 0,
+      "max_norm": 3.099240779876709
+    },
+    "diffusion": {
+      "total_errors": 31,
+      "errors_two_largest_norms": 8,
+      "max_norm": 6.184870719909668
+    },
+    "flow": {
+      "total_errors": 68,
+      "errors_two_largest_norms": 42,
+      "max_norm": 7.539889335632324
+    },
+    "sinkhorn": {
+      "total_errors": 48,
+      "errors_two_largest_norms": 32,
+      "max_norm": 6.918906211853027
+    },
+    "consistency_distilled": {
+      "total_errors": 221,
+      "errors_two_largest_norms": 217,
+      "max_norm": 8.986093521118164
+    }
+  },
+  "costs": {
+    "gaussian": {
+      "generator_seconds": 42.80453965027118,
+      "ae_seconds": 37.47610468696803,
+      "one_generator_plus_one_ae_seconds": 80.28064433723921
+    },
+    "wgan": {
+      "generator_seconds": 68.31696896185167,
+      "ae_seconds": 36.21404039062327,
+      "one_generator_plus_one_ae_seconds": 104.53100935247494
+    },
+    "diffusion": {
+      "generator_seconds": 51.13445993018104,
+      "ae_seconds": 362.86136525211623,
+      "one_generator_plus_one_ae_seconds": 413.99582518229727
+    },
+    "flow": {
+      "generator_seconds": 42.898835322470404,
+      "ae_seconds": 88.70131910796044,
+      "one_generator_plus_one_ae_seconds": 131.60015443043085
+    },
+    "sinkhorn": {
+      "generator_seconds": 136.64284391351976,
+      "ae_seconds": 37.20058955042623,
+      "one_generator_plus_one_ae_seconds": 173.84343346394598
+    },
+    "consistency_distilled": {
+      "generator_seconds": 81.5876002543373,
+      "ae_seconds": 41.77224457578268,
+      "one_generator_plus_one_ae_seconds": 123.35984483011998
+    }
+  },
+  "checkpoint_level_replay": "Unavailable in this checkout: compact archives contain no checkpoints",
+  "earlier_stability_evidence": "Oct10-11 result notes and source inspected; corresponding new raw bundles absent"
+}

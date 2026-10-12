@@ -2,6 +2,12 @@
 
 ## Resubmission work
 
+**Latest, 12 October:** the [independent application/coverage assessment](application_coverage_assessment_20261012.md)
+analyzes the fresh K64 stability results, fast competing generators and mixed
+input-coverage intervention. It includes a reproducible portable-record audit,
+precise transfer bounds and a bounded next experiment plan. Historical proposed
+experiments below do not override the current status index or this assessment.
+
 Start with [the resubmission handover](resubmission_handover.md), prepared after reviewing the actual TCOM rejection, the manuscript, implementation, earlier audit, and originating literature. It links a [cluster experiment specification](resubmission_cluster_plan.md) and [manuscript revision guide](resubmission_manuscript_plan.md). These supersede the older strategy/roadmap recommendations; the submitted paper and historical evidence remain unchanged.
 
 The actual decision and reports are in [the prior review audit](review_audit_20261008/README.md#full-review-reports). `tcom_review_comments.md` contains earlier pre-submission feedback, not the rejection reports. Several June raw result archives are absent from this checkout; the new handover distinguishes the saved audit evidence from independently reproduced results.

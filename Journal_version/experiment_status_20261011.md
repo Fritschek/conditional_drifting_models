@@ -4,6 +4,17 @@ Updated 12 October 2026. This is the current status index. Earlier assessment do
 retain their historical recommendations; do not interpret them as an unexecuted
 queue when the work is marked complete below.
 
+## Independent assessment complete, 12 October
+
+Read [the current assessment](application_coverage_assessment_20261012.md) for
+the scientific conclusions, independent portable-record audit, mathematical
+coverage bounds and next bounded replication. K64 grouping has a replicated
+practical stability result; Gaussian coverage gains are clear within one
+generator seed; Sinkhorn coverage outcomes and healthy downstream rankings
+remain mixed. No universal pre-optimization selector is established.
+The audit also clarifies scalar versus coordinate-wise centering and complete
+pipeline timing. No new training was run during this assessment.
+
 ## Fast competing generators: local application pilot complete
 
 Latest: the [input-coverage intervention](sspa_input_coverage_results_20261012.md)

@@ -2,13 +2,22 @@
 
 ## Priority update, 12 October
 
-The current experiment round is ready for external analysis. No simulation is
-running. Review the completed evidence before authorizing further experiments.
+The [independent assessment](application_coverage_assessment_20261012.md) is now
+complete. It verifies the portable application/coverage records and local source
+hashes, separates the replicated grouping repair from mixed downstream rankings,
+and supplies a bounded next experiment plan plus precise coverage/risk-transfer
+bounds. The existing K64 and solver studies should not be repeated as missing work.
+The normalization is scalar grand-mean subtraction, not vector centering; the
+existing sqrt(512) radius remains valid. Generator-seed coverage replication,
+saved-sampler checks and the larger structured channel are the priorities.
+No new simulation was launched by the assessment.
+
+The current experiment round has been assessed. No simulation is running.
 Git includes code, reports, compact results and figures. The large component,
 fresh-start, intervention and solver-replay checkpoint archives remain local
 and must be transferred separately for checkpoint-level reproduction. See
 [the evidence index](evidence/README.md) for availability.
-The immediate questions are which application-level contribution it supports,
+The assessment addresses which application-level contribution it supports,
 how far input coverage explains downstream failures, and which minimal tests
 are still needed. Historical next-step lists below are superseded by the latest
 completed-results reports and the current status index.
