@@ -1,5 +1,23 @@
 # Journal resubmission handover
 
+## Local application pilots complete, 13 October
+
+The [local readiness note](application_local_readiness_20261013.md) records
+the new calibration contract, all-family common-input comparison and jointly
+generated OFDM/interference implementation. The [protocol](application_local_protocol_20261013.md)
+is separate from historical runs. Ten CPU and ten CUDA tests pass, including
+resume and all-family smoke checks. The common-input SSPA comparison and both
+structured OFDM pilots completed: 27 SSPA curve points and 70 OFDM points.
+Start with [results](application_local_results_20261013.md) and
+[compact evidence](evidence/application_local_20261013/README.md).
+All runs have finished; no cluster job was submitted. SSPA WGAN adequacy,
+structured Gaussian/mixture baselines and generator convergence require bounded
+local follow-up before freezing the multi-seed campaign. The physical-channel
+OFDM receiver is useful after replacing its plain MLP with a frequency network.
+The learned-constellation performance study remains pending, beyond its passing
+gradient smoke test. Historical pending-work statements below describe earlier
+rounds and are superseded by this update.
+
 ## Independent assessment complete, 13 October
 
 Read the [new assessment](coverage_followup_assessment_20261013.md) first.

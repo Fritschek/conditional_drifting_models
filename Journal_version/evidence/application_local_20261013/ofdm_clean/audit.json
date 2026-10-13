@@ -1,0 +1,10 @@
+{
+  "kind": "ofdm",
+  "curve_points": 35,
+  "complete": true,
+  "manifest_sha256": "63f5aff3c842eb20dbfbc57e753880d7e369615bafe7135089c9c934454953ec",
+  "results_sha256": "51473dced3abee76a9d9be1a9df4d25b71a432d9ae8593a2fd5db0b7af5121fb",
+  "sources_verified": 41,
+  "checkpoints_verified": 12,
+  "reporter_sha256": "56cf214bdba8128820c2c34f183b6c155661b81ba7e50be11a61e999f0ed6f14"
+}

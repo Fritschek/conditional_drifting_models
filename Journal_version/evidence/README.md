@@ -1,5 +1,15 @@
 # Research evidence
 
+## Local application pilots, 13 October
+
+[Results](../application_local_results_20261013.md) and
+[compact records](application_local_20261013/README.md) cover the completed
+common-input SSPA comparison, post-hoc saved-codebook check, and clean plus
+intermittent-interference 64-subcarrier OFDM pilots. There are 27 SSPA and 70
+OFDM physical curve points; all main suite source/checkpoint audits pass.
+Weights remain local. This is a development round, with explicit baseline
+adequacy gates before a final cluster campaign.
+
 ## Independent follow-up audit, 13 October
 
 [Assessment](../coverage_followup_assessment_20261013.md),

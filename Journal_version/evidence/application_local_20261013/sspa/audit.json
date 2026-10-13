@@ -1,0 +1,10 @@
+{
+  "kind": "sspa",
+  "curve_points": 27,
+  "complete": true,
+  "manifest_sha256": "240dceeb9a53c5fb7b889dea036f5eb842f4432fa435e78898c7d9b54d354ab3",
+  "results_sha256": "d563c450b1f43e04f8e4581749529ded3a07a1e18c0da750f8e78331a0981095",
+  "sources_verified": 43,
+  "checkpoints_verified": 16,
+  "reporter_sha256": "56cf214bdba8128820c2c34f183b6c155661b81ba7e50be11a61e999f0ed6f14"
+}

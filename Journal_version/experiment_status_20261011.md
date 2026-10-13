@@ -4,12 +4,26 @@ Updated 13 October 2026. This is the current status index. Earlier assessment do
 retain their historical recommendations; do not interpret them as an unexecuted
 queue when the work is marked complete below.
 
+## Local application development, 13 October
+
+See [the implementation and execution status](application_local_readiness_20261013.md)
+and [frozen protocol](application_local_protocol_20261013.md). Calibration,
+common-input fast baselines and the joint OFDM/interference pilot are implemented.
+Ten CPU and ten CUDA tests plus complete smoke/resume pipelines pass. The
+one-seed common-input SSPA comparison (27 curve points) and clean/interference
+OFDM pilots (35 points each) have completed and passed source/checkpoint audits.
+Read [the new results](application_local_results_20261013.md) and
+[compact evidence](evidence/application_local_20261013/README.md). No simulation
+is running and no cluster job was submitted. Baseline adequacy and structured
+generator convergence remain gates before freezing the cluster campaign.
+
 The [13 October independent assessment](coverage_followup_assessment_20261013.md)
 has now checked the portable numerical records and sharpened their interpretation.
 Its [audit](evidence/coverage_followup_independent_audit_20261013.json) is separate
-from execution-host checkpoint tests. The next work is the noise convention,
-common competitor input coverage and structured-channel protocol; replication
-and saved-sampler panels below are completed, not a pending rerun queue.
+from execution-host checkpoint tests. Its recommended noise calibration,
+common competitor coverage and structured-channel development have now been
+implemented and tested above. The replication and saved-sampler panels below
+are also completed, not a pending rerun queue.
 
 ## Coverage replication and sampler panel complete, 13 October
 
