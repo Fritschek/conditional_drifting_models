@@ -2,6 +2,12 @@
 
 ## Resubmission work
 
+**Latest, 13 October:** the [coverage/sampler assessment](coverage_followup_assessment_20261013.md)
+verifies fresh-generator replication, highlights the ordinary-input SWD versus
+downstream reversal, and checks the physical noise-label offset. It includes a
+proved ideal-Euler limitation and a revised next-work handover. Completed
+replication and sampler panels should not be relaunched from older task lists.
+
 **Latest, 12 October:** the [independent application/coverage assessment](application_coverage_assessment_20261012.md)
 analyzes the fresh K64 stability results, fast competing generators and mixed
 input-coverage intervention. It includes a reproducible portable-record audit,

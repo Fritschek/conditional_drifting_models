@@ -1,5 +1,17 @@
 # Manuscript revision guide and mathematical audit
 
+**Evidence update, 13 October:** the
+[coverage/sampler assessment](coverage_followup_assessment_20261013.md) now
+supports replicated coverage benefits and documents important exceptions.
+Add the generator-block fidelity/transfer reversal to the planned evaluation,
+keep individual AE failures, and avoid portraying coarse Flow-8 as the best
+accuracy available from that trained field. State both gradient direction and
+magnitude. The ideal Gaussian Euler proposition is a scoped diagnostic result,
+not a theorem for the learned model or an originality claim. Correct physical
+SSPA axis definitions: current nominal software 8 dB is input-referenced
+11.0103 dB under the stated energy and N0/2 convention. Preserve source records
+and report any converted plotting axis explicitly. No submitted TeX was edited.
+
 Companion to [the handover](resubmission_handover.md) and [cluster protocol](resubmission_cluster_plan.md). Source locations below refer to commit `726db308c46fe1df67319934ed35ef8dd8d79945`; line numbers will move after edits. The submitted source and ZIP were preserved during this planning task.
 
 **Write in a separate revision source/tree.** Keep historical results and submitted artifacts identifiable. Correct attribution, definitions, and unsupported claims immediately; write new performance conclusions only after the corresponding experiments. Mathematical statements below are either proved here, explicitly conditional on stated assumptions, or identified as open empirical questions.

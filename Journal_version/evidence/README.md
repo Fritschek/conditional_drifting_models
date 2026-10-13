@@ -1,5 +1,17 @@
 # Research evidence
 
+## Independent follow-up audit, 13 October
+
+[Assessment](../coverage_followup_assessment_20261013.md),
+[audit records](coverage_followup_independent_audit_20261013.json), and
+[generator-block figure](coverage_followup_assessment_20261013.png) independently
+check the replication and sampler summaries. The audit verifies ten exported
+files, 40 local frozen sources, 135 physical curve points and 270 paired
+discordance records. Run
+`python3 Journal_version/figures_src/audit_coverage_followup_20261013.py`.
+It does not rerun training or verify absent checkpoint/raw-gradient tensors.
+Frozen compact exports and their checksums remain unchanged.
+
 ## Coverage replication and saved samplers, 13 October
 
 [Compact records](coverage_followup_20261013/README.md) and

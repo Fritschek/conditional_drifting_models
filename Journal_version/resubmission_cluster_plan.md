@@ -1,5 +1,14 @@
 # Cluster work specification
 
+**Current, 13 October:** the proposed 12-generator/45-AE coverage replication
+and six saved-sampler settings below are complete and independently assessed.
+See the [current handover](coverage_followup_assessment_20261013.md#7-updated-handover-close-this-round-and-move-to-the-application).
+Do not rerun that queue. Before the next campaign, freeze physical input-energy
+and noise conventions, use a common training-input law across competitors, and
+write the structured-channel/receiver protocol. Historical nominal SSPA labels
+need +3.0103 dB under the stated input-referenced convention; changing the
+physical noise requires a new channel ID. No new cluster jobs were submitted.
+
 **Independent assessment, 12 October:** read the
 [current analysis and bounded handover](application_coverage_assessment_20261012.md#7-concrete-next-handover)
 before using historical task lists below. The next proposed coverage replication

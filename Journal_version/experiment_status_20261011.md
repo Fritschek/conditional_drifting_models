@@ -4,6 +4,13 @@ Updated 13 October 2026. This is the current status index. Earlier assessment do
 retain their historical recommendations; do not interpret them as an unexecuted
 queue when the work is marked complete below.
 
+The [13 October independent assessment](coverage_followup_assessment_20261013.md)
+has now checked the portable numerical records and sharpened their interpretation.
+Its [audit](evidence/coverage_followup_independent_audit_20261013.json) is separate
+from execution-host checkpoint tests. The next work is the noise convention,
+common competitor input coverage and structured-channel protocol; replication
+and saved-sampler panels below are completed, not a pending rerun queue.
+
 ## Coverage replication and sampler panel complete, 13 October
 
 Read the [completed-results report](coverage_followup_results_20261013.md) first.

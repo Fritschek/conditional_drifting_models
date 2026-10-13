@@ -1,5 +1,21 @@
 # Journal resubmission handover
 
+## Independent assessment complete, 13 October
+
+Read the [new assessment](coverage_followup_assessment_20261013.md) first.
+Its portable-record audit verifies all 135 physical curve points, 270 paired
+discordance records and 40 local source/protocol hashes. Coverage improves the
+primary generator-block mean in all three seeds for both families, while
+individual failures and one low-SNR Sinkhorn block reversal remain. Flow-8's
+accuracy is limited by its sampler; cosine alone also obscures magnitude error.
+The assessment proves strict underdispersion for the ideal Gaussian Euler model
+and explains why an exact sample Jacobian can still give a biased loss gradient.
+The SSPA software labels require an explicit +3.0103 dB conversion for the
+stated input-referenced physical convention. Preserve the frozen records.
+Coverage replication and sampler checks are complete; resolve the convention,
+apply a common input law to competitors and define the structured-channel study.
+No new training was launched by this assessment.
+
 ## Completed follow-up, 13 October
 
 After the 12 October independent assessment, the coverage-replication and

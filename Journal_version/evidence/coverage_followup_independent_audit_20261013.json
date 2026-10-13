@@ -1,0 +1,423 @@
+{
+  "scope": "Independent portable-record/source/algebra audit; no training, checkpoint or raw-gradient tensor replay",
+  "exported_files_verified": 10,
+  "local_frozen_sources_verified": 40,
+  "generators": 12,
+  "ae_runs": 45,
+  "main_curve_points": 135,
+  "paired_discordance_records": 270,
+  "primary": {
+    "gaussian": {
+      "normal_mean": 0.0006415049235026041,
+      "broad_mean": 1.9709269205729164e-05,
+      "mean_change": -0.000621795654296875,
+      "between_generator_sd": 0.00044696542412913596
+    },
+    "sinkhorn": {
+      "normal_mean": 0.0001541773478190104,
+      "broad_mean": 3.8041008843315976e-05,
+      "mean_change": -0.00011613633897569444,
+      "between_generator_sd": 0.00010096460970257677
+    }
+  },
+  "primary_pairs": [
+    {
+      "generator_seed": 9201,
+      "ae_seed": 392010,
+      "family": "gaussian",
+      "normal_errors": 751,
+      "broad_errors": 34,
+      "broad_minus_normal": -0.0006837844848632812,
+      "pooled_paired_mc_se": 2.6643388259398518e-05,
+      "descriptive_change_over_mc_se": -25.664321602267485
+    },
+    {
+      "generator_seed": 9201,
+      "ae_seed": 392010,
+      "family": "sinkhorn",
+      "normal_errors": 38,
+      "broad_errors": 35,
+      "broad_minus_normal": -2.86102294921875e-06,
+      "pooled_paired_mc_se": 8.148200337536378e-06,
+      "descriptive_change_over_mc_se": -0.3511232948015347
+    },
+    {
+      "generator_seed": 9201,
+      "ae_seed": 392011,
+      "family": "gaussian",
+      "normal_errors": 934,
+      "broad_errors": 27,
+      "broad_minus_normal": -0.0008649826049804688,
+      "pooled_paired_mc_se": 2.945937429032602e-05,
+      "descriptive_change_over_mc_se": -29.361879734985237
+    },
+    {
+      "generator_seed": 9201,
+      "ae_seed": 392011,
+      "family": "sinkhorn",
+      "normal_errors": 35,
+      "broad_errors": 63,
+      "broad_minus_normal": 2.6702880859375e-05,
+      "pooled_paired_mc_se": 9.246183184778748e-06,
+      "descriptive_change_over_mc_se": 2.8879895980574792
+    },
+    {
+      "generator_seed": 9201,
+      "ae_seed": 392012,
+      "family": "gaussian",
+      "normal_errors": 1835,
+      "broad_errors": 43,
+      "broad_minus_normal": -0.001708984375,
+      "pooled_paired_mc_se": 4.11843707365382e-05,
+      "descriptive_change_over_mc_se": -41.49594480713561
+    },
+    {
+      "generator_seed": 9201,
+      "ae_seed": 392012,
+      "family": "sinkhorn",
+      "normal_errors": 97,
+      "broad_errors": 35,
+      "broad_minus_normal": -5.91278076171875e-05,
+      "pooled_paired_mc_se": 1.0873412060890254e-05,
+      "descriptive_change_over_mc_se": -5.437833799186164
+    },
+    {
+      "generator_seed": 9202,
+      "ae_seed": 392020,
+      "family": "gaussian",
+      "normal_errors": 13,
+      "broad_errors": 24,
+      "broad_minus_normal": 1.049041748046875e-05,
+      "pooled_paired_mc_se": 5.800968118093985e-06,
+      "descriptive_change_over_mc_se": 1.8083908180339336
+    },
+    {
+      "generator_seed": 9202,
+      "ae_seed": 392020,
+      "family": "sinkhorn",
+      "normal_errors": 361,
+      "broad_errors": 4,
+      "broad_minus_normal": -0.00034046173095703125,
+      "pooled_paired_mc_se": 1.806649841081757e-05,
+      "descriptive_change_over_mc_se": -18.844920759696024
+    },
+    {
+      "generator_seed": 9202,
+      "ae_seed": 392021,
+      "family": "gaussian",
+      "normal_errors": 622,
+      "broad_errors": 15,
+      "broad_minus_normal": -0.0005788803100585938,
+      "pooled_paired_mc_se": 2.3987311570765762e-05,
+      "descriptive_change_over_mc_se": -24.132771542605756
+    },
+    {
+      "generator_seed": 9202,
+      "ae_seed": 392021,
+      "family": "sinkhorn",
+      "normal_errors": 305,
+      "broad_errors": 10,
+      "broad_minus_normal": -0.00028133392333984375,
+      "pooled_paired_mc_se": 1.6869992024662476e-05,
+      "descriptive_change_over_mc_se": -16.676588994740353
+    },
+    {
+      "generator_seed": 9202,
+      "ae_seed": 392022,
+      "family": "gaussian",
+      "normal_errors": 17,
+      "broad_errors": 2,
+      "broad_minus_normal": -1.430511474609375e-05,
+      "pooled_paired_mc_se": 4.156948478992398e-06,
+      "descriptive_change_over_mc_se": -3.4412537991236216
+    },
+    {
+      "generator_seed": 9202,
+      "ae_seed": 392022,
+      "family": "sinkhorn",
+      "normal_errors": 30,
+      "broad_errors": 11,
+      "broad_minus_normal": -1.811981201171875e-05,
+      "pooled_paired_mc_se": 5.955670749663569e-06,
+      "descriptive_change_over_mc_se": -3.042446900333153
+    },
+    {
+      "generator_seed": 9203,
+      "ae_seed": 392030,
+      "family": "gaussian",
+      "normal_errors": 1350,
+      "broad_errors": 7,
+      "broad_minus_normal": -0.0012807846069335938,
+      "pooled_paired_mc_se": 3.5082788922137986e-05,
+      "descriptive_change_over_mc_se": -36.50749117398108
+    },
+    {
+      "generator_seed": 9203,
+      "ae_seed": 392030,
+      "family": "sinkhorn",
+      "normal_errors": 20,
+      "broad_errors": 63,
+      "broad_minus_normal": 4.100799560546875e-05,
+      "pooled_paired_mc_se": 8.476352175807762e-06,
+      "descriptive_change_over_mc_se": 4.837929660651559
+    },
+    {
+      "generator_seed": 9203,
+      "ae_seed": 392031,
+      "family": "gaussian",
+      "normal_errors": 78,
+      "broad_errors": 18,
+      "broad_minus_normal": -5.7220458984375e-05,
+      "pooled_paired_mc_se": 9.246051102687124e-06,
+      "descriptive_change_over_mc_se": -6.188637543626096
+    },
+    {
+      "generator_seed": 9203,
+      "ae_seed": 392031,
+      "family": "sinkhorn",
+      "normal_errors": 487,
+      "broad_errors": 64,
+      "broad_minus_normal": -0.00040340423583984375,
+      "pooled_paired_mc_se": 2.21373646906674e-05,
+      "descriptive_change_over_mc_se": -18.222775902947003
+    },
+    {
+      "generator_seed": 9203,
+      "ae_seed": 392032,
+      "family": "gaussian",
+      "normal_errors": 454,
+      "broad_errors": 16,
+      "broad_minus_normal": -0.0004177093505859375,
+      "pooled_paired_mc_se": 2.0627106633055895e-05,
+      "descriptive_change_over_mc_se": -20.250506191524646
+    },
+    {
+      "generator_seed": 9203,
+      "ae_seed": 392032,
+      "family": "sinkhorn",
+      "normal_errors": 82,
+      "broad_errors": 74,
+      "broad_minus_normal": -7.62939453125e-06,
+      "pooled_paired_mc_se": 1.1601951935810148e-05,
+      "descriptive_change_over_mc_se": -0.6575957712513356
+    }
+  ],
+  "seed_effects_by_snr": {
+    "gaussian_4": [
+      {
+        "generator_seed": 9201,
+        "normal": 0.015058199564615885,
+        "broad": 0.00969854990641276,
+        "difference": -0.005359649658203125,
+        "ratio": 1.5526238159231702
+      },
+      {
+        "generator_seed": 9202,
+        "normal": 0.008287747701009115,
+        "broad": 0.006293296813964844,
+        "difference": -0.0019944508870442714,
+        "ratio": 1.3169167045511947
+      },
+      {
+        "generator_seed": 9203,
+        "normal": 0.010695457458496094,
+        "broad": 0.006107648213704427,
+        "difference": -0.004587809244791667,
+        "ratio": 1.7511580700567324
+      }
+    ],
+    "gaussian_6": [
+      {
+        "generator_seed": 9201,
+        "normal": 0.0037940343221028647,
+        "broad": 0.0008405049641927084,
+        "difference": -0.0029535293579101562,
+        "ratio": 4.513993948562784
+      },
+      {
+        "generator_seed": 9202,
+        "normal": 0.0012423197428385417,
+        "broad": 0.000476837158203125,
+        "difference": -0.0007654825846354167,
+        "ratio": 2.6053333333333333
+      },
+      {
+        "generator_seed": 9203,
+        "normal": 0.002274195353190104,
+        "broad": 0.00041166941324869793,
+        "difference": -0.001862525939941406,
+        "ratio": 5.524324324324324
+      }
+    ],
+    "gaussian_8": [
+      {
+        "generator_seed": 9201,
+        "normal": 0.0011189778645833333,
+        "broad": 3.3060709635416664e-05,
+        "difference": -0.0010859171549479165,
+        "ratio": 33.84615384615385
+      },
+      {
+        "generator_seed": 9202,
+        "normal": 0.00020726521809895834,
+        "broad": 1.3033548990885416e-05,
+        "difference": -0.00019423166910807293,
+        "ratio": 15.902439024390246
+      },
+      {
+        "generator_seed": 9203,
+        "normal": 0.0005982716878255209,
+        "broad": 1.3033548990885416e-05,
+        "difference": -0.0005852381388346355,
+        "ratio": 45.90243902439025
+      }
+    ],
+    "sinkhorn_4": [
+      {
+        "generator_seed": 9201,
+        "normal": 0.011542956034342447,
+        "broad": 0.009929021199544271,
+        "difference": -0.001613934834798176,
+        "ratio": 1.1625472241787793
+      },
+      {
+        "generator_seed": 9202,
+        "normal": 0.011470476786295572,
+        "broad": 0.005926767985026042,
+        "difference": -0.00554370880126953,
+        "ratio": 1.9353679467925335
+      },
+      {
+        "generator_seed": 9203,
+        "normal": 0.009114901224772135,
+        "broad": 0.010005315144856771,
+        "difference": 0.0008904139200846366,
+        "ratio": 0.9110059096397025
+      }
+    ],
+    "sinkhorn_6": [
+      {
+        "generator_seed": 9201,
+        "normal": 0.0012184778849283855,
+        "broad": 0.0009263356526692709,
+        "difference": -0.0002921422322591146,
+        "ratio": 1.3153740562800276
+      },
+      {
+        "generator_seed": 9202,
+        "normal": 0.0018072128295898438,
+        "broad": 0.00038496653238932293,
+        "difference": -0.0014222462972005208,
+        "ratio": 4.694467382328654
+      },
+      {
+        "generator_seed": 9203,
+        "normal": 0.0011650721232096355,
+        "broad": 0.001114209493001302,
+        "difference": -5.086263020833348e-05,
+        "ratio": 1.0456490727532097
+      }
+    ],
+    "sinkhorn_8": [
+      {
+        "generator_seed": 9201,
+        "normal": 5.4041544596354164e-05,
+        "broad": 4.2279561360677086e-05,
+        "difference": -1.1761983235677079e-05,
+        "ratio": 1.2781954887218043
+      },
+      {
+        "generator_seed": 9202,
+        "normal": 0.00022125244140625,
+        "broad": 7.947285970052084e-06,
+        "difference": -0.0002133051554361979,
+        "ratio": 27.839999999999996
+      },
+      {
+        "generator_seed": 9203,
+        "normal": 0.0001872380574544271,
+        "broad": 6.389617919921875e-05,
+        "difference": -0.00012334187825520834,
+        "ratio": 2.9303482587064678
+      }
+    ]
+  },
+  "samplers": [
+    {
+      "family": "flow",
+      "nfe": 8,
+      "swd_floor": 1.9108376024222595,
+      "variance_ratio": 0.601221916219879,
+      "encoder": {
+        "cosine": 0.9760354253443276,
+        "relative_error": 0.6165437694359732,
+        "norm_ratio": 0.3991720349671941
+      }
+    },
+    {
+      "family": "flow",
+      "nfe": 32,
+      "swd_floor": 1.238961786272906,
+      "variance_ratio": 0.9003759291072421,
+      "encoder": {
+        "cosine": 0.99515308451557,
+        "relative_error": 0.23655639713544355,
+        "norm_ratio": 0.7800052501166271
+      }
+    },
+    {
+      "family": "flow",
+      "nfe": 128,
+      "swd_floor": 1.2061021424368965,
+      "variance_ratio": 0.9832006365648989,
+      "encoder": {
+        "cosine": 0.9937088975987046,
+        "relative_error": 0.12091766656317957,
+        "norm_ratio": 0.9481188191394933
+      }
+    },
+    {
+      "family": "diffusion",
+      "nfe": 20,
+      "swd_floor": 1.819029374201788,
+      "variance_ratio": 0.852625653878146,
+      "encoder": {
+        "cosine": 0.9598500699105214,
+        "relative_error": 0.39454342347579757,
+        "norm_ratio": 0.6824033728401916
+      }
+    },
+    {
+      "family": "diffusion",
+      "nfe": 50,
+      "swd_floor": 1.7232005969549558,
+      "variance_ratio": 0.9812272043843203,
+      "encoder": {
+        "cosine": 0.9224543486007397,
+        "relative_error": 0.3918181777722449,
+        "norm_ratio": 0.8557946929972365
+      }
+    },
+    {
+      "family": "diffusion",
+      "nfe": 100,
+      "swd_floor": 1.8049979192675822,
+      "variance_ratio": 1.0449643534164625,
+      "encoder": {
+        "cosine": 0.8848206981335179,
+        "relative_error": 0.47981900204579453,
+        "norm_ratio": 0.9994241124356597
+      }
+    }
+  ],
+  "ideal_euler_variance_ratios": {
+    "8": 0.5532895360148543,
+    "32": 0.865956496551613,
+    "128": 0.964715233241455
+  },
+  "nominal8_noise_variance": 0.05282977308203711,
+  "input_referenced_ebno_db": 11.010299956639813,
+  "generator_training_seconds": 1081.0197539420915,
+  "ae_training_seconds": 1581.3950887809333,
+  "interpretation": "MC standard errors are conditional on fitted codecs and are not generator-seed uncertainty"
+}
