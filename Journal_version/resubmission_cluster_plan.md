@@ -1,5 +1,18 @@
 # Cluster work specification
 
+**Latest independent application assessment, 13 October:** calibration, common
+input laws and both structured OFDM pilots are now implemented and completed.
+Read the [current analysis and bounded handover](application_local_assessment_20261013.md#7-concrete-next-handover)
+before using the historical matrices below. The physical receiver is useful,
+but the Gaussian heads have a representation bottleneck and the learned
+channels miss block-energy tails. Fit structural controls, add paired OFDM
+block statistics and establish generator convergence before freezing a full
+campaign. Current OFDM uses the frozen 300 ns profile in
+[the implemented protocol](application_local_protocol_20261013.md), superseding
+older 100 ns proposals below. `hpc/slurm_application_preflight.sh` checks only
+the existing cluster environment/test/smoke/resume path; create `logs/` and
+transfer pinned source checkouts before submitting. No cluster job was launched.
+
 **Current, 13 October:** the proposed 12-generator/45-AE coverage replication
 and six saved-sampler settings below are complete and independently assessed.
 See the [current handover](coverage_followup_assessment_20261013.md#7-updated-handover-close-this-round-and-move-to-the-application).

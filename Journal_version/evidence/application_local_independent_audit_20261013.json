@@ -1,0 +1,291 @@
+{
+  "scope": "Portable records and current source hashes only; checkpoints and CUDA not rerun",
+  "portable_export_hashes_verified": 12,
+  "posthoc_export_hashes_verified": 1,
+  "unique_local_source_hashes_verified": 47,
+  "physical_curve_points": 97,
+  "sspa_paired_discordance_records": 108,
+  "sources": {
+    "Journal_version/application_local_protocol_20261013.md": "dfcc732e64b143a215e643cfc85a440da1da8161efbb19f5ef6317d5da88adc7",
+    "conditional_drifting/__init__.py": "5c600cc75c0c9b6ed8dd3a00501b8672c6837ec250869494142f25c4564f5283",
+    "conditional_drifting/application_channels.py": "2c3f7b4fe8858d188e863d6a311445179a4f3dafbd98db12e1da1abeacb3c114",
+    "conditional_drifting/baselines/__init__.py": "a17e879dc515cafa7c902a09d7d7bf12f502afecc154b3e1e3f8aed787c09aa3",
+    "conditional_drifting/baselines/application_generators.py": "6e0248f9c607c1695a39e9871c73e951193315f6b2fbf3ef7ce0db2e718d15ab",
+    "conditional_drifting/baselines/diffusion.py": "bd3aea489d2e3f553200e0de0b404d410fd3032d342f8c08a08de7b4ad81fa30",
+    "conditional_drifting/baselines/fast_channels.py": "d19cb5d7df9771e3e37eee745e5f4e71f091cebc14671646141a9eafd796f469",
+    "conditional_drifting/baselines/fast_checkpoint.py": "0768e19ade49fbf781baa94bbbc74865d221a07039a91ec69f2eb74b9202a055",
+    "conditional_drifting/baselines/fast_evaluation.py": "ff699a4e90867f0420790a816189471b7acc59f09a7c3b733a9afceaccc34718",
+    "conditional_drifting/baselines/gan.py": "cd3e6699d5aa45dabf44e6e790159a281fbd717772b93e6cced5031797de5dfd",
+    "conditional_drifting/baselines/official_sources.py": "d781715f0fb9d8d54193507bc6bcdc8a1515bc472c20df64efd4cccb9857781d",
+    "conditional_drifting/baselines/paper_wgan.py": "edb02081e01c2b7f6b9fc96ae7543b8383196fcb44d63558f5de2741dc5f292d",
+    "conditional_drifting/benchmark.py": "d748351257007740dc6f3321f13c974163ff66271036e04f944e15afd0d5ae32",
+    "conditional_drifting/channels.py": "567f3f4f32d995755b107a56ffac225623e8fab078f77779ebd645a0111104ae",
+    "conditional_drifting/e2e_implants.py": "48b6c0a02796620a9b81f84a74a3c96ec2535492b25e185b818a02d15ab45c9a",
+    "conditional_drifting/feature_metrics.py": "d45e5a2fd2e6d40e1ec03e15d976853f920e5e623ba7688954c4de126caa80de",
+    "conditional_drifting/losses.py": "80b424f30591df3af79730cf2e4d2c592878a6894124873835c9b6a4cfd2ccca",
+    "conditional_drifting/metrics.py": "659e2a8168054bd76f0d1d959fd5f1af0b0f46b92f3e870744a5f1ffbf6fbf68",
+    "conditional_drifting/model.py": "6cb0cf5d115c9bae7a4393c217def6ea579374a5c2921a55f2d5923b667c2e07",
+    "conditional_drifting/ofdm_application.py": "b57f54620bcc89f03035d19730c14d3fe505d37b6703c945ecedd4f18b98d342",
+    "conditional_drifting/paper2309_presets.py": "caf70aea9abbe9dc92534d02419d5993ef84adcfb81091b8cd68ad5aaa12e97d",
+    "conditional_drifting/progress.py": "3bff4acacec28b34964f82c49bb40f07a420ec63fd4a8067c2518b776ed85885",
+    "conditional_drifting/sspa_checkpoint_metrics.py": "232c57d66b705b9146f11ac1b4952b59647fbcf3cfaf169d141b64fab0a1e517",
+    "conditional_drifting/sspa_components.py": "f6961d75bdb4484abebbdc79378c03bca5e4f2fe7d416a401fa99c1c0339494b",
+    "conditional_drifting/sspa_intervention.py": "32d6567f5feeda3e99259c899a88eae95e16593e1856209e8cfe210fdf6b93b0",
+    "conditional_drifting/sspa_solver_replay.py": "c4b035a311d165994487e1b4e0a59fac315f964e0105ec128beec568a14f885f",
+    "conditional_drifting/sspa_trajectory.py": "53b63c167a372eb1ad128cd30c55438f9e74b49d78dc72de2c6f68516754397e",
+    "conditional_drifting/sspa_update_screen.py": "6911b6f0963ed367360174f9c4137e57bef91f67b60ca42f7fe318898b50084c",
+    "conditional_drifting/sspa_utility.py": "44bfea6c3335cffa23e1325a3d4b60095393b6786fd75c63289b85a913add684",
+    "conditional_drifting/symbolic_ae.py": "787fcbe19e2564815f6e076c797083adb9b3559339d8b942af40f83383f16cb1",
+    "conditional_drifting/training.py": "32581169025fd62cf396276c8a125c7f907fab870075eb76cf9e84b168e30c0c",
+    "conditional_drifting/transport_reference.py": "9c6c493eb27d354cb38e8fa653eda5ef1bc6afbae597b2460175c93f63a56c2f",
+    "conditional_drifting/weight_registry.py": "0d60ab8a0d8e3936713d44ebabb2440ff7336fb4e03eca6a29eb7df8a3c02390",
+    "scripts/application_local_common.py": "e5a8afe2799d983f5b97e0a50a5ed07ba4858b2d32bcb137f378df76fb63885c",
+    "scripts/coverage_followup_common.py": "ca549cf9fb02e7ece1703dac49c9e29bafc17805fbe6b8fe8cfdf6e3604666c9",
+    "scripts/run_common_coverage_application.py": "42e167dce1dc9d2d5266d4f297284f25fdf8e39cdbf11904cae4c4b65ac03cb3",
+    "scripts/run_consistency_warmstart_development.py": "318cfc2bb86190216518fc2a55247c7c9f9b30c9083cdd6eb977796ef0743771",
+    "scripts/run_fast_baseline_development.py": "28adeb73b94f11a2c062569896de3d21f05c831424b5a50b7a8806152483b401",
+    "scripts/run_fast_channel_application.py": "c3bc5696e7edc228894fbb4e9097868783d0132155b983b892bebc9a46a85c4d",
+    "scripts/run_fast_channel_comparison.py": "2ad9843d08aa8dccb948a97be9d3e6b1156c304d5c4daac52a311013de18b5d6",
+    "scripts/run_local_gradient_fidelity.py": "449b6a2852ffba55393e34b78a12c65b30376545915078ca4d112f8924c96c29",
+    "scripts/run_sspa_input_coverage.py": "09bc1a337331b67c55ec9d3672586cefab66704d134344faa6f965f2a40a7cb7",
+    "scripts/run_symbolic_awgn_benchmark.py": "c481e371a535522fa2a478829b42179cbf0798ced41a0b58fea3849c136dbcda",
+    "scripts/ofdm_frequency_training.py": "08ea2b681b95ba62d69f3e39758dca00a49f68041947d2179a1fe12a3f95e986",
+    "scripts/run_ofdm_receiver_development.py": "fdd50b9523183fb9ae231c49aa508d48c38dbcc00a8d20f2281d82a622c3c72e",
+    "scripts/run_structured_ofdm_frequency_local.py": "810c51c8db76a9ad0a31d0d076a0d38eb7923f7cd18055646cc1bddac581cbda",
+    "Journal_version/ofdm_receiver_gate_20261013.md": "053c08be99ad0f69ca20d422f689e560f5890311249f5336e2d591401c410036"
+  },
+  "ofdm_nominal": {
+    "ofdm_clean": {
+      "analytic": {
+        "ber": 0.06348800659179688,
+        "mc_se": 0.0006030726729458914,
+        "inactive": 0.06348800659179688,
+        "active": null,
+        "swd_over_floor": 0.8281621699576434,
+        "crosscov_over_floor": 0.9589208008032118,
+        "learned_energy_exceedance": [
+          0.10400390625,
+          0.01123046875
+        ],
+        "true_energy_exceedance": [
+          0.1005859375,
+          0.010986328125
+        ]
+      },
+      "gaussian_1": {
+        "ber": 0.15460641043526785,
+        "mc_se": 0.0007353641540466012,
+        "inactive": 0.15460641043526785,
+        "active": null,
+        "swd_over_floor": 2.006861026002633,
+        "crosscov_over_floor": 4.540615902267697,
+        "learned_energy_exceedance": [
+          0.000244140625,
+          0.0
+        ],
+        "true_energy_exceedance": [
+          0.1005859375,
+          0.010986328125
+        ]
+      },
+      "mixture_1": {
+        "ber": 0.13590785435267858,
+        "mc_se": 0.0007480459705617957,
+        "inactive": 0.13590785435267858,
+        "active": null,
+        "swd_over_floor": 2.220438237592363,
+        "crosscov_over_floor": 5.088946046594317,
+        "learned_energy_exceedance": [
+          0.01123046875,
+          0.0
+        ],
+        "true_energy_exceedance": [
+          0.1005859375,
+          0.010986328125
+        ]
+      },
+      "sinkhorn_1": {
+        "ber": 0.10843440464564733,
+        "mc_se": 0.0008991421987530294,
+        "inactive": 0.10843440464564733,
+        "active": null,
+        "swd_over_floor": 1.523538127558021,
+        "crosscov_over_floor": 1.3668271206075375,
+        "learned_energy_exceedance": [
+          0.000244140625,
+          0.0
+        ],
+        "true_energy_exceedance": [
+          0.1005859375,
+          0.010986328125
+        ]
+      },
+      "flow_32": {
+        "ber": 0.10465294974190849,
+        "mc_se": 0.0008585838766617145,
+        "inactive": 0.10465294974190849,
+        "active": null,
+        "swd_over_floor": 2.153542280713067,
+        "crosscov_over_floor": 3.8646025989687853,
+        "learned_energy_exceedance": [
+          0.000244140625,
+          0.0
+        ],
+        "true_energy_exceedance": [
+          0.1005859375,
+          0.010986328125
+        ]
+      },
+      "consistency_distilled_1": {
+        "ber": 0.11264256068638392,
+        "mc_se": 0.0008995227169434218,
+        "inactive": 0.11264256068638392,
+        "active": null,
+        "swd_over_floor": 2.190274302370488,
+        "crosscov_over_floor": 3.868647332724616,
+        "learned_energy_exceedance": [
+          0.026611328125,
+          0.000732421875
+        ],
+        "true_energy_exceedance": [
+          0.1005859375,
+          0.010986328125
+        ]
+      },
+      "pilot_LMMSE": {
+        "ber": 0.06413868495396205,
+        "mc_se": 0.0006039242287717843,
+        "inactive": 0.06413868495396205,
+        "active": null
+      }
+    },
+    "ofdm_interference": {
+      "analytic": {
+        "ber": 0.08478219168526786,
+        "mc_se": 0.0008129252506402083,
+        "inactive": 0.06352763146407474,
+        "active": 0.2736873868436934,
+        "swd_over_floor": 0.8465632653751822,
+        "crosscov_over_floor": 0.9766557580873899,
+        "learned_energy_exceedance": [
+          0.110595703125,
+          0.0087890625
+        ],
+        "true_energy_exceedance": [
+          0.111083984375,
+          0.010009765625
+        ]
+      },
+      "gaussian_1": {
+        "ber": 0.15033830915178573,
+        "mc_se": 0.0008776561480001508,
+        "inactive": 0.13260022892840168,
+        "active": 0.3079899129235279,
+        "swd_over_floor": 1.8895659369715405,
+        "crosscov_over_floor": 4.10035397188693,
+        "learned_energy_exceedance": [
+          0.000244140625,
+          0.0
+        ],
+        "true_energy_exceedance": [
+          0.111083984375,
+          0.010009765625
+        ],
+        "inactive_contribution_to_gap": 0.06208692278180803,
+        "active_contribution_to_gap": 0.003469194684709822,
+        "inactive_fraction_of_gap": 0.9470805346811197
+      },
+      "mixture_1": {
+        "ber": 0.22239031110491073,
+        "mc_se": 0.0010225589413942312,
+        "inactive": 0.2007015782479217,
+        "active": 0.4151543236485904,
+        "swd_over_floor": 1.9629913582077667,
+        "crosscov_over_floor": 4.6743916895383695,
+        "learned_energy_exceedance": [
+          0.014892578125,
+          0.0
+        ],
+        "true_energy_exceedance": [
+          0.111083984375,
+          0.010009765625
+        ],
+        "inactive_contribution_to_gap": 0.12330082484654019,
+        "active_contribution_to_gap": 0.014307294573102678,
+        "inactive_fraction_of_gap": 0.8960287035863643
+      },
+      "sinkhorn_1": {
+        "ber": 0.12825448172433035,
+        "mc_se": 0.0010009372298790764,
+        "inactive": 0.11120548749139093,
+        "active": 0.2797816622122597,
+        "swd_over_floor": 1.5036070984111067,
+        "crosscov_over_floor": 1.288024510422237,
+        "learned_energy_exceedance": [
+          0.000244140625,
+          0.0
+        ],
+        "true_energy_exceedance": [
+          0.111083984375,
+          0.010009765625
+        ],
+        "inactive_contribution_to_gap": 0.04285594395228794,
+        "active_contribution_to_gap": 0.0006163460867745551,
+        "inactive_fraction_of_gap": 0.9858220929649504
+      },
+      "flow_32": {
+        "ber": 0.12231881277901786,
+        "mc_se": 0.0009521242696518534,
+        "inactive": 0.10470018624683526,
+        "active": 0.2789087421329425,
+        "swd_over_floor": 2.0917180024824704,
+        "crosscov_over_floor": 3.9738766683903135,
+        "learned_energy_exceedance": [
+          0.00048828125,
+          0.0
+        ],
+        "true_energy_exceedance": [
+          0.111083984375,
+          0.010009765625
+        ],
+        "inactive_contribution_to_gap": 0.03700855800083705,
+        "active_contribution_to_gap": 0.0005280630929129443,
+        "inactive_fraction_of_gap": 0.9859320557491288
+      },
+      "consistency_distilled_1": {
+        "ber": 0.13231331961495535,
+        "mc_se": 0.0009869733975095244,
+        "inactive": 0.11410831902530823,
+        "active": 0.29411479437882576,
+        "swd_over_floor": 2.0846849597902093,
+        "crosscov_over_floor": 3.880552125871626,
+        "learned_energy_exceedance": [
+          0.034912109375,
+          0.00048828125
+        ],
+        "true_energy_exceedance": [
+          0.111083984375,
+          0.010009765625
+        ],
+        "inactive_contribution_to_gap": 0.045465196881975437,
+        "active_contribution_to_gap": 0.002065931047712053,
+        "inactive_fraction_of_gap": 0.9565351983490026
+      },
+      "pilot_LMMSE": {
+        "ber": 0.08623014177594866,
+        "mc_se": 0.0008140363131004272,
+        "inactive": 0.06546163994218587,
+        "active": 0.27081537201482886,
+        "inactive_contribution_to_gap": 0.0017384120396205251,
+        "active_contribution_to_gap": -0.00029046194893973305,
+        "inactive_fraction_of_gap": 1.2006021829130558
+      }
+    }
+  },
+  "gaussian_hidden_width": 69,
+  "mixture_component_hidden_width": 34,
+  "free_real_data_input_dimension": 112,
+  "minimum_max_pilot_crosscov_magnitude": 0.9413514247686866,
+  "missing_preliminary_receiver_export": true,
+  "audit_script_sha256": "b98b2d643281833821abdbdaa8abb6757758a12abe7ac5bba6fc85888541d03d"
+}

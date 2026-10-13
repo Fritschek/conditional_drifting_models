@@ -4,6 +4,18 @@ Updated 13 October 2026. This is the current status index. Earlier assessment do
 retain their historical recommendations; do not interpret them as an unexecuted
 queue when the work is marked complete below.
 
+## Independent application audit, 13 October
+
+The [current assessment](application_local_assessment_20261013.md) independently
+checks the exported 97 physical curve points, 108 SSPA paired comparisons and
+47 source/protocol hashes. Numerical sources and frozen results remain unchanged.
+No new training or cluster job was launched. The bounded next queue is learned
+structural Gaussian/mixture controls, paired OFDM uncertainty exports, and a
+generator-budget trajectory. Exact Gaussian representability fails in the
+current narrow dense heads; energy-tail fidelity also fails badly for Sinkhorn.
+These gates supersede any older instruction to launch a full confirmation
+campaign. The existing cluster preflight is only an environment/execution check.
+
 ## Local application development, 13 October
 
 See [the implementation and execution status](application_local_readiness_20261013.md)

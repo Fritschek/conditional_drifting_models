@@ -1,5 +1,25 @@
 # Journal resubmission handover
 
+## Independent application assessment, 13 October
+
+Start with the [new assessment and bounded next handover](application_local_assessment_20261013.md).
+Its [portable audit](evidence/application_local_independent_audit_20261013.json)
+verifies 97 physical curve points, 108 paired SSPA comparisons and 47 distinct
+source/protocol hashes. Weight bytes and Torch tests were not rerun in this
+checkout. The cluster environment preflight can proceed separately; the full
+scientific campaign is not ready to freeze.
+
+New findings: the OFDM Gaussian/mixture heads have an exact representation
+bottleneck (69/68 hidden coordinates for 112 free inputs); Sinkhorn nearly
+eliminates the physical block-energy tail despite comparatively good SWD and
+covariance scores; 98.6% of its interference-case excess BER comes from
+inactive blocks. The completed SSPA exact-decoder check identifies substantial
+decoder mismatch even for physically separable codebooks. Next fit the learned
+structural covariance controls, save paired OFDM block statistics, and run the
+bounded generator-convergence study before confirmation seeds. The assessment
+also derives a restricted-observation posterior/risk link and states why it is
+not yet a training-free metric for arbitrary implicit generators.
+
 ## Local application pilots complete, 13 October
 
 The [local readiness note](application_local_readiness_20261013.md) records
