@@ -1,0 +1,15 @@
+{
+  "files": {
+    "coverage/manifest.json": "93181f0a6830395c1fc63dd23683b03e7cff9ac69f8da268778d6a834441935b",
+    "coverage/results.json": "be2026c720fd02cf9f17782bdb0f833a01224cd03cfeacad8b44cdfd37f9785b",
+    "coverage/summary.json": "a1713426272a8b206e1d2cea308af5c5b4e166c252181cc73a7bda696c8a45f9",
+    "coverage/curves.csv": "954199c30d78bc6857f4f7d2694d85b4a6e56d09ca739d770fc1df0c7700ddeb",
+    "coverage/report.md": "9c7978fbcd635e10b4db87a2b3e1494ccb2dab4503be98c258fe39549ebafb05",
+    "coverage/report_audit.json": "31e522f2a4bb711389199ce1d2ad03cf22223fcb6d878b75d1c3f9dde4aa88ee",
+    "samplers/manifest.json": "984ddac978f87e76856971965ff8631db6cc2e2b9ff7b8198b4a382cf58283cb",
+    "samplers/results.json": "dd7d27aeb040a25ae5e3f1eda643e2baed4215ececf080dae4b395ddd6237ce8",
+    "samplers/report.md": "fe0eafd3a2a8d35f46ee69eb42e93a26cbc00caf58d2ce16a5d6f79f33fe39d6",
+    "samplers/report_audit.json": "ef80240157285b71ae152a8279ac66f2e6acb362adba03b6c826a2f1073128e8"
+  },
+  "excluded": "Training checkpoints and sampler tensor panels remain in local results/."
+}

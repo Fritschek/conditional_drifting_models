@@ -1,5 +1,29 @@
 # Journal resubmission handover
 
+## Completed follow-up, 13 October
+
+After the 12 October independent assessment, the coverage-replication and
+saved-sampler simulations have been prepared in a
+[separate frozen protocol](coverage_followup_protocol_20261012.md), including
+commands, fresh seed assignments and a primary endpoint. The user subsequently
+approved execution. Both full suites now pass their final audits: 12 generators,
+45 AEs, 135 physical curve points and six saved-sampler settings. Start with the
+[new results](coverage_followup_results_20261013.md) and
+[compact evidence](evidence/coverage_followup_20261013/README.md). No simulation
+is running. Tiny smoke profiles are execution checks only. Previous numerical
+sources and frozen protocols are unchanged.
+
+Coverage gains replicate across three fresh generator-seed means, with mixed
+individual AE outcomes. Ordinary-input SWD remains an inadequate standalone
+selector. Saved Flow weights benefit substantially from finer integration;
+DDIM's gradient cosine decreases as steps increase in the tested early codec.
+The [SSPA noise-label audit](sspa_noise_label_audit_20261012.md) identifies a
+3.0103 dB convention offset that must be addressed before external comparisons.
+Next decisions concern a common coverage protocol across competitors, sampler
+validation, and the still-unexecuted larger structured-channel experiment.
+Historical statements below that replication or sampler checks are pending
+are superseded by this completed report.
+
 ## Priority update, 12 October
 
 The [independent assessment](application_coverage_assessment_20261012.md) is now

@@ -1,5 +1,16 @@
 # Research evidence
 
+## Coverage replication and saved samplers, 13 October
+
+[Compact records](coverage_followup_20261013/README.md) and
+[results](../coverage_followup_results_20261013.md) cover 12 fresh generators,
+45 AEs, 135 physical-channel curve points and six saved-checkpoint sampler
+settings. All final local audits passed. The export contains JSON/CSV/Markdown
+only, with SHA-256 checksums; training and tensor checkpoints remain local.
+Verify with `python3 scripts/export_coverage_followup.py --verify-only`.
+The prior single-generator coverage pilot below is now supplemented by three
+fresh generator replicas, with mixed individual AE outcomes retained.
+
 ## Independent application and coverage audit, 12 October
 
 [Audit records](application_coverage_independent_audit_20261012.json) and

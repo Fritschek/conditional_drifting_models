@@ -1,8 +1,42 @@
 # Experiment status for the next handoff
 
-Updated 12 October 2026. This is the current status index. Earlier assessment documents
+Updated 13 October 2026. This is the current status index. Earlier assessment documents
 retain their historical recommendations; do not interpret them as an unexecuted
 queue when the work is marked complete below.
+
+## Coverage replication and sampler panel complete, 13 October
+
+Read the [completed-results report](coverage_followup_results_20261013.md) first.
+The full coverage replication and saved-checkpoint sampler panel completed on
+local CUDA. Strict reports verify 12 generators, 45 AEs, 135 curve points and
+six sampler settings. No simulation remains running. All 68 focused CPU tests
+and seven new CUDA tests passed during preparation.
+Both CUDA smoke runs resumed with byte-identical result JSON. Smoke coverage
+aggregation verified four tiny generators, 15 AEs and 45 curve points.
+
+The [frozen child protocol](coverage_followup_protocol_20261012.md) specifies
+12 fresh coverage generators, 36 surrogate AEs and nine analytic references,
+using generator seeds 9201--9203 and paired AE seeds assigned before execution.
+The saved-checkpoint Flow 8/32/128 and DDIM 20/50/100 panel is also complete.
+New runners provide strict manifests, checkpoint resume, paired physical-noise
+error counts and generator-block aggregation. Tiny smoke runs are execution
+checks only. The seed-9111 sources remain unchanged. The larger structured-channel
+experiment is still pending.
+
+Broader coverage improves mean nominal-8-dB SER in all three generator blocks
+for both families. Ratios of normal/broad means are 32.55 for Gaussian and 4.05
+for Sinkhorn, with 8/9 and 7/9 numerical AE-pair improvements respectively.
+Sinkhorn ordinary-input conditional SWD worsens despite improved mean SER.
+Flow's variance deficit shrinks markedly with more steps; DDIM gradient fidelity
+does not improve monotonically. These are development findings, not universal
+family rankings. Compact records are in
+`evidence/coverage_followup_20261013/`; no new model weights are included.
+
+A separate [SSPA noise-label check](sspa_noise_label_audit_20261012.md) identifies
+a 3.0103 dB offset if Eb/N0 is defined relative to the pre-amplifier input under
+the current real-coordinate normalization. The completed replication preserves
+the parent's nominal settings and physical variance. Resolve the energy-reference
+convention before new paper-level or external-reference comparisons.
 
 ## Independent assessment complete, 12 October
 
